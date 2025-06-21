@@ -16,12 +16,12 @@ Hyprlock
 [Notifications]  
 Gnu stow  
 Theme GTK, Qt, etc  
-Neovim
+Neovim  
 Btop  
 Gdm (or ly)  
 
 # Maybe + scripts
-Grub
+Grub  
 Pywall16 (wallpaper colors)  
 Calculator script (part of rofi?)  
 
