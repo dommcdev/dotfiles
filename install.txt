@@ -1,0 +1,17 @@
+Applications to install:
+flatpak, yay
+
+Nautilus, Chrome, Gimp, OnlyOffice, Virt-manager, Parabolic, Ghostty
+
+gdm, fastfetch, hyprpaper, hypridle, waybar, rofi, otf-font-awesome, ttf-jetbrains-mono-nerd, font-manager, stow, zsh, btop
+
+
+
+
+Services to enable:
+gdm, bluez, 
+
+
+
+Packages to remove:
+Wofi, htop, dolphin
