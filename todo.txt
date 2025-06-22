@@ -8,8 +8,8 @@ Fastfetch
 Zsh + OMZ  
 Hypridle  
 Hyprlock  
-[Screenshots]  
-[Notifications]  
+[Screenshots - hyprshot, grim, slurp?]  
+[Notifications - dunst?]
 Gnu stow  
 Theme GTK, Qt, etc  
 Neovim  
@@ -29,4 +29,4 @@ Calculator script (part of rofi?)
 Chrome password keyring
 Shutdown not working
 Permissions popup to copy/paste
-
+UWSM thing
