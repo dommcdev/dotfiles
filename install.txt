@@ -1,9 +1,11 @@
 Applications to install:
 flatpak, yay
 
-Nautilus, Chrome, Gimp, OnlyOffice, Virt-manager, Parabolic, Ghostty
+Gimp, OnlyOffice, Parabolic
 
-gdm, fastfetch, hyprpaper, hypridle, waybar, rofi, otf-font-awesome, ttf-jetbrains-mono-nerd, font-manager, stow, zsh, btop
+google-chrome, sddm, nautilus, ghostty, virt-manager fastfetch, hyprpaper, hypridle, waybar, rofi, otf-font-awesome, ttf-jetbrains-mono-nerd, stow, zsh, btop
+
+trashcan for terminal? font-manager?
 
 
 
