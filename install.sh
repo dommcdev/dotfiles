@@ -12,19 +12,19 @@ sudo pacman -Syu
 echo "Installing yay..."
 sudo pacman -S --noconfirm --needed git base-devel
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm && cd .. && rm -rf yay
-yay --version #verfy correct installation
+#yay --version
 
 #Install flatpak
 echo "Installing flatpak..."
 sudo pacman -S --noconfirm --needed flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak --version #verfy correct installation
+#flatpak --version
 
 #Install arch+aur packages
-yay -S --needed --answerdiff None --answerclean None google-chrome ghostty nautilus fastfetch hyprpaper hypridle waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager
+yay -S --needed --answerdiff None --answerclean None google-chrome ghostty nautilus fastfetch hyprpaper hypridle waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman
 
 #Install flatpaks
-flatpak install --noninteractive flathub gimp onlyoffice parabolic
+flatpak install --noninteractive flathub org.gimp.GIMP onlyoffice tubeconverter
 
 # -------------------------------------------------- #
 #                   SERVICE MANAGEMENT               #
@@ -41,5 +41,9 @@ git config --global credential.helper store
 cd ~ && mkdir -p dev && cd dev
 git clone http://developermcd.com:8080/Dominic/dotfiles.git
 cd dotfiles
-stow .
+for package in */; do
+    stow --adopt "${package%/}"
+    git restore .
+    stow --override "${package%/}" #the %/ removes the trailing slash from directory names
+done
 
