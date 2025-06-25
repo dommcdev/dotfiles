@@ -1,6 +1,4 @@
-# Comments and blank lines are allowed.
-install.sh
-
+# This file is not in use currently. Stow won't see it unless I use stow .
 
 # Stow defaults
 RCS
