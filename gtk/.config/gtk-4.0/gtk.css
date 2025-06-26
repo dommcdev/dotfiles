@@ -1,113 +1,59 @@
-/*
- * Catppuccin Mocha theme for libadwaita
- */
+/* GTK NAMED COLORS ---------------- use responsibly! */
+@define-color destructive_bg_color #f38ba8;
+@define-color destructive_fg_color #1e1e2e;
+@define-color success_bg_color #a6e3a1;
+@define-color success_fg_color #1e1e2e;
+@define-color warning_bg_color #f9e2af;
+@define-color warning_fg_color #1e1e2e;
+@define-color error_bg_color #f38ba8;
+@define-color error_fg_color #1e1e2e;
 
-:root {
-  /*
-   * ===================================================================
-   * 1. CATPPUCCIN MOCHA PALETTE DEFINITIONS
-   * ===================================================================
-   */
-  --ctp-rosewater: #f5e0dc;
-  --ctp-flamingo:  #f2cdcd;
-  --ctp-pink:      #f5c2e7;
-  --ctp-mauve:     #cba6f7;
-  --ctp-red:       #f38ba8;
-  --ctp-maroon:    #eba0ac;
-  --ctp-peach:     #fab387;
-  --ctp-yellow:    #f9e2af;
-  --ctp-green:     #a6e3a1;
-  --ctp-teal:      #94e2d5;
-  --ctp-sky:       #89dceb;
-  --ctp-sapphire:  #74c7ec;
-  --ctp-blue:      #89b4fa;
-  --ctp-lavender:  #b4befe;
-  --ctp-text:      #cdd6f4;
-  --ctp-subtext1:  #bac2de;
-  --ctp-subtext0:  #a6adc8;
-  --ctp-overlay2:  #9399b2;
-  --ctp-overlay1:  #7f849c;
-  --ctp-overlay0:  #6c7086;
-  --ctp-surface2:  #585b70;
-  --ctp-surface1:  #45475a;
-  --ctp-surface0:  #313244;
-  --ctp-base:      #1e1e2e;
-  --ctp-mantle:    #181825;
-  --ctp-crust:     #11111b;
+@define-color accent_color #cba6f7;
+@define-color accent_bg_color #cba6f7;
 
-  /*
-   * ===================================================================
-   * 2. LIBADWAITA UI MAPPING
-   * ===================================================================
-   */
+@define-color destructive_color oklab(from @destructive_bg_color min(l, 0.5) a b);
+@define-color success_color oklab(from @success_bg_color min(l, 0.5) a b);
+@define-color warning_color oklab(from @warning_bg_color min(l, 0.5) a b);
+@define-color error_color oklab(from @error_bg_color min(l, 0.5) a b);
 
-  /* Base Colors */
-  --window-bg-color: var(--ctp-base);
-  --window-fg-color: var(--ctp-text);
-  --view-bg-color:   var(--ctp-mantle);
-  --view-fg-color:   var(--ctp-text);
+@define-color window_bg_color #1e1e2e;
+@define-color window_fg_color #cdd6f4;
 
-  /* Headerbar */
-  --headerbar-bg-color:           var(--ctp-base);
-  --headerbar-fg-color:           var(--ctp-text);
-  --headerbar-border-color:       var(--ctp-surface0);
-  --headerbar-backdrop-color:     var(--ctp-mantle);
-  --headerbar-shade-color:        rgba(0, 0, 0, 0.3);
-  --headerbar-darker-shade-color: rgba(0, 0, 0, 0.6);
+@define-color view_bg_color #181825;
+@define-color view_fg_color #cdd6f4;
 
-  /* Cards, Popovers, Dialogs & Thumbnails */
-  --card-bg-color:      var(--ctp-surface0);
-  --card-fg-color:      var(--ctp-text);
-  --card-shade-color:   rgba(0, 0, 0, 0.3);
-  --popover-bg-color:   var(--ctp-surface0);
-  --popover-fg-color:   var(--ctp-text);
-  --popover-shade-color:rgba(0, 0, 0, 0.3);
-  --dialog-bg-color:    var(--ctp-base);
-  --dialog-fg-color:    var(--ctp-text);
-  --thumbnail-bg-color: var(--ctp-surface0);
-  --thumbnail-fg-color: var(--ctp-text);
+@define-color headerbar_bg_color #1e1e2e;
+@define-color headerbar_fg_color #cdd6f4;
+@define-color headerbar_border_color #313244;
+@define-color headerbar_backdrop_color @window_bg_color;
+@define-color headerbar_shade_color rgba(0, 0, 0, 0.15);
+@define-color headerbar_darker_shade_color rgba(0, 0, 0, 0.2);
 
-  /* Buttons */
-  --button-bg-color:        var(--ctp-surface1);
-  --button-fg-color:        var(--ctp-text);
-  --button-shade-color:     var(--ctp-crust);
-  --button-hover-bg-color:  var(--ctp-surface2);
-  --button-active-bg-color: var(--ctp-overlay0);
-  
-  /* Inputs (Entry, TextArea) */
-  --input-bg-color:             var(--ctp-mantle);
-  --input-fg-color:             var(--ctp-text);
-  --input-border-color:         var(--ctp-surface1);
-  --input-focus-border-color:   var(--accent-color);
+@define-color sidebar_bg_color #313244;
+@define-color sidebar_fg_color #cdd6f4;
+@define-color sidebar_backdrop_color #313244;
+@define-color sidebar_shade_color rgba(0, 0, 0, 0.1);
+@define-color sidebar_border_color #45475a;
 
-  /* Accent & Action Colors */
-  --accent-color:           var(--ctp-blue);
-  --accent-bg-color:        var(--ctp-blue);
-  --accent-fg-color:        var(--ctp-base);
-  --destructive-color:      var(--ctp-red);
-  --destructive-bg-color:   var(--ctp-red);
-  --destructive-fg-color:   var(--ctp-base);
-  --success-color:          var(--ctp-green);
-  --success-bg-color:       var(--ctp-green);
-  --success-fg-color:       var(--ctp-base);
-  --warning-color:          var(--ctp-peach);
-  --warning-bg-color:       var(--ctp-peach);
-  --warning-fg-color:       var(--ctp-base);
-  --error-color:            var(--ctp-red);
-  --error-bg-color:         var(--ctp-red);
-  --error-fg-color:         var(--ctp-base);
+@define-color secondary_sidebar_bg_color #45475a;
+@define-color secondary_sidebar_fg_color #cdd6f4;
+@define-color secondary_sidebar_backdrop_color #45475a;
+@define-color secondary_sidebar_shade_color rgba(0, 0, 0, 0.1);
+@define-color secondary_sidebar_border_color #585b70;
 
-  /* Sidebar */
-  --sidebar-bg-color:         var(--ctp-mantle);
-  --sidebar-fg-color:         var(--ctp-text);
-  --sidebar-backdrop-color:   var(--ctp-crust);
-  --sidebar-border-color:     var(--ctp-surface0);
-  --sidebar-shade-color:      rgba(0, 0, 0, 0.3);
+@define-color card_bg_color #313244;
+@define-color card_fg_color #cdd6f4;
+@define-color card_shade_color rgba(0, 0, 0, 0.1);
 
-  /* Other UI Elements */
-  --link-color:               var(--ctp-blue);
-  --link-visited-color:       var(--ctp-mauve);
-  --borders-color:            var(--ctp-surface1);
-  --shade_color:              rgba(0, 0, 0, 0.3);
-  --scrollbar_outline_color:  rgba(0, 0, 0, 0.5);
-}
+@define-color dialog_bg_color #1e1e2e;
+@define-color dialog_fg_color #cdd6f4;
+
+@define-color popover_bg_color #313244;
+@define-color popover_fg_color #cdd6f4;
+@define-color popover_shade_color rgba(0, 0, 0, 0.1);
+
+@define-color thumbnail_bg_color #313244;
+@define-color thumbnail_fg_color #cdd6f4;
+
+@define-color shade_color rgba(0, 0, 0, 0.1);
+@define-color scrollbar_outline_color #585b70;
