@@ -46,9 +46,7 @@ systemctl --user enable --now waybar.service
 git config --global credential.helper store
 cd ~/dev/dotfiles
 git pull
-for package in */; do
-    stow --adopt "${package%/}" # the %/ removes the trailing slash from directory names
-    git restore .
-    stow --override "${package%/}" 
-done
+stow --adopt ghostty gtk hyprland hyprpaper waybar
+git restore .
+stow --override ghostty gtk hyprland hyprpaper waybar
 
