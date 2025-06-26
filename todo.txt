@@ -31,7 +31,9 @@ Calculator script (part of rofi?)
 Chrome password keyring
 Shutdown not working
 Permissions popup to copy/paste
-UWSM thing
+UWSM things
+Closing nvim with mainmod+c is slow
+Figure out git branches
 
 
 
