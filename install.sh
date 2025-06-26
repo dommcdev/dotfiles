@@ -1,29 +1,33 @@
 #!/bin/env bash
-set -e #exit immediately if a command exits with a non-zero status
+
+# Prerequisites
+# sudo pacman -Syu git
+# mkdir dev && cd dev
+# git clone http://developermcd.com:8080/Dominic/dotfiles.git
 
 # -------------------------------------------------- #
 #                  SOFTWARE INSTALLATION             #
 # -------------------------------------------------- #
 
-#Update system
+# Make sure system is up to date
 sudo pacman -Syu
 
-#Install yay
+# Install yay
 echo "Installing yay..."
 sudo pacman -S --noconfirm --needed git base-devel
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm && cd .. && rm -rf yay
 #yay --version
 
-#Install flatpak
+# Install flatpak
 echo "Installing flatpak..."
 sudo pacman -S --noconfirm --needed flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 #flatpak --version
 
-#Install arch+aur packages
-yay -S --needed --answerdiff None --answerclean None google-chrome ghostty nautilus fastfetch hyprpaper hypridle waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman
+# Install arch+aur packages
+yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome ghostty nautilus fastfetch hyprpaper hypridle waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim
 
-#Install flatpaks
+# Install flatpaks
 flatpak install --noninteractive flathub org.gimp.GIMP onlyoffice tubeconverter
 
 # -------------------------------------------------- #
@@ -32,18 +36,19 @@ flatpak install --noninteractive flathub org.gimp.GIMP onlyoffice tubeconverter
 
 #Enable various services to start on boot
 sudo systemctl enable --now bluetooth.service
+systemctl --user enable --now hyprpaper.service
+systemctl --user enable --now waybar.service
 
 # -------------------------------------------------- #
 #                     CONFIGURATION                  #
 # -------------------------------------------------- #
 
 git config --global credential.helper store
-cd ~ && mkdir -p dev && cd dev
-git clone http://developermcd.com:8080/Dominic/dotfiles.git
-cd dotfiles
+cd ~/dev/dotfiles
+git pull
 for package in */; do
-    stow --adopt "${package%/}"
+    stow --adopt "${package%/}" # the %/ removes the trailing slash from directory names
     git restore .
-    stow --override "${package%/}" #the %/ removes the trailing slash from directory names
+    stow --override "${package%/}" 
 done
 

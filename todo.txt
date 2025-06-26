@@ -32,3 +32,10 @@ Chrome password keyring
 Shutdown not working
 Permissions popup to copy/paste
 UWSM thing
+
+
+
+#Add to install script?
+Trashcan for terminal
+Font-manager
+[Hyprland programs]
