@@ -1,25 +1,26 @@
 # Programs to configure
-Hyprland  
+Hyprland (animations for switching between workspaces, including workspace indiciators, like hyde)  
 Waybar  
-Rofi  
+Rofi (incl web search, file search, calculator, clipboard history, emojis, etc)  
 Ghostty  
 Yazi  
 Fastfetch  
 Zsh + OMZ  
 Hypridle  
 Hyprlock  
+Wlogout?
 [Screenshots - hyprshot, grim, slurp?]  
 [Notifications - dunst?]
 Gnu stow  
 Theme GTK, Qt, etc  
 Neovim  
 Btop  
-Gdm (or ly)  
+SDDM
+Grub
 Clipboard (wlclip) + remove permission popup to copy/paste
 Cursor
 
 # Maybe
-Grub  
 Pywall16 (wallpaper colors)  
 Calculator script (part of rofi?)
 
