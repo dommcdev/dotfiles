@@ -28,7 +28,7 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome ghostty nautilus fastfetch hyprpaper hypridle waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim
 
 # Install flatpaks
-flatpak install --noninteractive flathub org.gimp.GIMP onlyoffice tubeconverter
+flatpak install --noninteractive flathub org.gimp.GIMP org.onlyoffice.desktopeditors org.nickvision.tubeconverter org.gtk.Gtk3theme.adw-gtk3
 
 # -------------------------------------------------- #
 #                   SERVICE MANAGEMENT               #

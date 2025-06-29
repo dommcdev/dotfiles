@@ -3,6 +3,7 @@ Hyprland (animations for switching between workspaces, including workspace indic
 Waybar  
 Rofi (incl web search, file search, calculator, clipboard history, emojis, etc)  
 Ghostty  
+Tmux
 Yazi  
 Fastfetch  
 Zsh + OMZ  
@@ -19,6 +20,7 @@ SDDM
 Grub
 Clipboard (wlclip) + remove permission popup to copy/paste
 Cursor
+Sunshine/Moonlight
 
 # Maybe
 Pywall16 (wallpaper colors)  
@@ -30,7 +32,7 @@ Calculator script (part of rofi?)
 
 # Fixes
 Chrome password keyring
-Shutdown not working
+Shutdown not working -- something to do with passthrough devices, removed and started working
 Permissions popup to copy/paste
 UWSM things
 Closing nvim with mainmod+c is slow
@@ -40,5 +42,4 @@ Figure out git branches
 
 #Add to install script?
 Trashcan for terminal
-Font-manager
 [Hyprland programs]
