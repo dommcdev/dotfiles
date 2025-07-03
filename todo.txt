@@ -43,8 +43,8 @@ Sunshine/Moonlight
 Chrome password keyring
 Shutdown not working -- something to do with passthrough devices, removed and started working
 Permissions popup to copy/paste
-UWSM things
+UWSM things (env variables)
 Closing nvim with mainmod+c is slow
-Add core hyprland programs to install script
 Automate arch install?
+Chrome ozone-platform selection does not sync
 
