@@ -59,10 +59,11 @@ systemctl --user enable --now hyprpolkitagent.service
 systemctl --user enable --now hyprpaper.service
 systemctl --user enable --now waybar.service
 
-# Flatpak overrides
+# Getting GTK theme to apply everywhere
 sudo flatpak override --system --filesystem=xdg-config/gtk-4.0
 sudo flatpak override --system --filesystem=xdg-config/gtk-3.0
 sudo flatpak override --system --filesystem=xdg-data/themes
+gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3"
 
 echo "-----------------------------------DONE!!!-------------------------"
 
