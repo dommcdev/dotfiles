@@ -1,12 +1,11 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-family: JetBrainsMono Nerd Font Propo, Roboto, Helvetica, Arial, sans-serif;
     font-size: 13px;
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    background-color: #1e1e2e;
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
@@ -50,7 +49,7 @@ button:hover {
 
 /* you can set a style on hover for any module like this */
 #pulseaudio:hover {
-    background-color: #fab387;
+    background-color: #f9e2af;
 }
 
 #workspaces button {
@@ -115,7 +114,7 @@ button:hover {
 
 #clock {
     background-color: #89b4fa;
-    border-radius: 10px;
+    /*border-radius: 10px;*/
 }
 
 #battery {
@@ -197,7 +196,7 @@ label:focus {
 #pulseaudio {
     background-color: #fab387;
     color: #000000;
-    border-radius: 10px;
+    /*border-radius: 10px;*/
 }
 
 #pulseaudio.muted {
