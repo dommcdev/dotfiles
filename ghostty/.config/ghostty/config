@@ -1,10 +1,12 @@
 theme = catppuccin-mocha
 confirm-close-surface=false
+font-family = "JetBrainsMono Nerd Font"
 
 
 
 # This is the configuration file for Ghostty.
 #
+# Reload config with 
 # The template does not set any default options, since Ghostty ships
 # with sensible defaults for all options. Users should only need to set
 # options that they want to change from the default.
