@@ -21,7 +21,7 @@ Grub
 Mouse cursor
 Theme colors script (incl pywall16?)
 Terminal trashcan
-
+Icons (incl ones for my webapps)
 
 
 
