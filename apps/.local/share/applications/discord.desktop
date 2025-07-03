@@ -3,6 +3,7 @@ Version=1.0
 Name=Discord
 GenericName=Chat
 Comment=Read and send messages
+Keywords=Discord;chat;
 StartupWMClass=Google-chrome
 Exec=/usr/bin/google-chrome-stable --app="https://discord.com/channels/@me"
 StartupNotify=true

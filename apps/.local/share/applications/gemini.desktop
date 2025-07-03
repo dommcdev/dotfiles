@@ -3,6 +3,7 @@ Version=1.0
 Name=Gemini
 GenericName=AI Chatbot
 Comment=Chat with Gemini
+Keywords=Gemini;chatGPT;AI;chatbot;Google;
 StartupWMClass=Google-chrome
 Exec=/usr/bin/google-chrome-stable --app="https://gemini.google.com"
 StartupNotify=true

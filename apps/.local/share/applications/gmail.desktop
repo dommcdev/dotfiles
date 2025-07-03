@@ -1,8 +1,9 @@
 [Desktop Entry]
 Version=1.0
 Name=Gmail
-GenericName=Mail
+GenericName=Email
 Comment=Read and send emails
+Keywords=Google;Gmail;Mail;Email;Send;
 StartupWMClass=Google-chrome
 Exec=/usr/bin/google-chrome-stable --app="https://mail.google.com/mail/u/0#inbox"
 StartupNotify=true

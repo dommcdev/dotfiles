@@ -1,8 +1,9 @@
 [Desktop Entry]
 Version=1.0
 Name=Youtube
-GenericName=YT
+#GenericName=Youtube
 Comment=Stream videos from youtube.com
+Keywords=Google;YT;Watch;Video;Stream;Play;Tube;Youtube;
 StartupWMClass=Google-chrome
 Exec=/usr/bin/google-chrome-stable --app="https://youtube.com/playlist?list=WL"
 StartupNotify=true
