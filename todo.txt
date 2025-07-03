@@ -6,7 +6,7 @@ Ghostty
 Tmux
 Yazi  
 Fastfetch  
-Zsh + OMZ (configure default editor)
+Zsh + OMZ (configure default editor, various alias (e.g. vi))
 Hypridle  
 Hyprlock  
 Wlogout?
@@ -18,7 +18,6 @@ Neovim
 Btop  
 SDDM
 Grub
-Cliphist
 Mouse cursor
 Theme colors script (incl pywall16?)
 Terminal trashcan
@@ -27,12 +26,12 @@ Terminal trashcan
 
 
 #DONE
-
+Cliphist
 
 
 
 Git
-Gnu Stow
+Gnu Stow (dotfile option instead of using .)
 Sunshine/Moonlight
 
 
