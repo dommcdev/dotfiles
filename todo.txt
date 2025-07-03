@@ -6,25 +6,35 @@ Ghostty
 Tmux
 Yazi  
 Fastfetch  
-Zsh + OMZ  
+Zsh + OMZ (configure default editor)
 Hypridle  
 Hyprlock  
 Wlogout?
-[Screenshots - hyprshot, grim, slurp?]  
-[Notifications - dunst?]
-Gnu stow  
-Theme GTK, Qt, etc  
+Grimblast  
+Dunst
+Theme GTK
+Theme QT
 Neovim  
 Btop  
 SDDM
 Grub
-Clipboard (wlclip) + remove permission popup to copy/paste
-Cursor
+Cliphist
+Mouse cursor
+Theme colors script (incl pywall16?)
+Terminal trashcan
+
+
+
+
+#DONE
+
+
+
+
+Git
+Gnu Stow
 Sunshine/Moonlight
 
-# Maybe
-Pywall16 (wallpaper colors)  
-Calculator script (part of rofi?)
 
 
 
@@ -36,10 +46,6 @@ Shutdown not working -- something to do with passthrough devices, removed and st
 Permissions popup to copy/paste
 UWSM things
 Closing nvim with mainmod+c is slow
-Figure out git branches
+Add core hyprland programs to install script
+Automate arch install?
 
-
-
-#Add to install script?
-Trashcan for terminal
-[Hyprland programs]
