@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Name=Youtube
+GenericName=YT
+Comment=Stream videos from youtube.com
+StartupWMClass=Google-chrome
+Exec=/usr/bin/google-chrome-stable --app="https://youtube.com/playlist?list=WL"
+StartupNotify=true
+Terminal=false
+Icon=google-chrome
+Type=Application
+Categories=Network;WebBrowser;

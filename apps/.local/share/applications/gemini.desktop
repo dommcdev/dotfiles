@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Name=Gemini
+GenericName=AI Chatbot
+Comment=Chat with Gemini
+StartupWMClass=Google-chrome
+Exec=/usr/bin/google-chrome-stable --app="https://gemini.google.com"
+StartupNotify=true
+Terminal=false
+Icon=google-chrome
+Type=Application
+Categories=Network;WebBrowser;
