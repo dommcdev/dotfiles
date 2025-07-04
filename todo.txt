@@ -36,7 +36,8 @@ Sunshine/Moonlight
 
 
 
-
+# IMPORTANT NOTE
+For gtk theme to work, the xdg-desktop-portal-gtk must be up and running. This is not guaranteed. I don't know why yet. 
 
 
 # Fixes
