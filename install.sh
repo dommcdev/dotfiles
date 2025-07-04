@@ -33,7 +33,7 @@ sudo pacman -S --noconfirm --needed ghostty nautilus nautilus-python fastfetch h
 yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome
 
 # Install flatpaks
-flatpak install --noninteractive flathub org.gimp.GIMP org.onlyoffice.desktopeditors org.nickvision.tubeconverter org.gtk.Gtk3theme.adw-gtk3
+flatpak install --noninteractive flathub org.gimp.GIMP org.onlyoffice.desktopeditors org.nickvision.tubeconverter
 
 
 # -------------------------------------------------- #
@@ -64,6 +64,9 @@ sudo flatpak override --system --filesystem=xdg-config/gtk-4.0
 sudo flatpak override --system --filesystem=xdg-config/gtk-3.0
 sudo flatpak override --system --filesystem=xdg-data/themes
 gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3"
+sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3
+sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3-dark
+
 
 echo "-----------------------------------DONE!!!-------------------------"
 
