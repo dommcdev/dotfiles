@@ -24,7 +24,7 @@ sudo pacman -S --noconfirm --needed flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 # Install Hyprland core packages
-sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland qt5-wayland qt6-wayland hyprpolkitagent grim slurp sddm #hyprland
+sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpolkitagent grim slurp sddm hyprland
 
 # Install arch packages
 sudo pacman -S --noconfirm --needed ghostty nautilus nautilus-python fastfetch hyprpaper hypridle waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist hyprpicker hyprsunset adw-gtk-theme pulseaudio networkmanager
@@ -60,15 +60,27 @@ systemctl --user enable --now hyprpaper.service
 systemctl --user enable --now waybar.service
 
 # Getting GTK theme to apply everywhere
+mkdir -p ~/.local/share/themes/
+ln -s /usr/share/themes/adw-gtk3 ~/.local/share/themes/adw-gtk3
 flatpak override --user --filesystem=xdg-config/gtk-4.0
 flatpak override --user --filesystem=xdg-config/gtk-3.0
 flatpak override --user --filesystem=xdg-data/themes
 gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3"
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3
 sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3-dark
 
 
 echo "-----------------------------------DONE!!!-------------------------"
 
-#Todo
-#Add prompt for rebooting
+read -rp "Do you want to reboot? [Y/n]: " choice
+
+# Convert choice to lowercase for easier comparison
+choice=${choice,,}
+
+if [[ "$choice" == "y" || "$choice" == "" ]]; then
+    echo "Rebooting..."
+    sudo reboot now
+else
+    echo "Reboot as soon as possible for all configurations to take effect."
+fi
