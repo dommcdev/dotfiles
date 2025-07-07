@@ -41,9 +41,6 @@ For gtk theme to work, the xdg-desktop-portal-gtk must be up and running. This i
 
 
 # Current TODO
-Add copying themes from usr/share/themes to .local/share/themes to script
-Add installing/enableing xdg-desktop-portal-gtk to script
-Add reboot to script - otherwise hyprland gets frozen
 Investigate symlinked folders vs individual files
 
 # Fixes
