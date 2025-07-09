@@ -23,8 +23,9 @@ Theme colors script (incl pywall16? Matugen?)
 Terminal trashcan
 Icons (incl ones for my webapps)
 Git
-Gnu Stow (dotfile option instead of using .)
 Sunshine/Moonlight
+Theme OnlyOffice
+Setup Nextcloud
 
 
 #DONE
@@ -33,14 +34,7 @@ Cliphist
 
 
 
-
-
-# IMPORTANT NOTE
-For gtk theme to work, the xdg-desktop-portal-gtk must be up and running. This is not guaranteed. I don't know why yet. 
-
-
-
-# Fixes
+# To-do
 Chrome password keyring
 Shutdown not working -- something to do with passthrough devices, removed and started working
 Permissions popup to copy/paste
@@ -48,4 +42,9 @@ UWSM things (env variables)
 Closing nvim with mainmod+c is slow
 Automate arch install?
 Chrome ozone-platform selection does not sync
+
+
+
+# Add to install
+Install tailscale + autostart + initial login
 
