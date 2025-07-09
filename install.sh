@@ -43,9 +43,9 @@ flatpak install --noninteractive flathub org.gimp.GIMP org.onlyoffice.desktopedi
 git config --global credential.helper store
 cd ~/dev/dotfiles
 git pull
-stow --adopt -D ghostty gtk hyprland waybar rofi apps zsh
+stow --adopt --dotfiles ghostty gtk hyprland waybar rofi apps zsh
 git restore .
-stow --override -D ghostty gtk hyprland waybar rofi apps zsh
+stow --override --dotfiles ghostty gtk hyprland waybar rofi apps zsh
 hyprctl reload
 
 
