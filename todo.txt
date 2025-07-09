@@ -39,10 +39,6 @@ Cliphist
 For gtk theme to work, the xdg-desktop-portal-gtk must be up and running. This is not guaranteed. I don't know why yet. 
 
 
-# Current TODO
-Investigate symlinked folders vs individual files
-
-
 
 # Fixes
 Chrome password keyring
