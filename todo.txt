@@ -19,10 +19,12 @@ Btop
 SDDM
 Grub
 Mouse cursor
-Theme colors script (incl pywall16?)
+Theme colors script (incl pywall16? Matugen?)
 Terminal trashcan
 Icons (incl ones for my webapps)
-
+Git
+Gnu Stow (dotfile option instead of using .)
+Sunshine/Moonlight
 
 
 #DONE
@@ -30,9 +32,6 @@ Cliphist
 
 
 
-Git
-Gnu Stow (dotfile option instead of using .)
-Sunshine/Moonlight
 
 
 
@@ -42,6 +41,8 @@ For gtk theme to work, the xdg-desktop-portal-gtk must be up and running. This i
 
 # Current TODO
 Investigate symlinked folders vs individual files
+
+
 
 # Fixes
 Chrome password keyring
