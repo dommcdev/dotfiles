@@ -37,9 +37,7 @@ Cliphist
 # To-do
 Chrome password keyring
 Shutdown not working -- something to do with passthrough devices, removed and started working
-Permissions popup to copy/paste
-UWSM things (env variables)
-Closing nvim with mainmod+c is slow
+UWSM Env variables
 Automate arch install?
 Chrome ozone-platform selection does not sync
 
