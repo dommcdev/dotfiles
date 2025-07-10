@@ -40,6 +40,7 @@ Chrome password keyring
 Arch + VFIO = shutdown hangs, very annoying
 Automate arch install
 When right click open file in vim, closing vim is slow with super+c
+Add workspace rules so gimp always opens full in new workspace
 
 
 
