@@ -44,9 +44,9 @@ git config --global credential.helper store
 cd ~/dev/dotfiles
 git pull
 stow --adopt --dotfiles ghostty gtk hyprland waybar rofi apps zsh
-git restore .
-stow --override --dotfiles ghostty gtk hyprland waybar rofi apps zsh
-hyprctl reload
+git clean -fd
+stow --restow --dotfiles ghostty gtk hyprland waybar rofi apps zsh
+#hyprctl reload
 
 
 # -------------------------------------------------- #
@@ -54,7 +54,7 @@ hyprctl reload
 # -------------------------------------------------- #
 
 # Enable various services to start on boot
-sudo systemctl enable --now sddm.service
+sudo systemctl enable sddm.service
 #sudo systemctl enable --now bluetooth.service
 systemctl --user enable --now hyprpolkitagent.service
 systemctl --user enable --now hyprpaper.service
@@ -73,6 +73,9 @@ gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3"
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3
 sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3-dark
+
+# Change shell
+chsh -s /usr/bin/zsh
 
 
 echo "-----------------------------------DONE!!!-------------------------"

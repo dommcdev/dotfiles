@@ -1,0 +1,5 @@
+[credential]
+	helper = store
+[user]
+	email = dominicmcdev@gmail.com
+	name = Dominic
