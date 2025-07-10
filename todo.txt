@@ -6,7 +6,7 @@ Ghostty
 Tmux
 Yazi  
 Fastfetch  
-Zsh + OMZ (configure default editor, various alias (e.g. vi))
+Zsh + OMZ
 Hypridle  
 Hyprlock  
 Wlogout?
@@ -36,13 +36,13 @@ Cliphist
 
 # To-do
 Chrome password keyring
-Shutdown not working -- something to do with passthrough devices, removed and started working
-UWSM Env variables
-Automate arch install?
+Arch + VFIO = shutdown hangs, very annoying
+Automate arch install
 Chrome ozone-platform selection does not sync
 
 
 
 # Add to install
 Install tailscale + autostart + initial login
+Change shell to zsh (chsh -s usr/bin/zsh)
 

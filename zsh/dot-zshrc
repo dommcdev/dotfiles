@@ -1,14 +1,43 @@
-# Lines configured by zsh-newuser-install
+# Main zsh options
 HISTFILE=~/.histfile
 HISTSIZE=5000
 SAVEHIST=5000
-setopt autocd
-unsetopt beep
-bindkey -v
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/dominic/.zshrc'
 
+setopt autocd #cd by typing dir name
+unsetopt beep #no beeping!
+bindkey -v
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
+
+
+# Visuals
+PS1="%{%F{green}%}%n@%m %{%F{yellow}%}%2~ %{%F{reset}%}%% "
+
+
+# Aliases
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias vi='nvim'
+alias vim='nvim'
+
+
+
+# Env variables
+export PATH="$HOME/.local/bin:$PATH"
+export EDITOR="nvim"
+export VISUAL="nvim" #Fallback for editor
+
+
+
+# FZF configuration
+source <(fzf --zsh)
+
+
+# Run yazi with 'y', change cwd when exiting yazi
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
