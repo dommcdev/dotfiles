@@ -27,7 +27,7 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpolkitagent grim slurp sddm hyprland
 
 # Install arch packages
-sudo pacman -S --noconfirm --needed ghostty nautilus nautilus-python fastfetch hyprpaper hypridle waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist hyprpicker hyprsunset adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor fzf ddcutil
+sudo pacman -S --noconfirm --needed ghostty nautilus nautilus-python fastfetch hyprpaper hypridle waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist hyprpicker hyprsunset adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor fzf ddcutil tailscale
 
 # Install aur packages
 yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome
@@ -40,7 +40,6 @@ flatpak install --noninteractive flathub org.gimp.GIMP org.onlyoffice.desktopedi
 #                     CONFIGURATION                  #
 # -------------------------------------------------- #
 
-git config --global credential.helper store
 cd ~/dev/dotfiles
 git pull
 stow --adopt --dotfiles ghostty gtk hyprland waybar rofi apps zsh
@@ -56,6 +55,7 @@ stow --restow --dotfiles ghostty gtk hyprland waybar rofi apps zsh
 # Enable various services to start on boot
 sudo systemctl enable sddm.service
 #sudo systemctl enable --now bluetooth.service
+sudo systemctl enable --now tailscaled
 systemctl --user enable --now hyprpolkitagent.service
 systemctl --user enable --now hyprpaper.service
 systemctl --user enable --now hypridle.service
@@ -76,6 +76,12 @@ sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3-dark
 
 # Change shell
 chsh -s /usr/bin/zsh
+
+# Create Downloads dir if it doesn't exit
+mkdir -p ~/Downloads
+
+# Authenticate Tailscale
+sudo tailscale up
 
 
 echo "-----------------------------------DONE!!!-------------------------"
