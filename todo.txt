@@ -39,7 +39,7 @@ Git
 Chrome password keyring
 Arch + VFIO = shutdown hangs, very annoying
 Automate arch install
-Chrome ozone-platform selection does not sync, video acceleration not working?
+When right click open file in vim, closing vim is slow with super+c
 
 
 

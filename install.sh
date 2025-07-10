@@ -27,7 +27,7 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpolkitagent grim slurp sddm hyprland
 
 # Install arch packages
-sudo pacman -S --noconfirm --needed ghostty nautilus nautilus-python fastfetch hyprpaper hypridle waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist hyprpicker hyprsunset adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor fzf ddcutil tailscale
+sudo pacman -S --noconfirm --needed ghostty nautilus nautilus-python fastfetch hyprpaper hypridle waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist hyprpicker hyprsunset adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor fzf ddcutil tailscale libva-utils
 
 # Install aur packages
 yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome
@@ -41,10 +41,10 @@ flatpak install --noninteractive flathub org.gimp.GIMP org.onlyoffice.desktopedi
 # -------------------------------------------------- #
 
 cd ~/dev/dotfiles
-git pull
-stow --adopt --dotfiles ghostty gtk hyprland waybar rofi apps zsh
+stow --adopt --dotfiles ghostty gtk hyprland waybar rofi apps zsh git
 git clean -fd
-stow --restow --dotfiles ghostty gtk hyprland waybar rofi apps zsh
+stow --restow --dotfiles ghostty gtk hyprland waybar rofi apps zsh git
+git pull #neccesary to populate gitcredentials
 #hyprctl reload
 
 
@@ -81,7 +81,7 @@ chsh -s /usr/bin/zsh
 mkdir -p ~/Downloads
 
 # Authenticate Tailscale
-sudo tailscale up
+#sudo tailscale up
 
 
 echo "-----------------------------------DONE!!!-------------------------"
