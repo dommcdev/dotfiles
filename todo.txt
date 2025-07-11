@@ -7,7 +7,6 @@ Tmux
 Yazi  
 Fastfetch  
 Zsh + OMZ  
-Hyprlock  
 Wlogout?
 Grimblast  
 Dunst
@@ -30,6 +29,8 @@ Setup Nextcloud
 Cliphist
 Hypridle
 Git
+Hyprlock
+Hypridle
 
 
 
@@ -38,7 +39,7 @@ Git
 # To-do
 Chrome password keyring
 Arch + VFIO = shutdown hangs, very annoying
-Automate arch install
+Install script workflow setup
 When right click open file in vim, closing vim is slow with super+c
 Add workspace rules so gimp always opens full in new workspace
 
