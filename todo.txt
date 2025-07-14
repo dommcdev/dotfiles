@@ -6,7 +6,7 @@ Ghostty
 Tmux
 Yazi  
 Fastfetch  
-Zsh + OMZ  
+Zsh + OMZ + starship 
 Wlogout?
 Grimblast  
 Dunst
@@ -16,13 +16,16 @@ Neovim
 Btop  
 SDDM
 Grub
-Mouse cursor
+Mouse cursor (colored?)
 Theme colors script (incl pywall16? Matugen?)
 Terminal trashcan
 Icons (incl ones for my webapps)
 Sunshine/Moonlight
 Theme OnlyOffice
 Setup Nextcloud
+Nautilus (open to create file, spacebar preview)
+Stow (replace with dotbot?)
+[Backups] (Timeshifts snapshots w/btrfs, borg-backup/equivilant, etc)
 
 
 #DONE
@@ -46,4 +49,5 @@ Add workspace rules so gimp always opens full in new workspace
 
 
 # Add to install
+Image viewer, pdf viewer, audio player, video player, impression, games, audacity, kdenlive, obs studio, calculator, switcheroo, rquickshare
 
