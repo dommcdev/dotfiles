@@ -23,6 +23,9 @@ echo "Installing flatpak..."
 sudo pacman -S --noconfirm --needed flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
+# Install useful utilies
+sudo pacman -S --noconfirm --needed openssh wget iwd wireless_tools wpa_supplicant smartmontools xdg-utils
+
 # Install Hyprland core packages
 sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpolkitagent grim slurp sddm hyprland
 
