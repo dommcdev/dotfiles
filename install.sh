@@ -27,20 +27,25 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 sudo pacman -S --noconfirm --needed libva-mesa-driver libva-utils mesa vulkan-radeon
 
 # Install useful utilies
-sudo pacman -S --noconfirm --needed openssh wget iwd wireless_tools wpa_supplicant smartmontools xdg-utils
-
-# Install Hyprland core packages
-sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpolkitagent grim slurp sddm hyprland
+sudo pacman -S --noconfirm --needed openssh wget iwd wireless_tools wpa_supplicant smartmontools xdg-utils bluez bluez-utils
 
 # Install arch packages
-sudo pacman -S --noconfirm --needed ghostty nautilus nautilus-python gvfs-smb fastfetch hyprpaper hypridle waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist hyprpicker hyprsunset adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor ddcutil tailscale yazi jq 7zip fd ripgrep fzf poppler zoxide imagemagick chafa ffmpeg
+sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpolkitagent grim slurp sddm hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset ghostty nautilus nautilus-python gvfs-smb fastfetch waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor ddcutil tailscale yazi jq 7zip fd ripgrep fzf poppler zoxide imagemagick chafa ffmpeg libnotify
+
+# Install gui packages
+sudo pacman -S --noconfirm --needed gimp impression audacity kdenlive gnome-calculator decibels papers loupe showtime switcheroo
 
 # Install aur packages
-yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome
+yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome r-quick-share
 
 # Install flatpaks
-flatpak install --noninteractive flathub org.gimp.GIMP org.onlyoffice.desktopeditors org.nickvision.tubeconverter
+flatpak install --noninteractive flathub org.onlyoffice.desktopeditors org.nickvision.tubeconverter
 
+# Install dev packages
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+\. "$HOME/.config/nvm/nvm.sh" #source file in lieu of restarting the shell
+nvm install 22
+npm install -g @google/gemini-cli
 
 # -------------------------------------------------- #
 #                     CONFIGURATION                  #
@@ -60,17 +65,14 @@ git pull #neccesary to populate gitcredentials
 
 # Enable various services to start on boot
 sudo systemctl enable sddm.service
-#sudo systemctl enable --now bluetooth.service
+sudo systemctl enable --now bluetooth.service
 sudo systemctl enable --now tailscaled
-systemctl --user enable --now hyprpolkitagent.service
-systemctl --user enable --now hyprpaper.service
-systemctl --user enable --now hypridle.service
-systemctl --user enable --now waybar.service
-#systemctl --user enable --now xdg-desktop-portal-gtk.service
+systemctl --user enable hyprpolkitagent.service
+systemctl --user enable hyprpaper.service
+systemctl --user enable hypridle.service
+systemctl --user enable waybar.service
 
 # Getting GTK theme to apply everywhere
-mkdir -p ~/.local/share/themes/
-ln -s /usr/share/themes/adw-gtk3 ~/.local/share/themes/adw-gtk3
 rm -rf ~/.config/gtk-4.0 ~/.config/gtk-3.0
 flatpak override --user --filesystem=xdg-config/gtk-4.0
 flatpak override --user --filesystem=xdg-config/gtk-3.0

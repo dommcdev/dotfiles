@@ -25,7 +25,7 @@ Theme OnlyOffice
 Setup Nextcloud
 Nautilus (open to create file, spacebar preview)
 Stow (replace with dotbot?)
-[Backups] (Timeshifts snapshots w/btrfs, borg-backup/equivilant, etc)
+[Backups] (Timeshifts snapshots w/btrfs, borg-backup/equivilant, rsync, etc)
 
 
 #DONE
@@ -39,14 +39,7 @@ Hypridle
 
 
 # To-do
-Chrome password keyring
-Install script workflow setup
+Install script setup (custom iso with pre-install script?)
 When right click open file in vim, closing vim is slow with super+c
 Add workspace rules so gimp always opens full in new workspace
-Get smb.conf from other vm
-
-
-
-# Add to install
-Image viewer, pdf viewer, audio player, video player, impression, games, audacity, kdenlive, obs studio, calculator, switcheroo, rquickshare
-
+Add pacman stuff to install script (lizardbyte repo + pacman hook for theme)
