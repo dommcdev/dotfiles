@@ -33,7 +33,7 @@ sudo pacman -S --noconfirm --needed openssh wget iwd wireless_tools wpa_supplica
 sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpolkitagent grim slurp sddm hyprland
 
 # Install arch packages
-sudo pacman -S --noconfirm --needed ghostty nautilus nautilus-python fastfetch hyprpaper hypridle waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist hyprpicker hyprsunset adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor fzf ddcutil tailscale
+sudo pacman -S --noconfirm --needed ghostty nautilus nautilus-python gvfs-smb fastfetch hyprpaper hypridle waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist hyprpicker hyprsunset adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor ddcutil tailscale yazi jq 7zip fd ripgrep fzf poppler zoxide imagemagick chafa ffmpeg
 
 # Install aur packages
 yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome
@@ -47,9 +47,9 @@ flatpak install --noninteractive flathub org.gimp.GIMP org.onlyoffice.desktopedi
 # -------------------------------------------------- #
 
 cd ~/dev/dotfiles
-stow --adopt --dotfiles ghostty gtk hyprland waybar rofi apps zsh git
+stow --adopt --dotfiles ghostty gtk hyprland waybar rofi apps zsh git nvim scripts
 git clean -fd
-stow --restow --dotfiles ghostty gtk hyprland waybar rofi apps zsh git
+stow --restow --dotfiles ghostty gtk hyprland waybar rofi apps zsh git nvim scripts
 git pull #neccesary to populate gitcredentials
 #hyprctl reload
 
@@ -66,7 +66,7 @@ systemctl --user enable --now hyprpolkitagent.service
 systemctl --user enable --now hyprpaper.service
 systemctl --user enable --now hypridle.service
 systemctl --user enable --now waybar.service
-systemctl --user enable --now xdg-desktop-portal-gtk.service
+#systemctl --user enable --now xdg-desktop-portal-gtk.service
 
 # Getting GTK theme to apply everywhere
 mkdir -p ~/.local/share/themes/
@@ -86,7 +86,7 @@ chsh -s /usr/bin/zsh
 # Create Downloads dir if it doesn't exit
 mkdir -p ~/Downloads
 
-# Authenticate Tailscale
+# Authenticate Tailscale (also sign in to Google in the process)
 #sudo tailscale up
 
 
