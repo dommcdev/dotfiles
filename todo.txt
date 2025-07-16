@@ -9,7 +9,7 @@ Fastfetch
 Zsh + OMZ + starship 
 Wlogout?
 Grimblast  
-Dunst
+Dunst + notify-send
 Theme GTK
 Theme QT
 Neovim  
@@ -20,7 +20,7 @@ Mouse cursor (colored?)
 Theme colors script (incl pywall16? Matugen?)
 Terminal trashcan
 Icons (incl ones for my webapps)
-Sunshine/Moonlight
+Sunshine/Moonlight (add lizardbyte repo, enable on startup, conf file for correct resolution, etc)
 Theme OnlyOffice
 Setup Nextcloud
 Nautilus (open to create file, spacebar preview)
@@ -30,7 +30,6 @@ Stow (replace with dotbot?)
 
 #DONE
 Cliphist
-Hypridle
 Git
 Hyprlock
 Hypridle
@@ -41,10 +40,10 @@ Hypridle
 
 # To-do
 Chrome password keyring
-Arch + VFIO = shutdown hangs, very annoying
 Install script workflow setup
 When right click open file in vim, closing vim is slow with super+c
 Add workspace rules so gimp always opens full in new workspace
+Get smb.conf from other vm
 
 
 
