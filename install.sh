@@ -23,6 +23,9 @@ echo "Installing flatpak..."
 sudo pacman -S --noconfirm --needed flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
+# Install graphics drivers
+sudo pacman -S --noconfirm --needed libva-mesa-driver libva-utils mesa vulkan-radeon
+
 # Install useful utilies
 sudo pacman -S --noconfirm --needed openssh wget iwd wireless_tools wpa_supplicant smartmontools xdg-utils
 
@@ -30,7 +33,7 @@ sudo pacman -S --noconfirm --needed openssh wget iwd wireless_tools wpa_supplica
 sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpolkitagent grim slurp sddm hyprland
 
 # Install arch packages
-sudo pacman -S --noconfirm --needed ghostty nautilus nautilus-python fastfetch hyprpaper hypridle waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist hyprpicker hyprsunset adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor fzf ddcutil tailscale libva-utils
+sudo pacman -S --noconfirm --needed ghostty nautilus nautilus-python fastfetch hyprpaper hypridle waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist hyprpicker hyprsunset adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor fzf ddcutil tailscale
 
 # Install aur packages
 yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome
