@@ -26,10 +26,11 @@ Setup Nextcloud
 Nautilus (open to create file, spacebar preview)
 Stow (replace with dotbot?)
 [Backups] (Timeshifts snapshots w/btrfs, borg-backup/equivilant, rsync, etc)
+Cliphist (view entire selection, move between with ctrl+vim keybindings
+Chrome (vimiumc + theme)
 
 
 #DONE
-Cliphist
 Git
 Hyprlock
 Hypridle
