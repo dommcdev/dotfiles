@@ -1,13 +1,12 @@
 # Programs to configure
 Hyprland (animation workspace indiciators, like hyde)  
 Waybar  
-Rofi (incl web search, file search, calculator, clipboard history, emojis, etc)  
+Rofi (incl web search, file search, calculator, clipboard history, emojis, power menu, etc)  
 Ghostty  
 Tmux
 Yazi  
 Fastfetch  
 Zsh + OMZ + starship 
-Wlogout?
 Grimblast  
 Dunst + notify-send
 Theme GTK
@@ -44,3 +43,9 @@ Install script setup (custom iso with pre-install script?)
 When right click open file in vim, closing vim is slow with super+c
 Add workspace rules so gimp always opens full in new workspace
 Add pacman stuff to install script (lizardbyte repo + pacman hook for theme)
+
+
+# BUGS
+Using regular Linux kernel results in shutdown hangs. Switching to lts kernel fixes this
+Running Chrome via Wayland results in video acceleration being not supported on my old gpu. Switch to x11 to fix
+PWAs start in floating mode when starting in Xwayland. Custom window rule fixes this (somewhat?)

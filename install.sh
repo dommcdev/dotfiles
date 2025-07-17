@@ -36,7 +36,7 @@ sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-d
 sudo pacman -S --noconfirm --needed gimp impression audacity kdenlive gnome-calculator decibels papers loupe showtime switcheroo
 
 # Install aur packages
-yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome r-quick-share
+yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome r-quick-share wlogout downgrade
 
 # Install flatpaks
 flatpak install --noninteractive flathub org.onlyoffice.desktopeditors org.nickvision.tubeconverter
