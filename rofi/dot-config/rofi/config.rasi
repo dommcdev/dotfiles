@@ -1,7 +1,9 @@
 configuration {
     show-icons: true;
-    modes: "drun,filebrowser,ssh,window,combi,recursivebrowser";
-    combi-modes: "drun,filebrowser,ssh";
+    font: "JetBrainsMono Nerd Font 12";
+    modi: "drun,filebrowser,powernc:rofi-power-menu --choices=shutdown/reboot/logout --confirm='',power:rofi-power-menu,ssh,window,combi,recursivebrowser";
+    combi-modes: [drun,powernc];
+
 
     display-ssh:    "󰣀 ssh:";
     display-run:    "󱓞 run:";
@@ -9,6 +11,10 @@ configuration {
     display-window: "󱂬 window:";
     display-combi:  "󰕘 combi:";
     display-filebrowser: "󰉋 filebrowser:";
+    display-power: " power:";
+    display-powernc: " power:";
+
 }
 
 @theme "~/.config/rofi/catppuccin-lavrent-mocha.rasi"
+//Note - powernc is power no-confirm, for use in combi-modes where the confirmation is somewhat cumbersome

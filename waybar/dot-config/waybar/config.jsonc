@@ -44,12 +44,6 @@
     "pulseaudio": {
         "format": "{icon} {volume}%",
         "format-icons": {
-            "headphone": "󰋋",
-            "hands-free": "󰋎",
-            "headset": "󰋎",
-            "phone": "󰏲",
-            "portable": "󰏲",
-            "car": "󰄋",
             "default": ["󰕿", "󰖀", "󰕾"]
         },
         "on-click": "pavucontrol"
@@ -57,7 +51,7 @@
 
     "network": {
         "format-wifi": "󰖩 {essid}",
-        "format-ethernet": "󰈁 Connected",
+        "format-ethernet": " Connected",
         "format-disconnected": "󰖪 Disconnected",
         "tooltip-format-wifi": "{ipaddr}/{cidr} @ {signalStrength}%",
         "on-click": "nm-connection-editor"

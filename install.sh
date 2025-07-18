@@ -36,7 +36,7 @@ sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-d
 sudo pacman -S --noconfirm --needed gimp impression audacity kdenlive gnome-calculator decibels papers loupe showtime switcheroo
 
 # Install aur packages
-yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome r-quick-share wlogout downgrade
+yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome r-quick-share downgrade
 
 # Install flatpaks
 flatpak install --noninteractive flathub org.onlyoffice.desktopeditors org.nickvision.tubeconverter
@@ -51,12 +51,12 @@ npm install -g @google/gemini-cli
 #                     CONFIGURATION                  #
 # -------------------------------------------------- #
 
+mkdir -p ~/.local/bin #so stow won't try to link the entire dir
 cd ~/dev/dotfiles
 stow --adopt --dotfiles ghostty gtk hyprland waybar rofi apps zsh git nvim scripts
 git clean -fd
 stow --restow --dotfiles ghostty gtk hyprland waybar rofi apps zsh git nvim scripts
 git pull #neccesary to populate gitcredentials
-#hyprctl reload
 
 
 # -------------------------------------------------- #
