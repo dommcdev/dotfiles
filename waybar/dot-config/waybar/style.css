@@ -38,12 +38,6 @@
     margin: 4px 0px;
 }
 
-/* Style modules on the left */
-#workspaces {
-    border-radius: 10px 0 0 10px;
-    margin-left: 8px;
-}
-
 /* Style modules on the right */
 #clock {
     border-radius: 0 10px 10px 0;
@@ -59,27 +53,26 @@
     border-radius: 0;
 }
 
-/* Workspace Button Styling */
+#workspaces {
+    background-color: @base;
+}
+
 #workspaces button {
-    padding: 2px 5px;
-    background-color: transparent;
     color: @subtext0;
-    transition: all 0.3s ease-in-out;
 }
 
 #workspaces button:hover {
-    background-color: @crust;
-    box-shadow: inherit;
-    text-shadow: inherit;
+    background-color: #313244; /* Catppuccin Surface0 */
 }
 
 #workspaces button.focused {
-    color: @lavender;
-    font-size: 18px; /* Make the focused icon slightly larger */
+    background-color: @lavender;
+    color: @crust;
 }
 
 #workspaces button.urgent {
-    color: @red;
+    background-color: @red;
+    color: @crust;
 }
 
 /* Specific Module Colors */
