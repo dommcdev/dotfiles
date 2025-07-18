@@ -1,0 +1,11 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Operation = Remove
+Type = Package
+Target = adw-gtk-theme
+
+[Action]
+Description = Sync adw-gtk-theme to ~/.local/share/themes for Flatpak
+When = PostTransaction
+Exec = /bin/sh -c 'HOME_DIR=$(getent passwd $(logname) | cut -d: -f6); TARGET_DIR="${HOME_DIR}/.local/share/themes"; rm -rf "${TARGET_DIR}/adw-gtk3" "${TARGET_DIR}/adw-gtk3-dark"; mkdir -p "${TARGET_DIR}"; cp -r /usr/share/themes/adw-gtk3 "${TARGET_DIR}/" 2>/dev/null || true; cp -r /usr/share/themes/adw-gtk3-dark "${TARGET_DIR}/" 2>/dev/null || true; chown -R $(logname):$(logname) "${TARGET_DIR}/adw-gtk3" "${TARGET_DIR}/adw-gtk3-dark" 2>/dev/null || true'

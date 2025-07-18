@@ -71,6 +71,7 @@ systemctl --user enable hyprpolkitagent.service
 systemctl --user enable hyprpaper.service
 systemctl --user enable hypridle.service
 systemctl --user enable waybar.service
+systemctl --user enable sunshine.service
 
 # Getting GTK theme to apply everywhere
 rm -rf ~/.config/gtk-4.0 ~/.config/gtk-3.0

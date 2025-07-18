@@ -1,8 +1,6 @@
 # Programs to configure
-Hyprland (animation workspace indiciators, like hyde)  
 Waybar  
-Rofi (incl web search, file search, calculator, clipboard history, emojis, power menu, etc)  
-Ghostty  
+Rofi (incl web search, file search, calculator, clipboard history, emojis, etc)  
 Tmux
 Yazi  
 Fastfetch  
@@ -19,7 +17,7 @@ Mouse cursor (colored?)
 Theme colors script (incl pywall16? Matugen?)
 Terminal trashcan
 Icons (incl ones for my webapps)
-Sunshine/Moonlight (add lizardbyte repo, enable on startup, conf file for correct resolution, etc)
+Sunshine (conf file for correct keybindings)
 Theme OnlyOffice
 Setup Nextcloud
 Nautilus (open to create file, spacebar preview)
@@ -33,6 +31,10 @@ Chrome (vimiumc + theme)
 Git
 Hyprlock
 Hypridle
+
+#MINOR TWEAKS ONLY
+Hyprland
+Ghostty
 
 
 
