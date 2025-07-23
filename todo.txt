@@ -29,9 +29,9 @@ Archinstall setup (new system workflow)
 
 
 #DONE
-Git
 Hyprlock
 Hypridle
+Mouse cursor
 
 #MINOR TWEAKS ONLY
 Hyprland
