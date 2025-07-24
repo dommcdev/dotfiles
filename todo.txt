@@ -1,7 +1,6 @@
 # Programs to configure
 Waybar (Workspace indicators, volume, internet, bt, time, date, weather, (cpu/ram/temp))
 Rofi (incl web search, file search, calculator, clipboard history, emojis, etc)  
-Tmux
 Yazi  
 Fastfetch  
 Zsh + OMZ + starship 
@@ -24,7 +23,7 @@ Nextcloud
 Timeshift snapshots
 BorgBackup (or equal.)
 Gitlab
-Neovim
+Neovim/Tmux
 
 #DONE
 Hyprlock
