@@ -33,17 +33,18 @@ sudo pacman -S --noconfirm --needed openssh wget iwd wireless_tools wpa_supplica
 sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpolkitagent grim slurp sddm hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset ghostty nautilus nautilus-python gvfs-smb fastfetch waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor ddcutil tailscale yazi jq 7zip fd ripgrep fzf poppler zoxide imagemagick chafa ffmpeg libnotify trash-cli
 
 # Install gui packages
-sudo pacman -S --noconfirm --needed gimp impression audacity kdenlive gnome-calculator decibels papers loupe showtime switcheroo
+sudo pacman -S --noconfirm --needed gimp impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar
+#blender, kdenlive
 
 # Install aur packages
 yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome r-quick-share downgrade
 
 # Install flatpaks
-flatpak install --noninteractive flathub org.onlyoffice.desktopeditors org.nickvision.tubeconverter
+flatpak install --noninteractive flathub org.onlyoffice.desktopeditors org.nickvision.tubeconverter io.gitlab.adhami3310.Footage
 
 # Install dev packages
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-\. "$HOME/.config/nvm/nvm.sh" #source file in lieu of restarting the shell
+source "$HOME/.config/nvm/nvm.sh" #source file in lieu of restarting the shell
 nvm install 22
 npm install -g @google/gemini-cli
 
@@ -51,17 +52,17 @@ npm install -g @google/gemini-cli
 #                     CONFIGURATION                  #
 # -------------------------------------------------- #
 
+# Ensure some dirs exist
 mkdir -p ~/.local/bin #so stow won't try to link the entire dir
+mkdir -p ~/.local/share/icons #same reason as above
+mkdir -p ~/Downloads
+
+# Apply dotfiles, authenticate gitlab
 cd ~/dev/dotfiles
-stow --adopt --dotfiles ghostty gtk hyprland waybar rofi apps zsh git nvim scripts
+stow --adopt --dotfiles ghostty gtk hyprland waybar rofi apps zsh git nvim scripts sunshine hyprcursors
 git clean -fd
-stow --restow --dotfiles ghostty gtk hyprland waybar rofi apps zsh git nvim scripts
+stow --restow --dotfiles ghostty gtk hyprland waybar rofi apps zsh git nvim scripts sunshine hyprcursors
 git pull #neccesary to populate gitcredentials
-
-
-# -------------------------------------------------- #
-#                   ONE-TIME COMMANDS                #
-# -------------------------------------------------- #
 
 # Enable various services to start on boot
 sudo systemctl enable sddm.service
@@ -85,9 +86,6 @@ sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3-dark
 
 # Change shell
 chsh -s /usr/bin/zsh
-
-# Create Downloads dir if it doesn't exit
-mkdir -p ~/Downloads
 
 # Authenticate Tailscale (also sign in to Google in the process)
 #sudo tailscale up

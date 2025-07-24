@@ -13,27 +13,27 @@ Btop
 SDDM
 Grub
 Theme colors script (incl pywall16? Matugen?)
-Terminal trashcan
 Icons (incl ones for my webapps)
-Sunshine (conf file for correct keybindings)
-Theme OnlyOffice
-Setup Nextcloud
+Theme OnlyOffice, Gimp
 Nautilus (open to create file, spacebar preview)
 Stow (replace with dotbot?)
-[Backups] (Timeshifts snapshots w/btrfs, borg-backup/equivilant, rsync, etc)
 Cliphist (view entire selection, move between with ctrl+vim keybindings
 Chrome (vimiumc + theme)
-Archinstall setup (new system workflow)
 
+Archinstall setup (new system workflow)
+Nextcloud
+Timeshift snapshots
+BorgBackup (or equal.)
 
 #DONE
 Hyprlock
 Hypridle
 Mouse cursor
 Grimblast
+Hyprland
+Sunshine
 
 #MINOR TWEAKS ONLY
-Hyprland
 Ghostty
 
 
@@ -42,11 +42,8 @@ Ghostty
 
 # To-do
 When right click open file in vim, closing vim is slow with super+c
-Add workspace rules so gimp always opens full in new workspace
 Add pacman stuff to install script (lizardbyte repo + pacman hook for theme)
-Bug where sometimes screen brightness doesn't reset
-Add so that keyboard brightness buttons hook into ddcutil
-On-screen gui popup for volume/brightness adjustments?
+On-screen gui popup for volume adjustments?
 Some fancy zsh thing that makes everything case-insensitive
 
 

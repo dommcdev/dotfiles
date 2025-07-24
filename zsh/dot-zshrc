@@ -26,6 +26,7 @@ alias wth='curl wttr.in'
 alias pwd='pwd && pwd | wl-copy'
 alias rm='trash-put'
 alias quit='exit'
+alias stow='stow --dotfiles'
 
 # Env variables
 export PATH="$HOME/.local/bin:$PATH"
