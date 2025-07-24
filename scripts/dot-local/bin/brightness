@@ -20,7 +20,7 @@ send_notification() {
         -h int:value:"$value" \
         "Monitor Brightness" \
         "${prefix}${value}%" \
-        -i "preferences-system-brightness" \
+        -i "brightness-display-symbolic" \
         -t 1500
 }
 
@@ -70,6 +70,7 @@ elif [ "$#" -eq 2 ]; then
     fi
 
     ddcutil setvcp 10 "$OPERATOR" "$STEP" $DDCUTIL_TARGET
+    sleep 0.1
     NEW_BRIGHTNESS=$(get_current_brightness)
 
     if [ -n "$NEW_BRIGHTNESS" ]; then
@@ -77,7 +78,7 @@ elif [ "$#" -eq 2 ]; then
     else
         # Fallback notification if reading the new value fails
         NOTIF_MESSAGE=$([ "$OPERATOR" == "+" ] && echo "Brightness increased" || echo "Brightness decreased")
-        notify-send "Monitor Brightness" "$NOTIF_MESSAGE" -i "preferences-system-brightness" -t 1500
+        notify-send "Monitor Brightness" "$NOTIF_MESSAGE" -i "brightness-display-symbolic" -t 1500
     fi
 else
     # --- INVALID USAGE: Too many arguments ---
