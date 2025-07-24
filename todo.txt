@@ -9,16 +9,14 @@ Btop
 SDDM
 Grub
 Theme colors script (incl Pywall16? Matugen?)
-Icons (incl ones for my webapps)
 Theme OnlyOffice, GTK
 Nautilus (open to create file, spacebar preview)
 Stow (replace with dotbot?)
 Cliphist (view entire selection, move between with ctrl+vim keybindings)
-
-
-Archinstall setup (new system workflow)
-Nextcloud
 Timeshift snapshots
+
+
+Nextcloud
 BorgBackup (or equal.)
 Gitlab
 Neovim/Tmux
@@ -31,14 +29,17 @@ Grimblast
 Hyprland
 Sunshine
 Ghostty
-Sunshine
+Icons
 Theme Qt, GIMP
+
+Why do I have window buttons, floating windows, blur around right click dialogs, etc!?
 
 
 
 
 
 # To-do
+[Finish install script]
 When right click open file in vim, closing vim is slow with super+c
 Add pacman stuff to install script (lizardbyte repo + pacman hook for theme)
 Some fancy zsh thing that makes everything case-insensitive

@@ -30,7 +30,7 @@ sudo pacman -S --noconfirm --needed libva-mesa-driver libva-utils mesa vulkan-ra
 sudo pacman -S --noconfirm --needed openssh wget iwd wireless_tools wpa_supplicant smartmontools xdg-utils bluez bluez-utils curl
 
 # Install arch packages
-sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpolkitagent grim slurp sddm hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset ghostty nautilus nautilus-python gvfs-smb fastfetch waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor ddcutil tailscale yazi jq 7zip fd ripgrep fzf poppler zoxide imagemagick chafa ffmpeg libnotify trash-cli noto-fonts-emoji papirus-icon-theme
+sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpolkitagent grim slurp sddm hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset ghostty nautilus nautilus-python gvfs-smb fastfetch waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor ddcutil tailscale yazi jq 7zip fd ripgrep fzf poppler zoxide imagemagick chafa ffmpeg libnotify trash-cli noto-fonts-emoji
 
 # Install gui packages
 sudo pacman -S --noconfirm --needed gimp impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar
@@ -75,7 +75,7 @@ systemctl --user enable hypridle.service
 systemctl --user enable waybar.service
 systemctl --user enable sunshine.service
 
-# Getting GTK theme to apply everywhere
+# Get GTK theme to apply everywhere
 flatpak override --user --filesystem=xdg-config/gtk-4.0
 flatpak override --user --filesystem=xdg-config/gtk-3.0
 flatpak override --user --filesystem=xdg-data/themes
@@ -84,8 +84,12 @@ gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3
 sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3-dark
 
-# Applying icon theme
-gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
+# Install and apply icon theme
+cd ~/dev
+git clone https://github.com/vinceliuice/Colloid-icon-theme.git && cd Colloid-icon-theme
+./install.sh -s catppuccin -t yellow -b
+cd .. && rm -rf Colloid-icon-them
+gsettings set org.gnome.desktop.interface icon-theme "Colloid-Yellow-Catppuccin-Dark"
 
 # Change shell
 chsh -s /usr/bin/zsh

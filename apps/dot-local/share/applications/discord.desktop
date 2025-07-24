@@ -8,6 +8,6 @@ StartupWMClass=Google-chrome
 Exec=/usr/bin/google-chrome-stable --app="https://discord.com/channels/@me"
 StartupNotify=true
 Terminal=false
-Icon=google-chrome
+Icon=discord
 Type=Application
 Categories=Network;WebBrowser;

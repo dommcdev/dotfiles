@@ -8,6 +8,6 @@ StartupWMClass=Google-chrome
 Exec=/usr/bin/google-chrome-stable --app="https://gemini.google.com"
 StartupNotify=true
 Terminal=false
-Icon=google-chrome
+Icon=google
 Type=Application
 Categories=Network;WebBrowser;

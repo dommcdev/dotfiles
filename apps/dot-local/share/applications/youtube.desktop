@@ -8,6 +8,6 @@ StartupWMClass=Google-chrome
 Exec=/usr/bin/google-chrome-stable --app="https://youtube.com/playlist?list=WL"
 StartupNotify=true
 Terminal=false
-Icon=google-chrome
+Icon=youtube
 Type=Application
 Categories=Network;WebBrowser;
