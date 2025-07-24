@@ -11,7 +11,7 @@ SDDM
 Grub
 Theme colors script (incl Pywall16? Matugen?)
 Icons (incl ones for my webapps)
-Theme OnlyOffice, Gimp
+Theme OnlyOffice
 Nautilus (open to create file, spacebar preview)
 Stow (replace with dotbot?)
 Cliphist (view entire selection, move between with ctrl+vim keybindings)

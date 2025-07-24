@@ -59,9 +59,9 @@ mkdir -p ~/Downloads
 
 # Apply dotfiles, authenticate gitlab
 cd ~/dev/dotfiles
-stow --adopt --dotfiles ghostty gtk hyprland waybar rofi apps zsh git nvim scripts sunshine hyprcursors
+stow --adopt --dotfiles ghostty gtk hyprland waybar rofi apps zsh git nvim scripts sunshine hyprcursors gimp
 git clean -fd
-stow --restow --dotfiles ghostty gtk hyprland waybar rofi apps zsh git nvim scripts sunshine hyprcursors
+stow --restow --dotfiles ghostty gtk hyprland waybar rofi apps zsh git nvim scripts sunshine hyprcursors gimp
 git pull #neccesary to populate gitcredentials
 
 # Enable various services to start on boot
