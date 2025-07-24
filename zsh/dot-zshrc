@@ -16,12 +16,16 @@ PS1="%{%F{green}%}%n@%m %{%F{yellow}%}%2~ %{%F{reset}%}%% "
 
 # Aliases
 alias ls='ls --color=auto'
+alias la='ls -lAh --color=auto --group-directories-first'
 alias grep='grep --color=auto'
 alias vi='nvim'
 alias vim='nvim'
 alias fs='fastfetch'
-
-
+alias c='clear' #note - ctrl+L will also clear!
+alias wth='curl wttr.in'
+alias pwd='pwd && pwd | wl-copy'
+alias rm='trash-put'
+alias quit='exit'
 
 # Env variables
 export PATH="$HOME/.local/bin:$PATH"

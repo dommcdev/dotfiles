@@ -27,10 +27,10 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 sudo pacman -S --noconfirm --needed libva-mesa-driver libva-utils mesa vulkan-radeon
 
 # Install useful utilies
-sudo pacman -S --noconfirm --needed openssh wget iwd wireless_tools wpa_supplicant smartmontools xdg-utils bluez bluez-utils
+sudo pacman -S --noconfirm --needed openssh wget iwd wireless_tools wpa_supplicant smartmontools xdg-utils bluez bluez-utils curl
 
 # Install arch packages
-sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpolkitagent grim slurp sddm hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset ghostty nautilus nautilus-python gvfs-smb fastfetch waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor ddcutil tailscale yazi jq 7zip fd ripgrep fzf poppler zoxide imagemagick chafa ffmpeg libnotify
+sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpolkitagent grim slurp sddm hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset ghostty nautilus nautilus-python gvfs-smb fastfetch waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor ddcutil tailscale yazi jq 7zip fd ripgrep fzf poppler zoxide imagemagick chafa ffmpeg libnotify trash-cli
 
 # Install gui packages
 sudo pacman -S --noconfirm --needed gimp impression audacity kdenlive gnome-calculator decibels papers loupe showtime switcheroo
