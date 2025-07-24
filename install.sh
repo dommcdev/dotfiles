@@ -30,7 +30,7 @@ sudo pacman -S --noconfirm --needed libva-mesa-driver libva-utils mesa vulkan-ra
 sudo pacman -S --noconfirm --needed openssh wget iwd wireless_tools wpa_supplicant smartmontools xdg-utils bluez bluez-utils curl
 
 # Install arch packages
-sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpolkitagent grim slurp sddm hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset ghostty nautilus nautilus-python gvfs-smb fastfetch waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor ddcutil tailscale yazi jq 7zip fd ripgrep fzf poppler zoxide imagemagick chafa ffmpeg libnotify trash-cli noto-fonts-emoji
+sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpolkitagent grim slurp sddm hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset ghostty nautilus nautilus-python gvfs-smb fastfetch waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor ddcutil tailscale yazi jq 7zip fd ripgrep fzf poppler zoxide imagemagick chafa ffmpeg libnotify trash-cli noto-fonts-emoji papirus-icon-theme
 
 # Install gui packages
 sudo pacman -S --noconfirm --needed gimp impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar
@@ -52,16 +52,17 @@ npm install -g @google/gemini-cli
 #                     CONFIGURATION                  #
 # -------------------------------------------------- #
 
-# Ensure some dirs exist
+# Ensure some dirs exist (or don't exist)
+rm -rf ~/.config/gtk-4.0 ~/.config/gtk-3.0
 mkdir -p ~/.local/bin #so stow won't try to link the entire dir
 mkdir -p ~/.local/share/icons #same reason as above
 mkdir -p ~/Downloads
 
 # Apply dotfiles, authenticate gitlab
 cd ~/dev/dotfiles
-stow --adopt --dotfiles ghostty gtk hyprland waybar rofi apps zsh git nvim scripts sunshine hyprcursors gimp
+stow --adopt --dotfiles ghostty gtk hyprland waybar rofi apps zsh git nvim scripts sunshine hyprcursors gimp qt
 git clean -fd
-stow --restow --dotfiles ghostty gtk hyprland waybar rofi apps zsh git nvim scripts sunshine hyprcursors gimp
+stow --restow --dotfiles ghostty gtk hyprland waybar rofi apps zsh git nvim scripts sunshine hyprcursors gimp qt
 git pull #neccesary to populate gitcredentials
 
 # Enable various services to start on boot
@@ -75,7 +76,6 @@ systemctl --user enable waybar.service
 systemctl --user enable sunshine.service
 
 # Getting GTK theme to apply everywhere
-rm -rf ~/.config/gtk-4.0 ~/.config/gtk-3.0
 flatpak override --user --filesystem=xdg-config/gtk-4.0
 flatpak override --user --filesystem=xdg-config/gtk-3.0
 flatpak override --user --filesystem=xdg-data/themes
@@ -83,6 +83,9 @@ gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3"
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3
 sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3-dark
+
+# Applying icon theme
+gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
 
 # Change shell
 chsh -s /usr/bin/zsh
