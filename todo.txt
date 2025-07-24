@@ -5,25 +5,26 @@ Tmux
 Yazi  
 Fastfetch  
 Zsh + OMZ + starship 
-Dunst + notify-send
-Theme GTK
-Theme QT
-Neovim  
+Notifications
+Theme GTK, QT 
 Btop  
 SDDM
 Grub
-Theme colors script (incl pywall16? Matugen?)
+Theme colors script (incl Pywall16? Matugen?)
 Icons (incl ones for my webapps)
 Theme OnlyOffice, Gimp
 Nautilus (open to create file, spacebar preview)
 Stow (replace with dotbot?)
-Cliphist (view entire selection, move between with ctrl+vim keybindings
+Cliphist (view entire selection, move between with ctrl+vim keybindings)
 Chrome (vimiumc + theme)
+
 
 Archinstall setup (new system workflow)
 Nextcloud
 Timeshift snapshots
 BorgBackup (or equal.)
+Gitlab
+Neovim
 
 #DONE
 Hyprlock
@@ -32,8 +33,6 @@ Mouse cursor
 Grimblast
 Hyprland
 Sunshine
-
-#MINOR TWEAKS ONLY
 Ghostty
 
 
@@ -43,7 +42,6 @@ Ghostty
 # To-do
 When right click open file in vim, closing vim is slow with super+c
 Add pacman stuff to install script (lizardbyte repo + pacman hook for theme)
-On-screen gui popup for volume adjustments?
 Some fancy zsh thing that makes everything case-insensitive
 
 
