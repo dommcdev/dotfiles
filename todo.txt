@@ -3,8 +3,7 @@ Waybar (Workspace indicators, volume, internet, bt, time, date, weather, (cpu/ra
 Rofi (incl web search, file search, calculator, clipboard history, emojis, etc)  
 Yazi  
 Fastfetch  
-Zsh + OMZ + starship 
-Notifications
+OMZ + starship 
 SDDM
 Grub
 Theme colors script (incl Pywall16? Matugen?)
@@ -30,6 +29,7 @@ Ghostty
 Icons
 Theme Qt, GIMP
 Btop
+Dunst
 
 
 
