@@ -5,12 +5,10 @@ Yazi
 Fastfetch  
 Zsh + OMZ + starship 
 Notifications
-Btop  
 SDDM
 Grub
 Theme colors script (incl Pywall16? Matugen?)
 Theme OnlyOffice, GTK
-Nautilus (open to create file, spacebar preview)
 Stow (replace with dotbot?)
 Cliphist (view entire selection, move between with ctrl+vim keybindings)
 Timeshift snapshots
@@ -31,8 +29,7 @@ Sunshine
 Ghostty
 Icons
 Theme Qt, GIMP
-
-Why do I have window buttons, floating windows, blur around right click dialogs, etc!?
+Btop
 
 
 
@@ -48,4 +45,4 @@ Make ctrl+[ remap happen at a lower level
 # BUGS
 Using regular Linux kernel results in shutdown hangs. Switching to lts kernel fixes this
 Running Chrome via Wayland results in video acceleration being not supported on my old gpu. Switch to x11 to fix
-PWAs start in floating mode when starting in Xwayland. Custom window rule fixes this (somewhat?)
+PWAs start in floating mode when starting in Xwayland. Custom window rule fixes this
