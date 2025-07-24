@@ -5,17 +5,15 @@ Yazi
 Fastfetch  
 Zsh + OMZ + starship 
 Notifications
-Theme GTK, QT 
 Btop  
 SDDM
 Grub
 Theme colors script (incl Pywall16? Matugen?)
 Icons (incl ones for my webapps)
-Theme OnlyOffice
+Theme OnlyOffice, GTK
 Nautilus (open to create file, spacebar preview)
 Stow (replace with dotbot?)
 Cliphist (view entire selection, move between with ctrl+vim keybindings)
-Chrome (vimiumc + theme)
 
 
 Archinstall setup (new system workflow)
@@ -33,6 +31,8 @@ Grimblast
 Hyprland
 Sunshine
 Ghostty
+Sunshine
+Theme Qt, GIMP
 
 
 
@@ -42,7 +42,7 @@ Ghostty
 When right click open file in vim, closing vim is slow with super+c
 Add pacman stuff to install script (lizardbyte repo + pacman hook for theme)
 Some fancy zsh thing that makes everything case-insensitive
-
+Make ctrl+[ remap happen at a lower level
 
 # BUGS
 Using regular Linux kernel results in shutdown hangs. Switching to lts kernel fixes this
