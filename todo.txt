@@ -1,18 +1,17 @@
 # Programs to configure
 Waybar (Workspace indicators, volume, internet, bt, time, date, weather, (cpu/ram/temp))
 Rofi (incl web search, file search, calculator, clipboard history, emojis, etc)  
-Yazi  
-Fastfetch  
-OMZ + starship 
+Fastfetch
+Starship, Oh-My-Zsh
 SDDM
 Grub
-Theme colors script (incl Pywall16? Matugen?)
-Theme OnlyOffice, GTK
+Theme colors script (Pywall16, Matugen)
 Stow (replace with dotbot?)
 Cliphist (view entire selection, move between with ctrl+vim keybindings)
 Timeshift snapshots
 
 
+# Separate, large projects
 Nextcloud
 BorgBackup (or equal.)
 Gitlab
@@ -30,6 +29,11 @@ Icons
 Theme Qt, GIMP
 Btop
 Dunst
+Yazi
+Bat
+
+# Back-burner
+OnlyOffice Theme
 
 
 
@@ -41,6 +45,7 @@ When right click open file in vim, closing vim is slow with super+c
 Add pacman stuff to install script (lizardbyte repo + pacman hook for theme)
 Some fancy zsh thing that makes everything case-insensitive
 Make ctrl+[ remap happen at a lower level
+Finish GTK theming
 
 # BUGS
 Using regular Linux kernel results in shutdown hangs. Switching to lts kernel fixes this
