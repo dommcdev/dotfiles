@@ -25,9 +25,7 @@ progress_bar_frame_width = 0
 progress_bar_corner_radius = 3
 
 # Colors
-foreground = "#cdd1dc"
-frame_color = "#2d303c"
-highlight = "#2274d5, #82aad9"
+#foreground = "#cdd1dc"
 
 # Text
 font = JetBrainsMono Nerd Font
@@ -47,7 +45,7 @@ icon_theme = Colloid-Yellow-Catppuccin-Dark, Adwaita, hicolor
 icon_corner_radius = 4
 
 # Misc/Advanced
-dmenu = rofi -show drun -prompt 'Open with'
+dmenu = rofi -dmenu -p "Notification Actions"
 corner_radius = 10
 
 # Mouse
