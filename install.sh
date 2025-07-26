@@ -91,12 +91,8 @@ git clone https://github.com/vinceliuice/Colloid-icon-theme.git && cd Colloid-ic
 cd .. && rm -rf Colloid-icon-them
 gsettings set org.gnome.desktop.interface icon-theme "Colloid-Yellow-Catppuccin-Dark"
 
-# Install and apply grub theme
-cd ~/dev
-git clone https://github.com/catppuccin/grub.git && cd grub
-sudo cp -r src/catppuccin-mocha-grub-theme /usr/share/grub/themes/
-cd .. && rm -rf grub
-rm -rf /etc/default/grub
+# Apply grub theme/config
+sudo mv /etc/default/grub /etc/default/grub.bak
 cd ~/dev/dotfiles && sudo stow --dotfiles --target=/ grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
