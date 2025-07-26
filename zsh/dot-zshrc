@@ -28,6 +28,8 @@ alias rm='trash-put'
 alias quit='exit'
 alias stow='stow --dotfiles'
 alias cat='bat'
+alias mv='mv -i'
+alias cp='cp -i'
 
 # Env variables
 export PATH="$HOME/.local/bin:$PATH"

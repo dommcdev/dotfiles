@@ -4,7 +4,6 @@ Rofi (incl web search, file search, calculator, clipboard history, emojis, etc)
 Fastfetch
 Starship, Oh-My-Zsh
 SDDM
-Grub
 Theme colors script (Pywall16, Matugen)
 Stow (replace with dotbot?)
 Cliphist (view entire selection, move between with ctrl+vim keybindings)
@@ -31,6 +30,7 @@ Btop
 Dunst
 Yazi
 Bat
+Grub
 
 # Back-burner
 OnlyOffice Theme
