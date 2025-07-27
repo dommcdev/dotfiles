@@ -3,7 +3,6 @@ Waybar (Workspace indicators, volume, internet, bt, time, date, weather, (cpu/ra
 Rofi (incl web search, file search, calculator, clipboard history, emojis, etc)  
 Starship, Oh-My-Zsh (case insensitive stuff)
 Theme colors script (Pywall16, Matugen)
-Stow (replace with dotbot?)
 Cliphist (view entire selection, move between with ctrl+vim keybindings)
 Timeshift snapshots
 
@@ -34,6 +33,7 @@ Grub
 SDDM
 Tailscale
 Git
+Dotbot
 
 # Back-burner
 Fastfetch
@@ -48,6 +48,7 @@ When right click open file in vim, closing vim is slow with super+c
 Add pacman stuff to install script (lizardbyte repo + pacman hook for theme)
 Make ctrl+[ remap happen at a lower level
 Tailscale subnet router
+Grub/SDDM/Pacman conf files (sudo??)
 
 # BUGS
 Using regular Linux kernel results in shutdown hangs. Switching to lts kernel fixes this
