@@ -1,0 +1,53 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+
+- clean: ['~']
+
+- link:
+    ~/.config/chrome-flags.conf: apps/chrome-flags.conf
+    ~/.local/share/applications: apps/desktop-files
+    ~/.config/bat: bat
+    ~/.config/btop: btop
+    ~/.config/dunst: dunst
+    ~/.config/ghostty: ghostty
+    ~/.config/GIMP/3.0/:
+      path: gimp/*
+      glob: true
+    ~/.gitconfig: git/gitconfig
+    ~/.config/gtk-3.0: gtk/gtk-3.0
+    ~/.config/gtk-4.0: gtk/gtk-4.0
+    ~/.config/templates: gtk/templates
+    ~/.config/user-dirs.dirs: gtk/user-dirs.dirs
+    ~/.local/share/icons/: 
+      path: cursors/*
+      glob: true
+    ~/.config/nvim: nvim
+    ~/.config/Kvantum: qt
+    ~/.config/rofi/:
+      path: rofi/*
+      glob: true
+      exclude: [rofi/scripts]
+    ~/.local/bin/:
+      path: scripts/*
+      glob: true
+    ~/.zshrc: zsh/zshrc
+    ~/.local/bin/:
+      path: rofi/scripts/*
+      glob: true
+    ~/.config/waybar: waybar
+    ~/.config/yazi: yazi
+    ~/.config/sunshine: sunshine
+    ~/.config/hypr:
+      path: hyprland/*
+      glob: true
+      exclude: [hyprland/uwsm]
+    ~/.config/uwsm: 
+      path: hyprland/uwsm/*
+      glob: true
+
+- create: []
+
+- shell: []
