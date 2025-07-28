@@ -34,18 +34,23 @@
       path: scripts/*
       glob: true
     ~/.zshrc: zsh/zshrc
-    ~/.local/bin/:
-      path: rofi/scripts/*
-      glob: true
     ~/.config/waybar: waybar
     ~/.config/yazi: yazi
-    ~/.config/sunshine: sunshine
+    ~/.config/sunshine/:
+      path: sunshine/*
+      glob: true
     ~/.config/hypr:
       path: hyprland/*
       glob: true
       exclude: [hyprland/uwsm]
     ~/.config/uwsm: 
       path: hyprland/uwsm/*
+      glob: true
+
+#This second link header is neccesary for linking items from multiple dotfile dirs into the same destination dir
+- link:
+    ~/.local/bin/:
+      path: rofi/scripts/*
       glob: true
 
 - create: []

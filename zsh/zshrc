@@ -30,6 +30,7 @@ alias stow='stow --dotfiles'
 alias cat='bat'
 alias mv='mv -i'
 alias cp='cp -i'
+alias showpath='echo $PATH | tr ":" "\n"'
 
 # Env variables
 export PATH="$HOME/.local/bin:$PATH"
