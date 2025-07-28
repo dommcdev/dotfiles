@@ -46,6 +46,7 @@
     ~/.config/uwsm: 
       path: hyprland/uwsm/*
       glob: true
+    ~/.config/fastfetch: fastfetch
 
 #This second link header is neccesary for linking items from multiple dotfile dirs into the same destination dir
 - link:

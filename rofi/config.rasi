@@ -1,5 +1,6 @@
 configuration {
     show-icons: true;
+    icon-theme: "Papirus";
     font: "JetBrainsMono Nerd Font 12";
     modi: "drun,filebrowser,powernc:rofi-power-menu --choices=shutdown/reboot/logout --confirm='',power:rofi-power-menu,ssh,window,combi,recursivebrowser";
     combi-modes: [drun,powernc];

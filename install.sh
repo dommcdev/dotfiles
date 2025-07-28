@@ -30,7 +30,7 @@ sudo pacman -S --noconfirm --needed libva-mesa-driver libva-utils mesa vulkan-ra
 sudo pacman -S --noconfirm --needed openssh wget iwd wireless_tools wpa_supplicant smartmontools xdg-utils bluez bluez-utils curl ffmpeg gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-libav jq 7zip fd ripgrep poppler zoxide imagemagick chafa resvg qt6-svg qt6-declarative qt5-quickcontrols2
 
 # Install arch packages
-sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpolkitagent grim slurp sddm hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset ghostty nautilus nautilus-python gvfs-smb fastfetch waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor ddcutil tailscale yazi fzf libnotify trash-cli noto-fonts-emoji sushi bat cava asciiquarium cmatrix
+sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpolkitagent grim slurp sddm hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset ghostty nautilus nautilus-python gvfs-smb fastfetch waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor ddcutil tailscale yazi fzf libnotify trash-cli noto-fonts-emoji sushi bat cava asciiquarium cmatrix papirus-icon-theme
 
 # Install gui packages
 sudo pacman -S --noconfirm --needed gimp impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar libreoffice-fresh
