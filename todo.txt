@@ -26,7 +26,7 @@ Ghostty
 Icons
 Theme Qt, GIMP
 Btop
-Dunst
+Dunst (swaync in future?)
 Yazi
 Bat
 Grub
@@ -49,6 +49,7 @@ Add pacman stuff to install script (lizardbyte repo + pacman hook for theme)
 Make ctrl+[ remap happen at a lower level
 Tailscale subnet router
 Grub/SDDM/Pacman conf files (sudo??)
+Volume script? (For notifs)
 
 # BUGS
 Using regular Linux kernel results in shutdown hangs. Switching to lts kernel fixes this
