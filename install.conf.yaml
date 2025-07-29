@@ -47,6 +47,7 @@
       path: hyprland/uwsm/*
       glob: true
     ~/.config/fastfetch: fastfetch
+    ~/.config/tmux/tmux.conf: tmux/tmux.conf
 
 #This second link header is neccesary for linking items from multiple dotfile dirs into the same destination dir
 - link:

@@ -1,7 +1,7 @@
 # Programs to configure
 Waybar (Workspace indicators, volume, internet, bt, time, date, weather, (cpu/ram/temp))
 Rofi (incl web search, file search, calculator, clipboard history, emojis, etc)  
-Starship, Oh-My-Zsh (case insensitive stuff)
+Starship, Oh-My-Zsh (case insensitive stuff, vi-mode)
 Theme colors script (Pywall16, Matugen)
 Cliphist (view entire selection, move between with ctrl+vim keybindings)
 Timeshift snapshots
@@ -50,6 +50,7 @@ Make ctrl+[ remap happen at a lower level
 Tailscale subnet router
 Grub/SDDM/Pacman conf files (sudo??)
 Volume script? (For notifs)
+Tmux buttons are ugly
 
 # BUGS
 Using regular Linux kernel results in shutdown hangs. Switching to lts kernel fixes this
