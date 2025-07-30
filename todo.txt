@@ -6,7 +6,6 @@ Theme colors script (Pywall16, Matugen)
 Cliphist (view entire selection, move between with ctrl+vim keybindings)
 Timeshift snapshots
 
-
 # Separate, large projects
 Nextcloud
 Immich
