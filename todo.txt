@@ -12,8 +12,8 @@ Immich
 Gitlab
 OnlyOffice (+ theme)
 BorgBackup (or equal.)
-Neovim/Tmux
-Wipe/setup mac (install script? sep tmux?)
+Neovim
+Wipe/setup mac (install script?)
 Rasp pi for wireless android auto
 
 #DONE
@@ -35,6 +35,7 @@ SDDM
 Tailscale
 Git
 Dotbot
+Tmux
 
 # Back-burner
 Fastfetch
