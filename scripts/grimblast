@@ -103,7 +103,7 @@ done
 
 ACTION=${1:-usage}
 SUBJECT=${2:-screen}
-FILE=${3:-$(getTargetDirectory)/$(date -Ins).png}
+FILE=${3:-$(getTargetDirectory)/$(date +"Screenshot %Y-%m-%d at %H.%M.%S").png}
 FILE_EDITOR=${3:-$(tmp_editor_directory)/$(date -Ins).png}
 
 if [ "$ACTION" != "save" ] && [ "$ACTION" != "copy" ] && [ "$ACTION" != "edit" ] && [ "$ACTION" != "copysave" ] && [ "$ACTION" != "check" ]; then
@@ -293,13 +293,11 @@ fi
 
 if [ "$ACTION" = "copy" ]; then
   takeScreenshot - "$GEOM" "$OUTPUT" | wl-copy --type image/png || die "Clipboard error"
-  notifyOk "$WHAT copied to buffer"
+  notifyOk "Screenshot captured!"
 elif [ "$ACTION" = "save" ]; then
   if takeScreenshot "$FILE" "$GEOM" "$OUTPUT"; then
-    TITLE="Screenshot of $SUBJECT"
-    MESSAGE=$(basename "$FILE")
     killHyprpicker
-    notifyOpen "$TITLE" "$MESSAGE" -i "$FILE"
+    notifyOpen "Screenshot captured!" "" -i "$FILE"
     echo "$FILE"
   else
     notifyError "Error taking screenshot with grim"
@@ -307,9 +305,7 @@ elif [ "$ACTION" = "save" ]; then
 elif [ "$ACTION" = "edit" ]; then
   env_editor_confirm
   if takeScreenshot "$FILE_EDITOR" "$GEOM" "$OUTPUT"; then
-    TITLE="Screenshot of $SUBJECT"
-    MESSAGE="Open screenshot in image editor"
-    notifyOk "$TITLE" "$MESSAGE" -i "$FILE_EDITOR"
+    notifyOk "Screenshot captured!" "" -i "$FILE_EDITOR"
     $GRIMBLAST_EDITOR "$FILE_EDITOR"
     echo "$FILE_EDITOR"
   else
@@ -318,7 +314,7 @@ elif [ "$ACTION" = "edit" ]; then
 else
   if [ "$ACTION" = "copysave" ]; then
     takeScreenshot - "$GEOM" "$OUTPUT" | tee "$FILE" | wl-copy --type image/png || die "Clipboard error"
-    notifyOk "$WHAT copied to buffer and saved to $FILE" -i "$FILE"
+    notifyOk "Screenshot captured!" -i "$FILE"
     echo "$FILE"
   else
     notifyError "Error taking screenshot with grim"

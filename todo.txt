@@ -13,8 +13,10 @@ Gitlab
 OnlyOffice (+ theme)
 BorgBackup (or equal.)
 Neovim
-Wipe/setup mac (install script?)
+Wipe/setup mac (install script? raycast/alt)
 Rasp pi for wireless android auto
+Git (history, etc):w
+
 
 #DONE
 Hyprlock
@@ -52,10 +54,11 @@ Make ctrl+[ remap happen at a lower level (+ tap for reg escape)
 Tailscale subnet router
 Grub/SDDM/Pacman conf files (sudo??)
 Volume script? (For notifs)
-Sushi should open windows in floating mode
 Screenshot tweaks (click to open in viewer, rename screenshots, only display "screenshot captured," edit default editor)
 Notif tweaks (click to open, right-click to dismiss)
 Add tmux-resurrect to tmux conf, also tmux-sessionizer, way to define configs for projects
+Yazi accessing remote shares?
+
 
 # BUGS
 Using regular Linux kernel results in shutdown hangs. Switching to lts kernel fixes this
