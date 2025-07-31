@@ -15,7 +15,7 @@ BorgBackup (or equal.)
 Neovim
 Wipe/setup mac (install script? raycast/alt)
 Rasp pi for wireless android auto
-Git (history, etc):w
+Git (history, etc)
 
 
 #DONE
@@ -54,10 +54,12 @@ Make ctrl+[ remap happen at a lower level (+ tap for reg escape)
 Tailscale subnet router
 Grub/SDDM/Pacman conf files (sudo??)
 Volume script? (For notifs)
-Screenshot tweaks (click to open in viewer, rename screenshots, only display "screenshot captured," edit default editor)
-Notif tweaks (click to open, right-click to dismiss)
+Screenshot tweaks (click to open in viewer)
 Add tmux-resurrect to tmux conf, also tmux-sessionizer, way to define configs for projects
 Yazi accessing remote shares?
+Zsh vi-mode esc isn't working right, also fzf inc search only works normal mode
+
+
 
 
 # BUGS
