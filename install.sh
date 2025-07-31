@@ -37,7 +37,7 @@ sudo pacman -S --noconfirm --needed gimp impression audacity gnome-calculator de
 #blender, kdenlive
 
 # Install aur packages
-yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome r-quick-share downgrade
+yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome r-quick-share downgrade zsh-vi-mode
 
 # Install flatpaks
 flatpak install --noninteractive flathub org.onlyoffice.desktopeditors org.nickvision.tubeconverter io.gitlab.adhami3310.Footage

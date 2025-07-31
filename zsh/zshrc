@@ -5,7 +5,6 @@ SAVEHIST=5000
 
 setopt autocd #cd by typing dir name
 unsetopt beep #no beeping!
-bindkey -v
 autoload -Uz compinit
 compinit
 
@@ -42,6 +41,9 @@ export VISUAL="nvim" #Fallback for editor
 # FZF configuration
 source <(fzf --zsh)
 
+# Better zsh-vi-mode
+source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
 
 # Run yazi with 'y', change cwd when exiting yazi
 function y() {
@@ -58,4 +60,5 @@ export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# Last but certainly not least...:)
 fastfetch
