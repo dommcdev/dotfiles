@@ -55,6 +55,7 @@ Volume script? (For notifs)
 Sushi should open windows in floating mode
 Screenshot tweaks (click to open in viewer, rename screenshots, only display "screenshot captured," edit default editor)
 Notif tweaks (click to open, right-click to dismiss)
+Add tmux-resurrect to tmux conf, also tmux-sessionizer, way to define configs for projects
 
 # BUGS
 Using regular Linux kernel results in shutdown hangs. Switching to lts kernel fixes this
