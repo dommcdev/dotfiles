@@ -1,0 +1,16 @@
+- defaults:
+    link:
+      relink: true
+      create: true
+      force: true
+    shell:
+      stdout: true
+      stderr: true
+
+- create: []
+
+- clean:
+    ~/:
+      force: true
+    ~/.config:
+      recursive: true

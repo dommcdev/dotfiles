@@ -3,6 +3,7 @@
 When right click open file in vim, closing vim is slow with super+c
 Make ctrl+[ remap happen at a lower level (+ tap for reg escape)
 Rework dotbot to use advanced conf for sudo (add grub, sddm, pacman files)
+--plan - remove install.conf-yaml eventually, remove shell.sh eventually. Back to my original plan or no mega-install script - just small pieces. 
 Screenshot tweaks (click to open in viewer)
 Add tmux-resurrect to tmux conf, also tmux-sessionizer, way to define configs for projects
 Yazi accessing remote shares? Also opening everything but txt in sushi
