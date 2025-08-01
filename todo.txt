@@ -5,7 +5,7 @@ Make ctrl+[ remap happen at a lower level (+ tap for reg escape)
 Rework dotbot to use advanced conf for sudo (add grub, sddm, pacman files)
 Screenshot tweaks (click to open in viewer)
 Add tmux-resurrect to tmux conf, also tmux-sessionizer, way to define configs for projects
-Yazi accessing remote shares?
+Yazi accessing remote shares? Also opening everything but txt in sushi
 Zsh vi-mode esc isn't working right, also fzf inc search only works normal mode
 Sushi doesn't work with pngs on remote shares
 Pacman colors?
@@ -33,31 +33,6 @@ Tailscale subnet router
 
 
 
-
-
-
-
-
-#DONE
-Hyprlock
-Hypridle
-Mouse cursor
-Grimblast
-Hyprland
-Sunshine
-Ghostty
-Icons
-Theme Qt, GIMP
-Btop
-Dunst (swaync in future?)
-Yazi
-Bat
-Grub
-SDDM
-Tailscale
-Git
-Dotbot
-Tmux
 
 
 # Back-burner

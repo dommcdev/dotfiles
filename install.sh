@@ -53,16 +53,11 @@ npm install -g @google/gemini-cli
 # -------------------------------------------------- #
 
 # Ensure some dirs exist (or don't exist)
-rm -rf ~/.config/gtk-4.0 ~/.config/gtk-3.0
-mkdir -p ~/.local/bin #so stow won't try to link the entire dir
-mkdir -p ~/.local/share/icons #same reason as above
 mkdir -p ~/Downloads
 
+
 # Apply dotfiles, authenticate gitlab
-cd ~/dev/dotfiles
-stow --adopt --dotfiles ghostty gtk hyprland waybar rofi apps zsh git nvim scripts sunshine hyprcursors gimp qt
-git clean -fd
-stow --restow --dotfiles ghostty gtk hyprland waybar rofi apps zsh git nvim scripts sunshine hyprcursors gimp qt
+cd ~/dev/dotfiles && ./install
 git pull #neccesary to populate gitcredentials
 
 # Enable various services to start on boot
@@ -92,9 +87,9 @@ cd .. && rm -rf Colloid-icon-them
 gsettings set org.gnome.desktop.interface icon-theme "Colloid-Yellow-Catppuccin-Dark"
 
 # Apply grub theme/config
-sudo mv /etc/default/grub /etc/default/grub.bak
-cd ~/dev/dotfiles && sudo stow --dotfiles --target=/ grub
-sudo grub-mkconfig -o /boot/grub/grub.cfg
+#sudo mv /etc/default/grub /etc/default/grub.bak
+#cd ~/dev/dotfiles && sudo stow --dotfiles --target=/ grub
+#sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 # Change shell
 chsh -s /usr/bin/zsh
