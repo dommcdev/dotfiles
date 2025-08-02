@@ -33,8 +33,7 @@ sudo pacman -S --noconfirm --needed openssh wget iwd wireless_tools wpa_supplica
 sudo pacman -S --noconfirm --needed dunst uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpolkitagent grim slurp sddm hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset ghostty nautilus nautilus-python gvfs-smb fastfetch waybar rofi ttf-jetbrains-mono-nerd stow zsh btop virt-manager blueman neovim cliphist adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor ddcutil tailscale yazi fzf libnotify trash-cli noto-fonts-emoji sushi bat cava asciiquarium cmatrix cowsay ponysay papirus-icon-theme
 
 # Install gui packages
-sudo pacman -S --noconfirm --needed gimp impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar libreoffice-fresh
-#blender, kdenlive
+sudo pacman -S --noconfirm --needed gimp impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar libreoffice-fresh blender, kdenlive
 
 # Install aur packages
 yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome r-quick-share downgrade zsh-vi-mode

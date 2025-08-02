@@ -1,22 +1,50 @@
 # To-do
-[Finish install script]
-When right click open file in vim, closing vim is slow with super+c
-Make ctrl+[ remap happen at a lower level (+ tap for reg escape)
-Rework dotbot to use advanced conf for sudo (add grub, sddm, pacman files)
---plan - remove install.conf-yaml eventually, remove shell.sh eventually. Back to my original plan or no mega-install script - just small pieces. 
-Screenshot tweaks (click to open in viewer)
-Add tmux-resurrect to tmux conf, also tmux-sessionizer, way to define configs for projects
-Yazi accessing remote shares? Also opening everything but txt in sushi
-Zsh vi-mode esc isn't working right, also fzf inc search only works normal mode
-Sushi doesn't work with pngs on remote shares
-Pacman colors?
-Cliphist (view entire selection, move between with ctrl+vim keybindings)
+Install script
+	arch iso program
+	script for using that program
+	pre-install script
+	post-install script
+Vim bug
+	Right-click open file = lag when closing. Different with floating windows.
+Low-level keyboard remaps
+	Tap ctrl to esc
+	Ctrl+[ to esc
+Dotbot
+	Individual yaml files, with if statements for macos
+	sudo option for pacman, sddm, grub
+Tmux
+	Tmux-ressurect, tmux-continuum
+	Tmux sessionizer (ctrl-e), add in nvim?
+	Tmuxifier, or way to define configs for projects
+Yazi
+	Open files in sushi (except for text)
+	Bookmarks? Some way to access remote shares easily
+Zsh
+	Vi-mode doesn't recognize fzf shortcuts unless in normal mode.
+	Starship
+	Oh-My-Zsh
+	Case-insensitivity?
+Cliphist
+	Way to view more of copied text
+Rofi
+	Web search
+	Calculator
+	Emojis/symbols
+	File search? Conversions? Other? Merge cliphist?
+	Navigate options using ctrl+hjkl
 Timeshift snapshots
-Waybar (Workspace indicators, volume, internet, bt, time, date, weather, (cpu/ram/temp))
-Rofi (incl web search, file search, calculator, clipboard history, emojis, etc)  
-Starship, Oh-My-Zsh (case insensitive stuff)
-Theme colors script (Pywall16, Matugen)
-Update script (flatpak + pacman/yay + cron job, incl snapshot hook?)
+Pacman colors
+System update script
+	Include flatpak, pacman, yay
+	Cron job on schedule?
+	Snapshot hook?
+Waybar
+	Workspace indicators, time/date, weather
+	Volume, internet, bluetooth
+	Cpu/ram/temp
+Theme script
+	Via single mycolors.css file?
+	Pywall16, Matugen?
 
 
 # Separate, large projects
@@ -50,3 +78,4 @@ Volume notifs
 Using regular Linux kernel results in shutdown hangs. Switching to lts kernel fixes this
 Running Chrome via Wayland results in video acceleration being not supported on my old gpu. Switch to x11 to fix
 PWAs start in floating mode when starting in Xwayland. Custom window rule fixes this
+Sushi doesn't work with pngs on remote shares

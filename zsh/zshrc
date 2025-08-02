@@ -40,10 +40,20 @@ export VISUAL="nvim" #Fallback for editor
 
 # FZF configuration
 source <(fzf --zsh)
+# Unbind the default Alt-C keybinding for fzf-cd-widget
+bindkey -rM emacs '^[^C'
+bindkey -rM vicmd '^[^C'
+bindkey -rM viins '^[^C'
+# Bind fzf-cd-widget to Ctrl-E
+bindkey -M emacs '^E' fzf-cd-widget
+bindkey -M vicmd '^E' fzf-cd-widget
+bindkey -M viins '^E' fzf-cd-widget
 
 # Better zsh-vi-mode
 source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
+# Zoxide
+eval "$(zoxide init --cmd cd zsh)"
 
 # Run yazi with 'y', change cwd when exiting yazi
 function y() {
