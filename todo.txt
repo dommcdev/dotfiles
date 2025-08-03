@@ -35,42 +35,38 @@ Rofi
 	Navigate options using ctrl+hjkl
 Timeshift snapshots
 Pacman colors
-System update script
-	Include flatpak, pacman, yay
-	Cron job on schedule?
-	Snapshot hook?
 Waybar
 	Workspace indicators, time/date, weather
 	Volume, internet, bluetooth
 	Cpu/ram/temp
-Theme script
-	Via single mycolors.css file?
-	Pywall16, Matugen?
-Dunst
-	Super P shorcut to activating default action
-	Some other way to access rofi menu?
-Hyprland
-	Better animations
-
-# Large projects
-Nextcloud
-Neovim
 Mac
 	Wipe
 	Install script (feat brew? integrated with dotbot ideally)
-	Setup raycast or alt
-Git (history, etc)
-Tailscale subnet router
+Tailscale
+	Set up subnet router
+	HTTPS?
+Git
+	Learn/set up how to easily view history, etc
+Nextcloud
 
 
 
 
-
-
-# Back-burner
+# After school begins
 Fastfetch
 Tweak GTK theme
 Volume notifs
+Tweak SDDM theme (image)
+System update script
+	Include flatpak, pacman, yay
+	Cron job on schedule?
+	Snapshot hook?
+Theme script
+	Via single mycolors.css file?
+	Pywall16, Matugen?
+Hyprland
+	Better animations
+Dunst better context menu workflow (only have 3 sec, dunst set-paused?)
 
 Immich
 Gitlab
