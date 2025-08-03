@@ -24,6 +24,7 @@ Zsh
 	Starship
 	Oh-My-Zsh
 	Case-insensitivity?
+	Spell-check???
 Cliphist
 	Way to view more of copied text
 Rofi
@@ -45,17 +46,19 @@ Waybar
 Theme script
 	Via single mycolors.css file?
 	Pywall16, Matugen?
+Dunst
+	Super P shorcut to activating default action
+	Some other way to access rofi menu?
+Hyprland
+	Better animations
 
-
-# Separate, large projects
+# Large projects
 Nextcloud
-Immich
-Gitlab
-OnlyOffice (+ theme)
-BorgBackup (or equal.)
 Neovim
-Wipe/setup mac (install script? raycast/alt)
-Rasp pi for wireless android auto
+Mac
+	Wipe
+	Install script (feat brew? integrated with dotbot ideally)
+	Setup raycast or alt
 Git (history, etc)
 Tailscale subnet router
 
@@ -68,6 +71,12 @@ Tailscale subnet router
 Fastfetch
 Tweak GTK theme
 Volume notifs
+
+Immich
+Gitlab
+OnlyOffice (+ theme)
+BorgBackup (or equal.)
+Rasp pi for wireless android auto
 
 
 
