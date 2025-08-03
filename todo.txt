@@ -47,6 +47,8 @@ Tailscale
 	HTTPS?
 Git
 	Learn/set up how to easily view history, etc
+	Rename programs to projects, reorganize to separate by course name
+	Move wallpapers to own repo
 Nextcloud
 
 

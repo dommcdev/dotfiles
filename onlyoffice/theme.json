@@ -1,0 +1,17 @@
+{
+    "name": "Amazing theme",
+    "l10n": {
+        "fr": "Thème incroyable",
+        "de": "Geweldig thema"
+      },
+    "id" : "theme-amazing",
+    "type" : "light",
+    "colors" : {
+        "toolbar-header-document" :  "#00FF00",
+        "toolbar-header-spreadsheet" : "#FF0000",
+        "toolbar-header-presentation" : "#0000FF",
+	"background-normal" : "#f00",
+        "background-toolbar" : "#0000FF",
+	"background-alt-key-hint" : "#FF0000"
+    }
+}
