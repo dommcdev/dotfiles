@@ -1,6 +1,5 @@
 # To-do
 Install script
-	arch iso program
 	script for using that program
 	pre-install script
 	post-install script

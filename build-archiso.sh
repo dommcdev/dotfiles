@@ -3,16 +3,19 @@
 # A script to create a custom Arch Linux live ISO using archiso
 
 # --- Configuration ---
-# You can change these variables to customize the script's behavior.
 
 # The directory where the archiso repository will be cloned.
-ARCHISO_REPO_DIR="$HOME/programs"
+ARCHISO_REPO_DIR="$HOME/programs/archiso"
 
 # The directory where the final ISO will be saved.
 OUTPUT_DIR="$HOME/dev"
 
+# Directory for building the archiso
+ARCHISO_BUILD_DIR="$HOME/programs/archiso/my-archiso"
+
 # The archiso profile to use. We'll use the 'releng' profile as requested.
 ARCHISO_PROFILE="releng"
+
 
 # --- Functions ---
 
@@ -84,20 +87,18 @@ prepare_build_environment() {
     echo "--- Preparing the build environment... ---"
 
     # The source profile directory from the archiso repo.
-    local src_profile_dir="$ARCHISO_REPO_DIR/configs/releng"
+    #local src_profile_dir="$ARCHISO_REPO_DIR/configs/releng"
 
-    # The destination directory for our custom profile.
-    local dest_profile_dir="$HOME/programs/archiso-build"
-
-    # Clean up any previous build directory.
-    if [ -d "$dest_profile_dir" ]; then
-        echo "Removing previous build directory '$dest_profile_dir'..."
-        rm -rf "$dest_profile_dir"
+    # Clean up any previous build directory
+    # Note - this should not exist, since this script deletes it after generating iso
+    if [ -d "$ARCHISO_BUILD_DIR" ]; then
+        echo "Removing previous build directory '$ARCHISO_BUILD_DIR'..."
+        sudo rm -rf "$ARCHISO_BUILD_DIR"
     fi
 
     # Copy the chosen profile to our working directory.
-    echo "Copying the '$ARCHISO_PROFILE' profile to '$dest_profile_dir'..."
-    cp -r "$src_profile_dir" "$dest_profile_dir"
+    echo "Copying the '$ARCHISO_PROFILE' profile to '$ARCHISO_BUILD_DIR'..."
+    cp -r "$ARCHISO_REPO_DIR/configs/releng" "$ARCHISO_BUILD_DIR"
     if [ $? -ne 0 ]; then
         echo "ERROR: Failed to copy the archiso profile. Exiting."
         exit 1
@@ -107,8 +108,8 @@ prepare_build_environment() {
     # This is where you would place your custom files, such as an install script.
     echo "--- Placeholder: Copying custom files to airootfs ---"
     # Example:
-    # cp /path/to/your/custom_install_script.sh "$dest_profile_dir/airootfs/root/install.sh"
-    # chmod +x "$dest_profile_dir/airootfs/root/install.sh"
+    # cp /path/to/your/custom_install_script.sh "$ARCHISO_BUILD_DIR/airootfs/root/install.sh"
+    # chmod +x "$ARCHISO_BUILD_DIR/airootfs/root/install.sh"
     #
     # IMPORTANT: The airootfs directory is the root filesystem of the live environment.
     # Files copied here will be available when the live ISO is booted.
@@ -123,14 +124,17 @@ build_and_move_iso() {
     echo "--- Starting the ISO build process... ---"
 
     # Navigate to the custom profile directory.
-    pushd "$HOME/archlive_build" > /dev/null
+    pushd "$ARCHISO_BUILD_DIR" > /dev/null
 
     # Run `mkarchiso` to build the ISO.
     # -v: Verbose output
     # -w: Working directory
     # -o: Output directory
     # The final argument is the profile directory to use (which we are currently in).
-    sudo mkarchiso -v -w "$HOME/archlive_build/work" -o "$OUTPUT_DIR" .
+    sudo mkarchiso -v -w "$ARCHISO_BUILD_DIR/work" -o "$OUTPUT_DIR" .
+    echo "Removing build directory '$ARCHISO_BUILD_DIR'..."
+    sudo rm -rf "$ARCHISO_BUILD_DIR"
+
     if [ $? -ne 0 ]; then
         echo "ERROR: ISO creation failed. Check the output above for details."
         popd > /dev/null
