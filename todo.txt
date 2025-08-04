@@ -30,6 +30,7 @@ Rofi
 	Calculator
 	Emojis/symbols
 	File search? Conversions? Ai?
+	Quick notes?
 	Navigate options using ctrl+hjkl
 Timeshift snapshots
 Waybar
@@ -45,7 +46,6 @@ Tailscale
 Git
 	Learn/set up how to easily view history, etc (lazygit?)
 Nextcloud
-
 
 
 
