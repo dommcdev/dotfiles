@@ -25,16 +25,13 @@ Zsh
 	Oh-My-Zsh
 	Case-insensitivity?
 	Spell-check???
-Cliphist
-	Way to view more of copied text
 Rofi
 	Web search
 	Calculator
 	Emojis/symbols
-	File search? Conversions? Other? Merge cliphist?
+	File search? Conversions? Ai?
 	Navigate options using ctrl+hjkl
 Timeshift snapshots
-Pacman colors
 Waybar
 	Workspace indicators, time/date, weather
 	Volume, internet, bluetooth
@@ -46,9 +43,7 @@ Tailscale
 	Set up subnet router
 	HTTPS?
 Git
-	Learn/set up how to easily view history, etc
-	Rename programs to projects, reorganize to separate by course name
-	Move wallpapers to own repo
+	Learn/set up how to easily view history, etc (lazygit?)
 Nextcloud
 
 
@@ -57,6 +52,7 @@ Nextcloud
 # After school begins
 Fastfetch
 Tweak GTK theme
+Theme cliphist
 Volume notifs
 Tweak SDDM theme (image)
 System update script
@@ -68,7 +64,6 @@ Theme script
 	Pywall16, Matugen?
 Hyprland
 	Better animations
-Dunst better context menu workflow (only have 3 sec, dunst set-paused?)
 
 Immich
 Gitlab
