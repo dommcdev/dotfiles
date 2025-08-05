@@ -14,9 +14,6 @@ Tmux
 	Tmux-ressurect, tmux-continuum
 	Tmux sessionizer (ctrl-e), add in nvim?
 	Tmuxifier, or way to define configs for projects
-Yazi
-	Open files in sushi (except for text)
-	Bookmarks? Some way to access remote shares easily
 Zsh
 	Vi-mode doesn't recognize fzf shortcuts unless in normal mode.
 	Starship
@@ -30,6 +27,7 @@ Rofi
 	File search? Conversions? Ai?
 	Quick notes?
 	Navigate options using ctrl+hjkl
+	Switch between modes with ctrl shortcut - C-e, C-s, etc. Or type "emoji", "search" etc. Search includes @aur, @flathub, etc.
 Timeshift snapshots
 Waybar
 	Workspace indicators, time/date, weather
@@ -48,8 +46,14 @@ Nextcloud
 
 
 # After school begins
+Yazi
+	Open files in sushi (except for text)
+	Bookmarks? Some way to access remote shares easily
 Fastfetch
 Tweak GTK theme
+Yazi
+	Open files in sushi (except for text)
+	Bookmarks? Some way to access remote shares easily
 Theme cliphist
 Volume notifs
 Tweak SDDM theme (image)
@@ -74,6 +78,13 @@ Rasp pi for wireless android auto
 
 
 
+# Things to try
+Windows
+Omarchy
+NixOS
+OpenSuse
+Install arch from scratch
+Macos vm????
 
 
 # BUGS
