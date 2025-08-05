@@ -1,8 +1,11 @@
 {
-    "archinstall-language": "English",
-    "audio_config": {
-        "audio": "pipewire"
+    "app_config": {
+        "audio-config": {
+	    "audio": "pipewire"
+	}
     },
+    "archinstall-language": "English",
+    "auth_config": {},
     "bootloader": "Grub",
     "custom-commands": [
         "su -l dominic -c 'mkdir -p /home/dominic/dev'",
@@ -28,7 +31,9 @@
         "type": "nm"
     },
     "ntp": true,
-    "packages": ["git"],
+    "packages": [
+        "git"
+    ],
     "parallel_downloads": 5,
     "profile_config": {
         "gfx_driver": null,
@@ -39,6 +44,7 @@
             "main": "Minimal"
         }
     },
+    "script": null,
     "services": [],
     "swap": true,
     "timezone": "US/Central",
