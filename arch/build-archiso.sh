@@ -16,6 +16,9 @@ ARCHISO_BUILD_DIR="$HOME/programs/archiso/my-archiso"
 # The archiso profile to use. We'll use the 'releng' profile as requested.
 ARCHISO_PROFILE="releng"
 
+# Location of files to place in iso
+SOURCE_DIR="$HOME/dev/dotfiles/arch/archinstall"
+
 
 # --- Functions ---
 
@@ -90,7 +93,7 @@ prepare_build_environment() {
     #local src_profile_dir="$ARCHISO_REPO_DIR/configs/releng"
 
     # Clean up any previous build directory
-    # Note - this should not exist, since this script deletes it after generating iso
+    # Note - this dir should not exist, since this script deletes it after generating iso
     if [ -d "$ARCHISO_BUILD_DIR" ]; then
         echo "Removing previous build directory '$ARCHISO_BUILD_DIR'..."
         sudo rm -rf "$ARCHISO_BUILD_DIR"
@@ -104,17 +107,21 @@ prepare_build_environment() {
         exit 1
     fi
 
-    # --- Placeholder for custom files ---
-    # This is where you would place your custom files, such as an install script.
-    echo "--- Placeholder: Copying custom files to airootfs ---"
-    # Example:
-    # cp /path/to/your/custom_install_script.sh "$ARCHISO_BUILD_DIR/airootfs/root/install.sh"
-    # chmod +x "$ARCHISO_BUILD_DIR/airootfs/root/install.sh"
-    #
-    # IMPORTANT: The airootfs directory is the root filesystem of the live environment.
-    # Files copied here will be available when the live ISO is booted.
-    echo "Custom file placeholder is ready. Add your files here."
-    # ------------------------------------
+    # Copy archinstall configs and bootstrap-arch.sh
+    if [ ! -d "$SOURCE_DIR" ]; then
+      echo "Error: The source directory '$SOURCE_DIR' does not exist." >&2
+      echo "Please clone your dotfiles repository to '~/dev/dotfiles' before running!" >&2
+      exit 1
+    fi
+
+    echo "Copying contents from '$SOURCE_DIR' to airootfs..."
+    cp -r "$SOURCE_DIR"/* "$ARCHISO_REPO_DIR/my-archiso/airootfs/root"
+    if [ $? -eq 0 ]; then
+      echo "Successfully copied the files."
+    else
+      echo "Error: Failed to copy the files." >&2
+      exit 1
+    fi
 
     echo "--- Build environment is prepared. ---"
 }

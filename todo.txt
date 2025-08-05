@@ -1,8 +1,7 @@
 # To-do
 Install script
-	script for using that program
-	pre-install script
 	post-install script
+	Figure out bootstrap process
 Vim bug
 	Right-click open file = lag when closing. Different with floating windows.
 Low-level keyboard remaps
@@ -63,6 +62,8 @@ Theme script
 	Pywall16, Matugen?
 Hyprland
 	Better animations
+Fix screensharing
+Setup gpu passthrough/virtualization
 
 Immich
 Gitlab

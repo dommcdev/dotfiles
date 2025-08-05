@@ -4,9 +4,11 @@
         "audio": "pipewire"
     },
     "bootloader": "Grub",
-    "custom_commands": [],
-        },
-    "hostname": "archlinux",
+    "custom-commands": [
+        "su -l dominic -c 'mkdir -p /home/dominic/dev'",
+        "su -l dominic -c 'git clone http://developermcd.com:8080/dominic/dotfiles.git /home/dominic/dev/dotfiles'" 
+    ],
+    "hostname": "kabigon",
     "kernels": [
         "linux",
         "linux-lts"
@@ -26,8 +28,8 @@
         "type": "nm"
     },
     "ntp": true,
-    "packages": [],
-    "parallel_downloads": 0,
+    "packages": ["git"],
+    "parallel_downloads": 5,
     "profile_config": {
         "gfx_driver": null,
         "greeter": null,
