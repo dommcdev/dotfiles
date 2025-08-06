@@ -37,7 +37,6 @@ Git
 	Learn/set up how to easily view history, etc (lazygit?)
 Nextcloud
 How to logout
-Use sed to replace parts of /etc/grub
 
 
 
