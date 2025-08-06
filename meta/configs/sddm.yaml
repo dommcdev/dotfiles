@@ -3,4 +3,5 @@
     /etc/sddm.conf: sddm/sddm.conf
 
 - shell:
-  - sudo cp -rf sddm/catppuccin-mocha-peach /usr/share/sddm/themes/catppuccin-mocha-peach
+  - sudo rm -rf /usr/share/sddm/themes/catppuccin-mocha-peach
+  - sudo cp -r sddm/catppuccin-mocha-peach /usr/share/sddm/themes/catppuccin-mocha-peach

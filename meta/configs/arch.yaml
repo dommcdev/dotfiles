@@ -1,0 +1,22 @@
+
+- shell:
+    # Update system
+  - sudo pacman -Syu --noconfirm
+
+    # Ensure Downloads dir exists
+  - mkdir -p ~/Downloads
+
+    # Install yay
+  - sudo pacman -S --noconfirm --needed git base-devel
+  - git clone https://aur.archlinux.org/yay.git && cd yay
+  - makepkg -si --noconfirm && cd .. && rm -rf yay
+
+    # Install flatpak
+  - sudo pacman -S --noconfirm --needed flatpak
+  - flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  
+    # Install graphics drivers
+  - sudo pacman -S --noconfirm --needed libva-mesa-driver libva-utils mesa vulkan-radeon
+
+    # Install arch utils
+  - sudo pacman -S --noconfirm --needed iwd wireless_tools wpa_supplicant smartmontools xdg-utils bluez bluez-utils gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-libav qt6-svg qt6-declarative qt5-quickcontrols2 inetutils iwd

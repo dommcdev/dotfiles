@@ -8,4 +8,8 @@
       path: hyprland/uwsm/*
       glob: true
 
-- shell: []
+- shell:
+  - sudo pacman -S --noconfirm --needed uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpokitagent hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset
+  - systemctl --user enable hyprpolkitagent.service
+  - systemctl --user enable hyprpaper.service
+  - systemctl --user enable hypridle.service

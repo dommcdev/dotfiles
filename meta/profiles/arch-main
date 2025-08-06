@@ -1,5 +1,7 @@
-apps
+pacman
 arch
+terminal
+apps
 bat
 btop
 cursors
@@ -15,7 +17,6 @@ qt
 rofi
 scripts
 sunshine
-terminal
 tmux
 waybar
 yazi

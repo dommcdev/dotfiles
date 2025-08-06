@@ -44,6 +44,12 @@ Nextcloud
 How to logout
 Grub
 	Use sed to replace parts of /etc/grub
+Hyprsunset???
+
+
+
+
+
 
 # After school begins
 Yazi
