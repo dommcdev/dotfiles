@@ -1,6 +1,6 @@
 
 - link:
     /etc/sddm.conf: sddm/sddm.conf
-    /usr/share/sddm/themes/catppuccin-mocha-sapphire: sddm/catppuccin-mocha-sapphire
 
-- shell: []
+- shell:
+  - sudo cp -rf sddm/catppuccin-mocha-peach /usr/share/sddm/themes/catppuccin-mocha-peach

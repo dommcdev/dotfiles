@@ -1,7 +1,5 @@
 
-- link:
-    /etc/default/grub: grub/grub
-    /usr/share/grub/themes/catppuccin-mocha-grub-theme/: grub/catppuccin-mocha-grub-theme
-
 - shell:
+  - sudo rm -rf /usr/share/grub/themes/catppuccin-mocha-grub-theme
+  - sudo cp -r grub/catppuccin-mocha-grub-theme /usr/share/grub/themes/
   - sudo grub-mkconfig -o /boot/grub/grub.cfg

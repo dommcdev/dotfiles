@@ -1,7 +1,6 @@
 # To-do
 Install script
 	post-install script
-	Figure out bootstrap process
 Vim bug
 	Right-click open file = lag when closing. Different with floating windows.
 Low-level keyboard remaps
@@ -43,8 +42,8 @@ Git
 	Learn/set up how to easily view history, etc (lazygit?)
 Nextcloud
 How to logout
-
-
+Grub
+	Use sed to replace parts of /etc/grub
 
 # After school begins
 Yazi
