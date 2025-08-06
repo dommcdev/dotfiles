@@ -1,5 +1,6 @@
 
 - link:
-    ~/.config/yazi: yazi
+    ~/.config/chrome-flags.conf: apps/chrome-flags.conf
+    ~/.local/share/applications: apps/desktop-files
 
 - shell: []

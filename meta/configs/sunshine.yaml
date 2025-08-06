@@ -1,5 +1,7 @@
 
 - link:
-    ~/.config/yazi: yazi
+    ~/.config/sunshine/*:
+      path: sunshine/*
+      glob: true
 
 - shell: []

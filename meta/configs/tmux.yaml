@@ -1,5 +1,5 @@
 
 - link:
-    ~/.config/yazi: yazi
+  ~/.config/tmux/tmux.conf: tmux/tmux.conf
 
 - shell: []

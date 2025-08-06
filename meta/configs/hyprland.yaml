@@ -1,5 +1,11 @@
 
 - link:
-    ~/.config/yazi: yazi
+    ~/.config/hypr:
+      path: hyprland/*
+      glob: true
+      exclude: [hyprland/uwsm]
+    ~/.config/uwsm:
+      path: hyprland/uwsm/*
+      glob: true
 
 - shell: []

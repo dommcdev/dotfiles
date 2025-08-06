@@ -1,5 +1,7 @@
 
 - link:
-    ~/.config/yazi: yazi
+    ~/.config/GIMP/3.0/:
+      path: gimp/*
+      glob: true
 
 - shell: []

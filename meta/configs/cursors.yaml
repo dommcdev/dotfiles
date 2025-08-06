@@ -1,5 +1,7 @@
 
 - link:
-    ~/.config/yazi: yazi
+    ~/.local/share/icons/: 
+      path: cursors/*
+      glob: true
 
 - shell: []

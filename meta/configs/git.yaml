@@ -1,5 +1,6 @@
 
 - link:
-    ~/.config/yazi: yazi
+    ~/.gitconfig: git/gitconfig
 
-- shell: []
+- shell:
+  - cd ~/dev/dotfiles && git fetch #populate git creds

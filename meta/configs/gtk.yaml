@@ -1,5 +1,7 @@
 
 - link:
-    ~/.config/yazi: yazi
-
+    ~/.config/gtk-3.0: gtk/gtk-3.0
+    ~/.config/gtk-4.0: gtk/gtk-4.0
+    ~/.config/templates: gtk/templates
+    ~/.config/user-dirs.dirs: gtk/user-dirs.dirs
 - shell: []

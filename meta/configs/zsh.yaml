@@ -1,5 +1,6 @@
 
 - link:
-    ~/.zshrc:
-      path: zsh/zshrc
-- shell: []
+    ~/.zshrc: zsh/zshrc
+
+- shell:
+  - chsh -s $(which zsh)

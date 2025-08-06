@@ -55,9 +55,6 @@ npm install -g @google/gemini-cli
 mkdir -p ~/Downloads
 
 
-# Apply dotfiles, authenticate gitlab
-cd ~/dev/dotfiles && ./install
-git pull #neccesary to populate gitcredentials
 
 # Enable various services to start on boot
 sudo systemctl enable sddm.service
