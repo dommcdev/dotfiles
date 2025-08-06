@@ -4,10 +4,6 @@ Vim bug
 Low-level keyboard remaps
 	Tap ctrl to esc
 	Ctrl+[ to esc
-Dotbot
-	If statements for macos
-	Post-install script
-	Use sed to replace parts of /etc/grub
 Tmux
 	Tmux-ressurect, tmux-continuum
 	Tmux sessionizer (ctrl-e), add in nvim?
@@ -33,7 +29,7 @@ Waybar
 	Cpu/ram/temp
 Mac
 	Wipe
-	Install script (feat brew? integrated with dotbot ideally)
+	Integrate with dotbot
 Tailscale
 	Set up subnet router
 	HTTPS?
@@ -41,6 +37,7 @@ Git
 	Learn/set up how to easily view history, etc (lazygit?)
 Nextcloud
 How to logout
+Use sed to replace parts of /etc/grub
 
 
 

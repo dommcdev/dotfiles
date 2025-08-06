@@ -16,10 +16,10 @@ cat << 'EOF' > /mnt/home/dominic/bootstrap-dotfiles.sh
 #!/bin/env bash
 mkdir -p ~/dev/
 git clone http://$GIT_USER:$GIT_PASS@developermcd.com:8080/dominic/dotfiles.git ~/dev/dotfiles
-cd dotfiles && ./install_profile arch
+cd dotfiles && ./install_profile arch-main
 EOF
 arch-chroot /mnt sudo -u dominic bash /home/dominic/bootstrap_dotfiles.sh
-arch-chroot /mnt rm /home/dominic/run_dotfiles.sh
+arch-chroot /mnt rm /home/dominic/bootstrap_dotfiles.sh
 
 
 #arch-chroot /mnt su -l dominic -c 'mkdir -p ~/dev/'
