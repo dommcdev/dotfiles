@@ -42,6 +42,7 @@ Tailscale
 Git
 	Learn/set up how to easily view history, etc (lazygit?)
 Nextcloud
+How to logout
 
 
 

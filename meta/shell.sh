@@ -1,15 +1,7 @@
 #!/bin/env bash
 
-# Prerequisites
-# sudo pacman -S git
-# mkdir dev && cd dev
-# git clone http://developermcd.com:8080/Dominic/dotfiles.git
 
-# -------------------------------------------------- #
-#                  SOFTWARE INSTALLATION             #
-# -------------------------------------------------- #
-
-# Make sure system is up to date
+# # Make sure system is up to date
 sudo pacman -Syu
 
 # Install yay
@@ -87,8 +79,6 @@ gsettings set org.gnome.desktop.interface icon-theme "Colloid-Yellow-Catppuccin-
 #cd ~/dev/dotfiles && sudo stow --dotfiles --target=/ grub
 #sudo grub-mkconfig -o /boot/grub/grub.cfg
 
-# Change shell
-chsh -s /usr/bin/zsh
 
 # Authenticate Tailscale (also sign in to Google in the process)
 #sudo tailscale up

@@ -1,5 +1,6 @@
 
 - link:
-    ~/.config/yazi: yazi
+    /etc/sddm.conf: sddm/sddm.conf
+    /usr/share/sddm/themes/catppuccin-mocha-sapphire: sddm/catppuccin-mocha-sapphire
 
 - shell: []
