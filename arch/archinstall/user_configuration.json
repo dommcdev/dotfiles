@@ -32,7 +32,8 @@
     },
     "ntp": true,
     "packages": [
-        "git"
+        "git",
+	"python"
     ],
     "parallel_downloads": 5,
     "profile_config": {
