@@ -7,9 +7,7 @@
   - mkdir -p ~/Downloads
 
     # Install yay
-  - sudo pacman -S --noconfirm --needed git base-devel
-  - git clone https://aur.archlinux.org/yay.git && cd yay
-  - makepkg -si --noconfirm && cd .. && rm -rf yay
+  - command -v yay > /dev/null || (sudo pacman -S --noconfirm --needed base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm && cd .. && rm -rf yay)
 
     # Install flatpak
   - sudo pacman -S --noconfirm --needed flatpak
