@@ -1,19 +1,15 @@
 #!/bin/env bash
 
 
-# Terminal
-sudo pacman -S --noconfirm --needed openssh wget curl ffmpeg 7zip fd ripgrep poppler zoxide imagemagick chafa resvg ncdu fzf trash-cli bat cava asciiquarium cmatrix cowsay ponysay tldr whois
 
 # Shared
 
-# Install arch packages
-sudo pacman -S --noconfirm --needed dunst  grim slurp sddm ghostty nautilus nautilus-python gvfs-smb fastfetch waybar rofi ttf-jetbrains-mono-nerd zsh btop virt-manager blueman neovim adw-gtk-theme pavucontrol networkmanager network-manager-applet nm-connection-editor ddcutil tailscale yazi libnotify noto-fonts-emoji sushi papirus-icon-theme  udiskie
+waybar rofi ttf-jetbrains-mono-nerd zsh btop  neovim adw-gtk-theme  tailscale yazi papirus-icon-theme 
 
-# Install gui packages
-sudo pacman -S --noconfirm --needed gimp impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar libreoffice-fresh blender, kdenlive
+impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar libreoffice-fresh blender, kdenlive
 
 # Install aur packages
-yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome r-quick-share downgrade zsh-vi-mode clipse
+yay -S --noconfirm --needed --answerdiff None --answerclean None r-quick-share zsh-vi-mode 
 
 # Install flatpaks
 flatpak install --noninteractive flathub org.onlyoffice.desktopeditors org.nickvision.tubeconverter io.gitlab.adhami3310.Footage
@@ -28,8 +24,6 @@ npm install -g @google/gemini-cli
 
 
 # Enable various services to start on boot
-sudo systemctl enable sddm.service
-sudo systemctl enable --now bluetooth.service
 sudo systemctl enable --now tailscaled
 systemctl --user enable waybar.service
 systemctl --user enable sunshine.service

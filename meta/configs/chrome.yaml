@@ -1,0 +1,6 @@
+
+- link:
+    ~/.config/chrome-flags.conf: apps/chrome/chrome-flags.conf
+
+- shell:
+  - yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome

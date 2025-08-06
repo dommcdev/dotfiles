@@ -2,4 +2,5 @@
 - link:
     ~/.config/dunst: dunst
 
-- shell: []
+- shell:
+  - sudo pacman -S --noconfirm --needed dunst libnotify

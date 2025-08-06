@@ -19,4 +19,13 @@
   - sudo pacman -S --noconfirm --needed libva-mesa-driver libva-utils mesa vulkan-radeon
 
     # Install arch utils
-  - sudo pacman -S --noconfirm --needed iwd wireless_tools wpa_supplicant smartmontools xdg-utils bluez bluez-utils gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-libav qt6-svg qt6-declarative qt5-quickcontrols2 inetutils iwd
+  - sudo pacman -S --noconfirm --needed iwd wireless_tools wpa_supplicant smartmontools xdg-utils gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-libav inetutils iwd ddcutil
+
+    # Install arch utils (gui)
+  - sudo pacman -S --noconfirm --needed virt-manager blueman pavucontrols networkmanager network-manager-applet nm-connection-editor noto-fonts-emoji
+
+    # Nautilus
+  - sudo pacman -S --noconfirm --needed nautilus nautilus-python gvfs-smb sushi udiskie
+
+    # AUR
+  - yay -S --noconfirm --needed --answerdiff None --answerclean None downgrade clipse

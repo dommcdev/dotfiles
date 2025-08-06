@@ -1,5 +1,5 @@
 
 - link:
-    ~/.config/bat: bat
+    ~/.config/bat: terminal/bat
 
 - shell: []

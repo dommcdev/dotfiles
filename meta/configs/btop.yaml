@@ -1,5 +1,5 @@
 
 - link:
-    ~/.config/btop: btop
+    ~/.config/btop: terminal/btop
 
 - shell: []

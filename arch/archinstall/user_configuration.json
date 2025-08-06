@@ -2,6 +2,9 @@
     "app_config": {
         "audio-config": {
 	    "audio": "pipewire"
+	},
+	"bluetooth_config": {
+	    "enabled": true
 	}
     },
     "archinstall-language": "English",

@@ -1,5 +1,6 @@
 
 - link:
-    ~/.config/fastfetch: fastfetch
+    ~/.config/fastfetch: terminal/fastfetch
 
-- shell: []
+- shell:
+  - sudo pacman -S --noconfirm --needed fastfetch

@@ -1,0 +1,3 @@
+
+- shell:
+  - sudo pacman -S --noconfirm --needed openssh wget curl ffmpeg 7zip fd ripgrep poppler zoxide imagemagick chafa resvg ncdu fzf trash-cli bat cava asciiquarium cmatrix cowsay ponysay tldr whois

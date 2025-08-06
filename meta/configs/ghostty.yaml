@@ -2,4 +2,5 @@
 - link:
     ~/.config/ghostty: ghostty
 
-- shell: []
+- shell:
+  - sudo pacman -S --noconfirm --needed ghostty
