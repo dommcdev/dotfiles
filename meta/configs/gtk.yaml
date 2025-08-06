@@ -4,4 +4,14 @@
     ~/.config/gtk-4.0: gtk/gtk-4.0
     ~/.config/templates: gtk/templates
     ~/.config/user-dirs.dirs: gtk/user-dirs.dirs
-- shell: []
+
+- shell:
+  - sudo pacman -S --noconfirm --needed adw-gtk-theme
+  - flatpak override --user --filesystem=xdg-config/gtk-4.0
+  - flatpak override --user --filesystem=xdg-config/gtk-3.0
+  - flatpak override --user --filesystem=xdg-data/themes
+  - gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3"
+  - gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+  - sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3
+  - sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3-dark
+

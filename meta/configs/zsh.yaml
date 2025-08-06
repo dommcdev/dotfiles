@@ -3,4 +3,5 @@
     ~/.zshrc: zsh/zshrc
 
 - shell:
+  - sudo pacman -S --noconfirm --needed zsh
   - chsh -s $(which zsh)

@@ -2,4 +2,6 @@
 - link:
     ~/.config/waybar: waybar
 
-- shell: []
+- shell:
+  - sudo pacman -S --noconfirm --needed waybar
+    systemctl --user enable waybar.service

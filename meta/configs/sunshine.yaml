@@ -4,4 +4,6 @@
       path: sunshine/*
       glob: true
 
-- shell: []
+- shell:
+  - sudo pacman -S --noconfirm --needed lizardbyte/sunshine
+  - systemctl --user enable sunshine.service

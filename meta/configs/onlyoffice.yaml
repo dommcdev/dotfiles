@@ -1,0 +1,6 @@
+
+- link:
+    ~/.config/onlyoffice: apps/onlyoffice/theme.json
+
+- shell:
+  - flatpak install --noninteractive flathub org.onlyoffice.desktopeditors

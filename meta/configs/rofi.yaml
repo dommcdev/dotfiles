@@ -1,5 +1,12 @@
 
 - link:
-    ~/.config/yazi: yazi
+    ~/.config/rofi/:
+      path: rofi/*
+      glob: true
+      exclude: [rofi/scripts]
+    ~/.local/bin/:
+      path: rofi/scripts/*
+      glob: true
 
-- shell: []
+- shell:
+  - sudo pacman -S --noconfirm --needed rofi

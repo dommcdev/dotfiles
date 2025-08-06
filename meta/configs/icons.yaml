@@ -1,0 +1,8 @@
+
+- shell:
+  - sudo pacman -S --noconfirm --needed papirus-icon-theme
+  - mkdir -p ~/dev && cd ~/dev
+  - git clone https://github.com/vinceliuice/Colloid-icon-theme.git && cd Colloid-icon-theme
+  - ./install.sh -s catppuccin -t yellow -b
+  - cd .. && rm -rf Colloid-icon-them
+  - gsettings set org.gnome.desktop.interface icon-theme "Colloid-Yellow-Catppuccin-Dark"
