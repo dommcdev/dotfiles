@@ -4,4 +4,4 @@
 
 - shell:
   - sudo pacman -S --noconfirm --needed waybar
-    systemctl --user enable waybar.service
+  - systemctl --user enable waybar.service

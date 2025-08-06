@@ -3,11 +3,8 @@
     # Update system
   - sudo pacman -Syu --noconfirm
 
-    # Ensure Downloads dir exists
-  - mkdir -p ~/Downloads
-
     # Install yay
-  - command -v yay > /dev/null || (sudo pacman -S --noconfirm --needed base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm && cd .. && rm -rf yay)
+  - command -v yay > /dev/null || (sudo pacman -S --noconfirm --needed base-devel && mkdir -p ~/dev/external && cd ~/dev/external && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm && cd .. && rm -rf yay)
 
     # Install flatpak
   - sudo pacman -S --noconfirm --needed flatpak
@@ -20,7 +17,7 @@
   - sudo pacman -S --noconfirm --needed iwd wireless_tools wpa_supplicant smartmontools xdg-utils gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-libav inetutils iwd ddcutil
 
     # Install arch utils (gui)
-  - sudo pacman -S --noconfirm --needed virt-manager blueman pavucontrols networkmanager network-manager-applet nm-connection-editor noto-fonts-emoji
+  - sudo pacman -S --noconfirm --needed virt-manager blueman pavucontrol networkmanager network-manager-applet nm-connection-editor noto-fonts-emoji
 
     # Nautilus
   - sudo pacman -S --noconfirm --needed nautilus nautilus-python gvfs-smb sushi udiskie

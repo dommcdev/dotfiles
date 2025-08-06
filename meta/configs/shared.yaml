@@ -1,10 +1,14 @@
 
 - shell:
+  - mkdir -p ~/dev/projects
+  - mkdir -p ~/dev/external
+  - mkdir -p ~/Downloads
+
   - sudo pacman -S --noconfirm --needed ttf-jetbrains-mono-nerd tailscale
 
     # Install GUI packages
-  - sudo pacman -S --noconfirm --needed impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar libreoffice-fresh blender, kdenlive
-  - flatpak install --assumeyes --noninteractive flathub org.nickvision.tubeconvert io.gitlab.adhami3310.Footage
+  - sudo pacman -S --noconfirm --needed impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar libreoffice-fresh blender kdenlive
+  - flatpak install --assumeyes --noninteractive flathub org.nickvision.tubeconverter io.gitlab.adhami3310.Footage
   - yay -S --noconfirm --needed --answerdiff None --answerclean None r-quick-share zsh-vi-mode 
 
     # Enable systemd services
@@ -12,6 +16,5 @@
 
     # Node, nvm, and gemini cli
   - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-  - source "$HOME/.config/nvm/nvm.sh" #source file in lieu of restarting the shell
-  - nvm install 22
+  - source "$HOME/.config/nvm/nvm.sh" && nvm install 22 #source file in lieu of restarting the shell
   - npm install -g @google/gemini-cli

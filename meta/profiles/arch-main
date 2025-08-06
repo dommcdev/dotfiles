@@ -11,7 +11,7 @@ fastfetch
 ghostty
 gimp
 git
-grub
+grub-sudo
 gtk
 hyprland
 icons
@@ -20,7 +20,7 @@ onlyoffice
 qt
 rofi
 scripts
-sddm
+sddm-sudo
 shared
 sunshine
 terminal
