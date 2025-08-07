@@ -1,4 +1,4 @@
-pacman
+pacman-sudo
 arch
 terminal
 apps
@@ -28,3 +28,4 @@ tmux
 waybar
 yazi
 zsh
+dev

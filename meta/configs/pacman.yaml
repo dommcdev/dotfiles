@@ -1,0 +1,6 @@
+
+- shell:
+  - sudo rm -rf /etc/pacman.conf
+  - sudo cp -r arch/pacman/pacman.conf /etc/pacman.conf
+  - sudo rm -rf /etc/pacman.d/hooks/adw-gtk3-flatpak-sync.hook
+  - sudo cp -r arch/pacman/hooks/adw-gtk3-flatpak-sync.hook /etc/pacman.d/hooks/

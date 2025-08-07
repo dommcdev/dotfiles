@@ -32,7 +32,9 @@ Tailscale
 	Set up subnet router
 	HTTPS?
 Nextcloud
-
+Add git repos to dotbot install
+Add pacman to dotbot install
+Rework bootstrap script to modify archinstall config via sed
 
 
 
@@ -66,7 +68,7 @@ Theme script
 Hyprland
 	Better animations
 Fix screensharing
-Setup gpu passthrough/virtualization
+Setup gpu passthrough/virtualization (installing boxes fixes??)
 
 Immich
 Gitlab

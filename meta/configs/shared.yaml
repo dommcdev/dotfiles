@@ -9,12 +9,7 @@
     # Install GUI packages
   - sudo pacman -S --noconfirm --needed impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar libreoffice-fresh blender kdenlive
   - flatpak install --assumeyes --noninteractive flathub org.nickvision.tubeconverter io.gitlab.adhami3310.Footage
-  - yay -S --noconfirm --needed --answerdiff None --answerclean None r-quick-share zsh-vi-mode 
+  - yay -S --noconfirm --needed --answerdiff None --answerclean None zsh-vi-mode
 
     # Enable systemd services
   - sudo systemctl enable tailscaled
-
-    # Node, nvm, and gemini cli
-  - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-  - source "$HOME/.config/nvm/nvm.sh" && nvm install 22 #source file in lieu of restarting the shell
-  - npm install -g @google/gemini-cli
