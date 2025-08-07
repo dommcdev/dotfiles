@@ -1,6 +1,4 @@
 # To-do
-Vim bug
-	Right-click open file = lag when closing. Different with floating windows.
 Low-level keyboard remaps
 	Tap ctrl to esc
 	Ctrl+[ to esc
@@ -33,10 +31,7 @@ Mac
 Tailscale
 	Set up subnet router
 	HTTPS?
-Git
-	Learn/set up how to easily view history, etc (lazygit?)
 Nextcloud
-How to logout
 
 
 
@@ -44,7 +39,12 @@ How to logout
 
 
 # After school begins
+Vim bug
+	Right-click open file = lag when closing. Different with floating windows.
+Git
+	Learn/set up how to easily view history, etc (lazygit?)
 Hyprsunset
+How to logout
 Yazi
 	Open files in sushi (except for text)
 	Bookmarks? Some way to access remote shares easily

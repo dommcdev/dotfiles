@@ -1,6 +1,6 @@
 {
     "app_config": {
-        "audio-config": {
+        "audio_config": {
 	    "audio": "pipewire"
 	},
 	"bluetooth_config": {
@@ -10,9 +10,8 @@
     "archinstall-language": "English",
     "auth_config": {},
     "bootloader": "Grub",
-    "custom-commands": [
-        "su -l dominic -c 'mkdir -p /home/dominic/dev'",
-        "su -l dominic -c 'git clone http://developermcd.com:8080/dominic/dotfiles.git /home/dominic/dev/dotfiles'" 
+    "custom_commands": [
+	"sudo -u dominic bash -c 'git clone http://developermcd.com:8080/dominic/dotfiles.git ~/dev/dotfiles'"
     ],
     "hostname": "kabigon",
     "kernels": [
