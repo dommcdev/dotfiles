@@ -3,5 +3,8 @@
     ~/.local/share/applications/: 
       path: apps/desktop-files/*
       glob: true
+    ~/.local/share/icons/hicolor/scalable/apps/: 
+      path: apps/desktop-files/icons/*
+      glob: true
 
 - shell: []
