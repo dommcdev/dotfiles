@@ -1,7 +1,4 @@
 # To-do
-Low-level keyboard remaps
-	Tap ctrl to esc
-	Ctrl+[ to esc
 Tmux
 	Tmux-ressurect, tmux-continuum
 	Tmux sessionizer (ctrl-e), add in nvim?
@@ -32,9 +29,6 @@ Tailscale
 	Set up subnet router
 	HTTPS?
 Nextcloud
-Add git repos to dotbot install
-Add pacman to dotbot install
-Rework bootstrap script to modify archinstall config via sed
 
 
 
