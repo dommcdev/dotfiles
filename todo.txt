@@ -35,11 +35,9 @@ Nextcloud
 
 
 # After school begins
-Vim bug
-	Right-click open file = lag when closing. Different with floating windows.
 Git
 	Learn/set up how to easily view history, etc (lazygit?)
-Hyprsunset
+Hyprsunset (not in vm)
 How to logout
 Yazi
 	Open files in sushi (except for text)

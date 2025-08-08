@@ -1,5 +1,7 @@
 
 - link:
-    ~/.local/share/applications: apps/desktop-files
+    ~/.local/share/applications/: 
+      path: apps/desktop-files/*
+      glob: true
 
 - shell: []
