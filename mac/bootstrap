@@ -1,0 +1,16 @@
+#!/bin/env bash
+set -e
+
+echo "Time to fix this Macbook!"
+
+# Install Homebrew
+"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+#Make sure to source the brew files. A restart is probably needed before using dotbot.
+# Install dotfile dependencies
+if command -v brew &> /dev/null; then brew install git python; else echo "Homebrew is not installed. Please install it first."; fi
+
+# Clone dotfiles
+git clone http://developermcd.com:8080/dominic/dotfiles.git ~/dev/dotfiles
+
+# Run dotfiles
+cd ~/dev/dotfiles && ./install-profile mac

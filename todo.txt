@@ -29,6 +29,7 @@ Tailscale
 	Set up subnet router
 	HTTPS?
 Nextcloud
+SDDM cursor
 
 
 

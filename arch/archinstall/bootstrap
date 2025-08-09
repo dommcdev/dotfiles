@@ -15,9 +15,9 @@ sed -i "s/archusername/${ARCH_USER}/g" user_credentials.json
 
 # Run archinstall with included configuration/credential file. Disk input is still manual.
 archinstall --config /root/user_configuration.json --creds /root/user_credentials.json
-echo -e "\n\n--- Archinstall completed successfully. Cloning dotfiles via arch-chroot ... ---\n\n"
 
 # More manual option for cloning dotfiles - unlike via archinstall, it is interactive
+#echo -e "\n\n--- Archinstall completed successfully. Cloning dotfiles via arch-chroot ... ---\n\n"
 #echo "git clone http://$GIT_USER:$GIT_PASS@developermcd.com:8080/dominic/dotfiles.git ~/dev/dotfiles" > /mnt/home/dominic/tmp.sh
 #arch-chroot /mnt sudo -u dominic bash home/dominic/tmp.sh
 #arch-chroot /mnt rm home/dominic/tmp.sh

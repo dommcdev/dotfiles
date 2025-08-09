@@ -1,13 +1,63 @@
-mac
-bat
-btop
-fastfetch
-ghostty
-git
-mac
-nvim
-scripts
-terminal
-tmux
-yazi
-zsh
+
+- link:
+
+- shell:
+
+    # Fix dock
+  - defaults write com.apple.dock persistent-apps -array # no pinned apps
+  - defaults write com.apple.dock show-recents -bool false # no recents
+  - defaults write com.apple.dock persistent-others # no Downloads shorcut
+  - defaults write com.apple.dock minimize-to-application -bool false # no app windows
+  - defaults write com.apple.dock autohide -bool true # autohide
+  - defaults write com.apple.dock tilesize -int 1 # set to minimum size
+  - defaults write com.apple.dock autohide-delay -float 1000 # set delay to ~16 min :)
+  - defaults write com.apple.dock no-bouncing -bool true # stop bouncing!
+
+    # Disable the "Are you sure you want to open this application" dialog
+  - defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+    # Prevent macOS from creating .DS_Store files on network volumes or usbs
+  - defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+  - defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+   # Bottom left hot corner -> Start screen saver
+  - defaults write com.apple.dock wvous-bl-corner -int 5
+  - defaults write com.apple.dock wvous-bl-modifier -int 0
+
+   # Trackpad: enable tap to click for this user and for the login screen
+  - defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+  - defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+  - defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+    # Fix Finder
+  - defaults write com.apple.finder ShowPathbar -bool true
+  - defaults write com.apple.finder ShowStatusBar -bool true
+  - defaults write com.apple.finder "FXRemoveOldTrashItems" -bool "true"
+  - defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+  - defaults write com.apple.finder QuitMenuItem -bool true
+  - defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
+  - defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+    # Misc
+  - defaults -currentHost write com.apple.controlcenter.plist BatteryShowPercentage -bool true # battery percent in menu bar
+  - defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false # save to disk (not iCloud) by default
+  - defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false # disable resume system-wide
+  - defaults write -g com.apple.swipescrolldirection -bool false # disable natural scrolling
+  - defaults write NSGlobalDomain KeyRepeat -int 2 # increase key repeat
+  - defaults write com.apple.dock mru-spaces -bool false # no rearranging Spaces
+  - defaults write com.apple.Spotlight MenuItemHidden -int 1
+
+   # Restart stuff
+  - killall Dock
+  - killall SystemUIServer
+
+
+
+
+# Set a custom wallpaper image. `DefaultDesktop.jpg` is already a symlink, and
+# all wallpapers are in `/Library/Desktop Pictures/`. The default is `Wave.jpg`.
+#rm -rf ~/Library/Application Support/Dock/desktoppicture.db
+#sudo rm -rf /System/Library/CoreServices/DefaultDesktop.jpg
+#sudo ln -s /path/to/your/image /System/Library/CoreServices/DefaultDesktop.jpg
+
+# Look into AutoRaise for focus follows mouse
