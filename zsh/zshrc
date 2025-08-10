@@ -30,6 +30,8 @@ alias cat='bat'
 alias mv='mv -i'
 alias cp='cp -i'
 alias showpath='echo $PATH | tr ":" "\n"'
+alias df="df -h"
+alias du="du -h -d 1"
 
 # Env variables
 export PATH="$HOME/.local/bin:$PATH"

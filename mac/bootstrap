@@ -1,16 +1,40 @@
 #!/bin/env bash
 set -e
 
-echo "Time to fix this Macbook!"
+# --- Vars ---
+DOTFILES_REPO="http://developermcd.com:8080/dominic/dotfiles.git"
+DOTFILES_DIR="$HOME/dev/dotfiles"
+BREW_INSTALLED="/opt/homebrew/bin/brew"
 
-# Install Homebrew
-"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-#Make sure to source the brew files. A restart is probably needed before using dotbot.
+echo -e "Starting Macbook setup...\n\n"
+
+# Check if Homebrew is already installed
+if [ ! -x "$BREW_INSTALLED" ]; then
+    echo "Homebrew not found. Installing..."
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    echo "Homebrew installation complete. You may need to restart your terminal."
+else
+    echo "Homebrew is already installed. Skipping installation."
+fi
+
+# Ensure brew is in the PATH for this session
+if [[ ! $(echo "$PATH" | grep -q "$BREW_INSTALLED"; echo $?) == 0 ]]; then
+    export PATH="$BREW_INSTALLED:$PATH"
+fi
+
 # Install dotfile dependencies
-if command -v brew &> /dev/null; then brew install git python; else echo "Homebrew is not installed. Please install it first."; fi
+echo "Installing dotfile dependencies (git, python)..."
+brew install git python
 
 # Clone dotfiles
-git clone http://developermcd.com:8080/dominic/dotfiles.git ~/dev/dotfiles
+if [ ! -d "$DOTFILES_DIR" ]; then
+    echo "Cloning dotfiles..."
+    git clone "$DOTFILES_REPO" "$DOTFILES_DIR"
+else
+    echo "Dotfiles directory already exists. Skipping clone."
+fi
 
 # Run dotfiles
-cd ~/dev/dotfiles && ./install-profile mac
+echo "Running dotfiles installer..."
+cd "$DOTFILES_DIR" && ./install-profile mac
+

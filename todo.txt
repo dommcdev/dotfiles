@@ -7,8 +7,7 @@ Zsh
 	Vi-mode doesn't recognize fzf shortcuts unless in normal mode.
 	Starship
 	Oh-My-Zsh
-	Case-insensitivity?
-	Spell-check???
+	Case-insensitivity, spell-check, etc.
 Rofi
 	Web search
 	Calculator
@@ -17,19 +16,17 @@ Rofi
 	Quick notes?
 	Navigate options using ctrl+hjkl
 	Switch between modes with ctrl shortcut - C-e, C-s, etc. Or type "emoji", "search" etc. Search includes @aur, @flathub, etc.
-Timeshift snapshots
+Timeshift snapshots (understand btrfs)
 Waybar
 	Workspace indicators, time/date, weather
 	Volume, internet, bluetooth
 	Cpu/ram/temp
 Mac
-	Wipe
 	Integrate with dotbot
 Tailscale
 	Set up subnet router
 	HTTPS?
 Nextcloud
-SDDM cursor
 
 
 
@@ -45,12 +42,9 @@ Yazi
 	Bookmarks? Some way to access remote shares easily
 Fastfetch
 Tweak GTK theme
-Yazi
-	Open files in sushi (except for text)
-	Bookmarks? Some way to access remote shares easily
 Theme cliphist
 Volume notifs
-Tweak SDDM theme (image)
+Tweak SDDM theme (image aligned, cursor correct)
 System update script
 	Include flatpak, pacman, yay
 	Cron job on schedule?
