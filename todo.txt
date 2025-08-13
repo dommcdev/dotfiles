@@ -1,4 +1,25 @@
 # To-do
+Timeshift snapshots (understand btrfs)
+Mac
+	Integrate with dotbot
+	Karabiner
+	Raycast
+	Way to switch between workspaces with hypr 1, 2, 3, etc
+Tailscale subnet router
+Nextcloud
+Finish arch install script
+	Add ssh
+	Remove creds from archinstall
+Neovim
+	Telescope
+	Theme
+	LSP
+	Starting screen (low prio)
+
+
+
+
+# After school begins
 Tmux
 	Tmux-ressurect, tmux-continuum
 	Tmux sessionizer (ctrl-e), add in nvim?
@@ -8,6 +29,10 @@ Zsh
 	Starship
 	Oh-My-Zsh
 	Case-insensitivity, spell-check, etc.
+Waybar
+	Workspace indicators, time/date, weather
+	Volume, internet, bluetooth
+	Cpu/ram/temp
 Rofi
 	Web search
 	Calculator
@@ -16,34 +41,18 @@ Rofi
 	Quick notes?
 	Navigate options using ctrl+hjkl
 	Switch between modes with ctrl shortcut - C-e, C-s, etc. Or type "emoji", "search" etc. Search includes @aur, @flathub, etc.
-Timeshift snapshots (understand btrfs)
-Waybar
-	Workspace indicators, time/date, weather
-	Volume, internet, bluetooth
-	Cpu/ram/temp
-Mac
-	Integrate with dotbot
-Tailscale
-	Set up subnet router
-	HTTPS?
-Nextcloud
-
-
-
-
-
-# After school begins
 Git
 	Learn/set up how to easily view history, etc (lazygit?)
-Hyprsunset (not in vm)
 How to logout
 Yazi
 	Open files in sushi (except for text)
 	Bookmarks? Some way to access remote shares easily
 Fastfetch
+Hyprland fullscreen window has red border
 Tweak GTK theme
 Theme cliphist
 Volume notifs
+SSH config?
 Tweak SDDM theme (image aligned, cursor correct)
 System update script
 	Include flatpak, pacman, yay
@@ -54,8 +63,12 @@ Theme script
 	Pywall16, Matugen?
 Hyprland
 	Better animations
-Fix screensharing
-Setup gpu passthrough/virtualization (installing boxes fixes??)
+Post-vm
+	Fix screensharing
+	Gpu passthrough
+	Fix virtualization (installing boxes fixes)
+	Fix hyprsunset
+Better brightness adjustment
 
 Immich
 Gitlab

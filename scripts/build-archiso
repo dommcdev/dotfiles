@@ -3,15 +3,16 @@
 # A script to create a custom Arch Linux live ISO using archiso
 
 # --- Configuration ---
+mkdir -p ~/dev/external
 
 # The directory where the archiso repository will be cloned.
-ARCHISO_REPO_DIR="$HOME/programs/archiso"
+ARCHISO_REPO_DIR="$HOME/dev/external/archiso"
 
 # The directory where the final ISO will be saved.
-OUTPUT_DIR="$HOME/dev"
+OUTPUT_DIR="$HOME/dev/external"
 
 # Directory for building the archiso
-ARCHISO_BUILD_DIR="$HOME/programs/archiso/my-archiso"
+ARCHISO_BUILD_DIR="$ARCHISO_REPO_DIR/my-archiso"
 
 # The archiso profile to use. We'll use the 'releng' profile as requested.
 ARCHISO_PROFILE="releng"
