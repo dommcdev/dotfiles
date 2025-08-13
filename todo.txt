@@ -8,8 +8,9 @@ Mac
 Tailscale subnet router
 Nextcloud
 Finish arch install script
-	Add ssh
-	Remove creds from archinstall
+	Add openssh-server
+	Remove creds from archinstall in bootstrap script
+	Add idopotency to chsh and git clone commands (zsh.yaml, dev.yaml)
 Neovim
 	Telescope
 	Theme

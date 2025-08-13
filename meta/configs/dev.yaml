@@ -1,6 +1,6 @@
 
 - shell:
-  - # Git repos
+    # Git repos
   - git clone http://developermcd.com:8080/dominic/courses.git ~/dev/courses
   - git clone http://developermcd.com:8080/dominic/wallpapers.git ~/dev/wallpapers
 
