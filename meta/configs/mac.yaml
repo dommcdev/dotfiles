@@ -4,7 +4,7 @@
     # Fix dock
   - defaults write com.apple.dock persistent-apps -array # no pinned apps
   - defaults write com.apple.dock show-recents -bool false # no recents
-  - defaults write com.apple.dock persistent-others # no Downloads shorcut
+  - defaults write com.apple.dock persistent-others -array # no Downloads shorcut
   - defaults write com.apple.dock minimize-to-application -bool false # no app windows
   - defaults write com.apple.dock autohide -bool true # autohide
   - defaults write com.apple.dock tilesize -int 1 # set to minimum size
