@@ -1,9 +1,9 @@
 {
-  "description": "Change caps_lock to control if pressed with other keys, to escape if pressed alone.",
+  "description": "Map Left Option to Left Command",
   "manipulators": [
     {
       "from": {
-        "key_code": "caps_lock",
+        "key_code": "left_option",
         "modifiers": {
           "optional": [
             "any"
@@ -12,12 +12,7 @@
       },
       "to": [
         {
-          "key_code": "left_control"
-        }
-      ],
-      "to_if_alone": [
-        {
-          "key_code": "escape"
+          "key_code": "left_command"
         }
       ],
       "type": "basic"
