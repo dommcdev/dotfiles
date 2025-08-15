@@ -3,4 +3,4 @@
     ~/.config/fastfetch: tui/fastfetch
 
 - shell:
-  - sudo pacman -S --noconfirm --needed fastfetch
+  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed fastfetch; else brew install fastfetch; fi

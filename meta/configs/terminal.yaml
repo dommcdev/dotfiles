@@ -1,3 +1,3 @@
 
 - shell:
-  - sudo pacman -S --noconfirm --needed openssh wget curl ffmpeg 7zip fd ripgrep poppler zoxide imagemagick chafa resvg ncdu fzf trash-cli bat cava asciiquarium cmatrix cowsay ponysay tldr whois eza jq
+  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed openssh wget curl ffmpeg 7zip fd ripgrep poppler zoxide imagemagick chafa resvg ncdu fzf trash-cli cava asciiquarium cmatrix cowsay ponysay tldr whois eza jq; else brew install openssh wget curl ffmpeg 7zip fd ripgrep poppler zoxide imagemagick chafa resvg ncdu fzf trash-cli cava asciiquarium cmatrix cowsay ponysay tldr whois eza jq; fi

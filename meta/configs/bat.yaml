@@ -3,4 +3,5 @@
     ~/.config/bat: tui/bat
 
 - shell:
+  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed bat; else brew install bat; fi
   - bat cache --build

@@ -3,4 +3,4 @@
     ~/.config/ghostty: ghostty
 
 - shell:
-  - sudo pacman -S --noconfirm --needed ghostty
+  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed ghostty; else brew install --cask ghostty; fi

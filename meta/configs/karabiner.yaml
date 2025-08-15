@@ -1,6 +1,6 @@
 
 - link:
-    ~/.config/karabiner: karabiner/conf.json #FIX THIS PLACEHOLDER
+    ~/.config/karabiner/karabiner.json: karabiner/karabiner.json
 
 - shell:
   - brew install --cask karabiner-elements

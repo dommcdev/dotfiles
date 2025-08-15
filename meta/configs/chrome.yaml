@@ -5,4 +5,4 @@
       if: '[ "$(uname)" = "Linux" ]'
 
 - shell:
-  - if [ "$(uname)" = "Darwin" ]; then brew install --cask google-chrome; else yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome; fi
+  - if [ "$(uname)" = "Linux" ]; then yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome; else brew install --cask google-chrome; fi

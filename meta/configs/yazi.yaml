@@ -3,4 +3,4 @@
     ~/.config/yazi: tui/yazi
 
 - shell:
-  - sudo pacman -S --noconfirm --needed yazi
+  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed yazi; else brew install yazi; fi

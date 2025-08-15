@@ -11,14 +11,15 @@
   - defaults write com.apple.dock autohide-delay -float 1000 # set delay to ~16 min :)
   - defaults write com.apple.dock no-bouncing -bool true # stop bouncing!
 
-   # Bottom left hot corner -> Start screen saver
+   # Bottom left hot corner = start screen saver
   - defaults write com.apple.dock wvous-bl-corner -int 5
   - defaults write com.apple.dock wvous-bl-modifier -int 0
 
-   # Trackpad: enable tap to click for this user and for the login screen
-  - defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-  - defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-  - defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+   # Trackpad
+  - defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true # tap to click
+  - defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1 # also tap to click
+  - defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1 # also tap to click
+  - defaults write -g com.apple.swipescrolldirection -bool false # disable natural scrolling
 
     # Fix Finder
   - defaults write com.apple.finder ShowPathbar -bool true
@@ -33,7 +34,6 @@
   - defaults -currentHost write com.apple.controlcenter.plist BatteryShowPercentage -bool true # battery percent in menu bar
   - defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false # save to disk (not iCloud) by default
   - defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false # disable resume system-wide
-  - defaults write -g com.apple.swipescrolldirection -bool false # disable natural scrolling
   - defaults write NSGlobalDomain KeyRepeat -int 2 # increase key repeat
   - defaults write com.apple.dock mru-spaces -bool false # no rearranging Spaces
   - defaults write com.apple.Spotlight MenuItemHidden -int 1 # hide spotlight icon in menu bar
