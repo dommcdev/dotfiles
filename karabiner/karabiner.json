@@ -1,7 +1,7 @@
 {
     "global": {
-	"check_for_updates_on_startup": false,
-	"show_in_menu_bar": false
+        "check_for_updates_on_startup": false,
+        "show_in_menu_bar": false
     },
     "profiles": [
         {
@@ -42,6 +42,19 @@
                                     "modifiers": { "optional": ["any"] }
                                 },
                                 "to": [{ "key_code": "left_command" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Map Right Option to Right Command",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "right_option",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "right_command" }],
                                 "type": "basic"
                             }
                         ]
