@@ -22,7 +22,7 @@ alias grep='grep --color=auto'
 alias vi='nvim'
 alias vim='nvim'
 alias fs='fastfetch'
-alias c='clear' #note - ctrl+L will also clear!
+alias c='clear'
 alias wth='curl wttr.in'
 alias pwd='pwd && pwd | wl-copy'
 alias rm='trash-put'
@@ -65,7 +65,6 @@ function y() {
 	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
 }
-
 
 # Part of nvm installation
 export NVM_DIR="$HOME/.config/nvm"

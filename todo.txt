@@ -71,6 +71,7 @@ Post-vm
 Better brightness adjustment
 Fonts? Chrome font can't handle Chinese chars
 Tailscale subnet router
+Store zsh files (hist, rc, etc) in .config/zsh
 
 Immich
 Gitlab
