@@ -3,5 +3,5 @@
     ~/.zshrc: zsh/zshrc
 
 - shell:
-  - sudo pacman -S --noconfirm --needed zsh
+  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed zsh; fi
   - if [ "$SHELL" != "$(which zsh)" ]; then chsh -s "$(which zsh)"; fi

@@ -1,6 +1,8 @@
 
 - link:
-    ~/.config/chrome-flags.conf: apps/chrome/chrome-flags.conf
+    ~/.config/chrome-flags.conf:
+      path: apps/chrome/chrome-flags.conf
+      if: '[ "$(uname)" = "Linux" ]'
 
 - shell:
-  - yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome
+  - if [ "$(uname)" = "Darwin" ]; then brew install --cask google-chrome; else yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome; fi
