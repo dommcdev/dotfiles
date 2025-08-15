@@ -4,7 +4,7 @@
   - mkdir -p ~/dev/external
   - mkdir -p ~/Downloads
 
-  - sudo pacman -S --noconfirm --needed ttf-jetbrains-mono-nerd tailscale
+  - sudo pacman -S --noconfirm --needed ttf-jetbrains-mono-nerd tailscale openssh
 
     # Install GUI packages
   - sudo pacman -S --noconfirm --needed impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar libreoffice-fresh blender kdenlive
@@ -13,3 +13,4 @@
 
     # Enable systemd services
   - sudo systemctl enable tailscaled
+  - sudo systemctl enable sshd

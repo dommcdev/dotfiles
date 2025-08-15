@@ -6,6 +6,7 @@
     ~/.config/user-dirs.dirs: gtk/user-dirs.dirs
 
 - shell:
+  - mkdir -p ~/Downloads/Screenshots ~/Downloads/Videos
   - sudo pacman -S --noconfirm --needed adw-gtk-theme
   - flatpak override --user --filesystem=xdg-config/gtk-4.0
   - flatpak override --user --filesystem=xdg-config/gtk-3.0

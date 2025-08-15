@@ -12,14 +12,10 @@ echo -e "Starting Macbook setup...\n\n"
 if [ ! -x "$BREW_INSTALLED" ]; then
     echo "Homebrew not found. Installing..."
     NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$(brew shellenv)"
     echo "Homebrew installation complete. You may need to restart your terminal."
 else
     echo "Homebrew is already installed. Skipping installation."
-fi
-
-# Ensure brew is in the PATH for this session
-if [[ ! $(echo "$PATH" | grep -q "$BREW_INSTALLED"; echo $?) == 0 ]]; then
-    export PATH="$BREW_INSTALLED:$PATH"
 fi
 
 # Install dotfile dependencies
@@ -36,5 +32,5 @@ fi
 
 # Run dotfiles
 echo "Running dotfiles installer..."
-cd "$DOTFILES_DIR" && ./install-profile mac
+#cd "$DOTFILES_DIR" && ./install-profile mac
 

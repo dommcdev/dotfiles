@@ -5,12 +5,8 @@ Mac
 	Karabiner
 	Raycast
 	Way to switch between workspaces with hypr 1, 2, 3, etc
-Tailscale subnet router
-Nextcloud
-Finish arch install script
-	Add openssh-server
-	Remove creds from archinstall in bootstrap script
-	Add idopotency to chsh and git clone commands (zsh.yaml, dev.yaml)
+	Rectangle
+	Autoraise (focus follows mouse)
 Neovim
 	Telescope
 	Theme
@@ -19,8 +15,11 @@ Neovim
 
 
 
-
 # After school begins
+Nextcloud/immich migration to physical hardware
+Chrome stylus sync (???)
+Fix hyprcursor/bibata animation speed (loading)
+Nautilus defaults conf file
 Tmux
 	Tmux-ressurect, tmux-continuum
 	Tmux sessionizer (ctrl-e), add in nvim?
@@ -70,6 +69,8 @@ Post-vm
 	Fix virtualization (installing boxes fixes)
 	Fix hyprsunset
 Better brightness adjustment
+Fonts? Chrome font can't handle Chinese chars
+Tailscale subnet router
 
 Immich
 Gitlab

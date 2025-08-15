@@ -1,10 +1,10 @@
 
 - shell:
     # Git repos
-  - git clone http://developermcd.com:8080/dominic/courses.git ~/dev/courses
-  - git clone http://developermcd.com:8080/dominic/wallpapers.git ~/dev/wallpapers
+  - if [ ! -d "$HOME/dev/wallpapers" ]; then git clone http://developermcd.com:8080/dominic/wallpapers.git $HOME/dev/wallpapers; fi
+  - if [ ! -d "$HOME/dev/courses" ]; then git clone http://developermcd.com:8080/dominic/courses.git $HOME/dev/courses; fi
 
-    # Node and NVM
+  # Node and NVM
   - mkdir -p ~/.config/nvm
   - NVM_DIR="$HOME/.config/nvm" PROFILE="/dev/null" bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash'
   - source "$HOME/.config/nvm/nvm.sh" && nvm install 22

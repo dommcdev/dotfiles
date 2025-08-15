@@ -4,4 +4,4 @@
 
 - shell:
   - sudo pacman -S --noconfirm --needed zsh
-  - chsh -s $(which zsh)
+  - if [ "$SHELL" != "$(which zsh)" ]; then chsh -s "$(which zsh)"; fi

@@ -1,9 +1,8 @@
 
-- link:
-    /etc/sddm.conf: sddm/sddm.conf
-
 - shell:
   - sudo pacman -S --noconfirm --needed sddm qt6-svg qt6-declarative qt5-quickcontrols2
+  - sudo rm -rf /etc/sddm.conf
+  - sudo cp -r sddm/sddm.conf /etc/sddm.conf
   - sudo rm -rf /usr/share/sddm/themes/catppuccin-mocha-peach
   - sudo cp -r sddm/catppuccin-mocha-peach /usr/share/sddm/themes/catppuccin-mocha-peach
   - sudo systemctl enable sddm.service
