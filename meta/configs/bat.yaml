@@ -1,5 +1,6 @@
 
 - link:
-    ~/.config/bat: terminal/bat
+    ~/.config/bat: tui/bat
 
-- shell: []
+- shell:
+  - bat cache --build

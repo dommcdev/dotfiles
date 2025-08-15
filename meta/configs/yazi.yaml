@@ -1,6 +1,6 @@
 
 - link:
-    ~/.config/yazi: terminal/yazi
+    ~/.config/yazi: tui/yazi
 
 - shell:
   - sudo pacman -S --noconfirm --needed yazi

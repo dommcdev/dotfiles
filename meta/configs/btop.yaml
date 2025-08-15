@@ -1,6 +1,6 @@
 
 - link:
-    ~/.config/btop: terminal/btop
+    ~/.config/btop: tui/btop
 
 - shell:
   - sudo pacman -S --noconfirm --needed btop
