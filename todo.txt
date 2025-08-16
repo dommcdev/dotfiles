@@ -2,9 +2,8 @@
 Timeshift snapshots (understand btrfs)
 Mac
 	Raycast
-	Way to switch between workspaces with hypr 1, 2, 3, etc
-	Rectangle
 	Autoraise (focus follows mouse)
+	Change close window shorcut to hypr c, delete to hypr delete, etc
 Neovim
 	Telescope
 	Theme
