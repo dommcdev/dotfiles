@@ -1,8 +1,7 @@
 theme = catppuccin-mocha
 confirm-close-surface=false
 font-family = "JetBrainsMono Nerd Font"
-background-opacity = 0.92
-
+background-opacity = 0.96
 
 
 # Reload config with ctrl+shift+,
@@ -12,13 +11,7 @@ background-opacity = 0.92
 #
 # Additionally, each config option is also explained in detail
 # on Ghostty's website, at https://ghostty.org/docs/config.
-
 #
-# # Any line beginning with a # is a comment. It's not possible to put
-# # a comment after a config option, since it would be interpreted as a
-# # part of the value. For example, this will have a value of "#123abc":
-# background = #123abc
-#
-# # Empty values are used to reset config keys to default.
+# Empty values are used to reset config keys to default
 # key =
 

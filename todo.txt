@@ -1,10 +1,6 @@
 # To-do
 Timeshift snapshots (understand btrfs)
-Mac
-	Raycast
-	Autoraise (focus follows mouse)
-	Change close window shorcut to hypr c, delete to hypr delete, etc
-Neovim
+Nvim
 	Telescope
 	Theme
 	LSP
