@@ -109,6 +109,30 @@
                             }
                         ]
                     }
+		    {
+		      "description": "Map Hypr+c to Command+q, to close applications on macOS.",
+		      "manipulators": [
+			{
+			  "from": {
+			    "key_code": "c",
+			    "modifiers": {
+			      "mandatory": [
+				"left_command left_option left_control"
+			      ]
+			    }
+			  },
+			  "to": [
+			    {
+			      "key_code": "q",
+			      "modifiers": [
+				"command"
+			      ]
+			    }
+			  ],
+			  "type": "basic"
+			}
+		      ]
+		    }
                 ]
             },
             "name": "Default profile",
