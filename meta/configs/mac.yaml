@@ -54,6 +54,16 @@
 #sudo rm -rf /System/Library/CoreServices/DefaultDesktop.jpg
 #sudo ln -s /path/to/your/image /System/Library/CoreServices/DefaultDesktop.jpg
 
-# Note to self - finder still needs lots of work
-# Screen timeout needs to be increased
 
+# TODO
+  # Finder needs work (folder alignment defaults, etc)
+  # Are you sure you want to open dialog is still appearing
+  # Disable .ds_stores systemwide ideally
+  # increase screen timeout
+  # remove last login line from zshrc (system)
+  # Display scaling
+  # Reduce motion toggle
+  # Show bluetooth in menu bar
+  # Change wallpaper
+  # Assign keybindings to switch workspaces
+  # Show large clock on screensaver and lock screen (keyboard shortcut to lock screen)
