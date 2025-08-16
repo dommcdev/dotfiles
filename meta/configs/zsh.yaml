@@ -3,6 +3,8 @@
     ~/.zshrc: 
       path: zsh/zshrc
       if: '[ "$(uname)" = "Linux" ]'
+
+- link: 
     ~/.zshrc:
       path: zsh/zshrc-mac
       if: '[ $(uname)" = "Darwin" ]'
