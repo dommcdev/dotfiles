@@ -1,8 +1,6 @@
 # To-do
 Timeshift snapshots (understand btrfs)
 Mac
-	Integrate with dotbot
-	Karabiner
 	Raycast
 	Way to switch between workspaces with hypr 1, 2, 3, etc
 	Rectangle
@@ -47,7 +45,7 @@ How to logout
 Yazi
 	Open files in sushi (except for text)
 	Bookmarks? Some way to access remote shares easily
-Fastfetch
+Fastfetch (fix on macos)
 Hyprland fullscreen window has red border
 Tweak GTK theme
 Theme cliphist

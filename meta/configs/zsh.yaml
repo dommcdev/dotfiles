@@ -1,6 +1,11 @@
 
 - link:
-    ~/.zshrc: zsh/zshrc
+    ~/.zshrc: 
+      path: zsh/zshrc
+      if: '[ "$(uname)" = "Linux" ]'
+    ~/.zshrc:
+      path: zsh/zshrc-mac
+      if: '[ $(uname)" = "Darwin" ]'
 
 - shell:
   - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed zsh; fi

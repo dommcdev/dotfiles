@@ -22,7 +22,7 @@ alias vim='nvim'
 alias fs='fastfetch'
 alias c='clear'
 alias wth='curl wttr.in'
-alias pwd='pwd && pwd | wl-copy'
+alias pwd='pwd && pwd | pbcopy'
 alias rm='trash-put'
 alias cat='bat'
 alias mv='mv -i'
@@ -50,7 +50,7 @@ bindkey -M vicmd '^E' fzf-cd-widget
 bindkey -M viins '^E' fzf-cd-widget
 
 # Better zsh-vi-mode
-source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 # Zoxide
 eval "$(zoxide init --cmd cd zsh)"
