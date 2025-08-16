@@ -55,4 +55,5 @@
 #sudo ln -s /path/to/your/image /System/Library/CoreServices/DefaultDesktop.jpg
 
 # Note to self - finder still needs lots of work
+# Screen timeout needs to be increased
 

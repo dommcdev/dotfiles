@@ -5,9 +5,9 @@
   - mkdir -p ~/Downloads
 
     # Install GUI packages
-  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar libreoffice-fresh blender kdenlive ttf-jetbrains-mono-nerd tailscale; else brew install font-jetbrains-mono-nerd-font && brew install --cask tailscale-app #etc etc
-  - flatpak install --assumeyes --noninteractive flathub org.nickvision.tubeconverter io.gitlab.adhami3310.Footage
-  - if [ "$(uname)" = "Linux" ]; then yay -S --noconfirm --needed --answerdiff None --answerclean None zsh-vi-mode; else brew install zsh-vi-mode
+  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar libreoffice-fresh blender kdenlive ttf-jetbrains-mono-nerd tailscale; else brew install font-jetbrains-mono-nerd-font && brew install --cask tailscale-app; fi
+  - if [ "$(uname)" = "Linux" ]; then flatpak install --assumeyes --noninteractive flathub org.nickvision.tubeconverter io.gitlab.adhami3310.Footage; fi
+  - if [ "$(uname)" = "Linux" ]; then yay -S --noconfirm --needed --answerdiff None --answerclean None zsh-vi-mode; else brew install zsh-vi-mode; fi
 
     # Enable systemd services
   - if [ "$(uname)" = "Linux" ]; then sudo systemctl enable tailscaled; fi
