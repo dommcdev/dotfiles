@@ -3,4 +3,4 @@
     ~/.config/onlyoffice: apps/onlyoffice/theme.json
 
 - shell:
-  - flatpak install --noninteractive flathub org.onlyoffice.desktopeditors
+  - if [ "$(uname)" = "Linux" ]; then flatpak install --noninteractive flathub org.onlyoffice.desktopeditors; else brew install --cask onlyoffice; fi

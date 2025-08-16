@@ -3,4 +3,4 @@
     ~/.config/nvim: nvim
 
 - shell:
-  - sudo pacman -S --noconfirm --needed neovim
+  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed neovim; else brew install neovim; fi
