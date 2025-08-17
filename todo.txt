@@ -65,6 +65,12 @@ Better brightness adjustment
 Fonts? Chrome font can't handle Chinese chars
 Tailscale subnet router
 Store zsh files (hist, rc, etc) in .config/zsh
+Mac
+	Tweak Raycast
+	Add apps to gui.yaml (yt-downloader, etc)
+	Remap some annoying ctrl-cmd swaps (open new tab, etc)
+	Move applications to specific workspace
+
 
 Immich
 Gitlab
