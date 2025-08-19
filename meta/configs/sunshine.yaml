@@ -1,6 +1,6 @@
 
 - link:
-    ~/.config/sunshine/*:
+    ~/.config/sunshine/:
       path: sunshine/*
       glob: true
 
