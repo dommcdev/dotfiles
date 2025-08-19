@@ -26,8 +26,7 @@
   - defaults write com.apple.finder ShowStatusBar -bool true
   - defaults write com.apple.finder "FXRemoveOldTrashItems" -bool "true"
   - defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-  #- defaults write com.apple.finder QuitMenuItem -bool true
-  - defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
+  - defaults write com.apple.finder NewWindowTargetPath -string "PfHm"
   - defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
     # Misc
@@ -71,3 +70,4 @@
   # (Change hostname????)
   # Open application, don't switch to it!
   # Edit widgets
+  # Add keyboard shortcuts (incl remap close finder window to same as quit finder would be"
