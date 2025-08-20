@@ -5,11 +5,18 @@ Nvim
 	Theme
 	LSP
 	Starting screen (low prio)
+Setup nextcloud somehwhere
+Mac
+	Tweak Raycast
+	Add apps to gui.yaml (yt-downloader, etc)
+	Remap some annoying ctrl-cmd swaps (open new tab, etc)
+	Move applications to specific workspace
+	Add settings tweaks to mac.yaml
 
 
 
 # After school begins
-Nextcloud/immich migration to physical hardware
+Setup immich
 Chrome stylus sync (???)
 Fix hyprcursor/bibata animation speed (loading)
 Nautilus defaults conf file
@@ -65,11 +72,6 @@ Better brightness adjustment
 Fonts? Chrome font can't handle Chinese chars
 Tailscale subnet router
 Store zsh files (hist, rc, etc) in .config/zsh
-Mac
-	Tweak Raycast
-	Add apps to gui.yaml (yt-downloader, etc)
-	Remap some annoying ctrl-cmd swaps (open new tab, etc)
-	Move applications to specific workspace
 
 
 Immich

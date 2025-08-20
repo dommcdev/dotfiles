@@ -1,4 +1,9 @@
 
+- link: 
+    ~/Library/Services/:
+      path: mac/shortcuts/*
+      glob: true
+
 - shell:
 
     # Fix dock
@@ -71,3 +76,6 @@
   # Open application, don't switch to it!
   # Edit widgets
   # Add keyboard shortcuts (incl remap close finder window to same as quit finder would be"
+  # Tap to click no worky
+  # Edit screenshot hotkeys
+  # Tailscale start on login
