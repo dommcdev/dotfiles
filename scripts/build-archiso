@@ -90,9 +90,6 @@ manage_archiso_repo() {
 prepare_build_environment() {
     echo "--- Preparing the build environment... ---"
 
-    # The source profile directory from the archiso repo.
-    #local src_profile_dir="$ARCHISO_REPO_DIR/configs/releng"
-
     # Clean up any previous build directory
     # Note - this dir should not exist, since this script deletes it after generating iso
     if [ -d "$ARCHISO_BUILD_DIR" ]; then
@@ -182,4 +179,4 @@ build_and_move_iso
 
 echo "--- Script finished successfully! ---"
 echo "Your new Archiso ISO should be located at '$OUTPUT_DIR'."
-ls "$OUTPUT_DIR"
+eza "$OUTPUT_DIR"
