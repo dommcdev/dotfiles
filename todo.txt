@@ -18,6 +18,7 @@ Mac
 # After school begins
 Setup immich
 Chrome stylus sync (???)
+Vimium C work on newtab/google sites?
 Fix hyprcursor/bibata animation speed (loading)
 Nautilus defaults conf file
 Tmux
@@ -52,7 +53,7 @@ Hyprland fullscreen window has red border
 Tweak GTK theme
 Theme cliphist
 Volume notifs
-SSH config?
+SSH config? (set up key-based auth)
 Tweak SDDM theme (image aligned, cursor correct)
 System update script
 	Include flatpak, pacman, yay
@@ -69,7 +70,7 @@ Post-vm
 	Fix virtualization (installing boxes fixes)
 	Fix hyprsunset
 Better brightness adjustment
-Fonts? Chrome font can't handle Chinese chars
+Fonts?
 Tailscale subnet router
 Store zsh files (hist, rc, etc) in .config/zsh
 
