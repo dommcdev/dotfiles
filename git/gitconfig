@@ -3,3 +3,5 @@
 [user]
 	email = dominicmcdev@gmail.com
 	name = Dominic
+[core]
+	excludesfile = /Users/dominic/.gitignore_global

@@ -12,6 +12,7 @@ Mac
 	Remap some annoying ctrl-cmd swaps (open new tab, etc)
 	Move applications to specific workspace
 	Add settings tweaks to mac.yaml
+	Add development.yaml
 
 
 

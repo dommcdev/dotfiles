@@ -1,5 +1,5 @@
 List of things to do after installing dotfiles. Blame macOS for (most of) this. 
 
 1) Log in to Chrome
-2) Open Tailscale app, accept permissions etc
+2) Open Tailscale app, login, toggle open on login
 3) Manually import raycast config because Raycast doesn't know what a plaintext config file is.

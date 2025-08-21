@@ -4,4 +4,5 @@
 
     # Enable systemd services
   - if [ "$(uname)" = "Linux" ]; then sudo systemctl enable sshd; fi
+  - if [ "$(uname)" = "Darwin" ]; then sudo systemsetup -setremotelogin on; fi #fix this bc full disk access needed first
 

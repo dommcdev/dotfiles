@@ -1,6 +1,8 @@
 
 - link:
     ~/.gitconfig: git/gitconfig
+    ~/.gitignore_global: git/gitignore_global
 
 - shell:
+  - git config --global core.excludesfile ~/.gitignore_global
   - cd ~/dev/dotfiles && git fetch #populate git creds

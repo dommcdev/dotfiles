@@ -13,7 +13,7 @@ sed -i "s/gitusername:gitpassword/${GIT_USER}:${GIT_PASS}/g" user_configuration.
 sed -i "s/archusername/${ARCH_USER}/g" user_configuration.json
 sed -i "s/archusername/${ARCH_USER}/g" user_credentials.json
 
-# Run archinstall with included configuration/credential file. Disk input is still manual.
+# Run archinstall with included configuration file. Disk input and user creds are still manual.
 archinstall --config /root/user_configuration.json #--creds /root/user_credentials.json
 
 # More manual option for cloning dotfiles - unlike via archinstall, it is interactive
