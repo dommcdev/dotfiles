@@ -73,7 +73,7 @@ Post-vm
 Better brightness adjustment
 Fonts?
 Tailscale subnet router
-Store zsh files (hist, rc, etc) in .config/zsh
+Store zsh files (hist, rc, etc) in .config/zsh. Also git?
 
 
 Immich

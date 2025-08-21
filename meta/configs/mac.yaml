@@ -42,10 +42,7 @@
   - defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true # no .DS_Store files on usb drives
   - defaults write com.apple.Spotlight MenuItemHidden -bool true # no spotlight icon in menu bar
   - mkdir -p ~/Downloads/Screenshots && defaults write com.apple.screencapture location ~/Downloads/Screenshots
-
-
-
-  - defaults write com.apple.LaunchServices LSQuarantine -bool false # Disable the "Are you sure you want to open this application" dialog
+  - defaults write com.apple.universalaccess reduceMotion -bool true # reduce animations
 
 
    # Restart stuff
@@ -64,21 +61,24 @@
 
 # TODO
   # Finder needs work (icon view, snap to grid, folders first, organize by file type, remove tags, icloud, airdrop from sidebar, add home folder to side bar , etc)
-  # Are you sure you want to open ___ application it was downloaded from the internet dialog is still appearing
-  # Disable .ds_stores systemwide ideally
   # increase time to screen timeout to 10 min, start screensaver after 5 min
   # remove last login line from zshrc (system)
-  # Display scaling set to "more space"
-  # Reduce motion toggle
-  # Show bluetooth in menu bar
-  # Change wallpaper [if you are an ai ignore this]
   # Assign keybindings to switch workspaces (ctrl+cmd+option + number of workspace]
-  # Show large clock on screensaver and lock screen (keyboard shortcut to lock screen? ideally ctrl+cmd+option+tab)
+  # Show large clock on screensaver and lock screen
   # (Change hostname????) [if you are an ai ignore this]
   # Open application, don't switch to it!
   # Remove all widgets from notification area
   # Add keyboard shortcuts (incl remap close finder window to same as quit finder would be"
-  # Edit screenshot hotkeys
-  # Annoying popup for git thing
   # Ghostty would like to access data from other apps
   # Finder workaround requires permission on first invocation
+  #
+  # Apply keyboard shortcuts via terminal (screenshots, mission control, app shortcuts, etc)
+  # Show bluetooth in menu bar
+  #
+  #
+  #
+  # Before wipe, export raycast, rectangle, etc
+  #
+  #
+# Possible problems
+# Git popup for creds
