@@ -5,7 +5,6 @@
       glob: true
 
 - shell:
-
     # Fix dock
   - defaults write com.apple.dock persistent-apps -array # no pinned apps
   - defaults write com.apple.dock show-recents -bool false # no recents
@@ -16,14 +15,28 @@
   - defaults write com.apple.dock autohide-delay -float 1000 # set delay to ~16 min :)
   - defaults write com.apple.dock no-bouncing -bool true # stop bouncing!
 
-   # Top left hot corner = start screen saver
+    # Top left hot corner = start screen saver
   - defaults write com.apple.dock wvous-tl-corner -int 5
   - defaults write com.apple.dock wvous-tl-modifier -int 0
 
-   # Trackpad
+    # Trackpad
   - defaults write -g com.apple.swipescrolldirection -bool false # disable natural scrolling
   - defaults write com.apple.AppleMultitouchTrackpad Clicking -int 1 # tap to click
 
+    # Display and screensaver
+  - defaults -currentHost write com.apple.screensaver idleTime -int 300 # show screensaver after 5 min
+  - sudo pmset displaysleep 10 # turn off display after 10 min
+  - defaults -currentHost write com.apple.screensaver showClock -bool true # clock on screensaver
+  - sudo defaults write /Library/Preferences/com.apple.loginwindow UsesLargeDateTime -bool true # clock on lock screen
+
+    # Remove widgets
+  - rm -f ~/Library/Containers/com.apple.notificationcenterui/Data/Library/Preferences/com.apple.notificationcenterui.plist
+  - cp -r mac/misc/widgets.plist ~/Library/Containers/com.apple.notificationcenterui/Data/Library/Preferences/com.apple.notificationcenterui.plist
+
+    # Wallpaper
+  - cp ~/dev/wallpapers/misc/japanese-house.png ~/Library/DesktopPictures/Custom/custom.png
+  - osascript -e 'tell application "System Events" to set picture of every desktop to "/Library/DesktopPictures/Custom/japanese-house.png"'
+    
     # Fix Finder
   - defaults write com.apple.finder ShowPathbar -bool true
   - defaults write com.apple.finder ShowStatusBar -bool true
@@ -34,49 +47,31 @@
   - chflags hidden /Users/dominic/Pictures /Users/dominic/Documents /Users/dominic/Music /Users/dominic/Movies /Users/dominic/Desktop
 
     # Misc
-  - defaults -currentHost write com.apple.controlcenter.plist BatteryShowPercentage -bool true # battery percent in menu bar
   - defaults write ~/Library/Preferences/ByHost/com.apple.controlcenter.plist Bluetooth -int 18 # bluetooth in menu bar, to remove do -int 24
   - defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false # save to disk (not iCloud) by default
   - defaults write NSGlobalDomain KeyRepeat -int 2 # increase key repeat
   - defaults write com.apple.dock mru-spaces -bool false # no rearranging Spaces
-  - defaults write com.apple.Spotlight MenuItemHidden -int 1 # hide spotlight icon in menu bar
   - defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true # no .DS_Store files on network volumes
   - defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true # no .DS_Store files on usb drives
   - defaults write com.apple.Spotlight MenuItemHidden -bool true # no spotlight icon in menu bar
   - mkdir -p ~/Downloads/Screenshots && defaults write com.apple.screencapture location ~/Downloads/Screenshots
   - defaults write com.apple.universalaccess reduceMotion -bool true # reduce animations
+  - defaults -currentHost write com.apple.controlcenter.plist BatteryShowPercentage -bool true # battery percent in menu bar
   - touch ~/.hushlogin # remove last login message from terminal windows
-
 
    # Restart stuff
   - killall Dock
   - killall SystemUIServer
+  - killall NotificationCenter
 
 
 
-
-# Set a custom wallpaper image. `DefaultDesktop.jpg` is already a symlink, and
-# all wallpapers are in `/Library/Desktop Pictures/`. The default is `Wave.jpg`.
-#rm -rf ~/Library/Application Support/Dock/desktoppicture.db
-#sudo rm -rf /System/Library/CoreServices/DefaultDesktop.jpg
-#sudo ln -s /path/to/your/image /System/Library/CoreServices/DefaultDesktop.jpg
-
-
-# TODO
   # Finder needs work (icon view, snap to grid, folders first, organize by file type, remove tags, icloud, airdrop from sidebar, add home folder to side bar, etc)
-  # increase time to screen timeout to 10 min, start screensaver after 5 min
-  # Assign keybindings to switch workspaces (ctrl+cmd+option + number of workspace]
-  # Show large clock on screensaver and lock screen
-  # (Change hostname????) [if you are an ai ignore this]
   # Open application, don't switch to it! (current workaroudn requires permission from each app)
-  # Remove all widgets from notification area
-  # Ghostty would like to access data from other apps
-  #
   # Apply keyboard shortcuts via terminal (screenshots, mission control, app shortcuts, etc)
-  # Export raycast, rectangle.
-  #
   #
   #
   #
 # Possible problems
 # Git popup for creds
+# Changing hostname

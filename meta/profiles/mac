@@ -1,3 +1,5 @@
+zsh
+development
 bat
 btop
 chrome
@@ -5,7 +7,6 @@ fastfetch
 ghostty
 git
 karabiner
-mac
 nvim
 onlyoffice
 rectangle
@@ -14,6 +15,6 @@ gui
 terminal
 tmux
 yazi
-zsh
 
+mac
 raycast

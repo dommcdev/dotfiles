@@ -1,2 +1,4 @@
 - shell:
+  - brew install --cask raycast
+  - 'echo "Your password is: password123"'
   - open "raycast://extensions/raycast/raycast/import-settings-data"

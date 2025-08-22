@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>PayloadContent</key>
+  <array>
+
+    <!-- Wallpaper payload -->
+    <dict>
+      <key>PayloadType</key>
+      <string>com.apple.desktop</string>
+      <key>PayloadVersion</key>
+      <integer>1</integer>
+      <key>PayloadIdentifier</key>
+      <string>com.personal.wallpaper</string>
+      <key>PayloadUUID</key>
+      <string>11111111-1111-1111-1111-111111111111</string>
+      <key>PayloadEnabled</key>
+      <true/>
+      <key>PayloadDisplayName</key>
+      <string>Custom Wallpaper</string>
+      <key>override-picture-path</key>
+      <string>/Library/DesktopPictures/Custom/custom.png</string>
+    </dict>
+
+    <!-- Screensaver payload -->
+    <dict>
+      <key>PayloadType</key>
+      <string>com.apple.screensaver</string>
+      <key>PayloadVersion</key>
+      <integer>1</integer>
+      <key>PayloadIdentifier</key>
+      <string>com.personal.screensaver</string>
+      <key>PayloadUUID</key>
+      <string>22222222-2222-2222-2222-222222222222</string>
+      <key>PayloadEnabled</key>
+      <true/>
+      <key>PayloadDisplayName</key>
+      <string>Screensaver Settings</string>
+      <key>idleTime</key>
+      <integer>300</integer>
+      <key>showClock</key>
+      <true/>
+    </dict>
+
+    <!-- Lock screen clock (loginwindow) -->
+    <dict>
+      <key>PayloadType</key>
+      <string>com.apple.loginwindow</string>
+      <key>PayloadVersion</key>
+      <integer>1</integer>
+      <key>PayloadIdentifier</key>
+      <string>com.personal.loginwindow</string>
+      <key>PayloadUUID</key>
+      <string>33333333-3333-3333-3333-333333333333</string>
+      <key>PayloadEnabled</key>
+      <true/>
+      <key>PayloadDisplayName</key>
+      <string>Lock Screen Clock</string>
+      <key>UsesLargeDateTime</key>
+      <true/>
+    </dict>
+
+    <!-- Battery percentage in menu bar -->
+    <dict>
+      <key>PayloadType</key>
+      <string>com.apple.controlcenter</string>
+      <key>PayloadVersion</key>
+      <integer>1</integer>
+      <key>PayloadIdentifier</key>
+      <string>com.personal.controlcenter</string>
+      <key>PayloadUUID</key>
+      <string>44444444-4444-4444-4444-444444444444</string>
+      <key>PayloadEnabled</key>
+      <true/>
+      <key>PayloadDisplayName</key>
+      <string>Battery Menu Bar</string>
+      <key>BatteryShowPercentage</key>
+      <true/>
+    </dict>
+
+    <!-- Reduce motion -->
+    <dict>
+      <key>PayloadType</key>
+      <string>com.apple.universalaccess</string>
+      <key>PayloadVersion</key>
+      <integer>1</integer>
+      <key>PayloadIdentifier</key>
+      <string>com.personal.universalaccess</string>
+      <key>PayloadUUID</key>
+      <string>55555555-5555-5555-5555-555555555555</string>
+      <key>PayloadEnabled</key>
+      <true/>
+      <key>PayloadDisplayName</key>
+      <string>Reduce Motion</string>
+      <key>reduceMotion</key>
+      <true/>
+    </dict>
+
+    <!-- Allow Ghostty full disk access -->
+    <dict>
+      <key>PayloadType</key>
+      <string>com.apple.TCC.configuration-profile-policy</string>
+      <key>PayloadVersion</key>
+      <integer>1</integer>
+      <key>PayloadIdentifier</key>
+      <string>com.example.ghostty.tcc</string>
+      <key>PayloadUUID</key>
+      <string>DAA72A7E-BAF3-4EBE-811E-156ADAA719C4</string>
+      <key>PayloadDisplayName</key>
+      <string>Ghostty Full Disk Access</string>
+      <key>Services</key>
+      <dict>
+        <key>SystemPolicyAllFiles</key>
+        <array>
+          <dict>
+            <key>IdentifierType</key>
+            <string>path</string>
+            <key>Identifier</key>
+            <string>/opt/homebrew/bin/ghostty</string>
+            <key>Authorization</key>
+            <string>Allow</string>
+            <key>AuthorizationValue</key>
+            <integer>1</integer>
+          </dict>
+        </array>
+      </dict>
+    </dict>
+
+  </array>
+
+  <key>PayloadType</key>
+  <string>Configuration</string>
+  <key>PayloadVersion</key>
+  <integer>1</integer>
+  <key>PayloadIdentifier</key>
+  <string>com.personal.fullsetup</string>
+  <key>PayloadUUID</key>
+  <string>66666666-6666-6666-6666-666666666666</string>
+  <key>PayloadDisplayName</key>
+  <string>Personal Mac Full Setup</string>
+  <key>PayloadDescription</key>
+  <string>Applies wallpaper, lock screen clock, screensaver, battery, and accessibility settings.</string>
+  <key>PayloadOrganization</key>
+  <string>Personal Setup</string>
+</dict>
+</plist>
+
