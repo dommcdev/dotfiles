@@ -292,6 +292,10 @@
       "keyCode" : 45,
       "modifierFlags" : 786432
     },
+    "restore" : {
+      "keyCode" : 2,
+      "modifierFlags" : 1966080
+    },
     "rightHalf" : {
       "keyCode" : 37,
       "modifierFlags" : 1835008
