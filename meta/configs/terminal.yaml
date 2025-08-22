@@ -1,6 +1,6 @@
 
 - shell:
-  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed openssh wget curl ffmpeg 7zip fd ripgrep poppler zoxide imagemagick chafa resvg ncdu fzf trash-cli cava asciiquarium cmatrix cowsay ponysay tldr whois eza jq less; else brew install openssh wget ffmpeg 7zip fd ripgrep poppler zoxide imagemagick ghostscript chafa resvg ncdu fzf trash-cli cava asciiquarium cmatrix cowsay ponysay tlrc eza jq less; fi
+  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed openssh wget curl ffmpeg 7zip fd ripgrep poppler zoxide imagemagick chafa resvg ncdu fzf trash-cli cava asciiquarium cmatrix cowsay ponysay tldr whois eza jq less bluetui impala; else brew install openssh wget ffmpeg 7zip fd ripgrep poppler zoxide imagemagick ghostscript chafa resvg ncdu fzf trash-cli cava asciiquarium cmatrix cowsay ponysay tlrc eza jq less; fi
 
     # Enable systemd services
   - if [ "$(uname)" = "Linux" ]; then sudo systemctl enable sshd; fi
