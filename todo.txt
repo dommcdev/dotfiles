@@ -5,7 +5,7 @@ Nvim
 	Starting screen (low prio)
 Mac
 	Tweak Raycast
-	Add apps to gui.yaml (yt-downloader, etc)
+	Add apps to gui.yaml (yt-downloader, vesktop, etc)
 	Remap some annoying ctrl-cmd swaps (open new tab, etc)
 	Move applications to specific workspace
 	Add settings tweaks to mac.yaml
