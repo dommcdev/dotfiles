@@ -13,22 +13,12 @@
       </metadata>
     </info>
   </bookmark>
-  <bookmark href="davs://nextcloud.tetra-salmon.ts.net/remote.php/dav/files/dominic" added="2025-08-13T19:45:00.062669Z" modified="2025-08-13T19:56:51.424047Z" visited="2025-08-13T19:56:51.424045Z">
+  <bookmark href="davs://nextcloud.tetra-salmon.ts.net/remote.php/dav/files/dominic" added="2025-08-21T23:50:37.735017Z" modified="2025-08-21T23:50:37.735020Z" visited="2025-08-21T23:50:37.735017Z">
     <title>dominic</title>
     <info>
       <metadata owner="http://freedesktop.org">
         <bookmark:applications>
-          <bookmark:application name="org.gnome.Nautilus" exec="&apos;org.gnome.Nautilus %u&apos;" modified="2025-08-13T19:56:51.424046Z" count="2"/>
-        </bookmark:applications>
-      </metadata>
-    </info>
-  </bookmark>
-  <bookmark href="smb://pikachu/" added="2025-08-13T22:41:17.410508Z" modified="2025-08-13T22:51:55.163318Z" visited="2025-08-13T22:51:55.163317Z">
-    <title>Windows shares on pikachu</title>
-    <info>
-      <metadata owner="http://freedesktop.org">
-        <bookmark:applications>
-          <bookmark:application name="org.gnome.Nautilus" exec="&apos;org.gnome.Nautilus %u&apos;" modified="2025-08-13T22:51:55.163318Z" count="3"/>
+          <bookmark:application name="org.gnome.Nautilus" exec="&apos;org.gnome.Nautilus %u&apos;" modified="2025-08-21T23:50:37.735019Z" count="1"/>
         </bookmark:applications>
       </metadata>
     </info>

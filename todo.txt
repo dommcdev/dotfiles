@@ -5,7 +5,6 @@ Nvim
 	Theme
 	LSP
 	Starting screen (low prio)
-Setup nextcloud somehwhere
 Mac
 	Tweak Raycast
 	Add apps to gui.yaml (yt-downloader, etc)
@@ -17,7 +16,6 @@ Mac
 
 
 # After school begins
-Setup immich
 Chrome stylus sync (???)
 Vimium C work on newtab/google sites?
 Fix hyprcursor/bibata animation speed (loading)
@@ -74,6 +72,7 @@ Better brightness adjustment
 Fonts?
 Tailscale subnet router
 Store zsh files (hist, rc, etc) in .config/zsh. Also git?
+Nautilus doesn't remember creds for remote shares
 
 
 Immich
