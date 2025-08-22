@@ -4,3 +4,5 @@
 
 - shell: 
   - brew install --cask rectangle
+
+#Note - rectangle will read the conf file above once, upon startup. It will then rename it and ignore it. 
