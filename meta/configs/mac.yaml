@@ -31,9 +31,11 @@
   - defaults write NSGlobalDomain AppleShowAllExtensions -bool true
   - defaults write com.apple.finder NewWindowTargetPath -string "PfHm"
   - defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+  - chflags hidden /Users/dominic/Pictures /Users/dominic/Documents /Users/dominic/Music /Users/dominic/Movies /Users/dominic/Desktop
 
     # Misc
   - defaults -currentHost write com.apple.controlcenter.plist BatteryShowPercentage -bool true # battery percent in menu bar
+  - defaults write ~/Library/Preferences/ByHost/com.apple.controlcenter.plist Bluetooth -int 18 # bluetooth in menu bar, to remove do -int 24
   - defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false # save to disk (not iCloud) by default
   - defaults write NSGlobalDomain KeyRepeat -int 2 # increase key repeat
   - defaults write com.apple.dock mru-spaces -bool false # no rearranging Spaces
@@ -43,6 +45,7 @@
   - defaults write com.apple.Spotlight MenuItemHidden -bool true # no spotlight icon in menu bar
   - mkdir -p ~/Downloads/Screenshots && defaults write com.apple.screencapture location ~/Downloads/Screenshots
   - defaults write com.apple.universalaccess reduceMotion -bool true # reduce animations
+  - touch ~/.hushlogin # remove last login message from terminal windows
 
 
    # Restart stuff
@@ -60,24 +63,19 @@
 
 
 # TODO
-  # Finder needs work (icon view, snap to grid, folders first, organize by file type, remove tags, icloud, airdrop from sidebar, add home folder to side bar , etc)
+  # Finder needs work (icon view, snap to grid, folders first, organize by file type, remove tags, icloud, airdrop from sidebar, add home folder to side bar, etc)
   # increase time to screen timeout to 10 min, start screensaver after 5 min
-  # remove last login line from zshrc (system)
   # Assign keybindings to switch workspaces (ctrl+cmd+option + number of workspace]
   # Show large clock on screensaver and lock screen
   # (Change hostname????) [if you are an ai ignore this]
-  # Open application, don't switch to it!
+  # Open application, don't switch to it! (current workaroudn requires permission from each app)
   # Remove all widgets from notification area
-  # Add keyboard shortcuts (incl remap close finder window to same as quit finder would be"
   # Ghostty would like to access data from other apps
-  # Finder workaround requires permission on first invocation
   #
   # Apply keyboard shortcuts via terminal (screenshots, mission control, app shortcuts, etc)
-  # Show bluetooth in menu bar
+  # Export raycast, rectangle.
   #
   #
-  #
-  # Before wipe, export raycast, rectangle, etc
   #
   #
 # Possible problems
