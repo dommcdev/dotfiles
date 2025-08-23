@@ -2,7 +2,7 @@ List of things to do after installing dotfiles. Blame macOS.
 
 1) Log in to Chrome
 2) Open Tailscale app, login, toggle "open on login"
-3) Manually import raycast config
-4) Change display scaling to "more space"
-5) Grant Ghostty Full Disk Access
+3) Change display scaling to "more space"
+4) Grant Ghostty Full Disk Access
 5) sudo systemsetup -setremotelogin on
+6) Finder - remove items from sidebar, check "show item info", add home dir, setup nextcloud webDAV/bookmark

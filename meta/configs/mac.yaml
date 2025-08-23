@@ -44,7 +44,10 @@
   - defaults write NSGlobalDomain AppleShowAllExtensions -bool true
   - defaults write com.apple.finder NewWindowTargetPath -string "PfHm"
   - defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+  - defaults write com.apple.finder ShowRecentTags -bool false
   - chflags hidden /Users/dominic/Pictures /Users/dominic/Documents /Users/dominic/Music /Users/dominic/Movies /Users/dominic/Desktop
+  - defaults write com.apple.finder "FXPreferredViewStyle" -string "icnv"
+  - /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy kind" ~/Library/Preferences/com.apple.finder.plist
 
     # Misc
   - defaults write ~/Library/Preferences/ByHost/com.apple.controlcenter.plist Bluetooth -int 18 # bluetooth in menu bar, to remove do -int 24
@@ -64,13 +67,10 @@
   - killall SystemUIServer
   - killall NotificationCenter
 
+#fd --hidden '^\.DS_Store$' ~ -x rm
 
-
-  # Finder needs work (icon view, snap to grid, folders first, organize by file type, remove tags, icloud, airdrop from sidebar, add home folder to side bar, etc)
-  # Open application, don't switch to it! (current workaroudn requires permission from each app)
+  # Open application, no switching (current workaroudn requires permission from each app)
   # Apply keyboard shortcuts via terminal (screenshots, mission control, app shortcuts, etc)
-  #
-  #
   #
 # Possible problems
 # Git popup for creds
