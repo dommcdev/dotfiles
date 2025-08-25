@@ -6,7 +6,7 @@
 
     # Install GUI packages
   - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar libreoffice-fresh blender kdenlive ttf-jetbrains-mono-nerd tailscale; else brew install font-jetbrains-mono-nerd-font && brew install --cask moonlight tailscale-app; fi
-  - if [ "$(uname)" = "Linux" ]; then flatpak install --assumeyes --noninteractive flathub org.nickvision.tubeconverter io.gitlab.adhami3310.Footage org.gnucash.GnuCash dev.vencord.Vesktop be.alexandervanhee.gradia; else brew install --cask gnucash vesktop; fi
+  - if [ "$(uname)" = "Linux" ]; then flatpak install --assumeyes --noninteractive flathub org.nickvision.tubeconverter io.gitlab.adhami3310.Footage org.gnucash.GnuCash dev.vencord.Vesktop be.alexandervanhee.gradia; else brew install --cask gnucash; fi
   - if [ "$(uname)" = "Linux" ]; then yay -S --noconfirm --needed --answerdiff None --answerclean None zsh-vi-mode; else brew install zsh-vi-mode; fi
 
     # Enable systemd services
