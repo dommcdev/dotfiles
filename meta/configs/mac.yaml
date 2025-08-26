@@ -85,7 +85,8 @@
   - 'echo "Please log out/in for some keyboard shortcuts to take effect"'
 
 
-# Possible problems
-# Git popup for creds
-# Changing hostname
+# Todo
+# Git popup for creds?
+# Changing hostname?
 # Open application rather than switching
+#Move applications to specific workspace

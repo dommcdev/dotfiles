@@ -4,10 +4,6 @@ Nvim
 	LSP
 	Starting screen (low prio)
 	Toggle for spellcheck
-Mac
-	Tweak Raycast
-	Add apps to gui.yaml (yt-downloader, vesktop, etc)
-	Move applications to specific workspace
 SSH config (key-based auth), Mosh
 Mount webdav manually? So it's in a consistant location, mounted on login, save files to it
 Gnucash settings files?
@@ -18,6 +14,8 @@ Chrome stylus sync (???)
 Vimium C work on newtab/google sites?
 Fix hyprcursor/bibata animation speed (loading)
 Nautilus defaults conf file
+Find good yt-dlp workflow (tui?)
+Learn rsync (or taildrop?)
 Tmux
 	Tmux-ressurect, tmux-continuum
 	Tmux sessionizer (ctrl-e), add in nvim?
@@ -69,6 +67,7 @@ Better brightness adjustment
 Fonts?
 Tailscale subnet router
 Store zsh files (hist, rc, etc) in .config/zsh. Also git?
+Tweak raycast
 
 
 Immich
