@@ -12,53 +12,11 @@
   - defaults write com.apple.finder NSUserKeyEquivalents -dict-add "Close Window" "@q" # since quit finder isn't an option
   - defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Close Tab" "^w"
   - defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "New Tab" "^t"
-
-
-    # ID 28: Screenshot whole screen → file
-  - defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 28 \
-  '{ enabled = 1; value = { parameters = (115, 1, 1835008); type = standard; }; }'
-
-    # ID 29: Screenshot selected area → file
-  - defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 29 \
-  '{ enabled = 1; value = { parameters = (51, 20, 1179648); type = standard; }; }'
-
-   # ID 30: Screenshot whole screen → clipboard
-  - defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 30 \
-  '{ enabled = 1; value = { parameters = (115, 1, 1966080); type = standard; }; }'
-
-   # ID 31: Screenshot selected area → clipboard
-  - defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 31 \
-  '{ enabled = 1; value = { parameters = (52, 21, 1179648); type = standard; }; }'
-
-  - defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 118 \
-  '{ enabled = 1; value = { parameters = (49, 18, 1835008); type = standard; }; }'
-
-  - defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 119 \
-  '{ enabled = 1; value = { parameters = (50, 19, 1835008); type = standard; }; }'
-
-  - defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 120 \
-  '{ enabled = 1; value = { parameters = (51, 20, 1835008); type = standard; }; }'
-
-  - defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 121 \
-  '{ enabled = 1; value = { parameters = (52, 21, 1835008); type = standard; }; }'
-
-  - defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 122 \
-  '{ enabled = 1; value = { parameters = (53, 23, 1835008); type = standard; }; }'
-
-  - defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 123 \
-  '{ enabled = 1; value = { parameters = (54, 22, 1835008); type = standard; }; }'
-
-  - defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 124 \
-  '{ enabled = 1; value = { parameters = (55, 26, 1835008); type = standard; }; }'
-
-  - defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 125 \
-  '{ enabled = 1; value = { parameters = (56, 28, 1835008); type = standard; }; }'
-
-  - defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 126 \
-  '{ enabled = 1; value = { parameters = (57, 25, 1835008); type = standard; }; }'
-
-  - defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 127 \
-  '{ enabled = 1; value = { parameters = (48, 29, 1835008); type = standard; }; }'
+  - defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Open Location..." "^l"
+  - defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Open File..." "^o"
+  - defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Reload This Page" "^r"
+  - defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Save Page As..." "^s"
+  - defaults import com.apple.symbolichotkeys mac/misc/symbolichotkeys.plist
 
     # Fix dock
   - defaults write com.apple.dock persistent-apps -array # no pinned apps
@@ -86,10 +44,11 @@
 
     # Remove widgets
   - rm -f ~/Library/Containers/com.apple.notificationcenterui/Data/Library/Preferences/com.apple.notificationcenterui.plist
-  - cp -r mac/misc/widgets.plist ~/Library/Containers/com.apple.notificationcenterui/Data/Library/Preferences/com.apple.notificationcenterui.plist
+  - cp mac/misc/widgets.plist ~/Library/Containers/com.apple.notificationcenterui/Data/Library/Preferences/com.apple.notificationcenterui.plist
 
     # Wallpaper
-  - cp ~/dev/wallpapers/misc/japanese-house.png ~/Library/DesktopPictures/Custom/custom.png
+  - mkdir -p ~/Library/DesktopPictures/Custom
+  - cp ~/dev/wallpapers/misc/japanese-house.png ~/Library/DesktopPictures/Custom
   - osascript -e 'tell application "System Events" to set picture of every desktop to "/Library/DesktopPictures/Custom/japanese-house.png"'
     
     # Fix Finder
@@ -102,7 +61,8 @@
   - defaults write com.apple.finder ShowRecentTags -bool false
   - chflags hidden /Users/dominic/Pictures /Users/dominic/Documents /Users/dominic/Music /Users/dominic/Movies /Users/dominic/Desktop
   - defaults write com.apple.finder "FXPreferredViewStyle" -string "icnv"
-  - /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy kind" ~/Library/Preferences/com.apple.finder.plist
+  - /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy name" ~/Library/Preferences/com.apple.finder.plist
+  -  defaults write com.apple.finder "_FXSortFoldersFirst" -bool "true"
 #  - fd --hidden '^\.DS_Store$' ~ -x rm
 
     # Misc
@@ -122,13 +82,10 @@
   - killall Dock
   - killall SystemUIServer
   - killall NotificationCenter
+  - 'echo "Please log out/in for some keyboard shortcuts to take effect"'
 
 
 # Possible problems
 # Git popup for creds
 # Changing hostname
-#
-# Todo
 # Open application rather than switching
-# Finish applying shortcuts
-# Finder change sort to by name, folders first
