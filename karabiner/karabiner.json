@@ -142,7 +142,27 @@
                                 "type": "basic"
                             }
                         ]
-                    }
+                    },
+		    {
+		        "description": "Map Hyper + Escape to Fn",
+		        "manipulators": [
+			    {
+			        "from": {
+				    "key_code": "escape",
+				    "modifiers": {
+				        "mandatory": ["left_command", "left_option", "left_control"],
+				        "optional": ["any"]
+				    }
+			        },
+			        "to": [
+				    {
+				        "apple_vendor_top_case_key_code": "keyboard_fn"
+				    }
+			        ],
+			        "type": "basic"
+			    }
+		        ]
+		    }
                 ]
             },
             "name": "Default profile",
