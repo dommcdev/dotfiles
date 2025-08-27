@@ -1,5 +1,8 @@
 # To-do
-Timeshift snapshots (understand btrfs)
+Timeshift
+	Understand btrfs
+	Backup config
+	Fix .desktop file - needs to be sudo -E timeshift-gtk
 Nvim
 	LSP
 	Starting screen (low prio)
@@ -12,7 +15,16 @@ Mount webdav manually? So it's in a consistant location, mounted on login, save 
 Gnucash settings files?
 Add nextcloud-client to arch setup script
 Nextcloud better keyboard shortcuts
+Mac
+	Tweak Raycast
+	Add apps to gui.yaml (yt-downloader, etc)
+	Move applications to specific workspace
+SSH config (key-based auth), Mosh
+Mount webdav manually? So it's in a consistant location, mounted on login, save files to it
+Gnucash settings files?
 
+
+Calendar widget
 Chrome stylus sync (???)
 Fix hyprcursor/bibata animation speed (loading)
 Nautilus defaults - series of dconf commands
