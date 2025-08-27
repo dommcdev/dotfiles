@@ -6,10 +6,11 @@ Nvim
 	Toggle for spellcheck
 	Diognose clipboard via ssh
 	move between entries in telescope with ctrl+hjkl
+	better indentation
 SSH config (key-based auth), Mosh
 Mount webdav manually? So it's in a consistant location, mounted on login, save files to it
 Gnucash settings files?
-Add nextcloud to arch setup script
+Add nextcloud-client to arch setup script
 Nextcloud better keyboard shortcuts
 
 Chrome stylus sync (???)
