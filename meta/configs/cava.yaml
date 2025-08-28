@@ -1,0 +1,6 @@
+
+- link:
+    ~/.config/cava/config: tui/cava/config
+
+- shell:
+  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed cava; else brew install cava; fi
