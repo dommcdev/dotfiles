@@ -88,6 +88,8 @@ Store zsh files (hist, rc, etc) in .config/zsh. Also git?
 Tweak GTK theme
 Tweak raycast
 Fonts?
+Cmatrix colors
+
 
 
 
