@@ -3,6 +3,7 @@ Timeshift
 	Understand btrfs
 	Backup config
 	Fix .desktop file - needs to be sudo -E timeshift-gtk
+	Little popup for file paths
 Nvim
 	LSP
 	Starting screen (low prio)

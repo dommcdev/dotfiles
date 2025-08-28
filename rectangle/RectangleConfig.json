@@ -167,7 +167,7 @@
       "int" : 0
     },
     "selectedCycleSizes" : {
-      "int" : 10
+      "int" : 26
     },
     "shortEdgeSnapAreaSize" : {
       "float" : 145
@@ -206,7 +206,7 @@
       "float" : -1
     },
     "subsequentExecutionMode" : {
-      "int" : 2
+      "int" : 0
     },
     "systemWideMouseDown" : {
       "int" : 0
