@@ -33,6 +33,7 @@ Nautilus defaults - series of dconf commands
 Find good yt-dlp workflow (tui?)
 Learn rsync (or taildrop?)
 Tmux
+Volume middle-screen popup
 	Tmux-ressurect, tmux-continuum
 	Tmux sessionizer (ctrl-e), add in nvim?
 	Tmuxifier, or way to define configs for projects
