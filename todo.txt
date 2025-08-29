@@ -10,6 +10,7 @@ Nvim
 	better indentation
 	Setup some kind of coderunner. Keyboard shortcut+:command, per-file or makefile, floating window??
 	Toggle for relative vs normal line numbers
+	Remove preview from snacks.picker
 SSH config (key-based auth), Mosh
 Mount webdav manually? So it's in a consistant location, mounted on login, save files to it
 Gnucash settings files?
