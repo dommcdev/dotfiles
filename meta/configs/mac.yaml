@@ -48,8 +48,16 @@
 
     # Wallpaper
   - mkdir -p ~/Library/DesktopPictures/Custom
-  - cp ~/dev/wallpapers/misc/japanese-house.png ~/Library/DesktopPictures/Custom
-  - osascript -e 'tell application "System Events" to set picture of every desktop to "/Library/DesktopPictures/Custom/japanese-house.png"'
+  - cp ~/dev/wallpapers/misc/backyard-japan.png ~/Library/DesktopPictures/Custom/custom.png
+  - osascript -e 'tell application "System Events" to set picture of every desktop to "~/Library/DesktopPictures/Custom/custom.png"'
+  - osascript <<EOF
+    tell application "System Events"
+        set theDesktops to a reference to every desktop
+        repeat with d in theDesktops
+            set picture of d to "~/Library/DesktopPictures/Custom/custom.png"
+        end repeat
+    end tell
+    EOF
     
     # Fix Finder
   - defaults write com.apple.finder ShowPathbar -bool true
