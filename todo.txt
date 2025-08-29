@@ -6,12 +6,10 @@ Timeshift
 	Little popup for file paths
 Nvim
 	LSP
-	Starting screen (low prio)
-	Toggle for spellcheck
 	Diognose clipboard via ssh
 	better indentation
 	Setup some kind of coderunner. Keyboard shortcut+:command, per-file or makefile, floating window??
-	Replace telescope with folke snacks.picker
+	Toggle for relative vs normal line numbers
 SSH config (key-based auth), Mosh
 Mount webdav manually? So it's in a consistant location, mounted on login, save files to it
 Gnucash settings files?

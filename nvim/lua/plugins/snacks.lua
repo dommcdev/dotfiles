@@ -15,13 +15,19 @@ return {
     },
     picker = { enabled = true },
     quickfile = { enabled = true },
-    scope = { enabled = true },
-    scroll = { enabled = true },
+    scope = { enabled = false },
+    scroll = { 
+      enabled = true,
+      animate = {
+        duration = {step = 15, total = 100},
+	easing = "linear",
+      },
+    },
     statuscolumn = { enabled = true },
     words = { enabled = true },
     styles = {
       notification = {
-        -- wo = { wrap = true } -- Wrap notifications
+        --wo = { wrap = true } -- Wrap notifications
       }
     }
   },
@@ -74,7 +80,6 @@ return {
     { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
     { "<leader>sR", function() Snacks.picker.resume() end, desc = "Resume" },
     { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
-    { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
     -- LSP
     { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
     { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
@@ -98,24 +103,6 @@ return {
     { "<c-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
     { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
     { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
-    {
-      "<leader>N",
-      desc = "Neovim News",
-      function()
-        Snacks.win({
-          file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
-          width = 0.6,
-          height = 0.6,
-          wo = {
-            spell = false,
-            wrap = false,
-            signcolumn = "yes",
-            statuscolumn = " ",
-            conceallevel = 3,
-          },
-        })
-      end,
-    }
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {
@@ -133,16 +120,16 @@ return {
         -- Create some toggle mappings
         Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
         Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-        Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+        --Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
         Snacks.toggle.diagnostics():map("<leader>ud")
-        Snacks.toggle.line_number():map("<leader>ul")
+        --Snacks.toggle.line_number():map("<leader>ul")
         Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
         Snacks.toggle.treesitter():map("<leader>uT")
-        Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+        --Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
         Snacks.toggle.inlay_hints():map("<leader>uh")
         Snacks.toggle.indent():map("<leader>ug")
-        Snacks.toggle.dim():map("<leader>uD")
       end,
     })
   end,
 }
+
