@@ -40,6 +40,8 @@ export VISUAL="nvim" #Fallback for editor
 
 
 # FZF configuration
+export FZF_CTRL_R_OPTS="--height 40% --layout=reverse --border"
+export FZF_ALT_C_OPTS="--height 40% --layout=reverse --border"
 source <(fzf --zsh)
 # Unbind the default Alt-C keybinding for fzf-cd-widget
 bindkey -rM emacs '^[^C'
