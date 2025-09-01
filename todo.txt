@@ -9,6 +9,7 @@ Nvim
 	Diognose clipboard via ssh
 	better indentation
 	Setup some kind of coderunner. Keyboard shortcut+:command, per-file or makefile, floating window??
+	Figure out why $terminal -e nvim doesn't work for me. Ghostty?
 	Toggle for relative vs normal line numbers
 	Remove preview from snacks.picker
 SSH config (key-based auth), Mosh
@@ -32,7 +33,7 @@ Nautilus defaults - series of dconf commands
 Find good yt-dlp workflow (tui?)
 Learn rsync (or taildrop?)
 Tmux
-Volume middle-screen popup
+Volume middle-screen popup (swayosd?)
 	Tmux-ressurect, tmux-continuum
 	Tmux sessionizer (ctrl-e), add in nvim?
 	Tmuxifier, or way to define configs for projects
@@ -82,6 +83,7 @@ Post-vm
 	Gpu passthrough
 	Fix virtualization (installing boxes fixes)
 	Fix hyprsunset
+	Figure out printers (Printer setup app?)
 Better brightness adjustment (pick level, then choose "apply")
 Tailscale subnet router
 Store zsh files (hist, rc, etc) in .config/zsh. Also git?
