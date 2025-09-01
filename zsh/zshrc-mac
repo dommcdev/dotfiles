@@ -3,6 +3,11 @@ HISTFILE=~/.histfile
 HISTSIZE=5000
 SAVEHIST=5000
 
+# Set a bar-shaped cursor in tmux/shell
+precmd() {
+  printf "\e[5 q"
+}
+
 setopt autocd #cd by typing dir name
 unsetopt beep #no beeping!
 autoload -Uz compinit
