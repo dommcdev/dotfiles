@@ -46,9 +46,9 @@ bindkey -rM emacs '^[^C'
 bindkey -rM vicmd '^[^C'
 bindkey -rM viins '^[^C'
 # Bind fzf-cd-widget to Ctrl-E
-bindkey -M emacs '^E' fzf-cd-widget
-bindkey -M vicmd '^E' fzf-cd-widget
-bindkey -M viins '^E' fzf-cd-widget
+bindkey -M emacs '^G' fzf-cd-widget
+bindkey -M vicmd '^G' fzf-cd-widget
+bindkey -M viins '^G' fzf-cd-widget
 
 # Better zsh-vi-mode
 #source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
