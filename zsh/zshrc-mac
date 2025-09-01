@@ -51,7 +51,7 @@ bindkey -M vicmd '^E' fzf-cd-widget
 bindkey -M viins '^E' fzf-cd-widget
 
 # Better zsh-vi-mode
-source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+#source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 # Zoxide
 eval "$(zoxide init --cmd cd zsh)"

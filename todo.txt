@@ -5,13 +5,13 @@ Timeshift
 	Fix .desktop file - needs to be sudo -E timeshift-gtk
 	Little popup for file paths
 Nvim
-	LSP
+	LSP/treesitter
 	Diognose clipboard via ssh
+	autopairs plugin
 	better indentation
 	Setup some kind of coderunner. Keyboard shortcut+:command, per-file or makefile, floating window??
 	Figure out why $terminal -e nvim doesn't work for me. Ghostty?
-	Toggle for relative vs normal line numbers
-	Remove preview from snacks.picker
+	Remove preview from snacks.picker, enable frequency
 SSH config (key-based auth), Mosh
 Mount webdav manually? So it's in a consistant location, mounted on login, save files to it
 Gnucash settings files?
@@ -27,13 +27,14 @@ Gnucash settings files?
 
 
 Calendar widget
+Theme hyprpolkitagent?
 Chrome stylus sync (???)
 Fix hyprcursor/bibata animation speed (loading)
 Nautilus defaults - series of dconf commands
 Find good yt-dlp workflow (tui?)
 Learn rsync (or taildrop?)
-Tmux
 Volume middle-screen popup (swayosd?)
+Tmux
 	Tmux-ressurect, tmux-continuum
 	Tmux sessionizer (ctrl-e), add in nvim?
 	Tmuxifier, or way to define configs for projects
@@ -41,9 +42,8 @@ Zsh
 	Vi-mode doesn't recognize fzf shortcuts unless in normal mode.
 	Starship
 	Oh-My-Zsh
-	Case-insensitivity, spell-check, etc.
 Waybar
-	Workspace indicators, time/date, weather
+	Workspace indicators, time/date (center), weather
 	Volume, internet, bluetooth
 	Cpu/ram/temp
 Rofi
@@ -57,6 +57,7 @@ Rofi
 Git
 	Learn/set up how to easily view history, etc (lazygit?)
 	Move dotfiles to github/make public
+	Integrate git-delta
 How to logout
 Yazi
 	Larger previews of files (sushi/macos quick preview, bound to C-p)
@@ -87,6 +88,10 @@ Post-vm
 Better brightness adjustment (pick level, then choose "apply")
 Tailscale subnet router
 Store zsh files (hist, rc, etc) in .config/zsh. Also git?
+Find good terminal music player
+Add QOL things from omarchy (increased sudo timeout, lockscreen lockout, etc)
+Remove zsh-vi-mode from install scripts
+
 
 # Low Priority
 Tweak GTK theme
@@ -108,7 +113,6 @@ Rasp pi for wireless android auto
 
 # Things to try
 Windows
-Omarchy
 NixOS
 OpenSuse
 Install arch from scratch

@@ -4,11 +4,15 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
+vim.o.number = true
 vim.o.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
+
+-- Make * register behave like + register
+vim.keymap.set({ "n", "v" }, '"*', '"+', { remap = true })
 
 -- Save undo history
 vim.o.undofile = true
