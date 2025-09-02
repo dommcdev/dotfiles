@@ -11,7 +11,7 @@ Nvim
 	better indentation
 	Setup some kind of coderunner. Keyboard shortcut+:command, per-file or makefile, floating window??
 	Figure out why $terminal -e nvim doesn't work for me. Ghostty?
-	Remove preview from snacks.picker, enable frequency
+	Remove preview from snacks.picker, enable frequency, way to view gitignored files etc
 SSH config (key-based auth), Mosh
 Mount webdav manually? So it's in a consistant location, mounted on login, save files to it
 Gnucash settings files?
