@@ -39,6 +39,7 @@
     # Display and screensaver
   - defaults -currentHost write com.apple.screensaver idleTime -int 300 # show screensaver after 5 min
   - sudo pmset displaysleep 10 # turn off display after 10 min
+  - sudo pmset -b lessbright 0 # don't slightly dim display on battery
   - defaults -currentHost write com.apple.screensaver showClock -bool true # clock on screensaver
   - sudo defaults write /Library/Preferences/com.apple.loginwindow UsesLargeDateTime -bool true # clock on lock screen
 

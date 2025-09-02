@@ -8,6 +8,7 @@ precmd() {
   printf "\e[5 q"
 }
 
+bindkey -e #emacs mode
 setopt autocd #cd by typing dir name
 unsetopt beep #no beeping!
 autoload -Uz compinit
