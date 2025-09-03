@@ -10,8 +10,8 @@ vim.o.relativenumber = true
 
 -- Indenting stuff
 vim.opt.expandtab = true --use spaces instead of tabs
-vim.opt.shiftwidth = 2   --number of spaces to use for autoindent
 vim.opt.tabstop = 2      --render a tab character as 2 spaces
+vim.opt.shiftwidth = 2   --number of spaces to use for autoindent
 vim.opt.softtabstop = 2  --number of spaces inserted by <Tab> key
 
 -- Enable mouse mode
