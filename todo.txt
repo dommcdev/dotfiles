@@ -1,4 +1,5 @@
 # To-do
+Add caplock to karabiner, keyd
 Timeshift
 	Understand btrfs
 	Backup config
