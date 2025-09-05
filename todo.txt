@@ -3,7 +3,7 @@ Add caplock to karabiner, keyd
 Timeshift
 	Understand btrfs
 	Backup config
-	Fix .desktop file - needs to be sudo -E timeshift-gtk
+  Investigate why snapshots aren't being created
 Nvim
 	LSP/treesitter
 	Diognose clipboard via ssh
@@ -14,9 +14,8 @@ Nvim
 	Remove preview from snacks.picker, enable frequency, way to view gitignored files etc
   Buffer picker needs to start in normal mode
 Nextcloud
-  Add nextcloud-client to arch setup script
   Nextcloud better keyboard shortcuts
-  Mount webdav manually? So it's in a consistant location, mounted on login, save files to it
+  Mount webdav to /mnt point manually, on login
 SSH config (key-based auth), Mosh
 Config files
   Gnucash
@@ -34,9 +33,8 @@ Tmux
 	Tmux sessionizer (ctrl-g), add in nvim?
 	Tmuxifier, or way to define configs for projects
   Type pane number to create pane
-Zsh
-	Starship
-	Oh-My-Zsh
+Starship
+Oh-My-Zsh
 Waybar
 	Workspace indicators, time/date (center), weather
 	Volume, internet, bluetooth
@@ -52,7 +50,6 @@ Rofi
 Git
 	Learn/set up how to easily view history, etc (lazygit?)
 	Move dotfiles to github/make public
-	Integrate git-delta
 How to logout
 Yazi
 	Larger previews of files (sushi/macos quick preview, bound to C-p)
