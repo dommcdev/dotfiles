@@ -9,7 +9,7 @@
       glob: true
 
 - shell:
-  - sudo pacman -S --noconfirm --needed uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprpolkitagent hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset grim slurp
-  - systemctl --user enable hyprpolkitagent.service
+  - sudo pacman -S --noconfirm --needed uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset grim slurp polkit-gnome
+  - systemctl --user enable --now polkit-gnome-authentication-agent-1.service
   - systemctl --user enable hyprpaper.service
   - systemctl --user enable hypridle.service
