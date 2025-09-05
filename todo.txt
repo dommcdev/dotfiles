@@ -92,17 +92,15 @@ Tweak GTK theme
 Tweak raycast
 Fonts?
 Cmatrix colors
-
+OnlyOffice theme
 
 
 
 Immich
 Gitlab
-OnlyOffice (+ theme)
 BorgBackup (or equal.)
 Rasp pi for wireless android auto
-
-
+Migrate to caddy-less nextcloud setup
 
 
 # Things to try
