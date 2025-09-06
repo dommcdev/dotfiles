@@ -1,0 +1,10 @@
+[Unit]
+Description=Polkit GNOME Authentication Agent
+
+[Service]
+ExecStart=/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+Restart=on-failure
+Type=simple
+
+[Install]
+WantedBy=default.target
