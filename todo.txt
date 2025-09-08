@@ -1,85 +1,81 @@
-# To-do
+# Easy
 Add caplock to karabiner, keyd
-Timeshift
-	Understand btrfs
-	Backup config
-  Investigate why snapshots aren't being created
-Nvim
-	LSP/treesitter
-	Diognose clipboard via ssh
-	Little popup for file paths
-	autopairs plugin
-	better indentation
-	Setup some kind of coderunner. Keyboard shortcut+:command, per-file or makefile, floating window??
-	Remove preview from snacks.picker, enable frequency, way to view gitignored files etc
-  Buffer picker needs to start in normal mode
-Nextcloud
-  Nextcloud better keyboard shortcuts
-  Mount webdav to /mnt point manually, on login
-SSH config (key-based auth), Mosh
 Config files
-  Gnucash
-  Aucacity (+ theme?)
-  Nautilus (dconf commands)
+    Gnucash
+    Aucacity (+ theme?)
+    Nautilus (dconf commands)
+How to logout
+Store zsh files (hist, rc, etc) in .config/zsh. Also git?
+Add QOL things from omarchy (increased sudo timeout, lockscreen lockout, etc)
+Mount webdav to /mnt point manually, on login
+Fix timeshift snapshots (+ backup config)
 
-Calendar widget
-Chrome stylus sync (???)
+
+
+# To-do
 Fix hyprcursor/bibata animation speed (loading)
-Find good yt-dlp workflow (tui?)
-Learn rsync (or taildrop?)
 Volume middle-screen popup (swayosd?)
-Tmux
-	Tmux-ressurect, tmux-continuum
-	Tmux sessionizer (ctrl-g), add in nvim?
-	Tmuxifier, or way to define configs for projects
-  Type pane number to create pane
+Better brightness adjustment (pick level, then choose "apply")
 Starship
 Oh-My-Zsh
+Nvim
+    Diognose clipboard via ssh
+    Autopairs plugin
+    Setup a coderunner (shortcut or :command, per-file or makefile, floating terminal or split).
+    Snacks.picker (less previews, enable frequency, view gitignored files, start buffer picker in normal mode)
+Tmux
+    Tmux-ressurect, tmux-continuum
+    Tmux sessionizer (ctrl-g), add in nvim?
+    Tmuxifier, or way to define configs for projects
+    Type pane number to create pane
 Waybar
-	Workspace indicators, time/date (center), weather
-	Volume, internet, bluetooth
-	Cpu/ram/temp
+    Workspace indicators, time/date (center), weather
+    Volume, internet, bluetooth
+    Cpu/ram/temp
+    Calendar widget
 Rofi
-	Web search
-	Calculator
-	Emojis/symbols
-	File search? Conversions? Ai?
-	Quick notes?
-	Navigate options using ctrl+hjkl
-	Switch between modes with ctrl shortcut - C-e, C-s, etc. Or type "emoji", "search" etc. Search includes @aur, @flathub, etc.
-Git
-	Learn/set up how to easily view history, etc (lazygit?)
-	Move dotfiles to github/make public
-How to logout
+    Web search
+    Calculator
+    Emojis/symbols
+    File search? Conversions? Ai?
+    Quick notes?
+    Navigate options using ctrl+hjkl
+    Switch between modes with ctrl shortcut - C-e, C-s, etc. Or type "emoji", "search" etc.
 Yazi
-	Larger previews of files (sushi/macos quick preview, bound to C-p)
-	Copy files to system clipboard (Linux and Mac)
-	Save/link .local/state/yazi/.dds - for bookmark persistance
-	Possible plugins - diff.yazi, [compress].yazi, lazygit.yazi, gvfs.yazi, trash??, mount.yazi
-	Better status line - starship.yazi
-Fastfetch (fix on macos)
-Tweak SDDM theme (image aligned, cursor correct)
+    Larger previews of files (sushi/macos quick preview, bound to C-p)
+    Copy files to system clipboard (Linux and Mac)
+    Save/link .local/state/yazi/.dds - for bookmark persistance
+    Possible plugins - diff.yazi, [compress].yazi, lazygit.yazi, gvfs.yazi, trash??, mount.yazi
+    Better status line - starship.yazi
 System update script
-	Include flatpak, pacman, yay
-	Cron job on schedule?
-	Snapshot hook?
+    Include flatpak, pacman, yay
+    Cron job on schedule?
+    Snapshot hook?
 Hyprland
-	Better animations
-  Fullscreen = red border
+    Better animations
+    Fullscreen = red border
 Post-vm
-	Fix screensharing
-	Gpu passthrough
-	Fix virtualization (installing boxes fixes)
-	Fix hyprsunset
-	Figure out printers (Printer setup app?)
-Better brightness adjustment (pick level, then choose "apply")
-Tailscale subnet router
-Store zsh files (hist, rc, etc) in .config/zsh. Also git?
-Find good terminal music player
-Add QOL things from omarchy (increased sudo timeout, lockscreen lockout, etc)
+    Fix screensharing
+    Gpu passthrough
+    Fix virtualization (installing boxes fixes)
+    Fix hyprsunset
+    Check nautilus glitches when small, showtime glitches, sushi can't preview pdf
+    Figure out printers (Printer setup app?)
+
+
+# Find tools, learn
+Yt-dlp workflow (tui? chrome?)
+Rsync, taildrop
+Music player tui
+Git
+SSH (key-based auth, save config), Mosh
+BTRFS
 
 
 # Low Priority
+Fastfetch (fix on macos)
+Tweak SDDM theme (image aligned, cursor correct)
+Chrome stylus sync (???)
 Tweak GTK theme
 Tweak raycast
 Fonts?
@@ -87,11 +83,12 @@ Cmatrix colors
 OnlyOffice theme
 Theme cliphist
 Theme script
-	Via single mycolors.css file?
-	Pywall16, Matugen?
+    Via single mycolors.css file?
+    Pywall16, Matugen?
 
 
 
+Tailscale subnet router
 Immich
 Gitlab
 BorgBackup (or equal.)
@@ -99,16 +96,14 @@ Rasp pi for wireless android auto
 Migrate to caddy-less nextcloud setup
 
 
+
 # Things to try
 Windows
-NixOS
-OpenSuse
-Install arch from scratch
-Macos vm????
+NixOS, OpenSuse, Arch from scratch
+MacOS vm
 
 
 # BUGS
 Using regular Linux kernel results in shutdown hangs. Switching to lts kernel fixes this
-Running Chrome via Wayland results in video acceleration being not supported on my old gpu. Switch to x11 to fix
 PWAs start in floating mode when starting in Xwayland. Custom window rule fixes this
 Sushi doesn't work with pngs on remote shares
