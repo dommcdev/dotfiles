@@ -4,8 +4,8 @@ Config files
     Gnucash
     Aucacity (+ theme?)
     Nautilus (dconf commands)
-How to logout
-Store zsh files (hist, rc, etc) in .config/zsh. Also git?
+Hyprland logout
+Store zsh and git files in .config
 Add QOL things from omarchy (increased sudo timeout, lockscreen lockout, etc)
 Mount webdav to /mnt point manually, on login
 Fix timeshift snapshots (+ backup config)
@@ -34,11 +34,7 @@ Waybar
     Cpu/ram/temp
     Calendar widget
 Rofi
-    Web search
-    Calculator
-    Emojis/symbols
-    File search? Conversions? Ai?
-    Quick notes?
+    Web search, calculator, emoji/symbols, AI, quick notes (.txt to downloads)
     Navigate options using ctrl+hjkl
     Switch between modes with ctrl shortcut - C-e, C-s, etc. Or type "emoji", "search" etc.
 Yazi
@@ -46,7 +42,6 @@ Yazi
     Copy files to system clipboard (Linux and Mac)
     Save/link .local/state/yazi/.dds - for bookmark persistance
     Possible plugins - diff.yazi, [compress].yazi, lazygit.yazi, gvfs.yazi, trash??, mount.yazi
-    Better status line - starship.yazi
 System update script
     Include flatpak, pacman, yay
     Cron job on schedule?
