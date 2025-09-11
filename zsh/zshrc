@@ -78,3 +78,4 @@ export NVM_DIR="$HOME/.config/nvm"
 
 # Last but certainly not least...:)
 fastfetch
+eval "$(starship init zsh)"

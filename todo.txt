@@ -16,11 +16,11 @@ Fix timeshift snapshots (+ backup config)
 Fix hyprcursor/bibata animation speed (loading)
 Volume middle-screen popup (swayosd?)
 Better brightness adjustment (pick level, then choose "apply")
-Starship
 Oh-My-Zsh
 Nvim
     Diognose clipboard via ssh
     Autopairs plugin
+    Smooth scrolling via trackpad?
     Setup per-file lsp indenting rules
     Setup a coderunner (shortcut or :command, per-file or makefile, floating terminal or split).
     Snacks.picker (less previews, enable frequency, view gitignored files, start buffer picker in normal mode)
