@@ -21,6 +21,7 @@ Oh-My-Zsh
 Nvim
     Diognose clipboard via ssh
     Autopairs plugin
+    Setup per-file lsp indenting rules
     Setup a coderunner (shortcut or :command, per-file or makefile, floating terminal or split).
     Snacks.picker (less previews, enable frequency, view gitignored files, start buffer picker in normal mode)
 Tmux
@@ -76,7 +77,7 @@ Tweak raycast
 Fonts?
 Cmatrix colors
 OnlyOffice theme
-Theme cliphist
+Theme cliphist (+ auto-paste)
 Theme script
     Via single mycolors.css file?
     Pywall16, Matugen?
