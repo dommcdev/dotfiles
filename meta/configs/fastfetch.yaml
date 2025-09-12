@@ -3,6 +3,7 @@
     ~/.config/fastfetch/config.jsonc:
       path: tui/fastfetch/config.jsonc
       if: '[ "$(uname)" = "Linux" ]'
+- link:
     ~/.config/fastfetch/config.jsonc:
       path: tui/fastfetch/config-mac.jsonc
       if: '[ "$(uname)" = "Darwin" ]'
