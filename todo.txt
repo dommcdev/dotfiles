@@ -69,7 +69,7 @@ BTRFS
 
 
 # Low Priority
-Fastfetch (fix on macos)
+Fastfetch
 Tweak SDDM theme (image aligned, cursor correct)
 Chrome stylus sync (???)
 Tweak GTK theme
