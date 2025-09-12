@@ -1,6 +1,6 @@
 
 - link:
-    ~/.config/starship: tui/starship
+    ~/.config/starship.toml: tui/starship/starship.toml
 
 - shell:
   - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed starship; else brew install starship; fi

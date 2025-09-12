@@ -1,6 +1,11 @@
 
 - link:
-    ~/.config/fastfetch: tui/fastfetch
+    ~/.config/fastfetch/config.jsonc:
+      path: tui/fastfetch/config.jsonc
+      if: '[ "$(uname)" = "Linux" ]'
+    ~/.config/fastfetch/config.jsonc:
+      path: tui/fastfetch/config-mac.jsonc
+      if: '[ "$(uname)" = "Darwin" ]'
 
 - shell:
   - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed fastfetch; else brew install fastfetch; fi
