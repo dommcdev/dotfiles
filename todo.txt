@@ -74,6 +74,7 @@ Tweak SDDM theme (image aligned, cursor correct)
 Chrome stylus sync (???)
 Tweak GTK theme
 Tweak raycast
+Tweak starship
 Fonts?
 Cmatrix colors
 OnlyOffice theme
