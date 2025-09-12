@@ -79,22 +79,6 @@ local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
 
--- Example: apply your Neovim settings to all LSP formatters
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client and client.server_capabilities.documentFormattingProvider then
-      client.config.settings = client.config.settings or {}
-      client.config.settings.format = client.config.settings.format or {}
-      client.config.settings.format = vim.tbl_deep_extend("force", client.config.settings.format, {
-        tabSize = vim.bo[args.buf].shiftwidth,
-        insertSpaces = vim.bo[args.buf].expandtab,
-      })
-    end
-  end,
-})
-
-
 -- Load and setup your plugins
 require("lazy").setup({
   { import = "plugins" },
