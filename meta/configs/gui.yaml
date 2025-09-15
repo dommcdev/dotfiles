@@ -11,3 +11,4 @@
     # Enable systemd services
   - if [ "$(uname)" = "Linux" ]; then sudo systemctl enable tailscaled; fi
   - if [ "$(uname)" = "Linux" ]; then sudo tailscale set --operator=$USER; fi
+  - if [ "$(uname)" = "Linux" ]; then sudo tailscale set --accept-routes; fi
