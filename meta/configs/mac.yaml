@@ -3,9 +3,8 @@
     # Keyboard shortcuts
   - defaults write -g NSUserKeyEquivalents -dict-add "Find..." "^f"
   - defaults write -g NSUserKeyEquivalents -dict-add "Lock Screen" "@~^å"
-  - defaults write -g NSUserKeyEquivalents -dict-add "Open Finder" "@~^f"
   - defaults write com.apple.finder NSUserKeyEquivalents -dict-add "Close Window" "@q" # since quit finder isn't an option
-  - defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Close Window" "@~$\$c"
+  - defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Close Window" "@~^\$c"
   - defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Close Tab" "^w"
   - defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Reopen Closed Tab" "^\$t"
   - defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "New Tab" "^t"
