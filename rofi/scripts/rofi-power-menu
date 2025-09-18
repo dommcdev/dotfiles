@@ -24,7 +24,7 @@ texts[switchuser]="switch user"
 texts[logout]="log out"
 texts[suspend]="suspend"
 texts[hibernate]="hibernate"
-texts[reboot]="reboot"
+texts[reboot]="restart"
 texts[shutdown]="shut down"
 
 declare -A icons
