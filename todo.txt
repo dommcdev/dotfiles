@@ -8,7 +8,6 @@ Hyprland logout
 Store zsh and git files in .config
 Add QOL things from omarchy (increased sudo timeout, lockscreen lockout, etc)
 Mount webdav to /mnt point manually, on login
-Fix timeshift snapshots (+ backup config)
 Fix SSH on mac
 
 
