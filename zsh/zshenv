@@ -1,0 +1,4 @@
+export EDITOR="nvim"
+export VISUAL="nvim" #Fallback for editor
+export ZDOTDIR="$HOME/.config/zsh"
+export PATH="$HOME/.local/bin:$PATH"

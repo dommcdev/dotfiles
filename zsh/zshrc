@@ -1,5 +1,5 @@
 # Main zsh options
-HISTFILE=~/.histfile
+HISTFILE=~/.local/state/zsh_history
 HISTSIZE=5000
 SAVEHIST=5000
 
@@ -40,12 +40,6 @@ alias showpath='echo $PATH | tr ":" "\n"'
 alias df="df -h"
 alias du="du -h -d 1"
 
-# Env variables
-export PATH="$HOME/.local/bin:$PATH"
-export EDITOR="nvim"
-export VISUAL="nvim" #Fallback for editor
-
-
 
 # FZF configuration
 source <(fzf --zsh)
@@ -53,7 +47,7 @@ source <(fzf --zsh)
 bindkey -rM emacs '^[^C'
 bindkey -rM vicmd '^[^C'
 bindkey -rM viins '^[^C'
-# Bind fzf-cd-widget to Ctrl-E
+# Bind fzf-cd-widget to Ctrl-G
 bindkey -M emacs '^G' fzf-cd-widget
 bindkey -M vicmd '^G' fzf-cd-widget
 bindkey -M viins '^G' fzf-cd-widget
@@ -73,10 +67,23 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-# Part of nvm installation
+# NVM Installation
 export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Lazy-load NVM - HUGE performance gain
+load_nvm() {
+  unset -f nvm node npm npx
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+  if [ $# -ne 0 ]; then
+    command "$@"
+  fi
+}
+nvm()  { load_nvm nvm "$@"; }
+node() { load_nvm node "$@"; }
+npm()  { load_nvm npm "$@"; }
+npx()  { load_nvm npx "$@"; }
+
+
 
 # Last but certainly not least...:)
 fastfetch
