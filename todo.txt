@@ -9,6 +9,7 @@ Store zsh and git files in .config
 Add QOL things from omarchy (increased sudo timeout, lockscreen lockout, etc)
 Mount webdav to /mnt point manually, on login
 Fix timeshift snapshots (+ backup config)
+Fix SSH on mac
 
 
 # To-do
@@ -65,7 +66,7 @@ Music player tui
 Git
 SSH (key-based auth, save config), Mosh
 BTRFS
-
+Yt-music but offline, for phone
 
 # Low Priority
 Fastfetch
