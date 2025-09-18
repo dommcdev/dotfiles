@@ -1,0 +1,7 @@
+[credential]
+    helper = store --file=$HOME/.config/git/credentials
+[user]
+	email = dominicmcdev@gmail.com
+	name = Dominic
+[core]
+	excludesfile = $HOME/.config/git/ignore

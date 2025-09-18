@@ -5,7 +5,6 @@ Config files
     Aucacity (+ theme?)
     Nautilus (dconf commands)
 Hyprland logout
-Store git files in .config
 Add QOL things from omarchy (increased sudo timeout, lockscreen lockout, etc)
 Mount webdav to /mnt point manually, on login
 Fix SSH on mac
