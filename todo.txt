@@ -19,9 +19,6 @@ Nvim
     Smooth scrolling via trackpad?
     Setup per-file lsp indenting rules
     Setup a coderunner (shortcut or :command, per-file or makefile, floating terminal or split).
-Tmux
-    Tmux-ressurect, tmux-continuum
-    Tmuxifier, or way to define configs for projects
 Waybar
     Workspace indicators, time/date (center), weather
     Volume, internet, bluetooth
@@ -74,7 +71,7 @@ Theme cliphist (+ auto-paste)
 Theme script
     Via single mycolors.css file?
     Pywall16, Matugen?
-
+Tmux-sessionizer for "restoring" sessions
 
 
 Tailscale subnet router
