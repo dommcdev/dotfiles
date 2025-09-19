@@ -14,10 +14,29 @@ unsetopt beep #no beeping!
 autoload -Uz compinit
 compinit
 
+# FZF configuration
+export FZF_CTRL_R_OPTS="--height 40% --layout=reverse --border"
+export FZF_ALT_C_OPTS="--height 40% --layout=reverse --border"
+source <(fzf --zsh)
+# Unbind the default Alt-C keybinding for fzf-cd-widget
+bindkey -rM emacs '^[^C'
+bindkey -rM vicmd '^[^C'
+bindkey -rM viins '^[^C'
+# Bind fzf-cd-widget to Ctrl-E
+bindkey -M emacs '^G' fzf-cd-widget
+bindkey -M vicmd '^G' fzf-cd-widget
+bindkey -M viins '^G' fzf-cd-widget
+export FZF_DEFAULT_OPTS="\
+--color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
+--color=selected-bg:#45475A \
+--color=border:#6C7086,label:#CDD6F4 \
+--height 40% \
+--border \
+--info=inline \
+--layout=reverse"
 
 # Visuals
 PS1="%{%F{green}%}%n@%m %{%F{yellow}%}%2~ %{%F{reset}%}%% "
-
 
 # Aliases
 alias gs='git status'
@@ -40,17 +59,12 @@ alias showpath='echo $PATH | tr ":" "\n"'
 alias df="df -h"
 alias du="du -h -d 1"
 
-
-# FZF configuration
-source <(fzf --zsh)
-# Unbind the default Alt-C keybinding for fzf-cd-widget
-bindkey -rM emacs '^[^C'
-bindkey -rM vicmd '^[^C'
-bindkey -rM viins '^[^C'
-# Bind fzf-cd-widget to Ctrl-G
-bindkey -M emacs '^G' fzf-cd-widget
-bindkey -M vicmd '^G' fzf-cd-widget
-bindkey -M viins '^G' fzf-cd-widget
+# Tmux-sessionizer
+bindkey -s '^t' "tmux-sessionizer\n"
+bindkey -s '\eh' "tmux-sessionizer -s 0\n"
+bindkey -s '\ej' "tmux-sessionizer -s 1\n"
+bindkey -s '\ek' "tmux-sessionizer -s 2\n"
+bindkey -s '\el' "tmux-sessionizer -s 3\n"
 
 # Better zsh-vi-mode
 #source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
@@ -83,7 +97,10 @@ node() { load_nvm node "$@"; }
 npm()  { load_nvm npm "$@"; }
 npx()  { load_nvm npx "$@"; }
 
-
+# --- Conditional macOS config ---
+if [[ "$(uname)" == "Darwin" ]]; then
+  [[ -f ~/.config/zsh/.zshrc-mac ]] && source ~/.config/zsh/.zshrc-mac
+fi
 
 # Last but certainly not least...:)
 fastfetch

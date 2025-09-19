@@ -1,6 +1,10 @@
 
 - link:
     ~/.config/tmux/tmux.conf: tmux/tmux.conf
+    ~/.config/tmux-sessionizer/tmux-sessionizer.conf: tmux/tmux-sessionizer.conf
+    ~/.local/bin/:
+      path: tmux/scripts/*
+      glob: true
 
 - shell:
   - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed tmux; else brew install tmux; fi
