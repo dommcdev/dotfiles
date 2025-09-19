@@ -4,5 +4,5 @@
 
 - shell:
   - brew tap dimentium/autoraise
-  - brew install autoraise --with-dalternative_task_switcher
+  - brew install autoraise --with-dold_activation_method
   - brew services start autoraise
