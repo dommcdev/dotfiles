@@ -1,15 +1,11 @@
 
 - link:
-    ~/.config/zsh/.zshrc: 
-      path: zsh/zshrc
-      if: '[ "$(uname)" = "Linux" ]' 
+    ~/.config/zsh/.zshrc: zsh/zshrc
     ~/.config/zsh/.zprofile:
       path: zsh/zprofile-mac
       if: '[ "$(uname)" = "Darwin" ]'
-    ~/.zshenv:
-      path: zsh/zshenv
-- link:
-    ~/.config/zsh/.zshrc:
+    ~/.zshenv: zsh/zshenv
+    ~/.config/zsh/.zshrc-mac:
       path: zsh/zshrc-mac
       if: '[ "$(uname)" = "Darwin" ]'
 

@@ -1,6 +1,6 @@
 
 - link:
-    ~/.config/karabiner/karabiner.json: karabiner/karabiner.json
+    ~/.config/karabiner/karabiner.json: mac/karabiner/karabiner.json
 
 - shell:
   - brew install --cask karabiner-elements

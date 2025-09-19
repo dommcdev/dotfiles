@@ -1,6 +1,6 @@
 
 - link: 
-    ~/Library/Application Support/Rectangle/RectangleConfig.json: rectangle/RectangleConfig.json
+    ~/Library/Application Support/Rectangle/RectangleConfig.json: mac/rectangle/RectangleConfig.json
 
 - shell: 
   - brew install --cask rectangle
