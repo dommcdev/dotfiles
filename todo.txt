@@ -21,12 +21,9 @@ Nvim
     Smooth scrolling via trackpad?
     Setup per-file lsp indenting rules
     Setup a coderunner (shortcut or :command, per-file or makefile, floating terminal or split).
-    Snacks.picker (less previews, enable frequency, view gitignored files, start buffer picker in normal mode)
 Tmux
     Tmux-ressurect, tmux-continuum
-    Tmux sessionizer (ctrl-g), add in nvim?
     Tmuxifier, or way to define configs for projects
-    Type pane number to create pane
 Waybar
     Workspace indicators, time/date (center), weather
     Volume, internet, bluetooth

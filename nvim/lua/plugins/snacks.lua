@@ -11,15 +11,26 @@ return {
       enabled = true,
       timeout = 3000,
     },
-    picker = { 
-      enabled = true,
+    picker = {
+      matcher = {
+        frecency = true, -- enable frequency/recent-use scoring
+        cwd_bonus = true,
+        history_bonus = true,
+      },
+      sources = {
+        buffers = {
+          on_show = function()
+            vim.cmd.stopinsert()
+          end,
+        },
+      },
     },
     quickfile = { enabled = true },
     scroll = { 
       enabled = true,
       animate = {
         duration = {step = 15, total = 100},
-	      easing = "linear",
+        easing = "linear",
       },
     },
   },
@@ -34,7 +45,7 @@ return {
     -- find
     { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-    { "<leader>sf", function() Snacks.picker.files() end, desc = "Find Files" },
+    { "<leader>sf", function() Snacks.picker.files( { args={ "--no-ignore"},}) end, desc = "Find Files" },
     { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
     { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
