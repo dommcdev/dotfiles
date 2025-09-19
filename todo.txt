@@ -44,7 +44,6 @@ System update script
     Snapshot hook?
 Hyprland
     Better animations
-    Fullscreen = red border
 Post-vm
     Fix screensharing
     Gpu passthrough

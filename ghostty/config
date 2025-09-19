@@ -1,4 +1,4 @@
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 confirm-close-surface=false
 font-family = "JetBrainsMono Nerd Font"
 background-opacity = 0.96
