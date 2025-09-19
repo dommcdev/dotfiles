@@ -129,45 +129,89 @@
                     },
                     {
                         "description": "Map Control + [ to Escape",
+                            "manipulators": [
+                                {
+                                    "from": {
+                                        "key_code": "open_bracket",
+                                        "modifiers": {
+                                            "mandatory": ["control"],
+                                            "optional": ["any"]
+                                        }
+                                    },
+                                    "to": [{ "key_code": "escape" }],
+                                    "type": "basic"
+                                }
+                            ]
+                    },
+                    {
+                        "description": "Map Hyper + Escape to Fn",
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "open_bracket",
+                                    "key_code": "escape",
                                     "modifiers": {
-                                        "mandatory": ["control"],
+                                        "mandatory": ["left_command", "left_option", "left_control"],
                                         "optional": ["any"]
                                     }
                                 },
-                                "to": [{ "key_code": "escape" }],
+                                "to": [
+                                    {
+                                        "apple_vendor_top_case_key_code": "keyboard_fn"
+                                    }
+                                ],
                                 "type": "basic"
                             }
                         ]
                     },
-		    {
-		        "description": "Map Hyper + Escape to Fn",
-		        "manipulators": [
-			    {
-			        "from": {
-				    "key_code": "escape",
-				    "modifiers": {
-				        "mandatory": ["left_command", "left_option", "left_control"],
-				        "optional": ["any"]
-				    }
-			        },
-			        "to": [
-				    {
-				        "apple_vendor_top_case_key_code": "keyboard_fn"
-				    }
-			        ],
-			        "type": "basic"
-			    }
-		        ]
-		    }
-                ]
+                    {
+                        "description": "Change right_shift + left_shift to caps_lock",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "left_shift",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "caps_lock"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "right_shift",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "caps_lock"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                        ]
+
             },
             "name": "Default profile",
             "selected": true,
             "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         }
-    ]
+                ]
 }
