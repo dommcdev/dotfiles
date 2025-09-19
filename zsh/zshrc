@@ -15,8 +15,6 @@ autoload -Uz compinit
 compinit
 
 # FZF configuration
-export FZF_CTRL_R_OPTS="--height 40% --layout=reverse --border"
-export FZF_ALT_C_OPTS="--height 40% --layout=reverse --border"
 source <(fzf --zsh)
 # Unbind the default Alt-C keybinding for fzf-cd-widget
 bindkey -rM emacs '^[^C'
@@ -27,11 +25,12 @@ bindkey -M emacs '^G' fzf-cd-widget
 bindkey -M vicmd '^G' fzf-cd-widget
 bindkey -M viins '^G' fzf-cd-widget
 export FZF_DEFAULT_OPTS="\
---color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
+--color=bg+:#313244,spinner:#F9E2AF,hl:#F38BA8 \
+--color=fg:#CDD6F4,header:#A6E3A1,info:#89B4FA,pointer:#F9E2AF \
+--color=marker:#94E2D5,fg+:#CDD6F4,prompt:#FAB387,hl+:#F38BA8 \
 --color=selected-bg:#45475A \
---color=border:#6C7086,label:#CDD6F4 \
---height 40% \
---border \
+--color=border:#6C7086,label:#89B4FA
+--height 20% \
 --info=inline \
 --layout=reverse"
 
