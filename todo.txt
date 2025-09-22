@@ -6,6 +6,7 @@ Config files
 Add QOL things from omarchy (increased sudo timeout, lockscreen lockout, etc)
 Mount webdav to /mnt point manually, on login
 Edit tmux-sessionizer to cut off beginning of path
+Update yaml profiles
 
 # To-do
 Fix hyprcursor/bibata animation speed (loading)
@@ -77,8 +78,8 @@ Immich
 Gitlab
 BorgBackup (or equal.)
 Rasp pi for wireless android auto
-Migrate to caddy-less nextcloud setup
-
+Yabai
+Add Ubuntu support for terminal dotfiles
 
 
 # Things to try

@@ -4,13 +4,13 @@ Host *
     ServerAliveCountMax 3
 
 Host chocobo
-    HostName chocobo.tetra-salmon.ts.net
+    HostName chocobo
     User dominic
 
 Host kabigon
-    HostName kabigon.tetra-salmon.ts.net
+    HostName kabigon
     User dominic
 
 Host pikachu
-    HostName pikachu.tetra-salmon.ts.net
+    HostName pikachu
     User dominic
