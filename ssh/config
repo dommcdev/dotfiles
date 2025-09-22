@@ -14,3 +14,7 @@ Host kabigon
 Host pikachu
     HostName pikachu
     User dominic
+
+Host dominic-pc
+    HostName dominic-pc
+    User dominic
