@@ -1,5 +1,5 @@
 format = """
-$directory$git_branch$git_status
+$hostname$directory$git_branch$git_status
 $character"""
 
 # Get editor completions based on the config schema
@@ -8,6 +8,6 @@ $character"""
 # Inserts a blank line between shell prompts
 add_newline = false
 
-# Disable the package module, hiding it from the prompt completely
-[package]
-disabled = true
+[hostname]
+ssh_only=true
+format = "[$hostname](bold yellow) in"
