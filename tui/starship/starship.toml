@@ -10,4 +10,4 @@ add_newline = false
 
 [hostname]
 ssh_only=true
-format = "[$hostname](bold yellow) in"
+format = "[$hostname](bold yellow) in "
