@@ -1,7 +1,6 @@
 
 - link:
     ~/.config/tmux/tmux.conf: tmux/tmux.conf
-    ~/.config/tmux-sessionizer/tmux-sessionizer.conf: tmux/tmux-sessionizer.conf
     ~/.local/bin/:
       path: tmux/scripts/*
       glob: true
