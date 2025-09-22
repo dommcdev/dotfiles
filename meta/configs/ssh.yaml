@@ -1,0 +1,11 @@
+
+- link:
+    ~/.ssh/config: ssh/config
+
+- shell:
+  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed openssh; else brew install openssh; fi
+
+    # Enable systemd services
+  - if [ "$(uname)" = "Linux" ]; then sudo systemctl enable sshd; fi
+
+

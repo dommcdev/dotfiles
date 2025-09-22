@@ -1,0 +1,16 @@
+Host *
+#    Port 2276
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+
+Host chocobo
+    HostName chocobo.tetra-salmon.ts.net
+    User dominic
+
+Host kabigon
+    HostName kabigon.tetra-salmon.ts.net
+    User dominic
+
+Host pikachu
+    HostName pikachu.tetra-salmon.ts.net
+    User dominic

@@ -1,8 +1,3 @@
 
 - shell:
-  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed openssh wget curl ffmpeg 7zip fd ripgrep poppler zoxide imagemagick chafa resvg ncdu fzf trash-cli cava asciiquarium cmatrix cowsay ponysay countryfetch tldr whois eza jq less bluetui impala yt-dlp gum git-delta gnuplot nmap bind; else brew install openssh wget ffmpeg 7zip fd ripgrep poppler zoxide imagemagick ghostscript chafa resvg ncdu fzf trash-cli cava asciiquarium cmatrix cowsay ponysay tlrc eza jq less yt-dlp gum git-delta gnuplot nmap bind; fi
-
-    # Enable systemd services
-  - if [ "$(uname)" = "Linux" ]; then sudo systemctl enable sshd; fi
-  - if [ "$(uname)" = "Darwin" ]; then sudo systemsetup -setremotelogin on; fi #fix this bc full disk access needed first
-
+  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed wget curl ffmpeg 7zip fd ripgrep poppler zoxide imagemagick chafa resvg ncdu fzf trash-cli cava asciiquarium cmatrix cowsay ponysay countryfetch tldr whois eza jq less bluetui impala yt-dlp gum git-delta gnuplot nmap bind; else brew install wget ffmpeg 7zip fd ripgrep poppler zoxide imagemagick ghostscript chafa resvg ncdu fzf trash-cli cava asciiquarium cmatrix cowsay ponysay tlrc eza jq less yt-dlp gum git-delta gnuplot nmap bind; fi
