@@ -230,6 +230,9 @@ find_dirs() {
         tmux list-sessions -F "[TMUX] #{session_name}" 2>/dev/null
     fi
 
+    # always put home dir first
+    echo "$HOME"
+
     # note: TS_SEARCH_PATHS is an array of paths to search for directories
     # if the path ends with :number, it will search for directories with a max depth of number ;)
     # if there is no number, it will search for directories with a max depth defined by TS_MAX_DEPTH or 1 if not set
@@ -242,7 +245,7 @@ find_dirs() {
             path="$entry"
         fi
 
-        [[ -d "$path" ]] && find "$path" -mindepth 1 -maxdepth "${depth:-${TS_MAX_DEPTH:-1}}" -path '*/.git' -prune -o -type d -print
+        [[ -d "$path" ]] && find "$path" -mindepth 1 -maxdepth "${depth:-${TS_MAX_DEPTH:-1}}" -path '*/.git' -prune -o -type d -print 2>/dev/null | sed -E "s|^$HOME|~|"
     done
 }
 
