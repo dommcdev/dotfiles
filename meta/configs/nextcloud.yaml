@@ -1,0 +1,14 @@
+
+- link:
+
+- shell:
+  - if [ "$(uname)" = "Linux" ]; then yay -S --noconfirm --needed --answerdiff None --answerclean None davfs2; fi
+  - if [ "$(uname)" = "Linux" ]; then sudo mkdir -p /mnt/nextcloud && sudo chown $USER:$USER /mnt/nextcloud
+  - if [ "$(uname)" = "Linux" ]; then sudo usermod -aG network $USER
+  - if [ "$(uname)" = "Linux" ]; then mkdir -p ~/.davfs2 && touch ~/.davfs2/secrets
+  - if [ "$(uname)" = "Linux" ]; then sudo sed -i "\|/mnt/nextcloud|d" "/etc/fstab" && echo "https://nextcloud.tetra-salmon.ts.net/remote.php/dav/files/dominic/ /mnt/nextcloud davfs user,noauto,_netdev 0 0" | sudo tee -a "/etc/fstab"
+  - if [ "$(uname)" = "Linux" ]; then
+
+#mount /mnt/nextcloud
+#add unmounting first, for safety
+#Systemd for auto-mounting after login
