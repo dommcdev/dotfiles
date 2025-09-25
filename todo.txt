@@ -5,13 +5,13 @@ Config files
     Nautilus (dconf commands)
 Add QOL things from omarchy (increased sudo timeout, lockscreen lockout, etc)
 Mount webdav to /mnt point manually, on login
-Edit tmux-sessionizer to cut off beginning of path
-
-# To-do
 Fix hyprcursor/bibata animation speed (loading)
 Volume middle-screen popup (swayosd?)
 Better brightness adjustment (pick level, then choose "apply")
-Oh-My-Zsh
+Snapshot hook for pacman
+System update script (weekly reminder?)
+
+# To-do
 Nvim
     Diognose clipboard via ssh
     Autopairs plugin
@@ -32,10 +32,6 @@ Yazi
     Copy files to system clipboard (Linux and Mac)
     Save/link .local/state/yazi/.dds - for bookmark persistance
     Possible plugins - diff.yazi, [compress].yazi, lazygit.yazi, gvfs.yazi, trash??, mount.yazi
-System update script
-    Include flatpak, pacman, yay
-    Cron job on schedule?
-    Snapshot hook?
 Post-vm
     Fix screensharing
     Gpu passthrough
@@ -55,6 +51,7 @@ BTRFS
 Yt-music but offline, for phone
 
 # Low Priority
+Notification center
 Fastfetch
 Tweak SDDM theme (image aligned, cursor correct)
 Chrome stylus sync (???)

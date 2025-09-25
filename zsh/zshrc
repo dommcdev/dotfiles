@@ -20,7 +20,7 @@ source <(fzf --zsh)
 bindkey -rM emacs '^[^C'
 bindkey -rM vicmd '^[^C'
 bindkey -rM viins '^[^C'
-# Bind fzf-cd-widget to Ctrl-E
+# Bind fzf-cd-widget to Ctrl-G
 bindkey -M emacs '^G' fzf-cd-widget
 bindkey -M vicmd '^G' fzf-cd-widget
 bindkey -M viins '^G' fzf-cd-widget
