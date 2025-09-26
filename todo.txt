@@ -11,6 +11,7 @@ Better brightness adjustment (pick level, then choose "apply")
 Snapshot hook for pacman
 System update script (weekly reminder?)
 Integrate delta with git
+Add installing xcode dev tools to beginning of mac bootstrap script
 
 # To-do
 Nvim
@@ -56,7 +57,7 @@ Notification center
 Fastfetch
 Tweak SDDM theme (image aligned, cursor correct)
 Chrome stylus sync (???)
-Tweak GTK theme
+Tweak GTK theme - rewaita?
 Tweak raycast
 Tweak starship
 Fonts?
@@ -68,6 +69,7 @@ Theme script
     Pywall16, Matugen?
 Tmux-sessionizer for "restoring" sessions
 Hyprland - better animations
+Kvantum isn't working - need to install KvantumManager?
 
 
 Tailscale subnet router

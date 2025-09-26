@@ -10,4 +10,4 @@
 
     # Enable systemd services
   - if [ "$(uname)" = "Linux" ]; then sudo systemctl enable tailscaled; fi
-  - sudo tailscale set --accept-routes --reset; fi
+  - sudo tailscale set --accept-routes --reset

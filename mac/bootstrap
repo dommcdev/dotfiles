@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 set -e
 
 # --- Vars ---
@@ -11,8 +11,8 @@ echo -e "Starting Macbook setup...\n\n"
 # Check if Homebrew is already installed
 if [ ! -x "$BREW_INSTALLED" ]; then
     echo "Homebrew not found. Installing..."
-    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    eval "$(brew shellenv)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
     echo "Homebrew installation complete. You may need to restart your terminal."
 else
     echo "Homebrew is already installed. Skipping installation."
@@ -32,5 +32,5 @@ fi
 
 # Run dotfiles
 echo "Running dotfiles installer..."
-#cd "$DOTFILES_DIR" && ./install-profile mac
+cd "$DOTFILES_DIR" && ./install-profile mac
 

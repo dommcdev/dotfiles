@@ -7,4 +7,3 @@ List of things to do after installing dotfiles. Blame macOS.
 5) sudo systemsetup -setremotelogin on
 6) Finder - remove items from sidebar, check "show item info", add home dir, setup nextcloud webDAV/bookmark
 7) Setup nextcloud desktop client
-8) Run sudo systemsetup -setremotelogin on
