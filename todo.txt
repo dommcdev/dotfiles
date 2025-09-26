@@ -10,6 +10,7 @@ Volume middle-screen popup (swayosd?)
 Better brightness adjustment (pick level, then choose "apply")
 Snapshot hook for pacman
 System update script (weekly reminder?)
+Integrate delta with git
 
 # To-do
 Nvim
