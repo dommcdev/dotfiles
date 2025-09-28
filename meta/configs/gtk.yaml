@@ -13,6 +13,7 @@
   - flatpak override --user --filesystem=xdg-data/themes
   - gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3"
   - gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+  - gsettings set org.gnome.desktop.interface accent-color 'orange'
   - sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3
   - sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3-dark
 
