@@ -1,0 +1,5 @@
+adw-gtk3 theme:
+Both gtk3 and gtk4 can have their stylesheets overridden by an external theme. Therefore, the adw-gtk theme in .local/share/themes modifies gtk3/gtk4 apps to look like libadwaita apps. It does not touch libadwaita apps though. It does define colors, but they will be the default libadwaita ones. 
+
+colors:
+It would be possible to replace the @define colors in the theme itself with the correct ones, however this would be more hassle than it is worth. Instead, for gtk3 we can override colors in .config/gtk-3.0/gtk.css, and for gtk4 we can override colors in .config/gtk-4.0/gtk.css. The latter is where we can also put any overrides for libadwaita apps as well. 
