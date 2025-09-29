@@ -1,0 +1,101 @@
+/* -----------------------------------------------------
+ * Catppuccin Mocha Theme for Waybar
+ * ----------------------------------------------------- */
+
+/* Color Palette */
+@define-color base   #1e1e2e;
+@define-color mantle #181825;
+@define-color crust  #11111b;
+@define-color text   #cdd6f4;
+@define-color subtext0 #a6adc8;
+@define-color lavender #b4befe;
+@define-color blue   #89b4fa;
+@define-color red    #f38ba8;
+@define-color green  #a6e3a1;
+
+/* General Bar Styling */
+* {
+    border: none;
+    border-radius: 0;
+    font-family: 'JetBrainsMono Nerd Font Propo', 'Noto Sans';
+    font-size: 14px;
+    min-height: 0;
+}
+
+#window {
+    background-color: @base;
+    color: @text;
+}
+
+/* Module Styling */
+#workspaces,
+#clock,
+#pulseaudio,
+#network,
+#bluetooth {
+    background-color: @mantle;
+    padding: 5px 15px;
+    margin: 2px 0px;
+}
+
+/* Style modules on the right */
+#clock {
+    border-radius: 0 10px 10px 0;
+    margin-right: 8px;
+}
+#pulseaudio {
+    border-radius: 0;
+}
+#network {
+    border-radius: 0;
+}
+#bluetooth {
+    border-radius: 0;
+}
+
+#workspaces {
+    background-color: @base;
+}
+
+#workspaces button {
+    color: @subtext0;
+}
+
+#workspaces button:hover {
+    background-color: #313244; /* Catppuccin Surface0 */
+}
+
+#workspaces button.focused {
+    background-color: @lavender;
+    color: @crust;
+}
+
+#workspaces button.urgent {
+    background-color: @red;
+    color: @crust;
+}
+
+/* Specific Module Colors */
+#clock {
+    color: @lavender;
+}
+
+#pulseaudio {
+    color: @blue;
+}
+
+#pulseaudio.muted {
+    color: @subtext0;
+}
+
+#network {
+    color: @green;
+}
+
+#network.disconnected {
+    color: @red;
+}
+
+#bluetooth {
+    color: @blue;
+}
