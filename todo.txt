@@ -77,7 +77,7 @@ Immich
 Gitlab
 BorgBackup (or equal.)
 Rasp pi for wireless android auto
-Yabai
+Yabai, skhd.zig
 Add Ubuntu support for terminal dotfiles
 
 
