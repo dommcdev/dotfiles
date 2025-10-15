@@ -1,17 +1,9 @@
 
 - shell:
     # Keyboard shortcuts
-  - defaults write -g NSUserKeyEquivalents -dict-add "Find..." "^f"
   - defaults write -g NSUserKeyEquivalents -dict-add "Lock Screen" "@~^å"
   - defaults write com.apple.finder NSUserKeyEquivalents -dict-add "Close Window" "@q" # since quit finder isn't an option
   - defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Close Window" "@~^\$c"
-  - defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Close Tab" "^w"
-  - defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Reopen Closed Tab" "^\$t"
-  - defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "New Tab" "^t"
-  - defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Open Location..." "^l"
-  - defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Open File..." "^o"
-  - defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Reload This Page" "^r"
-  - defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Save Page As..." "^s"
   - defaults import com.apple.symbolichotkeys mac/misc/symbolichotkeys.plist
 
     # Fix dock
@@ -86,5 +78,7 @@
 # Git popup for creds?
 # Changing hostname?
 # Move applications to specific workspaces
-# Focus follows mouse?
 # Changing wallpaper doesn't apply it to all workspaces
+# Configure yabai - its focus follows mouse doesn't work
+# Fix raycast being stupid and using control instead of command
+# Fix lock screen keyboard shortcut - how to represent tab key?
