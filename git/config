@@ -5,3 +5,5 @@
 	name = Dominic
 [core]
 	excludesfile = $HOME/.config/git/ignore
+[init]
+	defaultBranch = master
