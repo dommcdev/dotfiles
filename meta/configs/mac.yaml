@@ -82,3 +82,4 @@
 # Configure yabai - its focus follows mouse doesn't work
 # Fix raycast being stupid and using control instead of command
 # Fix lock screen keyboard shortcut - how to represent tab key?
+#Add installing xcode dev tools to beginning of mac bootstrap script

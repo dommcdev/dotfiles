@@ -11,7 +11,6 @@ Better brightness adjustment (pick level, then choose "apply")
 Snapshot hook for pacman
 System update script (weekly reminder?)
 Integrate delta with git
-Add installing xcode dev tools to beginning of mac bootstrap script
 
 # To-do
 Nvim
