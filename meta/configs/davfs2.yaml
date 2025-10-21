@@ -8,10 +8,8 @@
     sudo chown "$USER:$USER" /mnt/nextcloud
 
     # Setup davfs2 secrets
-    mkdir -p ~/.davfs2
-    if [ ! -f ~/.davfs2/secrets ]; then
-      echo "https://nextcloud.tetra-salmon.ts.net/remote.php/dav/files/dominic/ USERNAME PASSWORD" | sudo tee ~/.davfs2/secrets > /dev/null
-      chmod 600 ~/.davfs2/secrets
+    if ! sudo grep -q "nextcloud" "/etc/davfs2/secrets"; then
+      echo "https://nextcloud.tetra-salmon.ts.net/remote.php/dav/files/dominic/ USERNAME PASSWORD" | sudo tee -a /etc/davfs2/secrets > /dev/null
     fi
 
     # Stop any active mount services
