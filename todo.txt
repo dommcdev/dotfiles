@@ -1,4 +1,5 @@
 # Easy
+FIX: tailscale not happy with dns
 Config files
     Gnucash
     Aucacity (+ theme?)
@@ -34,12 +35,11 @@ Yazi
     Save/link .local/state/yazi/.dds - for bookmark persistance
     Possible plugins - diff.yazi, [compress].yazi, lazygit.yazi, gvfs.yazi, trash??, mount.yazi
 Post-vm
-    Fix screensharing
     Gpu passthrough
     Fix virtualization (installing boxes fixes)
-    Fix hyprsunset
-    Check nautilus glitches when small, showtime glitches, sushi can't preview pdf
     Figure out printers (Printer setup app?)
+Set up hyprsunset
+Keybinding for sunshine/moonlight
 
 
 # Find tools, learn
