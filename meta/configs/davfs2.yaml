@@ -9,9 +9,10 @@
 
     # Setup davfs2 secrets
     mkdir -p ~/.davfs2
-    rm -f ~/.davfs2/secrets
-    cp davfs2/secrets ~/.davfs2/secrets
-    chmod 600 ~/.davfs2/secrets
+    if [ ! -f ~/.davfs2/secrets ]; then
+      echo "https://nextcloud.tetra-salmon.ts.net/remote.php/dav/files/dominic/ USERNAME PASSWORD" | sudo tee ~/.davfs2/secrets > /dev/null
+      chmod 600 ~/.davfs2/secrets
+    fi
 
     # Stop any active mount services
     sudo systemctl stop mnt-nextcloud.automount || true
