@@ -24,3 +24,5 @@
 
     # AUR
   - yay -S --noconfirm --needed --answerdiff None --answerclean None downgrade clipse
+
+  - sudo systemctl enable iwd

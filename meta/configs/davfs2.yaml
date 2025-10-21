@@ -1,0 +1,28 @@
+
+- shell:
+  - |
+    yay -S --noconfirm --needed davfs2
+
+    # Prepare mount point
+    sudo mkdir -p /mnt/nextcloud
+    sudo chown "$USER:$USER" /mnt/nextcloud
+
+    # Setup davfs2 secrets
+    mkdir -p ~/.davfs2
+    rm -f ~/.davfs2/secrets
+    cp davfs2/secrets ~/.davfs2/secrets
+    chmod 600 ~/.davfs2/secrets
+
+    # Stop any active mount services
+    sudo systemctl stop mnt-nextcloud.automount || true
+    sudo systemctl stop mnt-nextcloud.mount || true
+
+    # Copy over systemd mount files
+    sudo rm -f /etc/systemd/system/mnt-nextcloud.mount
+    sudo cp davfs2/mnt-nextcloud.mount /etc/systemd/system/mnt-nextcloud.mount
+    sudo rm -f /etc/systemd/system/mnt-nextcloud.automount
+    sudo cp davfs2/mnt-nextcloud.automount /etc/systemd/system/mnt-nextcloud.automount
+
+    # Enable and start automount
+    sudo systemctl daemon-reload
+    sudo systemctl enable --now mnt-nextcloud.automount

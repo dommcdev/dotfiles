@@ -1,0 +1,14 @@
+[Unit]
+Description=Mount WebDAV Service
+After=network-online.target
+Wants=network-online.target
+
+[Mount]
+What=https://nextcloud.tetra-salmon.ts.net/remote.php/dav/files/dominic
+Where=/mnt/nextcloud
+Type=davfs
+Options=uid=1000,file_mode=0664,dir_mode=2775,grpid
+TimeoutSec=15
+
+[Install]
+WantedBy=multi-user.target

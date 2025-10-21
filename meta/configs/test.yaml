@@ -1,0 +1,5 @@
+
+- shell:
+  - |
+    export TESTING123="squid"
+    echo $TESTING123

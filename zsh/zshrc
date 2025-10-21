@@ -47,6 +47,7 @@ alias vi='nvim'
 alias iv='nvim' #common typo
 alias vim='nvim'
 alias fs='fastfetch'
+alias fsa='fastfetch -c all.jsonc'
 alias c='clear'
 alias wth='curl wttr.in'
 alias pwd='pwd && pwd | wl-copy'
