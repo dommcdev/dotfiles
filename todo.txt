@@ -1,5 +1,6 @@
 # Easy
 FIX: tailscale not happy with dns
+Change davfs mounting to happen on boot, not auto-mount on demand
 Config files
     Gnucash
     Aucacity (+ theme?)
@@ -81,7 +82,6 @@ Add Ubuntu support for terminal dotfiles
 
 
 # Things to try
-Windows
 NixOS, OpenSuse, Arch from scratch
 MacOS vm
 

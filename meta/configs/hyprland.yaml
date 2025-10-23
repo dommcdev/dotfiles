@@ -11,6 +11,6 @@
 
 - shell:
   - sudo pacman -S --noconfirm --needed uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset grim slurp polkit-gnome
-  - systemctl --user enable --now polkit-gnome.service
+  - systemctl --user enable polkit-gnome.service
   - systemctl --user enable hyprpaper.service
   - systemctl --user enable hypridle.service
