@@ -6,17 +6,15 @@ Config files
     Aucacity (+ theme?)
     Nautilus (dconf commands)
 Add QOL things from omarchy (increased sudo timeout, lockscreen lockout, etc)
-Mount webdav to /mnt point manually, on login
 Fix hyprcursor/bibata animation speed (loading)
 Volume middle-screen popup (swayosd?)
 Better brightness adjustment (pick level, then choose "apply")
-Snapshot hook for pacman
 System update script (weekly reminder?)
 Integrate delta with git
 
 # To-do
 Nvim
-    Diognose clipboard via ssh
+    Fix clipboard with ssh + tmux
     Autopairs plugin
     Smooth scrolling via trackpad?
     Setup per-file lsp indenting rules

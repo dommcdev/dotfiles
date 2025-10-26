@@ -25,7 +25,7 @@ texts[logout]="log out"
 texts[suspend]="suspend"
 texts[hibernate]="hibernate"
 texts[reboot]="restart"
-texts[shutdown]="shut down"
+texts[shutdown]="shut it down!"
 
 declare -A icons
 icons[lockscreen]="\Uf033e"
