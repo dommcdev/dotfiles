@@ -1,5 +1,7 @@
 # Easy
 Merge asahi branch into main
+    Add wtype to install script
+    Fix chrome gesture to be 2 fingers instead of 3
 FIX: tailscale not happy with dns
 Change davfs mounting to happen on boot, not auto-mount on demand
 Config files
