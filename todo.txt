@@ -1,4 +1,7 @@
 # Easy
+Merge asahi branch into main
+    Add wtype to install script
+    Fix chrome gesture to be 2 fingers instead of 3
 FIX: tailscale not happy with dns
 Change davfs mounting to happen on boot, not auto-mount on demand
 Config files
@@ -83,6 +86,8 @@ Add Ubuntu support for terminal dotfiles
 NixOS, OpenSuse, Arch from scratch
 MacOS vm
 
+# If on an x86 laptop
+Set up power-profiles-daemon
 
 # BUGS
 Using regular Linux kernel results in shutdown hangs. Switching to lts kernel fixes this

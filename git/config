@@ -6,4 +6,5 @@
 [core]
 	excludesfile = $HOME/.config/git/ignore
 [init]
-	defaultBranch = master
+	defaultBranch = main
+

@@ -29,8 +29,14 @@
 		"custom/right_div#5"
 	],
 	"modules-right": [
+        "tray",
 		"custom/left_div#6",
 		"group/pulseaudio",
+        "custom/left_div#7",
+        "backlight",
+        "custom/left_div#8",
+        "battery",
+        "custom/left_inv#2",
 		"custom/power_menu"
 	],
 
@@ -92,7 +98,7 @@
 		// "adapter":
 		// "design-capacity":
 		// "full-at":
-		// "interval":
+		"interval": 5,
 		"states": {
 			"warning": 20,
 			"critical": 10
@@ -266,8 +272,8 @@
 		"format-critical": "󰀧 {percentage}%",
 		// "rotate":
 		"states": {
-			"warning": 75,
-			"critical": 90
+			"warning": 90,
+			"critical": 95
 		},
 		"min-length": 7,
 		"max-length": 7,
@@ -412,7 +418,7 @@
 	},
 
 	"temperature": {
-		"thermal-zone": 1,
+		"thermal-zone": 0,
 		// "hwmon-path":
 		// "hwmon-path-abs":
 		// "input-filename":
