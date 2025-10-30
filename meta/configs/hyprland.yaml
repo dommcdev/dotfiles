@@ -1,13 +1,25 @@
 
 - link:
     ~/.config/hypr:
-      path: hyprland/*
+      path: hypr/*
       glob: true
-      exclude: [hyprland/uwsm]
+      exclude: [hypr/uwsm, hypr/hypridle*.conf, hypr/keybinding*.conf]
     ~/.config/uwsm:
-      path: hyprland/uwsm/*
+      path: hypr/uwsm/*
       glob: true
-    ~/.config/systemd/user/polkit-gnome.service: hyprland/systemd/polkit-gnome.service
+    ~/.config/hypr/hypridle.conf:
+      path: hypr/hypridle.conf
+      if: '[ "$(./sys.sh power)" = "0" ]'
+    ~/.config/hypr/hypridle.conf:
+      path: hypr/hypridle-laptop.conf
+      if: '[ "$(./sys.sh power)" = "1" ]'
+    ~/.config/hypr/keybindings.conf:
+      path: hypr/keybindings.conf
+      if: '[ "$(./sys.sh id)" != "fedora-asahi-remix" ]'
+    ~/.config/hypr/keybindings.conf:
+      path: hypr/keybindings-laptop.conf
+      if: '[ "$(./sys.sh id)" = "fedora-asahi-remix" ]'
+    ~/.config/systemd/user/polkit-gnome.service: hypr/systemd/polkit-gnome.service
 
 - shell:
   - sudo pacman -S --noconfirm --needed uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset grim slurp polkit-gnome

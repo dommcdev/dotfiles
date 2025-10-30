@@ -13,12 +13,14 @@ ID="${ID:-unknown}"
 
 #Note to self - this needs more testing!
 if [ -d /sys/class/power_supply/BAT0 ] || [ -d /sys/class/power_supply/macsmc-battery ]; then
-  POWER="laptop"
+  POWER=1
 else
-  POWER="desktop"
+  POWER=0
 fi
 
-echo $POWER
-# --- Output (for debugging or sourcing) ---
-echo "ID=$ID"
-echo "POWER=$POWER"
+# --- Output requested value ---
+case "${1:-all}" in
+  id) echo "$ID" ;;
+  power) echo "$POWER" ;;
+  all) echo "$ID $POWER" ;;
+esac
