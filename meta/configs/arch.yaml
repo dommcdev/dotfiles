@@ -14,7 +14,7 @@
   - sudo pacman -S --noconfirm --needed libva-mesa-driver libva-utils mesa vulkan-radeon
 
     # Install arch utils
-  - sudo pacman -S --noconfirm --needed iwd wireless_tools wpa_supplicant smartmontools xdg-utils gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-plugins-base gst-plugins-base-libs gst-libav inetutils iwd ddcutil wl-clipboard gnome-keyring libsecret wev unzip
+  - sudo pacman -S --noconfirm --needed iwd wireless_tools wpa_supplicant smartmontools xdg-utils gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-plugins-base gst-plugins-base-libs gst-libav inetutils iwd ddcutil wl-clipboard gnome-keyring libsecret wev unzip wtype
 
     # Install arch utils (gui)
   - sudo pacman -S --noconfirm --needed virt-manager blueman pavucontrol networkmanager network-manager-applet nm-connection-editor noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
