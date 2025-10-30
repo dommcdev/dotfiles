@@ -11,13 +11,14 @@ if [[ -f /etc/os-release ]]; then
 fi
 ID="${ID:-unknown}"
 
-# --- Detect power type ---
-if grep -q "Battery" /sys/class/power_supply/*/type 2>/dev/null; then
+#Note to self - this needs more testing!
+if [ -d /sys/class/power_supply/BAT0 ] || [ -d /sys/class/power_supply/macsmc-battery ]; then
   POWER="laptop"
 else
   POWER="desktop"
 fi
 
+echo $POWER
 # --- Output (for debugging or sourcing) ---
 echo "ID=$ID"
 echo "POWER=$POWER"
