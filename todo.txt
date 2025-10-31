@@ -1,4 +1,6 @@
 # Easy
+Remove gitignored files from picker
+Add blurred-backround hyprlock + include battery
 Change davfs mounting to happen on boot, not auto-mount on demand
 Config files
     Gnucash
