@@ -3,22 +3,14 @@
     ~/.config/hypr:
       path: hypr/*
       glob: true
-      exclude: [hypr/uwsm, hypr/hypridle*.conf, hypr/keybinding*.conf]
+      exclude: [hypr/uwsm, hypr/hypridle*.conf]
     ~/.config/uwsm:
       path: hypr/uwsm/*
       glob: true
     ~/.config/hypr/hypridle.conf:
       path: hypr/hypridle-laptop.conf
       if: '[ "$(./sys.sh power)" = "1" ]'
-    ~/.config/hypr/keybindings.conf:
-      path: hypr/keybindings-laptop.conf
-      if: '[ "$(./sys.sh id)" = "fedora-asahi-remix" ]'
     ~/.config/systemd/user/polkit-gnome.service: hypr/systemd/polkit-gnome.service
-
-- link: 
-    ~/.config/hypr/keybindings.conf:
-      path: hypr/keybindings.conf
-      if: '[ "$(./sys.sh id)" != "fedora-asahi-remix" ]'
 
 - link: 
     ~/.config/hypr/hypridle.conf:
