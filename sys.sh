@@ -11,6 +11,7 @@ if [[ -f /etc/os-release ]]; then
 fi
 ID="${ID:-unknown}"
 
+# 0 for desktop, 1 for laptop
 #Note to self - this needs more testing!
 if [ -d /sys/class/power_supply/BAT0 ] || [ -d /sys/class/power_supply/macsmc-battery ]; then
   POWER=1

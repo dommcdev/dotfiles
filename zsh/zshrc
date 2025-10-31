@@ -58,7 +58,7 @@ alias cp='cp -i'
 alias showpath='echo $PATH | tr ":" "\n"'
 alias df="df -h"
 alias du="du -h -d 1"
-alias gemini="npm exec -- gemini" #since npm is lazy-loaded
+#alias gemini="npm exec -- gemini" #since npm is lazy-loaded
 
 # Tmux-sessionizer
 bindkey -s '^t' "tmux-sessionizer\n"
@@ -97,6 +97,7 @@ nvm()  { load_nvm nvm "$@"; }
 node() { load_nvm node "$@"; }
 npm()  { load_nvm npm "$@"; }
 npx()  { load_nvm npx "$@"; }
+gemini()  { load_nvm gemini "$@"; }
 
 # --- Conditional macOS config ---
 if [[ "$(uname)" == "Darwin" ]]; then
