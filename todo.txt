@@ -1,6 +1,4 @@
 # Easy
-Fix chrome gesture to be 2 fingers instead of 3
-FIX: tailscale not happy with dns
 Change davfs mounting to happen on boot, not auto-mount on demand
 Config files
     Gnucash
@@ -12,6 +10,9 @@ Volume middle-screen popup (swayosd?)
 Better brightness adjustment (pick level, then choose "apply")
 System update script (weekly reminder?)
 Integrate delta with git
+Document tailscale subnet router
+Set up hyprsunset
+Keybinding for sunshine/moonlight
 
 # To-do
 Nvim
@@ -38,9 +39,8 @@ Post-vm
     Gpu passthrough
     Fix virtualization (installing boxes fixes)
     Figure out printers (Printer setup app?)
-Set up hyprsunset
-Keybinding for sunshine/moonlight
-
+Find good wifi/network app (impala?)
+Tailscale not-ideal resolv.conf
 
 # Find tools, learn
 Yt-dlp workflow (tui? chrome?)
@@ -71,23 +71,11 @@ Hyprland - better animations
 Kvantum isn't working - need to install KvantumManager?
 
 
-Tailscale subnet router
 Immich
 Gitlab
 BorgBackup (or equal.)
 Rasp pi for wireless android auto
-Yabai, skhd.zig
-Add Ubuntu support for terminal dotfiles
-
+Power-profiles-daemon
 
 # Things to try
-NixOS, OpenSuse, Arch from scratch
-MacOS vm
-
-# If on an x86 laptop
-Set up power-profiles-daemon
-
-# BUGS
-Using regular Linux kernel results in shutdown hangs. Switching to lts kernel fixes this
-PWAs start in floating mode when starting in Xwayland. Custom window rule fixes this
-Sushi doesn't work with pngs on remote shares
+NixOS, OpenSuse, manual Arch, MacOS vm
