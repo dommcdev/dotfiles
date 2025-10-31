@@ -1,8 +1,4 @@
 # Easy
-Asahi branch
-    hyprland.conf has monitor conf
-    keybindings.conf has chromium
-    keyd and hypridle are completely different
 Fix chrome gesture to be 2 fingers instead of 3
 FIX: tailscale not happy with dns
 Change davfs mounting to happen on boot, not auto-mount on demand
