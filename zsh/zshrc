@@ -58,6 +58,7 @@ alias cp='cp -i'
 alias showpath='echo $PATH | tr ":" "\n"'
 alias df="df -h"
 alias du="du -h -d 1"
+alias asciiquarium="asciiquarium -t"
 #alias gemini="npm exec -- gemini" #since npm is lazy-loaded
 
 # Tmux-sessionizer
