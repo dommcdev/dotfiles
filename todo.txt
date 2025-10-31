@@ -30,6 +30,7 @@ Rofi
     Web search, calculator, emoji/symbols, AI, quick notes (.txt to downloads)
     Navigate options using ctrl+hjkl
     Switch between modes with ctrl shortcut - C-e, C-s, etc. Or type "emoji", "search" etc.
+    Switch theme
 Yazi
     Larger previews of files (sushi/macos quick preview, bound to C-p)
     Copy files to system clipboard (Linux and Mac)
@@ -65,10 +66,11 @@ OnlyOffice theme
 Theme cliphist (+ auto-paste)
 Theme script
     Via single mycolors.css file?
-    Pywall16, Matugen?
+    Pywall16, Matugen, Wallust?
 Tmux-sessionizer for "restoring" sessions
 Hyprland - better animations
 Kvantum isn't working - need to install KvantumManager?
+Better exa colors
 
 
 Immich
