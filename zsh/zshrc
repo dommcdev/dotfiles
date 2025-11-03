@@ -104,9 +104,6 @@ if [[ "$(uname)" == "Darwin" ]]; then
   [[ -f ~/.config/zsh/.zshrc-mac ]] && source ~/.config/zsh/.zshrc-mac
 fi
 
-if [[ "$(sys id)" == "fedora-asahi-remix" ]]; then
-    alias google-chrome-stable='flatpak run org.chromium.Chromium --password-store=kwallet5'
-fi
 
 # Last but certainly not least...:)
 fastfetch
