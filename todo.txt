@@ -1,4 +1,6 @@
 # Easy
+Keyd changes - swap fn with control
+Change nautilus rename to be enter (or make f2 be easier to type)
 Remove gitignored files from picker
 Add blurred-backround hyprlock + include battery
 Change davfs mounting to happen on boot, not auto-mount on demand
