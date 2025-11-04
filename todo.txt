@@ -1,5 +1,5 @@
 # Easy
-Keyd changes - swap fn with control
+Keyd changes - swap fn with control, change delete to be alt-delete
 Change nautilus rename to be enter (or make f2 be easier to type)
 Remove gitignored files from picker
 Add blurred-backround hyprlock + include battery
