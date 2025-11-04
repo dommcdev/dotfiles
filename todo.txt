@@ -65,7 +65,6 @@ Tweak raycast
 Tweak rofi theme
 Tweak starship
 Fonts?
-Cmatrix colors
 OnlyOffice theme
 Theme cliphist (+ auto-paste)
 Theme script
