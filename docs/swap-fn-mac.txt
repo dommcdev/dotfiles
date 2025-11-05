@@ -1,0 +1,12 @@
+Test swapping fn with leftcontrol (temporary, applies until reboot): 
+echo 1 | sudo tee /sys/module/hid_apple/parameters/swap_fn_leftctrl
+
+Make it permanent:
+echo 'options hid_apple swap_fn_leftctrl=1' | sudo tee /etc/modprobe.d/hid_apple.conf
+
+Rebuild initramfs:
+sudo dracut -f
+sudo reboot now
+
+Veryify (should print 1):
+cat /sys/module/hid_apple/parameters/swap_fn_leftctrl
