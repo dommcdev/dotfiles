@@ -44,6 +44,10 @@ vim.o.confirm = true
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- Better home/end line movement
+vim.keymap.set({ 'n', 'v' }, 'H', '^', { desc = 'Move to first nonblank character' })
+vim.keymap.set({ 'n', 'v' }, 'L', '$', { desc = 'Move to end of line' })
+
 -- Highlight when yanking (copying) text, try it with `yap` in normal mode
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',

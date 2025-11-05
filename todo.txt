@@ -1,7 +1,6 @@
 # Easy
 Keyd changes - swap fn with control, change delete to be alt-delete
 Change nautilus rename to be enter (or make f2 be easier to type)
-Remove gitignored files from picker
 Add blurred-backround hyprlock + include battery
 Change davfs mounting to happen on boot, not auto-mount on demand
 Config files
@@ -20,7 +19,6 @@ Keybinding for sunshine/moonlight
 
 # To-do
 Nvim
-    Fix clipboard with ssh + tmux
     Autopairs plugin
     Smooth scrolling via trackpad?
     Setup per-file lsp indenting rules
@@ -74,6 +72,7 @@ Tmux-sessionizer for "restoring" sessions
 Hyprland - better animations
 Kvantum isn't working - need to install KvantumManager?
 Better exa colors
+Better solution for ssh -> tmux -> nvim shared clipboard
 
 
 Immich
@@ -81,6 +80,8 @@ Gitlab
 BorgBackup (or equal.)
 Rasp pi for wireless android auto
 Power-profiles-daemon
+Local AI
 
 # Things to try
 NixOS, OpenSuse, manual Arch, MacOS vm
+Windows
