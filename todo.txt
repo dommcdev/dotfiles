@@ -5,9 +5,7 @@ Config files
     Aucacity (+ theme?)
     Nautilus (dconf commands)
 Add QOL things from omarchy (increased sudo timeout, lockscreen lockout, etc)
-Fix hyprcursor/bibata animation speed (loading)
-Volume middle-screen popup (swayosd?)
-Better brightness adjustment (pick level, then choose "apply")
+Better brightness adjustment (pick level, then choose "apply" - include swayosd?)
 System update script (weekly reminder?)
 Integrate delta with git
 Document tailscale subnet router
@@ -40,6 +38,7 @@ Post-vm
     Fix virtualization (installing boxes fixes)
     Figure out printers (Printer setup app?)
 Find good wifi/network app (impala?)
+Fix/theme bibata hyprcursor
 Tailscale not-ideal resolv.conf
 
 # Find tools, learn

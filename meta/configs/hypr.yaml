@@ -18,7 +18,8 @@
       if: '[ "$(./sys.sh power)" = "0" ]'
 
 - shell:
-  - sudo pacman -S --noconfirm --needed uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset grim slurp polkit-gnome
+  - sudo pacman -S --noconfirm --needed uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset grim slurp polkit-gnome swayosd
   - systemctl --user enable polkit-gnome.service
   - systemctl --user enable hyprpaper.service
   - systemctl --user enable hypridle.service
+  - sudo systemctl enable swayosd-libinput-backend.service
