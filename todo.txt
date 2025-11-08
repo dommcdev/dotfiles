@@ -11,6 +11,7 @@ Integrate delta with git
 Document tailscale subnet router
 Set up hyprsunset
 Keybinding for sunshine/moonlight
+Set up separate conf for hyprlock
 
 # To-do
 Nvim
