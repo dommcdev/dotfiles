@@ -81,4 +81,4 @@ Local AI
 
 # Things to try
 NixOS, OpenSuse, manual Arch, MacOS vm
-Windows
+Windows (+ LookingGlass)
