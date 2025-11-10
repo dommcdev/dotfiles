@@ -1,4 +1,5 @@
 # Easy
+Implement grimblast changes into new ver.
 Change davfs mounting to happen on boot, not auto-mount on demand
 Config files
     Gnucash
