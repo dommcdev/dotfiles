@@ -45,8 +45,8 @@ vim.o.confirm = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Better home/end line movement
-vim.keymap.set({ 'n', 'v' }, 'H', '^', { desc = 'Move to first nonblank character' })
-vim.keymap.set({ 'n', 'v' }, 'L', '$', { desc = 'Move to end of line' })
+--vim.keymap.set({ 'n', 'v', 'o' }, 'L', '$', { noremap = true, desc = 'Move to end of line' })
+--vim.keymap.set({ 'n', 'v', 'o' }, 'H', '^', { noremap = true, desc = 'Move to first nonblank character' })
 
 -- Highlight when yanking (copying) text, try it with `yap` in normal mode
 vim.api.nvim_create_autocmd('TextYankPost', {
