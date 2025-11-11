@@ -10,6 +10,33 @@ shell-integration-features = ssh-terminfo
 clipboard-read=allow
 
 
+# Simulate tmux
+#keybind = ctrl+f>shift+R=reload_config
+#
+#keybind = ctrl+f>s=new_split:down
+#keybind = ctrl+f>v=new_split:right
+#
+#keybind = ctrl+f>h=goto_split:left
+#keybind = ctrl+f>j=goto_split:bottom
+#keybind = ctrl+f>k=goto_split:top
+#keybind = ctrl+f>l=goto_split:right
+#
+#keybind = ctrl+f>p=next_tab
+#keybind = ctrl+f>n=previous_tab
+#
+#keybind = ctrl+f>c=new_tab
+#keybind = ctrl+f>x=close_tab
+#
+#keybind = ctrl+f>1=goto_tab:1
+#keybind = ctrl+f>2=goto_tab:2
+#keybind = ctrl+f>3=goto_tab:3
+#keybind = ctrl+f>4=goto_tab:4
+#keybind = ctrl+f>5=goto_tab:5
+#keybind = ctrl+f>6=goto_tab:6
+#keybind = ctrl+f>7=goto_tab:7
+#keybind = ctrl+f>8=goto_tab:8
+#keybind = ctrl+f>9=goto_tab:9
+
 # Reload config with ctrl+shift+,
 #
 # Run `ghostty +show-config --default --docs` to view a list of
