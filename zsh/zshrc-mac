@@ -1,5 +1,0 @@
-alias pwd='pwd && pwd | pbcopy'
-alias rm='trash'
-
-# Better zsh-vi-mode
-#source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh

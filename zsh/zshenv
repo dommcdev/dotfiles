@@ -1,7 +1,5 @@
 export EDITOR="nvim"
 export VISUAL="nvim" #Fallback for editor
-export ZDOTDIR="$HOME/.config/zsh"
-export PATH="$HOME/.local/bin::$PATH"
 
 # opencode
-export PATH=/home/dominic/.opencode/bin:$PATH
+export PATH="$HOME/.opencode/bin:$PATH"

@@ -1,6 +1,7 @@
 
 - link:
     ~/.config/zsh/.zshrc: zsh/zshrc
+    ~/.config/zsh/.zshenv: zsh/zshenv
     ~/.config/zsh/.zprofile:
       path: zsh/zprofile-mac
       if: '[ "$(uname)" = "Darwin" ]'

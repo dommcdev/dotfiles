@@ -52,7 +52,6 @@ alias fs='fastfetch'
 alias fsa='fastfetch -c all.jsonc'
 alias c='clear'
 alias wth='curl wttr.in'
-alias pwd='pwd && pwd | wl-copy'
 alias rm='trash-put'
 alias cat='bat'
 alias mv='mv -i'
@@ -61,7 +60,6 @@ alias showpath='echo $PATH | tr ":" "\n"'
 alias df="df -h"
 alias du="du -h -d 1"
 alias asciiquarium="asciiquarium -t"
-#alias gemini="npm exec -- gemini" #since npm is lazy-loaded
 
 # Tmux-sessionizer
 bindkey -s '^t' "tmux-sessionizer\n"
@@ -69,9 +67,6 @@ bindkey -s '\eh' "tmux-sessionizer -s 0\n"
 bindkey -s '\ej' "tmux-sessionizer -s 1\n"
 bindkey -s '\ek' "tmux-sessionizer -s 2\n"
 bindkey -s '\el' "tmux-sessionizer -s 3\n"
-
-# Better zsh-vi-mode
-#source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 # Zoxide
 eval "$(zoxide init --cmd cd zsh)"
@@ -104,7 +99,7 @@ gemini()  { load_nvm gemini "$@"; }
 
 # --- Conditional macOS config ---
 if [[ "$(uname)" == "Darwin" ]]; then
-  [[ -f ~/.config/zsh/.zshrc-mac ]] && source ~/.config/zsh/.zshrc-mac
+    alias rm='trash'
 fi
 
 
