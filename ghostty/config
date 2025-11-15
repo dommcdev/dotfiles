@@ -6,6 +6,7 @@ window-padding-x=6
 window-padding-y=4
 shell-integration-features = ssh-terminfo
 quit-after-last-window-closed = false
+keybind = ctrl+enter=unbind
 
 # Prevent "Authorize clipboard access" dialog when using OSC 52 in nvim, etc
 clipboard-read=allow
