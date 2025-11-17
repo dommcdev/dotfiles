@@ -42,12 +42,22 @@ return {
 		end,
 	},
 
+	-- Add this plugin BEFORE mason-lspconfig
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = {
+				{ path = "luvit-meta/library", words = { "vim%.uv" } },
+			},
+		},
+	},
+
 	-- Mason-LSP bridge
 	{
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 			require("mason-lspconfig").setup({
 				ensure_installed = { "lua_ls", "clangd", "ruff" },
 				handlers = {
@@ -149,6 +159,7 @@ return {
 					end, { "i", "s" }),
 				}),
 				sources = cmp.config.sources({
+					{ name = "lazydev", group_index = 0 },
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 					{ name = "buffer" },
