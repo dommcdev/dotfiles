@@ -10,7 +10,6 @@ Config files
 Add QOL things from omarchy (increased sudo timeout, lockscreen lockout, etc)
 Better brightness adjustment (pick level, then choose "apply" - include swayosd?)
 System update script (weekly reminder?)
-Integrate delta with git
 Document tailscale subnet router
 Set up hyprsunset
 Keybinding for sunshine/moonlight

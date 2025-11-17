@@ -60,6 +60,7 @@ alias showpath='echo $PATH | tr ":" "\n"'
 alias df="df -h"
 alias du="du -h -d 1"
 alias asciiquarium="asciiquarium -t"
+alias venv="source .venv/bin/activate" #until I find a better way
 
 # Tmux-sessionizer
 bindkey -s '^t' "tmux-sessionizer\n"

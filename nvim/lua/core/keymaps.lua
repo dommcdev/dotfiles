@@ -1,5 +1,5 @@
 vim.api.nvim_create_user_command("ClangFormat", function()
-    vim.cmd('!clang-format -i -style="{BasedOnStyle: Google, IndentWidth: 4}" %')
+	vim.cmd('!clang-format -i -style="{BasedOnStyle: Google, IndentWidth: 4}" %')
 end, {})
 
 vim.keymap.set("n", "<C-t>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")

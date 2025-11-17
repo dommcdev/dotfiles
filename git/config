@@ -5,9 +5,25 @@
 	name = Dominic
 [core]
 	excludesfile = $HOME/.config/git/ignore
+    pager = delta
 [init]
 	defaultBranch = main
 [alias]
     lg = log --graph --abbrev-commit --decorate --all --color \
 --pretty=format:'%C(bold red)%h%C(reset) - %C(bold cyan)%ad%C(reset) %C(bold yellow)(%ar)%C(reset) %C(bold magenta)%d%C(reset) %s - %C(bold green)%an%C(reset)' \
 --date=format:'%Y-%m-%d %H:%M'
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    #side-by-side = true
+    syntax-theme = Catppuccin Mocha
+
+[merge]
+    conflictStyle = zdiff3
+
+#to prevent errors when piping I guess?
+[color]
+    ui = auto
