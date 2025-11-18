@@ -49,7 +49,7 @@ Yt-dlp workflow (tui? chrome?)
 Rsync, taildrop
 Music player tui
 Git
-SSH (key-based auth, save system config), Mosh
+SSH (key-based auth, save system config)
 BTRFS
 Yt-music but offline, for phone
 
