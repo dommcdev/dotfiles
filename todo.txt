@@ -1,5 +1,6 @@
 # Easy
 Switch to newer kernel
+Add multilib to pacman conf
 Setup docker
 Implement grimblast changes into new ver.
 Change davfs mounting to happen on boot, not auto-mount on demand
