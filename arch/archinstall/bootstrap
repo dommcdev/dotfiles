@@ -14,6 +14,6 @@ archinstall --config /root/user_configuration.json
 
 #More manual option for cloning dotfiles - unlike via archinstall, it is interactive
 echo -e "\n\n--- Archinstall completed successfully. Cloning dotfiles via arch-chroot ... ---\n\n"
-echo "gh auth login --web -p ssh && gh repo clone dominic/dotfiles /home/dominic/dotfiles" > /mnt/home/dominic/tmp.sh
+echo "gh auth login --web -p ssh && gh repo clone dommcdev/dotfiles /home/dominic/dotfiles" > /mnt/home/dominic/tmp.sh
 arch-chroot /mnt sudo -u dominic bash home/dominic/tmp.sh
 arch-chroot /mnt rm home/dominic/tmp.sh
