@@ -6,6 +6,8 @@
 [core]
 	excludesfile = $HOME/.config/git/ignore
     pager = delta
+[pull]
+    rebase = true
 [init]
 	defaultBranch = main
 [alias]

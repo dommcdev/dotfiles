@@ -3,21 +3,17 @@ set -e
 
 echo "This script will install Arch Linux on the specified drive (chosen via archinstall), as well as clone a dotfiles repo to ~/dev/dotfiles."
 
-# Read in git username and password
-read -p "Please enter your computer username: " ARCH_USER
-read -p "Please enter your git username: " GIT_USER
-read -s -p "Please enter your git password: " GIT_PASS
+# Read in computer hostname
+read -p "Please enter your computer hostname: " ARCH_HOST
 echo -e "\n\n"
 
-sed -i "s/gitusername:gitpassword/${GIT_USER}:${GIT_PASS}/g" user_configuration.json
-sed -i "s/archusername/${ARCH_USER}/g" user_configuration.json
-sed -i "s/archusername/${ARCH_USER}/g" user_credentials.json
+sed -i "s/archhostname/${ARCH_HOST}/g" user_configuration.json
 
 # Run archinstall with included configuration file. Disk input and user creds are still manual.
-archinstall --config /root/user_configuration.json #--creds /root/user_credentials.json
+archinstall --config /root/user_configuration.json 
 
-# More manual option for cloning dotfiles - unlike via archinstall, it is interactive
-#echo -e "\n\n--- Archinstall completed successfully. Cloning dotfiles via arch-chroot ... ---\n\n"
-#echo "git clone http://$GIT_USER:$GIT_PASS@developermcd.com:8080/dominic/dotfiles.git ~/dev/dotfiles" > /mnt/home/dominic/tmp.sh
-#arch-chroot /mnt sudo -u dominic bash home/dominic/tmp.sh
-#arch-chroot /mnt rm home/dominic/tmp.sh
+#More manual option for cloning dotfiles - unlike via archinstall, it is interactive
+echo -e "\n\n--- Archinstall completed successfully. Cloning dotfiles via arch-chroot ... ---\n\n"
+echo "gh auth login --web -p ssh && gh repo clone dominic/dotfiles /home/dominic/dotfiles" > /mnt/home/dominic/tmp.sh
+arch-chroot /mnt sudo -u dominic bash home/dominic/tmp.sh
+arch-chroot /mnt rm home/dominic/tmp.sh

@@ -1,8 +1,8 @@
 
 - shell:
     # Git repos
-  - if [ ! -d "$HOME/dev/wallpapers" ]; then git clone http://developermcd.com:8080/dominic/wallpapers.git $HOME/dev/wallpapers; fi
-  - if [ ! -d "$HOME/dev/courses" ]; then git clone http://developermcd.com:8080/dominic/courses.git $HOME/dev/courses; fi
+  - if [ ! -d "$HOME/dev/wallpapers" ]; then git clone git@github.com:dommcdev/wallpapers.git $HOME/dev/wallpapers; fi
+  - if [ ! -d "$HOME/dev/courses" ]; then git clone git@github.com:dommcdev/courses.git $HOME/dev/courses; fi
 
   # Node and NVM
   - mkdir -p ~/.config/nvm

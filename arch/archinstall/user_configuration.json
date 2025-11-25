@@ -10,10 +10,8 @@
     "archinstall-language": "English",
     "auth_config": {},
     "bootloader": "Grub",
-    "custom_commands": [
-	"sudo -u archusername bash -c 'git clone http://gitusername:gitpassword@developermcd.com:8080/dominic/dotfiles.git ~/dev/dotfiles'"
-    ],
-    "hostname": "kabigon",
+    "custom_commands": [],
+    "hostname": "archhostname",
     "kernels": [
         "linux",
         "linux-lts"
@@ -35,7 +33,8 @@
     "ntp": true,
     "packages": [
         "git",
-	"python"
+        "github-cli",
+	    "python"
     ],
     "parallel_downloads": 5,
     "profile_config": {
