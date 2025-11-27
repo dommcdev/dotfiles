@@ -35,6 +35,7 @@
         "backlight",
         "custom/left_div#8",
         "battery",
+		"power-profiles-daemon",
         "custom/left_inv#2",
 		"custom/power_menu"
 	],
@@ -440,6 +441,18 @@
 		"tooltip-format": "Temp in Fahrenheit: {temperatureF}°F"
 	},
 
+	"power-profiles-daemon": {
+	  "format": "{icon}",
+	  "tooltip-format": "Power profile: {profile}",
+	  "tooltip": true,
+	  "format-icons": {
+		"default": "󰾅",
+		"performance": "",
+		"balanced": "󰾅",
+		"power-saver": ""
+	  }
+	},
+
 	"hyprland/window": {
 		"format": "{}",
 		"rewrite": {
@@ -494,69 +507,6 @@
 		"cursor": true
 	},
 
-	"group/theme_switcher": {
-		"orientation": "horizontal",
-		"modules": [
-			"custom/theme_switcher",
-			"custom/user"
-		],
-		"drawer": {
-			// "transition-duration":
-			// "transition-left-to-right":
-			// "children-class":
-			// "click-to-reveal":
-		}
-	},
-
-	"custom/theme_switcher": {
-		"exec": "~/.config/waybar/scripts/theme-switcher.sh",
-		// "exec-if":
-		// "exec-on-event":
-		// "hide-empty-text":
-		"return-type": "json",
-		// "interval":
-		// "restart-interval":
-		// "signal":
-		"format": "{}",
-		// "format-icons":
-		// "rotate":
-		"min-length": 4,
-		"max-length": 4,
-		"on-click": "~/.config/waybar/scripts/theme-switcher.sh next",
-		// "on-click-middle":
-		"on-click-right": "~/.config/waybar/scripts/theme-switcher.sh prev"
-		// "on-scroll-up":
-		// "on-scroll-down":
-		// "smooth-scrolling-threshold":
-		// "tooltip":
-		// "tooltip-format":
-		// "escape":
-	},
-
-	"custom/user": {
-		"exec": "id --user --name",
-		// "exec-if":
-		// "exec-on-event":
-		// "hide-empty-text":
-		// "return-type":
-		// "interval":
-		// "restart-interval":
-		// "signal":
-		"format": "{}",
-		// "format-icons":
-		// "rotate":
-		// "min-length":
-		// "max-length":
-		// "on-click":
-		// "on-click-middle":
-		// "on-click-right":
-		// "on-scroll-up":
-		// "on-scroll-down":
-		// "smooth-scrolling-threshold":
-		"tooltip": false
-		// "tooltip-format":
-		// "escape":
-	},
 
 	"custom/distro": {
 		"format": "󰣇",
