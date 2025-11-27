@@ -27,7 +27,6 @@
 		"network",
 		"bluetooth",
 		"custom/right_div#5",
-        "tray"
 	],
 	"modules-right": [
 		"custom/left_div#6",
@@ -143,7 +142,7 @@
 		// "rotate":
 		"min-length": 2,
 		"max-length": 2,
-		"on-click": "blueman-manager",
+		"on-click": "ghostty --class=com.dominic.bluetui -e bluetui",
 		// "on-click-middle":
 		"on-click-right": "bluetoothctl power off && notify-send 'Bluetooth Off' -i 'network-bluetooth-inactive' -r 1925",
 		// "on-scroll-up":
@@ -231,8 +230,8 @@
 		"max-length": 7,
 		// "rotate":
 		"states": {
-			"warning": 75,
-			"critical": 90
+			"warning": 90,
+			"critical": 95
 		},
 		// "on-click":
 		// "on-click-middle":
@@ -330,9 +329,8 @@
 		// "rotate":
 		"min-length": 2,
 		"max-length": 2,
-		"on-click": "ghostty -e ~/.config/waybar/scripts/network.sh",
+		"on-click": "ghostty --class=com.dominic.impala -e impala",
 		// "on-click-middle":
-		"on-click-right": "nmcli radio wifi off && notify-send 'Wi-Fi Disabled' -i 'network-wireless-off' -r 1125",
 		// "on-scroll-up":
 		// "on-scroll-down":
 		// "smooth-scrolling-threshold":

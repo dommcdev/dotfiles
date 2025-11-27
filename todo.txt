@@ -1,6 +1,7 @@
 # Easy
 Fix grub auto-setup. Right now it adds the theme line multiple times. Also add other tweaks.
 Setup docker
+Get better wifi setup/fix tailscale flakieness
 Implement grimblast changes into new ver.
 Change davfs mounting to happen on boot, not auto-mount on demand
 Config files
