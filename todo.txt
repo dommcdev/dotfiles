@@ -1,6 +1,7 @@
 # Easy
 Create yaml/script for fingerprint sensor
-Fix grub auto-setup. Right now it adds the theme line multiple times. Also add other tweaks.
+Fix grub.yaml (adds theme line x3, implement other tweaks)
+Replace sddm/hyprlock theme
 Setup docker
 Get better wifi setup/fix tailscale flakieness
 Implement grimblast changes into new ver.
@@ -21,8 +22,6 @@ Mimetypes
 # To-do
 Nvim
     Autopairs plugin
-    Smooth scrolling via trackpad?
-    Setup per-file lsp indenting rules
     Setup a coderunner (shortcut or :command, per-file or makefile, floating terminal or split).
 Waybar
     Workspace indicators, time/date (center), weather
@@ -31,7 +30,6 @@ Waybar
     Calendar widget
 Rofi
     Web search, calculator, emoji/symbols, AI, quick notes (.txt to downloads)
-    Navigate options using ctrl+hjkl
     Switch between modes with ctrl shortcut - C-e, C-s, etc. Or type "emoji", "search" etc.
     Switch theme
 Yazi
@@ -39,13 +37,10 @@ Yazi
     Copy files to system clipboard (Linux and Mac)
     Save/link .local/state/yazi/.dds - for bookmark persistance
     Possible plugins - diff.yazi, [compress].yazi, lazygit.yazi, gvfs.yazi, trash??, mount.yazi
-Post-vm
-    Gpu passthrough
-    Fix virtualization (installing boxes fixes)
-    Figure out printers (Printer setup app?)
-Find good wifi/network app (impala?)
+Gpu passthrough
+Fix virtualization (installing boxes fixes)
+Figure out printers (Printer setup app?)
 Fix/theme bibata hyprcursor
-Tailscale not-ideal resolv.conf
 
 # Find tools, learn
 Yt-dlp workflow (tui? chrome?)
@@ -59,7 +54,6 @@ Yt-music but offline, for phone
 # Low Priority
 Notification center
 Fastfetch
-Tweak SDDM theme (image aligned, cursor correct)
 Chrome stylus sync (???)
 Tweak raycast
 Tweak rofi theme
@@ -81,7 +75,6 @@ Immich
 Gitlab
 BorgBackup (or equal.)
 Rasp pi for wireless android auto
-Power-profiles-daemon
 Local AI
 
 # Things to try
