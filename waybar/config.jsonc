@@ -136,7 +136,8 @@
 		"format": "󰂯",
 		"format-disabled": "󰂲",
 		"format-off": "󰂲",
-		"format-on": "󰂰",
+		"format-on": "󰂯",
+		// "format-on": "󰂰",
 		"format-connected": "󰂱",
 		// "format-connected-battery":
 		// "format-no-controller":
