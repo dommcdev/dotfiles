@@ -11,6 +11,7 @@ keybind = ctrl+enter=unbind
 # Prevent "Authorize clipboard access" dialog when using OSC 52 in nvim, etc
 clipboard-read=allow
 
+keybind=performable:ctrl+c=copy_to_clipboard
 
 # Simulate tmux
 #keybind = ctrl+f>shift+R=reload_config
