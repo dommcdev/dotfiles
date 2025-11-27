@@ -1,4 +1,5 @@
 # Easy
+Create yaml/script for fingerprint sensor
 Fix grub auto-setup. Right now it adds the theme line multiple times. Also add other tweaks.
 Setup docker
 Get better wifi setup/fix tailscale flakieness
