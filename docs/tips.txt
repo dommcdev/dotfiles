@@ -10,4 +10,4 @@ For libadwaita, use custom gtk.css in ~/.config/gtk-4.0/
 On Hyprland, simply place the hyprcursor in ~/.local/share/icons/ and it will automatically be picked up. If you have multiple, set the HYPRCURSOR_THEME and HYPRCURSOR_SIZE env vars in your hyprland conf/uwsm-hyprland file. 
 
 # Applying icon theme
-Gsettings (icon-theme) works for things like nautilus, but the gtk-4.0/settings.ini is needed for things like rofi.
+Gsettings (icon-theme) works for things like nautilus, but the gtk-4.0/settings.ini is needed for things like rofi (although rofi has a line for icon theme in its config).
