@@ -1,6 +1,7 @@
 #!/bin/env bash
 
 # Authenticate Tailscale (also sign in to Google in the process)
+# Tailscale note: At least when I'm on the same network as it, having a device configured as a subnet router off will result in tailscale not working. run tailscale up without the --accept-routes flag and it will work (have internet connectivity) again. 
 sudo tailscale up --accept-routes --reset --ssh
 sudo tailscale set --operator=$USER
 
