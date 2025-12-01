@@ -1,7 +1,7 @@
 
 - shell:
   - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed tailscale; else brew install --cask tailscale-app; fi
-  - sudo tailscale up --accept-routes --ssh --operator=$USER --reset
+  - if [ "$(uname)" = "Linux" ]; then sudo tailscale up --accept-routes --ssh --operator=$USER --reset
   - if [ "$(uname)" = "Linux" ]; then sudo systemctl enable tailscaled; fi
 
 # Subnet router note: Using --accept-routes DOES NOT WORK when on the same network as the subnet router WHEN that subnet router is off. 
