@@ -39,7 +39,7 @@
   - defaults write com.apple.finder NewWindowTargetPath -string "PfHm"
   - defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
   - defaults write com.apple.finder ShowRecentTags -bool false
-  - chflags hidden /Users/dominic/Pictures /Users/dominic/Documents /Users/dominic/Music /Users/dominic/Movies /Users/dominic/Desktop
+  - chflags hidden /Users/$USER/Pictures /Users/$USER/Documents /Users/$USER/Music /Users/$USER/Movies /Users/$USER/Desktop /Users/$USER/Public
   - defaults write com.apple.finder "FXPreferredViewStyle" -string "icnv"
   - /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy name" ~/Library/Preferences/com.apple.finder.plist
   -  defaults write com.apple.finder "_FXSortFoldersFirst" -bool "true"
@@ -54,7 +54,6 @@
   - defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true # no .DS_Store files on usb drives
   - defaults write com.apple.Spotlight MenuItemHidden -bool true # no spotlight icon in menu bar
   - mkdir -p ~/Downloads/Screenshots && defaults write com.apple.screencapture location ~/Downloads/Screenshots
-  - defaults write com.apple.universalaccess reduceMotion -bool true # reduce animations
   - defaults -currentHost write com.apple.controlcenter.plist BatteryShowPercentage -bool true # battery percent in menu bar
   - touch ~/.hushlogin # remove last login message from terminal windows
 
