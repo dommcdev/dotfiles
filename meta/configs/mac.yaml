@@ -57,17 +57,17 @@
   - defaults -currentHost write com.apple.controlcenter.plist BatteryShowPercentage -bool true # battery percent in menu bar
   - touch ~/.hushlogin # remove last login message from terminal windows
 
+  # Change hostname etc
+  - sudo scutil --set ComputerName "applepie"
+  - sudo scutil --set Hostname "applepie"
+  - sudo scutil --set LocalHostName "applepie"
+
    # Restart stuff
   - killall Dock
   - killall SystemUIServer
   - killall NotificationCenter
   - 'echo "Please log out/in for some keyboard shortcuts to take effect"'
 
-
-# Change hostname??
-
-
 # Note to self - main missing functionality
 #   No auto-tiling + focus follows mouse
 #   No ability to send application to different workspace
-#   Raycast cannot be easily launched when using terminal + internal shortcuts use ctrl instead of cmd
