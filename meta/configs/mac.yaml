@@ -59,7 +59,7 @@
 
   # Change hostname etc
   - sudo scutil --set ComputerName "applepie"
-  - sudo scutil --set Hostname "applepie"
+  - sudo scutil --set HostName "applepie"
   - sudo scutil --set LocalHostName "applepie"
 
    # Restart stuff
