@@ -2,7 +2,7 @@
 set -e
 
 # --- Vars ---
-DOTFILES_REPO="http://developermcd.com:8080/dominic/dotfiles.git"
+DOTFILES_REPO="git@github.com:dommcdev/dotfiles.git"
 DOTFILES_DIR="$HOME/dev/dotfiles"
 BREW_INSTALLED="/opt/homebrew/bin/brew"
 
@@ -20,7 +20,10 @@ fi
 
 # Install dotfile dependencies
 echo "Installing dotfile dependencies (git, python)..."
-brew install git python
+brew install git python gh
+
+# Setup github authentication
+gh auth login --web -p ssh
 
 # Clone dotfiles
 if [ ! -d "$DOTFILES_DIR" ]; then
@@ -34,3 +37,4 @@ fi
 echo "Running dotfiles installer..."
 cd "$DOTFILES_DIR" && ./install-profile mac
 
+#Add installing xcode dev tools to beginning of mac bootstrap script

@@ -6,5 +6,6 @@ List of things to do after installing dotfiles. Blame macOS.
 4) Grant Ghostty Full Disk Access
 5) sudo systemsetup -setremotelogin on
 6) Finder - remove items from sidebar, check "show item info", add home dir, setup nextcloud webDAV/bookmark
-7) Setup nextcloud desktop client - remove icon from menu bar
+7) Setup nextcloud desktop client
+8) Set wallpaper
 

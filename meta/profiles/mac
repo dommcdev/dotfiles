@@ -16,7 +16,6 @@ terminal
 tmux
 yazi
 ssh
-autoraise
 cava
 starship
 
