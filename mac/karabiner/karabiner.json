@@ -135,11 +135,11 @@
                         ]
                     },
                     {
-                        "description": "Map Hypr+c to Command+q, to close applications on macOS.",
+                        "description": "Map Hypr+x to Command+q, to close applications on macOS.",
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "c",
+                                    "key_code": "x",
                                     "modifiers": { "mandatory": ["left_command", "left_option", "left_control"] }
                                 },
                                 "to": [
