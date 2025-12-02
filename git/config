@@ -14,7 +14,7 @@
     lg = log --graph --abbrev-commit --decorate --all --color \
 --pretty=format:'%C(bold red)%h%C(reset) - %C(bold cyan)%ad%C(reset) %C(bold yellow)(%ar)%C(reset) %C(bold magenta)%d%C(reset) %s - %C(bold green)%an%C(reset)' \
 --date=format:'%Y-%m-%d %H:%M'
-    wip = git add . && git commit -m "wip"
+    wip = "!git add . && git commit -m 'wip'"
 
 [interactive]
     diffFilter = delta --color-only
