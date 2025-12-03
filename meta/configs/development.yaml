@@ -11,6 +11,7 @@
 
     # Gemini CLI
   - source "$HOME/.config/nvm/nvm.sh" && npm install -g @google/gemini-cli
+  - source "$HOME/.config/nvm/nvm.sh" && npm install -g opencode-ai@latest
 
     # Java, Clang
   - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed jdk-openjdk; else brew install java; fi

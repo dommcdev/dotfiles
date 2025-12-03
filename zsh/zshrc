@@ -98,6 +98,7 @@ node() { load_nvm node "$@"; }
 npm()  { load_nvm npm "$@"; }
 npx()  { load_nvm npx "$@"; }
 gemini()  { load_nvm gemini "$@"; }
+opencode()  { load_nvm opencode "$@"; }
 
 # --- Conditional macOS config ---
 if [[ "$(uname)" == "Darwin" ]]; then
