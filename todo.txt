@@ -1,4 +1,8 @@
 # Easy
+Find good markdown viewer
+Replace gnome polkit agent with hypr one 
+Find tui for flashing drives
+Better screenshot tool
 Create yaml/script for fingerprint sensor
 Fix grub.yaml (adds theme line x3, implement other tweaks)
 Replace sddm/hyprlock theme
