@@ -391,4 +391,26 @@ main() {
     parse-action "$ACTION" "$@"
 }
 
+# --- Custom Overrides ---
+
+# Custom date format matching old preference
+DATE_FORMAT="Screenshot %Y-%m-%d at %H.%M.%S"
+
+# Custom notification handler using Sushi
+notify::showparentdir() {
+    # Force shorter message to match legacy behavior
+    local title="Screenshot captured!"
+    local message=""
+    # Original args: $1=title, $2=message, $3=-i, $4=file_path
+
+    if $SHOW_FILE_NOTIFY; then
+        # $4 is the file path passed as the 4th argument
+        if [[ $(notify::ok -A "default=Open with Sushi" "$title" "$message" "$3" "$4") == "default" ]]; then
+            sushi "$4" || notify::error "Error opening with sushi"
+        fi
+    else
+        notify::ok "$title" "$message" "$3" "$4"
+    fi
+}
+
 main "$@"
