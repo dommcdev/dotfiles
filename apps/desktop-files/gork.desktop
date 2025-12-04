@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=SuperGork
+GenericName=Ai Gorkbot
+Comment=Chat with Gork
+Keywords=gork, gorkbot, gorktastic, grok, chatbot
+StartupWMClass=Google-chrome
+Exec=/usr/bin/google-chrome-stable --app="https://grok.com"
+StartupNotify=true
+Terminal=false
+Icon=grok
+Type=Application
+Categories=Network;WebBrowser;
