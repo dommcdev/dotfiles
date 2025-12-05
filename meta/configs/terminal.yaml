@@ -1,4 +1,4 @@
 
 - shell:
-  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed unrar github-cli wget curl ffmpeg 7zip fd ripgrep poppler zoxide imagemagick chafa resvg ncdu fzf trash-cli tldr whois eza jq less bluetui impala yt-dlp gum git-delta gnuplot nmap bind id3v2 bc lazygit; else brew install wget ffmpeg 7zip fd ripgrep poppler zoxide imagemagick ghostscript chafa resvg ncdu fzf tlrc eza jq less yt-dlp gum git-delta gnuplot nmap bind id3v2 bc; fi
+  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed unrar github-cli wget curl ffmpeg 7zip fd ripgrep poppler zoxide imagemagick chafa resvg ncdu fzf trash-cli tldr whois eza jq less bluetui impala yt-dlp gum git-delta gnuplot nmap bind id3v2 bc lazygit acpi; else brew install wget ffmpeg 7zip fd ripgrep poppler zoxide imagemagick ghostscript chafa resvg ncdu fzf tlrc eza jq less yt-dlp gum git-delta gnuplot nmap bind id3v2 bc; fi
 
