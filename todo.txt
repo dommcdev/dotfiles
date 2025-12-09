@@ -1,5 +1,6 @@
 # Easy
 Find good markdown viewer
+Power button should trigger rofi-power-menu w/auto-select timeout
 Replace gnome polkit agent with hypr one 
 Find tui for flashing drives
 Better screenshot tool
@@ -51,6 +52,7 @@ Rsync, taildrop
 Music player tui
 SSH (key-based auth, save system config)
 BTRFS
+BorgBackup (or equal.)
 Yt-music but offline, for phone
 
 # Low Priority
@@ -73,9 +75,11 @@ Better exa colors
 Better solution for ssh -> tmux -> nvim shared clipboard
 
 
-Immich
-Gitlab
-BorgBackup (or equal.)
+Server
+    Ubuntify shared dotfiles
+    Set up Caddy (or nginix?) reverse proxy
+    Re-set up nextcloud w/backups & above proxy
+    Immich, gitlab, etc
 Rasp pi for wireless android auto
 Local AI
 
