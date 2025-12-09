@@ -1,0 +1,11 @@
+[Unit]
+Description=Kickstart Nextcloud Mount after boot
+
+[Timer]
+# Wait 30 seconds after boot before triggering the mount
+OnBootSec=30
+# Trigger the actual mount unit, not the automount
+Unit=mnt-nextcloud.mount
+
+[Install]
+WantedBy=timers.target

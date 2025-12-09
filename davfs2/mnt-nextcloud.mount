@@ -9,6 +9,3 @@ Where=/mnt/nextcloud
 Type=davfs
 Options=uid=1000,file_mode=0664,dir_mode=2775,grpid
 TimeoutSec=15
-
-[Install]
-WantedBy=multi-user.target

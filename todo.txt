@@ -9,7 +9,6 @@ Fix grub.yaml (adds theme line x3, implement other tweaks)
 Replace sddm/hyprlock theme
 Setup docker
 Get better wifi setup/fix tailscale flakieness
-Change davfs mounting to happen on boot, not auto-mount on demand
 Config files
     Gnucash
     Aucacity (+ theme?)
