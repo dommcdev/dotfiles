@@ -1,5 +1,6 @@
 "cd" will cd to home directory
 "CTRL + L" will clear terminal screen
+ghostty +boo
 
 
 # Applying GTK Theme
