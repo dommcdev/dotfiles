@@ -27,6 +27,7 @@
 		"network",
 		"bluetooth",
 		"custom/right_div#5",
+        "tray"
 	],
 	"modules-right": [
 		"custom/left_div#6",
