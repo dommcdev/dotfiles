@@ -13,11 +13,11 @@
     # Install graphics drivers
   - sudo pacman -S --noconfirm --needed libva-mesa-driver libva-utils mesa vulkan-radeon
 
-    # Install arch utils
-  - sudo pacman -S --noconfirm --needed iwd wireless_tools wpa_supplicant smartmontools xdg-utils gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-plugins-base gst-plugins-base-libs gst-libav inetutils iwd ddcutil wl-clipboard gnome-keyring libsecret wev unzip wtype reflector brightnessctl sof-firmware acpi
+    # Install general utils
+  - sudo pacman -S --noconfirm --needed  smartmontools xdg-utils gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-plugins-base gst-plugins-base-libs gst-libav ddcutil wl-clipboard gnome-keyring libsecret wev unzip wtype reflector brightnessctl sof-firmware acpi
 
     # Install arch utils (gui)
-  - sudo pacman -S --noconfirm --needed virt-manager blueman pavucontrol networkmanager network-manager-applet nm-connection-editor noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
+  - sudo pacman -S --noconfirm --needed blueman pavucontrol noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
 
     # Nautilus
   - sudo pacman -S --noconfirm --needed nautilus nautilus-python gvfs-smb gvfs-dnssd gvfs-mtp sushi udiskie
@@ -25,4 +25,3 @@
     # AUR
   - yay -S --noconfirm --needed --answerdiff None --answerclean None downgrade clipse
 
-  - sudo systemctl enable iwd

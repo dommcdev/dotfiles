@@ -1,0 +1,4 @@
+
+- shell:
+  - sudo pacman -S --noconfirm --needed qemu-full virt-manager virt-viewer dnsmasq
+  - sudo systemctl enable --now libvirtd
