@@ -1,5 +1,4 @@
 # Easy
-Find good markdown viewer
 Power button should trigger rofi-power-menu w/auto-select timeout
 Find tui for flashing drives
 Better screenshot tool
@@ -24,6 +23,7 @@ Mimetypes
 Nvim
     Autopairs plugin
     Setup a coderunner (shortcut or :command, per-file or makefile, floating terminal or split).
+    Markdown viewer (in-browser - peek.nvim, live-preview.nvim, iamcco/markdown-preview)
 Waybar
     Workspace indicators, time/date (center), weather
     Volume, internet, bluetooth
