@@ -1,7 +1,6 @@
 # Easy
 Find good markdown viewer
 Power button should trigger rofi-power-menu w/auto-select timeout
-Replace gnome polkit agent with hypr one 
 Find tui for flashing drives
 Better screenshot tool
 Create yaml/script for fingerprint sensor
@@ -17,7 +16,6 @@ Add QOL things from omarchy (increased sudo timeout, lockscreen lockout, etc)
 Better brightness adjustment (pick level, then choose "apply" - include swayosd?)
 System update script (weekly reminder?)
 Document tailscale subnet router
-Set up hyprsunset
 Keybinding for sunshine/moonlight
 Set up separate conf for hyprlock
 Mimetypes

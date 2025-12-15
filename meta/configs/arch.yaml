@@ -14,7 +14,7 @@
   - sudo pacman -S --noconfirm --needed libva-mesa-driver libva-utils mesa vulkan-radeon
 
     # Install general utils
-  - sudo pacman -S --noconfirm --needed  smartmontools xdg-utils gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-plugins-base gst-plugins-base-libs gst-libav ddcutil wl-clipboard gnome-keyring libsecret wev unzip wtype reflector brightnessctl sof-firmware acpi
+  - sudo pacman -S --noconfirm --needed  smartmontools xdg-utils gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-plugins-base gst-plugins-base-libs gst-libav ddcutil wl-clipboard gnome-keyring libsecret wev unzip wtype reflector brightnessctl sof-firmware acpi fwupd
 
     # Install arch utils (gui)
   - sudo pacman -S --noconfirm --needed blueman pavucontrol noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
