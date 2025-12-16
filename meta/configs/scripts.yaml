@@ -3,6 +3,6 @@
     ~/.local/bin/:
       path: scripts/*
       glob: true
-    ~/.local/bin/sys: sys.sh
+    ~/.local/bin/sys: sys
 
 - shell: []

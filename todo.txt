@@ -6,7 +6,7 @@ Create yaml/script for fingerprint sensor
 Fix grub.yaml (adds theme line x3, implement other tweaks)
 Replace sddm/hyprlock theme
 Setup docker
-Get better wifi setup/fix tailscale flakieness
+Get better wifi setup (impala + nm = bad)
 Config files
     Gnucash
     Aucacity (+ theme?)
@@ -42,6 +42,7 @@ Gpu passthrough
 Fix virtualization (installing boxes fixes)
 Figure out printers (Printer setup app?)
 Fix/theme bibata hyprcursor
+Systemd-logind for custom power-button sequence (60s to shutdown)
 
 # Find tools, learn
 Yt-dlp workflow (tui? chrome?)

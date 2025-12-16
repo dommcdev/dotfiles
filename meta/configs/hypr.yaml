@@ -9,13 +9,13 @@
       glob: true
     ~/.config/hypr/hypridle.conf:
       path: hypr/hypridle-laptop.conf
-      if: '[ "$(./sys.sh power)" = "1" ]'
+      if: '[ "$(./sys power)" = "1" ]'
 #    ~/.config/systemd/user/polkit-gnome.service: hypr/systemd/polkit-gnome.service
 
 - link: 
     ~/.config/hypr/hypridle.conf:
       path: hypr/hypridle.conf
-      if: '[ "$(./sys.sh power)" = "0" ]'
+      if: '[ "$(./sys power)" = "0" ]'
 
 - shell:
   - sudo pacman -S --noconfirm --needed uwsm xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset grim slurp swayosd hyprpolkitagent
