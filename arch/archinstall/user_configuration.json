@@ -28,7 +28,7 @@
         "optional_repositories": []
     },
     "network_config": {
-        "type": "nm"
+        "type": "manual"
     },
     "ntp": true,
     "packages": [

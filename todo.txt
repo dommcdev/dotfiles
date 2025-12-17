@@ -1,12 +1,12 @@
 # Easy
 Power button should trigger rofi-power-menu w/auto-select timeout
+Public repo w/bootstrap scripts
 Find tui for flashing drives
 Better screenshot tool
 Create yaml/script for fingerprint sensor
 Fix grub.yaml (adds theme line x3, implement other tweaks)
 Replace sddm/hyprlock theme
 Setup docker
-Get better wifi setup (impala + nm = bad)
 Config files
     Gnucash
     Aucacity (+ theme?)
@@ -74,6 +74,7 @@ Better solution for ssh -> tmux -> nvim shared clipboard
 
 
 Server
+    Ubuntu server setup config?
     Ubuntify shared dotfiles
     Set up Caddy (or nginix?) reverse proxy
     Re-set up nextcloud w/backups & above proxy

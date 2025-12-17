@@ -1,20 +1,23 @@
 
 - shell:
   - sudo pacman -R --noconfirm iptables 2> /dev/null || true #Since we're about to install iptables-nft
-  - sudo pacman -S --noconfirm --needed nftables iptables-nft networkmanager nm-connection-editor iwd inetutils
-  - sudo pacman -S --noconfirm --needed network-manager-applet #eventually remove?
-
-  # wifi
-  - sudo systemctl enable iwd
-  - sudo systemctl disable wpa_supplicant
-  - sudo systemctl mask wpa_supplicant
+  - sudo pacman -S --noconfirm --needed nftables iptables-nft iwd inetutils impala
 
   # systemd-resolvd (dns)
   - sudo systemctl enable --now systemd-resolved
   - sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+  
+  # iwd
+  - sudo mkdir -p /etc/iwd
+  - sudo rm -f /etc/iwd/main.conf
+  - sudo cp network/iwd.conf /etc/iwd/main.conf
+  - sudo systemctl enable iwd
 
-  # Networkmanager conf
-  - sudo mkdir -p /etc/NetworkManager/conf.d
-  - sudo rm -f /etc/NetworkManager/conf.d/00-networkmanager.conf
-  - sudo cp network/networkmanager.conf /etc/NetworkManager/conf.d/00-networkmanager.conf
-  - sudo systemctl restart NetworkManager
+  # If using NetworkManager instead of impala
+  #- sudo pacman -S --noconfirm --needed networkmanager nm-connection-editor
+  #- yay -S --noconfirm --needed --answerdiff None --answerclean None gazelle-tui
+  #- sudo systemctl disable wpa_supplicant && sudo systemctl mask wpa_supplicant
+  #- sudo mkdir -p /etc/NetworkManager/conf.d
+  #- sudo rm -f /etc/NetworkManager/conf.d/00-networkmanager.conf
+  #- sudo cp network/networkmanager.conf /etc/NetworkManager/conf.d/00-networkmanager.conf
+  #- sudo systemctl restart NetworkManager
