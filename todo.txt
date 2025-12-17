@@ -5,12 +5,11 @@ Better screenshot tool
 Create yaml/script for fingerprint sensor
 Fix grub.yaml (adds theme line x3, implement other tweaks)
 Replace grub/sddm/hyprlock theme
-Setup docker
+Setup docker (steal from omarchy)
 Config files
     Gnucash
     Aucacity (+ theme?)
     Nautilus (dconf commands)
-Add QOL things from omarchy (increased sudo timeout, lockscreen lockout, etc)
 Better brightness adjustment (pick level, then choose "apply" - include swayosd?)
 System update script (weekly reminder?)
 Document tailscale subnet router
