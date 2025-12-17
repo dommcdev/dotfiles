@@ -4,8 +4,9 @@
 
 - shell:
   - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed openssh mosh; else brew install openssh; fi
-
-    # Enable systemd services
   - if [ "$(uname)" = "Linux" ]; then sudo systemctl enable sshd; fi
+  
+  # Solve common flakiness with ssh
+  - if [ "$(uname)" = "Linux" ]; then echo "net.ipv4.tcp_mtu_probing=1" | sudo tee -a /etc/sysctl.d/99-sysctl.conf; fi
 
 

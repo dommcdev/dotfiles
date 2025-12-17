@@ -1,11 +1,10 @@
 # Easy
-Power button should trigger rofi-power-menu w/auto-select timeout
 Public repo w/bootstrap scripts
 Find tui for flashing drives
 Better screenshot tool
 Create yaml/script for fingerprint sensor
 Fix grub.yaml (adds theme line x3, implement other tweaks)
-Replace sddm/hyprlock theme
+Replace grub/sddm/hyprlock theme
 Setup docker
 Config files
     Gnucash
@@ -16,7 +15,6 @@ Better brightness adjustment (pick level, then choose "apply" - include swayosd?
 System update script (weekly reminder?)
 Document tailscale subnet router
 Keybinding for sunshine/moonlight
-Set up separate conf for hyprlock
 Mimetypes
 
 # To-do
@@ -39,8 +37,6 @@ Yazi
     Save/link .local/state/yazi/.dds - for bookmark persistance
     Possible plugins - diff.yazi, [compress].yazi, lazygit.yazi, gvfs.yazi, trash??, mount.yazi
 Gpu passthrough
-Fix virtualization (installing boxes fixes)
-Figure out printers (Printer setup app?)
 Fix/theme bibata hyprcursor
 Systemd-logind for custom power-button sequence (60s to shutdown)
 
