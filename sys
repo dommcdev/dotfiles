@@ -1,32 +1,69 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# --- Detect OS ---
-if [[ "$(uname -s)" == "Darwin" ]]; then
-    ID="macos"
+# Path to the override file
+CONFIG_FILE="$XDG_CONFIG_HOME/.sys_env_override"
+
+# --- 1. Load Manual Overrides ---
+# We source the file if it exists. 
+# Format in file: OVERRIDE_ID="my-distro" and OVERRIDE_POWER=1
+if [[ -f "$CONFIG_FILE" ]]; then
+    source "$CONFIG_FILE"
+fi
+
+# --- 2. OS Detection ---
+if [[ -n "${OVERRIDE_ID:-}" ]]; then
+    ID="$OVERRIDE_ID"
 else
-    if [[ -f /etc/os-release ]]; then
+    UNAME=$(uname -s)
+    if [[ "$UNAME" == "Darwin" ]]; then
+        ID="macos"
+    elif [[ -f /etc/os-release ]]; then
         . /etc/os-release
-        # ID is already set by sourcing the file
+    fi
+    ID="${ID:-unknown}"
+fi
+
+# --- 3. Power Detection ---
+if [[ -n "${OVERRIDE_POWER:-}" ]]; then
+    POWER="$OVERRIDE_POWER"
+else
+    # Auto-detect logic
+    if [[ "$ID" == "macos" ]]; then
+        (pmset -g batt | grep -q "InternalBattery") && POWER=1 || POWER=0
     else
-        ID="unknown"
+        # Check for any battery starting with BAT or the macsmc bridge
+        if [ -d /sys/class/power_supply/BAT0 ] || [ -d /sys/class/power_supply/macsmc-battery ]; then
+            POWER=1
+        else
+            POWER=0
+        fi
     fi
 fi
 
-# --- Detect Power Status ---
-# 0 for wall power, 1 for battery
-POWER=0
-if [[ "$ID" == "macos" ]]; then
-    if pmset -g batt | grep -q "InternalBattery"; then POWER=1; fi
-else
-    # Check for any battery device starting with BAT
-    if ls /sys/class/power_supply/BAT* >/dev/null 2>&1; then POWER=1; fi
-fi
-
-# --- Output ---
+# --- 4. Output / Management ---
 case "${1:-all}" in
     id)    echo "$ID" ;;
     power) echo "$POWER" ;;
-    all)   echo "os=$ID power=$POWER" ;;
-    *)     echo "Usage: $0 {id|power|all}" >&2; exit 1 ;;
+    all)   echo "$ID $POWER" ;;
+    set-id)
+        echo "OVERRIDE_ID=\"$2\"" >> "$CONFIG_FILE"
+        echo "ID set to $2 in $CONFIG_FILE"
+        ;;
+    set-power)
+        echo "OVERRIDE_POWER=\"$2\"" >> "$CONFIG_FILE"
+        echo "Power set to $2 in $CONFIG_FILE"
+        ;;
+    reset)
+        if [[ -f "$CONFIG_FILE" ]]; then
+            rm "$CONFIG_FILE"
+            echo "Overrides cleared. Reverting to auto-detection."
+        else
+            echo "No override file found. Already using auto-detection."
+        fi
+        ;;
+    help)
+        echo "Usage: $0 {id|power|all|set-id <val>|set-power <val>|reset}" >&2
+        exit 1
+        ;;
 esac
