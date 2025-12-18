@@ -1,4 +1,5 @@
 # Easy
+Figure out screen sharing
 Public repo w/bootstrap scripts
 Find tui for flashing drives
 Better screenshot tool

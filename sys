@@ -1,27 +1,32 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# --- Detect distro ---
-UNAME=$(uname -s)
-if [[ "$UNAME" == "Darwin" ]]; then
-  ID="macos"
-fi
-if [[ -f /etc/os-release ]]; then
-  . /etc/os-release
-fi
-ID="${ID:-unknown}"
-
-# 0 for desktop, 1 for laptop
-#Note to self - this needs more testing!
-if [ -d /sys/class/power_supply/BAT0 ] || [ -d /sys/class/power_supply/macsmc-battery ]; then
-  POWER=1
+# --- Detect OS ---
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    ID="macos"
 else
-  POWER=0
+    if [[ -f /etc/os-release ]]; then
+        . /etc/os-release
+        # ID is already set by sourcing the file
+    else
+        ID="unknown"
+    fi
 fi
 
-# --- Output requested value ---
+# --- Detect Power Status ---
+# 0 for wall power, 1 for battery
+POWER=0
+if [[ "$ID" == "macos" ]]; then
+    if pmset -g batt | grep -q "InternalBattery"; then POWER=1; fi
+else
+    # Check for any battery device starting with BAT
+    if ls /sys/class/power_supply/BAT* >/dev/null 2>&1; then POWER=1; fi
+fi
+
+# --- Output ---
 case "${1:-all}" in
-  id) echo "$ID" ;;
-  power) echo "$POWER" ;;
-  all) echo "$ID $POWER" ;;
+    id)    echo "$ID" ;;
+    power) echo "$POWER" ;;
+    all)   echo "os=$ID power=$POWER" ;;
+    *)     echo "Usage: $0 {id|power|all}" >&2; exit 1 ;;
 esac
