@@ -1,0 +1,167 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# --- Color Definitions ---
+NC='\033[0m'
+WHITE='\033[1;37m'      # Bright White (Eyes/Belly)
+GREY='\033[1;30m'       # Dark Grey (Body Outline) - much more distinct than 0;37
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+ORANGE='\033[0;33m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'     # Beak and Feet
+RED='\033[0;31m'
+PURPLE='\033[0;35m'
+
+show_logo() {
+    local id=$1
+    clear
+
+    case "$id" in
+        "arch")
+            # All Teal (CYAN)
+            printf "${CYAN}                    -\`\n"
+            printf "                   .o+\`\n"
+            printf "                  \`ooo/\n"
+            printf "                 \`+oooo:\n"
+            printf "               \`+oooooo:\n"
+            printf "               -+oooooo+:\n"
+            printf "             \`/:-:++oooo+:\n"
+            printf "            \`/++++/+++++++:\n"
+            printf "           \`/++++++++++++++:\n"
+            printf "          \`/+++ooooooooooooo/\`\n"
+            printf "         ./ooosssso++osssssso+\`\n"
+            printf "        .oossssso-..../ossssss+\`\n"
+            printf "       -osssssso.      :ssssssso.\n"
+            printf "       -osssssss/        osssso+++.\n"
+            printf "      /ossssssss/        +ssssooo/-\n"
+            printf "    \`/ossssso+/:-        -:/+osssso+-\n"
+            printf "   \`+sso+:-                \`.-/+oso:\n"
+            printf "  \`++:.                           \`-/+/\n"
+            printf "  .\`                                 \`/\n"
+            ;;
+
+        "fedora")
+            printf "${BLUE}               .',;::::;,'..\n"
+            printf "           .';:cccccccccccc:;,..\n"
+            printf "       .;cccccccccccccccccccccc;.\n"
+            printf "     .:cccccccccccccccccccccccccc:.\n"
+            printf "   .;ccccccccccccc;${WHITE}.:dddl:.${BLUE};ccccccc;.\n"
+            printf "  .:ccccccccccccc;${WHITE}OWMKOOXMWd${BLUE};ccccccc:.\n"
+            printf " .:ccccccccccccc;${WHITE}KMMc${BLUE};cc;${WHITE}xMMc${BLUE};ccccccc:.\n"
+            printf " ,cccccccccccccc;${WHITE}MMM.${BLUE};cc;${WHITE};WW:${BLUE};cccccccc,\n"
+            printf " :cccccccccccccc;${WHITE}MMM.${BLUE};cccccccccccccccc:\n"
+            printf " :ccccccc;${WHITE}oxOOOo${BLUE};${WHITE}MMM000k.${BLUE};cccccccccccc:\n"
+            printf " cccccc;${WHITE}0MMKxdd:${BLUE};${WHITE}MMMkddc.${BLUE};cccccccccccc;\n"
+            printf " ccccc;${WHITE}XMO'${BLUE};cccc;${WHITE}MMM.${BLUE};cccccccccccccccc'\n"
+            printf " ccccc;${WHITE}MMo${BLUE};ccccc;${WHITE}MMW.${BLUE};ccccccccccccccc;\n"
+            printf " ccccc;${WHITE}0MNc.${BLUE}ccc${WHITE}.xMMd${BLUE};ccccccccccccccc;\n"
+            printf " cccccc;${WHITE}dNMWXXXWM0:${BLUE};cccccccccccccc:,\n"
+            printf " cccccccc;${WHITE}.:odl:.${BLUE};cccccccccccccc:.,\n"
+            printf " ccccccccccccccccccccccccccccc:'.\n"
+            printf " :cccccccccccccccccccccc:;,..\n"
+            printf "  ':cccccccccccccccc::;,..\n"
+            ;;
+
+        "ubuntu")
+            # All Red
+            printf "${RED}                             ....\n"
+            printf "               .',:clooo:   .:looooo:.\n"
+            printf "            .;looooooooc   .oooooooooo'\n"
+            printf "         .;loooooool:,''.   :ooooooooooc\n"
+            printf "        ;looool;.          'oooooooooo,\n"
+            printf "       ;clool'             .cooooooc.  ,,\n"
+            printf "          ...                 ......   .:oo,\n"
+            printf " .;clol:,.                         .loooo'\n"
+            printf ":ooooooooo,                         'ooool\n"
+            printf "'ooooooooooo.                         loooo.\n"
+            printf "'ooooooooool                          coooo.\n"
+            printf ",loooooooc.                         .loooo.\n"
+            printf "   .,;;;'.                          ;ooooc\n"
+            printf "       ...                          ,ooool.\n"
+            printf "    .cooooc.               ..',,'.  .cooo.\n"
+            printf "      ;ooooo:.            ;oooooooc.  :l.\n"
+            printf "       .coooooc,..       coooooooooo.\n"
+            printf "         .:ooooooolc:.  .ooooooooooo'\n"
+            printf "           .':loooooo;   ,oooooooooc\n"
+            printf "               ..';::c'   .;loooo:'\n"
+            ;;
+
+        "macos")
+            # Rainbow with Blue base
+            printf "${GREEN}                     ..\n"
+            printf "                  ,xNMM.\n"
+            printf "                .OMMMMo\n"
+            printf "                lMM\"\n"
+            printf "      .;loddo:.  .olloddol;.\n"
+            printf "    cKMMMMMMMMMMNWMMMMMMMMMM0:\n"
+            printf "${YELLOW} .KMMMMMMMMMMMMMMMMMMMMMMMWd.\n"
+            printf "${YELLOW} XMMMMMMMMMMMMMMMMMMMMMMMX.\n"
+            printf "${ORANGE};MMMMMMMMMMMMMMMMMMMMMMMM:\n"
+            printf "${ORANGE}:MMMMMMMMMMMMMMMMMMMMMMMM:\n"
+            printf "${RED}.MMMMMMMMMMMMMMMMMMMMMMMMX.\n"
+            printf "${RED} kMMMMMMMMMMMMMMMMMMMMMMMWd.\n"
+            printf "${RED} 'XMMMMMMMMMMMMMMMMMMMMMMMMMMk\n"
+            printf "${PURPLE}  'XMMMMMMMMMMMMMMMMMMMMMMMMK.\n"
+            printf "${PURPLE}    kMMMMMMMMMMMMMMMMMMMMMMd\n"
+            printf "${BLUE}     ;KMMMMMMMWXXWMMMMMMMk.\n"
+            printf "${BLUE}       \"cooc*\"    \"*coo'\"\n"
+            ;;
+
+        *)
+            # Shaded Generic Linux Tux
+            # Uses GREY (Dark Grey) for outline and WHITE (Bright White) for belly
+            printf "         ${GREY}#####\n"
+            printf "        ${GREY}#######\n"
+            printf "        ${GREY}##${WHITE}O${GREY}#${WHITE}O${GREY}##\n"
+            printf "        ${GREY}#${YELLOW}#####${GREY}#\n"
+            printf "      ${GREY}##${WHITE}##${YELLOW}###${WHITE}##${GREY}##\n"
+            printf "     ${GREY}#${WHITE}##########${GREY}##\n"
+            printf "    ${GREY}#${WHITE}############${GREY}##\n"
+            printf "    ${GREY}#${WHITE}############${GREY}###\n"
+            printf "   ${YELLOW}##${GREY}#${WHITE}###########${GREY}##${YELLOW}#\n"
+            printf " ${YELLOW}######${GREY}#${WHITE}#######${GREY}#${YELLOW}######\n"
+            printf " ${YELLOW}#######${GREY}#${WHITE}#####${GREY}#${YELLOW}#######\n"
+            printf "   ${YELLOW}#####${GREY}#######${YELLOW}#####\n"
+            ;;
+    esac
+    printf "${NC}\n"
+}
+
+run_install() {
+    local sys_id=$1
+    echo -e "${GREEN}🚀 Starting installation for $sys_id...${NC}"
+    # ./install-alone "$sys_id"
+    exit 0
+}
+
+# --- Main Interaction Loop ---
+while true; do
+    CURRENT_ID=$(./sys id)
+    CURRENT_POWER=$(./sys power)
+    
+    show_logo "$CURRENT_ID"
+    
+    echo -e "--- ${YELLOW}System Detection${NC} ---"
+    echo -e "System ID: ${CYAN}$CURRENT_ID${NC}"
+    echo -e "Hardware:  ${CYAN}$( [[ "$CURRENT_POWER" == "1" ]] && echo "Laptop" || echo "Desktop" )${NC}"
+    echo "----------------------------"
+    echo
+    
+    read -p "Proceed with installation? (Y/n): " PROCEED
+    PROCEED=${PROCEED:-y}
+
+    if [[ "$PROCEED" =~ ^[Yy]$ ]]; then
+        run_install "$CURRENT_ID"
+    else
+        echo -e "\n${YELLOW}Manual Override Mode${NC}"
+        read -p "Override ID? (Enter to keep '$CURRENT_ID'): " NEW_ID
+        [[ -n "$NEW_ID" ]] && ./sys set-id "$NEW_ID"
+
+        read -p "Override Hardware? (1=Laptop, 0=Desktop, Enter to skip): " NEW_POWER
+        [[ -n "$NEW_POWER" ]] && ./sys set-power "$NEW_POWER"
+        
+        echo -e "\n${BLUE}Refreshing configuration...${NC}"
+        sleep 0.5
+    fi
+done
