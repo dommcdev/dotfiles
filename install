@@ -132,7 +132,7 @@ show_logo() {
 run_install() {
     local sys_id=$1
     echo -e "${GREEN}Starting installation for $sys_id...${NC}"
-    ./install-profile "$sys_id"
+    ./meta/install-profile "$sys_id"
     exit 0
 }
 

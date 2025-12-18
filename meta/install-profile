@@ -12,13 +12,27 @@ PROFILES_DIR="profiles"
 DOTBOT_DIR="dotbot"
 DOTBOT_BIN="bin/dotbot"
 
-BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# If putting this file in [dotfiles-dir]
+#BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# If putting this file in the [dotfiles-dir]/meta
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BASE_DIR="$(dirname "$SCRIPT_DIR")"
 
 
 cd "${BASE_DIR}"
-git submodule update --init --recursive --remote
+git -C "${BASE_DIR}" submodule sync --quiet --recursive
+git submodule update --init --recursive "${BASE_DIR}"
 
-for config in ${@}; do
+
+while IFS= read -r config; do
+    CONFIGS+=" ${config}"
+done < "${META_DIR}/${PROFILES_DIR}/$1"
+
+shift
+
+for config in ${CONFIGS} ${@}; do
+    echo -e "\nConfigure $config"
     # create temporary file
     configFile="$(mktemp)"
     suffix="-sudo"
