@@ -5,3 +5,6 @@
     # Install GUI packages
   - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed file-roller impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar libreoffice-fresh blender kdenlive ttf-jetbrains-mono-nerd nextcloud-client gnome-power-manager; else brew install font-jetbrains-mono-nerd-font && brew install --cask moonlight nextcloud; fi
   - if [ "$(uname)" = "Linux" ]; then flatpak install --assumeyes --noninteractive flathub org.nickvision.tubeconverter io.gitlab.adhami3310.Footage org.gnucash.GnuCash dev.vencord.Vesktop be.alexandervanhee.gradia; else brew install --cask gnucash; fi
+    
+  # Nautilus
+  - sudo pacman -S --noconfirm --needed nautilus nautilus-python gvfs-smb gvfs-dnssd gvfs-mtp sushi udiskie

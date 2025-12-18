@@ -16,9 +16,6 @@
     # Install general utils
   - sudo pacman -S --noconfirm --needed  smartmontools xdg-utils gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-plugins-base gst-plugins-base-libs gst-libav ddcutil wl-clipboard gnome-keyring libsecret wev unzip wtype reflector brightnessctl sof-firmware acpi fwupd blueman pavucontrol noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
 
-    # Nautilus
-  - sudo pacman -S --noconfirm --needed nautilus nautilus-python gvfs-smb gvfs-dnssd gvfs-mtp sushi udiskie
-
     # AUR packages
   - yay -S --noconfirm --needed --answerdiff None --answerclean None downgrade clipse
 
