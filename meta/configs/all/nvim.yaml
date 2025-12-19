@@ -3,4 +3,11 @@
     ~/.config/nvim: nvim
 
 - shell:
-  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed neovim; else brew install neovim; fi
+  - |
+    if [[ "$(./sys id)" == "arch" ]]; then
+      sudo pacman -S --noconfirm --needed neovim
+    elif [[ "$(./sys id)" == "ubuntu" ]]; then
+      sudo apt install -y neovim
+    elif [[ "$(./sys id)" == "macos" ]]; then
+      brew install neovim
+    fi
