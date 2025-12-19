@@ -14,7 +14,7 @@
   - sudo pacman -S --noconfirm --needed libva-mesa-driver libva-utils mesa vulkan-radeon intel-media-driver
 
     # Install general utils
-  - sudo pacman -S --noconfirm --needed  smartmontools xdg-utils gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-plugins-base gst-plugins-base-libs gst-libav ddcutil wl-clipboard gnome-keyring libsecret wev unzip wtype reflector brightnessctl sof-firmware acpi fwupd blueman pavucontrol noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
+  - sudo pacman -S --noconfirm --needed smartmontools xdg-utils gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-plugins-base gst-plugins-base-libs gst-libav ddcutil wl-clipboard gnome-keyring libsecret wev unzip wtype reflector brightnessctl sof-firmware acpi fwupd blueman pavucontrol 
 
     # AUR packages
   - yay -S --noconfirm --needed --answerdiff None --answerclean None downgrade clipse
@@ -28,6 +28,4 @@
     # Give the user 10 instead of 3 tries to fat finger their password before lockout
   - echo "Defaults passwd_tries=10" | sudo tee /etc/sudoers.d/passwd-tries
   - sudo chmod 440 /etc/sudoers.d/passwd-tries
-
-    # Set for hyprlock too
-  - sudo sed -i 's/^# *deny = .*/deny = 10/' /etc/security/faillock.conf
+  - sudo sed -i 's/^# *deny = .*/deny = 10/' /etc/security/faillock.conf # Set for hyprlock too

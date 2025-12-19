@@ -1,6 +1,5 @@
 # Easy
 Figure out screen sharing
-Public repo w/bootstrap scripts
 Find tui for flashing drives
 Better screenshot tool
 Create yaml/script for fingerprint sensor
@@ -56,7 +55,6 @@ Chrome stylus sync (???)
 Tweak raycast
 Tweak rofi theme
 Tweak starship
-Fonts?
 OnlyOffice theme
 Theme cliphist (+ auto-paste)
 Theme script
