@@ -4,19 +4,19 @@
 
 - shell:
   - |
-    if [[ "$(sys id)" == "arch" ]]; then
+    if [[ "$(./sys id)" == "arch" ]]; then
       sudo pacman -S --noconfirm --needed openssh mosh
       sudo systemctl enable sshd
-    elif [[ "$(sys id)" == "ubuntu" ]]; then
+    elif [[ "$(./sys id)" == "ubuntu" ]]; then
       sudo apt install -y openssh-server
       sudo systemctl enable ssh
-    elif [[ "$(sys id)" == "macos" ]]; then 
+    elif [[ "$(./sys id)" == "macos" ]]; then 
       brew install openssh
     fi
 
   # Solve common flakiness with ssh
   - |
-    if [[ "$(sys type)" == "Linux" ]]; then
+    if [[ "$(./sys type)" == "Linux" ]]; then
       # Only append if the string isn't already in the file
       grep -qxF "net.ipv4.tcp_mtu_probing=1" /etc/sysctl.d/99-sysctl.conf || \
       echo "net.ipv4.tcp_mtu_probing=1" | sudo tee -a /etc/sysctl.d/99-sysctl.conf

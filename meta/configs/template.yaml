@@ -3,4 +3,4 @@
     ~/.config/nvim: nvim
 
 - shell:
-  - if [[ "$(sys id)" == "arch" ]]; then echo "hello world"; fi
+  - if [[ "$(./sys id)" == "arch" ]]; then echo "hello world"; fi
