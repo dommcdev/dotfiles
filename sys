@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Path to the override file
-CONFIG_FILE="$XDG_CONFIG_HOME/.sys_env_override"
+CONFIG_FILE="$HOME/.config/.sys_env_override"
 TYPE=$(uname -s)
 
 # --- 1. Load Manual Overrides ---
