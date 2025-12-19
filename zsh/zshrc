@@ -29,7 +29,7 @@ export FZF_DEFAULT_OPTS="\
 --color=fg:#CDD6F4,header:#A6E3A1,info:#89B4FA,pointer:#F9E2AF \
 --color=marker:#94E2D5,fg+:#CDD6F4,prompt:#FAB387,hl+:#F38BA8 \
 --color=selected-bg:#45475A \
---color=border:#6C7086,label:#89B4FA
+--color=border:#6C7086,label:#89B4FA \
 --height 20% \
 --info=inline \
 --layout=reverse"
