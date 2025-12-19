@@ -3,4 +3,13 @@
     ~/.config/starship.toml: tui/starship/starship.toml
 
 - shell:
-  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed starship; else brew install starship; fi
+  - |
+    if [[ "$(./sys id)" == "arch" ]]; then
+      sudo pacman -S --noconfirm --needed starship
+    elif [[ "$(./sys id)" == "ubuntu" ]]; then
+      curl -sS https://starship.rs/install.sh -o /tmp/starship_install.sh
+      sh /tmp/starship_install.sh 
+      #sudo apt install -y starship #after 25.04
+    elif [[ "$(./sys id)" == "macos" ]]; then
+      brew install starship
+    fi
