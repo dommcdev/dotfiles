@@ -18,7 +18,7 @@ ARCHISO_BUILD_DIR="$ARCHISO_REPO_DIR/my-archiso"
 ARCHISO_PROFILE="releng"
 
 # Location of files to place in iso
-SOURCE_DIR="$HOME/dev/dotfiles/arch/archinstall"
+SOURCE_DIR="$HOME/dev/dotfiles/public/arch"
 
 
 # --- Functions ---
