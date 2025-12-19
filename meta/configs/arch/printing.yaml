@@ -1,6 +1,7 @@
 
 - shell:
-  - sudo pacman -S --noconfirm --needed cups cups-browsed avahi
+  - sudo pacman -S --noconfirm --needed cups cups-browsed cups-pdf system-config-printer avahi
+  #note - system config printer didn't seem to work very well - it crashes
 
   # Disable multicast dns in resolved. Avahi will provide this for better network printer discovery
   - "sudo mkdir -p /etc/systemd/resolved.conf.d"
