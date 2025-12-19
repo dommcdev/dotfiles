@@ -3,9 +3,14 @@
     ~/.config/zsh/.zshrc: zsh/zshrc
     ~/.config/zsh/.zprofile:
       path: zsh/zprofile-mac
-      if: '[ "$(uname)" = "Darwin" ]'
+      if: '[[ "$(./sys type)" = "Darwin" ]]'
     ~/.zshenv: zsh/zshenv
 
 - shell:
-  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed zsh; fi
+  - |
+    if [[ "$(./sys id)" == "arch" ]]; then
+      sudo pacman -S --noconfirm --needed zsh
+    elif [[ "$(./sys id)" == "ubuntu" ]]; then
+      sudo apt install -y zsh
+    fi
   - if [ "$SHELL" != "$(which zsh)" ]; then chsh -s "$(which zsh)"; fi
