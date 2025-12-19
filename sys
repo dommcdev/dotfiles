@@ -3,6 +3,7 @@ set -euo pipefail
 
 # Path to the override file
 CONFIG_FILE="$XDG_CONFIG_HOME/.sys_env_override"
+TYPE=$(uname -s)
 
 # --- 1. Load Manual Overrides ---
 # We source the file if it exists. 
@@ -15,8 +16,7 @@ fi
 if [[ -n "${OVERRIDE_ID:-}" ]]; then
     ID="$OVERRIDE_ID"
 else
-    UNAME=$(uname -s)
-    if [[ "$UNAME" == "Darwin" ]]; then
+    if [[ "$TYPE" == "Darwin" ]]; then
         ID="macos"
     elif [[ -f /etc/os-release ]]; then
         . /etc/os-release
@@ -41,10 +41,12 @@ else
     fi
 fi
 
-# --- 4. Output / Management ---
+
+# --- 5. Output ---
 case "${1:-all}" in
     id)    echo "$ID" ;;
     power) echo "$POWER" ;;
+    type) echo "$TYPE" ;;
     all)   echo "$ID $POWER" ;;
     set-id)
         echo "OVERRIDE_ID=\"$2\"" >> "$CONFIG_FILE"
