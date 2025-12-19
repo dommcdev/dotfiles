@@ -105,6 +105,11 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias rm='trash'
 fi
 
+# --- Conditional ubuntu config ---
+if [[ "$($HOME/dev/dotfiles/sys id)" == "ubuntu" ]]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
 
 # Last but certainly not least...:)
 fastfetch
