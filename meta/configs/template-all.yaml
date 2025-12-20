@@ -7,8 +7,7 @@
     if [[ "$(./sys id)" == "arch" ]]; then
       sudo pacman -S --noconfirm --needed tailscale
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
-      curl -fsSL https://tailscale.com/install.sh -o /tmp/tailscale_install.sh
-      sh /tmp/tailscale_install.sh
+      sudo apt install -y tailscale
     elif [[ "$(./sys id)" == "macos" ]]; then
-      brew install --cask tailscale-app;
+      brew install tailscale
     fi

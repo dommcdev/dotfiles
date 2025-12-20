@@ -3,4 +3,11 @@
     ~/.config/btop: tui/btop
 
 - shell:
-  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed btop; else brew install btop; fi
+  - |
+    if [[ "$(./sys id)" == "arch" ]]; then
+      sudo pacman -S --noconfirm --needed btop
+    elif [[ "$(./sys id)" == "ubuntu" ]]; then
+      brew install btop
+    elif [[ "$(./sys id)" == "macos" ]]; then
+      brew install btop
+    fi
