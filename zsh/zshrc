@@ -2,6 +2,7 @@
 # Must be at top for programs installed via brew to be in path
 if [[ "$($HOME/dev/dotfiles/sys id)" == "ubuntu" ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    alias fd='fdfind'
 fi
 
 # Main zsh options

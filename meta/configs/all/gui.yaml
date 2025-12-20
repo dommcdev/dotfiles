@@ -3,7 +3,7 @@
   - mkdir -p ~/Downloads
 
     # Install GUI packages
-  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed file-roller impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar libreoffice-fresh blender kdenlive nextcloud-client gnome-power-manager; else brew install --cask moonlight nextcloud; fi
+  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed file-roller impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar libreoffice-fresh blender kdenlive nextcloud-client gnome-power-manager bluetui playerctl; else brew install --cask moonlight nextcloud; fi
   - if [ "$(uname)" = "Linux" ]; then flatpak install --assumeyes --noninteractive flathub org.nickvision.tubeconverter io.gitlab.adhami3310.Footage org.gnucash.GnuCash dev.vencord.Vesktop be.alexandervanhee.gradia; else brew install --cask gnucash; fi
     
   # Nautilus
