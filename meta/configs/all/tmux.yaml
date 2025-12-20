@@ -6,4 +6,11 @@
       glob: true
 
 - shell:
-  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed tmux; else brew install tmux; fi
+  - |
+    if [[ "$(./sys id)" == "arch" ]]; then
+      sudo pacman -S --noconfirm --needed tmux
+    elif [[ "$(./sys id)" == "ubuntu" ]]; then
+      brew install tmux
+    elif [[ "$(./sys id)" == "macos" ]]; then
+      brew install tmux
+    fi
