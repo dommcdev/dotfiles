@@ -1,3 +1,9 @@
+# --- Conditional ubuntu config ---
+# Must be at top for programs installed via brew to be in path
+if [[ "$($HOME/dev/dotfiles/sys id)" == "ubuntu" ]]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
 # Main zsh options
 HISTFILE=~/.local/state/zsh_history
 HISTSIZE=5000
@@ -103,11 +109,6 @@ opencode()  { load_nvm opencode "$@"; }
 # --- Conditional macOS config ---
 if [[ "$(uname)" == "Darwin" ]]; then
     alias rm='trash'
-fi
-
-# --- Conditional ubuntu config ---
-if [[ "$($HOME/dev/dotfiles/sys id)" == "ubuntu" ]]; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 
