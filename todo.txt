@@ -69,7 +69,6 @@ Better solution for ssh -> tmux -> nvim shared clipboard
 
 Server
     Ubuntu server setup config?
-    Ubuntify shared dotfiles
     Set up Caddy (or nginix?) reverse proxy
     Re-set up nextcloud w/backups & above proxy
     Immich, gitlab, etc
