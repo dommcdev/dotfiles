@@ -23,7 +23,8 @@
     if [[ "$(./sys id)" == "arch" ]]; then
       sudo pacman -S --noconfirm --needed bat yazi btop fastfetch cava
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
-      brew install bat yazi btop fastfetch cava
+      brew install bat yazi btop fastfetch
+      sudo apt install -y cava
       #sudo add-apt-repository -y ppa:zhangsongcui3371/fastfetch && sudo apt update
       #sudo apt install -y fastfetch
     elif [[ "$(./sys id)" == "macos" ]]; then
