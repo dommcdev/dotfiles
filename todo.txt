@@ -16,6 +16,10 @@ Document tailscale subnet router
 Keybinding for sunshine/moonlight
 Mimetypes
 
+Dotfiles install
+    Script to generate profile files based on contents of meta/Config
+    Add manual selection for choice of server/de/riced in install
+
 # To-do
 Nvim
     Autopairs plugin
@@ -65,6 +69,7 @@ Hyprland - better animations
 Kvantum isn't working - need to install KvantumManager?
 Better exa colors
 Better solution for ssh -> tmux -> nvim shared clipboard
+Ubuntu de and riced support
 
 
 Server
