@@ -1,14 +1,12 @@
 arch/arch
 arch/pacman
-all/terminal
+all/cli
+all/tui
 arch/keyd
 arch/apps
-all/bat
-all/btop
 all/chrome
 arch/cursors
 arch/dunst
-all/fastfetch
 all/ghostty
 arch/gimp
 all/git
@@ -31,7 +29,6 @@ all/yazi
 all/zsh
 all/development
 all/ssh
-all/cava
 all/starship
 arch/timeshift
 all/fun

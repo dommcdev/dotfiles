@@ -1,9 +1,6 @@
 all/zsh
 all/development
-all/bat
-all/btop
 all/chrome
-all/fastfetch
 all/ghostty
 all/git
 mac/karabiner
@@ -12,11 +9,10 @@ all/onlyoffice
 mac/rectangle
 all/scripts
 all/gui
-all/terminal
+all/cli
+all/tui
 all/tmux
-all/yazi
 all/ssh
-all/cava
 all/starship
 all/tailscale
 

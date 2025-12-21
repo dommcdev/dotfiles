@@ -1,6 +1,6 @@
 
 - link:
-    ~/.config/starship.toml: tui/starship/starship.toml
+    ~/.config/starship.toml: starship/starship.toml
 
 - shell:
   - |

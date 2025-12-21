@@ -1,0 +1,35 @@
+
+- link:
+    ~/.config/bat: tui/bat
+    ~/.config/yazi: tui/yazi
+    ~/.config/btop: tui/btop
+    ~/.config/cava/config: tui/cava/config
+    ~/.config/fastfetch/config.jsonc:
+      path: tui/fastfetch/config-arch.jsonc
+      if: '[[ "$(./sys id)" == "arch" ]]'
+
+- link:
+    ~/.config/fastfetch/config.jsonc:
+      path: tui/fastfetch/config-mac.jsonc
+      if: '[[ "$(./sys id)" == "macos" ]]'
+
+- link:
+    ~/.config/fastfetch/config.jsonc:
+      path: tui/fastfetch/config-ubuntu.jsonc
+      if: '[[ "$(./sys id)" == "ubuntu" ]]'
+
+- shell:
+  - |
+    if [[ "$(./sys id)" == "arch" ]]; then
+      sudo pacman -S --noconfirm --needed bat yazi btop fastfetch cava
+    elif [[ "$(./sys id)" == "ubuntu" ]]; then
+      brew install bat yazi btop fastfetch cava
+      #sudo add-apt-repository -y ppa:zhangsongcui3371/fastfetch && sudo apt update
+      #sudo apt install -y fastfetch
+    elif [[ "$(./sys id)" == "macos" ]]; then
+      brew install bat yazi btop fastfetch cava
+    fi
+  - bat cache --build
+
+#Notes
+#Cava does not work on macos without additional setup
