@@ -6,22 +6,5 @@
     # Install yay
   - command -v yay > /dev/null || (sudo pacman -S --noconfirm --needed base-devel && cd /tmp && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm)
   
-    # Install graphics drivers
-  - sudo pacman -S --noconfirm --needed libva-mesa-driver libva-utils mesa vulkan-radeon intel-media-driver
-
-    # Install general utils
-  - sudo pacman -S --noconfirm --needed smartmontools xdg-utils gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-plugins-base gst-plugins-base-libs gst-libav ddcutil wl-clipboard gnome-keyring libsecret wev wtype reflector brightnessctl sof-firmware acpi fwupd 
-
     # AUR packages
-  - yay -S --noconfirm --needed --answerdiff None --answerclean None downgrade clipse
-
-# Misc stuff
-
-    # Increase lockout limit to 10 and decrease timeout to 2 minutes
-  - sudo sed -i 's|^\(auth\s\+required\s\+pam_faillock.so\)\s\+preauth.*$|\1 preauth silent deny=10 unlock_time=120|' "/etc/pam.d/system-auth"
-  - sudo sed -i 's|^\(auth\s\+\[default=die\]\s\+pam_faillock.so\)\s\+authfail.*$|\1 authfail deny=10 unlock_time=120|' "/etc/pam.d/system-auth"
-
-    # Give the user 10 instead of 3 tries to fat finger their password before lockout
-  - echo "Defaults passwd_tries=10" | sudo tee /etc/sudoers.d/passwd-tries
-  - sudo chmod 440 /etc/sudoers.d/passwd-tries
-  - sudo sed -i 's/^# *deny = .*/deny = 10/' /etc/security/faillock.conf # Set for hyprlock too
+  - yay -S --noconfirm --needed --answerdiff None --answerclean None downgrade

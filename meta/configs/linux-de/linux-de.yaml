@@ -1,0 +1,8 @@
+
+- shell:
+  - |
+    if [[ "$(./sys id)" == "arch" ]]; then
+      sudo pacman -S --noconfirm --needed wev
+    elif [[ "$(./sys id)" == "ubuntu" ]]; then
+      sudo apt install -y wev 
+    fi

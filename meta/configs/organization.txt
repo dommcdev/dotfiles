@@ -13,13 +13,3 @@ machine
         ├── all/arch/linux-cli/linux-de/desktop/riced
         ├── all/ubuntu/linux-cli/linux-de/desktop/riced
         └── all/fedora/linux-cli/linux-de/desktop/riced
-
-all is stuff I want on every machine - mac/linux, server/desktop, de/riced
-
-desktop is stuff I want on every *desktop* (not necessarily riced) machine. Some can be linux-only, however. 
-
-riced is stuff I only want on riced out linux desktops.
-
-mac, arch, ubuntu, fedora, etc is stuff I only want on that platform - server/desktop, de/riced
-
-
