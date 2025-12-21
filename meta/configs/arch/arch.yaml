@@ -5,16 +5,12 @@
 
     # Install yay
   - command -v yay > /dev/null || (sudo pacman -S --noconfirm --needed base-devel && cd /tmp && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm)
-
-    # Install flatpak
-  - sudo pacman -S --noconfirm --needed flatpak
-  - flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
   
     # Install graphics drivers
   - sudo pacman -S --noconfirm --needed libva-mesa-driver libva-utils mesa vulkan-radeon intel-media-driver
 
     # Install general utils
-  - sudo pacman -S --noconfirm --needed smartmontools xdg-utils gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-plugins-base gst-plugins-base-libs gst-libav ddcutil wl-clipboard gnome-keyring libsecret wev unzip wtype reflector brightnessctl sof-firmware acpi fwupd blueman pavucontrol 
+  - sudo pacman -S --noconfirm --needed smartmontools xdg-utils gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-plugins-base gst-plugins-base-libs gst-libav ddcutil wl-clipboard gnome-keyring libsecret wev wtype reflector brightnessctl sof-firmware acpi fwupd 
 
     # AUR packages
   - yay -S --noconfirm --needed --answerdiff None --answerclean None downgrade clipse

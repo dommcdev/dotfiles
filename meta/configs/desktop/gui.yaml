@@ -8,7 +8,7 @@
   - mkdir -p ~/Downloads/Screenshots ~/Downloads/Videos
 
     # Install GUI packages
-  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed file-roller impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar libreoffice-fresh blender kdenlive nextcloud-client gnome-power-manager bluetui playerctl gimp; else brew install --cask moonlight nextcloud; fi
+  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed file-roller impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar libreoffice-fresh blender kdenlive nextcloud-client gnome-power-manager bluetui playerctl gimp blueman pavucontrol; else brew install --cask moonlight nextcloud; fi
   - if [ "$(uname)" = "Linux" ]; then flatpak install --assumeyes --noninteractive flathub org.nickvision.tubeconverter  org.gnucash.GnuCash be.alexandervanhee.gradia; else brew install --cask gnucash; fi
     
   # Nautilus
