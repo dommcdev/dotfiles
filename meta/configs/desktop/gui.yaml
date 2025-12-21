@@ -1,10 +1,19 @@
 
+- link:
+    ~/.config/GIMP/3.0/:
+      path: apps/gimp/*
+      glob: true
+
 - shell:
-  - mkdir -p ~/Downloads
+  - mkdir -p ~/Downloads/Screenshots ~/Downloads/Videos
 
     # Install GUI packages
-  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed file-roller impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar libreoffice-fresh blender kdenlive nextcloud-client gnome-power-manager bluetui playerctl; else brew install --cask moonlight nextcloud; fi
-  - if [ "$(uname)" = "Linux" ]; then flatpak install --assumeyes --noninteractive flathub org.nickvision.tubeconverter io.gitlab.adhami3310.Footage org.gnucash.GnuCash dev.vencord.Vesktop be.alexandervanhee.gradia; else brew install --cask gnucash; fi
+  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed file-roller impression audacity gnome-calculator decibels papers loupe showtime switcheroo gnome-calendar libreoffice-fresh blender kdenlive nextcloud-client gnome-power-manager bluetui playerctl gimp; else brew install --cask moonlight nextcloud; fi
+  - if [ "$(uname)" = "Linux" ]; then flatpak install --assumeyes --noninteractive flathub org.nickvision.tubeconverter  org.gnucash.GnuCash be.alexandervanhee.gradia; else brew install --cask gnucash; fi
     
   # Nautilus
-  - sudo pacman -S --noconfirm --needed nautilus nautilus-python gvfs-smb gvfs-dnssd gvfs-mtp sushi udiskie
+  - if [[ "$(./sys id)" == "arch" ]]; then sudo pacman -S --noconfirm --needed nautilus nautilus-python gvfs-smb gvfs-dnssd gvfs-mtp sushi udiskie
+
+# Kicked out
+#io.gitlab.adhami3310.Footage
+#dev.vencord.Vesktop

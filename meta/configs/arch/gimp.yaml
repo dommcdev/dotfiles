@@ -1,8 +1,0 @@
-
-- link:
-    ~/.config/GIMP/3.0/:
-      path: apps/gimp/*
-      glob: true
-
-- shell:
-  - sudo pacman -S --noconfirm --needed gimp
