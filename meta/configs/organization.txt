@@ -1,15 +1,15 @@
 machine
 ├── server
-│   ├── all/arch/linux-cli
-│   ├── all/ubuntu/linux-cli
-│   └── all/fedora/linux-cli
+│   ├── all/arch/linux
+│   ├── all/ubuntu/linux
+│   └── all/fedora/linux
 └── desktop
     ├── all/mac/desktop
     ├── de
-    │   ├── all/arch/linux-cli/linux-de/desktop
-    │   ├── all/ubuntu/linux-cli/linux-de/desktop
-    │   └── all/fedora/linux-cli/linux-de/desktop
+    │   ├── all/arch/linux/linux-desktop/desktop
+    │   ├── all/ubuntu/linux/linux-desktop/desktop
+    │   └── all/fedora/linux/linux-desktop/desktop
     └── riced
-        ├── all/arch/linux-cli/linux-de/desktop/riced
-        ├── all/ubuntu/linux-cli/linux-de/desktop/riced
-        └── all/fedora/linux-cli/linux-de/desktop/riced
+        ├── all/arch/linux/linux-desktop/desktop/riced
+        ├── all/ubuntu/linux/linux-desktop/desktop/riced
+        └── all/fedora/linux/linux-desktop/desktop/riced
