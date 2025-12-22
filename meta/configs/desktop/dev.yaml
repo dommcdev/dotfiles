@@ -6,14 +6,13 @@
   - if [ ! -d "$HOME/dev/wallpapers" ]; then git clone git@github.com:dommcdev/wallpapers.git $HOME/dev/wallpapers; fi
   - if [ ! -d "$HOME/dev/courses" ]; then git clone git@github.com:dommcdev/courses.git $HOME/dev/courses; fi
 
-  # Node and NVM
-  - mkdir -p ~/.config/nvm
-  - NVM_DIR="$HOME/.config/nvm" PROFILE="/dev/null" bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash'
-  - source "$HOME/.config/nvm/nvm.sh" && nvm install 22
-
     # Gemini and Opencode CLIs
-  - source "$HOME/.config/nvm/nvm.sh" && npm install -g @google/gemini-cli
-  - source "$HOME/.config/nvm/nvm.sh" && npm install -g opencode-ai@latest
+  - sudo pacman -S --noconfirm --needed nodejs npm
+  - npm install -g @google/gemini-cli
+  - npm install -g opencode-ai@latest
 
     # Java, Clang
   - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed jdk-openjdk; else brew install java; fi
+
+
+

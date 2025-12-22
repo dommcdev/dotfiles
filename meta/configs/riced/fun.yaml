@@ -1,0 +1,5 @@
+
+- shell:
+  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed perl-curses perl-term-animation cmatrix cowsay ponysay countryfetch lolcat fortune-mod sl espeak-ng toilet nyancat; fi
+  - if [ "$(uname)" = "Linux" ]; then yay -S --noconfirm --needed --answerdiff None --answerclean None cmatrix-git; fi
+

@@ -1,0 +1,26 @@
+# Alternate node.js installation method - via nvm
+
+  # Node via NVM
+  - mkdir -p ~/.config/nvm
+  - NVM_DIR="$HOME/.config/nvm" PROFILE="/dev/null" bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash'
+  - source "$HOME/.config/nvm/nvm.sh" && nvm install 22
+
+# Place in ~/.zshrc
+
+# NVM Installation
+export NVM_DIR="$HOME/.config/nvm"
+# Lazy-load NVM - HUGE performance gain
+load_nvm() {
+  unset -f nvm node npm npx
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+  if [ $# -ne 0 ]; then
+    command "$@"
+  fi
+}
+nvm()  { load_nvm nvm "$@"; }
+node() { load_nvm node "$@"; }
+npm()  { load_nvm npm "$@"; }
+npx()  { load_nvm npx "$@"; }
+gemini()  { load_nvm gemini "$@"; }
+opencode()  { load_nvm opencode "$@"; }
