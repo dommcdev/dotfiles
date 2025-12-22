@@ -6,14 +6,11 @@ Create yaml/script for fingerprint sensor
 Fix grub.yaml (adds theme line x3, implement other tweaks)
 Replace grub/sddm/hyprlock theme
 Setup docker (steal from omarchy)
-Config files
-    Gnucash
-    Aucacity (+ theme?)
-    Nautilus (dconf commands)
+Config files (Gnucash, Aucacity, Nautilus (dconf commands))
 Better brightness adjustment (pick level, then choose "apply" - include swayosd?)
 System update script (weekly reminder?)
 Document tailscale subnet router
-Keybinding for sunshine/moonlight
+Keybindings for sunshine/moonlight
 Mimetypes
 
 Dotfiles install
