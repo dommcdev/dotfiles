@@ -2,17 +2,22 @@
 - shell:
   - mkdir -p ~/dev/projects
   - mkdir -p ~/dev/external
-    # Git repos
-  - if [ ! -d "$HOME/dev/wallpapers" ]; then git clone git@github.com:dommcdev/wallpapers.git $HOME/dev/wallpapers; fi
   - if [ ! -d "$HOME/dev/courses" ]; then git clone git@github.com:dommcdev/courses.git $HOME/dev/courses; fi
 
+    #Node, java, clang 
+  - |
+    if [[ "$(./sys id)" == "arch" ]]; then
+      sudo pacman -S --noconfirm --needed jdk-openjdk clang nodejs npm
+    elif [[ "$(./sys id)" == "ubuntu" ]]; then
+      sudo apt install -y default-jdk clang nodejs npm
+    elif [[ "$(./sys id)" == "macos" ]]; then
+      brew install java clang nodejs
+    fi
+
+    # set node prefix so global packages are installed in user-owned dir
+    mkdir -p ~/.local/share/npm-global
+    npm config set prefix '~/.local/share/npm-global'
+
     # Gemini and Opencode CLIs
-  - sudo pacman -S --noconfirm --needed nodejs npm
   - npm install -g @google/gemini-cli
   - npm install -g opencode-ai@latest
-
-    # Java, Clang
-  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed jdk-openjdk; else brew install java; fi
-
-
-
