@@ -2,9 +2,10 @@
 - shell:
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed unrar unzip github-cli wget curl ffmpeg 7zip fd ripgrep poppler zoxide imagemagick chafa resvg ncdu fzf trash-cli tldr whois eza jq less yt-dlp gum git-delta gnuplot nmap bind id3v2 bc lazygit acpi
+      sudo pacman -S --noconfirm --needed unrar unzip github-cli wget curl ffmpeg 7zip fd ripgrep poppler zoxide imagemagick chafa resvg ncdu fzf trash-cli tldr whois eza jq less yt-dlp gum git-delta gnuplot nmap bind id3v2 bc lazygit acpi caligula
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       brew install fzf yt-dlp tlrc resvg gum
+      brew tap philocalyst/tap && brew install caligula
       sudo apt install -y unrar unzip gh trash-cli wget ffmpeg 7zip fd-find ripgrep poppler-utils zoxide imagemagick ghostscript chafa ncdu eza jq less git-delta gnuplot nmap bind9-dnsutils id3v2 bc
     elif [[ "$(./sys id)" == "macos" ]]; then
       brew install wget ffmpeg 7zip fd ripgrep poppler zoxide imagemagick ghostscript chafa resvg ncdu fzf tlrc eza jq less yt-dlp gum git-delta gnuplot nmap bind id3v2 bc

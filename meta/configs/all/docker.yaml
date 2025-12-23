@@ -10,3 +10,5 @@
     elif [[ "$(./sys id)" == "macos" ]]; then
       echo "Install docker"
     fi
+
+#don't forget lazydocker!
