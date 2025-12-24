@@ -27,9 +27,9 @@ bindkey -rM emacs '^[^C'
 bindkey -rM vicmd '^[^C'
 bindkey -rM viins '^[^C'
 # Bind fzf-cd-widget to Ctrl-G
-bindkey -M emacs '^G' fzf-cd-widget
-bindkey -M vicmd '^G' fzf-cd-widget
-bindkey -M viins '^G' fzf-cd-widget
+bindkey -M emacs '^H' fzf-cd-widget
+bindkey -M vicmd '^H' fzf-cd-widget
+bindkey -M viins '^H' fzf-cd-widget
 export FZF_DEFAULT_OPTS="\
 --color=bg+:#313244,spinner:#F9E2AF,hl:#F38BA8 \
 --color=fg:#CDD6F4,header:#A6E3A1,info:#89B4FA,pointer:#F9E2AF \
@@ -75,6 +75,9 @@ bindkey -s '\eh' "tmux-sessionizer -s 0\n"
 bindkey -s '\ej' "tmux-sessionizer -s 1\n"
 bindkey -s '\ek' "tmux-sessionizer -s 2\n"
 bindkey -s '\el' "tmux-sessionizer -s 3\n"
+
+# Because useful C-f bind conflicts with my tmux prefix, rebind forward-char to C-g 
+bindkey '^G' forward-char
 
 # Zoxide
 eval "$(zoxide init --cmd cd zsh)"
