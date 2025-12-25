@@ -10,14 +10,16 @@
     QUIRKS_FILE="/etc/libinput/local-overrides.quirks"
     sudo mkdir -p /etc/libinput/
 
-    if ! grep -q "0x0ade" "$QUIRKS_FILE" 2>/dev/null; then
+    if ! grep -q "keyd" "$QUIRKS_FILE" 2>/dev/null; then
         sudo tee -a "$QUIRKS_FILE" > /dev/null <<EOF
     [Keyd Virtual Keyboard]
     MatchUdevType=keyboard
-    MatchBus=usb
-    MatchVendor=0x0fac
-    MatchProduct=0x0ade
+    MatchName=*keyd*keyboard*
     AttrKeyboardIntegration=internal
     EOF
     fi
 
+# Useful commands
+# libinput quirks validate --data-dir /etc/libinput
+# libinput list-devices
+# libinput debug-events
