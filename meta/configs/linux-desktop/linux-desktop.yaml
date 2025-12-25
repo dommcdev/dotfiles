@@ -2,7 +2,7 @@
 - shell:
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed wev
+      sudo pacman -S --noconfirm --needed wev libinput-tools
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
-      sudo apt install -y wev 
+      sudo apt install -y wev libinput-tools 
     fi

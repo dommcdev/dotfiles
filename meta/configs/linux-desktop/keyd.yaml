@@ -1,7 +1,23 @@
 
 - shell:
-  - sudo pacman -S --noconfirm --needed keyd
-  - sudo rm -rf /etc/keyd/default.conf && sudo mkdir -p /etc/keyd
-  - if [[ "$(./sys id)" == "fedora-asahi-remix" ]]; then sudo cp keyd/default-laptop.conf /etc/keyd/default.conf; else sudo cp keyd/default.conf /etc/keyd/default.conf; fi
-  - sudo systemctl is-enabled keyd.service &>/dev/null && sudo keyd reload || sudo systemctl enable --now keyd.service
+  - |
+    sudo pacman -S --noconfirm --needed keyd
+    sudo rm -rf /etc/keyd/default.conf && sudo mkdir -p /etc/keyd
+    sudo cp keyd/default.conf /etc/keyd/default.conf
+    sudo systemctl is-enabled keyd.service &>/dev/null && sudo keyd reload || sudo systemctl enable --now keyd.service
+
+    # Force keyd virtual keyboard as internal so disable-while-typing in hyprland etc works
+    QUIRKS_FILE="/etc/libinput/local-overrides.quirks"
+    sudo mkdir -p /etc/libinput/
+
+    if ! grep -q "0x0ade" "$QUIRKS_FILE" 2>/dev/null; then
+        sudo tee -a "$QUIRKS_FILE" > /dev/null <<EOF
+    [Keyd Virtual Keyboard]
+    MatchUdevType=keyboard
+    MatchBus=usb
+    MatchVendor=0x0fac
+    MatchProduct=0x0ade
+    AttrKeyboardIntegration=internal
+    EOF
+    fi
 
