@@ -25,6 +25,7 @@ else
 fi
 
 # --- 3. Power Detection ---
+# 1 for battery, 0 for ac
 if [[ -n "${OVERRIDE_POWER:-}" ]]; then
     POWER="$OVERRIDE_POWER"
 else
