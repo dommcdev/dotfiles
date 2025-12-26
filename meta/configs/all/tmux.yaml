@@ -8,9 +8,13 @@
 - shell:
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed tmux
+      sudo pacman -S --noconfirm --needed tmux git
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       brew install tmux
+      sudo apt install -y git
     elif [[ "$(./sys id)" == "macos" ]]; then
-      brew install tmux
+      brew install tmux git
     fi
+  - |
+    [ -d ~/.config/tmux/plugins/tpm ] || git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+    ~/.config/tmux/plugins/tpm/bin/install_plugins
