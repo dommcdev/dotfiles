@@ -1,0 +1,17 @@
+
+- link: 
+
+- shell:
+  - mkdir -p ~/.config/GrandOrgue
+  - |
+    if [[ "$(./sys id)" == "arch" ]]; then
+      sudo pacman -S --noconfirm --needed realtime-privilages
+      sudo usermod -aG realtime $USER
+      flatpak install --assumeyes --noninteractive flathub net.sourceforge.GrandOrgue
+    elif [[ "$(./sys id)" == "ubuntu" ]]; then
+      flatpak install --assumeyes --noninteractive flathub net.sourceforge.GrandOrgue
+    fi
+  - flatpak override --user --env=HOME=$HOME/.config/GrandOrgue net.sourceforge.GrandOrgue
+
+#if using jack native need to set system quant
+# pw-metadata -n settings 0 clock.force-quantum 128

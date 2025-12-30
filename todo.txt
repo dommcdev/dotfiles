@@ -10,6 +10,7 @@ System update script (weekly reminder?)
 Document tailscale subnet router
 Keybindings for sunshine/moonlight
 Mimetypes
+Cafinate for grandorgue
 
 Dotfiles install
     Script to generate profile files based on contents of meta/Config
