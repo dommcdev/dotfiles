@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+#   ____                          _   ___                          
+#  / ___|_ __ __ _ _ __   __| |/ _ \ _ __ __ _ _    _   ___  
+# | |  _| '__/ _` | '_ \ / _` | | | | '__/ _` | | | |/ _ \ 
+# | |_| | | | (_| | | | | (_| | |_| | | | (_| | |_| |  __/ 
+#  \____|_|  \__,_|_| |_|\__,_|\___/|_|  \__, |\__,_|\___| 
+#                                         |___/            
+
+# ---------------------------------------------------------------------------- #
+#   1. Parse Command Line Arguments
+# ---------------------------------------------------------------------------- #
+DO_INSTALL=false
+DO_LAYOUT=false
+
+while getopts "ih" opt; do
+  case $opt in
+    i) DO_INSTALL=true ;;
+    h) DO_LAYOUT=true ;;
+    \?) echo "Usage: cmd [-i] [-h]" >&2; exit 1 ;;
+  esac
+done
+
+# ---------------------------------------------------------------------------- #
+#   2. Handle Installation (-i)
+# ---------------------------------------------------------------------------- #
+if [ "$DO_INSTALL" = true ]; then
+    echo "--- Installing / Configuring GrandOrgue ---"
+    
+    # Install the Flatpak
+    flatpak install --assumeyes --noninteractive flathub net.sourceforge.GrandOrgue
+    
+    # Create the custom config directory (Prevents crash if it doesn't exist)
+    mkdir -p "$HOME/.config/GrandOrgue"
+    
+    # Apply Overrides (Custom Home & Low Latency)
+    flatpak override --user --env=HOME="$HOME/.config/GrandOrgue" net.sourceforge.GrandOrgue
+    flatpak override --user --env=PIPEWIRE_LATENCY="128/48000" net.sourceforge.GrandOrgue
+    
+    echo "--- Configuration Complete ---"
+fi
+
+# ---------------------------------------------------------------------------- #
+#   3. Launch Grandorgue
+# ---------------------------------------------------------------------------- #
+if flatpak ps | grep -q "net.sourceforge.GrandOrgue"; then
+    flatpak kill net.sourceforge.GrandOrgue
+    while flatpak ps | grep -q "net.sourceforge.GrandOrgue"; do sleep 0.2; done
+fi
+flatpak run net.sourceforge.GrandOrgue &
+
+# ---------------------------------------------------------------------------- #
+#   4. Apply Layout (Only if -h is passed)
+# ---------------------------------------------------------------------------- #
+if [ "$DO_LAYOUT" = true ]; then
+    MAX_WAIT=60
+    count=0
+
+    while true; do
+        TILED_COUNT=$(hyprctl clients -j | jq '[.[] | select(.class == "GrandOrgue" and .floating == false)] | length')
+
+        # We need exactly 2 tiled windows: The Topbar + The Main Organ.
+        if [[ "$TILED_COUNT" -ge 2 ]]; then
+            break
+        fi
+
+        sleep 0.5
+        ((count++))
+        
+        if (( count > MAX_WAIT * 2 )); then
+            echo "Timeout: Organ took too long to load."
+            exit 1
+        fi
+    done
+    sleep 2
+
+    # Apply the specific Hyprland layout
+    . "$HOME/.local/bin/grandorgue-layout"
+fi
+
+# ---------------------------------------------------------------------------- #
+#   5. Route audio
+# ---------------------------------------------------------------------------- #
+DEFAULT_SINK=$(pactl get-default-sink)
+echo "Routing GrandOrgue to: $DEFAULT_SINK"
+
+# Connect Left Channel (out_0 -> playback_FL or playback_1)
+pw-link "GrandOrgueAudio:out_0" "${DEFAULT_SINK}:playback_FL" 2>/dev/null || \
+pw-link "GrandOrgueAudio:out_0" "${DEFAULT_SINK}:playback_1" 2>/dev/null
+
+# Connect Right Channel (out_1 -> playback_FR or playback_2)
+pw-link "GrandOrgueAudio:out_1" "${DEFAULT_SINK}:playback_FR" 2>/dev/null || \
+pw-link "GrandOrgueAudio:out_1" "${DEFAULT_SINK}:playback_2" 2>/dev/null
+
+
+
+#If not using flatpak, need to set pw-metadata quantum
+#pw-metadata -n settings 0 clock.force-quantum 128 
+#and to reset
+#pw-metadata -n settings 0 clock.force-quantum 0

@@ -1,0 +1,6 @@
+#!/bin/env bash
+hyprctl dispatch focuswindow "title:^GrandOrgue v.*"
+hyprctl dispatch togglesplit
+hyprctl dispatch focuswindow "title:^GrandOrgue v.*"
+hyprctl dispatch swapwindow u
+hyprctl dispatch splitratio -0.85

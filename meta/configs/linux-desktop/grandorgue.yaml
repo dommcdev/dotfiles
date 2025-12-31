@@ -12,6 +12,4 @@
       flatpak install --assumeyes --noninteractive flathub net.sourceforge.GrandOrgue
     fi
   - flatpak override --user --env=HOME=$HOME/.config/GrandOrgue net.sourceforge.GrandOrgue
-
-#if using jack native need to set system quant
-# pw-metadata -n settings 0 clock.force-quantum 128
+  - flatpak override --user --env=PIPEWIRE_LATENCY="128/48000" net.sourceforge.GrandOrgue
