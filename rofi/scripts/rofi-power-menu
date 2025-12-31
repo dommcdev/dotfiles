@@ -13,7 +13,7 @@ set -e
 set -u
 
 # All supported choices
-all=(shutdown reboot restart suspend sleep logout lockscreen)
+all=(shutdown reboot sleep logout lockscreen rebootfirmware)
 
 # By default, show all (i.e., just copy the array)
 show=("${all[@]}")
@@ -23,21 +23,19 @@ texts[lockscreen]="lock screen"
 texts[switchuser]="switch user"
 texts[logout]="log out"
 texts[sleep]="sleep"
-texts[suspend]="suspend"
 texts[hibernate]="hibernate"
 texts[reboot]="reboot"
-texts[restart]="restart"
+texts[rebootfirmware]="reboot to UEFI"
 texts[shutdown]="shut down"
 
 declare -A icons
 icons[lockscreen]="\Uf033e"
 icons[switchuser]="\Uf0019"
 icons[logout]="\Uf0343"
-icons[suspend]="\Uf04b2"
 icons[sleep]="\Uf04b2"
 icons[hibernate]="\Uf02ca"
 icons[reboot]="\Uf0709"
-icons[restart]="\Uf0709"
+icons[rebootfirmware]="\Uf0709"
 icons[shutdown]="\Uf0425"
 icons[cancel]="\Uf0156"
 
@@ -45,15 +43,13 @@ declare -A actions
 actions[lockscreen]="loginctl lock-session ${XDG_SESSION_ID-}"
 #actions[switchuser]="???"
 actions[logout]="uwsm stop"
-actions[suspend]="systemctl suspend"
 actions[sleep]="systemctl suspend"
 actions[hibernate]="systemctl hibernate"
 actions[reboot]="systemctl reboot"
-actions[restart]="systemctl reboot"
 actions[shutdown]="systemctl poweroff"
-
+actions[rebootfirmware]="systemctl reboot --firmware-setup"
 # By default, ask for confirmation for actions that are irreversible
-confirmations=(reboot shutdown logout)
+confirmations=(logout)
 
 # By default, no dry run
 dryrun=false
