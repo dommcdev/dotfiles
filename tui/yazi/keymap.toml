@@ -1,12 +1,24 @@
+[[mgr.prepend_keymap]]
+on   = "<C-n>"
+run  = "shell -- ripdrag %s -x -a"
+desc = "Drag n drop"
+
 [[input.prepend_keymap]]
 on   = "<Esc>"
 run  = "close"
 desc = "Cancel input"
 
+#for macos quick look preview
 [[mgr.prepend_keymap]]
 on = "<C-p>"
+for = "macos"
 run = 'shell -- qlmanage -p "$@"' 
 
+[[mgr.prepend_keymap]]
+on   = "<C-p>"
+for = "linux"
+run  = 'shell -- sushi "$@"'
+desc = "Large preview"
 
 [[mgr.prepend_keymap]]
 on = [ "m" ]
@@ -27,3 +39,8 @@ desc = "Delete a bookmark"
 on = [ "b", "D" ]
 run = "plugin bookmarks delete_all"
 desc = "Delete all bookmarks"
+
+[[mgr.prepend_keymap]]
+on  = "y"
+for = "linux"
+run = [ 'shell -- for path in %s; do echo "file://$path"; done | wl-copy -t text/uri-list', "yank" ]

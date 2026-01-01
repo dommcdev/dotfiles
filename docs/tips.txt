@@ -1,7 +1,17 @@
 "cd" will cd to home directory
-"CTRL + L" will clear terminal screen
 ghostty +boo
 systemctl reboot --firmware-setup
+
+
+
+For rebooting:
+    systemctl reboot
+    reboot (symlink to above)
+    shutdown -r now (classic)
+For shutdown
+    systemctl poweroff
+    poweroff (symlink to above)
+    shutdown now (classic)
 
 
 # Applying GTK Theme

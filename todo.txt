@@ -12,7 +12,6 @@ Keybindings for sunshine/moonlight
 Mimetypes
 Implement zsh hacks from vid + allow starship to view venv status
 Better solution for rofi-power-manager (want aliases, etc), add hyprshutdown
-Allow reboot without sudo
 
 Dotfiles install
     Script to generate profile files based on contents of meta/Config
@@ -34,10 +33,8 @@ Rofi
     Switch between modes with ctrl shortcut - C-e, C-s, etc. Or type "emoji", "search" etc.
     Switch theme
 Yazi
-    Larger previews of files (sushi/macos quick preview, bound to C-p)
-    Copy files to system clipboard (Linux and Mac)
     Save/link .local/state/yazi/.dds - for bookmark persistance
-    Possible plugins - diff.yazi, [compress].yazi, lazygit.yazi, gvfs.yazi, trash??, mount.yazi
+    Possible plugins - diff.yazi, ouch.yazi, lazygit.yazi, gvfs.yazi, trash??, mount.yazi
 Gpu passthrough
 Fix/theme bibata hyprcursor
 Systemd-logind for custom power-button sequence (60s to shutdown)

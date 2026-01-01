@@ -1,14 +1,16 @@
 
 - link:
     ~/.config/bat: tui/bat
-    ~/.config/yazi: tui/yazi
     ~/.config/btop: tui/btop
     ~/.config/qalculate/qalc.cfg: tui/qalc/qalc.cfg
     ~/.config/cava/config: tui/cava/config
     ~/.config/fastfetch/config.jsonc:
       path: tui/fastfetch/config-arch.jsonc
       if: '[[ "$(./sys id)" == "arch" ]]'
-
+    ~/.config/yazi:
+      path: tui/yazi
+      glob: true
+      exclude: [tui/yazi/plugins]
 - link:
     ~/.config/fastfetch/config.jsonc:
       path: tui/fastfetch/config-mac.jsonc

@@ -4,6 +4,7 @@
     ~/.config/gtk-4.0: gtk/gtk-4.0
     ~/.config/templates: gtk/templates
     ~/.config/user-dirs.dirs: gtk/user-dirs.dirs
+    ~/.config/mimeapps.list: gtk/mimeapps.list
 
 - shell:
   - mkdir -p ~/Downloads/Screenshots ~/Downloads/Videos
