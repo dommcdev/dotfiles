@@ -3,6 +3,7 @@
     ~/.config/bat: tui/bat
     ~/.config/yazi: tui/yazi
     ~/.config/btop: tui/btop
+    ~/.config/qalculate/qalc.cfg: tui/qalc/qalc.cfg
     ~/.config/cava/config: tui/cava/config
     ~/.config/fastfetch/config.jsonc:
       path: tui/fastfetch/config-arch.jsonc
@@ -21,14 +22,12 @@
 - shell:
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed bat yazi btop fastfetch cava
+      sudo pacman -S --noconfirm --needed bat yazi btop fastfetch cava gnuplot bc libqalculate
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       brew install bat yazi btop fastfetch
-      sudo apt install -y cava
-      #sudo add-apt-repository -y ppa:zhangsongcui3371/fastfetch && sudo apt update
-      #sudo apt install -y fastfetch
+      sudo apt install -y cava gnuplot bc qalc
     elif [[ "$(./sys id)" == "macos" ]]; then
-      brew install bat yazi btop fastfetch cava
+      brew install bat yazi btop fastfetch cava gnuplot bc libqalculate
     fi
   - bat cache --build
 

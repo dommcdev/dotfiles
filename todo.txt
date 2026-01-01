@@ -13,7 +13,6 @@ Mimetypes
 Implement zsh hacks from vid + allow starship to view venv status
 Better solution for rofi-power-manager (want aliases, etc), add hyprshutdown
 Allow reboot without sudo
-TUI calculator
 
 Dotfiles install
     Script to generate profile files based on contents of meta/Config

@@ -45,6 +45,8 @@ PS1="%{%F{green}%}%n@%m %{%F{yellow}%}%2~ %{%F{reset}%}%% "
 
 # Aliases
 alias ts='tailscale'
+alias calc='qalc'
+alias bc='bc -l'
 alias srcz='source ~/.config/zsh/.zshrc'
 alias gs='git status'
 alias gd='git diff'
