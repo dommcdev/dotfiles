@@ -8,9 +8,8 @@
       path: tui/fastfetch/config-arch.jsonc
       if: '[[ "$(./sys id)" == "arch" ]]'
     ~/.config/yazi:
-      path: tui/yazi
+      path: tui/yazi/*
       glob: true
-      exclude: [tui/yazi/plugins]
 - link:
     ~/.config/fastfetch/config.jsonc:
       path: tui/fastfetch/config-mac.jsonc
@@ -32,6 +31,7 @@
       brew install bat yazi btop fastfetch cava gnuplot bc libqalculate
     fi
   - bat cache --build
+  - cd ~/.config/yazi && ya pkg install
 
 #Notes
 #Cava does not work on macos without additional setup
