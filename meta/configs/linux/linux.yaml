@@ -3,9 +3,9 @@
   # Install flatpak, misc packages
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed flatpak smartmontools
+      sudo pacman -S --noconfirm --needed flatpak smartmontools dosfstools ntfs-3g exfatprogs btrfs-progs xfsprogs
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
-      sudo apt install -y flatpak smartmontools
+      sudo apt install -y flatpak smartmontools dosfstools ntfs-3g exfatprogs btrfs-progs xfsprogs
     fi
   - flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 

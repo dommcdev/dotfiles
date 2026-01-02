@@ -1,6 +1,8 @@
 "cd" will cd to home directory
 ghostty +boo
 systemctl reboot --firmware-setup
+Audio center: wiremix
+Disks: caligula, disktui
 
 
 
@@ -13,9 +15,15 @@ For shutdown
     poweroff (symlink to above)
     shutdown now (classic)
 
+Archiving/unarchiving
+    ouch: everyday compression/decompression, nice tui
+    7zip: high compression, good decompression
+    unar: great decompression, fixes gibberish text
+    unrar: best rar decompression (official spec)
 
-# Applying cursor theme
+
+Applying cursor theme
 On Hyprland, simply place the hyprcursor in ~/.local/share/icons/ and it will automatically be picked up. If you have multiple, set the HYPRCURSOR_THEME and HYPRCURSOR_SIZE env vars in your hyprland conf/uwsm-hyprland file. 
 
-# Applying icon theme
+Applying icon theme
 Gsettings (icon-theme) works for things like nautilus, but the gtk-4.0/settings.ini is needed for things like rofi (although rofi has a line for icon theme in its config).

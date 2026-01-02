@@ -9,7 +9,6 @@ Better brightness adjustment (pick level, then choose "apply" - include swayosd?
 System update script (weekly reminder?)
 Document tailscale subnet router
 Keybindings for sunshine/moonlight
-Mimetypes
 Implement zsh hacks from vid + allow starship to view venv status
 Better solution for rofi-power-manager (want aliases, etc), add hyprshutdown
 

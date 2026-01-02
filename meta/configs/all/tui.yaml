@@ -24,7 +24,7 @@
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
       sudo pacman -S --noconfirm --needed bat yazi btop fastfetch cava gnuplot bc libqalculate
-      yay -S --noconfirm --needed --answerdiff None --answerclean None ripdrag
+      yay -S --noconfirm --needed --answerdiff None --answerclean None ripdrag disktui
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       brew install bat yazi btop fastfetch
       sudo apt install -y cava gnuplot bc qalc
@@ -36,4 +36,4 @@
 
 #Notes
 #Cava does not work on macos without additional setup
-#Ripdrag not present on macos/ubuntu
+#Ripdrag and disktui not present on macos/ubuntu

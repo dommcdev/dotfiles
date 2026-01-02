@@ -9,3 +9,6 @@
       curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh -o /tmp/install_brew.sh
       /bin/bash /tmp/install_brew.sh
     fi
+
+# Note sure if I need this
+# sudo apt-add-repository universe && sudo apt update
