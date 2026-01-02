@@ -3,8 +3,14 @@
     ~/.local/share/applications/: 
       path: apps/desktop-files/*
       glob: true
+      exclude: [apps/desktop-files/hidden, apps/desktop-files/icons]
     ~/.local/share/icons/hicolor/scalable/apps/: 
       path: apps/desktop-files/icons/*
+      glob: true
+
+- link:
+    ~/.local/share/applications/: 
+      path: apps/desktop-files/hidden/*
       glob: true
 
 - shell: []
