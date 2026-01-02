@@ -14,10 +14,6 @@ For shutdown
     shutdown now (classic)
 
 
-# Applying GTK Theme
-For gtk3, use gsettings (gtk-theme and color-scheme)
-For libadwaita, use custom gtk.css in ~/.config/gtk-4.0/ 
-
 # Applying cursor theme
 On Hyprland, simply place the hyprcursor in ~/.local/share/icons/ and it will automatically be picked up. If you have multiple, set the HYPRCURSOR_THEME and HYPRCURSOR_SIZE env vars in your hyprland conf/uwsm-hyprland file. 
 

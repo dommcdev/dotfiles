@@ -3,3 +3,8 @@ Both gtk3 and gtk4 can have their stylesheets overridden by an external theme. T
 
 colors:
 It would be possible to replace the @define colors in the theme itself with the correct ones, however this would be more hassle than it is worth. Instead, for gtk3 we can override colors in .config/gtk-3.0/gtk.css, and for gtk4 we can override colors in .config/gtk-4.0/gtk.css. The latter is where we can also put any overrides for libadwaita apps as well. 
+
+
+applying GTK theme
+For gtk3, use gsettings (gtk-theme and color-scheme)
+For libadwaita, use custom gtk.css in ~/.config/gtk-4.0/ 
