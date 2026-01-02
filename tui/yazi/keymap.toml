@@ -41,11 +41,6 @@ run = "plugin bookmarks delete"
 desc = "Delete a bookmark"
 
 [[mgr.prepend_keymap]]
-on = [ "b", "D" ]
-run = "plugin bookmarks delete_all"
-desc = "Delete all bookmarks"
-
-[[mgr.prepend_keymap]]
 on  = "y"
 for = "linux"
 run = [ 'shell -- for path in %s; do echo "file://$path"; done | wl-copy -t text/uri-list', "yank" ]
@@ -64,3 +59,7 @@ desc = "Restore last deleted files/folders"
 on   = "R"
 run  = "plugin recycle-bin"
 desc = "Open Recycle Bin menu"
+
+[[mgr.prepend_keymap]]
+on  = "M"
+run = "plugin mount"

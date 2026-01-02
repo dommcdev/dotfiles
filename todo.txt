@@ -31,10 +31,7 @@ Waybar
 Rofi
     Web search, calculator, emoji/symbols, AI, quick notes (.txt to downloads)
     Switch between modes with ctrl shortcut - C-e, C-s, etc. Or type "emoji", "search" etc.
-    Switch theme
-Yazi
-    Save/link .local/state/yazi/.dds - for bookmark persistance
-    Possible plugins - diff.yazi, ouch.yazi, mount.yazi
+    Switch themE
 Gpu passthrough
 Fix/theme bibata hyprcursor
 Systemd-logind for custom power-button sequence (60s to shutdown)
@@ -51,11 +48,6 @@ Yt-music but offline, for phone
 # Low Priority
 Notification center
 Fastfetch
-Chrome stylus sync (???)
-Tweak raycast
-Tweak rofi theme
-Tweak starship
-OnlyOffice theme
 Theme cliphist (+ auto-paste)
 Theme script
     Via single mycolors.css file?
@@ -63,9 +55,10 @@ Theme script
 Tmux-sessionizer for "restoring" sessions
 Hyprland - better animations
 Kvantum isn't working - need to install KvantumManager?
-Better exa colors
 Better solution for ssh -> tmux -> nvim shared clipboard
+Xwayland apps following mouse cursor? 
 
+Theme and/or tweak: Rofi, starship, onlyoffice, exa
 
 Server
     Ubuntu server setup config?

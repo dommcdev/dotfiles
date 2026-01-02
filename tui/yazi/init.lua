@@ -22,3 +22,12 @@ require("full-border"):setup({
 	-- Available values: ui.Border.PLAIN, ui.Border.ROUNDED
 	type = ui.Border.ROUNDED,
 })
+
+require("starship"):setup()
+
+th.git = th.git or {}
+th.git.modified_sign = "M"
+th.git.added_sign = "A"
+th.git.deleted_sign = "D"
+
+require("git"):setup()
