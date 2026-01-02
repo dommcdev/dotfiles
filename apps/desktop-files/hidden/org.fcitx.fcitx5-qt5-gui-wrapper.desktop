@@ -1,2 +1,4 @@
 [Desktop Entry]
-Hidden=true
+Type=Application
+Name=org.fcitx.fcitx5-qt5-gui-wrapper
+NoDisplay=true

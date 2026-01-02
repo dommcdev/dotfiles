@@ -11,8 +11,10 @@ Document tailscale subnet router
 Keybindings for sunshine/moonlight
 Implement zsh hacks from vid + allow starship to view venv status
 Better solution for rofi-power-manager (want aliases, etc), add hyprshutdown
+ffmpeg tui, powerstats tui
 
 Dotfiles install
+    Rework bootstrapping workflow
     Script to generate profile files based on contents of meta/Config
     Add manual selection for choice of server/de/riced in install
     Finish adding ubuntu support (and fedora?)

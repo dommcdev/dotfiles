@@ -3,6 +3,7 @@ ghostty +boo
 systemctl reboot --firmware-setup
 Audio center: wiremix
 Disks: caligula, disktui
+Disk usage: dust
 
 
 

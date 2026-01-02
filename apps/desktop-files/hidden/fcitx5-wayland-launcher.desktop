@@ -1,2 +1,4 @@
 [Desktop Entry]
-Hidden=true
+Type=Application
+Name=fcitx5-wayland-launcher
+NoDisplay=true

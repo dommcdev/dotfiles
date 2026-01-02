@@ -1,2 +1,4 @@
 [Desktop Entry]
-Hidden=true
+Type=Application
+Name=electron37
+NoDisplay=true

@@ -1,2 +1,4 @@
 [Desktop Entry]
-Hidden=true
+Type=Application
+Name=org.fcitx.Fcitx5
+NoDisplay=true
