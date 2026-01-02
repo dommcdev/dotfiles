@@ -1,5 +1,5 @@
 require("bookmarks"):setup({
-	last_directory = { enable = false, persist = false, mode="dir" },
+	last_directory = { enable = false, persist = false, mode = "dir" },
 	persist = "all",
 	desc_format = "full",
 	file_pick_mode = "hover",
@@ -14,4 +14,11 @@ require("bookmarks"):setup({
 			delete_all = "Deleted all bookmarks",
 		},
 	},
+})
+
+require("recycle-bin"):setup()
+
+require("full-border"):setup({
+	-- Available values: ui.Border.PLAIN, ui.Border.ROUNDED
+	type = ui.Border.ROUNDED,
 })

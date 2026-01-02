@@ -3,5 +3,25 @@ use = "dedukun/bookmarks"
 rev = "9ef1254"
 hash = "92fbb5483657fa7976cdf4e0104e18e0"
 
+[[plugin.deps]]
+use = "Lil-Dank/lazygit"
+rev = "0e56060"
+hash = "ab2e66065a94cca4886b303518e44bd8"
+
+[[plugin.deps]]
+use = "boydaihungst/restore"
+rev = "6395e52"
+hash = "f107436db5d2cccccc11ab54bc97b761"
+
+[[plugin.deps]]
+use = "uhs-robert/recycle-bin"
+rev = "53ad17c"
+hash = "80221fe740a6f251d35845d29391bea7"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "80cd5b5"
+hash = "3996fc74044bc44144b323686f887e1"
+
 [flavor]
 deps = []

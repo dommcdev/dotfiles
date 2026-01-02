@@ -1,0 +1,30 @@
+[services.kabigon]
+type = "sftp"
+host = "kabigon"
+user = "dominic"
+port = 22
+key_file = "~/.ssh/id_ed25519"
+
+[services.pikachu]
+type = "sftp"
+host = "pikachu"
+user = "dominic"
+port = 22
+key_file = "~/.ssh/id_ed25519"
+
+[services.chocobo]
+type = "sftp"
+host = "chocobo"
+user = "dominic"
+port = 22
+key_file = "~/.ssh/id_ed25519"
+
+[services.applepie]
+type = "sftp"
+host = "applepie"
+user = "dominic"
+port = 22
+key_file = "~/.ssh/id_ed25519"
+
+# Usage - I have a keybind for going to chocobo, but for others just type 
+# yazi sftp://my-server

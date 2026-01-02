@@ -1,4 +1,9 @@
 [[mgr.prepend_keymap]]
+on   = [ "g", "i" ]
+run  = "plugin lazygit"
+desc = "run lazygit"
+
+[[mgr.prepend_keymap]]
 on   = "<C-n>"
 run  = "shell -- ripdrag %s -x -a"
 desc = "Drag n drop"
@@ -44,3 +49,18 @@ desc = "Delete all bookmarks"
 on  = "y"
 for = "linux"
 run = [ 'shell -- for path in %s; do echo "file://$path"; done | wl-copy -t text/uri-list', "yank" ]
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "s" ]
+run  = "cd sftp://chocobo"
+desc = "Go to chocobo server"
+
+[[mgr.prepend_keymap]]
+on   = "u"
+run  = "plugin restore"
+desc = "Restore last deleted files/folders"
+
+[[mgr.prepend_keymap]]
+on   = "R"
+run  = "plugin recycle-bin"
+desc = "Open Recycle Bin menu"

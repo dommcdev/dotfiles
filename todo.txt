@@ -34,7 +34,7 @@ Rofi
     Switch theme
 Yazi
     Save/link .local/state/yazi/.dds - for bookmark persistance
-    Possible plugins - diff.yazi, ouch.yazi, lazygit.yazi, gvfs.yazi, trash??, mount.yazi
+    Possible plugins - diff.yazi, ouch.yazi, mount.yazi
 Gpu passthrough
 Fix/theme bibata hyprcursor
 Systemd-logind for custom power-button sequence (60s to shutdown)
