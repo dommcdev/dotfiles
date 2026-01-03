@@ -11,7 +11,6 @@ Document tailscale subnet router
 Keybindings for sunshine/moonlight
 Implement zsh hacks from vid + allow starship to view venv status
 Better solution for rofi-power-manager (want aliases, etc), add hyprshutdown
-ffmpeg tui, powerstats tui
 
 Dotfiles install
     Rework bootstrapping workflow
@@ -23,7 +22,7 @@ Dotfiles install
 Nvim
     Autopairs plugin
     Setup a coderunner (shortcut or :command, per-file or makefile, floating terminal or split).
-    Markdown viewer (in-browser - peek.nvim, live-preview.nvim, iamcco/markdown-preview)
+    Markdown viewer (in-browser - peek.nvim, live-preview.nvim, iamcco/markdown-preview, Typora?)
 Waybar
     Workspace indicators, time/date (center), weather
     Volume, internet, bluetooth
@@ -54,12 +53,11 @@ Theme script
     Via single mycolors.css file?
     Pywall16, Matugen, Wallust?
 Tmux-sessionizer for "restoring" sessions
-Hyprland - better animations
 Kvantum isn't working - need to install KvantumManager?
 Better solution for ssh -> tmux -> nvim shared clipboard
 Xwayland apps following mouse cursor? 
 
-Theme and/or tweak: Rofi, starship, onlyoffice, exa
+Theme and/or tweak: Rofi, starship, onlyoffice, hypr animations, 
 
 Server
     Ubuntu server setup config?

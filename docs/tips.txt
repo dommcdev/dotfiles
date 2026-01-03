@@ -4,6 +4,7 @@ systemctl reboot --firmware-setup
 Audio center: wiremix
 Disks: caligula, disktui
 Disk usage: dust
+Convert images/pdfs: magick
 
 
 
