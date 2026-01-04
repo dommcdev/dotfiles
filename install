@@ -131,8 +131,28 @@ show_logo() {
 
 run_install() {
     local sys_id=$1
-    echo -e "${GREEN}Starting installation for $sys_id...${NC}"
-    ./meta/install-profile "$sys_id"
+    
+    echo -e "\n${YELLOW}Select Profile Type:${NC}"
+    echo "1) Server (Minimal)"
+    echo "2) Desktop Environment (DE)"
+    echo "3) Riced (Full Customization)"
+    read -p "Enter choice [1-3]: " CHOICE
+
+    local suffix=""
+    case "$CHOICE" in
+        1) suffix="server" ;;
+        2) suffix="de" ;;
+        3) suffix="riced" ;;
+        *) 
+            echo -e "${RED}Invalid choice. Exiting.${NC}"
+            exit 1 
+            ;;
+    esac
+
+    local target_profile="${sys_id}-${suffix}"
+
+    echo -e "${GREEN}Starting installation for $target_profile...${NC}"
+    ./meta/install-profile "$target_profile"
     exit 0
 }
 

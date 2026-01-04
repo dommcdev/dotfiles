@@ -17,7 +17,7 @@ if [[ -n "${OVERRIDE_ID:-}" ]]; then
     ID="$OVERRIDE_ID"
 else
     if [[ "$TYPE" == "Darwin" ]]; then
-        ID="macos"
+        ID="mac"
     elif [[ -f /etc/os-release ]]; then
         . /etc/os-release
     fi
@@ -30,7 +30,7 @@ if [[ -n "${OVERRIDE_POWER:-}" ]]; then
     POWER="$OVERRIDE_POWER"
 else
     # Auto-detect logic
-    if [[ "$ID" == "macos" ]]; then
+    if [[ "$ID" == "mac" ]]; then
         (pmset -g batt | grep -q "InternalBattery") && POWER=1 || POWER=0
     else
         # Check for any battery starting with BAT or the macsmc bridge
