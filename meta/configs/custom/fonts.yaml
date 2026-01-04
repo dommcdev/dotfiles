@@ -6,7 +6,7 @@
 
 - shell:
   - if [[ "$(./sys id)" == "arch" ]]; then sudo pacman -S --noconfirm --needed noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra ttf-jetbrains-mono-nerd; fi
-  - if [[ "$(./sys id)" == "macos" ]]; then brew install font-jetbrains-mono-nerd-font; fi
+  - if [[ "$(./sys id)" == "mac" ]]; then brew install font-jetbrains-mono-nerd-font; fi
   - if [[ "$(uname)" == "Linux" ]]; then gsettings set org.gnome.desktop.interface font-name 'Adwaita Sans 11'; fi
 
 # Nota bene

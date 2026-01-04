@@ -13,7 +13,7 @@
 - link:
     ~/.config/fastfetch/config.jsonc:
       path: tui/fastfetch/config-mac.jsonc
-      if: '[[ "$(./sys id)" == "macos" ]]'
+      if: '[[ "$(./sys id)" == "mac" ]]'
 
 - link:
     ~/.config/fastfetch/config.jsonc:
@@ -28,7 +28,7 @@
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       brew install bat yazi btop fastfetch
       sudo apt install -y cava gnuplot bc qalc
-    elif [[ "$(./sys id)" == "macos" ]]; then
+    elif [[ "$(./sys id)" == "mac" ]]; then
       brew install bat yazi btop fastfetch cava gnuplot bc libqalculate
     fi
   - if [ ! -d "$HOME/dev/projects/marlin" ]; then gh repo clone dommcdev/marlin ~/dev/projects; fi
@@ -37,5 +37,5 @@
   - cd ~/.config/yazi && ya pkg install
 
 #Notes
-#Cava does not work on macos without additional setup
-#Ripdrag and disktui not present on macos/ubuntu
+#Cava does not work on mac without additional setup
+#Ripdrag and disktui not present on mac/ubuntu

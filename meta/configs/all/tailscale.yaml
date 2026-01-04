@@ -6,7 +6,7 @@
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       curl -fsSL https://tailscale.com/install.sh -o /tmp/tailscale_install.sh
       sh /tmp/tailscale_install.sh
-    elif [[ "$(./sys id)" == "macos" ]]; then
+    elif [[ "$(./sys id)" == "mac" ]]; then
       brew install --cask tailscale-app;
     fi
   - |

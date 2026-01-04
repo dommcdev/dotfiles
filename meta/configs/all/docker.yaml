@@ -7,7 +7,7 @@
       echo "Install docker"
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       echo "Install docker"
-    elif [[ "$(./sys id)" == "macos" ]]; then
+    elif [[ "$(./sys id)" == "mac" ]]; then
       echo "Install docker"
     fi
 

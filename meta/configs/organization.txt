@@ -1,28 +1,34 @@
 machine
 ├── server
+│   ├── all (for mac)
 │   ├── all/arch/linux
 │   ├── all/ubuntu/linux
 │   └── all/fedora/linux
 └── desktop
-    ├── all/mac/desktop
     ├── de
+    │   ├── all/desktop (for mac)
     │   ├── all/arch/linux/linux-desktop/desktop
     │   ├── all/ubuntu/linux/linux-desktop/desktop
     │   └── all/fedora/linux/linux-desktop/desktop
-    └── riced
-        ├── all/arch/linux/linux-desktop/desktop/riced
-        ├── all/ubuntu/linux/linux-desktop/desktop/riced
-        └── all/fedora/linux/linux-desktop/desktop/riced
+    └── custom
+        ├── all/mac/desktop
+        ├── all/arch/linux/linux-desktop/desktop/custom
+        ├── all/ubuntu/linux/linux-desktop/desktop/custom
+        └── all/fedora/linux/linux-desktop/desktop/custom
 
+mac-server
 arch-server
 ubuntu-server
 fedora-server
 
-mac-desktop
+mac-de
 arch-de
 ubuntu-de
 fedora-de
 
-arch-riced
-ubuntu-riced
-fedora-riced
+mac-custom
+arch-custom
+ubuntu-custom
+fedora-custom
+
+Note - for mac, "server" just means my essential terminal stuff, "de" adds essential gui stuff, and "custom" adds everything including karabiner, rectangle, etc.

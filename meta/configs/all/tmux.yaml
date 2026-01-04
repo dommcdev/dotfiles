@@ -12,7 +12,7 @@
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       brew install tmux
       sudo apt install -y git
-    elif [[ "$(./sys id)" == "macos" ]]; then
+    elif [[ "$(./sys id)" == "mac" ]]; then
       brew install tmux git
     fi
   - |
