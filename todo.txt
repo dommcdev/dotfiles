@@ -15,7 +15,6 @@ Better solution for rofi-power-manager (want aliases, etc), add hyprshutdown
 Dotfiles install
     Rework bootstrapping workflow
     Script to generate profile files based on contents of meta/Config
-    Add manual selection for choice of server/de/custom in install
     Finish adding ubuntu support (and fedora?)
 
 # To-do

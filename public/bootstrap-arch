@@ -1,6 +1,8 @@
 #!/bin/env bash
 set -e
 
+#Note - deps installed: git, github-cli, python
+
 echo "This script will install Arch Linux on the specified drive (chosen via archinstall), as well as clone a dotfiles repo to ~/dev/dotfiles."
 
 # Read in computer hostname
