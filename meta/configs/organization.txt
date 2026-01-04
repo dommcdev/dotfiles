@@ -13,3 +13,16 @@ machine
         ├── all/arch/linux/linux-desktop/desktop/riced
         ├── all/ubuntu/linux/linux-desktop/desktop/riced
         └── all/fedora/linux/linux-desktop/desktop/riced
+
+arch-server
+ubuntu-server
+fedora-server
+
+mac-desktop
+arch-de
+ubuntu-de
+fedora-de
+
+arch-riced
+ubuntu-riced
+fedora-riced
