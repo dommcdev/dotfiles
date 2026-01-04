@@ -142,7 +142,7 @@ run_install() {
     case "$CHOICE" in
         1) suffix="server" ;;
         2) suffix="de" ;;
-        3) suffix="riced" ;;
+        3) suffix="custom" ;;
         *) 
             echo -e "${RED}Invalid choice. Exiting.${NC}"
             exit 1 
