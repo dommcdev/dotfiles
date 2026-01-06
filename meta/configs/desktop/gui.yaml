@@ -9,7 +9,7 @@
 
     # Install GUI packages
   - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed audacity decibels papers loupe showtime libreoffice-fresh blender kdenlive nextcloud-client gnome-power-manager gimp; else brew install --cask moonlight nextcloud; fi
-  - if [ "$(uname)" = "Linux" ]; then flatpak install --assumeyes --noninteractive flathub org.nickvision.tubeconverter org.gnucash.GnuCash be.alexandervanhee.gradia; else brew install --cask gnucash; fi
+  - if [ "$(uname)" = "Linux" ]; then flatpak install --assumeyes --noninteractive flathub org.nickvision.tubeconverter org.gnucash.GnuCash be.alexandervanhee.gradia io.typora.Typora; else brew install --cask gnucash; fi
     
   # Nautilus
   - if [[ "$(./sys id)" == "arch" ]]; then sudo pacman -S --noconfirm --needed nautilus nautilus-python gvfs-smb gvfs-dnssd gvfs-mtp sushi udiskie; fi
