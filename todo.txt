@@ -16,6 +16,7 @@ Dotfiles install
     Rework bootstrapping workflow
     Script to generate profile files based on contents of meta/Config
     Finish adding ubuntu support (and fedora?)
+    On ubuntu - brew env in zsh? Also ubuntu.yaml must be run first.
 
 # To-do
 Nvim
