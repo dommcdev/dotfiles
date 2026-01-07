@@ -3,6 +3,10 @@ if [[ "$($HOME/dev/dotfiles/sys id)" == "ubuntu" ]]; then
     alias fd='fdfind'
 fi
 
+if [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
 # Main zsh options
 HISTFILE=~/.local/state/zsh_history
 HISTSIZE=5000

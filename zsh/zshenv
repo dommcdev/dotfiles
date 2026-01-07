@@ -4,9 +4,3 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/share/npm-global/bin:$PATH"
 export ZDOTDIR="$HOME/.config/zsh"
 export ANDROID_HOME="$HOME/programs/Android/Sdk"
-
-
-if [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
-
