@@ -1,6 +1,4 @@
-format = """
-$hostname$directory$git_branch$git_status${custom.novenv}
-$character"""
+format = '$all'
 
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
@@ -12,10 +10,5 @@ add_newline = false
 ssh_only=true
 format = "[$hostname](bold yellow) in "
 
-[custom.novenv]
-description = "show indicator when venv is missing"
-command = """
-print "no-venv"
-"""
-when = '''[[ -f "requirements.txt" || -f "pyproject.toml" || -f "poetry.lock" || -f "Pipfile" ]] && [[ -z "$VIRTUAL_ENV" ]]'''
-format = '[$output ](red)'
+[python]
+format='via [${symbol}(\($virtualenv\) )]($style)'
