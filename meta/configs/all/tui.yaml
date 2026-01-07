@@ -31,7 +31,7 @@
     elif [[ "$(./sys id)" == "mac" ]]; then
       brew install bat yazi btop fastfetch cava gnuplot bc libqalculate
     fi
-  - if [ ! -d "$HOME/dev/projects/marlin" ]; then gh repo clone dommcdev/marlin ~/dev/projects; fi
+  - if [ ! -d "$HOME/dev/projects/marlin" ]; then gh repo clone dommcdev/marlin ~/dev/projects/marlin; fi
   - cd ~/dev/projects/marlin && make install
   - bat cache --build
   - cd ~/.config/yazi && ya pkg install

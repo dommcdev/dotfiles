@@ -12,11 +12,14 @@ Keybindings for sunshine/moonlight
 Implement zsh hacks from vid + allow starship to view venv status
 Better solution for rofi-power-manager (want aliases, etc), add hyprshutdown
 
+
 Dotfiles install
     Rework bootstrapping workflow
     Script to generate profile files based on contents of meta/Config
     Finish adding ubuntu support (and fedora?)
     On ubuntu - brew env in zsh? Also ubuntu.yaml must be run first.
+    Neovim lsp auto-install
+    ubuntu needs askpass or something
 
 # To-do
 Nvim
