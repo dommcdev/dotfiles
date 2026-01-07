@@ -1,31 +1,28 @@
 # Easy
-Better screenshot tool
 Create yaml/script for fingerprint sensor
 Fix grub.yaml (adds theme line x3, implement other tweaks)
 Replace grub/sddm/hyprlock theme
 Setup docker (steal from omarchy)
-Config files (Gnucash, Aucacity, Nautilus (dconf commands))
-Better brightness adjustment (pick level, then choose "apply" - include swayosd?)
+Better brightness adjustment (pick level + apply + swayosd)
 System update script (weekly reminder?)
 Document tailscale subnet router
 Keybindings for sunshine/moonlight
 Implement zsh hacks from vid + allow starship to view venv status
-Better solution for rofi-power-manager (want aliases, etc), add hyprshutdown
+Better power manager (w/aliases + hyprshutdown)
 
 
 Dotfiles install
-    Rework bootstrapping workflow
-    Script to generate profile files based on contents of meta/Config
-    Finish adding ubuntu support (and fedora?)
-    On ubuntu - brew env in zsh? Also ubuntu.yaml must be run first.
-    Neovim lsp auto-install
-    ubuntu needs askpass or something
+    Askpass or equivilant
+    Rework arch bootstrapping workflow
+    Script to generate profile files
 
 # To-do
+Switch to hledger
 Nvim
     Autopairs plugin
     Setup a coderunner (shortcut or :command, per-file or makefile, floating terminal or split).
     Markdown viewer (in-browser - peek.nvim, live-preview.nvim, iamcco/markdown-preview, Typora?)
+    LSP
 Waybar
     Workspace indicators, time/date (center), weather
     Volume, internet, bluetooth
@@ -38,6 +35,8 @@ Rofi
 Gpu passthrough
 Fix/theme bibata hyprcursor
 Systemd-logind for custom power-button sequence (60s to shutdown)
+Fedora dotfiles support + full ubuntu support
+Better screenshot tool
 
 # Find tools, learn
 Yt-dlp workflow (tui? chrome?)
