@@ -7,7 +7,7 @@ Better brightness adjustment (pick level + apply + swayosd)
 System update script (weekly reminder?)
 Document tailscale subnet router
 Keybindings for sunshine/moonlight
-Implement zsh hacks from vid + allow starship to view venv status
+Implement zsh hacks from vid
 Better power manager (w/aliases + hyprshutdown)
 
 

@@ -1,4 +1,6 @@
-format = '$all'
+format = """
+$hostname$directory$git_branch$git_status$python
+$character"""
 
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'

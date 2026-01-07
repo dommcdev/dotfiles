@@ -96,6 +96,37 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+auto_venv() {
+  # 1. Find the nearest venv by climbing up
+  local dir="$PWD"
+  local found_venv=""
+  while [[ "$dir" != "/" ]]; do
+    if [[ -f "$dir/.venv/bin/activate" ]]; then
+      found_venv="$dir/.venv"
+      break
+    fi
+    dir="${dir:h}"
+  done
+
+  # 2. If we are in a venv that DOESN'T match what we found (or we found nothing)
+  if [[ -n "$VIRTUAL_ENV" && "$VIRTUAL_ENV" != "$found_venv" ]]; then
+    if typeset -f deactivate > /dev/null; then
+      deactivate
+    else
+      unset VIRTUAL_ENV
+    fi
+  fi
+
+  # 3. If we found a venv and it's not already the active one, source it
+  if [[ -n "$found_venv" && "$VIRTUAL_ENV" != "$found_venv" ]]; then
+    source "$found_venv/bin/activate"
+  fi
+}
+autoload -U add-zsh-hook
+add-zsh-hook chpwd auto_venv
+auto_venv # Run once on startup
+
+
 # --- Conditional macOS config ---
 if [[ "$(uname)" == "Darwin" ]]; then
     alias rm='trash'
