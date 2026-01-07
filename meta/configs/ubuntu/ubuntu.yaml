@@ -2,10 +2,4 @@
 - link: {}
 
 - shell:
-    # Install brew
-  - |
-    BREW_BIN="/home/linuxbrew/.linuxbrew/bin/brew"
-    if [ ! -x "$BREW_BIN" ]; then
-      curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh -o /tmp/install_brew.sh
-      /bin/bash /tmp/install_brew.sh
-    fi
+  - sudo chmod -x /etc/update-motd.d/* #disable startup cli message
