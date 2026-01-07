@@ -1,27 +1,24 @@
-# --- Conditional ubuntu config ---
-if [[ "$($HOME/dev/dotfiles/sys id)" == "ubuntu" ]]; then
-    alias fd='fdfind'
-fi
-
-if [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
-
 # Main zsh options
 HISTFILE=~/.local/state/zsh_history
 HISTSIZE=5000
 SAVEHIST=5000
-
-# Set a bar-shaped cursor in tmux/shell
-precmd() {
-  printf "\e[5 q"
-}
 
 bindkey -e #emacs mode
 setopt autocd #cd by typing dir name
 unsetopt beep #no beeping!
 autoload -Uz compinit
 compinit
+
+# Conditional ubuntu config
+if [[ "$($HOME/dev/dotfiles/sys id)" == "ubuntu" ]]; then
+    alias fd='fdfind'
+fi
+
+# Brew
+if [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
 
 # FZF configuration
 source <(fzf --zsh)
@@ -43,7 +40,7 @@ export FZF_DEFAULT_OPTS="\
 --info=inline \
 --layout=reverse"
 
-# Visuals
+# Fallback prompt
 PS1="%{%F{green}%}%n@%m %{%F{yellow}%}%2~ %{%F{reset}%}%% "
 
 # Aliases
@@ -72,7 +69,8 @@ alias showpath='echo $PATH | tr ":" "\n"'
 alias df="df -h"
 alias du="du -h -d 1"
 alias asciiquarium="asciiquarium -t"
-alias venv="source .venv/bin/activate" #until I find a better way
+alias venv="source .venv/bin/activate" 
+#alias -g C='| wl-copy' #somehwat risky
 
 # Tmux-sessionizer
 bindkey -s '^t' "tmux-sessionizer\n"
@@ -84,11 +82,30 @@ bindkey -s '\el' "tmux-sessionizer -s 3\n"
 # Because useful C-f bind conflicts with my tmux prefix, rebind forward-char to C-g 
 bindkey '^G' forward-char
 
+# Hitting space will expand stuff like !!
+bindkey ' ' magic-space
+
+# keybind for typing boilerplate
+bindkey -s '^wgc' 'git commit -m ""\C-b'
+
+# Copy buffer contents to clipboard
+copy-buffer-to-clipboard() {
+   echo -n "$BUFFER" | wl-copy
+   zle -M "Copied to clipboard"
+}
+zle -N copy-buffer-to-clipboard
+bindkey '^wc' copy-buffer-to-clipboard
+
+# Open buffer line in editor
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^w^e' edit-command-line
+
 # Zoxide
 eval "$(zoxide init --cmd cd zsh)"
 
 # Run yazi with 'y', change cwd when exiting yazi
-function y() {
+y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
 	IFS= read -r -d '' cwd < "$tmp"
@@ -96,6 +113,7 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+# Automtically activate/deactivate python .venv
 auto_venv() {
   # 1. Find the nearest venv by climbing up
   local dir="$PWD"
@@ -132,6 +150,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias rm='trash'
 fi
 
-# Last but certainly not least...:)
-fastfetch
+# Finally, the eyecandy
 eval "$(starship init zsh)"
+precmd() { printf "\e[5 q" } # use bar-shaped cursor
+fastfetch
