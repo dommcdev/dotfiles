@@ -4,7 +4,12 @@ font-family = "JetBrainsMono Nerd Font"
 background-opacity = 0.96
 window-padding-x=6
 window-padding-y=4
-shell-integration-features = ssh-terminfo, ssh-env, cursor
+shell-integration-features = ssh-env, cursor
+
+#This is supposed to fix weird stuff when ssh-ing into machines, but doesn't really work
+#ssh-env is more reliable (or the equivilant of ssh-ing from a tmux session)
+#shell-integration-features = ssh-terminfo
+
 quit-after-last-window-closed = false
 keybind = ctrl+enter=unbind
 
