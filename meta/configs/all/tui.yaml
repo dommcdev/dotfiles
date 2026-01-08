@@ -23,7 +23,7 @@
 - shell:
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed bat yazi btop fastfetch cava gnuplot bc libqalculate
+      sudo pacman -S --noconfirm --needed bat yazi btop fastfetch cava gnuplot bc libqalculate bluetui wiremix
       yay -S --noconfirm --needed --answerdiff None --answerclean None ripdrag disktui
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       brew install bat yazi btop fastfetch
@@ -38,4 +38,4 @@
 
 #Notes
 #Cava does not work on mac without additional setup
-#Ripdrag and disktui not present on mac/ubuntu
+#Ripdrag, disktui, bluetui, and wiremix not present on ubuntu (mac)

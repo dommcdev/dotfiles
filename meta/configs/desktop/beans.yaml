@@ -1,0 +1,13 @@
+
+- link: {}
+
+- shell:
+  - |
+    if [[ "$(./sys id)" == "arch" ]]; then
+      yay -S --noconfirm --needed --answerdiff None --answerclean None beancount fava
+    elif [[ "$(./sys id)" == "ubuntu" ]]; then
+      brew install beancount fava
+    elif [[ "$(./sys id)" == "mac" ]]; then
+      brew install beancount fava
+    fi
+  - if [ ! -d "$HOME/dev/beans" ]; then gh repo clone dommcdev/beans ~/dev/beans; fi

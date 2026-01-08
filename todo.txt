@@ -49,7 +49,7 @@ Yt-music but offline, for phone
 # Low Priority
 Notification center
 Fastfetch
-Theme cliphist (+ auto-paste)
+Theme clipse (+ auto-paste)
 Theme script
     Via single mycolors.css file?
     Pywall16, Matugen, Wallust?
