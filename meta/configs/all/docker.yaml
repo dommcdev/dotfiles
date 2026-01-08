@@ -4,11 +4,15 @@
 - shell:
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
-      echo "Install docker"
+      sudo pacman -S --noconfirm --needed docker lazydocker
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
-      echo "Install docker"
+      curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
+      sudo sh /tmp/get-docker.sh
+      brew install lazydocker
     elif [[ "$(./sys id)" == "mac" ]]; then
-      echo "Install docker"
+      brew install docker lazydocker
     fi
+  - sudo systemctl enable docker
+  - sudo usermod -aG docker $USER
 
-#don't forget lazydocker!
+#todo - Arch docker doesn't work

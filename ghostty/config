@@ -4,7 +4,7 @@ font-family = "JetBrainsMono Nerd Font"
 background-opacity = 0.96
 window-padding-x=6
 window-padding-y=4
-shell-integration-features = ssh-terminfo
+shell-integration-features = ssh-terminfo, ssh-env, cursor
 quit-after-last-window-closed = false
 keybind = ctrl+enter=unbind
 

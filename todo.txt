@@ -16,12 +16,12 @@ Dotfiles install
     Script to generate profile files
 
 # To-do
-Switch to hledger
 Nvim
     Autopairs plugin
     Setup a coderunner (shortcut or :command, per-file or makefile, floating terminal or split).
     Markdown viewer (in-browser - peek.nvim, live-preview.nvim, iamcco/markdown-preview, Typora?)
     LSP
+    Beancount support
 Waybar
     Workspace indicators, time/date (center), weather
     Volume, internet, bluetooth
