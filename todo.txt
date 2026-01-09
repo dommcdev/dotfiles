@@ -8,7 +8,6 @@ System update script (weekly reminder?)
 Document tailscale subnet router
 Keybindings for sunshine/moonlight
 Better power manager (w/aliases + hyprshutdown)
-Caffinate
 
 
 Dotfiles install

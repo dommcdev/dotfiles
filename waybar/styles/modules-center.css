@@ -57,9 +57,6 @@
 #custom-right_inv.1 {
 	color: @time;
 }
-#idle_inhibitor {
-	background-color: @time;
-}
 #clock.time {
 	padding-right: 6px;
 	background-color: @time;
@@ -88,8 +85,20 @@
 }
 #bluetooth {
 	background-color: @tray;
-	padding: 0 5px;
+	padding: 0 0 0 5px;
 }
+#idle_inhibitor {
+	background-color: @tray;
+    padding: 0 6px 0 0px;
+}
+#idle_inhibitor.activated {
+    color: @yellow;
+    text-shadow: 0 0 4px rgba(229, 200, 144, 0.5);
+}
+#idle_inhibitor.deactivated {
+    color: #626880; /* Dimmed/Greyed out */
+}
+
 #custom-system_update {
 	background-color: @tray;
 	padding: 0 8px 0 2px;

@@ -26,6 +26,7 @@
 		"custom/right_div#4",
 		"network",
 		"bluetooth",
+        "idle_inhibitor",
 		"custom/right_div#5"
         //"tray"
 	],
@@ -248,8 +249,8 @@
 	"idle_inhibitor": {
 		"format": "{icon}",
 		"format-icons": {
-			"activated": "󰈈",
-			"deactivated": "󰈉"
+			"activated": "",
+			"deactivated": ""
 		},
 		// "rotate":
 		"min-length": 3,
