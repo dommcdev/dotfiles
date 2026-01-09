@@ -14,6 +14,7 @@
   # Nautilus
   - if [[ "$(./sys id)" == "arch" ]]; then sudo pacman -S --noconfirm --needed nautilus nautilus-python gvfs-smb gvfs-dnssd gvfs-mtp sushi udiskie; fi
   - if [[ "$(./sys type)" == "Linux" ]]; then gsettings set org.gnome.nautilus.icon-view captions "['size', 'none', 'none']"; fi
+  - if [[ "$(./sys type)" == "Linux" ]]; then gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true; fi
 
 
 # Kicked out
