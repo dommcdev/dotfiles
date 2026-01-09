@@ -12,7 +12,15 @@
     elif [[ "$(./sys id)" == "mac" ]]; then
       brew install docker lazydocker
     fi
-  - sudo systemctl enable docker
-  - sudo usermod -aG docker $USER
 
-#todo - Arch docker doesn't work
+  - |
+    if [[ "$(./sys type)" == "Linux" ]]; then
+      sudo systemctl enable --now docker
+      sudo usermod -aG docker $USER
+      
+      # let libvirt traffic through
+      sudo iptables -C DOCKER-USER -i virbr0 -j ACCEPT 2>/dev/null || \
+      sudo iptables -I DOCKER-USER -i virbr0 -j ACCEPT
+      sudo iptables -C DOCKER-USER -o virbr0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT 2>/dev/null || \
+      sudo iptables -I DOCKER-USER -o virbr0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+    fi
