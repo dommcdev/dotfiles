@@ -4,13 +4,13 @@
 - shell:
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed docker lazydocker
+      sudo pacman -S --noconfirm --needed docker docker-compose lazydocker
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
       sudo sh /tmp/get-docker.sh
       brew install lazydocker
     elif [[ "$(./sys id)" == "mac" ]]; then
-      brew install docker lazydocker
+      brew install docker docker-compose lazydocker
     fi
 
   - |
