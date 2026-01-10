@@ -5,7 +5,7 @@ set -euo pipefail
 
 DOTFILES_REPO="git@github.com:dommcdev/dotfiles.git"
 DOTFILES_DIR="$HOME/dev/dotfiles"
-BREW_BIN="/home/linuxbrew/.linuxbrew/bin/brew
+BREW_BIN="/home/linuxbrew/.linuxbrew/bin/brew"
 
 echo -e "Starting Ubuntu configuration...\n\n"
 
