@@ -386,17 +386,16 @@ return {
 				Snacks.toggle.indent():map("<leader>ug")
 			end,
 		})
-		-- ADD THIS SECTION BELOW:
-		vim.api.nvim_create_autocmd("VimEnter", {
-			callback = function()
-				-- Only run if no arguments (nvim) and not a special buffer
-				if vim.fn.argc() == 0 and vim.bo.buftype == "" then
-					-- Schedule allows the dashboard to render first, then opens the picker
-					vim.schedule(function()
-						Snacks.picker.files()
-					end)
-				end
-			end,
-		})
+		--		vim.api.nvim_create_autocmd("VimEnter", {
+		--			callback = function()
+		--				-- Only run if no arguments (nvim) and not a special buffer
+		--				if vim.fn.argc() == 0 and vim.bo.buftype == "" then
+		--					-- Schedule allows the dashboard to render first, then opens the picker
+		--					vim.schedule(function()
+		--						Snacks.picker.files()
+		--					end)
+		--				end
+		--			end,
+		--		})
 	end,
 }
