@@ -9,15 +9,18 @@
 
     # Install GUI packages
   - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed audacity decibels papers loupe showtime libreoffice-fresh blender kdenlive nextcloud-client gimp; else brew install --cask moonlight nextcloud; fi
-  - if [ "$(uname)" = "Linux" ]; then flatpak install --assumeyes --noninteractive flathub org.nickvision.tubeconverter be.alexandervanhee.gradia io.typora.Typora; fi
+  - if [ "$(uname)" = "Linux" ]; then flatpak install --assumeyes --noninteractive flathub org.nickvision.tubeconverter io.typora.Typora com.github.PintaProject.Pinta; fi
     
   # Nautilus
   - if [[ "$(./sys id)" == "arch" ]]; then sudo pacman -S --noconfirm --needed nautilus nautilus-python gvfs-smb gvfs-dnssd gvfs-mtp sushi udiskie; fi
-  - if [[ "$(./sys type)" == "Linux" ]]; then gsettings set org.gnome.nautilus.icon-view captions "['size', 'none', 'none']"; fi
-  - if [[ "$(./sys type)" == "Linux" ]]; then gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true; fi
-
+  - |
+    if [[ "$(./sys type)" == "Linux" ]]; then
+      gsettings set org.gnome.nautilus.icon-view captions "['size', 'none', 'none']"
+      gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true
+    fi
 
 # Kicked out
 #gnome-disk-utility, gnome-power-manager, gnome-calender
 #blueman, pavucontrol, gnome-calculator, file-roller
 #switcheroo, impression, vesktop, gnucash
+# be.alexandervanhee.gradia
