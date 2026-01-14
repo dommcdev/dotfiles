@@ -122,6 +122,14 @@ return {
 				},
 			})
 
+			-- Auto-show diagnostic float on CursorHold
+			vim.api.nvim_create_autocmd("CursorHold", {
+				group = vim.api.nvim_create_augroup("diagnostic-float", { clear = true }),
+				callback = function()
+					vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
+				end,
+			})
+
 			-- Get capabilities from blink.cmp
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
