@@ -88,6 +88,7 @@ bindkey ' ' magic-space
 
 # keybind for typing boilerplate
 bindkey -s '^wgc' 'git commit -m ""\C-b'
+bindkey -s '^i' "opencode run ''\C-b"
 
 # Copy buffer contents to clipboard
 copy-buffer-to-clipboard() {
