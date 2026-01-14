@@ -87,6 +87,11 @@
 	background-color: @tray;
 	padding: 0 0 0 5px;
 }
+
+#bluetooth.connected {
+	color: @accent;
+}
+
 #idle_inhibitor {
 	background-color: @tray;
     padding: 0 6px 0 0px;
