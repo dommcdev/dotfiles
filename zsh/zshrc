@@ -59,8 +59,8 @@ alias iv='nvim' #common typo
 alias vim='nvim'
 alias fs='fastfetch'
 alias fsa='fastfetch -c all.jsonc'
-alias c='clear'
-alias co='opencode'
+alias cl='clear'
+alias c='opencode'
 alias wth='curl wttr.in'
 alias rm='trash-put'
 alias cat='bat'
@@ -88,7 +88,7 @@ bindkey ' ' magic-space
 
 # keybind for typing boilerplate
 bindkey -s '^wgc' 'git commit -m ""\C-b'
-bindkey -s '^i' "opencode run ''\C-b"
+bindkey -s '^wi' "opencode run ''\C-b"
 
 # Copy buffer contents to clipboard
 copy-buffer-to-clipboard() {

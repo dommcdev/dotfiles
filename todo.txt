@@ -14,6 +14,7 @@ Dotfiles install
     Askpass or equivilant
     Rework arch bootstrapping workflow
     Script to generate profile files
+    Bug in linux.yaml with pam stuff
     
 
 # To-do
@@ -77,3 +78,4 @@ Local AI
 NixOS, OpenSuse, manual Arch, MacOS vm
 Windows (+ LookingGlass)
 Github actions
+Devcontainers

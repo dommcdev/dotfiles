@@ -18,6 +18,5 @@
     mkdir -p ~/.local/share/npm-global
     npm config set prefix '~/.local/share/npm-global'
 
-    # Gemini and Opencode CLIs
+    # Gemini cli
   - npm install -g @google/gemini-cli
-  - npm install -g opencode-ai@latest

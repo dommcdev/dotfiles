@@ -1,0 +1,9 @@
+# Depends on: dev.yaml
+
+- link: 
+    ~/.config/opencode/:
+      path: opencode/*
+      glob: true
+
+- shell:
+  - npm install -g opencode-ai@latest
