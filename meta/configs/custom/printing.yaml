@@ -1,6 +1,6 @@
 
 - shell:
-  - sudo pacman -S --noconfirm --needed cups cups-browsed cups-pdf system-config-printer avahi
+  - sudo pacman -S --noconfirm --needed cups cups-browsed cups-pdf system-config-printer avahi cups-pk-helper
   #note - system config printer didn't seem to work very well - it crashes
 
   # Disable multicast dns in resolved. Avahi will provide this for better network printer discovery
