@@ -76,3 +76,4 @@ Local AI
 # Things to try
 NixOS, OpenSuse, manual Arch, MacOS vm
 Windows (+ LookingGlass)
+Github actions
