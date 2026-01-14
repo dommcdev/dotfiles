@@ -32,6 +32,11 @@ return {
 				duration = { step = 15, total = 100 },
 				easing = "linear",
 			},
+			animate_repeat = {
+				delay = 30,
+				duration = { total = 0 },
+				easing = "linear",
+			},
 		},
 	},
 	keys = {
