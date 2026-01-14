@@ -14,6 +14,7 @@ Dotfiles install
     Askpass or equivilant
     Rework arch bootstrapping workflow
     Script to generate profile files
+    
 
 # To-do
 Nvim
@@ -32,6 +33,10 @@ Rofi
     Switch between modes with ctrl shortcut - C-e, C-s, etc. Or type "emoji", "search" etc.
     Switch themE
 Gpu passthrough
+Omarchy 
+    Steal bootloader
+    Steal ascii thing
+    Steal swayosd thing
 Fix/theme bibata hyprcursor
 Systemd-logind for custom power-button sequence (60s to shutdown)
 Fedora dotfiles support + full ubuntu support
