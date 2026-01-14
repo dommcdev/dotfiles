@@ -1,172 +1,257 @@
+-- Modern LSP configuration based on kickstart.nvim
+-- Uses snacks.picker instead of Telescope, blink.cmp for completion
+
 return {
-	-- Core LSP
-	{
-		"neovim/nvim-lspconfig",
-		config = function()
-			-- Setup diagnostic display
-			vim.diagnostic.config({
-				virtual_text = true,
-				signs = true,
-				underline = true,
-				update_in_insert = false,
-			})
-
-			-- Keymaps for LSP actions
-			local opts = { noremap = true, silent = true }
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-			vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Show diagnostics" })
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-			vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-			vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-			vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
-		end,
-	},
-
-	-- Mason installer
-	{
-		"williamboman/mason.nvim",
-		config = function()
-			require("mason").setup()
-			-- Optionally auto-install formatters
-			local mason_registry = require("mason-registry")
-			local formatters = { "autopep8", "stylua", "clang-format" }
-			for _, formatter in ipairs(formatters) do
-				if not mason_registry.is_installed(formatter) then
-					vim.cmd("MasonInstall " .. formatter)
-				end
-			end
-		end,
-	},
-
-	-- Add this plugin BEFORE mason-lspconfig
+	-- Lazydev: Lua LSP enhancements for Neovim config
 	{
 		"folke/lazydev.nvim",
 		ft = "lua",
 		opts = {
 			library = {
-				{ path = "luvit-meta/library", words = { "vim%.uv" } },
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 			},
 		},
 	},
 
-	-- Mason-LSP bridge
+	-- Main LSP Configuration
 	{
-		"williamboman/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			-- Mason must be loaded before dependents
+			{ "mason-org/mason.nvim", opts = {} },
+			"mason-org/mason-lspconfig.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
+
+			-- LSP status updates
+			{ "j-hui/fidget.nvim", opts = {} },
+
+			-- Completion capabilities
+			"saghen/blink.cmp",
+		},
 		config = function()
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			-- LspAttach: runs when an LSP attaches to a buffer
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
+				callback = function(event)
+					local map = function(keys, func, desc, mode)
+						mode = mode or "n"
+						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+					end
+
+					-- Standard LSP keymaps (gr* prefix as per Neovim 0.11+ conventions)
+					map("grn", vim.lsp.buf.rename, "[R]e[n]ame")
+					map("gra", vim.lsp.buf.code_action, "[G]oto Code [A]ction", { "n", "x" })
+					map("grD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+
+					-- LSP navigation via snacks.picker
+					map("grr", function()
+						Snacks.picker.lsp_references()
+					end, "[G]oto [R]eferences")
+					map("gri", function()
+						Snacks.picker.lsp_implementations()
+					end, "[G]oto [I]mplementation")
+					map("grd", function()
+						Snacks.picker.lsp_definitions()
+					end, "[G]oto [D]efinition")
+					map("grt", function()
+						Snacks.picker.lsp_type_definitions()
+					end, "[G]oto [T]ype Definition")
+					map("gO", function()
+						Snacks.picker.lsp_symbols()
+					end, "Document Symbols")
+					map("gW", function()
+						Snacks.picker.lsp_workspace_symbols()
+					end, "Workspace Symbols")
+
+					-- Additional useful mappings
+					map("K", vim.lsp.buf.hover, "Hover Documentation")
+					map("<leader>d", vim.diagnostic.open_float, "Show Diagnostics")
+
+					local client = vim.lsp.get_client_by_id(event.data.client_id)
+					if not client then
+						return
+					end
+
+					-- Document highlight on cursor hold
+					if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
+						local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
+						vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+							buffer = event.buf,
+							group = highlight_augroup,
+							callback = vim.lsp.buf.document_highlight,
+						})
+						vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+							buffer = event.buf,
+							group = highlight_augroup,
+							callback = vim.lsp.buf.clear_references,
+						})
+						vim.api.nvim_create_autocmd("LspDetach", {
+							group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
+							callback = function(event2)
+								vim.lsp.buf.clear_references()
+								vim.api.nvim_clear_autocmds({ group = "lsp-highlight", buffer = event2.buf })
+							end,
+						})
+					end
+
+					-- Inlay hints toggle
+					if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
+						map("<leader>th", function()
+							vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
+						end, "[T]oggle Inlay [H]ints")
+					end
+				end,
+			})
+
+			-- Diagnostic configuration
+			vim.diagnostic.config({
+				severity_sort = true,
+				float = { border = "rounded", source = "if_many" },
+				underline = { severity = vim.diagnostic.severity.ERROR },
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = "󰅚 ",
+						[vim.diagnostic.severity.WARN] = "󰀪 ",
+						[vim.diagnostic.severity.INFO] = "󰋽 ",
+						[vim.diagnostic.severity.HINT] = "󰌶 ",
+					},
+				},
+				virtual_text = {
+					source = "if_many",
+					spacing = 2,
+				},
+			})
+
+			-- Get capabilities from blink.cmp
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+			-- LSP server configurations
+			local servers = {
+				lua_ls = {
+					settings = {
+						Lua = {
+							completion = { callSnippet = "Replace" },
+						},
+					},
+				},
+				clangd = {},
+				ruff = {},
+			}
+
+			-- Tools to install via Mason
+			local ensure_installed = vim.tbl_keys(servers or {})
+			vim.list_extend(ensure_installed, {
+				"stylua",
+				"clang-format",
+			})
+			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "clangd", "ruff" },
+				ensure_installed = {},
+				automatic_installation = false,
 				handlers = {
 					function(server_name)
-						require("lspconfig")[server_name].setup({
-							capabilities = capabilities,
-						})
+						local server = servers[server_name] or {}
+						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+						require("lspconfig")[server_name].setup(server)
 					end,
 				},
 			})
 		end,
 	},
 
+	-- Autoformat with conform.nvim
 	{
 		"stevearc/conform.nvim",
-		config = function()
-			require("conform").setup({
-				formatters_by_ft = {
-					python = { "autopep8", "ruff_format" },
-					c = { "clang_format" },
-					cpp = { "clang_format" },
-					lua = { "stylua" },
-				},
-
-				formatters = {
-					autopep8 = {
-						prepend_args = {
-							"--aggressive",
-							"--aggressive",
-							"--max-line-length=88",
-						},
-					},
-					clang_format = {
-						prepend_args = {
-							"-style={BasedOnStyle: Google, IndentWidth: 4}",
-						},
-					},
-				},
-
-				-- Auto format on save
-				format_on_save = function(bufnr)
-					-- Disable for certain filetypes if needed
-					return {
-						timeout_ms = 2000,
-						lsp_fallback = false,
-					}
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
+		keys = {
+			{
+				"<leader>f",
+				function()
+					require("conform").format({ async = true, lsp_format = "fallback" })
 				end,
-			})
-		end,
+				mode = "",
+				desc = "[F]ormat buffer",
+			},
+		},
+		opts = {
+			notify_on_error = false,
+			format_on_save = function(bufnr)
+				-- Disable format_on_save for certain filetypes
+				local disable_filetypes = { c = true, cpp = true }
+				if disable_filetypes[vim.bo[bufnr].filetype] then
+					return nil
+				end
+				return { timeout_ms = 500, lsp_format = "fallback" }
+			end,
+			formatters_by_ft = {
+				python = { "ruff_format" },
+				c = { "clang_format" },
+				cpp = { "clang_format" },
+				lua = { "stylua" },
+			},
+			formatters = {
+				clang_format = {
+					prepend_args = { "-style={BasedOnStyle: Google, IndentWidth: 4}" },
+				},
+			},
+		},
 	},
 
-	-- Trouble for diagnostics UI (optional but nice)
+	-- Autocompletion with blink.cmp
+	{
+		"saghen/blink.cmp",
+		event = "VimEnter",
+		version = "1.*",
+		dependencies = {
+			{
+				"L3MON4D3/LuaSnip",
+				version = "2.*",
+				build = (function()
+					if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
+						return
+					end
+					return "make install_jsregexp"
+				end)(),
+			},
+			"folke/lazydev.nvim",
+		},
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
+		opts = {
+			keymap = {
+				preset = "default",
+			},
+			appearance = {
+				nerd_font_variant = "mono",
+			},
+			completion = {
+				documentation = { auto_show = true, auto_show_delay_ms = 200 },
+			},
+			sources = {
+				default = { "lsp", "path", "snippets", "lazydev" },
+				providers = {
+					lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
+				},
+			},
+			snippets = { preset = "luasnip" },
+			fuzzy = { implementation = "prefer_rust_with_warning" },
+			signature = { enabled = true },
+		},
+	},
+
+	-- Trouble for diagnostics UI
 	{
 		"folke/trouble.nvim",
 		dependencies = "nvim-tree/nvim-web-devicons",
 		opts = {},
-	},
-
-	-- Autocompletion setup
-	{
-		"hrsh7th/nvim-cmp",
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp", -- LSP completions
-			"hrsh7th/cmp-buffer", -- buffer words
-			"hrsh7th/cmp-path", -- file paths
-			"L3MON4D3/LuaSnip", -- snippet engine
-			"saadparwaiz1/cmp_luasnip", -- snippet completions
+		keys = {
+			{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+			{ "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
+			{ "<leader>cs", "<cmd>Trouble symbols toggle<cr>", desc = "Symbols (Trouble)" },
+			{ "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
+			{ "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
 		},
-		config = function()
-			local cmp = require("cmp")
-			local luasnip = require("luasnip")
-
-			cmp.setup({
-				snippet = {
-					expand = function(args)
-						luasnip.lsp_expand(args.body)
-					end,
-				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item()
-						elseif luasnip.expand_or_jumpable() then
-							luasnip.expand_or_jump()
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						elseif luasnip.jumpable(-1) then
-							luasnip.jump(-1)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-				}),
-				sources = cmp.config.sources({
-					{ name = "lazydev", group_index = 0 },
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-					{ name = "buffer" },
-					{ name = "path" },
-				}),
-			})
-		end,
 	},
 }
