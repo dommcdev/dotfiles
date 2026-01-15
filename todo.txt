@@ -1,13 +1,11 @@
 # Easy
 Create yaml/script for fingerprint sensor
 Replace grub/sddm/hyprlock theme
-Setup docker (steal from omarchy)
 Better brightness adjustment (pick level + apply + swayosd)
 System update script (weekly reminder?)
 Document tailscale subnet router
 Keybindings for sunshine/moonlight
 Better power manager (w/aliases + hyprshutdown)
-Weather (fix delay + add info to hover)
 
 
 Dotfiles install

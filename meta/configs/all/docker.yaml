@@ -15,9 +15,26 @@
 
   - |
     if [[ "$(./sys type)" == "Linux" ]]; then
+      # Limit Docker log sizes to avoid filling disk
+      sudo mkdir -p /etc/docker
+      sudo tee /etc/docker/daemon.json >/dev/null <<'DEOF'
+    {
+      "log-driver": "json-file",
+      "log-opts": { "max-size": "10m", "max-file": "5" }
+    }
+    DEOF
+
+      # Prevent Docker from blocking boot on network-online.target
+      sudo mkdir -p /etc/systemd/system/docker.service.d
+      sudo tee /etc/systemd/system/docker.service.d/no-block-boot.conf >/dev/null <<'DEOF'
+    [Unit]
+    DefaultDependencies=no
+    DEOF
+
       sudo systemctl enable --now docker
       sudo usermod -aG docker $USER
-      
+      sudo systemctl daemon-reload
+
       # let libvirt traffic through
       sudo iptables -C DOCKER-USER -i virbr0 -j ACCEPT 2>/dev/null || \
       sudo iptables -I DOCKER-USER -i virbr0 -j ACCEPT
