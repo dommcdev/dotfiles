@@ -2,7 +2,7 @@
 
 - link:
     ~/.config/nvim: nvim
-    ~/.editorconfig: nvim/.editorconfig
+    ~/.editorconfig: nvim/editorconfig
 
 - shell:
   - |
