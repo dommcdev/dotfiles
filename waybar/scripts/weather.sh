@@ -36,7 +36,7 @@ fi
 # Extract code, temp, and description
 eval "$(echo "$weather_json" | jq -r '.current_condition[0] | "code=\(.weatherCode)\ntemp=\(.temp_F)\ndesc=\"\(.weatherDesc[0].value)\""')"
 
-icon=$(get_icon "$code")
+icon=$(get_icon "$code" )
 
 # Print JSON for Waybar
 # text: Icon + Temp

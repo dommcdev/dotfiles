@@ -3,36 +3,35 @@
 /* theme switcher */
 
 #custom-user {
-	padding-right: 12px;
-	font-weight: normal;
+  padding-right: 12px;
+  font-weight: normal;
 }
 
 /* workspaces */
 
 #custom-left_div.1,
 #custom-right_div.1 {
-	color: @workspaces;
+  color: @workspaces;
 }
 #workspaces {
-	padding: 0 1px;
-	background-color: @workspaces;
+  padding: 0 1px;
+  background-color: @workspaces;
 }
 #workspaces .active label {
-	font-size: 22px;
-	color: @accent;
+  color: @accent;
 }
 
 /* window title & count */
 
 #window {
-	margin-left: 12px;
+  margin-left: 12px;
 }
 #window label {
-	font-weight: normal;
+  font-weight: normal;
 }
 #windowcount {
-	margin-right: 12px;
+  margin-right: 12px;
 }
 #windowcount label {
-	color: @hover-fg;
+  color: @hover-fg;
 }
