@@ -17,17 +17,12 @@ Dotfiles install
     Bug in linux.yaml with pam stuff
 
 # To-do
-Nvim
-    Setup a coderunner (shortcut or :command, per-file or makefile, floating terminal or split).
 Waybar
-    Workspace indicators, time/date (center), weather
-    Volume, internet, bluetooth
-    Cpu/ram/temp
+    Workspace indicators, weather
     Calendar widget
 Rofi
     Web search, calculator, emoji/symbols, AI, quick notes (.txt to downloads)
     Switch between modes with ctrl shortcut - C-e, C-s, etc. Or type "emoji", "search" etc.
-    Switch themE
 Gpu passthrough
 Omarchy
     Steal bootloader

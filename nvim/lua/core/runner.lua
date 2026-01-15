@@ -33,14 +33,21 @@ function M.run()
 
   local cmd_template = M.commands[ext]
 
-  -- Handle shebang for scripts (or fallback to configured command)
-  local f = io.open(file, "r")
-  if f then
-    local first_line = f:read("*l")
-    f:close()
-    if first_line and first_line:match("^#!") then
-      local interpreter = first_line:match("^#!(.*)")
-      cmd_template = vim.trim(interpreter) .. " ${file}"
+  -- Check for Makefile
+  if vim.fn.filereadable(dir .. "/Makefile") == 1 then
+    cmd_template = "cd ${dir} && make build && make run"
+  end
+
+  -- Handle shebang for scripts (if no Makefile found)
+  if not cmd_template or cmd_template == M.commands[ext] then
+    local f = io.open(file, "r")
+    if f then
+      local first_line = f:read("*l")
+      f:close()
+      if first_line and first_line:match("^#!") then
+        local interpreter = first_line:match("^#!(.*)")
+        cmd_template = vim.trim(interpreter) .. " ${file}"
+      end
     end
   end
 
@@ -66,5 +73,7 @@ function M.run()
 end
 
 vim.keymap.set("n", "<leader>r", M.run, { desc = "Run File" })
+
+vim.api.nvim_create_user_command("Run", M.run, { desc = "Run current file" })
 
 return M
