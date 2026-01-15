@@ -73,8 +73,18 @@
 	background-color: @date;
 }
 #custom-right_div.4 {
-	background-color: @tray;
+	background-color: @weather;
 	color: @date;
+}
+
+#custom-weather {
+	background-color: @weather;
+	padding: 0 6px;
+}
+
+#custom-right_div.weather {
+	background-color: @tray;
+	color: @weather;
 }
 
 /* quick settings */

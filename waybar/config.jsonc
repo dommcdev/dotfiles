@@ -24,6 +24,8 @@
 		"custom/right_div#3",
 		"clock#date",
 		"custom/right_div#4",
+		"custom/weather",
+		"custom/right_div#weather",
 		"network",
 		"bluetooth",
         "idle_inhibitor",
@@ -581,6 +583,10 @@
 		"format": "",
 		"tooltip": false
 	},
+	"custom/right_div#weather": {
+		"format": "",
+		"tooltip": false
+	},
 	"custom/right_inv#1": {
 		"format": "",
 		"tooltip": false
@@ -609,6 +615,14 @@
 		// "tooltip":
 		"tooltip-format": "Power Menu"
 		// "escape":
+	},
+
+	"custom/weather": {
+		"exec": "~/.config/waybar/scripts/weather.sh",
+		"return-type": "json",
+		"interval": 600,
+		"format": "{}",
+		"tooltip": true
 	},
 
 	"custom/system_update": {
