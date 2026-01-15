@@ -1,10 +1,8 @@
 #Neovim + python
 
 - link:
-    ~/.config/nvim:
-      path: nvim
-      exclude: [editorconfig]
-    ~/.editorconfig: nvim/editorconfig
+    ~/.config/nvim: nvim
+    ~/.editorconfig: nvim/.editorconfig
 
 - shell:
   - |
