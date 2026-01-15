@@ -1,9 +1,0 @@
-
-- link:
-    ~/.config/sunshine/:
-      path: sunshine/*
-      glob: true
-
-- shell:
-  - sudo pacman -S --noconfirm --needed lizardbyte/sunshine
-  - systemctl --user enable sunshine.service

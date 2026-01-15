@@ -1,0 +1,27 @@
+
+- link:
+    ~/.config/sunshine/:
+      path: sunshine/*
+      glob: true
+
+- shell:
+  - |
+    if [[ "$(./sys id)" == "arch" ]]; then
+      sudo pacman -S --noconfirm --needed lizardbyte/sunshine moonlight-qt
+      systemctl --user enable sunshine.service
+    elif [[ "$(./sys id)" == "ubuntu" ]]; then
+      echo "Not supported"
+    elif [[ "$(./sys id)" == "mac" ]]; then
+      brew install --cask moonlight
+    fi
+
+#Note - this requires adding
+#
+# [lizardbyte]
+# SigLevel = Optional
+# Server = https://github.com/LizardByte/pacman-repo/releases/latest/download
+#to /etc/pacman.conf
+#
+#and
+# monitor = sunshine-stream, 2560x1600@60, auto, 1
+#to hyprland.conf
