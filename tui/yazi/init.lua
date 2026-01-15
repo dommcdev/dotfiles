@@ -1,26 +1,26 @@
 require("bookmarks"):setup({
-	last_directory = { enable = false, persist = false, mode = "dir" },
-	persist = "all",
-	desc_format = "full",
-	file_pick_mode = "hover",
-	custom_desc_input = false,
-	show_keys = false,
-	notify = {
-		enable = false,
-		timeout = 1,
-		message = {
-			new = "New bookmark '<key>' -> '<folder>'",
-			delete = "Deleted bookmark in '<key>'",
-			delete_all = "Deleted all bookmarks",
-		},
-	},
+    last_directory = { enable = false, persist = false, mode = "dir" },
+    persist = "all",
+    desc_format = "full",
+    file_pick_mode = "hover",
+    custom_desc_input = false,
+    show_keys = false,
+    notify = {
+        enable = false,
+        timeout = 1,
+        message = {
+            new = "New bookmark '<key>' -> '<folder>'",
+            delete = "Deleted bookmark in '<key>'",
+            delete_all = "Deleted all bookmarks",
+        },
+    },
 })
 
 require("recycle-bin"):setup()
 
 require("full-border"):setup({
-	-- Available values: ui.Border.PLAIN, ui.Border.ROUNDED
-	type = ui.Border.ROUNDED,
+    -- Available values: ui.Border.PLAIN, ui.Border.ROUNDED
+    type = ui.Border.ROUNDED,
 })
 
 require("starship"):setup()
