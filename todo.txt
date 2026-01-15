@@ -2,7 +2,6 @@
 Create yaml/script for fingerprint sensor
 Replace grub/sddm/hyprlock theme
 Better brightness adjustment (pick level + apply + swayosd)
-System update script (weekly reminder?)
 Document tailscale subnet router
 Keybindings for sunshine/moonlight
 Better power manager (w/aliases + hyprshutdown)

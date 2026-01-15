@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+set -e
+
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+print_section() {
+  echo -e "\n${GREEN}==> $1${NC}"
+}
+
+print_info() {
+  echo -e "${YELLOW}$1${NC}"
+}
+
+# Validate sudo upfront and keep it alive
+if sudo -v; then
+  # Keep sudo alive in background
+  while true; do sudo -n true; sleep 50; kill -0 "$$" || exit; done 2>/dev/null &
+  SUDO_PID=$!
+  trap "kill $SUDO_PID 2>/dev/null" EXIT
+else
+  echo "Failed to obtain sudo credentials"
+  exit 1
+fi
+
+# pacman (Arch)
+if command -v pacman &>/dev/null; then
+  print_section "Updating pacman packages"
+  sudo pacman -Syu --noconfirm
+fi
+
+# yay (AUR)
+if command -v yay &>/dev/null; then
+  print_section "Updating AUR packages"
+  yay -Sua --noconfirm
+fi
+
+# apt (Debian/Ubuntu)
+if command -v apt &>/dev/null; then
+  print_section "Updating apt packages"
+  sudo apt update -y
+  sudo apt upgrade -y
+  sudo apt autoremove -y
+fi
+
+# dnf (Fedora/RHEL)
+if command -v dnf &>/dev/null; then
+  print_section "Updating dnf packages"
+  sudo dnf upgrade -y
+fi
+
+# brew (Homebrew)
+if command -v brew &>/dev/null; then
+  print_section "Updating Homebrew packages"
+  brew update
+  brew upgrade
+  brew cleanup
+fi
+
+# flatpak
+if command -v flatpak &>/dev/null; then
+  print_section "Updating Flatpak packages"
+  sudo flatpak update -y
+fi
+
+# npm global packages
+if command -v npm &>/dev/null; then
+  print_section "Updating global npm packages"
+  npm update -g
+fi
+
+print_section "All updates complete!"
