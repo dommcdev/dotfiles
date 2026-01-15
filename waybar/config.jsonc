@@ -622,7 +622,8 @@
 		"return-type": "json",
 		"interval": 600,
 		"format": "{}",
-		"tooltip": true
+		"tooltip": true,
+		"on-click": "ghostty --class=com.dominic.wttr -e ~/dev/dotfiles/scripts/weather.sh"
 	},
 
 	"custom/system_update": {

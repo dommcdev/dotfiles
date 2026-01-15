@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 curl wttr.in
 echo
 echo "Press any key to exit..."

@@ -5,16 +5,16 @@ mkdir -p "$(dirname "$CACHE_FILE")"
 
 get_icon() {
     case $1 in
-        113) echo " " ;;
-        116) echo " " ;;
-        119) echo " " ;;
-        122) echo " " ;;
-        143|248|260) echo " " ;;
-        176|179|263|266|293|296|299|302|305|308|311|314|317|350|353|356|359|320) echo " " ;;
-        200) echo " " ;;
-        386|389|392|395) echo " " ;;
-        227|230|323|326|329|332|335|338|368|371|374|377) echo " " ;;
-        *) echo " " ;;
+        113) echo "" ;;
+        116) echo "" ;;
+        119) echo "" ;;
+        122) echo "" ;;
+        143|248|260) echo "" ;;
+        176|179|263|266|293|296|299|302|305|308|311|314|317|350|353|356|359|320) echo "" ;;
+        200) echo "" ;;
+        386|389|392|395) echo "" ;;
+        227|230|323|326|329|332|335|338|368|371|374|377) echo "" ;;
+        *) echo "" ;;
     esac
 }
 
@@ -42,4 +42,4 @@ icon=$(get_icon "$code")
 # text: Icon + Temp
 # tooltip: Description + Temp
 # class: weather
-printf '{"text": "%s%s°F", "tooltip": "%s %s°F", "class": "weather"}\n' "$icon" "$temp" "$desc" "$temp"
+printf '{"text": "%s %s°F", "tooltip": "%s %s°F", "class": "weather"}\n' "$icon" "$temp" "$desc" "$temp"
