@@ -1,6 +1,9 @@
 
 - shell:
-  - sudo rm -rf /usr/share/grub/themes/catppuccin-mocha-grub-theme
-  - sudo cp -r grub/catppuccin-mocha-grub-theme /usr/share/grub/themes/
-  - sudo sed -i '$aGRUB_THEME="/usr/share/grub/themes/catppuccin-mocha-grub-theme/theme.txt"' /etc/default/grub
-  - sudo grub-mkconfig -o /boot/grub/grub.cfg
+  - |
+    sudo rsync -a --delete grub/catppuccin-mocha-grub-theme /usr/share/grub/themes/
+
+    grep -qxF 'GRUB_THEME="/usr/share/grub/themes/catppuccin-mocha-grub-theme/theme.txt"' /etc/default/grub || \
+    sudo sed -i '$aGRUB_THEME="/usr/share/grub/themes/catppuccin-mocha-grub-theme/theme.txt"' /etc/default/grub
+
+    sudo grub-mkconfig -o /boot/grub/grub.cfg

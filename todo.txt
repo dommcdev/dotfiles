@@ -1,6 +1,5 @@
 # Easy
 Create yaml/script for fingerprint sensor
-Fix grub.yaml (adds theme line x3, implement other tweaks)
 Replace grub/sddm/hyprlock theme
 Setup docker (steal from omarchy)
 Better brightness adjustment (pick level + apply + swayosd)
@@ -30,6 +29,7 @@ Fix/theme bibata hyprcursor
 Systemd-logind for custom power-button sequence (60s to shutdown)
 Fedora dotfiles support + full ubuntu support
 Better screenshot tool
+Switch to limine?
 
 # Find tools, learn
 Yt-dlp workflow (tui? chrome?)
