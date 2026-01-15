@@ -1,0 +1,33 @@
+Tailscale Subnet Router Setup
+==============================
+
+This allows other Tailscale devices to access a local network (e.g., 192.168.1.0/24)
+through this machine, even if devices on that network don't have Tailscale installed.
+
+1. Enable IP forwarding
+-----------------------
+echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
+echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
+sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
+
+2. Advertise the subnet (and exit node)
+-----------------------
+sudo tailscale set --advertise-routes=192.168.1.0/24
+sudo tailscale set --advertise-exit-node
+
+Replace 192.168.1.0/24 with your local subnet if needed, or add multiple like
+sudo tailscale set --advertise-routes=192.0.2.0/24,198.51.100.0/24
+
+
+3. Approve in admin console
+---------------------------
+Go to: https://login.tailscale.com/admin/machines
+Find this machine, click "...", then "Edit route settings"
+Enable the advertised subnet.
+
+4. (Optional) Accept routes on clients
+--------------------------------------
+On devices that need to reach the subnet:
+sudo tailscale up --accept-routes
+
+Note - subnet routers allow the client machines to access other machines on the subnet router's network. Enabling the exit node option allows clients to route all their traffic through the subnet router, aka a private vpn.
