@@ -18,11 +18,8 @@ Dotfiles install
 
 # To-do
 Nvim
-    Autopairs plugin
     Setup a coderunner (shortcut or :command, per-file or makefile, floating terminal or split).
     Markdown viewer (in-browser - peek.nvim, live-preview.nvim, iamcco/markdown-preview, Typora?)
-    LSP
-    Beancount support
 Waybar
     Workspace indicators, time/date (center), weather
     Volume, internet, bluetooth
@@ -33,7 +30,7 @@ Rofi
     Switch between modes with ctrl shortcut - C-e, C-s, etc. Or type "emoji", "search" etc.
     Switch themE
 Gpu passthrough
-Omarchy 
+Omarchy
     Steal bootloader
     Steal ascii thing
     Steal swayosd thing
@@ -61,9 +58,9 @@ Theme script
 Tmux-sessionizer for "restoring" sessions
 Kvantum isn't working - need to install KvantumManager?
 Better solution for ssh -> tmux -> nvim shared clipboard
-Xwayland apps following mouse cursor? 
+Xwayland apps following mouse cursor?
 
-Theme and/or tweak: Rofi, starship, onlyoffice, hypr animations, 
+Theme and/or tweak: Rofi, starship, onlyoffice, hypr animations,
 
 Server
     Ubuntu server setup config?

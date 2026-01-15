@@ -173,6 +173,21 @@ return {
                 capabilities = capabilities,
             })
 
+            vim.lsp.config("beancount", {
+                capabilities = capabilities,
+                init_options = {
+                    journal_file = vim.fn.expand("~/dev/beans/ledger.beancount"),
+                },
+            })
+
+            -- Beancount filetype detection
+            vim.filetype.add({
+                extension = {
+                    beancount = "beancount",
+                    bean = "beancount",
+                },
+            })
+
             -- Tools to install via Mason (LSP servers + formatters)
             require("mason-tool-installer").setup({
                 ensure_installed = {
@@ -186,6 +201,7 @@ return {
                     "typescript-language-server",
                     "sqls",
                     "gopls",
+                    "beancount-language-server",
                     -- Formatters
                     "stylua",
                     "clang-format",
@@ -290,7 +306,8 @@ return {
         ---@type blink.cmp.Config
         opts = {
             keymap = {
-                preset = "default",
+                preset = "super-tab",
+                ["<C-y>"] = { "select_and_accept", "fallback" },
             },
             appearance = {
                 nerd_font_variant = "mono",

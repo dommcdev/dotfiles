@@ -1,10 +1,13 @@
 return {
 	{
-		'nvim-mini/mini.nvim',
+		"nvim-mini/mini.nvim",
 		enabled = true,
 		config = function()
-			local statusline = require 'mini.statusline'
-			statusline.setup { use_icons = true }
-		end
+			-- Statusline
+			require("mini.statusline").setup({ use_icons = true })
+
+			-- Autopairs
+			require("mini.pairs").setup()
+		end,
 	},
 }
