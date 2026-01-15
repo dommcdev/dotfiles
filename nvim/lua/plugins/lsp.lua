@@ -13,13 +13,12 @@ return {
         },
     },
 
-    -- Main LSP Configuration
+    -- Main LSP Configuration (Neovim 0.11+ API)
     {
         "neovim/nvim-lspconfig",
         dependencies = {
             -- Mason must be loaded before dependents
             { "mason-org/mason.nvim", opts = {} },
-            "mason-org/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
 
             -- Completion capabilities
@@ -130,60 +129,87 @@ return {
             -- Get capabilities from blink.cmp
             local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-            -- LSP server configurations
-            local servers = {
-                -- Lua
-                lua_ls = {
-                    settings = {
-                        Lua = {
-                            completion = { callSnippet = "Replace" },
-                        },
+            -- LSP server configurations using new Neovim 0.11+ API (vim.lsp.config)
+            -- Configure each server with vim.lsp.config(), then enable with vim.lsp.enable()
+
+            vim.lsp.config("lua_ls", {
+                capabilities = capabilities,
+                settings = {
+                    Lua = {
+                        completion = { callSnippet = "Replace" },
                     },
                 },
-                -- C/C++
-                clangd = {},
-                -- Python
-                ruff = {},
-                -- Java
-                jdtls = {},
-                -- HTML
-                html = {},
-                -- CSS
-                cssls = {},
-                -- JavaScript/TypeScript
-                ts_ls = {},
-                -- SQL
-                sqls = {},
-                -- Go
-                gopls = {},
-            }
+            })
+
+            vim.lsp.config("clangd", {
+                capabilities = capabilities,
+            })
+
+            vim.lsp.config("ruff", {
+                capabilities = capabilities,
+            })
+
+            vim.lsp.config("jdtls", {
+                capabilities = capabilities,
+            })
+
+            vim.lsp.config("html", {
+                capabilities = capabilities,
+            })
+
+            vim.lsp.config("cssls", {
+                capabilities = capabilities,
+            })
+
+            vim.lsp.config("ts_ls", {
+                capabilities = capabilities,
+            })
+
+            vim.lsp.config("sqls", {
+                capabilities = capabilities,
+            })
+
+            vim.lsp.config("gopls", {
+                capabilities = capabilities,
+            })
 
             -- Tools to install via Mason (LSP servers + formatters)
-            local ensure_installed = vim.tbl_keys(servers or {})
-            vim.list_extend(ensure_installed, {
-                -- Formatters
-                "stylua", -- Lua
-                "clang-format", -- C/C++
-                "prettierd", -- HTML/CSS/JS/TS
-                "google-java-format", -- Java
-                "sql-formatter", -- SQL
-                "goimports", -- Go (import management)
-                "gofumpt", -- Go (stricter formatting)
-            })
-            require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
-            require("mason-lspconfig").setup({
-                ensure_installed = {},
-                automatic_installation = false,
-                handlers = {
-                    function(server_name)
-                        local server = servers[server_name] or {}
-                        server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-                        require("lspconfig")[server_name].setup(server)
-                    end,
+            require("mason-tool-installer").setup({
+                ensure_installed = {
+                    -- LSP servers
+                    "lua-language-server",
+                    "clangd",
+                    "ruff",
+                    "jdtls",
+                    "html-lsp",
+                    "css-lsp",
+                    "typescript-language-server",
+                    "sqls",
+                    "gopls",
+                    -- Formatters
+                    "stylua",
+                    "clang-format",
+                    "prettierd",
+                    "google-java-format",
+                    "sql-formatter",
+                    "goimports",
+                    "gofumpt",
                 },
             })
         end,
+    },
+
+    -- Mason-lspconfig: automatically enables installed LSP servers
+    {
+        "mason-org/mason-lspconfig.nvim",
+        dependencies = {
+            { "mason-org/mason.nvim", opts = {} },
+            "neovim/nvim-lspconfig",
+        },
+        opts = {
+            -- automatic_enable = true is the default, which calls vim.lsp.enable()
+            -- for all installed servers automatically
+        },
     },
 
     -- Autoformat with conform.nvim

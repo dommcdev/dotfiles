@@ -43,9 +43,13 @@ return {
                 blink_cmp = true,
                 gitsigns = true,
                 harpoon = true,
+                lsp_trouble = true,
                 mason = true,
                 treesitter = true,
-                snacks = true,
+                snacks = {
+                    enabled = true,
+                    indent_scope_color = "",
+                },
                 mini = {
                     enabled = true,
                     indentscope_color = "",
