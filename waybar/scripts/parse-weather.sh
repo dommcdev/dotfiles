@@ -33,13 +33,56 @@ else
 fi
 
 # Parse data using jq
-# Extract code, temp, and description
-eval "$(echo "$weather_json" | jq -r '.current_condition[0] | "code=\(.weatherCode)\ntemp=\(.temp_F)\ndesc=\"\(.weatherDesc[0].value)\""')"
+eval "$(echo "$weather_json" | jq -r '
+  .nearest_area[0] as $area |
+  .current_condition[0] |
+  "code=\(.weatherCode)
+temp=\(.temp_F)
+desc=\"\(.weatherDesc[0].value)\"
+wind_speed=\(.windspeedMiles)
+wind_dir=\(.winddir16Point)
+precip=\(.precipInches)
+city=\"\($area.areaName[0].value)\"
+region=\"\($area.region[0].value)\"
+country=\"\($area.country[0].value)\""
+')"
 
-icon=$(get_icon "$code" )
+icon=$(get_icon "$code")
+timestamp=$(date '+%I:%M %p')
+
+# Wind direction to arrow (arrow shows direction wind is blowing TO)
+get_wind_arrow() {
+    case $1 in
+        N)   echo "↓" ;;
+        NNE) echo "↓" ;;
+        NE)  echo "↙" ;;
+        ENE) echo "←" ;;
+        E)   echo "←" ;;
+        ESE) echo "←" ;;
+        SE)  echo "↖" ;;
+        SSE) echo "↑" ;;
+        S)   echo "↑" ;;
+        SSW) echo "↑" ;;
+        SW)  echo "↗" ;;
+        WSW) echo "→" ;;
+        W)   echo "→" ;;
+        WNW) echo "→" ;;
+        NW)  echo "↘" ;;
+        NNW) echo "↓" ;;
+        *)   echo "" ;;
+    esac
+}
+
+wind_arrow=$(get_wind_arrow "$wind_dir")
+
+# Build tooltip
+tooltip="${city}, ${region}
+${desc}, ${temp}°F
+${wind_arrow} ${wind_speed} mph, ${precip} in
+${timestamp}"
+
+# Escape tooltip for JSON
+tooltip_escaped=$(printf '%s' "$tooltip" | jq -Rs .)
 
 # Print JSON for Waybar
-# text: Icon + Temp
-# tooltip: Description + Temp
-# class: weather
-printf '{"text": "%s %s°F", "tooltip": "%s %s°F", "class": "weather"}\n' "$icon" "$temp" "$desc" "$temp"
+printf '{"text": "%s %s°F", "tooltip": %s, "class": "weather"}\n' "$icon" "$temp" "$tooltip_escaped"
