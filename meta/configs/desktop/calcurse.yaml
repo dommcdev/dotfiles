@@ -1,0 +1,13 @@
+
+- link: {}
+
+- shell:
+  - |
+    if [[ "$(./sys id)" == "arch" ]]; then
+      sudo pacman -S --noconfirm --needed calcurse
+    elif [[ "$(./sys id)" == "ubuntu" ]]; then
+      sudo apt install -y calcurse
+    elif [[ "$(./sys id)" == "mac" ]]; then
+      brew install calcurse
+    fi
+  - if [ ! -d "$HOME/dev/calendar" ]; then gh repo clone dommcdev/calendar ~/dev/calendar; fi

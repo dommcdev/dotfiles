@@ -72,6 +72,7 @@ alias df="df -h"
 alias du="du -h -d 1"
 alias asciiquarium="asciiquarium -t"
 alias venv="source .venv/bin/activate"
+alias calcurse="calcurse -D ~/dev/calendar"
 #alias -g C='| wl-copy' #somehwat risky
 
 # Tmux-sessionizer
