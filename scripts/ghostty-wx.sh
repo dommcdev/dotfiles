@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
+
+
+clear
 curl wttr.in
 echo
-echo "Press any key to exit..."
+echo -e "Press any key to close..."
 read -n 1 -s -r

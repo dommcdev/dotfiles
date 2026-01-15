@@ -1,5 +1,6 @@
 Tailscale Subnet Router Setup
 ==============================
+https://tailscale.com/kb/1019/subnets
 
 This allows other Tailscale devices to access a local network (e.g., 192.168.1.0/24)
 through this machine, even if devices on that network don't have Tailscale installed.

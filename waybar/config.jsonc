@@ -197,7 +197,7 @@
 		"min-length": 8,
 		"max-length": 8,
 		// "rotate":
-		// "on-click":
+		"on-click": "ghostty --class=com.dominic.cal -e ~/dev/dotfiles/scripts/ghostty-cal.sh",
 		// "on-click-middle":
 		// "on-click-right":
 		// "on-scroll-up":
@@ -629,7 +629,7 @@
 		"interval": 600,
 		"format": "{}",
 		"tooltip": true,
-		"on-click": "ghostty --class=com.dominic.wttr -e ~/dev/dotfiles/scripts/parse-weather.sh"
+		"on-click": "ghostty --class=com.dominic.wttr -e ~/dev/dotfiles/scripts/ghostty-wx.sh"
 	},
 
 	"custom/system_update": {
