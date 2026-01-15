@@ -18,7 +18,7 @@ Dotfiles install
 
 # To-do
 Waybar
-    Workspace indicators, weather
+    Weather
     Calendar widget
 Rofi
     Web search, calculator, emoji/symbols, AI, quick notes (.txt to downloads)

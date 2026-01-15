@@ -488,11 +488,7 @@
 		// "active-only":
 		// "hide-active":
 		// "all-outputs":
-		"format": "{icon}",
-		"format-icons": {
-			"active": "",
-			"default": ""
-		},
+		"format": "{name}",
 		"persistent-workspaces": {
 			"*": 5
 		},
