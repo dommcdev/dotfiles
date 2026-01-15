@@ -61,4 +61,4 @@
 @define-color warning		@yellow;
 @define-color critical		@red;
 @define-color charging		@green;
-@define-color weather		@surface0;
+@define-color weather		@base;

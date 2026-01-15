@@ -6,7 +6,7 @@
 	"modules-left": [
 		"custom/left_div#1",
 		"hyprland/workspaces",
-		"custom/right_div#1",
+		"custom/right_div#1"
 	],
 	"modules-center": [
 		"custom/left_div#2",
@@ -30,7 +30,6 @@
 		"bluetooth",
         "idle_inhibitor",
 		"custom/right_div#5"
-        //"tray"
 	],
 	"modules-right": [
 		"custom/left_div#6",
@@ -232,8 +231,8 @@
 		"format": "󰍛 {usage}%",
 		"format-warning": "󰀨 {usage}%",
 		"format-critical": "󰀨 {usage}%",
-		"min-length": 7,
-		"max-length": 7,
+		"min-length": 12,
+		"max-length": 12,
 		// "rotate":
 		"states": {
 			"warning": 90,
@@ -280,8 +279,8 @@
 			"warning": 90,
 			"critical": 95
 		},
-		"min-length": 7,
-		"max-length": 7,
+		"min-length": 12,
+		"max-length": 12,
 		// "on-click":
 		// "on-click-middle":
 		// "on-click-right":
@@ -434,8 +433,8 @@
 			"󱃃", "󰔏", "󱃂"
 		],
 		// "rotate":
-		"min-length": 8,
-		"max-length": 8,
+		"min-length": 13,
+		"max-length": 13,
 		// "on-click":
 		// "on-click-middle":
 		// "on-click-right":
@@ -631,6 +630,8 @@
 		// "exec-if":
 		// "exec-on-event":
 		// "hide-empty-text":
+		// "return-type":
+		// "json":
 		"return-type": "json",
 		"interval": 3600,
 		// "restart-interval":
