@@ -22,9 +22,6 @@ return {
             "mason-org/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
 
-            -- LSP status updates
-            { "j-hui/fidget.nvim", opts = {} },
-
             -- Completion capabilities
             "saghen/blink.cmp",
         },
