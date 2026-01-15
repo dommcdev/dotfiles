@@ -19,7 +19,6 @@ Dotfiles install
 # To-do
 Nvim
     Setup a coderunner (shortcut or :command, per-file or makefile, floating terminal or split).
-    Markdown viewer (in-browser - peek.nvim, live-preview.nvim, iamcco/markdown-preview, Typora?)
 Waybar
     Workspace indicators, time/date (center), weather
     Volume, internet, bluetooth
