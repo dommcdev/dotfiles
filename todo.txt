@@ -17,9 +17,7 @@ Dotfiles install
     Bug in linux.yaml with pam stuff
 
 # To-do
-Waybar
-    Weather
-    Calendar widget
+Waybar calendar widget
 Rofi
     Web search, calculator, emoji/symbols, AI, quick notes (.txt to downloads)
     Switch between modes with ctrl shortcut - C-e, C-s, etc. Or type "emoji", "search" etc.
