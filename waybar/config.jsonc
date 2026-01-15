@@ -624,12 +624,12 @@
 	},
 
 	"custom/weather": {
-		"exec": "~/.config/waybar/scripts/weather.sh",
+		"exec": "~/.config/waybar/scripts/parse-weather.sh",
 		"return-type": "json",
 		"interval": 600,
 		"format": "{}",
 		"tooltip": true,
-		"on-click": "ghostty --class=com.dominic.wttr -e ~/dev/dotfiles/scripts/weather.sh"
+		"on-click": "ghostty --class=com.dominic.wttr -e ~/dev/dotfiles/scripts/parse-weather.sh"
 	},
 
 	"custom/system_update": {
