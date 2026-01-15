@@ -1,14 +1,17 @@
 #Neovim + python
 
 - link:
-    ~/.config/nvim: nvim
+    ~/.config/nvim:
+      path: nvim
+      exclude: [editorconfig]
+    ~/.editorconfig: nvim/editorconfig
 
 - shell:
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
       sudo pacman -S --noconfirm --needed neovim python python-pip
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
-      brew install neovim 
+      brew install neovim
       sudo apt install -y python3 python3-dev python3-venv python3-pip
       #sudo add-apt-repository -y ppa:neovim-ppa/unstable && sudo apt update
       #sudo apt install -y neovim python3-dev python3-pip python3-venv

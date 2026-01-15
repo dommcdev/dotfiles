@@ -15,7 +15,6 @@ Dotfiles install
     Rework arch bootstrapping workflow
     Script to generate profile files
     Bug in linux.yaml with pam stuff
-    
 
 # To-do
 Nvim
