@@ -9,6 +9,7 @@
 		"custom/right_div#1"
 	],
 	"modules-center": [
+		"custom/spacer",
 		"custom/left_div#2",
 		"temperature",
 		"custom/left_div#3",
@@ -231,8 +232,8 @@
 		"format": "󰍛 {usage}%",
 		"format-warning": "󰀨 {usage}%",
 		"format-critical": "󰀨 {usage}%",
-		"min-length": 12,
-		"max-length": 12,
+		"min-length": 7,
+		"max-length": 7,
 		// "rotate":
 		"states": {
 			"warning": 90,
@@ -279,8 +280,8 @@
 			"warning": 90,
 			"critical": 95
 		},
-		"min-length": 12,
-		"max-length": 12,
+		"min-length": 7,
+		"max-length": 7,
 		// "on-click":
 		// "on-click-middle":
 		// "on-click-right":
@@ -433,8 +434,8 @@
 			"󱃃", "󰔏", "󱃂"
 		],
 		// "rotate":
-		"min-length": 13,
-		"max-length": 13,
+		"min-length": 8,
+		"max-length": 8,
 		// "on-click":
 		// "on-click-middle":
 		// "on-click-right":
@@ -510,6 +511,12 @@
 
 	"custom/distro": {
 		"format": "󰣇",
+		"tooltip": false
+	},
+
+	"custom/spacer": {
+		"format": " ",
+		"min-length": 15,
 		"tooltip": false
 	},
 
