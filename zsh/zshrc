@@ -59,8 +59,9 @@ alias iv='nvim' #common typo
 alias vim='nvim'
 alias fs='fastfetch'
 alias fsa='fastfetch -c all.jsonc'
-alias cl='clear'
-alias c='opencode'
+alias c='clear'
+alias ai='opencode'
+alias ia='opencode'
 alias wth='curl wttr.in'
 alias rm='trash-put'
 alias cat='bat'
@@ -70,7 +71,7 @@ alias showpath='echo $PATH | tr ":" "\n"'
 alias df="df -h"
 alias du="du -h -d 1"
 alias asciiquarium="asciiquarium -t"
-alias venv="source .venv/bin/activate" 
+alias venv="source .venv/bin/activate"
 #alias -g C='| wl-copy' #somehwat risky
 
 # Tmux-sessionizer
@@ -80,7 +81,7 @@ bindkey -s '\ej' "tmux-sessionizer -s 1\n"
 bindkey -s '\ek' "tmux-sessionizer -s 2\n"
 bindkey -s '\el' "tmux-sessionizer -s 3\n"
 
-# Because useful C-f bind conflicts with my tmux prefix, rebind forward-char to C-g 
+# Because useful C-f bind conflicts with my tmux prefix, rebind forward-char to C-g
 bindkey '^G' forward-char
 
 # Hitting space will expand stuff like !!
