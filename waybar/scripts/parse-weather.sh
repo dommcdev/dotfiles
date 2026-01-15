@@ -75,11 +75,11 @@ get_wind_arrow() {
 
 wind_arrow=$(get_wind_arrow "$wind_dir")
 
-# Build tooltip
-tooltip="${city}, ${region}
-${desc}, ${temp}°F
-${wind_arrow} ${wind_speed} mph, ${precip} in
-${timestamp}"
+# Build tooltip with Pango markup (colors from theme.css - catppuccin-mocha)
+tooltip="<b>${city}, ${region}</b>
+${desc}, <span color=\"#fab387\">${temp}°F</span>
+<span color=\"#89b4fa\">${wind_arrow} ${wind_speed} mph</span>, <span color=\"#89dceb\">${precip} in</span>
+<span color=\"#6c7086\">${timestamp}</span>"
 
 # Escape tooltip for JSON
 tooltip_escaped=$(printf '%s' "$tooltip" | jq -Rs .)
