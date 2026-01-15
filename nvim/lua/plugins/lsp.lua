@@ -132,6 +132,7 @@ return {
 
             -- LSP server configurations
             local servers = {
+                -- Lua
                 lua_ls = {
                     settings = {
                         Lua = {
@@ -139,15 +140,35 @@ return {
                         },
                     },
                 },
+                -- C/C++
                 clangd = {},
+                -- Python
                 ruff = {},
+                -- Java
+                jdtls = {},
+                -- HTML
+                html = {},
+                -- CSS
+                cssls = {},
+                -- JavaScript/TypeScript
+                ts_ls = {},
+                -- SQL
+                sqls = {},
+                -- Go
+                gopls = {},
             }
 
-            -- Tools to install via Mason
+            -- Tools to install via Mason (LSP servers + formatters)
             local ensure_installed = vim.tbl_keys(servers or {})
             vim.list_extend(ensure_installed, {
-                "stylua",
-                "clang-format",
+                -- Formatters
+                "stylua", -- Lua
+                "clang-format", -- C/C++
+                "prettierd", -- HTML/CSS/JS/TS
+                "google-java-format", -- Java
+                "sql-formatter", -- SQL
+                "goimports", -- Go (import management)
+                "gofumpt", -- Go (stricter formatting)
             })
             require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
@@ -191,10 +212,27 @@ return {
                 return { timeout_ms = 500, lsp_format = "fallback" }
             end,
             formatters_by_ft = {
+                -- Python
                 python = { "ruff_format" },
+                -- C/C++
                 c = { "clang_format" },
                 cpp = { "clang_format" },
+                -- Lua
                 lua = { "stylua" },
+                -- Java
+                java = { "google-java-format" },
+                -- Web (HTML/CSS/JS/TS)
+                html = { "prettierd" },
+                css = { "prettierd" },
+                javascript = { "prettierd" },
+                typescript = { "prettierd" },
+                javascriptreact = { "prettierd" },
+                typescriptreact = { "prettierd" },
+                json = { "prettierd" },
+                -- SQL
+                sql = { "sql_formatter" },
+                -- Go (goimports first for imports, then gofumpt for stricter formatting)
+                go = { "goimports", "gofumpt" },
             },
             formatters = {
                 clang_format = {
