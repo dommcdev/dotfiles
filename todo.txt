@@ -12,6 +12,7 @@ Dotfiles install
 Rofi
     Web search, calculator, emoji/symbols, AI, quick notes (.txt to downloads)
     Switch between modes with ctrl shortcut - C-e, C-s, etc. Or type "emoji", "search" etc.
+Nvim (status line, snacks stuff, ai)
 Gpu passthrough
 Fix/theme bibata hyprcursor
 Systemd-logind for custom power-button sequence (60s to shutdown)
