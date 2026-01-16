@@ -3,6 +3,7 @@ Create yaml/script for fingerprint sensor
 Replace grub/sddm/hyprlock theme
 Better brightness adjustment (pick level + apply + swayosd)
 Better power manager (w/aliases + hyprshutdown)
+adjust calendar floating term size
 
 
 Dotfiles install
@@ -12,7 +13,6 @@ Dotfiles install
     Bug in linux.yaml with pam stuff
 
 # To-do
-Waybar calendar widget
 Rofi
     Web search, calculator, emoji/symbols, AI, quick notes (.txt to downloads)
     Switch between modes with ctrl shortcut - C-e, C-s, etc. Or type "emoji", "search" etc.
@@ -24,7 +24,7 @@ Omarchy
 Fix/theme bibata hyprcursor
 Systemd-logind for custom power-button sequence (60s to shutdown)
 Fedora dotfiles support + full ubuntu support
-Better screenshot tool
+Better screenshot tool (omarchy one w/Satty?)
 Switch to limine?
 
 # Find tools, learn

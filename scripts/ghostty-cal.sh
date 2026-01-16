@@ -7,6 +7,5 @@ clear
 
 cal -y
 
-echo ""
 echo -e "${DIM}Press any key to close...${NC}"
 read -n 1 -s

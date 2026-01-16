@@ -219,7 +219,7 @@
 			}
 		},
 		"actions": {
-			"on-click": "mode"
+			//"on-click": "mode"
 			// "on-click-middle":
 			// "on-click-right":
 			// "on-scroll-up":
