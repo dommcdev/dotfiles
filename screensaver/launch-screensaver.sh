@@ -20,9 +20,9 @@ for m in $(hyprctl monitors -j | jq -r '.[] | .name'); do
   hyprctl dispatch focusmonitor "$m"
   hyprctl dispatch exec -- \
     ghostty --class=com.dominic.screensaver \
-    --config-file="$HOME/.config/ghostty/screensaver" \
+    --config-file="$HOME/dev/dotfiles/screensaver/ghostty-conf" \
     --font-size=18 \
-    -e screensaver
+    -e screensaver.sh
 done
 
 hyprctl dispatch focusmonitor "$focused"

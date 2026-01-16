@@ -22,7 +22,7 @@ hyprctl keyword cursor:invisible true &>/dev/null
 tty=$(tty 2>/dev/null)
 
 while true; do
-  tte -i ~/dev/dotfiles/images/kabigon.txt \
+  tte -i ~/dev/dotfiles/screensaver/kabigon.txt \
     --frame-rate 120 --canvas-width 0 --canvas-height 0 --reuse-canvas --anchor-canvas c --anchor-text c \
     --random-effect --exclude-effects dev_worm \
     --no-eol --no-restore-cursor &

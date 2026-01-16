@@ -1,0 +1,13 @@
+
+- link:
+    ~/.local/bin/:
+      path: screensaver/*.sh
+      glob: true
+
+- shell:
+  - |
+    if [[ "$(./sys id)" == "arch" ]]; then
+        yay -S --noconfirm --needed --answerdiff None --answerclean None python-terminaltexteffects
+    elif [[ "$(./sys id)" == "ubuntu" ]]; then
+      echo "not supported"
+    fi
