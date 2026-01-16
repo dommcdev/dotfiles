@@ -22,7 +22,6 @@ for m in $(hyprctl monitors -j | jq -r '.[] | .name'); do
     ghostty --class=com.dominic.screensaver \
     --config-file="$HOME/.config/ghostty/screensaver" \
     --font-size=18 \
-    --fullscreen \
     -e screensaver
 done
 
