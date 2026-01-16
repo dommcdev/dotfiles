@@ -1,7 +1,6 @@
 # Easy
 Create yaml/script for fingerprint sensor
 Replace grub/sddm/hyprlock theme
-Better brightness adjustment (pick level + apply + swayosd)
 Better power manager (w/aliases + hyprshutdown)
 
 
@@ -46,10 +45,8 @@ Xwayland apps following mouse cursor?
 Theme and/or tweak: Rofi, starship, onlyoffice, hypr animations,
 
 Server
-    Ubuntu server setup config?
-    Set up Caddy (or nginix?) reverse proxy
-    Re-set up nextcloud w/backups & above proxy
-    Immich, gitlab, etc
+    Set up Caddy reverse proxy
+    Immich, gitlab, filebrowser, onlyoffice, etc
 Rasp pi for wireless android auto
 Local AI
 

@@ -31,7 +31,7 @@ dotfiles/
 │   ├── profiles/            # Installation profiles (arch-custom, mac-server, etc.)
 │   ├── base.yaml            # Default dotbot settings
 │   └── install-profile      # Profile installer script
-├── scripts/                 # Utility scripts
+├── scripts/                 # Utility scripts (symlinked to ~/.local/bin)
 ├── nvim/                    # Neovim config (Lua)
 ├── hypr/                    # Hyprland WM configs
 ├── zsh/                     # Zsh configuration

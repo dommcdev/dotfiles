@@ -1,0 +1,217 @@
+#!/usr/bin/env bash
+
+# Brightness control script with TUI popup and CLI interface
+# Usage:
+#   brightness           - Open TUI popup (default)
+#   brightness get/-g    - Show current brightness
+#   brightness set/-s <val>        - Set absolute brightness (0-100)
+#   brightness set/-s +/- <val>    - Adjust brightness relatively
+#   brightness help/-h   - Show help
+
+set -e
+
+DDCUTIL_TARGET="--display 1"
+STEP=5
+
+# Colors (Catppuccin Mocha)
+BLUE='\033[38;2;137;180;250m'      # #89b4fa
+SURFACE='\033[38;2;69;71;90m'      # #45475a
+TEXT='\033[38;2;205;214;244m'      # #cdd6f4
+DIM='\033[38;2;88;91;112m'         # #585b70
+RESET='\033[0m'
+
+ICONS=("" "" "" "" "" "" "" "" "")
+
+# --- Helper Functions ---
+
+get_brightness() {
+    ddcutil getvcp 10 $DDCUTIL_TARGET 2>/dev/null | grep -oP 'current value =\s+\K\d+' || echo ""
+}
+
+get_icon() {
+    local value=$1
+    local index=$(( (value * 8) / 100 ))
+    ((index > 8)) && index=8
+    ((index < 0)) && index=0
+    printf '%s' "${ICONS[$index]}"
+}
+
+send_notification() {
+    local value="$1"
+    local prefix="$2"
+    notify-send \
+        -h string:x-canonical-private-synchronous:brightness \
+        -h int:value:"$value" \
+        "Monitor Brightness" \
+        "${prefix}${value}%" \
+        -i "brightness-display-symbolic" \
+        -t 1500
+}
+
+show_help() {
+    cat <<EOF
+Usage: $(basename "$0") [command] [args]
+
+Commands:
+  (no command)      Open TUI brightness popup
+  get, -g           Show current brightness
+  set, -s <0-100>   Set absolute brightness
+  set, -s +/- <val> Adjust brightness relatively (e.g., set + 10)
+  help, -h          Show this help
+
+Examples:
+  brightness            # Open TUI
+  brightness get        # Print current brightness
+  brightness set 75     # Set to 75%
+  brightness set + 10   # Increase by 10%
+  brightness -s - 5     # Decrease by 5%
+EOF
+}
+
+# --- TUI Popup ---
+
+draw_screen() {
+    local value=$1
+    local width=50
+    local filled=$((value * width / 100))
+    local empty=$((width - filled))
+    local icon
+    icon=$(get_icon "$value")
+
+    printf '\033[2J\033[H'
+
+    local bar=""
+    for ((i=0; i<width; i++)); do bar+="━"; done
+
+    printf '\n'
+    printf "   ${TEXT}%s  ${BLUE}%s${SURFACE}%s${RESET} ${BLUE}%3d%%${RESET}\n" "$icon" "${bar:0:$filled}" "${bar:$filled}" "$value"
+    printf '\n'
+    printf "   ${DIM}h/l adjust  ⏎ apply  q cancel${RESET}"
+}
+
+cleanup() {
+    printf '\033[?25h'
+    printf '\033[2J\033[H'
+}
+
+run_tui() {
+    local value
+    value=$(get_brightness)
+    [[ -z $value ]] && { notify-send "DDCUTIL Error" "Could not get brightness." -u critical; exit 1; }
+
+    printf '\033[?25l'
+    trap cleanup EXIT
+
+    draw_screen "$value"
+
+    while true; do
+        read -rsn1 key
+
+        if [[ $key == $'\x1b' ]]; then
+            read -rsn2 -t 0.01 seq || true
+            if [[ -z $seq ]]; then
+                exit 0
+            fi
+            case "$seq" in
+                '[D') key='h' ;;
+                '[C') key='l' ;;
+                *) continue ;;
+            esac
+        fi
+
+        case "$key" in
+            h|H|j|J)
+                value=$((value - STEP))
+                ((value < 0)) && value=0
+                ;;
+            l|L|k|K)
+                value=$((value + STEP))
+                ((value > 100)) && value=100
+                ;;
+            '')
+                printf '\033[2J\033[H'
+                local icon
+                icon=$(get_icon "$value")
+                printf '\n   %b%s  Applying %d%%...%b' "$TEXT" "$icon" "$value" "$RESET"
+                ddcutil setvcp 10 "$value" $DDCUTIL_TARGET
+                exit 0
+                ;;
+            q|Q)
+                exit 0
+                ;;
+            *)
+                continue
+                ;;
+        esac
+
+        draw_screen "$value"
+    done
+}
+
+# --- CLI Commands ---
+
+cmd_get() {
+    local brightness
+    brightness=$(get_brightness)
+    if [[ -n $brightness ]]; then
+        echo "$brightness"
+    else
+        notify-send "DDCUTIL Error" "Could not get current brightness." -u critical
+        exit 1
+    fi
+}
+
+cmd_set() {
+    local arg1="$1"
+    local arg2="$2"
+
+    # Check if relative adjustment (+ or -)
+    if [[ $arg1 == "+" || $arg1 == "-" ]]; then
+        if [[ -z $arg2 || ! $arg2 =~ ^[0-9]+$ ]]; then
+            echo "Error: Invalid relative value" >&2
+            exit 1
+        fi
+        ddcutil setvcp 10 "$arg1" "$arg2" $DDCUTIL_TARGET
+        sleep 0.1
+        local new_brightness
+        new_brightness=$(get_brightness)
+        if [[ -n $new_brightness ]]; then
+            send_notification "$new_brightness" "New: "
+        fi
+    else
+        # Absolute value
+        if [[ ! $arg1 =~ ^[0-9]+$ ]] || ((arg1 < 0 || arg1 > 100)); then
+            echo "Error: Value must be a number between 0 and 100" >&2
+            exit 1
+        fi
+        ddcutil setvcp 10 "$arg1" $DDCUTIL_TARGET
+        send_notification "$arg1" "Set to: "
+    fi
+}
+
+# --- Main ---
+
+main() {
+    case "${1:-}" in
+        "")
+            run_tui
+            ;;
+        get|-g)
+            cmd_get
+            ;;
+        set|-s)
+            shift
+            cmd_set "$@"
+            ;;
+        help|-h|--help)
+            show_help
+            ;;
+        *)
+            echo "Unknown command: $1" >&2
+            show_help
+            exit 1
+            ;;
+    esac
+}
+
+main "$@"
