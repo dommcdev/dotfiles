@@ -9,4 +9,5 @@
       sudo apt install -y 7zip unar unrar gh trash-cli wget ffmpeg fd-find ripgrep poppler-utils zoxide imagemagick ghostscript chafa ncdu eza jq less git-delta nmap bind9-dnsutils id3v2 playerctl duf
     elif [[ "$(./sys id)" == "mac" ]]; then
       brew install ouch 7zip unar ffmpeg wget fd ripgrep poppler zoxide imagemagick ghostscript chafa resvg ncdu fzf tlrc eza jq less yt-dlp gum git-delta nmap bind id3v2 dust glow duf
+      brew tap philocalyst/tap && brew install caligula
     fi

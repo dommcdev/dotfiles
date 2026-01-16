@@ -24,12 +24,14 @@
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
       sudo pacman -S --noconfirm --needed bat yazi btop fastfetch cava gnuplot bc libqalculate bluetui wiremix
-      yay -S --noconfirm --needed --answerdiff None --answerclean None ripdrag disktui
+      yay -S --noconfirm --needed --answerdiff None --answerclean None ripdrag disktui ascii-image-converter
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       brew install bat yazi btop fastfetch
+      brew install TheZoraiz/ascii-image-converter/ascii-image-converter
       sudo apt install -y cava gnuplot bc qalc
     elif [[ "$(./sys id)" == "mac" ]]; then
       brew install bat yazi btop fastfetch cava gnuplot bc libqalculate
+      brew install TheZoraiz/ascii-image-converter/ascii-image-converter
     fi
   - if [ ! -d "$HOME/dev/projects/marlin" ]; then gh repo clone dommcdev/marlin ~/dev/projects/marlin; fi
   - cd ~/dev/projects/marlin && make install
