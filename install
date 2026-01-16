@@ -132,16 +132,16 @@ show_logo() {
 while true; do
     CURRENT_ID=$(./sys id)
     CURRENT_POWER=$(./sys power)
-    
+
     show_logo "$CURRENT_ID"
-    
+
     # Using BOLD on labels for high contrast
     echo -e "--- ${YELLOW}System Detection${NC} ---"
     echo -e "${BOLD}System ID:${NC} ${CYAN}$CURRENT_ID${NC}"
     echo -e "${BOLD}Hardware: ${NC} ${CYAN}$( [[ "$CURRENT_POWER" == "1" ]] && echo "Laptop" || echo "Desktop" )${NC}"
     echo "----------------------------"
     echo
-    
+
     echo -e "${YELLOW}Select Profile Type:${NC}"
     echo "1) Server (cli essentials)"
     echo "2) Desktop Environment (for use with a DE)"
@@ -153,7 +153,7 @@ while true; do
         1) suffix="server" ;;
         2) suffix="de" ;;
         3) suffix="custom" ;;
-        *) 
+        *)
             echo -e "${RED}Invalid choice. Please try again.${NC}"
             sleep 1
             continue
@@ -176,8 +176,10 @@ while true; do
 
         read -p "Override Hardware? (1=Laptop, 0=Desktop, Enter to skip): " NEW_POWER
         [[ -n "$NEW_POWER" ]] && ./sys set-power "$NEW_POWER"
-        
+
         echo -e "\n${BLUE}Refreshing configuration...${NC}"
         sleep 0.5
     fi
 done
+
+. "~/dev/dotfiles/misc/finished"
