@@ -9,7 +9,6 @@ Dotfiles install
     Askpass or equivilant
     Rework arch bootstrapping workflow
     Script to generate profile files
-    Bug in linux.yaml with pam stuff
     Add ascii flare to end of install
 
 # To-do
