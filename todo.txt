@@ -5,10 +5,8 @@ Better power manager (w/aliases + hyprshutdown)
 
 
 Dotfiles install
-    Askpass or equivilant
     Rework arch bootstrapping workflow
     Script to generate profile files
-    Add ascii flare to end of install
 
 # To-do
 Rofi

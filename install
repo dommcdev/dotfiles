@@ -129,6 +129,49 @@ show_logo() {
     printf -- "${NC}\n"
 }
 
+gain_root() {
+    if sudo test -f /etc/sudoers.d/99-dotfiles-installer; then
+        echo "Sudo access already configured."
+    else
+        echo "Configuring passwordless sudo for the installer..."
+        # Ask for password once
+        if ! sudo -v; then
+            echo "Failed to obtain sudo credentials."
+            exit 1
+        fi
+        
+        # Create the file
+        echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/99-dotfiles-installer >/dev/null
+        sudo chmod 440 /etc/sudoers.d/99-dotfiles-installer
+        echo "Passwordless sudo configured for this session."
+    fi
+}
+
+echo_in_style() {
+  echo "$1" | tte --canvas-width 0 --anchor-text c --frame-rate 640 print
+}
+
+finished() {
+    clear
+    echo
+    tte -i ~/dev/dotfiles/screensaver/logo.txt --canvas-width 0 --anchor-text c --frame-rate 920 laseretch
+    echo
+    echo_in_style "Finished installing"
+    
+    if sudo test -f /etc/sudoers.d/99-dotfiles-installer; then
+      sudo rm -f /etc/sudoers.d/99-dotfiles-installer &>/dev/null
+    fi
+    
+    # Exit gracefully if user chooses not to reboot
+    # Default padding if PADDING_LEFT not set
+    local pad=${PADDING_LEFT:-0}
+    if gum confirm --padding "0 0 0 $((pad + 32))" --show-help=false --default --affirmative "Reboot Now" --negative "" ""; then
+      clear
+      sudo reboot 2>/dev/null
+    fi
+    exit 0
+}
+
 while true; do
     CURRENT_ID=$(./sys id)
     CURRENT_POWER=$(./sys power)
@@ -166,9 +209,10 @@ while true; do
     PROCEED=${PROCEED:-y}
 
     if [[ "$PROCEED" =~ ^[Yy]$ ]]; then
+        gain_root
         echo -e "${GREEN}Starting installation for $target_profile...${NC}"
         ./meta/install-profile "$target_profile"
-        exit 0
+        finished
     else
         echo -e "\n${YELLOW}Manual Override Mode${NC}"
         read -p "Override ID? (Enter to keep '$CURRENT_ID'): " NEW_ID
@@ -181,5 +225,3 @@ while true; do
         sleep 0.5
     fi
 done
-
-. "~/dev/dotfiles/misc/finished"
