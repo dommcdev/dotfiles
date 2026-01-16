@@ -1,0 +1,7 @@
+
+- link:
+    ~/.config/swayosd: swayosd
+
+- shell:
+  - sudo pacman -S --noconfirm --needed swayosd
+  - sudo systemctl enable swayosd-libinput-backend.service

@@ -3,7 +3,7 @@ Create yaml/script for fingerprint sensor
 Replace grub/sddm/hyprlock theme
 Better brightness adjustment (pick level + apply + swayosd)
 Better power manager (w/aliases + hyprshutdown)
-adjust calendar floating term size
+tte and ascii-image-convert to install
 
 
 Dotfiles install
@@ -11,16 +11,13 @@ Dotfiles install
     Rework arch bootstrapping workflow
     Script to generate profile files
     Bug in linux.yaml with pam stuff
+    Add ascii flare to end of install
 
 # To-do
 Rofi
     Web search, calculator, emoji/symbols, AI, quick notes (.txt to downloads)
     Switch between modes with ctrl shortcut - C-e, C-s, etc. Or type "emoji", "search" etc.
 Gpu passthrough
-Omarchy
-    Steal bootloader
-    Steal ascii thing
-    Steal swayosd thing
 Fix/theme bibata hyprcursor
 Systemd-logind for custom power-button sequence (60s to shutdown)
 Fedora dotfiles support + full ubuntu support
