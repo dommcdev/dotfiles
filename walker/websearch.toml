@@ -1,4 +1,7 @@
+always_show_default = false
+
 engines_as_actions = false
+#if false each engine will have an entry, if true it will show a "search" entry and you must use alt+j to do anything
 
 [[entries]]
 default = true

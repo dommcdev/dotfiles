@@ -83,9 +83,9 @@ provider = "symbols"
 prefix = "="
 provider = "calc"
 
-[[providers.prefixes]]
-prefix = "@"
-provider = "websearch"
+ [[providers.prefixes]]
+ prefix = "@"
+ provider = "websearch"
 
 [[providers.prefixes]]
 prefix = ":"
