@@ -1,3 +1,4 @@
+# Depends on: git
 
 - link:
     ~/.config/tmux/tmux.conf: tmux/tmux.conf
