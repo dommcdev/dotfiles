@@ -35,7 +35,7 @@ tty=$(tty 2>/dev/null)
 phrases_dir=~/dev/dotfiles/screensaver/phrases
 
 while true; do
-  phrase=$(find "$phrases_dir" -type f -name '*.txt' | shuf -n1)
+  phrase=$(find "$phrases_dir" -type f -name '*.tte' | shuf -n1)
   center_text < "$phrase" | tte \
     --frame-rate 120 --canvas-width 0 --canvas-height 0 --reuse-canvas --anchor-canvas c --anchor-text c \
     --random-effect \
