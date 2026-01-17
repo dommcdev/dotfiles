@@ -1,0 +1,14 @@
+- link:
+    ~/.config/walker:
+      path: walker/*
+      glob: true
+      exclude: [walker/calc.toml,walker/desktopapplications.toml]
+    ~/.config/elephant/calc.toml:
+      path: walker/calc.toml
+    ~/.config/elephant/desktopapplications.toml:
+      path: walker/desktopapplications.toml
+
+- shell:
+  - sudo pacman -S --noconfirm --needed omarchy-walker
+  - systemctl --user enable elephant.service
+  - systemctl --user start elephant.service || true
