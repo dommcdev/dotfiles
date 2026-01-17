@@ -47,6 +47,7 @@ Theme and/or tweak: Rofi, starship, onlyoffice, hypr animations,
 Server
     Set up Caddy reverse proxy
     Immich, gitlab, filebrowser, onlyoffice, etc
+    Ditch davfs2
 Rasp pi for wireless android auto
 Local AI
 
