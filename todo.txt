@@ -26,7 +26,6 @@ Theme script
     Via single mycolors.css file?
     Pywall16, Matugen, Wallust?
 Tmux-sessionizer for "restoring" sessions
-Kvantum isn't working - need to install KvantumManager?
 Better solution for ssh -> tmux -> nvim shared clipboard
 Xwayland apps following mouse cursor?
 Theme and/or tweak: Starship, onlyoffice, hypr animations, wallpaper

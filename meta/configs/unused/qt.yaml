@@ -3,3 +3,5 @@
     ~/.config/Kvantum: qt
 
 - shell: []
+
+#Nota bene - need to install (and autostart?) Kvantum manager for this to apply
