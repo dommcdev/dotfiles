@@ -22,6 +22,12 @@ default = [
   "websearch",
 ]
 
+[providers.actions]
+websearch = [
+  { action = "search", default = true, bind = "Return" },
+  { action = "open_url", label = "open url", default = true, bind = "Return" },
+]
+
 [[providers.prefixes]]
 prefix = "/"
 provider = "providerlist"

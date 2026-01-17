@@ -1,11 +1,8 @@
-# Show engines as alternate actions (not items)
-engines_as_actions = true
-always_show_default = true
+engines_as_actions = false
 
-# Web search providers
 [[entries]]
-name = "DuckDuckGo"
 default = true
+name = "DuckDuckGo"
 url = "https://duckduckgo.com/?q=%TERM%"
 
 [[entries]]
@@ -27,11 +24,3 @@ url = "https://en.wikipedia.org/wiki/Special:Search?search=%TERM%"
 [[entries]]
 name = "Arch Wiki"
 url = "https://wiki.archlinux.org/index.php?search=%TERM%"
-
-[[entries]]
-name = "Reddit"
-url = "https://www.reddit.com/search/?q=%TERM%"
-
-[[entries]]
-name = "Stack Overflow"
-url = "https://stackoverflow.com/search?q=%TERM%"

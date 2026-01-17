@@ -11,6 +11,6 @@
       path: walker/websearch.toml
 
 - shell:
-  - sudo pacman -S --noconfirm --needed omarchy-walker
+  - sudo pacman -S --noconfirm --needed omarchy-walker openbsd-netcat
   - systemctl --user enable elephant.service
   - systemctl --user start elephant.service || true
