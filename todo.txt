@@ -1,6 +1,6 @@
 # To-do
 Create yaml/script for fingerprint sensor
-Replace grub/sddm/hyprlock theme
+Replace grub/sddm
 Better power manager (w/aliases + hyprshutdown)
 Nvim (status line, snacks stuff, ai)
 Gpu passthrough
@@ -28,7 +28,7 @@ Theme script
 Tmux-sessionizer for "restoring" sessions
 Better solution for ssh -> tmux -> nvim shared clipboard
 Xwayland apps following mouse cursor?
-Theme and/or tweak: Starship, onlyoffice, hypr animations, wallpaper
+Theme and/or tweak: Starship, onlyoffice, hypr animations, wallpaper, tmux
 
 
 Server
