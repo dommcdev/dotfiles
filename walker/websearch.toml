@@ -10,5 +10,25 @@ url = "https://www.google.com/search?q=%TERM%"
 
 [[entries]]
 name = "YouTube"
-prefix = "!yt"
+prefix = "@yt"
 url = "https://www.youtube.com/results?search_query=%TERM%"
+
+[[entries]]
+name = "Arch Packages"
+prefix = "@pkgs"
+url = "https://archlinux.org/packages/?q=%TERM%"
+
+[[entries]]
+name = "AUR"
+prefix = "@aur"
+url = "https://aur.archlinux.org/packages?O=0&K=%TERM%"
+
+[[entries]]
+name = "Flathub"
+prefix = "@flat"
+url = "https://flathub.org/apps/search?q=%TERM%"
+
+[[entries]]
+name = "Ubuntu Packages"
+prefix = "@upkgs"
+url = "https://packages.ubuntu.com/%TERM%"

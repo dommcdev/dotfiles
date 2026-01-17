@@ -2,10 +2,9 @@
 Create yaml/script for fingerprint sensor
 Replace grub/sddm/hyprlock theme
 Better power manager (w/aliases + hyprshutdown)
+Create better kabi icon
 ctrl v pastes in terminal
 change wallpaper
-Create better kabi icon
-nvim terminal needs to go to cwd
 
 
 Dotfiles install
@@ -13,8 +12,6 @@ Dotfiles install
     Script to generate profile files
 
 # To-do
-Rofi
-    Web search, calculator, emoji/symbols, AI, quick notes (.txt to downloads)
 Nvim (status line, snacks stuff, ai)
 Gpu passthrough
 Fix/theme bibata hyprcursor

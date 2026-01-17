@@ -6,6 +6,7 @@ vim.keymap.set("n", "<M-l>", "<cmd>silent !tmux neww tmux-sessionizer -s 3<CR>")
 
 vim.keymap.set("n", "<leader>t", function()
   Snacks.terminal.toggle(nil, {
+    cwd = vim.fn.expand("%:p:h"),
     win = {
       position = "float",
       height = 0.9,

@@ -83,10 +83,6 @@ provider = "symbols"
 prefix = "="
 provider = "calc"
 
- [[providers.prefixes]]
- prefix = "@"
- provider = "websearch"
-
 [[providers.prefixes]]
 prefix = ":"
 provider = "clipboard"
@@ -145,7 +141,6 @@ files = [
   { action = "refresh_index", label = "reload", bind = "ctrl r", after = "AsyncReload" },
 ]
 
-
 runner = [
   { action = "run", default = true, bind = "Return" },
   { action = "runterminal", label = "run in terminal", bind = "shift Return" },
@@ -158,7 +153,6 @@ symbols = [
 unicode = [
   { action = "run_cmd", label = "select", default = true, bind = "Return" },
 ]
-
 
 clipboard = [
   { action = "copy", default = true, bind = "Return" },
