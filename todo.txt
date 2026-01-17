@@ -4,7 +4,6 @@ Replace grub/sddm
 Better power manager (w/aliases + hyprshutdown)
 Nvim (status line, snacks stuff, ai)
 Gpu passthrough
-Fix/theme bibata hyprcursor
 Systemd-logind for custom power-button sequence (60s to shutdown)
 Better screenshot tool (omarchy one w/Satty?)
 Switch to limine?
@@ -28,7 +27,7 @@ Theme script
 Tmux-sessionizer for "restoring" sessions
 Better solution for ssh -> tmux -> nvim shared clipboard
 Xwayland apps following mouse cursor?
-Theme and/or tweak: Starship, onlyoffice, hypr animations, wallpaper, tmux
+Theme and/or tweak: Starship, onlyoffice, hypr animations, wallpaper, cursor
 
 
 Server

@@ -24,10 +24,4 @@ Archiving/unarchiving
     unrar: best rar decompression (official spec)
 
 Connecting to edurom (impala)
-    Use PEAP. For identity put full email; for phase2 identity put full email; for phase2 password put your stmu password. Leave phase2 method as mschapv2, and leave server domain mask, ca cert, client cert, client key, and key passphrase empty. You will be prompted to enter username/password - enter stmu email/password (again). 
-
-Applying cursor theme
-On Hyprland, simply place the hyprcursor in ~/.local/share/icons/ and it will automatically be picked up. If you have multiple, set the HYPRCURSOR_THEME and HYPRCURSOR_SIZE env vars in your hyprland conf/uwsm-hyprland file. 
-
-Applying icon theme
-Gsettings (icon-theme) works for things like nautilus, but the gtk-4.0/settings.ini is needed for things like rofi (although rofi has a line for icon theme in its config).
+    Use PEAP. For identity put full email; for phase2 identity put full email; for phase2 password put your stmu password. Leave phase2 method as mschapv2, and leave server domain mask, ca cert, client cert, client key, and key passphrase empty. You will be prompted to enter username/password - enter stmu email/password (again).

@@ -18,3 +18,4 @@
   - sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3
   - sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3-dark
 
+#Note - on non-pacman systems you will need to set up a hook for copying the adw-gtk theme to ~/.local/share/themes

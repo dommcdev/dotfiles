@@ -1,7 +1,15 @@
 
-- link:
-    ~/.local/share/icons/: 
-      path: cursors/*
-      glob: true
+- link: {}
 
-- shell: []
+- shell:
+  - |
+    if [[ "$(./sys id)" == "arch" ]]; then
+      yay -S --noconfirm --needed --answerdiff None --answerclean None xcursor-breeze
+    elif [[ "$(./sys id)" == "ubuntu" ]]; then
+      echo "Add me please"
+    fi
+
+
+#Applying hyprcursor theme
+#On Hyprland, simply place the hyprcursor in ~/.local/share/icons/ and it will automatically be picked up. If you have multiple, set the HYPRCURSOR_THEME and HYPRCURSOR_SIZE env vars in your hyprland conf/uwsm-hyprland file.
+#OR just put exec-once hyprctl setcursor [cursorname] [size] in your hyprland config. This works with Xcursors as well.
