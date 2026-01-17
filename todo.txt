@@ -4,6 +4,9 @@ Replace grub/sddm/hyprlock theme
 Better power manager (w/aliases + hyprshutdown)
 Calendar size needs tweaking on smaller screens
 ctrl v pastes in terminal
+change wallpaper
+Create better kabi icon
+nvim terminal needs to go to cwd
 
 
 Dotfiles install
