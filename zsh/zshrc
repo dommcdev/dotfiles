@@ -100,6 +100,17 @@ copy-buffer-to-clipboard() {
 zle -N copy-buffer-to-clipboard
 bindkey '^wc' copy-buffer-to-clipboard
 
+paste-from-clipboard() {
+    if command -v wl-paste >/dev/null; then
+        LBUFFER+="$(wl-paste)"
+    elif command -v pbpaste >/dev/null; then
+        LBUFFER+="$(pbpaste)"
+    fi
+}
+zle -N paste-from-clipboard
+bindkey '^V' paste-from-clipboard
+
+
 # Open buffer line in editor
 autoload -Uz edit-command-line
 zle -N edit-command-line

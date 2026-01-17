@@ -3,7 +3,6 @@ Create yaml/script for fingerprint sensor
 Replace grub/sddm/hyprlock theme
 Better power manager (w/aliases + hyprshutdown)
 Create better kabi icon
-ctrl v pastes in terminal
 change wallpaper
 
 
