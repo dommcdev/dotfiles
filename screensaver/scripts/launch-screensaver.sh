@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Launch the screensaver in Ghostty on all monitors.
-# Usage: launch-screensaver [force]
+# Usage: launch-screensaver
 
 # Exit early if tte is not installed
 if ! command -v tte &>/dev/null; then

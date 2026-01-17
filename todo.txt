@@ -8,7 +8,6 @@ Fix/theme bibata hyprcursor
 Systemd-logind for custom power-button sequence (60s to shutdown)
 Better screenshot tool (omarchy one w/Satty?)
 Switch to limine?
-Fix screensaver phrases so they don't overflow on smaller screens
 
 # Find tools, learn
 Yt-dlp workflow (tui? chrome?)

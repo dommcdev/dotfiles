@@ -1,7 +1,7 @@
 
 - link:
     ~/.local/bin/:
-      path: screensaver/scripts
+      path: screensaver/scripts/*
       glob: true
 
 - shell:
