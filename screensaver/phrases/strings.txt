@@ -41,7 +41,7 @@ It Worked Yesterday
 Experimental Build
 Held Together by Hope
 Overclocked Calculator
-Glorified Typewriter
+Glorified Typewritter
 I Use Arch BTW
 Undefined Behavior
 Syntax Error
@@ -53,7 +53,7 @@ Nuclear Fusion
 Jerry Rigged
 Have You Tried Turning It Off and On Again
 Feature Creep
-Abandonware
+Abadonware
 Technical Debt Collector
 Unstable Branch
 Stuck in Vim
@@ -83,5 +83,3 @@ Hotfix
 RTFM
 Neofetch My Sanity
 Blue Screen of Death
-Omarchy
-Read the Friendly Manual
