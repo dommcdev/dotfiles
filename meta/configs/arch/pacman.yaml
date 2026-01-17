@@ -5,3 +5,4 @@
   - sudo rm -rf /etc/pacman.d/hooks/adw-gtk3-flatpak-sync.hook
   - sudo mkdir -p /etc/pacman.d/hooks
   - sudo cp -r arch/pacman/hooks/adw-gtk3-flatpak-sync.hook /etc/pacman.d/hooks/
+  - sudo pacman -Syy
