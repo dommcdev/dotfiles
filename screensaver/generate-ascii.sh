@@ -82,13 +82,52 @@ names=(
     "Cheese Grater"
 )
 
+# Split a phrase into lines with max 2 words each
+split_phrase() {
+    local phrase="$1"
+    local -a words
+    read -ra words <<< "$phrase"
+    local count=${#words[@]}
+    
+    if [ "$count" -le 2 ]; then
+        echo "$phrase"
+        return
+    fi
+    
+    # Split into chunks of 2 words
+    local i=0
+    while [ "$i" -lt "$count" ]; do
+        if [ "$((i + 1))" -lt "$count" ]; then
+            echo "${words[$i]} ${words[$((i + 1))]}"
+            i=$((i + 2))
+        else
+            echo "${words[$i]}"
+            i=$((i + 1))
+        fi
+    done
+}
+
 for name in "${names[@]}"; do
     # Convert to lowercase filename with spaces as underscores
     filename=$(echo "$name" | tr '[:upper:]' '[:lower:]' | tr ' ' '_')
     output_file="${OUTPUT_DIR}/${filename}.txt"
     
     echo "Generating: ${filename}.txt"
-    figlet -f "$FONT" "$name" > "$output_file"
+    
+    # Count words
+    word_count=$(echo "$name" | wc -w)
+    
+    if [ "$word_count" -le 2 ]; then
+        # Single line for 1-2 words
+        figlet -f "$FONT" "$name" > "$output_file"
+    else
+        # Multi-line for 3+ words
+        > "$output_file"
+        while IFS= read -r line; do
+            figlet -f "$FONT" "$line" >> "$output_file"
+            echo >> "$output_file"
+        done < <(split_phrase "$name")
+    fi
 done
 
 echo "Done! Generated ${#names[@]} files."
