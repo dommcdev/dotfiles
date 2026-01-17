@@ -68,23 +68,23 @@
    ======================================== */
 
 * {
-	font-family: "JetBrains Mono Nerd Font";
-	font-weight: bold;
-	font-size: 16px;
-	color: @main-fg;
+  font-family: "JetBrains Mono Nerd Font";
+  font-weight: bold;
+  font-size: 16px;
+  color: @main-fg;
 }
 
 /* main outline */
 
 window#waybar {
-	background-color: @outline;
+  background-color: @main-bg;
 }
 
 /* main background */
 
 window#waybar > box {
-	margin: 4px;
-	background-color: @main-bg;
+  margin: 4px;
+  background-color: @main-bg;
 }
 
 /* hoverables */
@@ -98,47 +98,53 @@ window#waybar > box {
 #mpris:hover,
 #pulseaudio:hover,
 #wireplumber:hover {
-	color: @hover-fg;
+  color: @hover-fg;
 }
 
 /* states */
 
-.warning { color: @warning; }
-.critical { color: @critical; }
-.charging { color: @charging; }
+.warning {
+  color: @warning;
+}
+.critical {
+  color: @critical;
+}
+.charging {
+  color: @charging;
+}
 .deactivated,
 .paused,
 #pulseaudio.output.muted,
 #pulseaudio.input.source-muted,
 #wireplumber.muted {
-	color: @hover-fg;
+  color: @hover-fg;
 }
 
 /* buttons */
 
 button {
-	border-radius: 16px;
-	padding: 0 10px;
+  border-radius: 16px;
+  padding: 0 10px;
 }
 button:hover {
-	background-color: @hover-bg;
-	color: @hover-fg;
+  background-color: @hover-bg;
+  color: @hover-fg;
 }
 
 /* tooltips */
 
 tooltip {
-	border: 2px solid @main-br;
-	border-radius: 10px;
-	background-color: @main-bg;
+  border: 2px solid @main-br;
+  border-radius: 10px;
+  background-color: @main-bg;
 }
 tooltip label {
-	margin: 2px 4px;
-	font-weight: normal;
+  margin: 2px 4px;
+  font-weight: normal;
 }
 tooltip decoration {
-	border: none;
-	background-color: transparent;
+  border: none;
+  background-color: transparent;
 }
 
 /* ========================================
@@ -189,122 +195,122 @@ tooltip decoration {
 #custom-left_inv,
 #custom-right_div,
 #custom-right_inv {
-	font-size: 25.49px;
+  font-size: 25.49px;
 }
 
 /* temperature */
 
 #custom-left_div.2 {
-	color: @temperature;
+  color: @temperature;
 }
 #temperature {
-	background-color: @temperature;
+  background-color: @temperature;
 }
 
 /* memory */
 
 #custom-left_div.3 {
-	background-color: @temperature;
-	color: @memory;
+  background-color: @temperature;
+  color: @memory;
 }
 #memory {
-	background-color: @memory;
+  background-color: @memory;
 }
 
 /* cpu */
 
 #custom-left_div.4 {
-	background-color: @memory;
-	color: @cpu;
+  background-color: @memory;
+  color: @cpu;
 }
 #cpu {
-	background-color: @cpu;
+  background-color: @cpu;
 }
 #custom-left_inv.1 {
-	color: @cpu;
+  color: @cpu;
 }
 
 /* distro icon */
 
 #custom-left_div.5,
 #custom-right_div.2 {
-	color: @accent;
+  color: @accent;
 }
 #custom-distro {
-	padding: 0 10px 0 5px;
-	font-size: 25px;
-	background-color: @accent;
-	color: @main-bg;
+  padding: 0 10px 0 5px;
+  font-size: 25px;
+  background-color: @accent;
+  color: @main-bg;
 }
 
 /* idle inhibitor & time */
 
 #custom-right_inv.1 {
-	color: @time;
+  color: @time;
 }
 #clock.time {
-	padding-right: 6px;
-	background-color: @time;
+  padding-right: 6px;
+  background-color: @time;
 }
 #custom-right_div.3 {
-	background-color: @date;
-	color: @time;
+  background-color: @date;
+  color: @time;
 }
 
 /* date */
 
 #clock.date {
-	padding-left: 6px;
-	background-color: @date;
+  padding-left: 6px;
+  background-color: @date;
 }
 #custom-right_div.4 {
-	background-color: @weather;
-	color: @date;
+  background-color: @weather;
+  color: @date;
 }
 
 #custom-weather {
-	background-color: @weather;
-	padding: 0 6px;
+  background-color: @weather;
+  padding: 0 6px;
 }
 
 #custom-right_div.weather {
-	background-color: @tray;
-	color: @weather;
+  background-color: @tray;
+  color: @weather;
 }
 
 /* quick settings */
 
 #network {
-	background-color: @tray;
-	padding: 0 6px 0 4px;
+  background-color: @tray;
+  padding: 0 6px 0 4px;
 }
 #bluetooth {
-	background-color: @tray;
-	padding: 0 0 0 5px;
+  background-color: @tray;
+  padding: 0 0 0 5px;
 }
 
 #bluetooth.connected {
-	color: @accent;
+  color: @accent;
 }
 
 #idle_inhibitor {
-	background-color: @tray;
-    padding: 0 6px 0 0px;
+  background-color: @tray;
+  padding: 0 6px 0 0px;
 }
 #idle_inhibitor.activated {
-    color: @yellow;
-    text-shadow: 0 0 4px rgba(229, 200, 144, 0.5);
+  color: @yellow;
+  text-shadow: 0 0 4px rgba(229, 200, 144, 0.5);
 }
 #idle_inhibitor.deactivated {
-    color: #626880; /* Dimmed/Greyed out */
+  color: #626880; /* Dimmed/Greyed out */
 }
 
 #custom-system_update {
-	background-color: @tray;
-	padding: 0 8px 0 2px;
+  background-color: @tray;
+  padding: 0 8px 0 2px;
 }
 #custom-right_div.5 {
-	color: @tray;
+  color: @tray;
 }
 
 /* ========================================
@@ -314,43 +320,43 @@ tooltip decoration {
 /* media info */
 
 #mpris {
-	padding: 0 12px;
-	font-weight: normal;
+  padding: 0 12px;
+  font-weight: normal;
 }
 
 /* volume */
 
 #custom-left_div.6 {
-	color: @volume;
+  color: @volume;
 }
 #pulseaudio,
 #wireplumber {
-	background-color: @volume;
+  background-color: @volume;
 }
 
 /* brightness */
 
 #custom-left_div.7 {
-	background-color: @volume;
-	color: @backlight;
+  background-color: @volume;
+  color: @backlight;
 }
 #backlight {
-	background-color: @backlight;
+  background-color: @backlight;
 }
 
 /* battery */
 
 #custom-left_div.8 {
-	background-color: @backlight;
-	color: @battery;
+  background-color: @backlight;
+  color: @battery;
 }
 #battery {
-	background-color: @battery;
+  background-color: @battery;
 }
 #power-profiles-daemon {
-    background-color: @battery;
-    padding-right: 10px;
+  background-color: @battery;
+  padding-right: 10px;
 }
 #custom-left_inv.2 {
-	color: @battery;
+  color: @battery;
 }
