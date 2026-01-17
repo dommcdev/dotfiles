@@ -2,8 +2,6 @@
 Create yaml/script for fingerprint sensor
 Replace grub/sddm/hyprlock theme
 Better power manager (w/aliases + hyprshutdown)
-Create better kabi icon
-change wallpaper
 
 
 Dotfiles install
@@ -39,8 +37,9 @@ Tmux-sessionizer for "restoring" sessions
 Kvantum isn't working - need to install KvantumManager?
 Better solution for ssh -> tmux -> nvim shared clipboard
 Xwayland apps following mouse cursor?
+Center-align phrases
 
-Theme and/or tweak: Starship, onlyoffice, hypr animations,
+Theme and/or tweak: Starship, onlyoffice, hypr animations, wallpaper
 
 Server
     Set up Caddy reverse proxy

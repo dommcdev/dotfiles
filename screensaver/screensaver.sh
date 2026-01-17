@@ -16,15 +16,29 @@ exit_screensaver() {
 
 trap exit_screensaver SIGINT SIGTERM SIGHUP SIGQUIT
 
+center_text() {
+  local lines=() max_width=0
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    lines+=("$line")
+    ((${#line} > max_width)) && max_width=${#line}
+  done
+  for line in "${lines[@]}"; do
+    local padding=$(( (max_width - ${#line}) / 2 ))
+    printf "%*s%s\n" "$padding" "" "$line"
+  done
+}
+
 printf '\033]11;rgb:00/00/00\007'  # Set background color to black
 hyprctl keyword cursor:invisible true &>/dev/null
 
 tty=$(tty 2>/dev/null)
+phrases_dir=~/dev/dotfiles/screensaver/phrases
 
 while true; do
-  tte -i ~/dev/dotfiles/screensaver/logo.txt \
+  phrase=$(find "$phrases_dir" -type f -name '*.txt' | shuf -n1)
+  center_text < "$phrase" | tte \
     --frame-rate 120 --canvas-width 0 --canvas-height 0 --reuse-canvas --anchor-canvas c --anchor-text c \
-    --random-effect --exclude-effects dev_worm \
+    --random-effect \
     --no-eol --no-restore-cursor &
 
   while pgrep -t "${tty#/dev/}" -x tte >/dev/null; do
