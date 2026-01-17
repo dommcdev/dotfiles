@@ -1,19 +1,11 @@
-# Easy
+# To-do
 Create yaml/script for fingerprint sensor
 Replace grub/sddm/hyprlock theme
 Better power manager (w/aliases + hyprshutdown)
-
-
-Dotfiles install
-    Rework arch bootstrapping workflow
-    Script to generate profile files
-
-# To-do
 Nvim (status line, snacks stuff, ai)
 Gpu passthrough
 Fix/theme bibata hyprcursor
 Systemd-logind for custom power-button sequence (60s to shutdown)
-Fedora dotfiles support + full ubuntu support
 Better screenshot tool (omarchy one w/Satty?)
 Switch to limine?
 
@@ -37,15 +29,17 @@ Tmux-sessionizer for "restoring" sessions
 Kvantum isn't working - need to install KvantumManager?
 Better solution for ssh -> tmux -> nvim shared clipboard
 Xwayland apps following mouse cursor?
-Center-align phrases
-
 Theme and/or tweak: Starship, onlyoffice, hypr animations, wallpaper
+
 
 Server
     Set up Caddy reverse proxy
     Immich, gitlab, filebrowser, onlyoffice, etc
     Ditch davfs2
-Rasp pi for wireless android auto
+Dotfiles install
+    Rework arch bootstrapping workflow
+    Script to generate profile files
+    Fedora + Ubuntu support
 Local AI
 
 # Things to try
