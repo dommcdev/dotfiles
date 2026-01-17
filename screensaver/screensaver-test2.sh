@@ -3,8 +3,7 @@
 # Run the test screensaver cycling through all logos in order.
 # Usage: screensaver-test2.sh
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PHRASES_DIR="$SCRIPT_DIR/phrases"
+PHRASES_DIR="$HOME/dev/dotfiles/screensaver/phrases"
 
 screensaver_in_focus() {
   hyprctl activewindow -j | jq -e '.class == "com.dominic.screensaver"' >/dev/null 2>&1

@@ -20,7 +20,7 @@ BorgBackup (or equal.)
 Yt-music but offline, for phone
 
 # Low Priority
-Notification center
+Swap out waybar/dunst with some shell+notif center
 Fastfetch
 Theme clipse (+ auto-paste)
 Theme script
