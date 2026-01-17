@@ -102,6 +102,11 @@ fallback = [
   { action = "erase_history", label = "clear hist", bind = "ctrl h", after = "AsyncReload" },
 ]
 
+
+[[emergencies]]
+text = "Restart Walker"
+command = "restart-walker.sh"
+
 dmenu = [{ action = "select", default = true, bind = "Return" }]
 
 providerlist = [

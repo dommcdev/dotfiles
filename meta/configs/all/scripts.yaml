@@ -3,6 +3,12 @@
     ~/.local/bin/:
       path: scripts/*
       glob: true
+      exclude: [scripts/utilities]
     ~/.local/bin/sys: sys
+
+- link:
+    ~/.local/bin/:
+      path: scripts/utilities/*
+      glob: true
 
 - shell: []
