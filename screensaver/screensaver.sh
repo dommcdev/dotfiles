@@ -42,7 +42,11 @@ while true; do
     --no-eol --no-restore-cursor &
 
   while pgrep -t "${tty#/dev/}" -x tte >/dev/null; do
-    if read -n1 -t 1 || ! screensaver_in_focus; then
+    if read -n1 -t 1 key || ! screensaver_in_focus; then
+      if [[ "$key" == "n" ]]; then
+        pkill -x tte 2>/dev/null || true
+        break
+      fi
       exit_screensaver
     fi
   done
