@@ -36,7 +36,7 @@ hyprctl keyword cursor:invisible true &>/dev/null
 tty=$(tty 2>/dev/null)
 
 # Get all phrase files sorted alphabetically
-mapfile -t logos < <(find "$PHRASES_DIR" -type f -name '*.txt' | sort)
+mapfile -t logos < <(find "$PHRASES_DIR" -type f -name '*.tte' | sort)
 
 if [[ ${#logos[@]} -eq 0 ]]; then
   echo "Error: No phrase files found in $PHRASES_DIR"

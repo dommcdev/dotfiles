@@ -13,3 +13,5 @@ insert_final_newline = true
 indent_size = 2
 
 
+[*.tte]
+trim_trailing_whitespace = false
