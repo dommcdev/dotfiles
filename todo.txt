@@ -3,6 +3,7 @@ Create yaml/script for fingerprint sensor
 Replace grub/sddm/hyprlock theme
 Better power manager (w/aliases + hyprshutdown)
 Calendar size needs tweaking on smaller screens
+ctrl v pastes in terminal
 
 
 Dotfiles install
@@ -42,7 +43,7 @@ Kvantum isn't working - need to install KvantumManager?
 Better solution for ssh -> tmux -> nvim shared clipboard
 Xwayland apps following mouse cursor?
 
-Theme and/or tweak: Rofi, starship, onlyoffice, hypr animations,
+Theme and/or tweak: Starship, onlyoffice, hypr animations,
 
 Server
     Set up Caddy reverse proxy

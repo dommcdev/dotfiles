@@ -74,13 +74,17 @@ child > * {
 }
 
 child:hover .item-box {
+  background: alpha(@border, 0.1);
 }
 
 child:selected .item-box {
+  background: alpha(@border, 0.3);
+  border-left: 3px solid @border;
 }
 
 child:selected .item-box * {
   color: @selected-text;
+  font-weight: bold;
 }
 
 .item-box {

@@ -2,11 +2,13 @@
     ~/.config/walker:
       path: walker/*
       glob: true
-      exclude: [walker/calc.toml,walker/desktopapplications.toml]
+      exclude: [walker/calc.toml,walker/desktopapplications.toml,walker/websearch.toml]
     ~/.config/elephant/calc.toml:
       path: walker/calc.toml
     ~/.config/elephant/desktopapplications.toml:
       path: walker/desktopapplications.toml
+    ~/.config/elephant/websearch.toml:
+      path: walker/websearch.toml
 
 - shell:
   - sudo pacman -S --noconfirm --needed omarchy-walker
