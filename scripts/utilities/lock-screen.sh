@@ -7,4 +7,5 @@ pidof hyprlock && exit 0
 pkill -f com.dominic.screensaver 2>/dev/null || true
 sleep 0.1
 
-hyprlock
+hyprlock --immediate-render
+
