@@ -4,4 +4,20 @@
 
 - shell:
   - sudo pacman -S --noconfirm --needed swayosd
+  - |
+    cat << 'EOF' > ~/.config/systemd/user/swayosd-server.service
+    [Unit]
+    Description=SwayOSD
+    After=graphical-session.target
+    [Service]
+    ExecStart=/usr/bin/swayosd-server
+    Restart=on-failure
+    [Install]
+    WantedBy=graphical-session.target
+    EOF
+  - systemctl --user daemon-reload
+  - systemctl --user enable swayosd-server
   - sudo systemctl enable swayosd-libinput-backend.service
+  - systemctl --user restart swayosd-server 2>/dev/null || true
+  - sudo systemctl restart swayosd-libinput-backend 2>/dev/null || true
+
