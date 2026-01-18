@@ -10,7 +10,6 @@ Switch to limine?
 
 # Find tools, learn
 Yt-dlp workflow (tui? chrome?)
-Rsync
 Music player tui
 BorgBackup (or equal.)
 Yt-music but offline, for phone

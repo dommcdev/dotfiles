@@ -73,6 +73,9 @@ alias du="du -h -d 1"
 alias asciiquarium="asciiquarium -t"
 alias venv="source .venv/bin/activate"
 alias calcurse="calcurse -D ~/dev/calendar"
+alias rcp='rsync -ahP --backup --suffix=_old'
+alias rbig='rsync -ahPz --stats --inplace'
+alias rmirror='rsync -ahP --delete'
 #alias -g C='| wl-copy' #somehwat risky
 
 # Tmux-sessionizer
