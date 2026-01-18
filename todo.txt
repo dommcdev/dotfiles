@@ -7,7 +7,6 @@ Gpu passthrough
 Systemd-logind for custom power-button sequence (60s to shutdown)
 Better screenshot tool (omarchy one w/Satty?)
 Switch to limine?
-Laptop hyprlock tweaks
 
 # Find tools, learn
 Yt-dlp workflow (tui? chrome?)
