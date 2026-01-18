@@ -25,7 +25,7 @@
   # Increase security
   - |
     if [[ "$(./sys type)" == "Linux" ]]; then
-      sudo sed -i 's/^#\?Port .*/Port 2264/' /etc/ssh/sshd_config
+      #sudo sed -i 's/^#\?Port .*/Port 2264/' /etc/ssh/sshd_config
       sudo sed -i 's/^#\?PasswordAuthentication .*/PasswordAuthentication no/' /etc/ssh/sshd_config
       sudo sed -i 's/^#\?PermitRootLogin .*/PermitRootLogin no/' /etc/ssh/sshd_config
 
