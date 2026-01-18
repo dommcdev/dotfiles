@@ -6,10 +6,13 @@
     if [[ "$(./sys id)" == "arch" ]]; then
       yay -S --noconfirm --needed --answerdiff None --answerclean None xcursor-breeze
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
-      echo "Add me please"
+      sudo apt install -y breeze-cursor-theme
     fi
+  # Get xwayland apps to follow cursor theme
+  - mkdir -p ~/.local/share/icons/default && printf '[Icon Theme]\nName=Default\nComment=Default Cursor Theme\nInherits=Breeze\n' > ~/.local/share/icons/default/index.theme
 
 
 #Applying hyprcursor theme
-#On Hyprland, simply place the hyprcursor in ~/.local/share/icons/ and it will automatically be picked up. If you have multiple, set the HYPRCURSOR_THEME and HYPRCURSOR_SIZE env vars in your hyprland conf/uwsm-hyprland file.
-#OR just put exec-once hyprctl setcursor [cursorname] [size] in your hyprland config. This works with Xcursors as well.
+# In Hyprland, place the hyprcursor in ~/.local/share/icons/ and it will automatically be picked up. If you have multiple, set the HYPRCURSOR_THEME and HYPRCURSOR_SIZE env vars in your uwsm env-hyprland file.
+# OR just put exec-once hyprctl setcursor [cursorname] [size] in your hyprland config. This works with Xcursors as well.
+# For xwayland apps put the cursor name in ~/.local/share/icons/default/index.theme (see above)

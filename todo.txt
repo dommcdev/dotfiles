@@ -25,7 +25,6 @@ Theme script
     Pywall16, Matugen, Wallust?
 Tmux-sessionizer for "restoring" sessions
 Better solution for ssh -> tmux -> nvim shared clipboard
-Xwayland apps following mouse cursor?
 Theme and/or tweak: Starship, onlyoffice, hypr animations, wallpaper
 
 
