@@ -1,12 +1,13 @@
 # To-do
 Create yaml/script for fingerprint sensor
 Replace grub/sddm
-Better power manager (w/aliases + hyprshutdown)
+Better power manager (w/aliases + hyprshutdown, wlogout)
 Nvim (status line, snacks stuff, ai)
 Gpu passthrough
 Systemd-logind for custom power-button sequence (60s to shutdown)
 Better screenshot tool (omarchy one w/Satty?)
 Switch to limine?
+Wlogout
 
 # Find tools, learn
 Yt-dlp workflow (tui? chrome?)
@@ -28,6 +29,7 @@ Tmux-sessionizer for "restoring" sessions
 Better solution for ssh -> tmux -> nvim shared clipboard
 Xwayland apps following mouse cursor?
 Theme and/or tweak: Starship, onlyoffice, hypr animations, wallpaper, cursor
+
 
 
 Server
