@@ -10,9 +10,8 @@ Switch to limine?
 
 # Find tools, learn
 Yt-dlp workflow (tui? chrome?)
-Rsync, taildrop
+Rsync
 Music player tui
-BTRFS
 BorgBackup (or equal.)
 Yt-music but offline, for phone
 
@@ -25,7 +24,7 @@ Theme script
     Pywall16, Matugen, Wallust?
 Tmux-sessionizer for "restoring" sessions
 Better solution for ssh -> tmux -> nvim shared clipboard
-Theme and/or tweak: Starship, onlyoffice, hypr animations, wallpaper
+Theme and/or tweak: Starship, onlyoffice, hypr animations
 
 
 
