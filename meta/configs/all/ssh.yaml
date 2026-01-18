@@ -10,7 +10,7 @@
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       sudo apt install -y openssh-server
       sudo systemctl enable ssh
-    elif [[ "$(./sys id)" == "mac" ]]; then 
+    elif [[ "$(./sys id)" == "mac" ]]; then
       brew install openssh
     fi
 
@@ -20,4 +20,13 @@
       # Only append if the string isn't already in the file
       grep -qxF "net.ipv4.tcp_mtu_probing=1" /etc/sysctl.d/99-sysctl.conf || \
       echo "net.ipv4.tcp_mtu_probing=1" | sudo tee -a /etc/sysctl.d/99-sysctl.conf
+    fi
+
+  # Increase security
+  - |
+    if [[ "$(./sys type)" == "Linux" ]]; then
+      sudo sed -i 's/^#\?Port .*/Port 2264/' /etc/ssh/sshd_config
+      sudo sed -i 's/^#\?PasswordAuthentication .*/PasswordAuthentication no/' /etc/ssh/sshd_config
+      sudo sed -i 's/^#\?PermitRootLogin .*/PermitRootLogin no/' /etc/ssh/sshd_config
+      sudo systemctl restart ssh 2>/dev/null || sudo systemctl restart sshd
     fi
