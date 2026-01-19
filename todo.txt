@@ -22,19 +22,19 @@ Tmux-sessionizer for "restoring" sessions
 Better solution for ssh -> tmux -> nvim shared clipboard
 Theme and/or tweak: Starship, onlyoffice, hypr animations
 
+# Server
+Set up Caddy reverse proxy
+Immich, gitlab, filebrowser, onlyoffice, etc
+Ditch davfs2
 
-Server
-    Set up Caddy reverse proxy
-    Immich, gitlab, filebrowser, onlyoffice, etc
-    Ditch davfs2
-Dotfiles install
-    Rework arch bootstrapping workflow
-    Script to generate profile files
-    Fedora + Ubuntu support
-Local AI
+# Dotfiles
+Rework arch bootstrapping workflow
+Script to generate profile files
+Fedora + Ubuntu support
 
 # Things to try
 NixOS, OpenSuse, manual Arch, MacOS vm
 Windows (+ LookingGlass)
+Local AI
 Github actions
 Devcontainers
