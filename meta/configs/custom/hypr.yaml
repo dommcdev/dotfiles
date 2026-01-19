@@ -23,5 +23,4 @@
   - systemctl --user enable hyprpaper.service
   - systemctl --user enable hypridle.service
   - systemctl --user enable hyprsunset.service
-  - if [ ! -d "$HOME/dev/wallpapers" ]; then git clone git@github.com:dommcdev/wallpapers.git $HOME/dev/wallpapers; fi
   #-sudo pacman -S --noconfirm --needed polkit-gnome && systemctl --user enable polkit-gnome.service

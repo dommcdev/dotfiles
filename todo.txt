@@ -2,7 +2,7 @@
 Create yaml/script for fingerprint sensor
 Replace grub/sddm
 Better power manager (w/aliases + hyprshutdown, wlogout)
-Nvim (status line, snacks stuff, ai)
+Nvim (status line, snacks stuff, ai, atone, flash, tiny inline diagnostics)
 Gpu passthrough
 Systemd-logind for custom power-button sequence (60s to shutdown)
 Better screenshot tool (omarchy one w/Satty?)
@@ -18,13 +18,10 @@ Yt-music but offline, for phone
 Swap out waybar/dunst with some shell+notif center
 Fastfetch
 Theme clipse (+ auto-paste)
-Theme script
-    Via single mycolors.css file?
-    Pywall16, Matugen, Wallust?
+Auto-theming (single colors.css)
 Tmux-sessionizer for "restoring" sessions
 Better solution for ssh -> tmux -> nvim shared clipboard
 Theme and/or tweak: Starship, onlyoffice, hypr animations
-
 
 
 Server
