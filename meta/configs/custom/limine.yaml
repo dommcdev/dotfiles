@@ -1,0 +1,45 @@
+- shell:
+  - |
+    print_info "Installing Limine and automation tools..."
+    yay -S --noconfirm --needed limine limine-mkinitcpio-hook limine-snapper-sync
+
+    print_info "Configuring Limine..."
+    
+    # 1. Determine Kernel Command Line
+    CMDLINE=""
+    # Try existing Limine config
+    for conf in /boot/limine.conf /boot/EFI/limine/limine.conf /boot/limine/limine.conf; do
+        if [[ -f "$conf" ]]; then
+            CMDLINE=$(grep "^[[:space:]]*cmdline:" "$conf" | head -1 | sed 's/^[[:space:]]*cmdline:[[:space:]]*//')
+            [[ -n "$CMDLINE" ]] && break
+        fi
+    done
+
+    # Fallback to current running cmdline (strip bootloader specific args)
+    if [[ -z "$CMDLINE" ]]; then
+        # Take /proc/cmdline but remove BOOT_IMAGE and initrd which are bootloader specific
+        # Keep root= as it is essential unless auto-discovered
+        CMDLINE=$(cat /proc/cmdline | sed -E 's/(BOOT_IMAGE|initrd)=[^ ]*//g' | tr -s ' ' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+    fi
+
+    # 2. Deploy /etc/default/limine
+    sudo cp limine/default.conf /etc/default/limine
+    sudo sed -i "s|@@CMDLINE@@|$CMDLINE|g" /etc/default/limine
+
+    # 3. Deploy /boot/limine.conf (Theming)
+    sudo cp limine/limine.conf /boot/limine.conf
+
+    # 4. Setup Snapper/Limine Sync
+    # Enable the service
+    sudo systemctl enable --now limine-snapper-sync.service
+
+    # 5. Enable mkinitcpio hooks if needed
+    # Ensure standard hooks are in place (optional, but good practice)
+    # sudo tee /etc/mkinitcpio.conf.d/limine.conf <<< "HOOKS+=(limine)" # Example if needed
+
+    # 6. Generate entries
+    print_info "Generating boot entries..."
+    sudo limine-update
+    sudo limine-snapper-sync
+
+    print_info "Limine setup complete! Don't forget to run 'limine install' on your disk if this is a fresh install."

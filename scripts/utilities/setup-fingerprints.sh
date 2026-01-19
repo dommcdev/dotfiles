@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -e
 
@@ -20,7 +20,11 @@ print_info() {
 }
 
 check_fingerprint_hardware() {
-  if ! lsusb | grep -Eiq 'fingerprint|synaptics|goodix|elan|validity|FPC'; then
+  # Get fingerprint devices for the user
+  devices=$(fprintd-list "$USER" 2>/dev/null)
+
+  # Exit if no devices found
+  if [[ -z "$devices" ]]; then
     print_error "\nNo fingerprint sensor detected."
     return 1
   fi
@@ -51,7 +55,6 @@ EOF
   fi
 }
 
-
 remove_pam_config() {
   # Remove from sudo
   if grep -q pam_fprintd.so /etc/pam.d/sudo; then
@@ -66,12 +69,33 @@ remove_pam_config() {
   fi
 }
 
+setup_fingerprints() {
+  print_success "\nLet's setup your right index finger as the first fingerprint."
+  print_info "Keep moving the finger around on sensor until the process completes.\n"
+
+  if sudo fprintd-enroll "$USER"; then
+    print_success "\nFingerprint enrolled successfully!"
+
+    # Verify
+    print_info "\nNow let's verify that it's working correctly.\n"
+    if fprintd-verify; then
+      print_success "\nPerfect! Fingerprint authentication is now configured."
+      print_info "You can use your fingerprint for sudo, polkit, and lock screen (Super + Escape)."
+    else
+      print_error "\nVerification failed. You may want to try enrolling again."
+    fi
+  else
+    print_error "\nEnrollment failed. Please try again."
+    exit 1
+  fi
+}
+
+
 if [[ "--remove" == "$1" ]]; then
   print_success "Removing fingerprint scanner from authentication.\n"
 
   # Remove PAM configuration
   remove_pam_config
-
 
   # Uninstall packages
   print_info "Removing fingerprint packages..."
@@ -92,24 +116,6 @@ else
   # Configure PAM
   setup_pam_config
 
-
-  # Enroll first fingerprint
-  print_success "\nLet's setup your right index finger as the first fingerprint."
-  print_info "Keep moving the finger around on sensor until the process completes.\n"
-
-  if sudo fprintd-enroll "$USER"; then
-    print_success "\nFingerprint enrolled successfully!"
-
-    # Verify
-    print_info "\nNow let's verify that it's working correctly.\n"
-    if fprintd-verify; then
-      print_success "\nPerfect! Fingerprint authentication is now configured."
-      print_info "You can use your fingerprint for sudo, polkit, and lock screen (Super + Escape)."
-    else
-      print_error "\nVerification failed. You may want to try enrolling again."
-    fi
-  else
-    print_error "\nEnrollment failed. Please try again."
-    exit 1
-  fi
+  # Enroll fingerprints
+  setup_fingerprints()
 fi
