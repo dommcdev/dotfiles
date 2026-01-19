@@ -1,5 +1,9 @@
 
 - shell:
-  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed perl-curses perl-term-animation cmatrix cowsay ponysay countryfetch lolcat fortune-mod sl espeak-ng toilet nyancat; fi
-  - if [ "$(uname)" = "Linux" ]; then yay -S --noconfirm --needed --answerdiff None --answerclean None cmatrix-git; fi
+  - if [[ "$(./sys id)" == "arch" ]]; then sudo pacman -S --noconfirm --needed perl-curses perl-term-animation cowsay ponysay countryfetch lolcat fortune-mod sl espeak-ng toilet nyancat; fi
+  - if [[ "$(./sys id)" == "arch" ]]; then yay -S --noconfirm --needed --answerdiff None --answerclean None cmatrix-git; fi
+  - |
+    git clone --depth 1 https://github.com/AngelJumbo/lavat.git /tmp/lavat \
+    && (cd /tmp/lavat && sudo make install); \
+    rm -rf /tmp/lavat
 
