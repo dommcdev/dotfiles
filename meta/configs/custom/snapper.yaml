@@ -1,0 +1,22 @@
+- shell:
+  - |
+    yay -S --noconfirm --needed snapper snap-pac
+
+    if ! sudo snapper list-configs 2>/dev/null | grep -q "root"; then
+        sudo snapper -c root create-config /
+    fi
+
+    # Disable timeline (No daily/hourly snapshots)
+    sudo sed -i 's/^TIMELINE_CREATE=".*"/TIMELINE_CREATE="no"/' /etc/snapper/configs/root
+    
+    # Keep only 5 numbered snapshots (from updates/installs)
+    sudo sed -i 's/^NUMBER_LIMIT=".*"/NUMBER_LIMIT="5"/' /etc/snapper/configs/root
+    sudo sed -i 's/^NUMBER_LIMIT_IMPORTANT=".*"/NUMBER_LIMIT_IMPORTANT="5"/' /etc/snapper/configs/root
+    
+    # Reduce disk space limit to 30%
+    sudo sed -i 's/^SPACE_LIMIT=".*"/SPACE_LIMIT="0.3"/' /etc/snapper/configs/root
+    sudo sed -i 's/^FREE_LIMIT=".*"/FREE_LIMIT="0.3"/' /etc/snapper/configs/root
+    
+    sudo systemctl enable --now snapper-cleanup.timer
+    sudo systemctl disable --now snapper-timeline.timer 2>/dev/null || true
+    
