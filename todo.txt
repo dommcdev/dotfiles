@@ -1,6 +1,5 @@
 # To-do
 Create yaml/script for fingerprint sensor
-Replace grub/sddm
 Better power manager (w/aliases + hyprshutdown, wlogout)
 Nvim (status line, snacks stuff, ai, atone, flash, tiny inline diagnostics)
 Gpu passthrough
