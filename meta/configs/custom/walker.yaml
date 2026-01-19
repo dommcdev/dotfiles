@@ -2,12 +2,28 @@
     ~/.config/walker:
       path: walker/*
       glob: true
+      exclude: [walker/elephant]
     ~/.config/elephant:
       path: walker/elephant/*
       glob: true
-    ~/.local/bin/restart-walker.sh: walker/restart-walker.sh
 
 - shell:
   - sudo pacman -S --noconfirm --needed omarchy-walker
   - elephant service enable
-  - systemctl --user start elephant.service || true
+  - |
+    cat << 'EOF' > ~/.config/systemd/user/walker.service
+    [Unit]
+    Description=Walker
+    Wants=elephant.service
+    After=graphical-session.target elephant.service
+
+    [Service]
+    ExecStart=/usr/bin/walker --gapplication-service
+    Restart=on-failure
+
+    [Install]
+    WantedBy=graphical-session.target
+    EOF
+  - systemctl --user daemon-reload
+  - systemctl --user enable walker
+  - systemctl --user restart elephant walker 2>/dev/null || true
