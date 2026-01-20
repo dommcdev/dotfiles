@@ -132,6 +132,31 @@ remove_pam_config() {
   fi
 }
 
+get_enrolled_fingers() {
+  local output
+  output=$(fprintd-list "$USER" 2>/dev/null || true)
+  local enrolled_list=""
+  
+  if echo "$output" | grep -q "right-index-finger"; then enrolled_list+="Right Index, "; fi
+  if echo "$output" | grep -q "right-middle-finger"; then enrolled_list+="Right Middle, "; fi
+  if echo "$output" | grep -q "right-thumb"; then enrolled_list+="Right Thumb, "; fi
+  if echo "$output" | grep -q "right-ring-finger"; then enrolled_list+="Right Ring, "; fi
+  if echo "$output" | grep -q "right-little-finger"; then enrolled_list+="Right Little, "; fi
+  if echo "$output" | grep -q "left-index-finger"; then enrolled_list+="Left Index, "; fi
+  if echo "$output" | grep -q "left-middle-finger"; then enrolled_list+="Left Middle, "; fi
+  if echo "$output" | grep -q "left-thumb"; then enrolled_list+="Left Thumb, "; fi
+  if echo "$output" | grep -q "left-ring-finger"; then enrolled_list+="Left Ring, "; fi
+  if echo "$output" | grep -q "left-little-finger"; then enrolled_list+="Left Little, "; fi
+  
+  enrolled_list=${enrolled_list%, }
+  
+  if [[ -z "$enrolled_list" ]]; then
+      echo "None"
+  else
+      echo "$enrolled_list"
+  fi
+}
+
 enroll_fingerprints() {
   print_success "\nStarting Fingerprint Enrollment"
   
@@ -142,13 +167,15 @@ enroll_fingerprints() {
 
   while true; do
     echo "" # Spacing
-    local choice
-    choice=$(gum choose --header "Select finger to enroll" \
-      "Right Index" "Right Middle" "Right Thumb" "Right Ring" "Right Little" \
-      "Left Index" "Left Middle" "Left Thumb" "Left Ring" "Left Little" \
-      "Done")
     
-    if [[ "$choice" == "Done" ]]; then
+    local enrolled
+    enrolled=$(get_enrolled_fingers)
+    echo -e "${YELLOW}Enrolled: ${NC}${enrolled}"
+    
+    local choice
+    if ! choice=$(gum choose --header "Select finger to enroll (Esc to finish)" \
+      "Right Index" "Right Middle" "Right Thumb" "Right Ring" "Right Little" \
+      "Left Index" "Left Middle" "Left Thumb" "Left Ring" "Left Little"); then
       break
     fi
 
@@ -172,6 +199,7 @@ enroll_fingerprints() {
     # -f forces enrollment even if finger is already enrolled
     if sudo fprintd-enroll -f "$finger_id" "$USER"; then
       gum style --foreground 212 "Successfully enrolled $choice!"
+      sleep 2
     else
       gum style --foreground 196 "Failed to enroll $choice."
       if ! gum confirm "Try again?"; then
@@ -179,15 +207,6 @@ enroll_fingerprints() {
       fi
     fi
   done
-  
-  # Verify
-  print_info "\nVerifying enrollment..."
-  if fprintd-verify; then
-      print_success "\nPerfect! Fingerprint authentication is working."
-      print_info "You can use your fingerprint for sudo, polkit, and lock screen."
-  else
-      print_error "\nVerification failed or cancelled."
-  fi
 }
 
 main() {
