@@ -23,7 +23,7 @@ highlight = "#89b4fa"
 
 # Progress bar
 progress_bar_frame_width = 0
-progress_bar_corner_radius = 3
+progress_bar_corner_radius = 0
 
 # Text
 font = JetBrainsMono Nerd Font
@@ -44,7 +44,7 @@ icon_corner_radius = 4
 
 # Misc/Advanced
 dmenu = rofi -dmenu -p "Notification Actions"
-corner_radius = 10
+corner_radius = 0
 
 # Mouse
 mouse_left_click = do_action, close_current

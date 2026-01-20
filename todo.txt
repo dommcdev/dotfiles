@@ -1,16 +1,14 @@
 # To-do
-Create yaml/script for fingerprint sensor
+Fix colors in enroll-fingerprints
 Better power manager (w/aliases + hyprshutdown, wlogout)
 Nvim (status line, snacks stuff, ai, atone, flash, tiny inline diagnostics)
 Gpu passthrough
 Systemd-logind for custom power-button sequence (60s to shutdown)
 Better screenshot tool (omarchy one w/Satty?)
-
-# Find tools, learn
-Yt-dlp workflow (tui? chrome?)
+Yt-dlp workflow (tui + yt api project)
 Music player tui
 BorgBackup (or equal.)
-Yt-music but offline, for phone
+
 
 # Low Priority
 Swap out waybar/dunst with some shell+notif center
@@ -23,7 +21,7 @@ Theme and/or tweak: Starship, onlyoffice, hypr animations
 
 # Server
 Set up Caddy reverse proxy
-Immich, gitlab, filebrowser, onlyoffice, etc
+Immich, gitlab, filebrowser, onlyoffice, music player, etc
 Ditch davfs2
 
 # Dotfiles
