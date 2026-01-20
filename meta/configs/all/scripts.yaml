@@ -3,7 +3,7 @@
     ~/.local/bin/:
       path: scripts/*
       glob: true
-      exclude: [scripts/utilities]
+      exclude: [scripts/utilities, scripts/archived]
     ~/.local/bin/sys: sys
 
 - link:

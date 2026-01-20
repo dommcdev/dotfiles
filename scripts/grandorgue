@@ -83,6 +83,14 @@ fi
 DEFAULT_SINK=$(pactl get-default-sink)
 echo "Routing GrandOrgue to: $DEFAULT_SINK"
 
+for i in {1..60}; do
+    if pw-link -o | grep -q "GrandOrgueAudio:out_0" && \
+       pw-link -o | grep -q "GrandOrgueAudio:out_1"; then
+        break
+    fi
+    sleep 0.25
+done
+
 # Connect Left Channel (out_0 -> playback_FL or playback_1)
 pw-link "GrandOrgueAudio:out_0" "${DEFAULT_SINK}:playback_FL" 2>/dev/null || \
 pw-link "GrandOrgueAudio:out_0" "${DEFAULT_SINK}:playback_1" 2>/dev/null
