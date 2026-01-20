@@ -1,4 +1,3 @@
-"cd" will cd to home directory
 ghostty +boo
 systemctl reboot --firmware-setup
 Audio center: wiremix
@@ -22,6 +21,13 @@ Archiving/unarchiving
     7zip: high compression, good decompression
     unar: great decompression, fixes gibberish text
     unrar: best rar decompression (official spec)
+
+cp command
+    When copying *folders*, cp is NOT idempotent.
+    cp src/ dest/ will clone src and rename as dest on a first run, 
+    but create dest/src on the second run
+    use rsync -a src/ dest/ instead, but keep in mind src/ copies contents of src,
+    while src (no trailing /) copies the folder itself
 
 Connecting to edurom (impala)
     Use PEAP. For identity put full email; for phase2 identity put full email; for phase2 password put your stmu password. Leave phase2 method as mschapv2, and leave server domain mask, ca cert, client cert, client key, and key passphrase empty. You will be prompted to enter username/password - enter stmu email/password (again).

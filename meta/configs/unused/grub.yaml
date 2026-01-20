@@ -1,0 +1,12 @@
+
+- shell:
+  - |
+    git clone --depth 1 https://github.com/catppuccin/grub.git /tmp/catgrub
+    sudo mkdir -p /usr/share/grub/themes/catppuccin-mocha-grub-theme/
+    sudo rsync -a --delete /tmp/catgrub/src/catppuccin-mocha-grub-theme/ /usr/share/grub/themes/catppuccin-mocha-grub-theme/
+    rm -rf /tmp/catgrub
+
+    sudo sed -i '/^GRUB_THEME=/d' /etc/default/grub
+    echo 'GRUB_THEME="/usr/share/grub/themes/catppuccin-mocha-grub-theme/theme.txt"' | sudo tee -a /etc/default/grub
+
+    sudo grub-mkconfig -o /boot/grub/grub.cfg

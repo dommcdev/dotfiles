@@ -17,11 +17,8 @@
     sudo systemctl stop mnt-nextcloud.mount || true
 
     # Copy over systemd mount files
-    sudo rm -f /etc/systemd/system/mnt-nextcloud.mount
     sudo cp davfs2/mnt-nextcloud.mount /etc/systemd/system/mnt-nextcloud.mount
-    sudo rm -f /etc/systemd/system/mnt-nextcloud.automount
     sudo cp davfs2/mnt-nextcloud.automount /etc/systemd/system/mnt-nextcloud.automount
-    sudo rm -f /etc/systemd/system/mnt-nextcloud.timer
     sudo cp davfs2/mnt-nextcloud.timer /etc/systemd/system/mnt-nextcloud.timer
 
     # Enable and start automount
