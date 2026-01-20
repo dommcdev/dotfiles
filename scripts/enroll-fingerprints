@@ -2,9 +2,10 @@
 
 set -e
 
-GREEN='\033[0;32m'
-RED='\033[0;31m'
-YELLOW='\033[1;33m'
+GREEN='\033[38;2;166;227;161m' # Catppuccin Mocha Green
+RED='\033[38;2;243;139;168m'   # Catppuccin Mocha Red
+YELLOW='\033[38;2;249;226;175m' # Catppuccin Mocha Yellow
+BLUE='\033[38;2;137;180;250m'   # Catppuccin Mocha Blue
 NC='\033[0m' # No Color
 
 print_success() {
@@ -16,7 +17,7 @@ print_error() {
 }
 
 print_info() {
-  echo -e "${YELLOW}$1${NC}"
+  echo -e "${BLUE}$1${NC}"
 }
 
 SYS_CMD="$HOME/.local/bin/sys"
@@ -173,7 +174,7 @@ enroll_fingerprints() {
     echo -e "${YELLOW}Enrolled: ${NC}${enrolled}"
     
     local choice
-    if ! choice=$(gum choose --header "Select finger to enroll (Esc to finish)" \
+    if ! choice=$(gum choose --cursor.foreground="#a6e3a1" --header.foreground="#89b4fa" --header "Select finger to enroll (Esc to finish)" \
       "Right Index" "Right Middle" "Right Thumb" "Right Ring" "Right Little" \
       "Left Index" "Left Middle" "Left Thumb" "Left Ring" "Left Little"); then
       break
@@ -198,11 +199,11 @@ enroll_fingerprints() {
     
     # -f forces enrollment even if finger is already enrolled
     if sudo fprintd-enroll -f "$finger_id" "$USER"; then
-      gum style --foreground 212 "Successfully enrolled $choice!"
+      gum style --foreground "#a6e3a1" "Successfully enrolled $choice!"
       sleep 2
     else
-      gum style --foreground 196 "Failed to enroll $choice."
-      if ! gum confirm "Try again?"; then
+      gum style --foreground "#f38ba8" "Failed to enroll $choice."
+      if ! gum confirm --selected.background="#a6e3a1" --selected.foreground="#1e1e2e" "Try again?"; then
          continue
       fi
     fi
