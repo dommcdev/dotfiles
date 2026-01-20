@@ -1,6 +1,7 @@
 
 - shell:
   - sudo pacman -S --noconfirm --needed timeshift btrfs-progs xorg-xhost
-  - sudo rm -rf /etc/timeshift/timeshift.json
   - sudo cp -r timeshift/timeshift.json /etc/timeshift/timeshift.json
   - systemctl enable --now cronie.service
+
+# Note - ideally my ESP should be at /boot/efi to allow timeshift to snapshot my kernels

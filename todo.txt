@@ -5,7 +5,6 @@ Nvim (status line, snacks stuff, ai, atone, flash, tiny inline diagnostics)
 Gpu passthrough
 Systemd-logind for custom power-button sequence (60s to shutdown)
 Better screenshot tool (omarchy one w/Satty?)
-Switch to limine?
 
 # Find tools, learn
 Yt-dlp workflow (tui? chrome?)

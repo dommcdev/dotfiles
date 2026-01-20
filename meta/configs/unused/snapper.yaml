@@ -20,3 +20,7 @@
     sudo systemctl enable --now snapper-cleanup.timer
     sudo systemctl disable --now snapper-timeline.timer 2>/dev/null || true
     
+
+# Nota bene - if I ever want to use this, I would probably want to
+# configure it to not use nexted subvolumes for the snapshots
+# Also, this has not been tested yet!
