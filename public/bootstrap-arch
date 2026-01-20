@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 set -e
 
 #Note - deps installed: git, github-cli, python
@@ -11,10 +11,11 @@ echo -e "\n\n"
 
 sed -i "s/archhostname/${ARCH_HOST}/g" user_configuration.json
 
-# Run archinstall with included configuration file. Disk input and user creds are still manual.
+# Run archinstall with included configuration file. Disk selection and user creds are still manual.
+curl -fsSL "https://raw.githubusercontent.com/dommcdev/bootstrap/refs/heads/main/arch/user_configuration.json" -o user_configuration.json
 archinstall --config /root/user_configuration.json 
 
-#More manual option for cloning dotfiles - unlike via archinstall, it is interactive
+# Interactively clone dotfiles
 echo -e "\n\n--- Archinstall completed successfully. Cloning dotfiles via arch-chroot ... ---\n\n"
 echo "gh auth login --web -p ssh && gh repo clone dommcdev/dotfiles /home/dominic/dotfiles" > /mnt/home/dominic/tmp.sh
 arch-chroot /mnt sudo -u dominic bash home/dominic/tmp.sh
