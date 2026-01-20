@@ -19,16 +19,76 @@ print_info() {
   echo -e "${YELLOW}$1${NC}"
 }
 
+SYS_CMD="$HOME/.local/bin/sys"
+OS_ID=$("$SYS_CMD" id)
+
 check_fingerprint_hardware() {
   # Get fingerprint devices for the user
-  devices=$(fprintd-list "$USER" 2>/dev/null)
+  # Suppress stderr to avoid confusion if service isn't ready immediately
+  local devices
+  devices=$(fprintd-list "$USER" 2>/dev/null || true)
 
   # Exit if no devices found
-  if [[ -z "$devices" ]]; then
+  if [[ -z "$devices" ]] || [[ "$devices" == *"No devices available"* ]]; then
     print_error "\nNo fingerprint sensor detected."
     return 1
   fi
   return 0
+}
+
+install_packages() {
+  print_info "Checking required packages for $OS_ID..."
+  
+  case "$OS_ID" in
+    arch)
+      # Check if installed to be fast/idempotent
+      if ! pacman -Qi fprintd &>/dev/null || ! pacman -Qi usbutils &>/dev/null; then
+        print_info "Installing packages (Arch)..."
+        sudo pacman -S --noconfirm --needed fprintd usbutils
+      else
+        print_success "Packages already installed."
+      fi
+      ;;
+    ubuntu)
+      if ! dpkg -s fprintd libpam-fprintd usbutils &>/dev/null; then
+        print_info "Installing packages (Ubuntu)..."
+        sudo apt update
+        sudo apt install -y fprintd libpam-fprintd usbutils
+      else
+        print_success "Packages already installed."
+      fi
+      ;;
+    fedora)
+      if ! rpm -q fprintd fprintd-pam usbutils &>/dev/null; then
+        print_info "Installing packages (Fedora)..."
+        sudo dnf install -y fprintd fprintd-pam usbutils
+      else
+        print_success "Packages already installed."
+      fi
+      ;;
+    *)
+      print_error "Unsupported OS for automated package installation: $OS_ID"
+      exit 1
+      ;;
+  esac
+}
+
+remove_packages() {
+  print_info "Removing packages for $OS_ID..."
+  case "$OS_ID" in
+    arch)
+      sudo pacman -Rns --noconfirm fprintd usbutils 2>/dev/null || true
+      ;;
+    ubuntu)
+      sudo apt-get remove -y fprintd libpam-fprintd usbutils || true
+      ;;
+    fedora)
+      sudo dnf remove -y fprintd fprintd-pam usbutils || true
+      ;;
+    *)
+      print_error "Unsupported OS for automated package removal: $OS_ID"
+      ;;
+  esac
 }
 
 setup_pam_config() {
@@ -36,6 +96,8 @@ setup_pam_config() {
   if ! grep -q pam_fprintd.so /etc/pam.d/sudo; then
     print_info "Configuring sudo for fingerprint authentication..."
     sudo sed -i '1i auth    sufficient pam_fprintd.so' /etc/pam.d/sudo
+  else
+    print_success "Sudo PAM already configured."
   fi
 
   # Configure polkit
@@ -47,11 +109,12 @@ setup_pam_config() {
     sudo tee /etc/pam.d/polkit-1 >/dev/null <<'EOF'
 auth      sufficient pam_fprintd.so
 auth      required pam_unix.so
-
 account   required pam_unix.so
 password  required pam_unix.so
 session   required pam_unix.so
 EOF
+  else
+    print_success "Polkit PAM already configured."
   fi
 }
 
@@ -69,53 +132,83 @@ remove_pam_config() {
   fi
 }
 
-setup_fingerprints() {
-  print_success "\nLet's setup your right index finger as the first fingerprint."
-  print_info "Keep moving the finger around on sensor until the process completes.\n"
+enroll_fingerprints() {
+  print_success "\nStarting Fingerprint Enrollment"
+  
+  if ! command -v gum &>/dev/null; then
+     print_error "Error: 'gum' is not installed. Please install gum to use the interactive enrollment."
+     exit 1
+  fi
 
-  if sudo fprintd-enroll "$USER"; then
-    print_success "\nFingerprint enrolled successfully!"
-
-    # Verify
-    print_info "\nNow let's verify that it's working correctly.\n"
-    if fprintd-verify; then
-      print_success "\nPerfect! Fingerprint authentication is now configured."
-      print_info "You can use your fingerprint for sudo, polkit, and lock screen (Super + Escape)."
-    else
-      print_error "\nVerification failed. You may want to try enrolling again."
+  while true; do
+    echo "" # Spacing
+    local choice
+    choice=$(gum choose --header "Select finger to enroll" \
+      "Right Index" "Right Middle" "Right Thumb" "Right Ring" "Right Little" \
+      "Left Index" "Left Middle" "Left Thumb" "Left Ring" "Left Little" \
+      "Done")
+    
+    if [[ "$choice" == "Done" ]]; then
+      break
     fi
+
+    local finger_id=""
+    case "$choice" in
+      "Right Index")  finger_id="right-index-finger" ;;
+      "Right Middle") finger_id="right-middle-finger" ;;
+      "Right Thumb")  finger_id="right-thumb" ;;
+      "Right Ring")   finger_id="right-ring-finger" ;;
+      "Right Little") finger_id="right-little-finger" ;;
+      "Left Index")   finger_id="left-index-finger" ;;
+      "Left Middle")  finger_id="left-middle-finger" ;;
+      "Left Thumb")   finger_id="left-thumb" ;;
+      "Left Ring")    finger_id="left-ring-finger" ;;
+      "Left Little")  finger_id="left-little-finger" ;;
+    esac
+
+    print_info "Enrolling $choice..."
+    print_info "Please scan your finger repeatedly on the sensor until completion."
+    
+    # -f forces enrollment even if finger is already enrolled
+    if sudo fprintd-enroll -f "$finger_id" "$USER"; then
+      gum style --foreground 212 "Successfully enrolled $choice!"
+    else
+      gum style --foreground 196 "Failed to enroll $choice."
+      if ! gum confirm "Try again?"; then
+         continue
+      fi
+    fi
+  done
+  
+  # Verify
+  print_info "\nVerifying enrollment..."
+  if fprintd-verify; then
+      print_success "\nPerfect! Fingerprint authentication is working."
+      print_info "You can use your fingerprint for sudo, polkit, and lock screen."
   else
-    print_error "\nEnrollment failed. Please try again."
-    exit 1
+      print_error "\nVerification failed or cancelled."
   fi
 }
 
-
-if [[ "--remove" == "$1" ]]; then
-  print_success "Removing fingerprint scanner from authentication.\n"
-
-  # Remove PAM configuration
-  remove_pam_config
-
-  # Uninstall packages
-  print_info "Removing fingerprint packages..."
-  sudo pacman -Rns --noconfirm fprintd
-
-  print_success "Fingerprint authentication has been completely removed."
-else
-  print_success "Setting up fingerprint scanner for authentication.\n"
-
-  # Install required packages
-  print_info "Installing required packages..."
-  sudo pacman -S --noconfirm --needed fprintd usbutils
-
-  if ! check_fingerprint_hardware; then
-    exit 1
+main() {
+  if [[ "${1:-}" == "--remove" ]]; then
+    print_success "Removing fingerprint scanner from authentication.\n"
+    remove_pam_config
+    remove_packages
+    print_success "Fingerprint authentication has been removed."
+  else
+    print_success "Setting up fingerprint scanner for authentication.\n"
+    
+    install_packages
+    
+    if ! check_fingerprint_hardware; then
+      print_error "Hardware check failed."
+      exit 1
+    fi
+    
+    setup_pam_config
+    enroll_fingerprints
   fi
+}
 
-  # Configure PAM
-  setup_pam_config
-
-  # Enroll fingerprints
-  setup_fingerprints()
-fi
+main "$@"
