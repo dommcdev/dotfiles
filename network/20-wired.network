@@ -1,9 +1,7 @@
 [Match]
-Type=ethernet
+Name=en*
 
-# Or use a wildcard for common naming schemes:
-# Name=en* [Network]
-
+[Network]
 DHCP=yes
 MulticastDNS=yes
 
