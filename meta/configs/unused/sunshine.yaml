@@ -15,13 +15,12 @@
       brew install --cask moonlight
     fi
 
-#Note - this requires adding
+# Note - this requires adding
+#    [lizardbyte]
+#    SigLevel = Optional
+#    Server = https://github.com/LizardByte/pacman-repo/releases/latest/download
+# to /etc/pacman.conf and
+#    monitor = sunshine-stream, 2560x1600@60, auto, 1
+# to hyprland.conf
 #
-# [lizardbyte]
-# SigLevel = Optional
-# Server = https://github.com/LizardByte/pacman-repo/releases/latest/download
-#to /etc/pacman.conf
-#
-#and
-# monitor = sunshine-stream, 2560x1600@60, auto, 1
-#to hyprland.conf
+# and copying over apps.json and sunshine.conf from ~/.config/sunshine

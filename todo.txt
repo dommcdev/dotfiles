@@ -21,8 +21,7 @@ Theme and/or tweak: Starship, onlyoffice, hypr animations
 
 # Server
 Set up Caddy reverse proxy
-Immich, gitlab, filebrowser, onlyoffice, music player, etc
-Ditch davfs2
+Immich, gitlab, filebrowser, onlyoffice, music player, syncthing, etc
 
 # Dotfiles
 Rework arch bootstrapping workflow (sudoless + tui for manual stuff)
