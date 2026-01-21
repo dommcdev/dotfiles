@@ -5,13 +5,17 @@ vim.keymap.set("n", "<M-k>", "<cmd>silent !tmux neww tmux-sessionizer -s 2<CR>")
 vim.keymap.set("n", "<M-l>", "<cmd>silent !tmux neww tmux-sessionizer -s 3<CR>")
 
 vim.keymap.set("n", "<leader>t", function()
-  Snacks.terminal.toggle(nil, {
-    cwd = vim.fn.expand("%:p:h"),
-    win = {
-      position = "float",
-      height = 0.9,
-      width = 0.9,
-      border = "rounded",
-    },
-  })
+	Snacks.terminal.toggle(nil, {
+		cwd = vim.fn.expand("%:p:h"),
+		win = {
+			position = "float",
+			height = 0.9,
+			width = 0.9,
+			border = "rounded",
+		},
+	})
 end, { desc = "Toggle Terminal" })
+
+-- Fast buffer switching with Shift+h and Shift+l
+vim.keymap.set("n", "L", ":bnext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "H", ":bprevious<CR>", { noremap = true, silent = true })

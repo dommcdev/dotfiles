@@ -2,11 +2,11 @@
 
 set -e
 
-GREEN='\033[38;2;166;227;161m' # Catppuccin Mocha Green
-RED='\033[38;2;243;139;168m'   # Catppuccin Mocha Red
-YELLOW='\033[38;2;249;226;175m' # Catppuccin Mocha Yellow
-BLUE='\033[38;2;137;180;250m'   # Catppuccin Mocha Blue
-NC='\033[0m' # No Color
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
 
 print_success() {
   echo -e "${GREEN}$1${NC}"
@@ -159,7 +159,7 @@ get_enrolled_fingers() {
 }
 
 enroll_fingerprints() {
-  print_success "\nStarting Fingerprint Enrollment"
+  print_info "\nStarting Fingerprint Enrollment"
   
   if ! command -v gum &>/dev/null; then
      print_error "Error: 'gum' is not installed. Please install gum to use the interactive enrollment."
@@ -171,10 +171,10 @@ enroll_fingerprints() {
     
     local enrolled
     enrolled=$(get_enrolled_fingers)
-    echo -e "${YELLOW}Enrolled: ${NC}${enrolled}"
+    echo -e "${YELLOW}Enrolled: ${enrolled}${NC}"
     
     local choice
-    if ! choice=$(gum choose --cursor.foreground="#a6e3a1" --header.foreground="#89b4fa" --header "Select finger to enroll (Esc to finish)" \
+    if ! choice=$(gum choose --cursor.foreground="4" --header.foreground="4" --header "Select finger to enroll (Esc to finish)" \
       "Right Index" "Right Middle" "Right Thumb" "Right Ring" "Right Little" \
       "Left Index" "Left Middle" "Left Thumb" "Left Ring" "Left Little"); then
       break
@@ -199,11 +199,11 @@ enroll_fingerprints() {
     
     # -f forces enrollment even if finger is already enrolled
     if sudo fprintd-enroll -f "$finger_id" "$USER"; then
-      gum style --foreground "#a6e3a1" "Successfully enrolled $choice!"
+      gum style --foreground "2" "Successfully enrolled $choice!"
       sleep 2
     else
-      gum style --foreground "#f38ba8" "Failed to enroll $choice."
-      if ! gum confirm --selected.background="#a6e3a1" --selected.foreground="#1e1e2e" "Try again?"; then
+      gum style --foreground "1" "Failed to enroll $choice!"
+      if ! gum confirm --selected.background="4" --selected.foreground="0" "Try again?"; then
          continue
       fi
     fi
@@ -212,12 +212,12 @@ enroll_fingerprints() {
 
 main() {
   if [[ "${1:-}" == "--remove" ]]; then
-    print_success "Removing fingerprint scanner from authentication.\n"
+    print_info "Removing fingerprint scanner from authentication.\n"
     remove_pam_config
     remove_packages
     print_success "Fingerprint authentication has been removed."
   else
-    print_success "Setting up fingerprint scanner for authentication.\n"
+    print_info "Setting up fingerprint scanner for authentication.\n"
     
     install_packages
     

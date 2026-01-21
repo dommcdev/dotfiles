@@ -1,5 +1,4 @@
 # To-do
-Fix colors in enroll-fingerprints
 Better power manager (w/aliases + hyprshutdown, wlogout)
 Nvim (status line, snacks stuff, ai, atone, flash, tiny inline diagnostics)
 Gpu passthrough
@@ -26,7 +25,7 @@ Immich, gitlab, filebrowser, onlyoffice, music player, etc
 Ditch davfs2
 
 # Dotfiles
-Rework arch bootstrapping workflow
+Rework arch bootstrapping workflow (sudoless + tui for manual stuff)
 Script to generate profile files
 Fedora + Ubuntu support
 
