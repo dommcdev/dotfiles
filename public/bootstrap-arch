@@ -9,10 +9,9 @@ echo "This script will install Arch Linux on the specified drive (chosen via arc
 read -p "Please enter your computer hostname: " ARCH_HOST
 echo -e "\n\n"
 
-sed -i "s/archhostname/${ARCH_HOST}/g" user_configuration.json
-
 # Run archinstall with included configuration file. Disk selection and user creds are still manual.
 curl -fsSL "https://raw.githubusercontent.com/dommcdev/bootstrap/refs/heads/main/arch/user_configuration.json" -o user_configuration.json
+sed -i "s/archhostname/${ARCH_HOST}/g" user_configuration.json
 archinstall --config /root/user_configuration.json 
 
 # Interactively clone dotfiles
