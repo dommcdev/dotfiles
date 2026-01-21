@@ -8,6 +8,7 @@ Better screenshot tool (omarchy one w/Satty?)
 Yt-dlp workflow (tui + yt api project)
 Music player tui
 BorgBackup (or equal.)
+lavat screensaver
 
 
 # Low Priority
