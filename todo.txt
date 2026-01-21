@@ -8,6 +8,7 @@ Yt-dlp workflow (tui + yt api project)
 Music player tui
 BorgBackup (or equal.)
 lavat screensaver
+manage dev.yaml/opencode.yaml dep error
 
 
 # Low Priority
@@ -25,7 +26,6 @@ Immich, gitlab, filebrowser, onlyoffice, music player, syncthing, etc
 
 # Dotfiles
 Rework arch bootstrapping workflow (sudoless + tui for manual stuff)
-Script to generate profile files (yay first, no tailscale)
 Fedora + Ubuntu support
 Add 2 options to install: custom config selection, and custom profile selection
 

@@ -3,8 +3,5 @@
     # Update system
   - sudo pacman -Syy && sudo pacman -Syu --noconfirm
 
-    # Install yay
-  - command -v yay > /dev/null || (sudo pacman -S --noconfirm --needed base-devel && cd /tmp && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm)
-  
     # AUR packages
   - yay -S --noconfirm --needed --answerdiff None --answerclean None downgrade

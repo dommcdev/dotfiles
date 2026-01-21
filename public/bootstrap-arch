@@ -3,8 +3,6 @@ set -e
 
 #Note - deps installed: git, github-cli, python, openssh, base-devel
 
-echo "This script will install Arch Linux on the specified drive (chosen via archinstall), as well as clone a dotfiles repo to ~/dev/dotfiles."
-
 # Read in computer hostname
 read -p "Please enter your computer hostname: " ARCH_HOST
 echo -e "\n\n"
@@ -14,8 +12,17 @@ curl -fsSL "https://raw.githubusercontent.com/dommcdev/bootstrap/refs/heads/main
 sed -i "s/archhostname/${ARCH_HOST}/g" user_configuration.json
 archinstall --config /root/user_configuration.json
 
-# Interactively clone dotfiles
+# Prepare installation for running dotfiles installer
 echo -e "\n\n--- Archinstall completed successfully. Cloning dotfiles via arch-chroot ... ---\n\n"
-echo "gh auth login --web -p ssh && gh repo clone dommcdev/dotfiles /home/dominic/dev/dotfiles" > /mnt/home/dominic/tmp.sh
+cat << 'EOF' > /mnt/home/dominic/tmp.sh
+gh auth login --web -p ssh && gh repo clone dommcdev/dotfiles /home/dominic/dev/dotfiles
+
+command -v yay > /dev/null || (
+    sudo pacman -S --noconfirm --needed base-devel
+    git clone https://aur.archlinux.org/yay.git /tmp/yay
+    cd /tmp/yay
+    makepkg -si --noconfirm
+)
+EOF
 arch-chroot /mnt sudo -u dominic bash home/dominic/tmp.sh
 arch-chroot /mnt rm home/dominic/tmp.sh

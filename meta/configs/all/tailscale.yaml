@@ -11,8 +11,8 @@
     fi
   - |
     if [[ "$(./sys type)" == "Linux" ]]; then
-      sudo systemctl enable tailscaled
-      sudo tailscale up --ssh --operator=$USER --reset
+      sudo systemctl enable --now tailscaled
+      sudo tailscale set --ssh --operator=$USER
     fi
 
 
