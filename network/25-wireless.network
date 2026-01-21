@@ -1,0 +1,12 @@
+[Match]
+Type=wlan
+
+# Or use a wildcard:
+# Name=wl*
+
+[Network]
+DHCP=yes
+MulticastDNS=yes
+
+[DHCPv4]
+RouteMetric=600

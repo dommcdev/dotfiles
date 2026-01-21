@@ -1,10 +1,11 @@
 
 - shell:
-  # install nftables, impala, iwd
-  - sudo pacman -R --noconfirm iptables 2> /dev/null || true #Since we're about to install iptables-nft
-  - sudo pacman -S --noconfirm --needed nftables iptables-nft iwd inetutils impala
+  # install packages
+  - |
+    sudo pacman -R --noconfirm iptables 2> /dev/null || true #Since we're about to install iptables-nft
+    sudo pacman -S --noconfirm --needed nftables iptables-nft iwd inetutils impala
 
-  # Nuke NetworkManager if needed
+  # nuke NetworkManager if needed
   - |
     if command -v nmcli >/dev/null 2>&1; then
         sudo systemctl disable --now NetworkManager NetworkManager-wait-online.service NetworkManager-dispatcher.service || true
@@ -13,20 +14,36 @@
         sudo rm -rf /etc/NetworkManager
     fi
 
+  # systemd-networkd (dhcp)
+  - |
+    sudo mkdir -p /etc/systemd/network
+    sudo cp network/20-wired.network /etc/systemd/network/
+    sudo cp network/25-wireless.network /etc/systemd/network/
+    sudo systemctl enable --now systemd-networkd
+    sudo systemctl enable --now systemd-networkd-wait-online.service
+
   # systemd-resolvd (dns)
-  - sudo systemctl enable --now systemd-resolved
-  - sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+  - |
+    sudo systemctl enable --now systemd-resolved
+    sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
-  # iwd
-  - sudo mkdir -p /etc/iwd
-  - sudo rm -f /etc/iwd/main.conf
-  - sudo cp network/iwd.conf /etc/iwd/main.conf
-  - sudo systemctl enable iwd
+  # iwd (wifi)
+  - |
+    sudo mkdir -p /etc/iwd
+    sudo cp network/iwd.conf /etc/iwd/main.conf
+    sudo systemctl enable --now iwd
 
-  # If using NetworkManager instead of impala
-  # (Remove block nuking networkmanager)
-  #- sudo pacman -S --noconfirm --needed networkmanager nm-connection-editor
-  #- yay -S --noconfirm --needed --answerdiff None --answerclean None gazelle-tui
-  #- sudo mkdir -p /etc/NetworkManager/conf.d
-  #- sudo cp network/networkmanager.conf /etc/NetworkManager/conf.d/00-networkmanager.conf
-  #- sudo systemctl restart NetworkManager
+  - sudo systemctl restart iwd systemd-networkd
+
+
+# Debugging: networkctl status, ip link, ip route, ip addr
+
+
+
+# If using NetworkManager instead of impala
+# (Remove block nuking networkmanager, probably also systemd-networkd block)
+#- sudo pacman -S --noconfirm --needed networkmanager nm-connection-editor
+#- yay -S --noconfirm --needed --answerdiff None --answerclean None gazelle-tui
+#- sudo mkdir -p /etc/NetworkManager/conf.d
+#- sudo cp network/networkmanager.conf /etc/NetworkManager/conf.d/00-networkmanager.conf
+#- sudo systemctl restart NetworkManager
