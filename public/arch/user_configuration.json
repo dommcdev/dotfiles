@@ -28,7 +28,7 @@
     "type": "manual"
   },
   "ntp": true,
-  "packages": ["git", "github-cli", "python"],
+  "packages": ["git", "github-cli", "python", "openssh"],
   "parallel_downloads": 5,
   "profile_config": {
     "gfx_driver": null,

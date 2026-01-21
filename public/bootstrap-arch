@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-#Note - deps installed: git, github-cli, python
+#Note - deps installed: git, github-cli, python openssh
 
 echo "This script will install Arch Linux on the specified drive (chosen via archinstall), as well as clone a dotfiles repo to ~/dev/dotfiles."
 
