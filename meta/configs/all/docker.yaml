@@ -12,32 +12,34 @@
     elif [[ "$(./sys id)" == "mac" ]]; then
       brew install docker docker-compose lazydocker
     fi
-
   - |
     if [[ "$(./sys type)" == "Linux" ]]; then
-      # Limit Docker log sizes to avoid filling disk
+      # Limit Docker log sizes
       sudo mkdir -p /etc/docker
-      sudo tee /etc/docker/daemon.json >/dev/null <<'DEOF'
+      sudo tee /etc/docker/daemon.json >/dev/null <<'EOF'
     {
       "log-driver": "json-file",
       "log-opts": { "max-size": "10m", "max-file": "5" }
     }
-    DEOF
+    EOF
 
-      # Prevent Docker from blocking boot on network-online.target
+      # Prevent Docker from blocking boot
       sudo mkdir -p /etc/systemd/system/docker.service.d
-      sudo tee /etc/systemd/system/docker.service.d/no-block-boot.conf >/dev/null <<'DEOF'
+      sudo tee /etc/systemd/system/docker.service.d/no-block-boot.conf >/dev/null <<'EOF'
     [Unit]
     DefaultDependencies=no
-    DEOF
+    EOF
 
+      sudo systemctl daemon-reload
       sudo systemctl enable --now docker
       sudo usermod -aG docker $USER
-      sudo systemctl daemon-reload
 
       # let libvirt traffic through
-      sudo iptables -C DOCKER-USER -i virbr0 -j ACCEPT 2>/dev/null || \
-      sudo iptables -I DOCKER-USER -i virbr0 -j ACCEPT
-      sudo iptables -C DOCKER-USER -o virbr0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT 2>/dev/null || \
-      sudo iptables -I DOCKER-USER -o virbr0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+      # Using -I FORWARD 1 ensures these rules stay at the top of the stack
+      sudo iptables -C FORWARD -i virbr0 -j ACCEPT 2>/dev/null || \
+      sudo iptables -I FORWARD 1 -i virbr0 -j ACCEPT
+      sudo iptables -C FORWARD -o virbr0 -j ACCEPT 2>/dev/null || \
+      sudo iptables -I FORWARD 1 -o virbr0 -j ACCEPT
+
+      sudo systemctl restart docker 2>/dev/null || true
     fi
