@@ -15,3 +15,6 @@
       force: true
     ~/.config:
       recursive: true
+    ~/.local/bin:
+      force: true
+      recursive: true
