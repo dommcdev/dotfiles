@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-#Note - deps installed: git, github-cli, python, homebrew
+#Note - deps installed: git, github-cli, python, homebrew, make
 
 DOTFILES_REPO="git@github.com:dommcdev/dotfiles.git"
 DOTFILES_DIR="$HOME/dev/dotfiles"
@@ -22,7 +22,7 @@ fi
 
 # Install dotfile dependencies
 echo "Installing dotfile dependencies (git, python)..."
-sudo apt install -y python3 git gh
+sudo apt install -y python3 git gh make
 
 # Setup github authentication
 if ! gh auth status >/dev/null 2>&1; then

@@ -25,8 +25,8 @@ Immich, gitlab, filebrowser, onlyoffice, music player, etc
 Ditch davfs2
 
 # Dotfiles
-Rework arch bootstrapping workflow (networking, sudoless + tui for manual stuff)
-Script to generate profile files
+Rework arch bootstrapping workflow (sudoless + tui for manual stuff)
+Script to generate profile files (yay first, no tailscale)
 Fedora + Ubuntu support
 
 # Things to try

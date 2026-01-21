@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-#Note - deps installed: git, github-cli, python openssh
+#Note - deps installed: git, github-cli, python, openssh, base-devel
 
 echo "This script will install Arch Linux on the specified drive (chosen via archinstall), as well as clone a dotfiles repo to ~/dev/dotfiles."
 
@@ -12,7 +12,7 @@ echo -e "\n\n"
 # Run archinstall with included configuration file. Disk selection and user creds are still manual.
 curl -fsSL "https://raw.githubusercontent.com/dommcdev/bootstrap/refs/heads/main/arch/user_configuration.json" -o user_configuration.json
 sed -i "s/archhostname/${ARCH_HOST}/g" user_configuration.json
-archinstall --config /root/user_configuration.json 
+archinstall --config /root/user_configuration.json
 
 # Interactively clone dotfiles
 echo -e "\n\n--- Archinstall completed successfully. Cloning dotfiles via arch-chroot ... ---\n\n"
