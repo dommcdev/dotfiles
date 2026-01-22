@@ -1,7 +1,3 @@
 
 - shell:
-    # Update system
-  - sudo pacman -Syy && sudo pacman -Syu --noconfirm
-
-    # AUR packages
   - yay -S --noconfirm --needed --answerdiff None --answerclean None downgrade
