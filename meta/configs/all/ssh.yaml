@@ -29,7 +29,7 @@
       sudo sed -i 's/^#\?PasswordAuthentication .*/PasswordAuthentication no/' /etc/ssh/sshd_config
       sudo sed -i 's/^#\?PermitRootLogin .*/PermitRootLogin no/' /etc/ssh/sshd_config
 
-      systemctl daemon-reload
+      sudo systemctl daemon-reload
       sudo systemctl restart ssh.socket 2>/dev/null || sudo systemctl restart sshd.socket 2>/dev/null
       sudo systemctl restart ssh 2>/dev/null || sudo systemctl restart sshd
     fi
