@@ -360,3 +360,7 @@ tooltip decoration {
 #custom-left_inv.2 {
   color: @battery;
 }
+
+#custom-power_menu {
+  margin-right: 6px;
+}

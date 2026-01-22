@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Logout
+Comment=Log out of the session
+Exec=uwsm stop
+Icon=system-log-out
+Terminal=false
+Categories=System;
+Keywords=logout;logoff;signout;exit;quit;stop;

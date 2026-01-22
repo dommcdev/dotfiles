@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Lock Session
+Comment=Lock the screen
+Exec=loginctl lock-session
+Icon=system-lock-screen
+Terminal=false
+Categories=System;
+Keywords=lock;screenlock;secure;protect;

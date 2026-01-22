@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Reboot to UEFI
+Comment=Restart into firmware setup
+Exec=systemctl reboot --firmware-setup
+Icon=system-reboot
+Terminal=false
+Categories=System;
+Keywords=uefi;bios;firmware;reboot;restart;setup;

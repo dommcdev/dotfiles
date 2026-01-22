@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Screensaver
+Comment=Start the screensaver
+Exec=launch-screensaver.sh
+Icon=screensaver-custom
+Terminal=false
+Categories=System;
+Keywords=screensaver;pipes;protect;

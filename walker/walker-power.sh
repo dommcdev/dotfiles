@@ -4,14 +4,14 @@ menu() {
   local prompt="$1"
   local options="$2"
 
-  echo -e "$options" | walker --dmenu --width 265 --minwidth 265 --maxwidth 265 --height 300 --minheight 300 --maxheight 300 -p "$prompt"
+  echo -e "$options" | walker --dmenu --width 235 --minwidth 235 --maxwidth 235 --height 300 --minheight 300 --maxheight 300 -p "$prompt"
 }
 
 show_system_menu() {
   # Spacer to push aliases off-screen (requires item_dmenu.xml with ellipsize=0)
   local s="                                                                                                    "
 
-  local options="󰐥  Shutdown${s}power off\n󰜉  Reboot${s}restart\n󰒲  Suspend${s}sleep\n󰍃  Log Out${s}logout\n  Lock\n󱄄  Screensaver\n󱄄  Lava Lamp\n󰜉  Reboot to UEFI${s}bios"
+  local options="󰐥  Shutdown${s}power off\n󰜉  Reboot${s}restart\n󰒲  Suspend${s}sleep\n󰍃  Log Out${s}logout\n  Lock\n󱄄  Screensaver\n󰟕  Lava Lamp\n󰜉  Reboot to UEFI${s}bios"
 
   case $(menu "System" "$options") in
   *Shutdown*) systemctl poweroff ;;

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Lava Lamp
+Comment=Start the lava lamp screensaver
+Exec=launch-screensaver.sh -l
+Icon=lava-lamp
+Terminal=false
+Categories=System;
+Keywords=lava;lamp;mood;screensaver;

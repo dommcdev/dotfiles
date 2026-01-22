@@ -1,0 +1,7 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: "Symbols Nerd Font", "Symbols Nerd Font Mono", "Nerd Font", monospace; fill: white; }
+  </style>
+  <circle cx="64" cy="64" r="64" fill="#9745dd" />
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="80">󱄄</text>
+</svg>
