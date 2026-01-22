@@ -7,6 +7,7 @@ Music player tui
 BorgBackup (or equal.)
 Finish power menu + fix walker resizing issue
 Mouse turns off screensaver
+Set up typst/latex
 
 
 # Low Priority
