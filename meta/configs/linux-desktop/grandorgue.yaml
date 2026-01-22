@@ -1,15 +1,18 @@
 
-- link: 
+- link: {}
 
 - shell:
   - mkdir -p ~/.config/GrandOrgue
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed realtime-privilages
-      sudo usermod -aG realtime $USER
       flatpak install --assumeyes --noninteractive flathub net.sourceforge.GrandOrgue
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       flatpak install --assumeyes --noninteractive flathub net.sourceforge.GrandOrgue
     fi
   - flatpak override --user --env=HOME=$HOME/.config/GrandOrgue net.sourceforge.GrandOrgue
   - flatpak override --user --env=PIPEWIRE_LATENCY="128/48000" net.sourceforge.GrandOrgue
+
+
+# Note - I couldn't get realtime to work with flatpak.
+#sudo pacman -S --noconfirm --needed realtime-privileges
+#sudo usermod -aG realtime $USER
