@@ -1,7 +1,21 @@
 #!/usr/bin/env bash
 
 # Launch the screensaver in Ghostty on all monitors.
-# Usage: launch-screensaver
+# Usage: launch-screensaver [-l]
+
+cmd="screensaver.sh"
+
+while getopts "l" opt; do
+  case $opt in
+    l)
+      cmd="lavat -g -c fab387 -s 7 -b 12"
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+  esac
+done
 
 # Exit early if tte is not installed
 if ! command -v tte &>/dev/null; then
@@ -26,7 +40,7 @@ for m in $(hyprctl monitors -j | jq -r '.[] | .name'); do
     ghostty --class=com.dominic.screensaver \
     --config-file="$HOME/dev/dotfiles/screensaver/ghostty-conf" \
     --font-size="$font_size" \
-    -e screensaver.sh
+    -e "$cmd"
 done
 
 hyprctl dispatch focusmonitor "$focused"
