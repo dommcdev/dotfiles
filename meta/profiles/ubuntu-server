@@ -2,6 +2,7 @@ all/cli
 all/docker
 all/git
 all/nvim
+all/opencode
 all/scripts
 all/ssh
 all/starship
@@ -9,6 +10,5 @@ all/tailscale
 all/tmux
 all/tui
 all/zsh
-linux/linux
-linux/virtualization
 ubuntu/ubuntu
+linux/linux

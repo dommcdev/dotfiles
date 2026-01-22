@@ -2,6 +2,7 @@ all/cli
 all/docker
 all/git
 all/nvim
+all/opencode
 all/scripts
 all/ssh
 all/starship
@@ -9,9 +10,11 @@ all/tailscale
 all/tmux
 all/tui
 all/zsh
-mac/mac
+desktop/beans
+desktop/calcurse
 desktop/chrome
 desktop/dev
 desktop/ghostty
 desktop/gui
 desktop/onlyoffice
+desktop/wallpapers

@@ -10,7 +10,5 @@ all/tailscale
 all/tmux
 all/tui
 all/zsh
-arch/arch
-arch/network
-arch/pacman
+fedora/fedora
 linux/linux

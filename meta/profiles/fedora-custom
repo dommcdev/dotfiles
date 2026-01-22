@@ -10,7 +10,7 @@ all/tailscale
 all/tmux
 all/tui
 all/zsh
-ubuntu/ubuntu
+fedora/fedora
 linux/linux
 linux-desktop/apps
 linux-desktop/grandorgue

@@ -2,6 +2,7 @@ all/cli
 all/docker
 all/git
 all/nvim
+all/opencode
 all/scripts
 all/ssh
 all/starship
