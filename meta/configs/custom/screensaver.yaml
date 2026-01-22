@@ -7,7 +7,7 @@
 - shell:
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed omarchy/python-terminaltexteffects
+      yay -S --noconfirm --needed --answerdiff None --answerclean None python-terminaltexteffects
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       echo "not supported"
     fi
