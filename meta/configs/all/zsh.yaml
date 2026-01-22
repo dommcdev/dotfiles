@@ -13,4 +13,12 @@
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       sudo apt install -y zsh
     fi
-  - if [ "$SHELL" != "$(which zsh)" ]; then chsh -s "$(which zsh)"; fi
+
+  # Change shell
+  - |
+    CURRENT_DEFAULT=$(getent passwd "$USER" | cut -d: -f7)
+    ZSH_PATH=$(which zsh)
+
+    if [ "$CURRENT_DEFAULT" != "$ZSH_PATH" ]; then
+        sudo chsh -s "$ZSH_PATH" "$USER"
+    fi
