@@ -4,11 +4,13 @@
 # Usage: launch-screensaver [-l]
 
 cmd="screensaver.sh"
+font_size_override=""
 
 while getopts "l" opt; do
   case $opt in
     l)
-      cmd="lavat -g -c fab387 -s 7 -b 12"
+      cmd="lavat -g -c fab387 -s 10"
+      font_size_override="12"
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
@@ -31,9 +33,13 @@ walker -q 2>/dev/null || true
 focused=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true).name')
 
 for m in $(hyprctl monitors -j | jq -r '.[] | .name'); do
-  scale=$(hyprctl monitors -j | jq -r ".[] | select(.name == \"$m\").scale")
-  height=$(hyprctl monitors -j | jq -r ".[] | select(.name == \"$m\").height")
-  font_size=$(echo "18 * $height / $scale / 1440" | bc)
+  if [[ -n "$font_size_override" ]]; then
+    font_size="$font_size_override"
+  else
+    scale=$(hyprctl monitors -j | jq -r ".[] | select(.name == \"$m\").scale")
+    height=$(hyprctl monitors -j | jq -r ".[] | select(.name == \"$m\").height")
+    font_size=$(echo "18 * $height / $scale / 1440" | bc)
+  fi
 
   hyprctl dispatch focusmonitor "$m"
   hyprctl dispatch exec -- \
