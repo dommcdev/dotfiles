@@ -14,6 +14,7 @@ RED='\033[1;31m'        # Bold Red
 PURPLE='\033[1;35m'     # Bold Purple
 GREEN='\033[1;32m'      # Bold Green
 
+
 show_logo() {
     local id=$1
     clear
@@ -129,7 +130,8 @@ show_logo() {
     printf -- "${NC}\n"
 }
 
-gain_root() {
+# Note - I chose to go with the sudo loop option for broader compatiblity (macos) and better security
+enable_passwordless_sudo() {
     if sudo test -f /etc/sudoers.d/99-dotfiles-installer; then
         echo "Sudo access already configured."
     else
@@ -139,7 +141,7 @@ gain_root() {
             echo "Failed to obtain sudo credentials."
             exit 1
         fi
-        
+
         # Create the file
         echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/99-dotfiles-installer >/dev/null
         sudo chmod 440 /etc/sudoers.d/99-dotfiles-installer
@@ -147,8 +149,20 @@ gain_root() {
     fi
 }
 
+start_sudo_loop() {
+    sudo -v
+
+    while true; do
+        sudo -n true
+        sleep 60
+        kill -0 "$$" || exit
+    done 2>/dev/null &
+
+    SUDO_LOOP_PID=$!
+}
+
 echo_in_style() {
-  echo "$1" | tte --canvas-width 0 --anchor-text c --frame-rate 640 print
+    echo "$1" | tte --canvas-width 0 --anchor-text c --frame-rate 640 print
 }
 
 finished() {
@@ -157,19 +171,21 @@ finished() {
     tte -i ~/dev/dotfiles/screensaver/logo.txt --canvas-width 0 --anchor-text c --frame-rate 920 laseretch
     echo
     echo_in_style "Finished installing"
-    
-    if sudo test -f /etc/sudoers.d/99-dotfiles-installer; then
-      sudo rm -f /etc/sudoers.d/99-dotfiles-installer &>/dev/null
-    fi
-    
+
+    #if sudo test -f /etc/sudoers.d/99-dotfiles-installer; then
+    #  sudo rm -f /etc/sudoers.d/99-dotfiles-installer &>/dev/null
+    #fi
+
     # Exit gracefully if user chooses not to reboot
-    # Default padding if PADDING_LEFT not set
     local pad=${PADDING_LEFT:-0}
     if gum confirm --padding "0 0 0 $((pad + 32))" --show-help=false --default --affirmative "Reboot Now" --negative "" ""; then
       clear
       sudo reboot 2>/dev/null
     fi
     exit 0
+
+    # Kill sudo keep-alive loop (technically optional)
+    kill "$SUDO_LOOP_PID"
 }
 
 while true; do
@@ -209,7 +225,7 @@ while true; do
     PROCEED=${PROCEED:-y}
 
     if [[ "$PROCEED" =~ ^[Yy]$ ]]; then
-        gain_root
+        start_sudo_loop
         echo -e "${GREEN}Starting installation for $target_profile...${NC}"
         ./meta/install-profile "$target_profile"
         finished

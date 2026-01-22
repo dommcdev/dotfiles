@@ -25,7 +25,7 @@ Set up Caddy reverse proxy
 Immich, gitlab, filebrowser, onlyoffice, music player, syncthing, etc
 
 # Dotfiles
-Rework arch bootstrapping workflow (sudoless + tui for manual stuff)
+Rework arch bootstrapping workflow (tui for manual stuff)
 Fedora + Ubuntu support
 Add 2 options to install: custom config selection, and custom profile selection
 
