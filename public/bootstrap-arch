@@ -15,7 +15,9 @@ archinstall --config /root/user_configuration.json
 # Prepare installation for running dotfiles installer
 echo -e "\n\n--- Archinstall completed successfully. Cloning dotfiles via arch-chroot ... ---\n\n"
 cat << 'EOF' > /mnt/home/dominic/tmp.sh
-gh auth login --web -p ssh && gh repo clone dommcdev/dotfiles /home/dominic/dev/dotfiles
+gh auth login --web -p ssh
+ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
+gh repo clone dommcdev/dotfiles /home/dominic/dev/dotfiles
 
 command -v yay > /dev/null || (
     sudo pacman -S --noconfirm --needed base-devel
