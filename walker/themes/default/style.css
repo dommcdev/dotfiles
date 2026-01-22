@@ -80,7 +80,7 @@ child:hover .item-box {
 }
 
 child:selected .item-box {
-  background: alpha(@border, 0.1);
+  background: alpha(@border, 0.05);
 }
 
 child:selected .item-box * {
