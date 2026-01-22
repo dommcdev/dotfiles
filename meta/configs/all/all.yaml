@@ -1,0 +1,15 @@
+
+- shell:
+  # Install node and npm
+  - |
+    if [[ "$(./sys id)" == "arch" ]]; then
+      sudo pacman -S --noconfirm --needed nodejs npm
+    elif [[ "$(./sys id)" == "ubuntu" ]]; then
+      sudo apt install -y nodejs npm
+    elif [[ "$(./sys id)" == "mac" ]]; then
+      brew install nodejs
+    fi
+
+    # set node prefix so global packages are installed in user-owned dir
+    mkdir -p ~/.local/share/npm-global
+    npm config set prefix '~/.local/share/npm-global'

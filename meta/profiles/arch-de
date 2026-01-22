@@ -1,3 +1,5 @@
+all/all
+arch/arch
 all/cli
 all/docker
 all/git
@@ -10,7 +12,6 @@ all/tailscale
 all/tmux
 all/tui
 all/zsh
-arch/arch
 arch/network
 arch/pacman
 linux/linux

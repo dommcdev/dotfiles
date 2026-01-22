@@ -12,15 +12,15 @@ generate_profile() {
     shift
     local dirs=("$@")
     local target_file="$PROFILES_DIR/$profile_name"
-    
+
     echo "Generating $profile_name..."
-    
+
     # Clear/Create file
     > "$target_file"
-    
+
     for folder in "${dirs[@]}"; do
         local folder_path="$CONFIGS_DIR/$folder"
-        
+
         if [[ -d "$folder_path" ]]; then
             # Use nullglob to handle empty directories
             shopt -s nullglob

@@ -28,7 +28,7 @@ Immich, gitlab, filebrowser, onlyoffice, music player, syncthing, etc
 Rework arch bootstrapping workflow (tui for manual stuff)
 Fedora + Ubuntu support
 Add 2 options to install: custom config selection, and custom profile selection
-make sure dev and pacman yamls are run first
+make sure all and pacman yamls are run first
 
 # Things to try
 NixOS, OpenSuse, manual Arch, MacOS vm
