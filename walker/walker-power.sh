@@ -12,7 +12,7 @@ menu() {
 }
 
 show_system_menu() {
-  local options="  Lock\n󱄄  Screensaver\n󱄄  Lava Lamp\n󰒲  Suspend\n󰜉  Restart\n󰐥  Shutdown"
+  local options="󰐥  Shutdown\n󰜉  Restart\n󰒲  Suspend\n  Lock\n󱄄  Screensaver\n󱄄  Lava Lamp\n"
 
   case $(menu "System" "$options") in
   *Lock*) loginctl lock-session ;;

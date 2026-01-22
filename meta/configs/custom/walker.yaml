@@ -2,10 +2,11 @@
     ~/.config/walker:
       path: walker/*
       glob: true
-      exclude: [walker/elephant]
+      exclude: [walker/elephant, walker/*.sh]
     ~/.config/elephant:
       path: walker/elephant/*
       glob: true
+    ~/.local/bin/walker-power.sh: walker/walker-power.sh
 
 - shell:
   - sudo pacman -S --noconfirm --needed omarchy-walker

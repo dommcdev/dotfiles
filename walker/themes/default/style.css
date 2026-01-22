@@ -1,6 +1,8 @@
 @define-color selected-text #cdd6f4;
 @define-color text #cdd6f4;
 @define-color base #1e1e2e;
+@define-color surface0 #313244;
+@define-color blue #89b4fa;
 @define-color border #cdd6f4;
 @define-color foreground #cdd6f4;
 @define-color background #1e1e2e;
@@ -40,7 +42,7 @@ scrollbar {
 }
 
 .search-container {
-  background: @base;
+  background: alpha(@surface0, 0.3);
   padding: 10px;
 }
 
@@ -78,11 +80,11 @@ child:hover .item-box {
 }
 
 child:selected .item-box {
-  background: alpha(@border, 0.3);
+  background: alpha(@border, 0.1);
 }
 
 child:selected .item-box * {
-  color: @selected-text;
+  color: @blue;
   font-weight: bold;
 }
 
