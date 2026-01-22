@@ -9,7 +9,7 @@ font_size_override=""
 while getopts "l" opt; do
   case $opt in
     l)
-      cmd="lavat -g -c fab387 -s 10"
+      cmd="lavat -g -c fab387 -s 5 -b 13"
       font_size_override="12"
       ;;
     \?)

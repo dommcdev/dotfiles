@@ -7,7 +7,6 @@ Better screenshot tool (omarchy one w/Satty?)
 Yt-dlp workflow (tui + yt api project)
 Music player tui
 BorgBackup (or equal.)
-lavat screensaver
 
 
 # Low Priority
@@ -24,9 +23,9 @@ Set up Caddy reverse proxy
 Immich, gitlab, filebrowser, onlyoffice, music player, syncthing, etc
 
 # Dotfiles
-Rework arch bootstrapping workflow (tui for manual stuff)
+Tui for archinstall
 Fedora + Ubuntu support
-Add 2 options to install: custom config selection, and custom profile selection
+Add custom config/profile selection to install
 Method for arranging deps
 
 # Things to try
