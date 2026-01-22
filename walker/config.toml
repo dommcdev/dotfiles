@@ -26,7 +26,7 @@ anchor_right = true
 "symbols" = 1
 
 [placeholders]
-"default" = { input = "Search...", list = "No Results" } # placeholders for input and empty list, key is the providers name, so f.e. "desktopapplications" or "menus:other"
+"default" = { input = " Search...", list = "No Results" } # placeholders for input and empty list, key is the providers name, so f.e. "desktopapplications" or "menus:other"
 
 [keybinds]
 close = ["Escape"]
@@ -101,7 +101,7 @@ fallback = [
 
 [[emergencies]]
 text = "Restart Walker"
-command = "restart-walker.sh"
+command = "systemctl --user restart walker"
 
 dmenu = [{ action = "select", default = true, bind = "Return" }]
 

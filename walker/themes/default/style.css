@@ -79,7 +79,6 @@ child:hover .item-box {
 
 child:selected .item-box {
   background: alpha(@border, 0.3);
-  border-left: 3px solid @border;
 }
 
 child:selected .item-box * {
