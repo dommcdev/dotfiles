@@ -607,12 +607,12 @@
 		// "interval":
 		// "restart-interval":
 		// "signal":
-		"format": "󰤄",
+		"format": "⏻",
 		// "format-icons":
 		// "rotate":
 		// "min-length":
 		// "max-length":
-		"on-click": "rofi -show power",
+		"on-click": "walker-power.sh",
 		// "on-click-middle":
 		// "on-click-right":
 		// "on-scroll-up":
