@@ -5,8 +5,7 @@ Better screenshot tool (omarchy one w/Satty?)
 Yt-dlp workflow (tui + yt api project)
 Music player tui
 BorgBackup (or equal.)
-Mouse turns off screensaver
-Set up typst/latex
+Set up typst
 Walker glitches
 
 

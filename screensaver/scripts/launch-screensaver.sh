@@ -49,4 +49,23 @@ for m in $(hyprctl monitors -j | jq -r '.[] | .name'); do
     -e "$cmd"
 done
 
+# Wait for screensaver to initialize and mouse to settle
+sleep 0.5
+
+# Get initial cursor position
+get_cursor_pos() {
+  hyprctl cursorpos -j | jq -r '"\(.x),\(.y)"'
+}
+initial_pos=$(get_cursor_pos)
+
+# Watch for mouse movement or screensaver exit
+while pgrep -f com.dominic.screensaver >/dev/null; do
+  current_pos=$(get_cursor_pos)
+  if [[ "$current_pos" != "$initial_pos" ]]; then
+    pkill -f com.dominic.screensaver
+    break
+  fi
+  sleep 0.1
+done
+
 hyprctl dispatch focusmonitor "$focused"
