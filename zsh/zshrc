@@ -93,7 +93,7 @@ bindkey ' ' magic-space
 
 # keybind for typing boilerplate
 bindkey -s '^wgc' 'git commit -m ""\C-b'
-bindkey -s '^wi' "opencode run ''\C-b"
+bindkey -s '^wi' "opencode run -m google/gemini-3-flash-preview ''\C-b"
 
 # Copy buffer contents to clipboard
 copy-buffer-to-clipboard() {

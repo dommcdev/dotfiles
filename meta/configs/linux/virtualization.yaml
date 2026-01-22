@@ -3,6 +3,6 @@
   - sudo pacman -S --noconfirm --needed qemu-full virt-manager virt-viewer dnsmasq
   - sudo systemctl enable libvirtd
   - sudo usermod -aG libvirt $USER #necessary to prevent polkit auth when opening virt-manager
-  - sudo virsh net-autostart default
+  - sudo virsh net-autostart default || true #true conditional is for when running in a vm
 #  - for f in virtualization/machines/*.xml; do sudo virsh define "$f"; done
 #  Note - the above errors out due to some efi not being found
