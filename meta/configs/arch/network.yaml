@@ -2,8 +2,8 @@
 - shell:
   # install packages
   - |
-    # yes is needed for the remove iptables prompt
-    yes | sudo pacman -S --noconfirm --needed nftables iptables-nft iwd inetutils impala
+    yes | sudo pacman -S --needed nftables iptables-nft #will remove iptables when prompted
+    sudo pacman -S --noconfirm --needed iwd inetutils impala
 
   # nuke NetworkManager if needed
   - |

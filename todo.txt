@@ -9,6 +9,7 @@ Music player tui
 BorgBackup (or equal.)
 lavat screensaver
 manage dev.yaml/opencode.yaml dep error
+change shell password, auto-yes for ssh github
 
 
 # Low Priority
