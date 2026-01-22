@@ -6,7 +6,7 @@ Yt-dlp workflow (tui + yt api project)
 Music player tui
 BorgBackup (or equal.)
 Set up typst
-Walker glitches
+Vicinae
 
 
 # Low Priority
