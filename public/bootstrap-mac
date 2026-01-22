@@ -28,6 +28,7 @@ brew install git python gh
 if ! gh auth status >/dev/null 2>&1; then
     echo "Setting up GitHub auth..."
     gh auth login --web -p ssh
+    ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
 else
     echo "GitHub already authenticated. Skipping."
 fi

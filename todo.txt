@@ -8,7 +8,6 @@ Yt-dlp workflow (tui + yt api project)
 Music player tui
 BorgBackup (or equal.)
 lavat screensaver
-tte bug
 
 
 # Low Priority
