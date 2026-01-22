@@ -4,7 +4,7 @@ menu() {
   local prompt="$1"
   local options="$2"
 
-  echo -e "$options" | walker --dmenu --width 235 --maxheight 300 --minheight 300 -p "$prompt"
+  echo -e "$options" | walker --dmenu --width 285 --height 370 -p "$prompt"
 }
 
 show_system_menu() {
