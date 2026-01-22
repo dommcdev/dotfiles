@@ -5,7 +5,8 @@ Better screenshot tool (omarchy one w/Satty?)
 Yt-dlp workflow (tui + yt api project)
 Music player tui
 BorgBackup (or equal.)
-Fix walker stuff
+Finish power menu + fix walker resizing issue
+Mouse turns off screensaver
 
 
 # Low Priority
