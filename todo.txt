@@ -1,15 +1,15 @@
 # To-do
-Better power manager (w/aliases + hyprshutdown, wlogout)
 Nvim (status line, snacks stuff, ai, atone, flash, tiny inline diagnostics)
-Gpu passthrough
 Systemd-logind for custom power-button sequence (60s to shutdown)
 Better screenshot tool (omarchy one w/Satty?)
 Yt-dlp workflow (tui + yt api project)
 Music player tui
 BorgBackup (or equal.)
+Fix walker stuff
 
 
 # Low Priority
+Gpu passthrough
 Swap out waybar/dunst with some shell+notif center
 Fastfetch
 Theme clipse (+ auto-paste)
