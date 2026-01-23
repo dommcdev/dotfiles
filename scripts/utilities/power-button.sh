@@ -22,7 +22,7 @@ ICON_REBOOT="󰜉"
 ICON_SUSPEND="󰒲"
 
 # State
-COUNTDOWN=40
+COUNTDOWN=15
 SELECTED=2 # 0=Sleep, 1=Restart, 2=Shutdown (Default)
 
 # Terminal geometry
