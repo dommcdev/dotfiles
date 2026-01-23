@@ -28,3 +28,6 @@
   - systemctl --user daemon-reload
   - systemctl --user enable walker
   - systemctl --user restart elephant walker 2>/dev/null || true
+
+# Put in hyprland conf
+# $walker = walker --width 644 --height 400

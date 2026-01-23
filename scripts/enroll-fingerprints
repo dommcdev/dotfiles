@@ -39,15 +39,15 @@ check_fingerprint_hardware() {
 
 install_packages() {
   print_info "Checking required packages for $OS_ID..."
-  
+
   case "$OS_ID" in
     arch)
       # Check if installed to be fast/idempotent
       if ! pacman -Qi fprintd &>/dev/null || ! pacman -Qi usbutils &>/dev/null; then
         print_info "Installing packages (Arch)..."
         sudo pacman -S --noconfirm --needed fprintd usbutils
-      else
-        print_success "Packages already installed."
+#      else
+#        print_success "Packages already installed."
       fi
       ;;
     ubuntu)
@@ -55,16 +55,16 @@ install_packages() {
         print_info "Installing packages (Ubuntu)..."
         sudo apt update
         sudo apt install -y fprintd libpam-fprintd usbutils
-      else
-        print_success "Packages already installed."
+#      else
+#        print_success "Packages already installed."
       fi
       ;;
     fedora)
       if ! rpm -q fprintd fprintd-pam usbutils &>/dev/null; then
         print_info "Installing packages (Fedora)..."
         sudo dnf install -y fprintd fprintd-pam usbutils
-      else
-        print_success "Packages already installed."
+#      else
+#        print_success "Packages already installed."
       fi
       ;;
     *)
@@ -97,8 +97,8 @@ setup_pam_config() {
   if ! grep -q pam_fprintd.so /etc/pam.d/sudo; then
     print_info "Configuring sudo for fingerprint authentication..."
     sudo sed -i '1i auth    sufficient pam_fprintd.so' /etc/pam.d/sudo
-  else
-    print_success "Sudo PAM already configured."
+#  else
+#    print_success "Sudo PAM already configured."
   fi
 
   # Configure polkit
@@ -114,8 +114,8 @@ account   required pam_unix.so
 password  required pam_unix.so
 session   required pam_unix.so
 EOF
-  else
-    print_success "Polkit PAM already configured."
+#  else
+#    print_success "Polkit PAM already configured."
   fi
 }
 
@@ -137,7 +137,7 @@ get_enrolled_fingers() {
   local output
   output=$(fprintd-list "$USER" 2>/dev/null || true)
   local enrolled_list=""
-  
+
   if echo "$output" | grep -q "right-index-finger"; then enrolled_list+="Right Index, "; fi
   if echo "$output" | grep -q "right-middle-finger"; then enrolled_list+="Right Middle, "; fi
   if echo "$output" | grep -q "right-thumb"; then enrolled_list+="Right Thumb, "; fi
@@ -148,9 +148,9 @@ get_enrolled_fingers() {
   if echo "$output" | grep -q "left-thumb"; then enrolled_list+="Left Thumb, "; fi
   if echo "$output" | grep -q "left-ring-finger"; then enrolled_list+="Left Ring, "; fi
   if echo "$output" | grep -q "left-little-finger"; then enrolled_list+="Left Little, "; fi
-  
+
   enrolled_list=${enrolled_list%, }
-  
+
   if [[ -z "$enrolled_list" ]]; then
       echo "None"
   else
@@ -160,7 +160,7 @@ get_enrolled_fingers() {
 
 enroll_fingerprints() {
   print_info "\nStarting Fingerprint Enrollment"
-  
+
   if ! command -v gum &>/dev/null; then
      print_error "Error: 'gum' is not installed. Please install gum to use the interactive enrollment."
      exit 1
@@ -168,11 +168,11 @@ enroll_fingerprints() {
 
   while true; do
     echo "" # Spacing
-    
+
     local enrolled
     enrolled=$(get_enrolled_fingers)
     echo -e "${YELLOW}Enrolled: ${enrolled}${NC}"
-    
+
     local choice
     if ! choice=$(gum choose --cursor.foreground="4" --header.foreground="4" --header "Select finger to enroll (Esc to finish)" \
       "Right Index" "Right Middle" "Right Thumb" "Right Ring" "Right Little" \
@@ -196,7 +196,7 @@ enroll_fingerprints() {
 
     print_info "Enrolling $choice..."
     print_info "Please scan your finger repeatedly on the sensor until completion."
-    
+
     # -f forces enrollment even if finger is already enrolled
     if sudo fprintd-enroll -f "$finger_id" "$USER"; then
       gum style --foreground "2" "Successfully enrolled $choice!"
@@ -218,14 +218,14 @@ main() {
     print_success "Fingerprint authentication has been removed."
   else
     print_info "Setting up fingerprint scanner for authentication.\n"
-    
+
     install_packages
-    
+
     if ! check_fingerprint_hardware; then
       print_error "Hardware check failed."
       exit 1
     fi
-    
+
     setup_pam_config
     enroll_fingerprints
   fi

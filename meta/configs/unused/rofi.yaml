@@ -10,3 +10,6 @@
 
 - shell:
   - sudo pacman -S --noconfirm --needed rofi
+
+# Put in hyprland conf
+# $rofi = pkill rofi || rofi -show combi
