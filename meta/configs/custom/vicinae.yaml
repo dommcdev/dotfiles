@@ -1,6 +1,7 @@
 
 - link: 
     ~/.config/vicinae/settings.json: vicinae/settings.json
+    ~/.local/bin/vicinae-power.sh: vicinae/vicinae-power.sh
 
 - shell:
   - |

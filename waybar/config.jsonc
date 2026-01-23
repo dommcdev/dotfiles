@@ -612,7 +612,7 @@
 		// "rotate":
 		// "min-length":
 		// "max-length":
-		"on-click": "walker-power.sh",
+		"on-click": "vicinae-power.sh",
 		// "on-click-middle":
 		// "on-click-right":
 		// "on-scroll-up":

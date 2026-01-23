@@ -13,9 +13,9 @@
       path: apps/desktop-files/hidden/*
       glob: true
 
-- link:
-    ~/.local/share/applications/:
-      path: apps/desktop-files/power-menu/*
-      glob: true
+#- link:
+#    ~/.local/share/applications/:
+#      path: apps/desktop-files/power-menu/*
+#      glob: true
 
 - shell: []

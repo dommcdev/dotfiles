@@ -6,7 +6,6 @@ Yt-dlp workflow (tui + yt api project)
 Music player tui
 BorgBackup (or equal.)
 Set up typst
-Vicinae
 
 
 # Low Priority

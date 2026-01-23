@@ -9,111 +9,140 @@
 // Learn more about configuration at https://docs.vicinae.com/config
 
 {
-  "$schema": "https://vicinae.com/schemas/config.json",
-  "close_on_focus_loss": false,
-  "theme": {
-    "dark": {
-      "name": "catppuccin-mocha",
-      "icon_theme": "Papirus-Dark"
-    }
-  },
-  "launcher_window": {
-    "opacity": 0.9,
-    "client_side_decorations": {
-      "enabled": true,
-      "rounding": 0,
-      "border_with": 4
-    }
-  },
-  "providers": {
-    "applications": {
-      "preferences": {
-        "launchPrefix": " ",
-        "paths": [
-          "/home/dominic/.local/share/applications",
-          "/var/lib/flatpak/exports/share/applications",
-          "/usr/share/applications"
-        ]
+   "$schema": "https://vicinae.com/schemas/config.json",
+   "close_on_focus_loss": false,
+   "theme": {
+      "dark": {
+         "name": "catppuccin-mocha",
+         "icon_theme": "Papirus-Dark"
       }
-    },
-    "clipboard": {
-      "entrypoints": {
-        "clear": {
-          "enabled": false
-        }
+   },
+   "launcher_window": {
+      "opacity": 0.9,
+      "client_side_decorations": {
+         "enabled": true,
+         "rounding": 0
       }
-    },
-    "core": {
-      "enabled": true,
-      "entrypoints": {
-        "about": {
-          "enabled": false
-        },
-        "documentation": {
-          "enabled": true
-        },
-        "inspect-local-storage": {
-          "enabled": false
-        },
-        "keybind-settings": {
-          "enabled": false
-        },
-        "list-extensions": {
-          "enabled": false
-        },
-        "manage-fallback": {
-          "enabled": false
-        },
-        "oauth-token-store": {
-          "enabled": false
-        },
-        "open-config-file": {
-          "enabled": false
-        },
-        "open-default-config": {
-          "enabled": false
-        },
-        "refresh-apps": {
-          "enabled": false
-        },
-        "reload-scripts": {
-          "enabled": false
-        },
-        "report-bug": {
-          "enabled": false
-        },
-        "search-emojis": {
-          "enabled": true
-        },
-        "settings": {
-          "enabled": true
-        },
-        "sponsor": {
-          "enabled": false
-        },
-        "store": {
-          "enabled": false
-        }
+   },
+   "providers": {
+      "applications": {
+         "preferences": {
+            "launchPrefix": " ",
+            "paths": [
+               "/home/dominic/.local/share/applications",
+               "/var/lib/flatpak/exports/share/applications",
+               "/usr/share/applications"
+            ]
+         }
+      },
+      "clipboard": {
+         "entrypoints": {
+            "clear": {
+               "enabled": false
+            }
+         }
+      },
+      "core": {
+         "enabled": true,
+         "entrypoints": {
+            "about": {
+               "enabled": false
+            },
+            "documentation": {
+               "enabled": true
+            },
+            "inspect-local-storage": {
+               "enabled": false
+            },
+            "keybind-settings": {
+               "enabled": false
+            },
+            "list-extensions": {
+               "enabled": false
+            },
+            "manage-fallback": {
+               "enabled": false
+            },
+            "oauth-token-store": {
+               "enabled": false
+            },
+            "open-config-file": {
+               "enabled": false
+            },
+            "open-default-config": {
+               "enabled": false
+            },
+            "refresh-apps": {
+               "enabled": false
+            },
+            "reload-scripts": {
+               "enabled": false
+            },
+            "report-bug": {
+               "enabled": false
+            },
+            "search-emojis": {
+               "enabled": true
+            },
+            "settings": {
+               "enabled": true
+            },
+            "sponsor": {
+               "enabled": false
+            },
+            "store": {
+               "enabled": false
+            }
+         }
+      },
+      "developer": {
+         "enabled": false
+      },
+      "font": {
+         "enabled": true
+      },
+      "manage-shortcuts": {
+         "enabled": false
+      },
+      "power": {
+         "enabled": true,
+         "entrypoints": {
+            "hibernate": {
+               "enabled": false
+            },
+            "logout": {
+               "enabled": false
+            },
+            "power-off": {
+               "alias": "shutdown",
+               "enabled": true
+            },
+            "reboot": {
+               "enabled": true
+            },
+            "sleep": {
+               "alias": "suspend",
+               "enabled": true,
+               "preferences": {
+                  "confirm": false
+               }
+            },
+            "soft-reboot": {
+               "enabled": false
+            },
+            "suspend": {
+               "enabled": false
+            }
+         }
+      },
+      "raycast-compat": {
+         "enabled": false
+      },
+      "theme": {
+         "enabled": false
+      },
+      "wm": {
+         "enabled": false
       }
-    },
-    "developer": {
-      "enabled": false
-    },
-    "font": {
-      "enabled": true
-    },
-    "manage-shortcuts": {
-      "enabled": false
-    },
-    "raycast-compat": {
-      "enabled": false
-    },
-    "theme": {
-      "enabled": false
-    },
-    "wm": {
-      "enabled": false
-    }
-  }
+   }
 }
-
