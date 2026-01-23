@@ -22,7 +22,7 @@ ICON_REBOOT="󰜉"
 ICON_SUSPEND="󰒲"
 
 # State
-COUNTDOWN=15
+COUNTDOWN=40
 SELECTED=2 # 0=Sleep, 1=Restart, 2=Shutdown (Default)
 
 # Terminal geometry
@@ -81,11 +81,11 @@ gen_button() {
 
     # Return lines separated by newlines
     # Top
-    echo "${color_border}╭${h_border}╮${RESET}"
+    echo "${color_border}┌${h_border}┐${RESET}"
     # Middle
     echo "${color_border}│${RESET}${color_text}${text}${RESET}${color_border}│${RESET}"
     # Bottom
-    echo "${color_border}╰${h_border}╯${RESET}"
+    echo "${color_border}└${h_border}┘${RESET}"
 }
 
 draw_frame() {
@@ -231,6 +231,7 @@ run_tui() {
 }
 
 main() {
+    echo
     run_tui
 }
 
