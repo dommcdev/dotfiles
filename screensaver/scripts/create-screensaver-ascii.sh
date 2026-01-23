@@ -4,6 +4,7 @@ set -euo pipefail
 # Fonts
 FONT_NO_NUMBERS="Delta Corps Priest 1"
 FONT_WITH_NUMBERS="DOS Rebel"
+FONT_DIR="$HOME/.local/share/figlet/fonts"
 
 # Target ~11 chars per line
 TARGET_LINE_WIDTH=11
@@ -134,6 +135,40 @@ split_phrase() {
     fi
 }
 
+ensure_fonts() {
+    mkdir -p "$FONT_DIR"
+
+    local font_no_num_file="$FONT_DIR/${FONT_NO_NUMBERS}.flf"
+    if [[ ! -f "$font_no_num_file" ]]; then
+        echo "Downloading font: $FONT_NO_NUMBERS..."
+        if command -v curl >/dev/null 2>&1; then
+            curl -fLo "$font_no_num_file" --create-dirs \
+                "https://raw.githubusercontent.com/xero/figlet-fonts/master/Delta%20Corps%20Priest%201.flf"
+        elif command -v wget >/dev/null 2>&1; then
+            wget -O "$font_no_num_file" \
+                "https://raw.githubusercontent.com/xero/figlet-fonts/master/Delta%20Corps%20Priest%201.flf"
+        else
+            echo "Error: curl or wget required to download fonts."
+            exit 1
+        fi
+    fi
+
+    local font_with_num_file="$FONT_DIR/${FONT_WITH_NUMBERS}.flf"
+    if [[ ! -f "$font_with_num_file" ]]; then
+        echo "Downloading font: $FONT_WITH_NUMBERS..."
+        if command -v curl >/dev/null 2>&1; then
+            curl -fLo "$font_with_num_file" --create-dirs \
+                "https://raw.githubusercontent.com/xero/figlet-fonts/master/DOS%20Rebel.flf"
+        elif command -v wget >/dev/null 2>&1; then
+            wget -O "$font_with_num_file" \
+                "https://raw.githubusercontent.com/xero/figlet-fonts/master/DOS%20Rebel.flf"
+        else
+            echo "Error: curl or wget required to download fonts."
+            exit 1
+        fi
+    fi
+}
+
 # Generate ASCII art for a single phrase
 generate_ascii() {
     local phrase="$1"
@@ -159,7 +194,7 @@ generate_ascii() {
     # Generate ASCII art, one figlet call per line
     > "$filename"
     while IFS= read -r line; do
-        figlet -f "$font" "$line" >> "$filename"
+        figlet -d "$FONT_DIR" -f "$font" "$line" >> "$filename"
     done < <(split_phrase "$phrase")
 }
 
@@ -187,6 +222,8 @@ main() {
                 ;;
         esac
     done
+
+    ensure_fonts
 
     # Determine input source
     if [[ -n "$file" ]]; then
