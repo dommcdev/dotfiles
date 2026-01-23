@@ -173,6 +173,11 @@ return {
         capabilities = capabilities,
       })
 
+      vim.lsp.config("tinymist", {
+        capabilities = capabilities,
+        offset_encoding = "utf-8",
+      })
+
       vim.lsp.config("beancount", {
         capabilities = capabilities,
         init_options = {
@@ -201,6 +206,7 @@ return {
           "typescript-language-server",
           "sqls",
           "gopls",
+          "tinymist",
           "beancount-language-server",
           -- Formatters
           "stylua",
@@ -210,6 +216,7 @@ return {
           "sql-formatter",
           "goimports",
           "gofumpt",
+          "typstyle",
         },
       })
     end,
@@ -275,6 +282,8 @@ return {
         sql = { "sql_formatter" },
         -- Go (goimports first for imports, then gofumpt for stricter formatting)
         go = { "goimports", "gofumpt" },
+        -- Typst
+        typst = { "typstyle" },
       },
       formatters = {
         clang_format = {
