@@ -1,22 +1,2 @@
 
-- shell:
-  # Install flatpak, misc packages
-  - |
-    if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed flatpak smartmontools dosfstools ntfs-3g exfatprogs btrfs-progs xfsprogs
-    elif [[ "$(./sys id)" == "ubuntu" ]]; then
-      sudo apt install -y flatpak smartmontools dosfstools ntfs-3g exfatprogs btrfs-progs xfsprogs
-    fi
-  - flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
-    # Give the user 10 instead of 3 tries to fat finger their password before lockout
-  - echo "Defaults passwd_tries=10" | sudo tee /etc/sudoers.d/passwd-tries
-  - sudo chmod 440 /etc/sudoers.d/passwd-tries
-
-    # Increase lockout limit to 10 and decrease timeout to 2 minutes (Arch only - uses pam_faillock)
-  - |
-    if [[ "$(./sys id)" == "arch" ]]; then
-      sudo sed -i 's|^\(auth\s\+required\s\+pam_faillock.so\)\s\+preauth.*$|\1 preauth silent deny=10 unlock_time=120|' "/etc/pam.d/system-auth"
-      sudo sed -i 's|^\(auth\s\+\[default=die\]\s\+pam_faillock.so\)\s\+authfail.*$|\1 authfail deny=10 unlock_time=120|' "/etc/pam.d/system-auth"
-      sudo sed -i 's/^# *deny = .*/deny = 10/' /etc/security/faillock.conf
-    fi
+- shell: []
