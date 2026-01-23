@@ -1,0 +1,8 @@
+
+# Clipse
+yay -S clipse
+Add to hyprland conf:
+    exec-once = clipse -listen
+    windowrule = match:class com.dominic.clipse, float on, center on, size monitor_w*0.4 monitor_h*0.4, stay_focused on, dim_around on
+    $clipboard = ghostty --class=com.dominic.clipse -e clipse
+    bind = $mainMod SHIFT, V, exec, pkill clipse || $clipboard

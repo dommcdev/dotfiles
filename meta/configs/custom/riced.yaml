@@ -3,7 +3,6 @@
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
       sudo pacman -S --noconfirm --needed xdg-utils ddcutil wl-clipboard gnome-keyring libsecret wtype reflector brightnessctl acpi fwupd 
-      yay -S --noconfirm --needed --answerdiff None --answerclean None clipse
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       echo "Please install"
     fi

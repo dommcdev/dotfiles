@@ -13,7 +13,6 @@ Vicinae
 Gpu passthrough
 Swap out waybar/dunst with some shell+notif center
 Fastfetch
-Theme clipse (+ auto-paste)
 Auto-theming (single colors.css)
 Tmux-sessionizer for "restoring" sessions
 Better solution for ssh -> tmux -> nvim shared clipboard
