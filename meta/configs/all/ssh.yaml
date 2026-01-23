@@ -10,6 +10,9 @@
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       sudo apt install -y openssh-server
       sudo systemctl enable ssh
+    elif [[ "$(./sys id)" == "fedora" ]]; then
+      sudo dnf install -y openssh-server mosh
+      sudo systemctl enable sshd
     elif [[ "$(./sys id)" == "mac" ]]; then
       brew install openssh
     fi

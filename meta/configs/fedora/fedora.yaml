@@ -1,13 +1,2 @@
 
-- link: 
-    ~/.config/nvim: nvim
-
-- shell:
-  - |
-    if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed tailscale
-    elif [[ "$(./sys id)" == "ubuntu" ]]; then
-      sudo apt install -y tailscale
-    elif [[ "$(./sys id)" == "mac" ]]; then
-      brew install tailscale
-    fi
+- shell: []

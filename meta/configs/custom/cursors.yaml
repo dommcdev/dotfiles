@@ -9,6 +9,8 @@
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       sudo apt install -y breeze-cursor-theme
       #sudo apt install -y bibata-cursor-theme
+    elif [[ "$(./sys id)" == "fedora" ]]; then
+      sudo dnf install -y breeze-cursor-theme
     fi
   # Get xwayland apps to follow cursor theme
   - |

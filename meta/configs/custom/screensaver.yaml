@@ -10,4 +10,6 @@
       yay -S --noconfirm --needed --answerdiff None --answerclean None aur/python-terminaltexteffects
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       echo "not supported"
+    elif [[ "$(./sys id)" == "fedora" ]]; then
+      echo "not supported"
     fi

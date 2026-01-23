@@ -8,6 +8,8 @@
       flatpak install --assumeyes --noninteractive flathub net.sourceforge.GrandOrgue
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       flatpak install --assumeyes --noninteractive flathub net.sourceforge.GrandOrgue
+    elif [[ "$(./sys id)" == "fedora" ]]; then
+      flatpak install --assumeyes --noninteractive flathub net.sourceforge.GrandOrgue
     fi
   - flatpak override --user --env=HOME=$HOME/.config/GrandOrgue net.sourceforge.GrandOrgue
   - flatpak override --user --env=PIPEWIRE_LATENCY="128/48000" net.sourceforge.GrandOrgue

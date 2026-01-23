@@ -8,6 +8,8 @@
       sudo pacman -S --noconfirm --needed starship
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       brew install starship
+    elif [[ "$(./sys id)" == "fedora" ]]; then
+      brew install starship
     elif [[ "$(./sys id)" == "mac" ]]; then
       brew install starship
     fi

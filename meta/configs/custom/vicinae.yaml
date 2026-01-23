@@ -9,6 +9,8 @@
       yay -S --noconfirm --needed --answerdiff None --answerclean None vicinae-bin
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       echo "Not supported"
+    elif [[ "$(./sys id)" == "fedora" ]]; then
+      echo "Not supported"
     fi
   - systemctl --user enable vicinae
   - systemctl --user restart vicinae 2>/dev/null || true

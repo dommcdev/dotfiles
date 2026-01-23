@@ -5,4 +5,6 @@
       sudo pacman -S --noconfirm --needed xdg-utils ddcutil wl-clipboard gnome-keyring libsecret wtype reflector brightnessctl acpi fwupd 
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       echo "Please install"
+    elif [[ "$(./sys id)" == "fedora" ]]; then
+      sudo dnf install -y xdg-utils ddcutil wl-clipboard gnome-keyring libsecret wtype brightnessctl acpi fwupd
     fi

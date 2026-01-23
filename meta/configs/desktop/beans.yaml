@@ -9,6 +9,8 @@
       yay -S --noconfirm --needed --answerdiff None --answerclean None beancount fava
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       brew install beancount fava rust
+    elif [[ "$(./sys id)" == "fedora" ]]; then
+      brew install beancount fava rust
     elif [[ "$(./sys id)" == "mac" ]]; then
       brew install beancount fava rust
     fi
