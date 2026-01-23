@@ -1,4 +1,3 @@
-# Depends on: git
 
 - link:
     ~/.config/tmux/tmux.conf: tmux/tmux.conf
@@ -9,12 +8,12 @@
 - shell:
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed tmux git
+      #sudo pacman -S --noconfirm --needed tmux
+      yay -S --noconfirm --needed --answerdiff None --answerclean None tmux-git
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       brew install tmux
-      sudo apt install -y git
     elif [[ "$(./sys id)" == "mac" ]]; then
-      brew install tmux git
+      brew install tmux
     fi
   - |
     [ -d ~/.config/tmux/plugins/tpm ] || git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
