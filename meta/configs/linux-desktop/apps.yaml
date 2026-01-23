@@ -1,9 +1,8 @@
 
 - link:
     ~/.local/share/applications/:
-      path: apps/desktop-files/*
+      path: apps/desktop-files/misc-apps/*
       glob: true
-      exclude: [apps/desktop-files/hidden, apps/desktop-files/icons, apps/desktop-files/power-menu]
     ~/.local/share/icons/hicolor/scalable/apps/:
       path: apps/desktop-files/icons/*
       glob: true
@@ -15,7 +14,17 @@
 
 #- link:
 #    ~/.local/share/applications/:
-#      path: apps/desktop-files/power-menu/*
+#      path: apps/desktop-files/power-items/*
 #      glob: true
 
-- shell: []
+- shell:
+  - gtk-update-icon-cache -f -t ~/.local/share/icons/hicolor
+  - update-desktop-database ~/.local/share/applications
+
+- clean:
+    ~/.local/share/icons/hicolor/:
+      force: true
+      recursive: true
+    ~/.local/share/applications/:
+      force: true
+      recursive: true
