@@ -8,7 +8,6 @@ Music player tui
 # Low Priority
 Gpu passthrough
 Swap out waybar/dunst with some shell+notif center
-Fastfetch
 Auto-theming (single colors.css)
 
 # Server
