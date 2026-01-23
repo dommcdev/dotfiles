@@ -27,28 +27,23 @@
             "key": "CPU",
             "type": "cpu",
             "showPeCoreCount": true,
-            "keyColor": "33"
         },
         {
             "key": "GPU",
             "type": "gpu",
-            "keyColor": "32"
         },
         {
             "key": "Display",
             "type": "display",
-            "keyColor": "36"
         },
         {
             "key": "Disk",
             "type": "disk",
             "folders": "/",
-            "keyColor": "34"
         },
         {
             "key": "Memory",
             "type": "memory",
-            "keyColor": "31"
         },
         {
             "type": "custom", // InformationEnd
@@ -63,75 +58,61 @@
             "type": "command",
             "key": "OS",
             "text": "if [ -f /etc/os-release ]; then . /etc/os-release; os=\"${PRETTY_NAME} $(uname -m)\"; birth=$(stat -c %W /); else os=\"$(sw_vers -productName) $(sw_vers -productVersion) $(uname -m)\"; birth=$(stat -f %B /); fi; now=$(date +%s); days=$(( (now - birth) / 86400 )); echo \"${os} (${days} days)\"",
-            "keyColor": "33"
         },
         {
             "key": "Kernel",
             "type": "kernel",
-            "keyColor": "93"
         },
         {
-            "key": "DM",
+            "key": "LM",
             "type": "lm",
-            "keyColor": "35"
         },
         {
             "key": "DE",
             "type": "de",
-            "keyColor": "91"
         },
         {
             "key": "WM",
             "type": "wm",
-            "keyColor": "32"
+        },
+        {
+            "key": "Icons",
+            "type": "icons",
+        },
+        {
+            "key": "Font",
+            "type": "font",
+        },
+        {
+            "key": "Font",
+            "type": "terminalfont",
+        },
+        {
+            "key": "Terminal",
+            "type": "terminal",
+        },
+        {
+            "key": "Shell",
+            "type": "shell",
+        },
+        {
+            "key": "Packages",
+            "type": "packages",
+        },
+        {
+            "key": "Cursor",
+            "type": "cursor",
         },
         {
             "type": "command",
             "key": "Theme",
             "text": "echo -e \"\\u001b[31m● \\u001b[32m● \\u001b[33m● \\u001b[34m● \\u001b[35m● \\u001b[36m●\"",
-            "keyColor": "35"
-        },
-        {
-            "key": "Icons",
-            "type": "icons",
-            "keyColor": "36"
-        },
-        {
-            "key": "Font",
-            "type": "font",
-            "keyColor": "96"
-        },
-        {
-            "key": "Font",
-            "type": "terminalfont",
-            "keyColor": "34"
-        },
-        {
-            "key": "Terminal",
-            "type": "terminal",
-            "keyColor": "94"
-        },
-        {
-            "key": "Shell",
-            "type": "shell",
-            "keyColor": "34"
-        },
-        {
-            "key": "Packages",
-            "type": "packages",
-            "keyColor": "35"
-        },
-        {
-            "key": "Cursor",
-            "type": "cursor",
-            "keyColor": "36"
         },
         {
             "key": "Local IP",
             "type": "localip",
             "showIpv6": true,
             "showMac": false,
-            "keyColor": "32"
         },
         {
             "type": "custom", // InformationEnd

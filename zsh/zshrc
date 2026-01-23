@@ -58,6 +58,7 @@ alias vi='nvim'
 alias iv='nvim' #common typo
 alias vim='nvim'
 alias fs='fastfetch'
+alias fsf='fastfetch -c full.jsonc'
 alias fsa='fastfetch -c all.jsonc'
 alias c='clear'
 alias ai='opencode'
