@@ -130,6 +130,10 @@ show_logo() {
     printf -- "${NC}\n"
 }
 
+update_profiles() {
+    bash ~/.local/bin/generate-profiles.sh
+}
+
 # Note - I chose to go with the sudo loop option for broader compatiblity (macos) and better security
 enable_passwordless_sudo() {
     if sudo test -f /etc/sudoers.d/99-dotfiles-installer; then
@@ -284,6 +288,7 @@ while true; do
         start_sudo_loop
         if [[ -n "$target_profile" ]]; then
             echo -e "${GREEN}Starting installation for $target_profile...${NC}"
+            update_profiles
             ./meta/install-profile "$target_profile"
         else
             echo -e "${GREEN}Starting installation...${NC}"

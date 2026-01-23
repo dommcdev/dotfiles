@@ -1,5 +1,5 @@
-all/all
-arch/pacman
+all/all1
+arch/pacman1
 all/cli
 all/docker
 all/git
@@ -43,5 +43,5 @@ custom/screensaver
 custom/sddm
 custom/swayosd
 custom/timeshift
-custom/walker
+custom/vicinae
 custom/waybar

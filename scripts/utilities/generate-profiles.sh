@@ -18,6 +18,9 @@ generate_profile() {
     # Clear/Create file
     > "$target_file"
 
+    local priority_list=()
+    local normal_list=()
+
     for folder in "${dirs[@]}"; do
         local folder_path="$CONFIGS_DIR/$folder"
 
@@ -27,12 +30,28 @@ generate_profile() {
             for yaml in "$folder_path"/*.yaml; do
                 local base
                 base=$(basename "$yaml" .yaml)
-                echo "$folder/$base" >> "$target_file"
+                
+                # Check priority (ends in 1)
+                if [[ "$base" == *1 ]]; then
+                    priority_list+=("$folder/$base")
+                else
+                    normal_list+=("$folder/$base")
+                fi
             done
             shopt -u nullglob
         else
             echo "  Warning: Config folder '$folder' not found"
         fi
+    done
+
+    # Write priority configs first
+    for config in "${priority_list[@]}"; do
+        echo "$config" >> "$target_file"
+    done
+
+    # Write normal configs
+    for config in "${normal_list[@]}"; do
+        echo "$config" >> "$target_file"
     done
 }
 
