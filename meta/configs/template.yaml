@@ -6,6 +6,7 @@
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
       sudo pacman -S --noconfirm --needed tailscale
+      yay -S --noconfirm --needed --answerdiff None --answerclean None ripdrag
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       sudo apt install -y tailscale
     elif [[ "$(./sys id)" == "mac" ]]; then

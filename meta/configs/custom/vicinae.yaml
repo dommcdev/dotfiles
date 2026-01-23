@@ -1,0 +1,13 @@
+
+- link: 
+    ~/.config/vicinae/settings.json: vicinae/settings.json
+
+- shell:
+  - |
+    if [[ "$(./sys id)" == "arch" ]]; then
+      yay -S --noconfirm --needed --answerdiff None --answerclean None vicinae-bin
+    elif [[ "$(./sys id)" == "ubuntu" ]]; then
+      echo "Not supported"
+    fi
+  - systemctl --user enable vicinae
+  - systemctl --user restart vicinae 2>/dev/null || true
