@@ -201,35 +201,10 @@ while true; do
     echo "----------------------------"
     echo
 
-    echo -e "${YELLOW}Select Profile Type:${NC}"
-    echo "1) Server (cli essentials)"
-    echo "2) Desktop Environment (for use with a DE)"
-    echo "3) Custom (everything)"
-    read -p "Enter choice [1-3]: " CHOICE
+    read -p "Proceed with current system information? [Y/n]: " CONFIRM_SYS
+    CONFIRM_SYS=${CONFIRM_SYS:-y}
 
-    suffix=""
-    case "$CHOICE" in
-        1) suffix="server" ;;
-        2) suffix="de" ;;
-        3) suffix="custom" ;;
-        *)
-            echo -e "${RED}Invalid choice. Please try again.${NC}"
-            sleep 1
-            continue
-            ;;
-    esac
-
-    target_profile="${CURRENT_ID}-${suffix}"
-
-    read -p "Proceed with installation for $target_profile? (Y/n): " PROCEED
-    PROCEED=${PROCEED:-y}
-
-    if [[ "$PROCEED" =~ ^[Yy]$ ]]; then
-        start_sudo_loop
-        echo -e "${GREEN}Starting installation for $target_profile...${NC}"
-        ./meta/install-profile "$target_profile"
-        finished
-    else
+    if [[ ! "$CONFIRM_SYS" =~ ^[Yy]$ ]]; then
         echo -e "\n${YELLOW}Manual Override Mode${NC}"
         read -p "Override ID? (Enter to keep '$CURRENT_ID'): " NEW_ID
         [[ -n "$NEW_ID" ]] && ./sys set-id "$NEW_ID"
@@ -239,5 +214,90 @@ while true; do
 
         echo -e "\n${BLUE}Refreshing configuration...${NC}"
         sleep 0.5
+        continue
+    fi
+
+    echo -e "\n${YELLOW}Select Profile Type:${NC}"
+    echo "1) Server (cli essentials)"
+    echo "2) Desktop (for use with a DE)"
+    echo "3) Custom (everything)"
+    echo "4) Custom Profile (enter name)"
+    echo "5) Build Your Own (select configs)"
+    read -p "Enter choice [1-5]: " CHOICE
+
+    target_profile=""
+    selected_configs=""
+
+    case "$CHOICE" in
+        1) target_profile="${CURRENT_ID}-server" ;;
+        2) target_profile="${CURRENT_ID}-de" ;;
+        3) target_profile="${CURRENT_ID}-custom" ;;
+        4)
+            read -p "Enter custom profile name: " custom_name
+            if [[ -f "meta/profiles/$custom_name" ]]; then
+                target_profile="$custom_name"
+            else
+                echo -e "${RED}Profile 'meta/profiles/$custom_name' not found.${NC}"
+                sleep 2
+                continue
+            fi
+            ;;
+        5)
+            echo -e "${BLUE}Scanning for configurations...${NC}"
+            if ! command -v gum &>/dev/null; then
+                 echo -e "${RED}Error: 'gum' is not installed but is required for this feature.${NC}"
+                 sleep 2
+                 continue
+            fi
+
+            available_configs=$(find meta/configs -type f -name "*.yaml" | sed 's|^meta/configs/||' | sed 's|\.yaml$||' | sort)
+            # Use gum filter with --no-limit to allow multiple selections.
+            # Header provides explicit instructions on how to use it.
+            selected_configs=$(echo "$available_configs" | gum filter --no-limit --height 20 --header "TAB to select multiple, ENTER to confirm" --header.foreground 3 --prompt "Select configs > " --cursor-text.foreground 2 --selected-indicator.foreground 2 --match.foreground 4 --show-help)
+
+            if [[ -z "$selected_configs" ]]; then
+                echo -e "${YELLOW}No configs selected.${NC}"
+                sleep 1
+                continue
+            fi
+            ;;
+        *)
+            echo -e "${RED}Invalid choice. Please try again.${NC}"
+            sleep 1
+            continue
+            ;;
+    esac
+
+    if [[ -n "$target_profile" ]]; then
+        read -p "Proceed with installation for $target_profile? (Y/n): " PROCEED
+    elif [[ -n "$selected_configs" ]]; then
+        echo -e "\n${YELLOW}Selected configurations:${NC}"
+        echo "$selected_configs"
+        read -p "Proceed with installation? (Y/n): " PROCEED
+    else
+        continue
+    fi
+
+    PROCEED=${PROCEED:-y}
+
+    if [[ "$PROCEED" =~ ^[Yy]$ ]]; then
+        start_sudo_loop
+        if [[ -n "$target_profile" ]]; then
+            echo -e "${GREEN}Starting installation for $target_profile...${NC}"
+            ./meta/install-profile "$target_profile"
+        else
+            echo -e "${GREEN}Starting installation...${NC}"
+            while IFS= read -r config; do
+                if [[ -n "$config" ]]; then
+                    echo -e "${BLUE}Installing $config...${NC}"
+                    ./setup "$config"
+                fi
+            done <<< "$selected_configs"
+        fi
+        finished
+    else
+        echo -e "\n${BLUE}Restarting...${NC}"
+        sleep 1
+        continue
     fi
 done
