@@ -3,6 +3,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Use tmux/ssh friendly clipboard
+vim.g.clipboard = "osc52"
+
 -- Prevent side colume width changing if lsp shows/stops showing symbols
 vim.opt.signcolumn = "yes"
 
@@ -44,10 +47,6 @@ vim.o.confirm = true
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
--- Better home/end line movement
---vim.keymap.set({ 'n', 'v', 'o' }, 'L', '$', { noremap = true, desc = 'Move to end of line' })
---vim.keymap.set({ 'n', 'v', 'o' }, 'H', '^', { noremap = true, desc = 'Move to first nonblank character' })
-
 -- Highlight when yanking (copying) text, try it with `yap` in normal mode
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking (copying) text",
@@ -56,35 +55,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.hl.on_yank()
   end,
 })
-
--- workaround for getting clipboard to work with ssh -> tmux -> nvim
--- clipboard works out-of-the-box for ssh -> nvim
--- copying works out-of-the-box for tmux -> ssh -> nvim, but pasting only works with ctrl+shift+v
--- vim.g.clipboard = {
---   name = "OSC 52",
---   copy = {
---     ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
---     ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
---   },
---   paste = {
---     ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
---     ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
---   },
--- }
--- if vim.env.TMUX ~= nil then
---     local copy = { "tmux", "load-buffer", "-w", "-" }
---     local paste = { "bash", "-c", "tmux refresh-client -l && sleep 0.05 && tmux save-buffer -" }
---     vim.g.clipboard = {
---         name = "tmux",
---         copy = {
---             ["+"] = copy,
---             ["*"] = copy,
---         },
---         paste = {
---             ["+"] = paste,
---             ["*"] = paste,
---         },
---         cache_enabled = 0,
---     }
--- end
-vim.g.clipboard = "osc52"

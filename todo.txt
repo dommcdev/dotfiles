@@ -11,7 +11,6 @@ Gpu passthrough
 Swap out waybar/dunst with some shell+notif center
 Fastfetch
 Auto-theming (single colors.css)
-Better solution for ssh -> tmux -> nvim shared clipboard
 
 # Server
 BorgBackup (or equal.)
