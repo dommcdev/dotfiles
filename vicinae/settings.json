@@ -21,9 +21,11 @@
       "opacity": 0.9,
       "client_side_decorations": {
          "enabled": true,
-         "rounding": 0
+         "rounding": 10,
+         "border_width": 2
       }
    },
+   "favorites": ["system:run", "core:search-emojis", "clipboard:history"],
    "providers": {
       "applications": {
          "preferences": {
@@ -98,6 +100,13 @@
       "developer": {
          "enabled": false
       },
+      "files": {
+         "entrypoints": {
+            "rebuild-index": {
+               "enabled": false
+            }
+         }
+      },
       "font": {
          "enabled": true
       },
@@ -114,7 +123,6 @@
                "enabled": false
             },
             "power-off": {
-               "alias": "shutdown",
                "enabled": true
             },
             "reboot": {
