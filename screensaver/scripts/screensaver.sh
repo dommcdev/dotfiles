@@ -8,7 +8,6 @@ screensaver_in_focus() {
 }
 
 exit_screensaver() {
-  hyprctl keyword cursor:invisible false &>/dev/null || true
   pkill -x tte 2>/dev/null || true
   pkill -f com.dominic.screensaver 2>/dev/null || true
   exit 0
@@ -29,7 +28,6 @@ center_text() {
 }
 
 printf '\033]11;rgb:00/00/00\007'  # Set background color to black
-hyprctl keyword cursor:invisible true &>/dev/null
 
 tty=$(tty 2>/dev/null)
 phrases_dir=~/dev/dotfiles/screensaver/phrases

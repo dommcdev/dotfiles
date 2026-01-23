@@ -1,11 +1,9 @@
 # To-do
 Nvim (status line, snacks stuff, ai, atone, flash, tiny inline diagnostics)
-Systemd-logind for custom power-button sequence (60s to shutdown)
-Better screenshot tool (omarchy one w/Satty?)
+Better screenshot tool (Omarchy's w/Satty, screen recording)
 Yt-dlp workflow (tui + yt api project)
 Music player tui
-BorgBackup (or equal.)
-Set up typst
+Map power button to 60s shutdown
 
 
 # Low Priority
@@ -15,9 +13,9 @@ Fastfetch
 Auto-theming (single colors.css)
 Tmux-sessionizer for "restoring" sessions
 Better solution for ssh -> tmux -> nvim shared clipboard
-Theme and/or tweak: Starship, onlyoffice, hypr animations
 
 # Server
+BorgBackup (or equal.)
 Set up Caddy reverse proxy
 Immich, gitlab, filebrowser, onlyoffice, music player, syncthing, etc
 
