@@ -147,16 +147,16 @@ draw_frame() {
     local w0=11
     local w1=13
     local w2=14
-    local space=2
+    local space=1
     local total_w=$((w0 + space + w1 + space + w2))
 
     local pad_btn=$(( (COLS - total_w) / 2 ))
     [[ $pad_btn -lt 0 ]] && pad_btn=0
 
     # Print the 3 rows of buttons
-    printf "%*s%s  %s  %s\n" "$pad_btn" "" "${b0_lines[0]}" "${b1_lines[0]}" "${b2_lines[0]}"
-    printf "%*s%s  %s  %s\n" "$pad_btn" "" "${b0_lines[1]}" "${b1_lines[1]}" "${b2_lines[1]}"
-    printf "%*s%s  %s  %s\n" "$pad_btn" "" "${b0_lines[2]}" "${b1_lines[2]}" "${b2_lines[2]}"
+    printf "%*s%s %s %s\n" "$pad_btn" "" "${b0_lines[0]}" "${b1_lines[0]}" "${b2_lines[0]}"
+    printf "%*s%s %s %s\n" "$pad_btn" "" "${b0_lines[1]}" "${b1_lines[1]}" "${b2_lines[1]}"
+    printf "%*s%s %s %s\n" "$pad_btn" "" "${b0_lines[2]}" "${b1_lines[2]}" "${b2_lines[2]}"
 
     echo
 
