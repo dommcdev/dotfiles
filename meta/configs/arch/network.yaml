@@ -33,7 +33,11 @@
     sudo cp network/iwd.conf /etc/iwd/main.conf
     sudo systemctl enable --now iwd
 
-  - sudo systemctl restart iwd systemd-networkd
+  # Restart network stack because have you tried turning it off and on again
+  - |
+    sudo systemctl restart iwd systemd-networkd
+    echo "Waiting for network to come back online..."
+    /usr/lib/systemd/systemd-networkd-wait-online --quiet --timeout=30
 
 
 # Debugging: networkctl status, ip link, ip route, ip addr

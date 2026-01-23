@@ -18,7 +18,6 @@ Immich, gitlab, filebrowser, onlyoffice, music player, syncthing, etc
 # Dotfiles
 Tui for archinstall
 Fedora + Ubuntu support
-Method for arranging deps
 
 # Things to try
 NixOS, OpenSuse, manual Arch, MacOS vm
