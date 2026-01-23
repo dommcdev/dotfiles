@@ -87,3 +87,4 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 --         cache_enabled = 0,
 --     }
 -- end
+vim.g.clipboard = "osc52"
