@@ -23,6 +23,8 @@
   - systemctl --user enable hyprpaper.service
   - systemctl --user enable hypridle.service
   - systemctl --user enable hyprsunset.service
+
+  # Don't let systemd-logind handle power button - let hyprland use it
   - sudo sed -i 's/.*HandlePowerKey=.*/HandlePowerKey=ignore/' /etc/systemd/logind.conf
 
 
