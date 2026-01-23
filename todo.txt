@@ -11,7 +11,6 @@ Gpu passthrough
 Swap out waybar/dunst with some shell+notif center
 Fastfetch
 Auto-theming (single colors.css)
-Tmux-sessionizer for "restoring" sessions
 Better solution for ssh -> tmux -> nvim shared clipboard
 
 # Server
