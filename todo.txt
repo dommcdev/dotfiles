@@ -1,5 +1,6 @@
 # To-do
 Nvim (status line, snacks stuff, ai, atone, flash, tiny inline diagnostics)
+    Add cargo for beancount, better solution for lsps (bloat)
 Better screenshot tool (Omarchy's w/Satty, screen recording)
 Yt-dlp workflow (tui + yt api project)
 
