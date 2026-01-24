@@ -87,8 +87,6 @@
         // "on-click":
         // "on-click-middle":
         // "on-click-right":
-        "on-scroll-up": "~/.config/waybar/scripts/backlight.sh up",
-        "on-scroll-down": "~/.config/waybar/scripts/backlight.sh down",
         // "smooth-scrolling-threshold":
         // "reverse-scrolling":
         // "reverse-mouse-scrolling":
@@ -386,7 +384,7 @@
         // "on-click-right":
         // "smooth-scrolling-threshold":
         // "tooltip":
-        "tooltip-format": "Output Device: {desc}"
+        "tooltip-format": "Output Device here: {desc}"
         // "max-volume":
         // "ignored-sinks":
         // "reverse-scrolling":
