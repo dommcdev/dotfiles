@@ -128,9 +128,9 @@
         // "weighted-average":
         // "bat-compatibility":
         "events": {
-            "on-discharging-warning": "notify-send 'Low Battery' '{capacity}% battery remaining'",
-            "on-discharging-critical": "notify-send 'Low Battery' '{capacity}% battery remaining' -u critical",
-            "on-charging-100": "notify-send 'Battery full' 'Battery is at {capacity}%'"
+			"on-discharging-warning": "notify-send 'Battery Low (20%)' -u critical -i 'battery-020' -h string:x-canonical-private-synchronous:battery",
+			"on-discharging-critical": "notify-send 'Battery Critical (10%)' -u critical -i 'battery-010' -h string:x-canonical-private-synchronous:battery",
+			"on-charging-100": "notify-send 'Battery Full (100%)' -i 'battery-100' -h string:x-canonical-private-synchronous:battery"
         }
     },
 
@@ -150,7 +150,7 @@
         "max-length": 2,
         "on-click": "ghostty --class=com.dominic.bluetui -e bluetui",
         // "on-click-middle":
-        "on-click-right": "bluetoothctl power off && notify-send 'Bluetooth Off' -i 'network-bluetooth-inactive' -r 1925",
+        "on-click-right": "bluetoothctl power off && notify-send 'Bluetooth Off' -i 'network-bluetooth-inactive' -h string:x-canonical-private-synchronous:bluetooth",
         // "on-scroll-up":
         // "on-scroll-down":
         // "smooth-scrolling-threshold":
@@ -264,8 +264,8 @@
         // "on-scroll-down":
         // "smooth-scrolling-threshold":
         // "tooltip":
-        "tooltip-format-activated": "Keep Screen On: <span text_transform='capitalize'>{status}</span>",
-        "tooltip-format-deactivated": "Keep Screen On: <span text_transform='capitalize'>{status}</span>",
+        "tooltip-format-activated": "Idle Inhibitor: <span text_transform='capitalize'>{status}</span>",
+        "tooltip-format-deactivated": "Idle Inhibitor: <span text_transform='capitalize'>{status}</span>",
         "start-activated": false
         // "timeout":
     },
@@ -289,7 +289,7 @@
         // "on-scroll-down":
         // "smooth-scrolling-threshold":
         // "tooltip":
-        "tooltip-format": "Memory Used: {used:0.1f} GB / {total:0.1f} GB"
+        "tooltip-format": "Memory Used: {used:0.1f}/{total:0.1f} GB"
     },
 
     "mpris": {
@@ -384,8 +384,6 @@
         "on-click": "~/.config/waybar/scripts/volume.sh output mute",
         // "on-click-middle":
         // "on-click-right":
-        "on-scroll-up": "~/.config/waybar/scripts/volume.sh output raise",
-        "on-scroll-down": "~/.config/waybar/scripts/volume.sh output lower",
         // "smooth-scrolling-threshold":
         // "tooltip":
         "tooltip-format": "Output Device: {desc}"
@@ -443,7 +441,7 @@
         // "on-scroll-down":
         // "smooth-scrolling-threshold":
         // "tooltip":
-        "tooltip-format": "Temp in Fahrenheit: {temperatureF}°F"
+        "tooltip-format": "Fahrenheit: {temperatureF}°F"
     },
 
     "power-profiles-daemon": {

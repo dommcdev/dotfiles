@@ -1,125 +1,167 @@
 #!/usr/bin/env bash
 #
-# Control default input and output device volume using pactl
+# Adjust default device volume and send a notification with the current level
 #
-# Author: Jesse Mirabel <github.com/sejjy>
-# Created: September 07, 2025
+# Requirements:
+# - pactl (libpulse)
+# - notify-send (libnotify)
+#
+# Author:  Jesse Mirabel <sejjymvm@gmail.com>
+# Date:    September 07, 2025
 # License: MIT
 
-VALUE=1
+# Nota bene - this might crash system if used in waybar irresponsibly
+
+DEF_VALUE=1
 MIN=0
 MAX=100
-ID=2425
 
-print-usage() {
-	cat <<-EOF
-		USAGE: ${0} [OPTIONS]
+DEVICE=
+ACTION=
+VALUE=
 
-		Control default input and output device volume using pactl
+DEV_DEF=
+DEV_STATE=
+DEV_VOLUME=
+DEV_ICON=
+DEV_NAME=
+
+usage() {
+	local script=${0##*/}
+
+	cat <<- EOF
+		USAGE: $script {input|output} {mute|raise|lower} [value]
+
+		Adjust default device volume and send a notification with the current level
+
+		DEVICE:
+		  input            Use "@DEFAULT_SOURCE@" (microphone)
+		  output           Use "@DEFAULT_SINK@" (speaker/headphones)
 
 		OPTIONS:
-		    input            Set device as '@DEFAULT_SOURCE@'
-		    output           Set device as '@DEFAULT_SINK@'
-
-		    mute             Toggle device mute
-
-		    raise <value>    Raise volume by <value>
-		    lower <value>    Lower volume by <value>
-		                       Default value: $VALUE
+		  mute             Toggle device mute
+		  raise [value]    Raise volume by [value] (default: $DEF_VALUE)
+		  lower [value]    Lower volume by [value] (default: $DEF_VALUE)
 
 		EXAMPLES:
-		    Toggle microphone mute:
-		      $ ${0} input mute
+		  Toggle microphone mute:
+		    $ $script input mute
 
-		    Raise speaker volume:
-		      $ ${0} output raise
+		  Raise speaker volume:
+		    $ $script output raise
 
-		    Lower speaker volume by 5:
-		      $ ${0} output lower 5
+		  Lower speaker volume by 5:
+		    $ $script output lower 5
 	EOF
-	exit 1
 }
 
-get-icon() {
-	local new_vol=$1
-	local icon
+pactl() {
+	command pactl "$1" "$DEV_DEF" "${@:2}"
+}
 
-	if [[ $new_vol == 'Muted' ]]; then
-		icon="$ICON-muted"
-	elif ((new_vol < ((MAX * 33) / 100))); then
-		icon="$ICON-low"
-	elif ((new_vol < ((MAX * 66) / 100))); then
-		icon="$ICON-medium"
+get_state() {
+	local state
+	state=$(pactl "get-$DEV_STATE" | awk '{print $2}')
+
+	case $state in
+		"yes") printf "Muted" ;;
+		"no")  printf "Unmuted" ;;
+	esac
+}
+
+get_volume() {
+	pactl "get-$DEV_VOLUME" | awk '{print $5}' | tr -d "%"
+}
+
+get_icon() {
+	local state level
+	state=$(get_state)
+	level=$(get_volume)
+
+	local new_level=${1:-$level}
+
+	if [[ $state == "Muted" ]]; then
+		printf "%s" "$DEV_ICON-muted"
 	else
-		icon="$ICON-high"
+		if ((new_level < MAX * 33 / 100)); then
+			printf "%s" "$DEV_ICON-low"
+		elif ((new_level < MAX * 66 / 100)); then
+			printf "%s" "$DEV_ICON-medium"
+		else
+			printf "%s" "$DEV_ICON-high"
+		fi
 	fi
-
-	echo "$icon"
 }
 
-toggle-mute() {
-	local mute icon
+set_state() {
+	pactl "set-$DEV_STATE" toggle
 
-	pactl "set-$MUTE" "$DEV" toggle
+	local state icon
+	state=$(get_state)
+	icon=$(get_icon)
 
-	case $(pactl "get-$MUTE" "$DEV" | awk '{print $2}') in
-		yes) mute='Muted' ;;
-		no) mute='Unmuted' ;;
-	esac
-
-	icon=$(get-icon "$mute")
-	notify-send "$TITLE: $mute" -i "$icon" -r $ID
+	notify-send "$DEV_NAME: $state" -i "$icon" \
+		-h string:x-canonical-private-synchronous:volume
 }
 
-set-volume() {
-	local action=$1
-	local value=$2
-	local vol new_vol icon
+set_volume() {
+	local level
+	level=$(get_volume)
 
-	vol=$(pactl "get-$VOL" "$DEV" | awk '{print $5}' | tr -d '%')
+	local new_level
 
-	case $action in
-		raise)
-			new_vol=$((vol + value))
-			((new_vol > MAX)) && new_vol=$MAX
+	case $ACTION in
+		"raise")
+			new_level=$((level + VALUE))
+			((new_level > MAX)) && new_level=$MAX
 			;;
-		lower)
-			new_vol=$((vol - value))
-			((new_vol < MIN)) && new_vol=$MIN
+		"lower")
+			new_level=$((level - VALUE))
+			((new_level < MIN)) && new_level=$MIN
 			;;
 	esac
 
-	pactl "set-$VOL" "$DEV" "${new_vol}%"
+	pactl "set-$DEV_VOLUME" "$new_level%"
 
-	icon=$(get-icon "$new_vol")
-	notify-send "$TITLE: $new_vol" -h int:value:"$new_vol" -i "$icon" -r $ID
+	local icon
+	icon=$(get_icon $new_level)
+
+	notify-send "$DEV_NAME: $new_level%" -h int:value:$new_level -i "$icon" \
+		-h string:x-canonical-private-synchronous:volume
 }
 
 main() {
-	local device=$1
-	local action=$2
-	local value=${3:-$VALUE}
+	DEVICE=$1
+	ACTION=$2
+	VALUE=${3:-$DEF_VALUE}
 
-	! ((value > 0 )) && print-usage
+	if ((VALUE < 1)); then
+		usage >&2
+		return 1
+	fi
 
-	case $device in
-		input)
-			DEV='@DEFAULT_SOURCE@'
-			MUTE='source-mute' VOL='source-volume'
-			TITLE='Microphone' ICON='mic-volume'
+	case $DEVICE in
+		"input")
+			DEV_DEF="@DEFAULT_SOURCE@"
+			DEV_STATE="source-mute"
+			DEV_VOLUME="source-volume"
+			DEV_ICON="mic-volume"
+			DEV_NAME="Microphone"
 			;;
-		output)
-			DEV='@DEFAULT_SINK@'
-			MUTE='sink-mute'   VOL='sink-volume'
-			TITLE='Volume'     ICON='audio-volume'
+		"output")
+			DEV_DEF="@DEFAULT_SINK@"
+			DEV_STATE="sink-mute"
+			DEV_VOLUME="sink-volume"
+			DEV_ICON="audio-volume"
+			DEV_NAME="Volume"
 			;;
-		*) print-usage ;;
+		*) usage >&2; return 1 ;;
 	esac
 
-	case $action in
-		mute) toggle-mute ;;
-		raise | lower) set-volume "$action" "$value" ;;
-		*) print-usage ;;
+	case $ACTION in
+		"mute")            set_state ;;
+		"raise" | "lower") set_volume ;;
+		*)                 usage >&2; return 1 ;;
 	esac
 }
 

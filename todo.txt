@@ -5,6 +5,7 @@ Better screenshot tool (Omarchy's w/Satty, screen recording)
 Yt-dlp workflow (tui + yt api project)
 Tui for archinstall
 Fedora + Ubuntu dotfiles support
+Fix weather stuff
 
 # Low Priority
 Music player tui

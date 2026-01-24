@@ -13,14 +13,4 @@
       </metadata>
     </info>
   </bookmark>
-  <bookmark href="davs://nextcloud.tetra-salmon.ts.net/remote.php/dav/files/dominic" added="2025-08-21T23:50:37.735017Z" modified="2025-08-21T23:50:37.735020Z" visited="2025-08-21T23:50:37.735017Z">
-    <title>dominic</title>
-    <info>
-      <metadata owner="http://freedesktop.org">
-        <bookmark:applications>
-          <bookmark:application name="org.gnome.Nautilus" exec="&apos;org.gnome.Nautilus %u&apos;" modified="2025-08-21T23:50:37.735019Z" count="1"/>
-        </bookmark:applications>
-      </metadata>
-    </info>
-  </bookmark>
 </xbel>
