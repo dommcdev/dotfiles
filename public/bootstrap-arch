@@ -16,6 +16,7 @@ archinstall --config /root/user_configuration.json
 echo -e "\n\n--- Archinstall completed successfully. Cloning dotfiles via arch-chroot ... ---\n\n"
 cat << 'EOF' > /mnt/home/dominic/tmp.sh
 gh auth login --web -p ssh
+mkdir -p ~/.ssh && chmod 700 ~/.ssh
 ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
 gh repo clone dommcdev/dotfiles /home/dominic/dev/dotfiles
 

@@ -8,7 +8,6 @@ OS="unknown"
 if [[ "$(uname -s)" == "Darwin" ]]; then
     OS="mac"
     BREW_BIN="/opt/homebrew/bin/brew"
-    [[ -f "/usr/local/bin/brew" ]] && BREW_BIN="/usr/local/bin/brew"
 elif [ -f /etc/os-release ]; then
     . /etc/os-release
     OS=$ID
@@ -44,6 +43,7 @@ fi
 # Setup github authentication
 if ! gh auth status >/dev/null 2>&1; then
     echo "Setting up GitHub auth..."
+    mkdir -p ~/.ssh && chmod 700 ~/.ssh
     gh auth login --web -p ssh
     ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
 else
