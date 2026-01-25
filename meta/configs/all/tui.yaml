@@ -21,7 +21,7 @@
       sudo apt install -y cava gnuplot bc qalc
     elif [[ "$(./sys id)" == "fedora" ]]; then
       brew install bat yazi btop fastfetch
-      sudo dnf install -y cava gnuplot bc libqalculate
+      sudo dnf install -y cava gnuplot bc libqalculate wiremix
     elif [[ "$(./sys id)" == "mac" ]]; then
       brew install bat yazi btop fastfetch cava gnuplot bc libqalculate
     fi
@@ -32,7 +32,7 @@
 
 #Notes
 #Cava does not work on mac without additional setup
-#Ripdrag, disktui, bluetui, and wiremix not present on ubuntu (mac)
+#Ripdrag, disktui, bluetui, and wiremix not present on ubuntu
 #
 #
 # Ascii-image-converter

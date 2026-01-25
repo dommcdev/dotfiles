@@ -1,2 +1,8 @@
 
-- shell: []
+- shell:
+  - |
+    if ! grep -q "max_parallel_downloads" /etc/dnf/dnf.conf; then
+      echo -e "max_parallel_downloads=10\nfastestmirror=True" | sudo tee -a /etc/dnf/dnf.conf
+    fi
+
+#Todo - Add additional tweaks to dnf conf
