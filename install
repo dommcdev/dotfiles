@@ -131,7 +131,7 @@ show_logo() {
 }
 
 update_profiles() {
-    bash ~/.local/bin/generate-profiles.sh &> /dev/null
+    bash ./scripts/utilities/generate-profiles.sh &> /dev/null
 }
 
 start_sudo_loop() {
