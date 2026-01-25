@@ -112,18 +112,7 @@ return {
             [vim.diagnostic.severity.HINT] = "󰌶 ",
           },
         },
-        virtual_text = {
-          source = "if_many",
-          spacing = 2,
-        },
-      })
-
-      -- Auto-show diagnostic float on CursorHold
-      vim.api.nvim_create_autocmd("CursorHold", {
-        group = vim.api.nvim_create_augroup("diagnostic-float", { clear = true }),
-        callback = function()
-          vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
-        end,
+        virtual_text = false, -- Disabled for tiny-inline-diagnostic
       })
 
       -- Get capabilities from blink.cmp
@@ -348,5 +337,15 @@ return {
       { "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
       { "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
     },
+  },
+
+  -- Tiny Inline Diagnostic
+  {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy", -- Or "LspAttach"
+    priority = 1000, -- needs to be loaded in first
+    config = function()
+      require("tiny-inline-diagnostic").setup()
+    end,
   },
 }

@@ -1,5 +1,5 @@
 # To-do
-Nvim (status line, ai, atone, flash, tiny inline diagnostics, debloat lsps)
+Nvim (status line, ai, atone, flash, debloat lsps)
 Better screenshot tool (Omarchy's w/Satty, screen recording)
 Yt-dlp workflow (tui + yt api project)
 Tui for archinstall
