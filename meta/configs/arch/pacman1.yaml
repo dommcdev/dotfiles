@@ -1,6 +1,0 @@
-
-- shell:
-  - sudo cp arch/pacman/pacman.conf /etc/pacman.conf
-  - sudo mkdir -p /etc/pacman.d/hooks
-  - sudo cp arch/pacman/hooks/adw-gtk3-flatpak-sync.hook /etc/pacman.d/hooks/
-  - sudo pacman -Syyu --noconfirm

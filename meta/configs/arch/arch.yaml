@@ -1,3 +1,0 @@
-
-- shell:
-  - yay -S --noconfirm --needed --answerdiff None --answerclean None downgrade
