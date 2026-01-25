@@ -118,7 +118,7 @@ bindkey '^V' paste-from-clipboard
 # Open buffer line in editor
 autoload -Uz edit-command-line
 zle -N edit-command-line
-bindkey '^w^e' edit-command-line
+bindkey '^we' edit-command-line
 
 # Zoxide
 eval "$(zoxide init --cmd cd zsh)"

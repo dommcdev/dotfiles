@@ -18,7 +18,7 @@ cat << 'EOF' > /mnt/home/dominic/tmp.sh
 gh auth login --web -p ssh
 mkdir -p ~/.ssh && chmod 700 ~/.ssh
 ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
-gh repo clone dommcdev/dotfiles /home/dominic/dev/dotfiles
+gh repo clone dommcdev/dotfiles /home/dominic/dev/dotfiles || true
 
 command -v yay > /dev/null || (
     sudo pacman -S --noconfirm --needed base-devel
