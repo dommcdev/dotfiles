@@ -1,13 +1,13 @@
 # To-do
 Better screenshot tool (Omarchy's w/Satty, screen recording)
-Yt-dlp workflow (tui + yt api project)
+Yt-dlp tui
 Tui for archinstall
-Fedora + Ubuntu dotfiles support
 
 # Low Priority
 Music player tui
 Gpu passthrough
 Swap out waybar/dunst with some shell+notif center
+Finish cross-platform dotfiles support
 
 # Server
 BorgBackup (or equal.)

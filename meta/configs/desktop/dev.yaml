@@ -10,11 +10,11 @@
     if [[ "$(./sys id)" == "arch" ]]; then
       sudo pacman -S --noconfirm --needed jdk-openjdk clang python python-pip typst deno
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
-      brew install java clang python typst deno
+      brew install java llvm python typst deno
     elif [[ "$(./sys id)" == "fedora" ]]; then
-      brew install java clang python typst deno
+      brew install java llvm python typst deno
     elif [[ "$(./sys id)" == "mac" ]]; then
-      brew install java clang python typst deno
+      brew install java llvm python typst deno
     fi
 
     # Gh-preview-markdown

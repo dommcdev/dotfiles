@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-#Note - deps installed: git, github-cli, python, homebrew, make
+#Note - deps installed: git, github-cli, python, homebrew, make, gcc
 
 # Detect OS
 OS="unknown"
@@ -22,7 +22,7 @@ echo -e "Starting configuration for $OS...\n\n"
 # Check if Homebrew is already installed
 if [ ! -x "$BREW_BIN" ]; then
     echo "Homebrew not found. Installing..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     eval "$("$BREW_BIN" shellenv)"
     echo "Homebrew installation complete."
 else
@@ -33,11 +33,11 @@ fi
 # Install dotfile dependencies
 echo "Installing dotfile dependencies..."
 if [[ "$OS" == "ubuntu" ]]; then
-    sudo apt update && sudo apt install -y python3 git gh make
+    sudo apt update && sudo apt install -y python3 git gh make gcc
 elif [[ "$OS" == "fedora" ]]; then
-    sudo dnf install -y python3 git gh make
+    sudo dnf install -y python3 git gh make gcc
 elif [[ "$OS" == "mac" ]]; then
-    brew install python3 git gh make
+    brew install python3 git gh make gcc
 fi
 
 # Setup github authentication
