@@ -263,6 +263,7 @@ EOF
 - Configs are organized by scope: `all/` > `linux/` > `arch/` (most specific)
 - Profiles in `meta/profiles/` are simple lists of config paths to install
 - The theme is **Catppuccin Mocha** throughout.
+- **Clean & Concise Code**: Always prefer simple, readable, and concise solutions. Avoid over-engineering; do not write a 50-line function when a few lines will suffice.
 - **IMPORTANT**: When writing new scripts or TUIs, **DO NOT hardcode hex colors** (e.g., Catppuccin Mocha hex codes). Instead, rely on standard terminal ANSI colors (e.g., via `tput setaf`) or tools that use the terminal's color scheme (like `gum`). This ensures the UI respects the user's terminal theme.
 - **Gum Usage**: When using `gum`, **ALWAYS** override its default pink/purple colors. Use the terminal's color scheme (e.g., `--border-foreground 4` for blue, `--selected-foreground 2` for green). Never leave `gum` defaults visible.
 - Neovim config uses Lua with Lazy.nvim plugin manager
