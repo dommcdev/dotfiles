@@ -1,13 +1,15 @@
+# Note - rust pulled in for nvim's beancount lsp to work
 
 - link: {}
 
 - shell:
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
+      sudo pacman -S --noconfirm --needed rust
       yay -S --noconfirm --needed --answerdiff None --answerclean None beancount fava
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
-      brew install beancount fava
+      brew install beancount fava rust
     elif [[ "$(./sys id)" == "mac" ]]; then
-      brew install beancount fava
+      brew install beancount fava rust
     fi
   - if [ ! -d "$HOME/dev/beans" ]; then gh repo clone dommcdev/beans ~/dev/beans; fi
