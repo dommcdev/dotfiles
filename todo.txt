@@ -1,5 +1,4 @@
 # To-do
-Nvim (ai, debloat lsps)
 Better screenshot tool (Omarchy's w/Satty, screen recording)
 Yt-dlp workflow (tui + yt api project)
 Tui for archinstall

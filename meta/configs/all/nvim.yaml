@@ -1,4 +1,5 @@
-#Neovim + python + deno + unzip + cargo
+# Neovim + python + deno + unzip + cargo
+# Todo - debloat lsp somehow - don't need everything on minimal installs
 
 - link:
     ~/.config/nvim: nvim
