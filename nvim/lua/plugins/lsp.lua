@@ -25,6 +25,73 @@ return {
       "saghen/blink.cmp",
     },
     config = function()
+      -- Tools map for on-demand installation
+      local tools_by_ft = {
+        lua = { "lua-language-server", "stylua" },
+        python = { "ruff" },
+        c = { "clangd", "clang-format" },
+        cpp = { "clangd", "clang-format" },
+        java = { "jdtls", "google-java-format" },
+        html = { "html-lsp", "prettierd" },
+        css = { "css-lsp", "prettierd" },
+        javascript = { "typescript-language-server", "prettierd" },
+        typescript = { "typescript-language-server", "prettierd" },
+        javascriptreact = { "typescript-language-server", "prettierd" },
+        typescriptreact = { "typescript-language-server", "prettierd" },
+        sql = { "sqls", "sql-formatter" },
+        go = { "gopls", "goimports", "gofumpt" },
+        typst = { "tinymist", "typstyle" },
+        beancount = { "beancount-language-server" },
+      }
+
+      -- Create an autocommand to install tools when opening a file
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("mason-lazy-install", { clear = true }),
+        callback = function(opts)
+          local ft = opts.match
+          local tools = tools_by_ft[ft]
+          if not tools then
+            return
+          end
+
+          local registry = require("mason-registry")
+
+          -- Only refresh if we suspect we need to install something
+          local function install_missing()
+            for _, tool in ipairs(tools) do
+              if registry.is_installed(tool) then
+                -- already installed, skip
+              else
+                local p = registry.get_package(tool)
+                vim.notify("Installing " .. tool .. " for " .. ft .. "...", vim.log.levels.INFO)
+                p:install():once("closed", function()
+                  vim.notify(tool .. " installed!", vim.log.levels.INFO)
+                  -- Attempt to start LSP if the installed tool was a server
+                  vim.schedule(function()
+                    if #vim.lsp.get_clients({ bufnr = opts.buf }) == 0 then
+                      vim.cmd("LspStart")
+                    end
+                  end)
+                end)
+              end
+            end
+          end
+
+          -- Check without refresh first for speed
+          local needs_install = false
+          for _, tool in ipairs(tools) do
+            if not registry.is_installed(tool) then
+              needs_install = true
+              break
+            end
+          end
+
+          if needs_install then
+            registry.refresh(install_missing)
+          end
+        end,
+      })
+
       -- LspAttach: runs when an LSP attaches to a buffer
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
@@ -183,8 +250,12 @@ return {
       })
 
       -- Tools to install via Mason (LSP servers + formatters)
+      -- NOTE: We use mason-tool-installer only to register the ensure_installed list
+      -- for manual :MasonToolsInstall command, but we disable auto-run
       require("mason-tool-installer").setup({
         ensure_installed = {
+          -- We keep this list for reference or manual bulk install,
+          -- but the FileType autocommand handles the heavy lifting now.
           -- LSP servers
           "lua-language-server",
           "clangd",
@@ -207,6 +278,8 @@ return {
           "gofumpt",
           "typstyle",
         },
+        auto_update = false,
+        run_on_start = false, -- DISABLE auto-install on startup
       })
     end,
   },

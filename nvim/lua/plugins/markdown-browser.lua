@@ -1,6 +1,8 @@
 return {
   "toppair/peek.nvim",
   event = { "VeryLazy" },
+  -- Only enable if Deno is available to avoid build errors
+  enabled = vim.fn.executable("deno") == 1,
   build = "deno task --quiet build:fast",
   keys = {
     {
