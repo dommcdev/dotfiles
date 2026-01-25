@@ -4,6 +4,8 @@ return {
   lazy = false,
   ---@type snacks.Config
   opts = {
+    words = { enabled = true },
+    bigfile = { enabled = true },
     terminal = { enabled = true },
     dashboard = { enabled = true },
     explorer = { enabled = true },
@@ -352,6 +354,8 @@ return {
       end,
       desc = "Dismiss All Notifications",
     },
+    { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
+    { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {

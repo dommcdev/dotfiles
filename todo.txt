@@ -1,11 +1,9 @@
 # To-do
-Nvim (status line, snacks stuff, ai, atone, flash, tiny inline diagnostics)
-    Add cargo for beancount, better solution for lsps (bloat)
+Nvim (status line, ai, atone, flash, tiny inline diagnostics, debloat lsps)
 Better screenshot tool (Omarchy's w/Satty, screen recording)
 Yt-dlp workflow (tui + yt api project)
 Tui for archinstall
 Fedora + Ubuntu dotfiles support
-Fix weather stuff
 
 # Low Priority
 Music player tui
