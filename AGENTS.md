@@ -214,6 +214,18 @@ Use `./sys` for platform detection:
     ~/.config/hypr/hypridle.conf:
       path: hypr/hypridle-laptop.conf
       if: '[ "$(./sys power)" = "1" ]'
+
+#### Multi-line Content
+
+**Avoid** using `\n` in `echo` commands (e.g., `echo -e "a\nb"`) as it may break the Dotbot YAML parser. Always use heredocs for multi-line content:
+
+```yaml
+- shell:
+  - |
+    sudo tee /path/to/file >/dev/null <<EOF
+    line 1
+    line 2
+    EOF
 ```
 
 ### Idempotency
