@@ -3,5 +3,5 @@
     ~/.config/ghostty: ghostty
 
 - shell:
-  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed ghostty; else brew install --cask ghostty; fi
+  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed ghostty ttf-jetbrains-mono-nerd; else brew install --cask ghostty font-jetbrains-mono-nerd-font; fi
   - if [ "$(uname)" = "Linux" ]; then systemctl enable --user app-com.mitchellh.ghostty.service; fi

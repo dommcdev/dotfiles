@@ -1,5 +1,5 @@
 
-- link: 
+- link:
     ~/.config/fontconfig/fonts.conf:
       path: fonts/fonts.conf
       if: '[ "$(uname)" = "Linux" ]'
@@ -11,4 +11,4 @@
 
 # Nota bene
 # fc-match [serif|sans-serif|monospace etc]
-# fc-cache -rv 
+# fc-cache -rv
