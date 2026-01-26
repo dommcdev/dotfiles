@@ -2,7 +2,6 @@
 Better screenshot tool (Omarchy's w/Satty, screen recording)
 Yt-dlp tui
 Tui for archinstall
-Still asking for sudo multiple times on fedora
 
 # Low Priority
 Music player tui
