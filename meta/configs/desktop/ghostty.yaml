@@ -7,7 +7,7 @@
     if [[ "$(./sys id)" == "arch" ]]; then
       sudo pacman -S --noconfirm --needed ghostty ttf-jetbrains-mono-nerd
     elif [[ "$(./sys id)" == "fedora" ]]; then
-      dnf copr enable -y scottames/ghostty && dnf install -y ghostty
+      sudo dnf copr enable -y scottames/ghostty && sudo dnf install -y ghostty
       brew install --cask font-jetbrains-mono-nerd-font
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
