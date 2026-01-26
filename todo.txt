@@ -12,7 +12,7 @@ Finish cross-platform dotfiles support
 
 # Server
 BorgBackup (or equal.)
-Gitlab, filebrowser, onlyoffice, music player, syncthing, etc
+Gitlab, music player, syncthing, etc
 
 # Things to try
 Windows (+ LookingGlass)
