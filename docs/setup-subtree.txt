@@ -10,6 +10,12 @@ Push files from private repo to public repo for the first time (will have to be 
 git subtree push --prefix=<folder-name> <remote-name> <remote-branch>
 (e.g. git subtree push --prefix=public bootstrap main)
 
+Alternatively
+git subtree split --prefix=public -b split-branch #one-time only
+
+git subtree split --prefix=public --rejoin -b split-branch
+git push bootstrap split-branch:main
+
 
 (To pull changes from public repo, do)
 git subtree pull --prefix=public bootstrap main --squash

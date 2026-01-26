@@ -3,5 +3,16 @@
     ~/.config/ghostty: ghostty
 
 - shell:
-  - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed ghostty ttf-jetbrains-mono-nerd; else brew install --cask ghostty font-jetbrains-mono-nerd-font; fi
-  - if [ "$(uname)" = "Linux" ]; then systemctl enable --user app-com.mitchellh.ghostty.service; fi
+  - |
+    if [[ "$(./sys id)" == "arch" ]]; then
+      sudo pacman -S --noconfirm --needed ghostty ttf-jetbrains-mono-nerd
+    elif [[ "$(./sys id)" == "fedora" ]]; then
+      dnf copr enable -y scottames/ghostty && dnf install -y ghostty
+      brew install --cask font-jetbrains-mono-nerd-font
+    elif [[ "$(./sys id)" == "ubuntu" ]]; then
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
+      brew install --cask font-jetbrains-mono-nerd-font
+    elif [[ "$(./sys id)" == "mac" ]]; then
+      brew install --cask ghostty font-jetbrains-mono-nerd-font
+    fi
+  - if [[ "$(./sys type)" == "Linux" ]]; then systemctl enable --user app-com.mitchellh.ghostty.service; fi
