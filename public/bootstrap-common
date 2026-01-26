@@ -17,8 +17,6 @@ fi
 DOTFILES_REPO="git@github.com:dommcdev/dotfiles.git"
 DOTFILES_DIR="$HOME/dev/dotfiles"
 
-echo -e "Starting configuration for $OS...\n\n"
-
 start_sudo_loop() {
     echo -e "Please enter your password to initialize sudo keep-alive..."
     sudo -v
@@ -31,6 +29,9 @@ start_sudo_loop() {
 
     SUDO_LOOP_PID=$!
 }
+
+echo -e "Starting configuration for $OS...\n\n"
+start_sudo_loop
 
 # Check if Homebrew is already installed
 if [ ! -x "$BREW_BIN" ]; then
