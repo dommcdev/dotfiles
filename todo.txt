@@ -1,12 +1,9 @@
 # To-do
 Better screenshot tool (Omarchy's w/Satty, screen recording)
-Yt-dlp tui
-Tui for archinstall
-
-# Low Priority
 Music player tui
 Gpu passthrough
 Swap out waybar/dunst with some shell+notif center
+Tui for archinstall
 Finish cross-platform dotfiles support
 
 # Server

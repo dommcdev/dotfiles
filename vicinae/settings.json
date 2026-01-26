@@ -25,7 +25,7 @@
          "border_width": 2
       }
    },
-   "favorites": ["system:run", "core:search-emojis", "clipboard:history"],
+   "favorites": ["core:search-emojis", "clipboard:history"],
    "providers": {
       "applications": {
          "preferences": {
@@ -154,3 +154,4 @@
       }
    }
 }
+
