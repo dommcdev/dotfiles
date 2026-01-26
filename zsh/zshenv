@@ -1,6 +1,17 @@
+typeset -gU path PATH #no path duplicates!
+
 export EDITOR="nvim"
 export VISUAL="nvim" #Fallback for editor
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.local/share/npm-global/bin:$PATH"
 export ZDOTDIR="$HOME/.config/zsh"
 export ANDROID_HOME="$HOME/programs/Android/Sdk"
+
+################## SETTING PATH ##################
+export PATH="$HOME/.local/share/npm-global/bin:$PATH"
+# Homebrew for non-interactive shells
+if [[ -d /home/linuxbrew/.linuxbrew ]]; then
+    export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
+    export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+    export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX/Homebrew"
+    export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}"
+fi
+export PATH="$HOME/.local/bin:$PATH"
