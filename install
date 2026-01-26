@@ -134,9 +134,28 @@ update_profiles() {
     bash ./scripts/utilities/generate-profiles.sh &> /dev/null
 }
 
+# Not currently used
 start_sudo_loop() {
     sudo -v
     while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+}
+
+enable_passwordless_sudo() {
+    if sudo test -f /etc/sudoers.d/99-dotfiles-installer; then
+        echo "Sudo access already configured."
+    else
+        echo "Configuring passwordless sudo for the installer..."
+        # Ask for password once
+        if ! sudo -v; then
+            echo "Failed to obtain sudo credentials."
+            exit 1
+        fi
+
+        # Create the file
+        echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/99-dotfiles-installer >/dev/null
+        sudo chmod 440 /etc/sudoers.d/99-dotfiles-installer
+        echo "Passwordless sudo configured for this session."
+    fi
 }
 
 finished() {
@@ -144,6 +163,10 @@ finished() {
     echo
     echo "Finished installing!"
     echo
+
+    if sudo test -f /etc/sudoers.d/99-dotfiles-installer; then
+      sudo rm -f /etc/sudoers.d/99-dotfiles-installer &>/dev/null
+    fi
 
     read -p "Would you like to reboot now? [Y/n] " choice
     case "$choice" in
@@ -170,7 +193,7 @@ while true; do
     echo "----------------------------"
     echo
 
-    read -p "Proceed with current system information? [Y/n]: " CONFIRM_SYS
+    read -p "Is this system information correct? [Y/n]: " CONFIRM_SYS
     CONFIRM_SYS=${CONFIRM_SYS:-y}
 
     if [[ ! "$CONFIRM_SYS" =~ ^[Yy]$ ]]; then
@@ -250,7 +273,7 @@ while true; do
     PROCEED=${PROCEED:-y}
 
     if [[ "$PROCEED" =~ ^[Yy]$ ]]; then
-        start_sudo_loop
+        enable_passwordless_sudo
         if [[ -n "$target_profile" ]]; then
             echo -e "${GREEN}Starting installation for $target_profile...${NC}"
             update_profiles
