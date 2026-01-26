@@ -136,14 +136,7 @@ update_profiles() {
 
 start_sudo_loop() {
     sudo -v
-
-    while true; do
-        sudo -n true
-        sleep 60
-        kill -0 "$$" || exit
-    done 2>/dev/null &
-
-    SUDO_LOOP_PID=$!
+    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 }
 
 finished() {
@@ -162,9 +155,6 @@ finished() {
         exit 0
         ;;
     esac
-
-    # Kill sudo keep-alive loop (technically optional)
-    kill "$SUDO_LOOP_PID"
 }
 
 while true; do

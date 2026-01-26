@@ -17,17 +17,10 @@ fi
 DOTFILES_REPO="git@github.com:dommcdev/dotfiles.git"
 DOTFILES_DIR="$HOME/dev/dotfiles"
 
+
 start_sudo_loop() {
-    echo -e "Please enter your password to initialize sudo keep-alive..."
     sudo -v
-
-    while true; do
-        sudo -n true
-        sleep 60
-        kill -0 "$$" || exit
-    done 2>/dev/null &
-
-    SUDO_LOOP_PID=$!
+    while true; do sudo -n true; sleep 30; kill -0 "$$" || exit; done 2>/dev/null &
 }
 
 echo -e "Starting configuration for $OS...\n\n"
