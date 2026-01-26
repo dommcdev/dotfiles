@@ -19,6 +19,19 @@ DOTFILES_DIR="$HOME/dev/dotfiles"
 
 echo -e "Starting configuration for $OS...\n\n"
 
+start_sudo_loop() {
+    echo -e "Please enter your password to initialize sudo keep-alive..."
+    sudo -v
+
+    while true; do
+        sudo -n true
+        sleep 60
+        kill -0 "$$" || exit
+    done 2>/dev/null &
+
+    SUDO_LOOP_PID=$!
+}
+
 # Check if Homebrew is already installed
 if [ ! -x "$BREW_BIN" ]; then
     echo "Homebrew not found. Installing..."
