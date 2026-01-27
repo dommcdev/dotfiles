@@ -4,8 +4,10 @@ export EDITOR="nvim"
 export VISUAL="nvim" #Fallback for editor
 export ZDOTDIR="$HOME/.config/zsh"
 export ANDROID_HOME="$HOME/programs/Android/Sdk"
+export GOPATH="$HOME/.local/share/go"
 
 ################## SETTING PATH ##################
+export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.local/share/npm-global/bin:$PATH"
 # Homebrew for non-interactive shells
 if [[ -d /home/linuxbrew/.linuxbrew ]]; then
