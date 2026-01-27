@@ -19,11 +19,11 @@ C_TEXT=$(tput setaf 7)      # White/Text
 # Icons
 ICON_SHUTDOWN="󰐥"
 ICON_REBOOT="󰜉"
-ICON_SUSPEND="󰒲"
+ICON_LOGOUT="󰍃"
 
 # State
 COUNTDOWN=15
-SELECTED=2 # 0=Sleep, 1=Restart, 2=Shutdown (Default)
+SELECTED=2 # 0=Logout, 1=Restart, 2=Shutdown (Default)
 
 # Terminal geometry
 ROWS=$(tput lines)
@@ -49,9 +49,9 @@ reboot_system() {
     exit 0
 }
 
-suspend_system() {
+logout_system() {
     cleanup
-    systemctl suspend
+    uwsm stop
     exit 0
 }
 
@@ -127,7 +127,7 @@ draw_frame() {
     # Use mapfile or read to split lines (bash specific)
 
     local b0_out b1_out b2_out
-    b0_out=$(gen_button "Sleep" "$ICON_SUSPEND" "$((SELECTED == 0))")
+    b0_out=$(gen_button "Logout" "$ICON_LOGOUT" "$((SELECTED == 0))")
     b1_out=$(gen_button "Restart" "$ICON_REBOOT" "$((SELECTED == 1))")
     b2_out=$(gen_button "Shutdown" "$ICON_SHUTDOWN" "$((SELECTED == 2))")
 
@@ -139,12 +139,12 @@ draw_frame() {
     # Calculate total width for centering
     # To get visible length, strip ANSI codes.
     # Hack: Assume standard padding.
-    # Sleep: " 󰒲 Sleep " = 9 chars -> Box width 11
+    # Logout: " 󰍃 Logout " = 10 chars -> Box width 12
     # Restart: " 󰜉 Restart " = 11 chars -> Box width 13
     # Shutdown: " 󰐥 Shutdown " = 12 chars -> Box width 14
     # Spacing: 2 chars between buttons
 
-    local w0=11
+    local w0=12
     local w1=13
     local w2=14
     local space=1
@@ -209,7 +209,7 @@ run_tui() {
                     ;;
                 "") # Enter
                     case "$SELECTED" in
-                        0) suspend_system ;;
+                        0) logout_system ;;
                         1) reboot_system ;;
                         2) shutdown_system ;;
                     esac
