@@ -25,7 +25,10 @@
          "border_width": 2
       }
    },
-   "favorites": ["core:search-emojis", "clipboard:history"],
+   "favorites": [
+      "core:search-emojis",
+      "clipboard:history"
+   ],
    "providers": {
       "applications": {
          "preferences": {
@@ -60,7 +63,7 @@
                "enabled": false
             },
             "list-extensions": {
-               "enabled": false
+               "enabled": true
             },
             "manage-fallback": {
                "enabled": false
@@ -93,12 +96,12 @@
                "enabled": false
             },
             "store": {
-               "enabled": false
+               "enabled": true
             }
          }
       },
       "developer": {
-         "enabled": false
+         "enabled": true
       },
       "files": {
          "entrypoints": {
@@ -144,7 +147,7 @@
          }
       },
       "raycast-compat": {
-         "enabled": false
+         "enabled": true
       },
       "theme": {
          "enabled": false
@@ -154,4 +157,3 @@
       }
    }
 }
-
