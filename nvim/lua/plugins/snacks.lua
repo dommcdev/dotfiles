@@ -1,6 +1,26 @@
 return {
   "folke/snacks.nvim",
   opts = {
+    dashboard = {
+      preset = {
+        -- The default snacks.nvim header (Neovim logo)
+        header = [[
+███╗   ██╗███████╗██████╗ ██╗   ██╗██╗███╗   ███╗
+████╗  ██║██╔════╝██╔══██╗██║   ██║██║████╗ ████║
+██╔██╗ ██║█████╗  ██║  ██║██║   ██║██║██╔████╔██║
+██║╚██╗██║██╔══╝  ██║  ██║╚██╗ ██╔╝██║██║╚██╔╝██║
+██║ ╚████║███████╗██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
+╚═╝  ╚═══╝╚══════╝╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
+]],
+      },
+    },
+    scroll = {
+      enabled = true,
+      animate = {
+        duration = { step = 15, total = 100 },
+        easing = "linear",
+      },
+    },
     picker = {
       sources = {
         buffers = {
