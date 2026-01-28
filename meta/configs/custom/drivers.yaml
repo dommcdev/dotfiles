@@ -2,7 +2,7 @@
 - shell:
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed libva-mesa-driver libva-utils mesa vulkan-radeon intel-media-driver sof-firmware gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-plugins-base gst-plugins-base-libs gst-libav
+      sudo pacman -S --noconfirm --needed libva-mesa-driver libva-utils mesa vulkan-radeon intel-media-driver sof-firmware gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-plugins-base gst-plugins-base-libs gst-libav vulkan-intel
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       echo "Please install graphics drivers"
     elif [[ "$(./sys id)" == "fedora" ]]; then

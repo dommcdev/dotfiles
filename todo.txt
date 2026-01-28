@@ -6,7 +6,6 @@ Swap out waybar/dunst with some shell+notif center
 Tui for archinstall
 Finish cross-platform dotfiles support
 Vicinae symbol picker
-Nvim git signs
 
 # Server
 BorgBackup (or equal.)
