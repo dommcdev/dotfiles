@@ -20,7 +20,10 @@
     sudo cp network/20-wired.network /etc/systemd/network/
     sudo cp network/25-wireless.network /etc/systemd/network/
     sudo systemctl enable --now systemd-networkd
-    sudo systemctl enable --now systemd-networkd-wait-online.service
+
+    # this service halts boot until network is up. Disabling it means network is always considered "up"
+    sudo systemctl disable systemd-networkd-wait-online.service
+    sudo systemctl mask systemd-networkd-wait-online.service
 
   # systemd-resolvd (dns)
   - |
