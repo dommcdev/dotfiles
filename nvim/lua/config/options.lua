@@ -5,9 +5,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Use tmux/ssh friendly clipboard
-vim.g.clipboard = "osc52"
-
 -- Prevent side colume width changing if lsp shows/stops showing symbols
 vim.opt.signcolumn = "yes"
 
@@ -45,6 +42,3 @@ vim.o.scrolloff = 4
 
 -- raise save confirmation dialog instead of failing for some operations
 vim.o.confirm = true
-
--- Clear highlights on search when pressing <Esc> in normal mode
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")

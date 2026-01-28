@@ -1,6 +1,8 @@
 return {
   "folke/snacks.nvim",
   opts = {
+    -- Disable indent guides by default
+    indent = { enabled = false },
     dashboard = {
       preset = {
         -- The default snacks.nvim header (Neovim logo)

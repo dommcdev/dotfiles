@@ -1,7 +1,6 @@
 return {
   -- Disable bufferline (tab bar)
   { "akinsho/bufferline.nvim", enabled = false },
-
   -- Disable WhichKey
   { "folke/which-key.nvim", enabled = false },
 
