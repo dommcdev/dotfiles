@@ -2,6 +2,9 @@ return {
   -- Disable bufferline (tab bar)
   { "akinsho/bufferline.nvim", enabled = false },
 
+  -- Disable WhichKey
+  { "folke/which-key.nvim", enabled = false },
+
   -- Configure lualine to show modified status [+]
   {
     "nvim-lualine/lualine.nvim",
@@ -22,7 +25,7 @@ return {
     end,
   },
 
-  -- Configure Noice to put the command line in the bottom left (classic cmdline)
+  -- Configure Noice
   {
     "folke/noice.nvim",
     opts = {
@@ -35,6 +38,19 @@ return {
       },
       popupmenu = {
         enabled = true, -- Keep fancy popupmenu
+      },
+      routes = {
+        -- Filter out "yanked" notifications
+        -- Note: The message is often "3 lines yanked" or similar, so we regex match
+        {
+          filter = {
+            event = "msg_show",
+            any = {
+              { find = "%d+ lines yanked" },
+            },
+          },
+          opts = { skip = true },
+        },
       },
     },
   },
