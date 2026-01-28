@@ -4,7 +4,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Use tmux/ssh friendly clipboard
-vim.g.clipboard = "osc52"
+vim.g.clipboard = ""
 
 -- Prevent side colume width changing if lsp shows/stops showing symbols
 vim.opt.signcolumn = "yes"

@@ -17,7 +17,7 @@
       brew install neovim python unzip tree-sitter-cli
     fi
   - nvim --headless "+Lazy! restore" +qa
-  #- nvim --headless -c "lua require('nvim-treesitter').install({'lua','vim','vimdoc','python','java','c','cpp','html','css','javascript','typescript','tsx','sql','go','json','yaml','toml','bash','markdown','markdown_inline','beancount','typst'}):wait(60000)" -c "qa"
+  - nvim --headless -c "lua require('nvim-treesitter').install({'lua','vim','vimdoc','python','java','c','cpp','html','css','javascript','typescript','tsx','sql','go','json','yaml','toml','bash','markdown','markdown_inline','beancount','typst'}):wait(60000)" -c "qa"
 
 
 # - nvim --headless -c "MasonToolsInstallSync" -c "qa"
