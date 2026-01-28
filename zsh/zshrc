@@ -1,9 +1,12 @@
-# Main zsh options
-HISTFILE=~/.local/state/zsh_history
-HISTSIZE=5000
-SAVEHIST=5000
+# History stuff
+HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh_history"
+HISTSIZE=100000
+SAVEHIST=100000
+setopt hist_ignore_space hist_ignore_dups append_history inc_append_history
 
+# Zsh stuff
 bindkey -e #emacs mode
+setopt interactive_comments # allow comments in shell
 setopt autocd #cd by typing dir name
 unsetopt beep #no beeping!
 autoload -Uz compinit
@@ -173,3 +176,11 @@ fi
 eval "$(starship init zsh)"
 precmd() { printf "\e[5 q" } # use bar-shaped cursor
 fastfetch
+
+# autosuggestions
+# requires zsh-autosuggestions
+#source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# syntax highlighting
+# requires zsh-syntax-highlighting package
+#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
