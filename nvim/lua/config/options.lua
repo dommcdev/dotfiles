@@ -45,3 +45,6 @@ vim.o.confirm = true
 
 -- Disable system clipboard sync
 vim.opt.clipboard = ""
+
+-- Disable showing invisible characters (spaces, tabs, etc)
+vim.opt.list = false
