@@ -42,3 +42,6 @@ vim.o.scrolloff = 4
 
 -- raise save confirmation dialog instead of failing for some operations
 vim.o.confirm = true
+
+-- Disable system clipboard sync
+vim.opt.clipboard = ""
