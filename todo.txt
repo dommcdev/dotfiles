@@ -1,9 +1,14 @@
 # To-do
-Gpu passthrough
-Swap out waybar/dunst with some shell+notif center
-Tui for archinstall
-Finish cross-platform dotfiles support
 Nvim stuff
+Tweak auth stuff in fingerprints script
+Screen recording script w/waybar indicator
+
+# Low Priority
+Gpu passthrough
+Quickshell + notif center
+Tui for archinstall options
+Finish cross-platform dotfiles support
+Theme hypr* stuff
 
 # Server
 BorgBackup (or equal.)
