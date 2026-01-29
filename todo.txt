@@ -1,6 +1,4 @@
 # To-do
-Better screenshot tool (Omarchy's w/Satty, screen recording)
-Music player tui
 Gpu passthrough
 Swap out waybar/dunst with some shell+notif center
 Tui for archinstall
@@ -9,7 +7,7 @@ Nvim stuff
 
 # Server
 BorgBackup (or equal.)
-Gitlab, music player, syncthing, etc
+Gitea, Navidrome (+ client), Syncthing
 
 # Things to try
 Windows (+ LookingGlass)
