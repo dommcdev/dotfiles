@@ -3,7 +3,8 @@ systemctl reboot --firmware-setup
 Audio center: wiremix
 Disks: caligula, disktui
 Disk usage: dust, duf
-Convert images/pdfs: magick
+Convert images/pdf-to-image: magick
+Work with pdfs: poppler-utils, e.g. pdfunite
 
 
 
@@ -24,7 +25,7 @@ Archiving/unarchiving
 
 cp command
     When copying *folders*, cp is NOT idempotent.
-    cp src/ dest/ will clone src and rename as dest on a first run, 
+    cp src/ dest/ will clone src and rename as dest on a first run,
     but create dest/src on the second run
     use rsync -a src/ dest/ instead, but keep in mind src/ copies contents of src,
     while src (no trailing /) copies the folder itself
