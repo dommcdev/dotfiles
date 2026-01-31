@@ -376,10 +376,7 @@ return {
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
-      keymap = {
-        preset = "super-tab",
-        ["<C-y>"] = { "select_and_accept", "fallback" },
-      },
+      keymap = { preset = "default" },
       appearance = {
         nerd_font_variant = "mono",
       },
