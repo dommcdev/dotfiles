@@ -1,9 +1,11 @@
-# Depends on: dev.yaml
 
-- link: 
+- link:
     ~/.config/opencode/:
       path: opencode/*
       glob: true
 
 - shell:
-  - npm install -g opencode-ai@latest
+    if [[ "$(./sys id)" == "arch" ]]; then
+      sudo pacman -S --noconfirm --needed opencode
+    elif [[ "$(./sys id)" != "arch" ]]; then
+      bun add -g opencode-ai

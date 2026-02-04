@@ -1,17 +1,16 @@
 
 - shell:
-  # Install node and npm
+  # Install bun (for global packages)
   - |
+    export BUN_INSTALL="$HOME/.local/share/bun"
     if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed nodejs npm
+      sudo pacman -S --noconfirm --needed bun
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
-      sudo apt install -y nodejs npm
+      brew install oven-sh/bun/bun
     elif [[ "$(./sys id)" == "fedora" ]]; then
-      sudo dnf install -y nodejs npm
+      brew install oven-sh/bun/bun
     elif [[ "$(./sys id)" == "mac" ]]; then
-      brew install nodejs
+      brew install oven-sh/bun/bun
     fi
 
-    # set node prefix so global packages are installed in user-owned dir
-    mkdir -p ~/.local/share/npm-global
-    npm config set prefix '~/.local/share/npm-global'
+  -

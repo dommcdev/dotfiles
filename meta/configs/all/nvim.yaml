@@ -11,8 +11,7 @@
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       brew install neovim python unzip tree-sitter-cli
     elif [[ "$(./sys id)" == "fedora" ]]; then
-      brew install neovim tree-sitter-cli
-      sudo dnf install -y python3 python3-devel python3-pip unzip
+      brew install neovim python unzip tree-sitter-cli
     elif [[ "$(./sys id)" == "mac" ]]; then
       brew install neovim python unzip tree-sitter-cli
     fi

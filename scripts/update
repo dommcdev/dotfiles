@@ -71,4 +71,11 @@ if command -v npm &>/dev/null; then
   npm update -g
 fi
 
+
+# bun global packages
+if command -v bun &>/dev/null; then
+  print_section "Updating global bun packages"
+  bun update -g
+fi
+
 print_section "All updates complete!"
