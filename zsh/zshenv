@@ -5,12 +5,11 @@ export VISUAL="nvim" #Fallback for editor
 export ZDOTDIR="$HOME/.config/zsh"
 export ANDROID_HOME="$HOME/programs/Android/Sdk"
 export GOPATH="$HOME/.local/share/go"
-export BUN_INSTALL="$HOME/.local/share/bun"
 
 
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.local/share/npm-global/bin:$PATH"
-export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$HOME/.local/share/bun/bin:$PATH"
 # Homebrew for non-interactive shells
 if [[ -d /home/linuxbrew/.linuxbrew ]]; then
     export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"

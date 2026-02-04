@@ -1,8 +1,17 @@
 
 - shell:
+  # Create the global bunfig to permanently set paths
+  - |
+    cat <<EOF > "$HOME/.config/.bunfig.toml"
+    [install]
+    globalDir = "$HOME/.local/share/bun/install/global"
+    globalBinDir = "$HOME/.local/share/bun/bin"
+
+    [install.cache]
+    dir = "$HOME/.cache/bun"
+    EOF
   # Install bun (for global packages)
   - |
-    export BUN_INSTALL="$HOME/.local/share/bun"
     if [[ "$(./sys id)" == "arch" ]]; then
       sudo pacman -S --noconfirm --needed bun
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
@@ -12,5 +21,3 @@
     elif [[ "$(./sys id)" == "mac" ]]; then
       brew install oven-sh/bun/bun
     fi
-
-  -
