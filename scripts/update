@@ -34,7 +34,7 @@ fi
 # yay (AUR)
 if command -v yay &>/dev/null; then
   print_section "Updating AUR packages"
-  yay -Sua --noconfirm
+  yay -Sua --noconfirm --cleanafter
 fi
 
 # apt (Debian/Ubuntu)
