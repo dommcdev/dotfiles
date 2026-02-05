@@ -23,6 +23,11 @@ git remote add bootstrap git@github.com:dommcdev/bootstrap.git
 ### 2. Push to the Remote Repository
 
 ```bash
+git subtree push --prefix=public bootstrap main
+```
+
+Alternatively (to view changes before pushing):
+```bash
 git subtree split --prefix=public -b split-branch
 git push bootstrap split-branch:main
 ```
