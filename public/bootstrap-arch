@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-#Note - deps installed: git, github-cli, python, openssh, base-devel
+#Note - deps installed: git, python, openssh, base-devel
 
 # Read in computer hostname
 read -p "Please enter your computer hostname: " ARCH_HOST
@@ -15,10 +15,7 @@ archinstall --config /root/user_configuration.json
 # Prepare installation for running dotfiles installer
 echo -e "\n\n--- Archinstall completed successfully. Cloning dotfiles via arch-chroot ... ---\n\n"
 cat << 'EOF' > /mnt/home/dominic/tmp.sh
-gh auth login --web -p ssh
-mkdir -p ~/.ssh && chmod 700 ~/.ssh
-ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
-gh repo clone dommcdev/dotfiles /home/dominic/dev/dotfiles || true
+git clone git@githubcom:dommcdev/dotfiles.git /home/dominic/dev/dotfiles || true
 
 command -v yay > /dev/null || (
     sudo pacman -S --noconfirm --needed base-devel

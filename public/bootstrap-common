@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-#Note - deps installed: git, github-cli, python, homebrew, make, gcc
+#Note - deps installed: git, python, homebrew, make, gcc
 
 # Detect OS
 OS="unknown"
@@ -40,21 +40,11 @@ fi
 # Install dotfile dependencies
 echo "Installing dotfile dependencies..."
 if [[ "$OS" == "ubuntu" ]]; then
-    sudo apt update && sudo apt install -y python3 git gh make gcc
+    sudo apt update && sudo apt install -y python3 git make gcc
 elif [[ "$OS" == "fedora" ]]; then
-    sudo dnf install -y python3 git gh make gcc
+    sudo dnf install -y python3 git make gcc
 elif [[ "$OS" == "mac" ]]; then
-    brew install python3 git gh make gcc
-fi
-
-# Setup github authentication
-if ! gh auth status >/dev/null 2>&1; then
-    echo "Setting up GitHub auth..."
-    mkdir -p ~/.ssh && chmod 700 ~/.ssh
-    gh auth login --web -p ssh
-    ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
-else
-    echo "GitHub already authenticated. Skipping."
+    brew install python3 git make gcc
 fi
 
 # Clone dotfiles

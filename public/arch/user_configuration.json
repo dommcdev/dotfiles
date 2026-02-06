@@ -28,7 +28,7 @@
     "type": "iso"
   },
   "ntp": true,
-  "packages": ["git", "github-cli", "python", "openssh", "base-devel"],
+  "packages": ["git", "python", "openssh", "base-devel"],
   "parallel_downloads": 5,
   "profile_config": {
     "gfx_driver": null,

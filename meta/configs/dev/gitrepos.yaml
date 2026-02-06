@@ -1,0 +1,31 @@
+
+- link:
+
+- shell:
+  # Install github cli
+  - |
+    if [[ "$(./sys id)" == "arch" ]]; then
+      sudo pacman -S --noconfirm --needed github-cli
+    elif [[ "$(./sys id)" != "arch" ]]; then
+      brew install gh
+    fi
+
+  # Authenticate github
+  - |
+    if ! gh auth status >/dev/null 2>&1; then
+        echo "Setting up GitHub auth..."
+        mkdir -p ~/.ssh && chmod 700 ~/.ssh
+        gh auth login --web -p ssh
+        ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
+    else
+        echo "GitHub already authenticated. Skipping."
+    fi
+
+  # Gh-preview-markdown
+  - gh extension install yusukebe/gh-markdown-preview
+    # to update - gh extension upgrade markdown-preview
+    # to use - gh markdown-preview file.md
+
+  # Clone repos
+  - mkdir -p ~/dev/projects ~/dev/external
+  - if [ ! -d "$HOME/dev/courses" ]; then git clone git@github.com:dommcdev/courses.git $HOME/dev/courses; fi
