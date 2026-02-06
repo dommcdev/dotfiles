@@ -8,7 +8,7 @@ read -p "Please enter your computer hostname: " ARCH_HOST
 echo -e "\n\n"
 
 # Run archinstall with included configuration file. Disk selection and user creds are still manual.
-curl -fsSL "https://raw.githubusercontent.com/dommcdev/bootstrap/refs/heads/main/arch/user_configuration.json" -o user_configuration.json
+curl -fsSL "https://raw.githubusercontent.com/dommcdev/dotfiles/refs/heads/main/bootstrap/arch/user_configuration.json" -o user_configuration.json
 sed -i "s/archhostname/${ARCH_HOST}/g" user_configuration.json
 archinstall --config /root/user_configuration.json
 
