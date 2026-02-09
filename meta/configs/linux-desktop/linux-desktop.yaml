@@ -3,11 +3,11 @@
   # Install flatpak, misc packages
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed flatpak smartmontools dosfstools ntfs-3g exfatprogs btrfs-progs xfsprogs wev libinput-tools
+      sudo pacman -S --noconfirm --needed flatpak smartmontools dosfstools ntfs-3g exfatprogs btrfs-progs xfsprogs wev libinput-tools dmidecode
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
-      sudo apt install -y flatpak smartmontools dosfstools ntfs-3g exfatprogs btrfs-progs xfsprogs wev libinput-tools
+      sudo apt install -y flatpak smartmontools dosfstools ntfs-3g exfatprogs btrfs-progs xfsprogs wev libinput-tools dmidecode
     elif [[ "$(./sys id)" == "fedora" ]]; then
-      sudo dnf install -y flatpak smartmontools dosfstools ntfs-3g exfatprogs btrfs-progs xfsprogs wev libinput-utils
+      sudo dnf install -y flatpak smartmontools dosfstools ntfs-3g exfatprogs btrfs-progs xfsprogs wev libinput-utils dmidecode
     fi
   - flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
