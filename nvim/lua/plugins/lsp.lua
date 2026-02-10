@@ -28,7 +28,7 @@ return {
       -- Tools map for on-demand installation
       local tools_by_ft = {
         lua = { "lua-language-server", "stylua" },
-        python = { "ruff" },
+        python = { "pyright", "ruff" },
         c = { "clangd", "clang-format" },
         cpp = { "clangd", "clang-format" },
         java = { "jdtls", "google-java-format" },
@@ -201,8 +201,28 @@ return {
         capabilities = capabilities,
       })
 
+      vim.lsp.config("pyright", {
+        capabilities = capabilities,
+        settings = {
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+              diagnosticMode = "openFilesOnly",
+            },
+          },
+        },
+      })
+
       vim.lsp.config("ruff", {
         capabilities = capabilities,
+        init_options = {
+          settings = {
+            lint = {
+              select = { "E", "F", "I" },
+            },
+          },
+        },
       })
 
       vim.lsp.config("jdtls", {
@@ -259,6 +279,7 @@ return {
           -- LSP servers
           "lua-language-server",
           "clangd",
+          "pyright",
           "ruff",
           "jdtls",
           "html-lsp",
