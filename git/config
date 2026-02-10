@@ -8,6 +8,9 @@
     pager = delta
 [pull]
     rebase = true
+[push]
+    autoSetupRemote = true
+    default = current
 [init]
 	defaultBranch = main
 [alias]
@@ -16,6 +19,7 @@
 --date=format:'%Y-%m-%d %H:%M'
     wip = "!git add . && git commit -m 'wip'"
     lgs = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    undo = reset --soft HEAD^
 
 [interactive]
     diffFilter = delta --color-only
