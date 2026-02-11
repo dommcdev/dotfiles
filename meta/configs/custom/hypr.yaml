@@ -18,7 +18,7 @@
       if: '[ "$(./sys power)" = "0" ]'
 
 - shell:
-  - sudo pacman -S --noconfirm --needed uwsm libnewt xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset grim slurp hyprpolkitagent
+  - sudo pacman -S --noconfirm --needed uwsm libnewt xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset grim slurp hyprpolkitagent satty
   - systemctl --user enable hyprpolkitagent.service
   - systemctl --user enable hyprpaper.service
   - systemctl --user enable hypridle.service

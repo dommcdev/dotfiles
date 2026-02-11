@@ -396,6 +396,9 @@ main() {
 # Custom date format matching old preference
 DATE_FORMAT="Screenshot %Y-%m-%d at %H.%M.%S"
 
+# Use satty as the editor
+GRIMBLAST_EDITOR="satty --filename"
+
 # Custom notification handler using Sushi
 notify::showparentdir() {
     # Force shorter message to match legacy behavior
