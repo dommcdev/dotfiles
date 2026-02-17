@@ -37,3 +37,7 @@ greping through entire git history
 Connecting to edurom (impala)
     Use PEAP. For identity put full email; for phase2 identity put full email; for phase2 password put your stmu password. Leave phase2 method as mschapv2, and leave server domain mask, ca cert, client cert, client key, and key passphrase empty. You will be prompted to enter username/password - enter stmu email/password (again).
     Note - using the eduroam option with full email + full email + password seems to work as well.
+
+
+Networking stuff
+wireless-regdb might be necessary for setting regulartory domain on some wireless cards
