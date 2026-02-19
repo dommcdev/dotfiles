@@ -20,3 +20,8 @@
 
 
 # Subnet router note: Using --accept-routes DOES NOT WORK when on the same network as the subnet router WHEN that subnet router is off. Turn on/off with tailscale set --accept-routes=[true|false]
+#
+# To turn exit node on, do
+#   tailscale set --exit-node=[name]
+# To turn off, do
+#   tailscale set --exit-node=
