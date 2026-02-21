@@ -11,4 +11,6 @@
     fi
 
 
-# pacman -S qt5ct breeze5 #for qt5
+# For qt5 theming
+# pacman -S qt5ct breeze5
+# Also change qt_qpa_platformtheme to qt5ct and symlink qt5ct.conf file
