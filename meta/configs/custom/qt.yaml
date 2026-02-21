@@ -1,0 +1,14 @@
+
+- link:
+    ~/.config/Kvantum: qt
+
+- shell:
+  - |
+    if [[ "$(./sys id)" == "arch" ]]; then
+      sudo pacman -S --noconfirm --needed qt6ct qt5ct kvantum qt5-wayland qt6-wayland
+    elif [[ "$(./sys id)" != "arch" ]]; then
+      echo "To be added"
+    fi
+
+# Todo - I want KDE's theme, probably will require installing their engine, patches, etc
+# Also, I did run qt6ct to select theme. Need to automate that

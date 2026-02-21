@@ -1,8 +1,0 @@
-
-- link:
-    ~/.config/Kvantum: qt
-
-- shell:
-  - sudo pacman -S --noconfirm --needed qt5ct
-
-#Nota bene - need to install (and autostart?) Kvantum manager for this to apply

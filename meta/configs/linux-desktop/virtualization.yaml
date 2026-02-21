@@ -6,3 +6,5 @@
   - sudo virsh net-autostart default || true #true conditional is for when running in a vm
 #  - for f in virtualization/machines/*.xml; do sudo virsh define "$f"; done
 #  Note - the above errors out due to some efi not being found
+#
+# sudo virsh net-list --all
