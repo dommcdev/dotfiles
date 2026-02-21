@@ -1,10 +1,10 @@
 
 - link:
-    ~/.config/gtk-3.0: gtk/gtk-3.0
-    ~/.config/gtk-4.0: gtk/gtk-4.0
-    ~/.config/templates: gtk/templates
-    ~/.config/user-dirs.dirs: gtk/user-dirs.dirs
-    ~/.config/mimeapps.list: gtk/mimeapps.list
+    ~/.config/gtk-3.0: styling/gtk/gtk-3.0
+    ~/.config/gtk-4.0: styling/gtk/gtk-4.0
+    ~/.config/templates: styling/gtk/templates
+    ~/.config/user-dirs.dirs: styling/gtk/user-dirs.dirs
+    ~/.config/mimeapps.list: styling/gtk/mimeapps.list
 
 - shell:
   - mkdir -p ~/Downloads/Screenshots ~/Downloads/Videos

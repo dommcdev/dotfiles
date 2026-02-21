@@ -12,7 +12,6 @@ Quickshell + notif center
 Tui for archinstall options
 Finish cross-platform dotfiles support
 Theme hypr* stuff
-QT theming
 
 # Server
 BorgBackup (or equal.)

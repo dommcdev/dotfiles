@@ -1,7 +1,7 @@
 
 - link:
     ~/.config/fontconfig/fonts.conf:
-      path: fonts/fonts.conf
+      path: styling/fonts/fonts.conf
       if: '[ "$(uname)" = "Linux" ]'
 
 - shell:

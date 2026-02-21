@@ -4,11 +4,9 @@
 - shell:
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
-      yay -S --noconfirm --needed --answerdiff None --answerclean None xcursor-breeze
-      #yay -S --noconfirm --needed --answerdiff None --answerclean None bibata-cursor-theme-bin
+      sudo pacman -S --noconfirm --needed breeze
     elif [[ "$(./sys id)" == "ubuntu" ]]; then
       sudo apt install -y breeze-cursor-theme
-      #sudo apt install -y bibata-cursor-theme
     elif [[ "$(./sys id)" == "fedora" ]]; then
       sudo dnf install -y breeze-cursor-theme
     fi
@@ -27,3 +25,12 @@
 # In Hyprland, place the hyprcursor in ~/.local/share/icons/ and it will automatically be picked up. If you have multiple, set the HYPRCURSOR_THEME and HYPRCURSOR_SIZE env vars in your uwsm env-hyprland file.
 # OR just put exec-once hyprctl setcursor [cursorname] [size] in your hyprland config. This works with Xcursors as well.
 # For xwayland apps put the cursor name in ~/.local/share/icons/default/index.theme (see above)
+
+
+
+
+
+# Nota bene - breeze pkg includes cursors + qt stuff, and conflicts with aur xcursor-breeze pkg
+
+#yay -S --noconfirm --needed --answerdiff None --answerclean None bibata-cursor-theme-bin
+#sudo apt install -y bibata-cursor-theme
