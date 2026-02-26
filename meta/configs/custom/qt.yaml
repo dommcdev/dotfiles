@@ -5,7 +5,8 @@
 - shell:
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed qt6ct qt5-wayland qt6-wayland breeze breeze-icons
+      sudo pacman -S --noconfirm --needed qt5-wayland qt6-wayland breeze breeze-icons
+      yay -S --noconfirm --needed --answerdiff None --answerclean None qt6ct-kde
     elif [[ "$(./sys id)" != "arch" ]]; then
       echo "To be added"
     fi
@@ -14,3 +15,5 @@
 # For qt5 theming
 # pacman -S qt5ct breeze5
 # Also change qt_qpa_platformtheme to qt5ct and symlink qt5ct.conf file
+#
+# If using regular qt6ct package you will need to change qt6ct.conf to use a builtin qt6ct theme file rather than the Breeze.colors ones.
