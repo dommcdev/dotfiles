@@ -13,3 +13,6 @@
       brew install calcurse
     fi
   - if [ ! -d "$HOME/dev/calendar" ]; then gh repo clone dommcdev/calendar ~/dev/calendar; fi
+
+# need to add to hyprland conf
+#exec-once = calcurse --daemon
