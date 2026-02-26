@@ -1,0 +1,12 @@
+[Unit]
+Description=Hyprland Monitor IPC Listener
+After=graphical-session.target
+
+[Service]
+# %h is a systemd variable for your home directory
+ExecStart=%h/.local/bin/monitor-listener.sh
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target

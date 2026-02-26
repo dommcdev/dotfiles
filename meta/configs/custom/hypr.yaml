@@ -10,7 +10,9 @@
     ~/.config/hypr/hypridle.conf:
       path: hypr/hypridle-laptop.conf
       if: '[ "$(./sys power)" = "1" ]'
-#    ~/.config/systemd/user/polkit-gnome.service: hypr/systemd/polkit-gnome.service
+    ~/.config/systemd/user:
+      path: hypr/systemd/*
+      glob: true
 
 - link:
     ~/.config/hypr/hypridle.conf:
@@ -18,11 +20,12 @@
       if: '[ "$(./sys power)" = "0" ]'
 
 - shell:
-  - sudo pacman -S --noconfirm --needed uwsm libnewt xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset grim slurp hyprpolkitagent satty
+  - sudo pacman -S --noconfirm --needed uwsm libnewt xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset grim slurp hyprpolkitagent satty socat
   - systemctl --user enable hyprpolkitagent.service
   - systemctl --user enable hyprpaper.service
   - systemctl --user enable hypridle.service
   - systemctl --user enable hyprsunset.service
+  - systemctl --user enable hyprland-monitor-listener.service
 
   # Don't let systemd-logind handle power button - let hyprland use it
   - sudo sed -i 's/.*HandlePowerKey=.*/HandlePowerKey=ignore/' /etc/systemd/logind.conf
