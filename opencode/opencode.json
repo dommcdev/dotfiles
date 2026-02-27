@@ -1,20 +1,4 @@
 {
-  "$schema": "https://opencode.ai/config.json",
-  //alternatively, use 'system' theme for transparent background but worse color contrast etc
-  "theme": "catppuccin",
-  "provider": {
-    "ollama": {
-      "models": {
-        "glm-5:cloud": {
-          "_launch": true,
-          "name": "glm-5:cloud"
-        }
-      },
-      "name": "Ollama (local)",
-      "npm": "@ai-sdk/openai-compatible",
-      "options": {
-        "baseURL": "http://127.0.0.1:11434/v1"
-      }
-    }
-  }
+  "$schema": "https://opencode.ai/config.json"
+  //  "plugin": ["opencode-gemini-auth@latest"]
 }
