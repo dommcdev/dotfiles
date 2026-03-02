@@ -27,6 +27,7 @@
     wip = "!git add . && git commit -m 'wip'"
     lgs = log --graph --decorate --pretty=oneline --abbrev-commit --all
     undo = reset --soft HEAD^
+    sync = "!f() { git add . && git commit -m \"sync: $(date +'%Y-%m-%d %H:%M:%S')\"; }; f"
 
 [interactive]
     diffFilter = delta --color-only
