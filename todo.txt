@@ -5,6 +5,7 @@ Screen recording script w/waybar indicator
 Ambient light sensor?
 Wifi switching between networks?
 Setup camera on thinkpad
+xdg-desktop-portal-hyprland for hyprpolkitagent theming?
 
 # Low Priority
 Gpu passthrough
