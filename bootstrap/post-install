@@ -13,6 +13,15 @@ sign_in_google() {
     fi
 }
 
+
+login_opencode() {
+    read -rp "Would you like to authenticate opencode? [Y/n] "
+    if [[ "${REPLY,,}" =~ ^y$|^$ ]]; then
+        opencode auth login
+        pause_and_continue
+    fi
+}
+
 start_tailscale() {
     read -rp "Would you like to start tailscale? [Y/n] "
     if [[ "${REPLY,,}" =~ ^y$|^$ ]]; then
@@ -46,6 +55,7 @@ timeshift_setup() {
 }
 
 sign_in_google
+login_opencode
 start_tailscale
 setup_gitrepos
 enroll_fingerprints
