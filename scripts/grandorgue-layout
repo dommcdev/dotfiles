@@ -3,4 +3,4 @@ hyprctl dispatch focuswindow "title:^GrandOrgue v.*"
 hyprctl dispatch layoutmsg togglesplit
 hyprctl dispatch focuswindow "title:^GrandOrgue v.*"
 hyprctl dispatch swapwindow u
-hyprctl dispatch resizewindowpixel exact 100% 10%, "title:^GrandOrgue v.*"
+hyprctl dispatch resizewindowpixel exact 100% 7%, "title:^GrandOrgue v.*"

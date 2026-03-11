@@ -13,4 +13,14 @@
       </metadata>
     </info>
   </bookmark>
+  <bookmark href="smb://srv2/" added="2026-03-10T19:14:01.826891Z" modified="2026-03-10T19:14:01.826905Z" visited="2026-03-10T19:14:01.826895Z">
+    <title>Windows shares on srv2</title>
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <bookmark:applications>
+          <bookmark:application name="org.gnome.Nautilus" exec="&apos;org.gnome.Nautilus %u&apos;" modified="2026-03-10T19:14:01.826899Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
 </xbel>

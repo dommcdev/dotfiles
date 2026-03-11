@@ -47,7 +47,6 @@ export FZF_DEFAULT_OPTS="\
 PS1="%{%F{green}%}%n@%m %{%F{yellow}%}%2~ %{%F{reset}%}%% "
 
 # Aliases
-alias webify='magick "$1" -resize 1920x1080^ -gravity center -extent 1920x1080 -strip -quality 80 "${1%.*}.webp"'
 alias ts='tailscale'
 alias calc='qalc'
 alias bc='bc -l'
@@ -134,6 +133,10 @@ y() {
 	IFS= read -r -d '' cwd < "$tmp"
 	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
+}
+
+webify() {
+  magick "$1" -resize 1920x1080^ -gravity center -extent 1920x1080 -strip -quality 80 "${1%.*}.webp"
 }
 
 # Automtically activate/deactivate python .venv
