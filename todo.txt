@@ -6,7 +6,6 @@ Ambient light sensor?
 Wifi switching between networks?
 xdg-desktop-portal-hyprland for hyprpolkitagent theming?
 Set ghostty as default terminal for stuff
-Set up copilot.lua with better settings (overloaded tab, prioritize my lsp)
 
 # Low Priority
 Gpu passthrough
