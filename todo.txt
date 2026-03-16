@@ -1,5 +1,5 @@
 # To-do
-Nvim stuff
+Nvim stuff (oil, better cmd mode, more lazy loading, etc)
 Tweak auth stuff in fingerprints script
 Screen recording script w/waybar indicator
 Ambient light sensor?
