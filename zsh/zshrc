@@ -166,9 +166,9 @@ auto_venv() {
     source "$found_venv/bin/activate"
   fi
 }
-autoload -U add-zsh-hook
-add-zsh-hook chpwd auto_venv
-auto_venv # Run once on startup
+#autoload -U add-zsh-hook
+#add-zsh-hook chpwd auto_venv
+#auto_venv # Run once on startup
 
 
 # --- Conditional macOS config ---

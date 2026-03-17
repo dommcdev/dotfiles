@@ -4,15 +4,7 @@
   # Various compilers/languages
   - |
     if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed jdk-openjdk clang python python-pip typst deno
-    elif [[ "$(./sys id)" == "ubuntu" ]]; then
-      brew install java llvm python typst deno
-    elif [[ "$(./sys id)" == "fedora" ]]; then
-      brew install java llvm python typst deno
-    elif [[ "$(./sys id)" == "mac" ]]; then
-      brew install java llvm python typst deno
+      sudo pacman -S --noconfirm --needed jdk-openjdk clang python python-pip deno uv
+    elif [[ "$(./sys id)" != "arch" ]]; then
+      brew install java llvm python typst deno uv
     fi
-
-
-
-#sudo apt install -y default-jdk clang python3 python3-dev python3-pip python3-venv
