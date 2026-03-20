@@ -1,3 +1,11 @@
 {
-  "$schema": "https://opencode.ai/config.json"
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["opencode-cursor-oauth"],
+  "provider": {
+    "cursor": {
+      "name": "Cursor"
+    }
+  }
 }
+
+//Note: run `opencode auth login --provider cursor`
