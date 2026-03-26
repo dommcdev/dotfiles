@@ -42,3 +42,7 @@ Connecting to edurom (impala)
 
 Networking stuff
 wireless-regdb might be necessary for setting regulartory domain on some wireless cards
+
+Opencode Notes
+Run `opencode auth login --provider cursor`
+https://github.com/ephraimduncan/opencode-cursor

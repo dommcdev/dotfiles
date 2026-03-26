@@ -18,6 +18,7 @@ login_opencode() {
     read -rp "Would you like to authenticate opencode? [Y/n] "
     if [[ "${REPLY,,}" =~ ^y$|^$ ]]; then
         opencode auth login
+        "Don't forget to do :Copilot auth in nvim for gh copilot"
         pause_and_continue
     fi
 }
