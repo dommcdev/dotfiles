@@ -34,20 +34,18 @@ fi
 
 # Parse data using jq (supports both flat and wrapped wttr.in responses)
 eval "$(echo "$weather_json" | jq -r '
-  (.data // .) as $d |
-  ($d.current_condition[0] // {}) as $cur |
-  ($d.nearest_area[0] // {}) as $area |
-  "code=\(($cur.weatherCode // 0) | tostring)
-temp=\(($cur.temp_F // "--") | tostring)
-desc=\"\(($cur.weatherDesc[0].value // "Unknown") | tostring)\"
-wind_speed=\(($cur.windspeedMiles // "--") | tostring)
-wind_dir=\(($cur.winddir16Point // "") | tostring)
-precip=\(($cur.precipInches // "--") | tostring)
-city=\"\(($area.areaName[0].value // "Local") | tostring)\"
-region=\"\(($area.region[0].value // ($d.request[0].query // "")) | tostring)\"
-country=\"\(($area.country[0].value // "") | tostring)\""
+  .nearest_area[0] as $area |
+  .current_condition[0] |
+  "code=\(.weatherCode)
+temp=\(.temp_F)
+desc=\"\(.weatherDesc[0].value)\"
+wind_speed=\(.windspeedMiles)
+wind_dir=\(.winddir16Point)
+precip=\(.precipInches)
+city=\"\($area.areaName[0].value)\"
+region=\"\($area.region[0].value)\"
+country=\"\($area.country[0].value)\""
 ')"
-
 icon=$(get_icon "$code")
 timestamp=$(date '+%I:%M %p')
 
