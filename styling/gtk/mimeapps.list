@@ -11,7 +11,7 @@ image/gif=org.gnome.Loupe.desktop
 image/webp=org.gnome.Loupe.desktop
 image/bmp=org.gnome.Loupe.desktop
 image/tiff=org.gnome.Loupe.desktop
-application/pdf=org.gnome.Papers.desktop
+application/pdf=org.gnome.Evince.desktop
 video/mp4=org.gnome.Showtime.desktop
 video/x-msvideo=org.gnome.Showtime.desktop
 video/x-matroska=org.gnome.Showtime.desktop
@@ -73,3 +73,4 @@ application/vnd.openxmlformats-officedocument.presentationml.presentation=org.on
 application/vnd.oasis.opendocument.presentation=org.onlyoffice.desktopeditors.desktop
 
 [Added Associations]
+application/pdf=org.gnome.Evince.desktop;
