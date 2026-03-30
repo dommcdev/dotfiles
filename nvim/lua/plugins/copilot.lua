@@ -20,7 +20,6 @@ return {
           require("copilot.suggestion").dismiss()
         end
       end,
-      mode = { "n", "i" },
       desc = "[Copilot] [T]oggle inline",
     },
   },

@@ -46,3 +46,9 @@ wireless-regdb might be necessary for setting regulartory domain on some wireles
 Opencode Notes
 Run `opencode auth login --provider cursor`
 https://github.com/ephraimduncan/opencode-cursor
+
+Git submodules
+Two parts - actual file contents, and commit hash which tries to match those file contents.
+git submodule update --init --recursive --remote grabs the latest commits from the remote (and dotbot does this automatically on each run). This changes both the files and the pointer, so it makes sense to add/commit the updated pointer.
+HOWEVER, if you then do git pull on a different machine, it gets the updated pointer but NOT the updated files - they are now out of sync. If you run git add/commit at this point git will think you want to revert the pointer to match the files you have currently. This will work, but then running git pull on the og machine will then have the same problem, i.e. the files belong to [newer commit] but you just pulled [older commit].
+The solution is to run git submodule update after pulling any commits that change the submodule commit pointer. This ensures that the files you have match the submodule commit pointer you last committed.
