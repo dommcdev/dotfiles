@@ -4,7 +4,6 @@ Tweak auth stuff in fingerprints script
 Screen recording script w/waybar indicator
 Ambient light sensor?
 xdg-desktop-portal-hyprland for hyprpolkitagent theming?
-Set ghostty as default terminal for stuff
 
 # Low Priority
 Gpu passthrough

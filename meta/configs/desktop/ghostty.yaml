@@ -15,4 +15,15 @@
     elif [[ "$(./sys id)" == "mac" ]]; then
       brew install --cask ghostty font-jetbrains-mono-nerd-font
     fi
+
+  # Autostart in background for faster launches
   - if [[ "$(./sys type)" == "Linux" ]]; then systemctl enable --user app-com.mitchellh.ghostty.service; fi
+
+  # Set as default terminal
+  - |
+    if [[ "$(./sys type)" == "Linux" ]]; then
+      cat >~/.config/xdg-terminals.list <<EOF
+    # Terminal emulator preference order for xdg-terminal-exec
+    com.mitchellh.ghostty.desktop
+    EOF
+    fi
