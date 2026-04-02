@@ -42,6 +42,7 @@ return {
         go = { "gopls", "goimports", "gofumpt" },
         typst = { "tinymist", "typstyle" },
         beancount = { "beancount-language-server" },
+        yaml = { "prettierd" },
       }
 
       -- Create an autocommand to install tools when opening a file
@@ -367,6 +368,7 @@ return {
         go = { "goimports", "gofumpt" },
         -- Typst
         typst = { "typstyle" },
+        yaml = { "prettierd" },
       },
       formatters = {
         clang_format = {
