@@ -47,6 +47,7 @@ export FZF_DEFAULT_OPTS="\
 PS1="%{%F{green}%}%n@%m %{%F{yellow}%}%2~ %{%F{reset}%}%% "
 
 # Aliases
+alias ped="uv run ~/dev/dotfiles/scripts/fake-pedals.py"
 alias ts='tailscale'
 alias calc='qalc'
 alias bc='bc -l'
