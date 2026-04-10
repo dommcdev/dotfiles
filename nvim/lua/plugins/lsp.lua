@@ -43,6 +43,8 @@ return {
         typst = { "tinymist", "typstyle" },
         beancount = { "beancount-language-server" },
         yaml = { "prettierd" },
+        json = { "prettierd" },
+        jsonc = { "prettierd" },
       }
 
       -- Create an autocommand to install tools when opening a file
@@ -369,6 +371,8 @@ return {
         -- Typst
         typst = { "typstyle" },
         yaml = { "prettierd" },
+        json = { "prettierd" },
+        jsonc = { "prettierd" },
       },
       formatters = {
         clang_format = {
