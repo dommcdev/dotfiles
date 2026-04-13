@@ -3,7 +3,6 @@ Nvim stuff (oil, better cmd mode, more lazy loading, etc)
 Tweak auth stuff in fingerprints script
 Screen recording script w/waybar indicator
 Ambient light sensor?
-xdg-desktop-portal-hyprland for hyprpolkitagent theming?
 
 # Low Priority
 Gpu passthrough
