@@ -97,8 +97,8 @@ bindkey '^G' forward-char
 bindkey ' ' magic-space
 
 # keybind for typing boilerplate
-bindkey -s '^wgc' 'git commit -m ""\C-b'
-bindkey -s '^wi' "opencode run -m google/gemini-3-flash-preview ''\C-b"
+#bindkey -s '^wgc' 'git commit -m ""\C-b'
+bindkey -s '^wi' "opencode run -m opencode/big-pickle ''\C-b"
 
 # Copy buffer contents to clipboard
 copy-buffer-to-clipboard() {
@@ -136,9 +136,21 @@ y() {
 	rm -f -- "$tmp"
 }
 
-webify() {
-  magick "$1" -resize 1920x1080^ -gravity center -extent 1920x1080 -strip -quality 80 "${1%.*}.webp"
+# Download as high-quality MP3
+vaud() {
+    yt-dlp -x --audio-format mp3 --audio-quality 0 "$1"
 }
+
+# Download video up to 1080p MP4
+vid() {
+    yt-dlp -f 'bv[height<=1080][ext=mp4]+ba[ext=m4a]/b[height<=1080][ext=mp4] / bv[height<=1080]+ba/b[height<=1080]' --merge-output-format mp4 "$1"
+}
+
+# Download absolute best quality available as MP4
+vbest() {
+    yt-dlp -f 'bv*+ba/b' --merge-output-format mp4 "$1"
+}
+
 
 # Automtically activate/deactivate python .venv
 auto_venv() {
