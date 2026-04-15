@@ -33,10 +33,10 @@
     ddiff = -c diff.external=difft diff
 
     # Git log
-    lg = log --graph --abbrev-commit --decorate --all --color \
---pretty=format:'%C(bold red)%h%C(reset) - %C(bold cyan)%ad%C(reset) %C(bold yellow)(%ar)%C(reset) %C(bold magenta)%d%C(reset) %s - %C(bold green)%an%C(reset)' \
+    lgp = log --graph --abbrev-commit --decorate --all --color \
+--pretty=format:'%C(bold red)%h%C(reset) - %C(bold cyan)%ad%C(reset) %C(bold magenta)%d%C(reset) %s - %C(bold green)%an%C(reset)' \
 --date=format:'%Y-%m-%d %H:%M'
-    lgs = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    lg = log --graph --decorate --pretty=oneline --abbrev-commit --all
 
 [interactive]
     diffFilter = delta --color-only
