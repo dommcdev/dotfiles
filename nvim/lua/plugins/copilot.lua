@@ -28,7 +28,7 @@ return {
 
     require("copilot").setup({
       suggestion = {
-        enabled = true,
+        enabled = false,
         auto_trigger = true,
         keymap = {
           accept = false, -- Handled by our custom Supertab below
