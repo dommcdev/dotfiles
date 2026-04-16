@@ -16,6 +16,9 @@ return {
     cmdline = {
       view = "cmdline",
     },
+    messages = {
+      enabled = true, -- Keep message handling enabled
+    },
     presets = {
       bottom_search = true,
       command_palette = true,
