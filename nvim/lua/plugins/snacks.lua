@@ -8,8 +8,14 @@ return {
     bigfile = { enabled = true },
     terminal = { enabled = true },
     dashboard = { enabled = true },
-    explorer = { enabled = true },
+    explorer = {
+      enabled = true,
+      replace_netrw = true,
+      trash = true,
+    },
+    gitbrowse = {},
     indent = { enabled = false },
+    input = {},
     notifier = {
       enabled = true,
       timeout = 3000,
@@ -39,6 +45,13 @@ return {
   },
   keys = {
     -- Top Pickers & Explorer
+    {
+      "<leader>gi",
+      function()
+        Snacks.git.blame_line()
+      end,
+      desc = "Git Blame Line",
+    },
     {
       "<leader><leader>",
       function()
@@ -127,7 +140,7 @@ return {
     },
     -- git
     {
-      "<leader>gb",
+      "<leader>gt",
       function()
         Snacks.picker.git_branches()
       end,
@@ -354,8 +367,37 @@ return {
       end,
       desc = "Dismiss All Notifications",
     },
-    { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
-    { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
+    {
+      "]]",
+      function()
+        Snacks.words.jump(vim.v.count1)
+      end,
+      desc = "Next Reference",
+      mode = { "n", "t" },
+    },
+    {
+      "[[",
+      function()
+        Snacks.words.jump(-vim.v.count1)
+      end,
+      desc = "Prev Reference",
+      mode = { "n", "t" },
+    },
+
+    {
+      "<leader>gb",
+      function()
+        Snacks.gitbrowse()
+      end,
+      desc = "Git Browse (File)",
+    },
+    {
+      "<leader>gB",
+      function()
+        Snacks.gitbrowse({ what = "repo" })
+      end,
+      desc = "Git Browse (repo)",
+    },
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {
