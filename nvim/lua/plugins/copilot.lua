@@ -2,22 +2,28 @@ return {
   "zbirenbaum/copilot.lua",
   cmd = "Copilot",
   event = "InsertEnter",
+  init = function()
+    vim.g.copilot_inline_suggestions_off = true
+  end,
   keys = {
     {
       "<leader>ct",
       function()
-        -- Inline suggestions only (keeps Copilot LSP running). See :h copilot.txt
-        -- copilot_suggestion_hidden / copilot_suggestion_auto_trigger.
-        vim.g.copilot_inline_suggestions_off = not (vim.g.copilot_inline_suggestions_off == true)
-        local off = vim.g.copilot_inline_suggestions_off == true
+        vim.g.copilot_inline_suggestions_off = not vim.g.copilot_inline_suggestions_off
+        local off = vim.g.copilot_inline_suggestions_off
+
         for _, buf in ipairs(vim.api.nvim_list_bufs()) do
           if vim.api.nvim_buf_is_valid(buf) then
             vim.b[buf].copilot_suggestion_hidden = off
-            vim.b[buf].copilot_suggestion_auto_trigger = off and false or nil
+            vim.b[buf].copilot_suggestion_auto_trigger = not off
           end
         end
+
         if off then
           require("copilot.suggestion").dismiss()
+          print("Copilot inline: OFF")
+        else
+          print("Copilot inline: ON")
         end
       end,
       desc = "[Copilot] [T]oggle inline",
@@ -28,10 +34,10 @@ return {
 
     require("copilot").setup({
       suggestion = {
-        enabled = false,
-        auto_trigger = true,
+        enabled = true,
+        auto_trigger = false,
         keymap = {
-          accept = false, -- Handled by our custom Supertab below
+          accept = false,
           next = "<M-]>",
           prev = "<M-[>",
           dismiss = "<C-]>",
@@ -39,7 +45,7 @@ return {
       },
       -- Security: Don't attach to sensitive files
       filetypes = {
-        markdown = true,
+        markdown = false,
         help = false,
         gitcommit = false,
         sh = function()
