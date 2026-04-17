@@ -1,13 +1,13 @@
-
 - link:
     ~/.config/opencode/:
       path: opencode/*
       glob: true
 
 - shell:
-  - |
-    if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed opencode
-    elif [[ "$(./sys id)" != "arch" ]]; then
-      bun add -g opencode-ai
-    fi
+    - |
+      if [[ "$(./sys id)" == "arch" ]]; then
+        #sudo pacman -S --noconfirm --needed opencode
+        bun add -g opencode-ai
+      elif [[ "$(./sys id)" != "arch" ]]; then
+        bun add -g opencode-ai
+      fi
