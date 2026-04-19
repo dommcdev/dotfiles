@@ -46,7 +46,11 @@ export FZF_DEFAULT_OPTS="\
 # Fallback prompt
 PS1="%{%F{green}%}%n@%m %{%F{yellow}%}%2~ %{%F{reset}%}%% "
 
-# Aliases
+
+################################################################################################
+############################################ Aliases ###########################################
+################################################################################################
+
 alias ped="uv run ~/dev/dotfiles/scripts/fake-pedals.py"
 alias ts='tailscale'
 alias calc='qalc'
@@ -59,7 +63,7 @@ alias la='eza -la'
 alias lst='eza --tree'
 alias grep='grep --color=auto'
 alias vi='nvim'
-alias iv='nvim' #common typo
+alias iv='nvim'
 alias vim='nvim'
 alias fs='fastfetch'
 alias fsf='fastfetch -c full.jsonc'
@@ -83,30 +87,11 @@ alias rbig='rsync -ahPz --stats --inplace'
 alias rmirror='rsync -ahP --delete'
 #alias -g C='| wl-copy' #somehwat risky
 
-# Tmux-sessionizer
-bindkey -s '^t' "tmux-sessionizer\n"
-bindkey -s '\eh' "tmux-sessionizer -s 0\n"
-bindkey -s '\ej' "tmux-sessionizer -s 1\n"
-bindkey -s '\ek' "tmux-sessionizer -s 2\n"
-bindkey -s '\el' "tmux-sessionizer -s 3\n"
 
-# Because useful C-f bind conflicts with my tmux prefix, rebind forward-char to C-g
-bindkey '^G' forward-char
 
-# Hitting space will expand stuff like !!
-bindkey ' ' magic-space
-
-# keybind for typing boilerplate
-#bindkey -s '^wgc' 'git commit -m ""\C-b'
-bindkey -s '^wi' "opencode run -m opencode/big-pickle ''\C-b"
-
-# Copy buffer contents to clipboard
-copy-buffer-to-clipboard() {
-   echo -n "$BUFFER" | wl-copy
-   zle -M "Copied to clipboard"
-}
-zle -N copy-buffer-to-clipboard
-bindkey '^wc' copy-buffer-to-clipboard
+################################################################################################
+########################################### Functions ##########################################
+################################################################################################
 
 paste-from-clipboard() {
     if command -v wl-paste >/dev/null; then
@@ -115,17 +100,12 @@ paste-from-clipboard() {
         LBUFFER+="$(pbpaste)"
     fi
 }
-zle -N paste-from-clipboard
-bindkey '^V' paste-from-clipboard
 
-
-# Open buffer line in editor
-autoload -Uz edit-command-line
-zle -N edit-command-line
-bindkey '^we' edit-command-line
-
-# Zoxide
-eval "$(zoxide init --cmd cd zsh)"
+# Copy prompt to clipboad (keybind below)
+copy-buffer-to-clipboard() {
+   echo -n "$BUFFER" | wl-copy
+   zle -M "Copied to clipboard"
+}
 
 # Run yazi with 'y', change cwd when exiting yazi
 y() {
@@ -151,38 +131,64 @@ vbest() {
     yt-dlp -f 'bv*+ba/b' --merge-output-format mp4 "$1"
 }
 
+# Call ghostty-sessionizer script to fuzzy-find project dir, then cd to it
+fzf_project_jump() {
+    local target_dir
 
-# Automtically activate/deactivate python .venv
-auto_venv() {
-  # 1. Find the nearest venv by climbing up
-  local dir="$PWD"
-  local found_venv=""
-  while [[ "$dir" != "/" ]]; do
-    if [[ -f "$dir/.venv/bin/activate" ]]; then
-      found_venv="$dir/.venv"
-      break
+    target_dir=$(ghostty-sessionizer.sh)
+
+    if [[ -n "$target_dir" && -d "$target_dir" ]]; then
+        cd "$target_dir"
+
+        zle reset-prompt
     fi
-    dir="${dir:h}"
-  done
-
-  # 2. If we are in a venv that DOESN'T match what we found (or we found nothing)
-  if [[ -n "$VIRTUAL_ENV" && "$VIRTUAL_ENV" != "$found_venv" ]]; then
-    if typeset -f deactivate > /dev/null; then
-      deactivate
-    else
-      unset VIRTUAL_ENV
-    fi
-  fi
-
-  # 3. If we found a venv and it's not already the active one, source it
-  if [[ -n "$found_venv" && "$VIRTUAL_ENV" != "$found_venv" ]]; then
-    source "$found_venv/bin/activate"
-  fi
 }
-#autoload -U add-zsh-hook
-#add-zsh-hook chpwd auto_venv
-#auto_venv # Run once on startup
 
+
+
+
+################################################################################################
+############################################ Keybinds ##########################################
+################################################################################################
+
+# Tmux-sessionizer
+bindkey -s '^t' "tmux-sessionizer\n"
+
+# Because useful C-f bind conflicts with my tmux prefix, rebind forward-char to C-g
+bindkey '^G' forward-char
+
+# Hitting space will expand stuff like !!
+bindkey ' ' magic-space
+
+# Keybinds for typing boilerplate
+bindkey -s '^wi' "opencode run -m opencode/big-pickle ''\C-b"
+
+# Copy buffer contents to clipboard
+zle -N copy-buffer-to-clipboard
+bindkey '^wc' copy-buffer-to-clipboard
+
+#Make ctrl-v work
+zle -N paste-from-clipboard
+bindkey '^V' paste-from-clipboard
+
+# Open buffer line in editor
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^we' edit-command-line
+
+# Ghostty sessionizer
+#zle -N fzf_project_jump
+#bindkey '^t' fzf_project_jump
+
+
+
+
+################################################################################################
+############################################ Finalize ##########################################
+################################################################################################
+
+# Zoxide
+eval "$(zoxide init --cmd cd zsh)"
 
 # --- Conditional macOS config ---
 if [[ "$(uname)" == "Darwin" ]]; then
@@ -194,10 +200,8 @@ eval "$(starship init zsh)"
 precmd() { printf "\e[5 q" } # use bar-shaped cursor
 fastfetch
 
-# autosuggestions
-# requires zsh-autosuggestions
+# autosuggestions - requires zsh-autosuggestions
 #source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# syntax highlighting
-# requires zsh-syntax-highlighting package
+# syntax highlighting - requires zsh-syntax-highlighting
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
