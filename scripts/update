@@ -66,10 +66,10 @@ if command -v flatpak &>/dev/null; then
 fi
 
 # npm global packages
-if command -v npm &>/dev/null; then
-  print_section "Updating global npm packages"
-  npm update -g
-fi
+#if command -v npm &>/dev/null; then
+#  print_section "Updating global npm packages"
+#  npm update -g
+#fi
 
 
 # bun global packages

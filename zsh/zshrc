@@ -68,6 +68,8 @@ PS1="%{%F{green}%}%n@%m %{%F{yellow}%}%2~ %{%F{reset}%}%% "
 ############################################ Aliases ###########################################
 ################################################################################################
 
+alias bungl='bun list -g --depth=0'
+alias npmgl='npm list -g --depth=0'
 alias ped="uv run ~/dev/dotfiles/scripts/fake-pedals.py"
 alias ts='tailscale'
 alias calc='qalc'

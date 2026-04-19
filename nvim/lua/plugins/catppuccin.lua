@@ -1,7 +1,6 @@
 return {
   "catppuccin/nvim",
   name = "catppuccin",
-  version = "*",
   priority = 1000,
   config = function()
     require("catppuccin").setup({
@@ -11,6 +10,10 @@ return {
         dark = "mocha",
       },
       transparent_background = true, -- disables setting the background color.
+      float = {
+        transparent = true,
+        solid = false,
+      },
       show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
       term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
       dim_inactive = {
@@ -39,7 +42,8 @@ return {
       color_overrides = {},
       custom_highlights = {},
       default_integrations = true,
-      integrations = {
+      auto_integrations = true, --automatically detect installed plugins and enabled their respective integrations
+      integrations = { --the part technically optional due to line above
         blink_cmp = true,
         gitsigns = true,
         harpoon = true,
