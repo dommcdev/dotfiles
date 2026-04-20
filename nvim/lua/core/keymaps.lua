@@ -11,7 +11,7 @@ vim.keymap.set("n", "<leader>t", function()
       position = "float",
       height = 0.9,
       width = 0.9,
-      border = "rounded",
+      border = "single",
     },
   })
 end, { desc = "Toggle Terminal" })
@@ -31,3 +31,4 @@ vim.keymap.set("n", "J", "mzJ`z")
 -- Yank to system clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", 'gg"+yG')
+vim.keymap.set("n", "<leader>cp", 'gg"+yG')
