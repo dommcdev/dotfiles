@@ -1,4 +1,3 @@
-
 - link:
     ~/.config/hypr:
       path: hypr/*
@@ -20,15 +19,13 @@
       if: '[ "$(./sys power)" = "0" ]'
 
 - shell:
-  - sudo pacman -S --noconfirm --needed uwsm libnewt xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset grim slurp hyprpolkitagent satty
-  - systemctl --user enable hyprpolkitagent.service
-  - systemctl --user enable hyprpaper.service
-  - systemctl --user enable hypridle.service
-  - systemctl --user enable hyprsunset.service
+    - sudo pacman -S --noconfirm --needed uwsm libnewt xdg-desktop-portal-hyprland xdg-desktop-portal-gtk hyprland hyprlock hypridle hyprpaper hyprpicker hyprsunset grim slurp hyprpolkitagent satty hyprland-qt-support
+    - systemctl --user enable hyprpolkitagent.service
+    - systemctl --user enable hyprpaper.service
+    - systemctl --user enable hypridle.service
+    - systemctl --user enable hyprsunset.service
 
-  # Don't let systemd-logind handle power button - let hyprland use it
-  - sudo sed -i 's/.*HandlePowerKey=.*/HandlePowerKey=ignore/' /etc/systemd/logind.conf
-
-
+    # Don't let systemd-logind handle power button - let hyprland use it
+    - sudo sed -i 's/.*HandlePowerKey=.*/HandlePowerKey=ignore/' /etc/systemd/logind.conf
 #- sudo pacman -S --noconfirm --needed polkit-gnome && systemctl --user enable polkit-gnome.service
 #- sudo pacman -S --noconfirm --needed socat && systemctl --user enable hyprland-monitor-listener.service
