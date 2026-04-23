@@ -30,5 +30,4 @@ vim.keymap.set("n", "J", "mzJ`z")
 
 -- Yank to system clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", 'gg"+yG')
-vim.keymap.set("n", "<leader>cp", 'gg"+yG')
+vim.keymap.set("n", "<leader>Y", ":%y+<CR>", { desc = "Copy whole file" })
