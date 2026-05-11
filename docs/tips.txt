@@ -7,6 +7,7 @@ Convert images/pdf-to-image: magick
 Work with pdfs: poppler-utils, e.g. pdfunite
 View hardware info etc: hostnamectl
 Laptop mirroring wonky: hyprctl reload
+hunk diff for diff tui
 
 
 

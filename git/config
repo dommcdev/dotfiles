@@ -11,7 +11,7 @@
 	email = dominicmcdev@gmail.com
 	name = Dominic
 [core]
-	excludesfile = $HOME/.config/git/ignore
+  	excludesfile = $HOME/.config/git/ignore
     pager = delta
 [pull]
     rebase = true
