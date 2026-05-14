@@ -1,17 +1,5 @@
-Host chocobo
-    HostName chocobo
-    User dominic
-
-Host kabigon
-    HostName kabigon
-    User dominic
-
-Host pikachu
-    HostName pikachu
-    User dominic
-
-Host applepie
-    HostName applepie
+Host chocobo kabigon pikachu applepie
+    HostName %h.tetra-salmon.ts.net
     User dominic
 
 Host srv2
