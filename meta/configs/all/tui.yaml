@@ -1,4 +1,3 @@
-
 - link:
     ~/.config/bat: tui/bat
     ~/.config/btop: tui/btop
@@ -12,25 +11,23 @@
       glob: true
 
 - shell:
-  - |
-    if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed bat yazi btop fastfetch cava gnuplot bc libqalculate bluetui wiremix
-      yay -S --noconfirm --needed --answerdiff None --answerclean None ripdrag disktui
-    elif [[ "$(./sys id)" == "ubuntu" ]]; then
-      brew install bat yazi btop fastfetch
-      sudo apt install -y cava gnuplot bc qalc
-    elif [[ "$(./sys id)" == "fedora" ]]; then
-      brew install bat yazi btop fastfetch
-      sudo dnf install -y cava gnuplot bc libqalculate wiremix
-    elif [[ "$(./sys id)" == "mac" ]]; then
-      brew install bat yazi btop fastfetch cava gnuplot bc libqalculate
-    fi
-  - bat cache --build
-  - cd ~/.config/yazi && ya pkg install
-
+    - |
+      if [[ "$(./sys id)" == "arch" ]]; then
+        sudo pacman -S --noconfirm --needed bat yazi btop fastfetch cava gnuplot bc libqalculate bluetui wiremix
+      elif [[ "$(./sys id)" == "ubuntu" ]]; then
+        brew install bat yazi btop fastfetch
+        sudo apt install -y cava gnuplot bc qalc
+      elif [[ "$(./sys id)" == "fedora" ]]; then
+        brew install bat yazi btop fastfetch
+        sudo dnf install -y cava gnuplot bc libqalculate wiremix
+      elif [[ "$(./sys id)" == "mac" ]]; then
+        brew install bat yazi btop fastfetch cava gnuplot bc libqalculate
+      fi
+    - bat cache --build
+    - cd ~/.config/yazi && ya pkg install
 #Notes
 #Cava does not work on mac without additional setup
-#Ripdrag, disktui, bluetui, and wiremix not present on ubuntu
+#Bluetui, and wiremix not present on ubuntu
 #
 #
 # Ascii-image-converter
