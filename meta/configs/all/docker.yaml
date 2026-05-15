@@ -1,49 +1,25 @@
-
 - link: {}
 
 - shell:
-  - |
-    if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed docker docker-compose lazydocker
-    elif [[ "$(./sys id)" == "ubuntu" ]]; then
-      curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
-      sudo sh /tmp/get-docker.sh
-      brew install lazydocker
-    elif [[ "$(./sys id)" == "fedora" ]]; then
-      curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
-      sudo sh /tmp/get-docker.sh
-      brew install lazydocker
-    elif [[ "$(./sys id)" == "mac" ]]; then
-      brew install docker docker-compose lazydocker
-    fi
-  - |
-    if [[ "$(./sys type)" == "Linux" ]]; then
-      # Limit Docker log sizes
-      sudo mkdir -p /etc/docker
-      sudo tee /etc/docker/daemon.json >/dev/null <<'EOF'
-    {
-      "log-driver": "json-file",
-      "log-opts": { "max-size": "10m", "max-file": "5" }
-    }
-    EOF
+    - |
+      if [[ "$(./sys id)" == "arch" ]]; then
+        sudo pacman -S --noconfirm --needed docker docker-compose lazydocker
+      elif [[ "$(./sys id)" == "ubuntu" ]]; then
+        curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
+        sudo sh /tmp/get-docker.sh
+        brew install lazydocker
+      elif [[ "$(./sys id)" == "fedora" ]]; then
+        curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
+        sudo sh /tmp/get-docker.sh
+        brew install lazydocker
+      elif [[ "$(./sys id)" == "mac" ]]; then
+        brew install docker docker-compose lazydocker
+      fi
+    - |
+      if [[ "$(./sys type)" == "Linux" ]]; then
+        sudo systemctl enable --now docker
+        sudo usermod -aG docker $USER
+        sudo systemctl restart docker 2>/dev/null || true
+      fi
 
-      # Prevent Docker from blocking boot
-      sudo mkdir -p /etc/systemd/system/docker.service.d
-      sudo tee /etc/systemd/system/docker.service.d/no-block-boot.conf >/dev/null <<'EOF'
-    [Unit]
-    DefaultDependencies=no
-    EOF
-
-      sudo systemctl daemon-reload
-      sudo systemctl enable --now docker
-      sudo usermod -aG docker $USER
-
-      # let libvirt traffic through
-      # Using -I FORWARD 1 ensures these rules stay at the top of the stack
-      sudo iptables -C FORWARD -i virbr0 -j ACCEPT 2>/dev/null || \
-      sudo iptables -I FORWARD 1 -i virbr0 -j ACCEPT
-      sudo iptables -C FORWARD -o virbr0 -j ACCEPT 2>/dev/null || \
-      sudo iptables -I FORWARD 1 -o virbr0 -j ACCEPT
-
-      sudo systemctl restart docker 2>/dev/null || true
-    fi
+#TODO ideally desktop machines would only enable docker.socket

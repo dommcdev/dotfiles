@@ -7,7 +7,7 @@
     - mkdir -p ~/Downloads/Screenshots ~/Downloads/Videos
 
       # Install GUI packages
-    - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed audacity decibels papers loupe showtime libreoffice-fresh blender kdenlive gnome-disk-utility gimp resources evince celluloid; fi
+    - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed audacity decibels papers loupe showtime libreoffice-fresh blender kdenlive gnome-disk-utility gimp resources evince celluloid blutui wiremix gnuplot cava; fi
     - if [ "$(uname)" = "Linux" ]; then flatpak install --assumeyes --noninteractive flathub org.nickvision.tubeconverter com.github.PintaProject.Pinta; fi
 
     # Nautilus
@@ -17,6 +17,19 @@
         gsettings set org.gnome.nautilus.icon-view captions "['size', 'none', 'none']"
         gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true
       fi
+
+# For future
+#      elif [[ "$(./sys id)" == "ubuntu" ]]; then
+#        sudo apt install -y cava gnuplot
+#      elif [[ "$(./sys id)" == "fedora" ]]; then
+#        sudo dnf install -y cava gnuplot wiremix
+#      elif [[ "$(./sys id)" == "mac" ]]; then
+#        brew install cava gnuplot
+#      fi
+#
+#Notes
+#Cava does not work on mac without additional setup
+#Bluetui, and wiremix not present on ubuntu
 
 # Kicked out
 #gnome-power-manager, gnome-calender
