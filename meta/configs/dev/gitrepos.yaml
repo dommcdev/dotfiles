@@ -29,4 +29,4 @@
     # Edit previously cloned repos to have ssh rather than https remotes
     - |
       if [ -d "$HOME/dev/dotfiles" ]; then cd "$HOME/dev/dotfiles" && git remote set-url origin git@github.com:dommcdev/dotfiles.git; fi
-     if [ -d "$HOME/dev/wallpapers" ]; then cd "$HOME/dev/wallpapers" && git remote set-url origin git@github.com:dommcdev/wallpapers.git; fi
+      if [ -d "$HOME/dev/wallpapers" ]; then cd "$HOME/dev/wallpapers" && git remote set-url origin git@github.com:dommcdev/wallpapers.git; fi
