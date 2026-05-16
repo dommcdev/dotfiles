@@ -14,7 +14,7 @@ elif [ -f /etc/os-release ]; then
     BREW_BIN="/home/linuxbrew/.linuxbrew/bin/brew"
 fi
 
-DOTFILES_REPO="git@github.com:dommcdev/dotfiles.git"
+DOTFILES_REPO="https://github.com/dommcdev/dotfiles.git"
 DOTFILES_DIR="$HOME/dev/dotfiles"
 
 
