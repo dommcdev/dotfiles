@@ -5,45 +5,45 @@ hash = "92fbb5483657fa7976cdf4e0104e18e0"
 
 [[plugin.deps]]
 use = "Lil-Dank/lazygit"
-rev = "0e56060"
-hash = "ab2e66065a94cca4886b303518e44bd8"
+rev = "e73fd74"
+hash = "6ea5f37c7f219671ec504cb8311f889d"
 
 [[plugin.deps]]
 use = "boydaihungst/restore"
-rev = "6395e52"
-hash = "f107436db5d2cccccc11ab54bc97b761"
+rev = "0e08704"
+hash = "e4d7c06510b4fe5f64ae31fbb4e017d6"
 
 [[plugin.deps]]
 use = "uhs-robert/recycle-bin"
-rev = "53ad17c"
-hash = "80221fe740a6f251d35845d29391bea7"
+rev = "fa68711"
+hash = "8714306b5cac6359edbacbf545fbd691"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "80cd5b5"
-hash = "3996fc74044bc44144b323686f887e1"
+rev = "5d5c480"
+hash = "7b625412411be411153886894d9acaf"
 
 [[plugin.deps]]
 use = "Rolv-Apneseth/starship"
-rev = "eca1861"
-hash = "e519d894e94ded741e06aae4d4775981"
+rev = "a837101"
+hash = "635b0feb9215772d22020eb0abf0bb34"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "80cd5b5"
-hash = "e2d4bfccf31e5ab05f46fee4797c5215"
+rev = "5d5c480"
+hash = "e3260d0b1feded8c8e3ae3afa1169e30"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "80cd5b5"
-hash = "170317244d60fbe70ad3cc3353358480"
+rev = "5d5c480"
+hash = "88e56a64b7ce7c4314427452343fef17"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "9276ffa"
-hash = "b951d27afe197d154f6da9683b46c5f8"
+rev = "0670801"
+hash = "7dfe41c9c3d9be76da8a844263d0bbed"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-latte"
-rev = "9276ffa"
-hash = "525675a9180ed23a097b07399627294a"
+rev = "0670801"
+hash = "b8f46853c27707115f25f3423a47bd38"
