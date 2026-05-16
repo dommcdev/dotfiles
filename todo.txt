@@ -13,6 +13,7 @@ Theme hypr* stuff
 
 # Server
 BorgBackup (or equal.)
+Setup github mirroring
 Navidrome (+ client)
 
 # Things to try
