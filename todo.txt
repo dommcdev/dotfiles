@@ -13,7 +13,7 @@ Theme hypr* stuff
 
 # Server
 BorgBackup (or equal.)
-Gitea, Navidrome (+ client), Syncthing
+Navidrome (+ client)
 
 # Things to try
 Windows (+ LookingGlass)
