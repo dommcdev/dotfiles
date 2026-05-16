@@ -1,0 +1,17 @@
+- link: {}
+
+- shell:
+    - |
+      if [[ "$(./sys id)" == "arch" ]]; then
+        sudo pacman -S --noconfirm --needed syncthing
+      elif [[ "$(./sys id)" == "fedora" ]]; then
+        sudo dnf install -y syncthing
+      elif [[ "$(./sys id)" == "ubuntu" ]]; then
+        sudo apt install -y syncthing
+      elif [[ "$(./sys id)" == "mac" ]]; then
+        brew install syncthing
+      fi
+    - |
+      if [[ "$(./sys type)" == "Linux" ]]; then
+        systemctl --user enable --now syncthing
+      fi
