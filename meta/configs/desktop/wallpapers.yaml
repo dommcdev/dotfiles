@@ -1,3 +1,2 @@
-
 - shell:
-  - if [ ! -d "$HOME/dev/wallpapers" ]; then git clone git@github.com:dommcdev/wallpapers.git $HOME/dev/wallpapers; fi
+    - if [ ! -d "$HOME/dev/wallpapers" ]; then git clone https://github.com/dommcdev/wallpapers.git $HOME/dev/wallpapers; fi
