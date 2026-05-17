@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+SRC_DIR="$HOME/photos/upload"
+TARGET_DIR="$HOME/photos"
+MISC_DIR="$TARGET_DIR/misc"
+
+# Ensure the ingress and fallback directories exist
+mkdir -p "$SRC_DIR" "$MISC_DIR"
+
+# Prevent the loop from running on a literal '*' if the directory is empty
+shopt -s nullglob
+files=("${SRC_DIR}"/*)
+
+if [ ${#files[@]} -eq 0 ]; then
+    echo "No files found in $SRC_DIR to process."
+    exit 0
+fi
+
+for file in "${files[@]}"; do
+    # Skip directories if any accidentally exist inside upload/
+    [ -f "$file" ] || continue
+
+    # Extract Year/Month using ExifTool.
+    # Tries DateTimeOriginal first (camera capture), falls back to CreateDate (digitized time).
+    SUB_DIR=$(exiftool -d "%Y/%m" -p '$DateTimeOriginal' "$file" 2>/dev/null \
+           || exiftool -d "%Y/%m" -p '$CreateDate' "$file" 2>/dev/null || true)
+
+    if [ -n "$SUB_DIR" ]; then
+        DEST="$TARGET_DIR/$SUB_DIR"
+        mkdir -p "$DEST"
+        mv "$file" "$DEST/"
+        echo "Sorted: $(basename "$file") -> $SUB_DIR/"
+    else
+        mv "$file" "$MISC_DIR/"
+        echo "No EXIF found. Moved to misc: $(basename "$file")"
+    fi
+done
+
+echo "Processing complete."
