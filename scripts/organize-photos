@@ -1,0 +1,426 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+usage() {
+    cat <<'EOF'
+Usage: temp-sort-photos.sh YEAR [ROOT_DIR]
+
+Recursively sorts image/video files under ROOT_DIR into exactly these folders:
+  ROOT_DIR/01 ... ROOT_DIR/12, plus ROOT_DIR/misc when needed
+
+Files are dated from EXIF/media metadata using exiftool, not OS timestamps.
+Dated files are renamed like:
+  IMG_YYYYMMDD_HHMMSSNNN.ext
+
+Examples:
+  temp-sort-photos.sh 2026 ~/photos/2026
+  temp-sort-photos.sh 2026              # uses ~/photos/2026
+EOF
+}
+
+die() {
+    printf 'Error: %s\n' "$*" >&2
+    exit 1
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+    usage
+    exit 0
+fi
+
+if ! command -v exiftool >/dev/null 2>&1; then
+    cat >&2 <<'EOF'
+Error: exiftool is not installed.
+
+Install it first:
+  Arch:   sudo pacman -S perl-image-exiftool
+  Ubuntu: sudo apt install libimage-exiftool-perl
+  macOS:  brew install exiftool
+EOF
+    exit 1
+fi
+
+YEAR="${1:-}"
+[[ "$YEAR" =~ ^[0-9]{4}$ ]] || {
+    usage >&2
+    die "YEAR must be a four-digit year."
+}
+
+ROOT_DIR="${2:-$HOME/photos/$YEAR}"
+[[ -d "$ROOT_DIR" ]] || die "ROOT_DIR does not exist: $ROOT_DIR"
+
+ROOT_DIR="$(realpath "$ROOT_DIR")"
+MISC_DIR="$ROOT_DIR/misc"
+
+is_managed_dir() {
+    local name="$1"
+    [[ "$name" =~ ^(0[1-9]|1[0-2]|misc)$ ]]
+}
+
+lower_ext() {
+    local filename="$1"
+    local ext
+
+    if [[ "$filename" == *.* && "$filename" != .* ]]; then
+        ext="${filename##*.}"
+    else
+        ext="file"
+    fi
+
+    printf '%s\n' "${ext,,}"
+}
+
+first_date() {
+    local date
+
+    for date in "$@"; do
+        if [[ "$date" =~ ^[0-9]{4}:[0-9]{2}:[0-9]{2}:[0-9]{2}:[0-9]{2}:[0-9]{2}$ ]]; then
+            printf '%s\n' "$date"
+            return 0
+        fi
+    done
+
+    return 1
+}
+
+valid_month_day() {
+    local month=$((10#$1))
+    local day=$((10#$2))
+
+    (( month >= 1 && month <= 12 && day >= 1 && day <= 31 ))
+}
+
+date_from_text() {
+    local text="$1"
+    local year month day yy
+
+    if [[ "$text" =~ (^|[^0-9])([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})([^0-9]|$) ]]; then
+        year="${BASH_REMATCH[2]}"
+        month="$(printf '%02d' "$((10#${BASH_REMATCH[3]}))")"
+        day="$(printf '%02d' "$((10#${BASH_REMATCH[4]}))")"
+    elif [[ "$text" =~ (^|[^0-9])([0-9]{1,2})-([0-9]{1,2})-([0-9]{2})([^0-9]|$) ]]; then
+        month="$(printf '%02d' "$((10#${BASH_REMATCH[2]}))")"
+        day="$(printf '%02d' "$((10#${BASH_REMATCH[3]}))")"
+        yy="${BASH_REMATCH[4]}"
+        year="${YEAR:0:2}${yy}"
+    elif [[ "$text" =~ (^|[^0-9])([0-9]{2})([0-9]{2})([0-9]{2})([^0-9]|$) ]]; then
+        month="${BASH_REMATCH[2]}"
+        day="${BASH_REMATCH[3]}"
+        yy="${BASH_REMATCH[4]}"
+        year="${YEAR:0:2}${yy}"
+    else
+        return 1
+    fi
+
+    if [[ "$year" == "$YEAR" ]] && valid_month_day "$month" "$day"; then
+        printf '%s:%s:%s:00:00:00\n' "$year" "$month" "$day"
+        return 0
+    fi
+
+    return 1
+}
+
+date_from_parent_dirs() {
+    local filepath="$1"
+    local dir name parsed
+
+    dir="$(dirname "$filepath")"
+
+    while [[ "$dir" != "$ROOT_DIR" && "$dir" == "$ROOT_DIR"/* ]]; do
+        name="$(basename "$dir")"
+
+        if ! is_managed_dir "$name" && parsed="$(date_from_text "$name")"; then
+            printf '%s\n' "$parsed"
+            return 0
+        fi
+
+        dir="$(dirname "$dir")"
+    done
+
+    return 1
+}
+
+date_from_filename() {
+    local filename="$1"
+    local year month day hour minute second
+
+    if [[ "$filename" =~ ^IMG_([0-9]{4})([0-9]{2})([0-9]{2})_([0-9]{2})([0-9]{2})([0-9]{2})[0-9]{3}\.[^./]+$ ]]; then
+        year="${BASH_REMATCH[1]}"
+        month="${BASH_REMATCH[2]}"
+        day="${BASH_REMATCH[3]}"
+        hour="${BASH_REMATCH[4]}"
+        minute="${BASH_REMATCH[5]}"
+        second="${BASH_REMATCH[6]}"
+
+        if [[ "$year" == "$YEAR" ]] && valid_month_day "$month" "$day"; then
+            printf '%s:%s:%s:%s:%s:%s\n' "$year" "$month" "$day" "$hour" "$minute" "$second"
+            return 0
+        fi
+    fi
+
+    return 1
+}
+
+remove_known_junk_files() {
+    find "$ROOT_DIR" -type f \( \
+        -iname 'Thumbs.db' \
+        -o -iname 'Picasa.ini' \
+        -o -iname '.picasa.ini' \
+        -o -iname '.DS_Store' \
+        -o -name '._*' \
+    \) -delete
+}
+
+set_next_target_path() {
+    local filepath="$1"
+    local dest_dir="$2"
+    local year="$3"
+    local month="$4"
+    local day="$5"
+    local hour="$6"
+    local minute="$7"
+    local second="$8"
+    local ext="$9"
+    local base_ts="${year}${month}${day}_${hour}${minute}${second}"
+    local idx="${counter[$base_ts]:-0}"
+    local suffix target_path filename current_suffix
+
+    filename="$(basename "$filepath")"
+
+    if [[ "$(dirname "$filepath")" == "$dest_dir" && "$filename" =~ ^IMG_${base_ts}([0-9]{3})\.[^./]+$ ]]; then
+        current_suffix=$((10#${BASH_REMATCH[1]}))
+        TARGET_PATH="$filepath"
+        if (( idx <= current_suffix )); then
+            counter["$base_ts"]=$((current_suffix + 1))
+        fi
+        return 0
+    fi
+
+    while true; do
+        suffix="$(printf '%03d' "$idx")"
+        target_path="$dest_dir/IMG_${base_ts}${suffix}.${ext}"
+
+        if [[ -e "$target_path" ]]; then
+            if [[ "$filepath" -ef "$target_path" ]]; then
+                TARGET_PATH="$target_path"
+                counter["$base_ts"]=$((idx + 1))
+                return 0
+            fi
+
+            idx=$((idx + 1))
+            continue
+        fi
+
+        TARGET_PATH="$target_path"
+        counter["$base_ts"]=$((idx + 1))
+        return 0
+    done
+}
+
+increment_target_suffix() {
+    local target_path="$1"
+    local dest_dir filename stem suffix ext idx next_path name base
+
+    dest_dir="$(dirname "$target_path")"
+    filename="$(basename "$target_path")"
+
+    if [[ "$filename" =~ ^(IMG_[0-9]{8}_[0-9]{6})([0-9]{3})\.([^./]+)$ ]]; then
+        stem="${BASH_REMATCH[1]}"
+        suffix="${BASH_REMATCH[2]}"
+        ext="${BASH_REMATCH[3]}"
+        idx=$((10#$suffix + 1))
+
+        while (( idx <= 999 )); do
+            next_path="$dest_dir/${stem}$(printf '%03d' "$idx").${ext}"
+            if [[ ! -e "$next_path" ]]; then
+                TARGET_PATH="$next_path"
+                return 0
+            fi
+            idx=$((idx + 1))
+        done
+
+        return 1
+    fi
+
+    if [[ "$filename" == *.* && "$filename" != .* ]]; then
+        name="${filename%.*}"
+        ext=".${filename##*.}"
+    else
+        name="$filename"
+        ext=""
+    fi
+
+    base="$name"
+    idx=1
+
+    while (( idx <= 999 )); do
+        next_path="$dest_dir/${base}_$(printf '%03d' "$idx")${ext}"
+        if [[ ! -e "$next_path" ]]; then
+            TARGET_PATH="$next_path"
+            return 0
+        fi
+        idx=$((idx + 1))
+    done
+
+    return 1
+}
+
+set_next_misc_target_path() {
+    local filepath="$1"
+    local ext="$2"
+    local suffix target_path
+
+    mkdir -p "$MISC_DIR"
+
+    while (( misc_counter <= 999 )); do
+        suffix="$(printf '%03d' "$misc_counter")"
+        target_path="$MISC_DIR/IMG_${suffix}.${ext}"
+
+        if [[ -e "$target_path" ]]; then
+            if [[ "$filepath" -ef "$target_path" ]]; then
+                TARGET_PATH="$target_path"
+                misc_counter=$((misc_counter + 1))
+                return 0
+            fi
+
+            misc_counter=$((misc_counter + 1))
+            continue
+        fi
+
+        TARGET_PATH="$target_path"
+        misc_counter=$((misc_counter + 1))
+        return 0
+    done
+
+    return 1
+}
+
+for month in {01..12}; do
+    mkdir -p "$ROOT_DIR/$month"
+done
+
+printf 'Removing known junk files...\n'
+remove_known_junk_files
+
+declare -A counter
+misc_counter=1
+
+processed=0
+moved=0
+unchanged=0
+misc=0
+skipped=0
+
+printf 'Scanning metadata with exiftool...\n'
+while IFS='|' read -r filepath subsec_datetime_orig datetime_orig date_time_digitized create_date date_created creation_date gps_datetime content_create_date media_create_date track_create_date modify_date media_modify_date track_modify_date; do
+    [[ -f "$filepath" ]] || continue
+
+    filename="$(basename "$filepath")"
+    filename_lower="${filename,,}"
+
+    case "$filename_lower" in
+        thumbs.db|picasa.ini|.picasa.ini|.ds_store|._*|*.sh)
+            continue
+            ;;
+    esac
+
+    ((processed += 1))
+
+    if chosen_date="$(first_date \
+        "$subsec_datetime_orig" \
+        "$datetime_orig" \
+        "$date_time_digitized" \
+        "$create_date" \
+        "$date_created" \
+        "$creation_date" \
+        "$gps_datetime" \
+        "$content_create_date" \
+        "$media_create_date" \
+        "$track_create_date" \
+        "$modify_date" \
+        "$media_modify_date" \
+        "$track_modify_date")" || chosen_date="$(date_from_parent_dirs "$filepath")"; then
+        IFS=':' read -r file_year month day hour minute second <<< "$chosen_date"
+
+        if [[ "$file_year" != "$YEAR" ]]; then
+            if parent_date="$(date_from_parent_dirs "$filepath")"; then
+                IFS=':' read -r file_year month day hour minute second <<< "$parent_date"
+            elif filename_date="$(date_from_filename "$filename")"; then
+                IFS=':' read -r file_year month day hour minute second <<< "$filename_date"
+            fi
+        fi
+
+        if [[ "$file_year" == "$YEAR" ]]; then
+            dest_dir="$ROOT_DIR/$month"
+            ext="$(lower_ext "$filename")"
+            set_next_target_path "$filepath" "$dest_dir" "$file_year" "$month" "$day" "$hour" "$minute" "$second" "$ext"
+            target_path="$TARGET_PATH"
+        else
+            ext="$(lower_ext "$filename")"
+            if ! set_next_misc_target_path "$filepath" "$ext"; then
+                printf 'Name collision, skipped to avoid overwrite: %s -> %s/IMG_999.%s\n' "$filepath" "$MISC_DIR" "$ext" >&2
+                ((skipped += 1))
+                continue
+            fi
+            target_path="$TARGET_PATH"
+            ((misc += 1))
+        fi
+    elif chosen_date="$(date_from_filename "$filename")"; then
+        IFS=':' read -r file_year month day hour minute second <<< "$chosen_date"
+        dest_dir="$ROOT_DIR/$month"
+        ext="$(lower_ext "$filename")"
+        set_next_target_path "$filepath" "$dest_dir" "$file_year" "$month" "$day" "$hour" "$minute" "$second" "$ext"
+        target_path="$TARGET_PATH"
+    else
+        ext="$(lower_ext "$filename")"
+        if ! set_next_misc_target_path "$filepath" "$ext"; then
+            printf 'Name collision, skipped to avoid overwrite: %s -> %s/IMG_999.%s\n' "$filepath" "$MISC_DIR" "$ext" >&2
+            ((skipped += 1))
+            continue
+        fi
+        target_path="$TARGET_PATH"
+        ((misc += 1))
+    fi
+
+    if [[ "$filepath" -ef "$target_path" ]]; then
+        ((unchanged += 1))
+        continue
+    fi
+
+    if [[ -e "$target_path" ]]; then
+        if increment_target_suffix "$target_path"; then
+            target_path="$TARGET_PATH"
+        else
+            printf 'Name collision, skipped to avoid overwrite: %s -> %s\n' "$filepath" "$target_path" >&2
+            ((skipped += 1))
+            continue
+        fi
+    fi
+
+    mkdir -p "$(dirname "$target_path")"
+    mv -n -- "$filepath" "$target_path"
+    printf 'Sorted: %s -> %s\n' "${filepath#$ROOT_DIR/}" "${target_path#$ROOT_DIR/}"
+    ((moved += 1))
+done < <(
+    exiftool -r -f -q -d '%Y:%m:%d:%H:%M:%S' \
+        -p '$FilePath|$SubSecDateTimeOriginal|$DateTimeOriginal|$DateTimeDigitized|$CreateDate|$DateCreated|$CreationDate|$GPSDateTime|$ContentCreateDate|$MediaCreateDate|$TrackCreateDate|$ModifyDate|$MediaModifyDate|$TrackModifyDate' \
+        "$ROOT_DIR" 2>/dev/null
+)
+
+printf 'Cleaning empty folders...\n'
+remove_known_junk_files
+while IFS= read -r -d '' dir; do
+    name="$(basename "$dir")"
+    if [[ "$dir" != "$ROOT_DIR" ]] && ! is_managed_dir "$name"; then
+        rmdir -- "$dir" 2>/dev/null || true
+    fi
+done < <(find "$ROOT_DIR" -depth -type d -print0)
+
+printf '\nComplete. Processed: %d, moved/renamed: %d, already sorted: %d, misc: %d, skipped collisions: %d\n' \
+    "$processed" "$moved" "$unchanged" "$misc" "$skipped"
+
+if (( skipped > 0 )); then
+    printf 'Some files were skipped because moving them would overwrite different content. Resolve those manually.\n' >&2
+    exit 2
+fi
