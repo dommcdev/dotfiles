@@ -163,6 +163,36 @@ fzf_project_jump() {
     fi
 }
 
+rename-dirs() {
+    setopt localoptions nullglob
+    local dirs=([0-9]*\ -\ *(/))
+
+    if (( ${#dirs} == 0 )); then
+        echo "No directories found matching the pattern."
+        return 0
+    fi
+
+    echo "The following renames will occur:"
+    for dir in $dirs; do
+        local num="${dir%% *}"
+        local padded=$(printf "%02d" "$num")
+        echo "  $dir  ->  $padded"
+    done
+    echo ""
+
+    if read -q "reply?Proceed with renaming? (y/N): "; then
+        echo "\n"
+        for dir in $dirs; do
+            local num="${dir%% *}"
+            local padded=$(printf "%02d" "$num")
+            mv "$dir" "$padded"
+        done
+        echo "All directories successfully renamed."
+    else
+        echo "\nAborted. No changes made."
+    fi
+}
+
 
 
 
