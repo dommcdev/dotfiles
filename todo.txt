@@ -5,17 +5,9 @@ Screen recording script w/waybar indicator
 Ambient light sensor?
 
 # Low Priority
-Gpu passthrough
+Gpu passthrough (Windows, LookingGlass)
 Quickshell + notif center
 Tui for archinstall options
 Finish cross-platform dotfiles support
 Theme hypr* stuff
-
-# Server
-BorgBackup (or equal.)
-Setup github mirroring
-Navidrome (+ client)
-
-# Things to try
-Windows (+ LookingGlass)
 Devcontainers
