@@ -1,5 +1,5 @@
 - link:
-    ~/.config/GIMP/3.0/:
+    ~/.config/GIMP/3.2/:
       path: apps/gimp/*
       glob: true
 
@@ -7,7 +7,7 @@
     - mkdir -p ~/Downloads/Screenshots ~/Downloads/Videos
 
       # Install GUI packages
-    - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed audacity decibels papers loupe showtime libreoffice-fresh blender kdenlive gnome-disk-utility gimp resources evince celluloid blutui wiremix gnuplot cava; fi
+    - if [ "$(uname)" = "Linux" ]; then sudo pacman -S --noconfirm --needed audacity decibels papers loupe showtime libreoffice-fresh blender kdenlive gnome-disk-utility gimp resources evince celluloid bluetui wiremix gnuplot cava; fi
     - if [ "$(uname)" = "Linux" ]; then flatpak install --assumeyes --noninteractive flathub org.nickvision.tubeconverter com.github.PintaProject.Pinta; fi
 
     # Nautilus

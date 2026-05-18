@@ -23,4 +23,14 @@
       </metadata>
     </info>
   </bookmark>
+  <bookmark href="sftp://chocobo/" added="2026-05-18T15:38:32.995768Z" modified="2026-05-18T15:38:32.995770Z" visited="2026-05-18T15:38:32.995769Z">
+    <title>/ on chocobo</title>
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <bookmark:applications>
+          <bookmark:application name="org.gnome.Nautilus" exec="&apos;org.gnome.Nautilus %u&apos;" modified="2026-05-18T15:38:32.995770Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
 </xbel>
