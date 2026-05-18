@@ -15,3 +15,11 @@
       if [[ "$(./sys type)" == "Linux" ]]; then
         systemctl --user enable --now syncthing
       fi
+
+# Instructions
+# I use the hub-and-spoke approach. All devices sync to chocobo (and not to each other).
+# First, set up chocobo. You'll need to change the gui listen address to <machine.ip>:8384 to allow other devices to access. Set a gui password since this will be avaible to the local network. In settings/connections turn off everything but local discovery (don't think we need any of them). Grab the id string.
+# Then, set up your other devices. No need to modify gui settings or add a gui password here though. Change connection settings like above. Then click add remote device, and put in the id string from above. Crucially, under the advanced settings change the address to tcp://chocobo:22000 rather than dynamic.
+# Over on chocobo hit accept. No need to change the address here though (it can stay dynamic).
+#
+# I think you can initiate a folder from either device. Just create a folder on one device (with the correct path for that machine), in the sharing tab either share with chocobo or (if on chocobo) share with everyone. On the other devices you will need to accept (and change path if necessary).
