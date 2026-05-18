@@ -7,12 +7,11 @@ all/opencode
 all/scripts
 all/ssh
 all/starship
+all/syncthing
 all/tailscale
 all/tmux
 all/tui
 all/zsh
-desktop/beans
-desktop/calcurse
 desktop/chrome
 desktop/dev
 desktop/ghostty

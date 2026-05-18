@@ -8,6 +8,7 @@ all/opencode
 all/scripts
 all/ssh
 all/starship
+all/syncthing
 all/tailscale
 all/tmux
 all/tui

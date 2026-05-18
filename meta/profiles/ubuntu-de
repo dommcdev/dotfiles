@@ -7,6 +7,7 @@ all/opencode
 all/scripts
 all/ssh
 all/starship
+all/syncthing
 all/tailscale
 all/tmux
 all/tui
@@ -18,8 +19,6 @@ linux-desktop/grandorgue
 linux-desktop/keyd
 linux-desktop/linux-desktop
 linux-desktop/virtualization
-desktop/beans
-desktop/calcurse
 desktop/chrome
 desktop/dev
 desktop/ghostty
