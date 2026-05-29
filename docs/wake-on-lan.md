@@ -9,12 +9,14 @@ Look for and enable settings that mention
 
 Also make sure ErP is disabled
 
-### Enable in Kernel
-Create `/etc/systemd/network/50-wol.link` and paste the following:
-```toml
-[Match]
-MACAddress=12:34:56:78:9a:bc  # Replace with your actual MAC address
-
-[Link]
-WakeOnLan=magic
+### Enable WOL in kernel
+Create `/etc/udev/rules.d/81-wol.rules` and paste the following:
 ```
+ACTION=="add", SUBSYSTEM=="net", NAME=="en*", RUN+="/usr/bin/ethtool -s $name wol g"
+```
+Then reload udev to arm it:
+`sudo udevadm control --reload-rules && sudo udevadm trigger`
+
+Note: Alternatively, you can run the above ethtool cmd via a systemd service, cron job, etc...it just has to be run once per boot. You could also create `/etc/systemd/network/50-wol.link` but this would require taking over the functionality of `/usr/lib/systemd/network/99-default.link` since only the higher priority file from the above will be run.
+
+More info: https://wiki.archlinux.org/title/Wake-on-LAN
