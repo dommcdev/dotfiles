@@ -204,7 +204,7 @@ rename-dirs() {
 bindkey -s '^t' "tmux-sessionizer\n"
 
 # Because useful C-f bind conflicts with my tmux prefix, rebind forward-char to C-g
-bindkey '^G' forward-char
+#bindkey '^G' forward-char
 
 # Hitting space will expand stuff like !!
 bindkey ' ' magic-space
