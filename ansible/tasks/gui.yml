@@ -68,12 +68,13 @@
   when: is_arch
 
 - name: Install Chrome and OnlyOffice on macOS
-  ansible.builtin.command: "brew install --cask {{ item }}"
+  community.general.homebrew_cask:
+    name:
+      - google-chrome
+      - onlyoffice
+    state: present
+    update_homebrew: false
   environment: "{{ brew_environment }}"
-  changed_when: false
-  loop:
-    - google-chrome
-    - onlyoffice
   when: is_macos
 
 - name: Link GIMP config files
@@ -154,16 +155,17 @@
   when: is_arch
 
 - name: Install desktop development packages with Homebrew
-  ansible.builtin.command: "brew install {{ item }}"
+  community.general.homebrew:
+    name:
+      - java
+      - llvm
+      - python
+      - typst
+      - deno
+      - uv
+    state: present
+    update_homebrew: false
   environment: "{{ brew_environment }}"
-  changed_when: false
-  loop:
-    - java
-    - llvm
-    - python
-    - typst
-    - deno
-    - uv
   when: not is_arch
 
 - name: Install GitHub CLI for repo setup on Arch
@@ -174,9 +176,11 @@
   when: is_arch
 
 - name: Install GitHub CLI for repo setup with Homebrew
-  ansible.builtin.command: brew install gh
+  community.general.homebrew:
+    name: gh
+    state: present
+    update_homebrew: false
   environment: "{{ brew_environment }}"
-  changed_when: false
   when: not is_arch
 
 - name: Ensure dev directories exist
@@ -217,9 +221,11 @@
   when: is_arch
 
 - name: Install node with Homebrew
-  ansible.builtin.command: brew install nodejs
+  community.general.homebrew:
+    name: nodejs
+    state: present
+    update_homebrew: false
   environment: "{{ brew_environment }}"
-  changed_when: false
   when: not is_arch
 
 - name: Configure npm global prefix
@@ -241,13 +247,14 @@
   when: is_arch
 
 - name: Install beancount tools with Homebrew
-  ansible.builtin.command: "brew install {{ item }}"
+  community.general.homebrew:
+    name:
+      - beancount
+      - fava
+      - rust
+    state: present
+    update_homebrew: false
   environment: "{{ brew_environment }}"
-  changed_when: false
-  loop:
-    - beancount
-    - fava
-    - rust
   when: not is_arch
 
 - name: Clone beans repo

@@ -4,9 +4,11 @@
   when: is_arch
 
 - name: Install tmux with Homebrew
-  ansible.builtin.command: brew install tmux
+  community.general.homebrew:
+    name: tmux
+    state: present
+    update_homebrew: false
   environment: "{{ brew_environment }}"
-  changed_when: false
   when: not is_arch
 
 - name: Ensure tmux config directory exists

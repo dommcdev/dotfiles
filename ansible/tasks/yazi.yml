@@ -6,9 +6,11 @@
   when: is_arch
 
 - name: Install Yazi with Homebrew
-  ansible.builtin.command: brew install yazi
+  community.general.homebrew:
+    name: yazi
+    state: present
+    update_homebrew: false
   environment: "{{ brew_environment }}"
-  changed_when: false
   when: not is_arch
 
 - name: Link Yazi config

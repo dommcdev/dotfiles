@@ -6,9 +6,11 @@
   when: is_arch
 
 - name: Install Starship with Homebrew
-  ansible.builtin.command: brew install starship
+  community.general.homebrew:
+    name: starship
+    state: present
+    update_homebrew: false
   environment: "{{ brew_environment }}"
-  changed_when: false
   when: not is_arch
 
 - name: Link Starship config

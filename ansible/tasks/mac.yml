@@ -25,13 +25,14 @@
     force: true
 
 - name: Install macOS-only GUI utilities
-  ansible.builtin.command: "brew install --cask {{ item }}"
+  community.general.homebrew_cask:
+    name:
+      - karabiner-elements
+      - raycast
+      - rectangle
+    state: present
+    update_homebrew: false
   environment: "{{ brew_environment }}"
-  changed_when: false
-  loop:
-    - karabiner-elements
-    - raycast
-    - rectangle
 
 - name: Apply macOS defaults
   ansible.builtin.shell: |

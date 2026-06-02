@@ -26,9 +26,11 @@
   when: is_fedora
 
 - name: Install OpenSSH with Homebrew
-  ansible.builtin.command: brew install openssh
+  community.general.homebrew:
+    name: openssh
+    state: present
+    update_homebrew: false
   environment: "{{ brew_environment }}"
-  changed_when: false
   when: is_macos
 
 - name: Ensure SSH config directory exists

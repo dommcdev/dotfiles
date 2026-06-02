@@ -35,10 +35,11 @@
   when: is_ubuntu
 
 - name: Install Ghostty and font casks with Homebrew
-  ansible.builtin.command: "brew install --cask {{ item }}"
+  community.general.homebrew_cask:
+    name: "{{ ['ghostty', 'font-jetbrains-mono-nerd-font'] if is_macos else ['font-jetbrains-mono-nerd-font'] }}"
+    state: present
+    update_homebrew: false
   environment: "{{ brew_environment }}"
-  changed_when: false
-  loop: "{{ ['ghostty', 'font-jetbrains-mono-nerd-font'] if is_macos else ['font-jetbrains-mono-nerd-font'] }}"
   when: is_macos or is_ubuntu or is_fedora
 
 - name: Enable Ghostty user service

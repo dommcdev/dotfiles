@@ -15,9 +15,11 @@
   when: is_ubuntu or is_fedora
 
 - name: Install Tailscale app on macOS
-  ansible.builtin.command: brew install --cask tailscale-app
+  community.general.homebrew_cask:
+    name: tailscale-app
+    state: present
+    update_homebrew: false
   environment: "{{ brew_environment }}"
-  changed_when: false
   when: is_macos
 
 - name: Enable tailscaled

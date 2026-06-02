@@ -11,14 +11,15 @@
   when: is_arch
 
 - name: Install Neovim packages with Homebrew
-  ansible.builtin.command: "brew install {{ item }}"
+  community.general.homebrew:
+    name:
+      - neovim
+      - python
+      - unzip
+      - tree-sitter-cli
+    state: present
+    update_homebrew: false
   environment: "{{ brew_environment }}"
-  changed_when: false
-  loop:
-    - neovim
-    - python
-    - unzip
-    - tree-sitter-cli
   when: not is_arch
 
 - name: Link Neovim config

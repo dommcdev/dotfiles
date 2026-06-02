@@ -1,0 +1,2 @@
+Add stuff from bootstrapping scripts
+* Update homebrew after installation to make sure it stays updated

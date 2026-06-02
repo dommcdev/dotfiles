@@ -29,9 +29,11 @@
   when: is_arch
 
 - name: Install JetBrains Mono Nerd Font on macOS
-  ansible.builtin.command: brew install --cask font-jetbrains-mono-nerd-font
+  community.general.homebrew_cask:
+    name: font-jetbrains-mono-nerd-font
+    state: present
+    update_homebrew: false
   environment: "{{ brew_environment }}"
-  changed_when: false
   when: is_macos
 
 - name: Link GTK configs

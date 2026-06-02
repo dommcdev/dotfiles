@@ -177,17 +177,19 @@
       when: is_fedora
 
     - name: Install terminal Homebrew packages on Linux
-      ansible.builtin.command: "brew install {{ item }}"
+      community.general.homebrew:
+        name: "{{ brew_pkgs }}"
+        state: present
+        update_homebrew: false
       environment: "{{ brew_environment }}"
-      changed_when: false
-      loop: "{{ brew_pkgs }}"
       when: (is_ubuntu or is_fedora)
 
     - name: Install terminal Homebrew packages on macOS
-      ansible.builtin.command: "brew install {{ item }}"
+      community.general.homebrew:
+        name: "{{ macos_brew_pkgs }}"
+        state: present
+        update_homebrew: false
       environment: "{{ brew_environment }}"
-      changed_when: false
-      loop: "{{ macos_brew_pkgs }}"
       when: is_macos
 
 - name: Link terminal config directories

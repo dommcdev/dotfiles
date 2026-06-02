@@ -22,9 +22,11 @@
   when: is_fedora
 
 - name: Install Syncthing with Homebrew
-  ansible.builtin.command: brew install syncthing
+  community.general.homebrew:
+    name: syncthing
+    state: present
+    update_homebrew: false
   environment: "{{ brew_environment }}"
-  changed_when: false
   when: is_macos
 
 - name: Enable Syncthing user service
