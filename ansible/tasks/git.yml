@@ -1,13 +1,13 @@
 - name: Ensure git config directory exists
   ansible.builtin.file:
-    path: "{{ dotfiles_home }}/.config/git"
+    path: "{{ home }}/.config/git"
     state: directory
     mode: "0755"
 
 - name: Link git config files
   ansible.builtin.file:
-    src: "{{ dotfiles_root }}/git/{{ item }}"
-    dest: "{{ dotfiles_home }}/.config/git/{{ item }}"
+    src: "{{ root }}/git/{{ item }}"
+    dest: "{{ home }}/.config/git/{{ item }}"
     state: link
     force: true
   loop:

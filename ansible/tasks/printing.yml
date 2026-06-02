@@ -11,7 +11,7 @@
       - nss-mdns
     state: present
   become: true
-  when: dotfiles_is_arch
+  when: is_arch
 
 - name: Create resolved override directory
   ansible.builtin.file:

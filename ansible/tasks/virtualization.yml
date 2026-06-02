@@ -7,7 +7,7 @@
       - dnsmasq
     state: present
   become: true
-  when: dotfiles_is_arch
+  when: is_arch
 
 - name: Enable libvirtd
   ansible.builtin.systemd_service:
@@ -17,7 +17,7 @@
 
 - name: Add user to libvirt group
   ansible.builtin.user:
-    name: "{{ dotfiles_user }}"
+    name: "{{ user }}"
     groups: libvirt
     append: true
   become: true

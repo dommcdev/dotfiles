@@ -3,7 +3,7 @@
     name: keyd
     state: present
   become: true
-  when: dotfiles_is_arch
+  when: is_arch
 
 - name: Create keyd config directory
   ansible.builtin.file:
@@ -14,7 +14,7 @@
 
 - name: Copy keyd default config
   ansible.builtin.copy:
-    src: "{{ dotfiles_root }}/keyd/default.conf"
+    src: "{{ root }}/keyd/default.conf"
     dest: /etc/keyd/default.conf
     mode: "0644"
   become: true

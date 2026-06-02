@@ -1,26 +1,26 @@
 - name: Ensure Karabiner config directory exists
   ansible.builtin.file:
-    path: "{{ dotfiles_home }}/.config/karabiner"
+    path: "{{ home }}/.config/karabiner"
     state: directory
     mode: "0755"
 
 - name: Link Karabiner config
   ansible.builtin.file:
-    src: "{{ dotfiles_root }}/mac/karabiner/karabiner.json"
-    dest: "{{ dotfiles_home }}/.config/karabiner/karabiner.json"
+    src: "{{ root }}/mac/karabiner/karabiner.json"
+    dest: "{{ home }}/.config/karabiner/karabiner.json"
     state: link
     force: true
 
 - name: Ensure Rectangle config directory exists
   ansible.builtin.file:
-    path: "{{ dotfiles_home }}/Library/Application Support/Rectangle"
+    path: "{{ home }}/Library/Application Support/Rectangle"
     state: directory
     mode: "0755"
 
 - name: Link Rectangle config
   ansible.builtin.file:
-    src: "{{ dotfiles_root }}/mac/rectangle/RectangleConfig.json"
-    dest: "{{ dotfiles_home }}/Library/Application Support/Rectangle/RectangleConfig.json"
+    src: "{{ root }}/mac/rectangle/RectangleConfig.json"
+    dest: "{{ home }}/Library/Application Support/Rectangle/RectangleConfig.json"
     state: link
     force: true
 
@@ -37,7 +37,7 @@
   ansible.builtin.shell: |
     defaults write com.apple.finder NSUserKeyEquivalents -dict-add "Close Window" "@q"
     defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Close Window" "@~^\$c"
-    defaults import com.apple.symbolichotkeys "{{ dotfiles_root }}/mac/misc/symbolichotkeys.plist"
+    defaults import com.apple.symbolichotkeys "{{ root }}/mac/misc/symbolichotkeys.plist"
     defaults write com.apple.dock persistent-apps -array
     defaults write com.apple.dock show-recents -bool false
     defaults write com.apple.dock persistent-others -array

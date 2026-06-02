@@ -1,20 +1,20 @@
 - name: Ensure Vicinae config directory exists
   ansible.builtin.file:
-    path: "{{ dotfiles_home }}/.config/vicinae"
+    path: "{{ home }}/.config/vicinae"
     state: directory
     mode: "0755"
 
 - name: Link Vicinae settings
   ansible.builtin.file:
-    src: "{{ dotfiles_root }}/vicinae/settings.json"
-    dest: "{{ dotfiles_home }}/.config/vicinae/settings.json"
+    src: "{{ root }}/vicinae/settings.json"
+    dest: "{{ home }}/.config/vicinae/settings.json"
     state: link
     force: true
 
 - name: Link Vicinae power helper
   ansible.builtin.file:
-    src: "{{ dotfiles_root }}/vicinae/vicinae-power.sh"
-    dest: "{{ dotfiles_home }}/.local/bin/vicinae-power.sh"
+    src: "{{ root }}/vicinae/vicinae-power.sh"
+    dest: "{{ home }}/.local/bin/vicinae-power.sh"
     state: link
     force: true
 

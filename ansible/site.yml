@@ -5,19 +5,19 @@
   pre_tasks:
     - name: Check for dotfiles sys helper
       ansible.builtin.stat:
-        path: "{{ dotfiles_root }}/sys"
-      register: dotfiles_sys_helper
+        path: "{{ root }}/sys"
+      register: sys_helper
 
     - name: Detect laptop state from dotfiles sys helper
-      ansible.builtin.command: "{{ dotfiles_root }}/sys power"
-      register: dotfiles_sys_power
+      ansible.builtin.command: "{{ root }}/sys power"
+      register: sys_power
       changed_when: false
       failed_when: false
-      when: dotfiles_sys_helper.stat.exists
+      when: sys_helper.stat.exists
 
     - name: Record laptop state
       ansible.builtin.set_fact:
-        dotfiles_is_laptop: "{{ 'laptops' in group_names or (dotfiles_sys_power.stdout | default('0')) == '1' }}"
+        is_laptop: "{{ 'laptops' in group_names or (sys_power.stdout | default('0')) == '1' }}"
 
   tasks:
     - name: Misc bootstrap, distro, hardware, and small tools
@@ -64,56 +64,56 @@
 
     - name: Network stack
       ansible.builtin.include_tasks: tasks/network.yml
-      when: dotfiles_is_arch and dotfiles_is_linux
+      when: is_arch and is_linux
 
     - name: Desktop GUI apps
       ansible.builtin.include_tasks: tasks/gui.yml
-      when: dotfiles_is_desktop
+      when: is_desktop
 
     - name: macOS-specific setup
       ansible.builtin.include_tasks: tasks/mac.yml
-      when: dotfiles_is_macos and dotfiles_is_desktop
+      when: is_macos and is_desktop
 
     - name: Ghostty
       ansible.builtin.include_tasks: tasks/ghostty.yml
-      when: dotfiles_is_desktop
+      when: is_desktop
 
     - name: Look and feel
       ansible.builtin.include_tasks: tasks/looknfeel.yml
-      when: dotfiles_is_custom
+      when: is_custom
 
     - name: Keyd
       ansible.builtin.include_tasks: tasks/keyd.yml
-      when: dotfiles_is_custom and dotfiles_is_linux
+      when: is_custom and is_linux
 
     - name: Printing
       ansible.builtin.include_tasks: tasks/printing.yml
-      when: dotfiles_is_custom and dotfiles_is_linux
+      when: is_custom and is_linux
 
     - name: Virtualization
       ansible.builtin.include_tasks: tasks/virtualization.yml
-      when: dotfiles_is_custom and dotfiles_is_linux
+      when: is_custom and is_linux
 
     - name: Hyprland
       ansible.builtin.include_tasks: tasks/hypr.yml
-      when: dotfiles_is_custom and dotfiles_is_arch
+      when: is_custom and is_arch
 
     - name: Waybar
       ansible.builtin.include_tasks: tasks/waybar.yml
-      when: dotfiles_is_custom and dotfiles_is_arch
+      when: is_custom and is_arch
 
     - name: Dunst
       ansible.builtin.include_tasks: tasks/dunst.yml
-      when: dotfiles_is_custom and dotfiles_is_arch
+      when: is_custom and is_arch
 
     - name: SwayOSD
       ansible.builtin.include_tasks: tasks/swayosd.yml
-      when: dotfiles_is_custom and dotfiles_is_arch
+      when: is_custom and is_arch
 
     - name: Vicinae
       ansible.builtin.include_tasks: tasks/vicinae.yml
-      when: dotfiles_is_custom and dotfiles_is_arch
+      when: is_custom and is_arch
 
     - name: SDDM
       ansible.builtin.include_tasks: tasks/sddm.yml
-      when: dotfiles_is_custom and dotfiles_is_arch
+      when: is_custom and is_arch

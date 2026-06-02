@@ -3,7 +3,7 @@
     name: zsh
     state: present
   become: true
-  when: dotfiles_is_arch
+  when: is_arch
 
 - name: Install zsh on Ubuntu
   ansible.builtin.apt:
@@ -12,58 +12,58 @@
     update_cache: true
     cache_valid_time: 3600
   become: true
-  when: dotfiles_is_ubuntu
+  when: is_ubuntu
 
 - name: Install zsh on Fedora
   ansible.builtin.dnf:
     name: zsh
     state: present
   become: true
-  when: dotfiles_is_fedora
+  when: is_fedora
 
 - name: Ensure zsh config directory exists
   ansible.builtin.file:
-    path: "{{ dotfiles_home }}/.config/zsh"
+    path: "{{ home }}/.config/zsh"
     state: directory
     mode: "0755"
 
 - name: Link zshrc
   ansible.builtin.file:
-    src: "{{ dotfiles_root }}/zsh/zshrc"
-    dest: "{{ dotfiles_home }}/.config/zsh/.zshrc"
+    src: "{{ root }}/zsh/zshrc"
+    dest: "{{ home }}/.config/zsh/.zshrc"
     state: link
     force: true
 
 - name: Link macOS zprofile
   ansible.builtin.file:
-    src: "{{ dotfiles_root }}/zsh/zprofile-mac"
-    dest: "{{ dotfiles_home }}/.config/zsh/.zprofile"
+    src: "{{ root }}/zsh/zprofile-mac"
+    dest: "{{ home }}/.config/zsh/.zprofile"
     state: link
     force: true
-  when: dotfiles_is_macos
+  when: is_macos
 
 - name: Link zshenv
   ansible.builtin.file:
-    src: "{{ dotfiles_root }}/zsh/zshenv"
-    dest: "{{ dotfiles_home }}/.zshenv"
+    src: "{{ root }}/zsh/zshenv"
+    dest: "{{ home }}/.zshenv"
     state: link
     force: true
 
 - name: Read current login shell
-  ansible.builtin.command: "getent passwd {{ dotfiles_user }}"
+  ansible.builtin.command: "getent passwd {{ user }}"
   register: zsh_passwd_entry
   changed_when: false
-  when: dotfiles_is_linux
+  when: is_linux
 
 - name: Locate zsh
   ansible.builtin.shell: command -v zsh
   register: zsh_path
   changed_when: false
-  when: dotfiles_is_linux
+  when: is_linux
 
 - name: Change login shell to zsh
-  ansible.builtin.command: "chsh -s {{ zsh_path.stdout }} {{ dotfiles_user }}"
+  ansible.builtin.command: "chsh -s {{ zsh_path.stdout }} {{ user }}"
   become: true
   when:
-    - dotfiles_is_linux
+    - is_linux
     - zsh_passwd_entry.stdout.split(':')[-1] != zsh_path.stdout

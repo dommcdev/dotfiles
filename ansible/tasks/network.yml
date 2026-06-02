@@ -25,7 +25,7 @@
 
 - name: Copy systemd-networkd configs
   ansible.builtin.copy:
-    src: "{{ dotfiles_root }}/network/{{ item }}"
+    src: "{{ root }}/network/{{ item }}"
     dest: "/etc/systemd/network/{{ item }}"
     mode: "0644"
   become: true
@@ -71,7 +71,7 @@
 
 - name: Copy iwd config
   ansible.builtin.copy:
-    src: "{{ dotfiles_root }}/network/iwd.conf"
+    src: "{{ root }}/network/iwd.conf"
     dest: /etc/iwd/main.conf
     mode: "0644"
   become: true

@@ -3,7 +3,7 @@
     name: tailscale
     state: present
   become: true
-  when: dotfiles_is_arch
+  when: is_arch
 
 - name: Install Tailscale on Ubuntu and Fedora
   ansible.builtin.shell: |
@@ -12,13 +12,13 @@
   args:
     creates: /usr/bin/tailscale
   become: true
-  when: dotfiles_is_ubuntu or dotfiles_is_fedora
+  when: is_ubuntu or is_fedora
 
 - name: Install Tailscale app on macOS
   ansible.builtin.command: brew install --cask tailscale-app
   environment: "{{ brew_environment }}"
   changed_when: false
-  when: dotfiles_is_macos
+  when: is_macos
 
 - name: Enable tailscaled
   ansible.builtin.systemd_service:
@@ -26,10 +26,10 @@
     enabled: true
     state: started
   become: true
-  when: dotfiles_is_linux
+  when: is_linux
 
 - name: Configure Tailscale SSH operator
-  ansible.builtin.command: "tailscale set --ssh --operator={{ dotfiles_user }}"
+  ansible.builtin.command: "tailscale set --ssh --operator={{ user }}"
   become: true
   changed_when: false
-  when: dotfiles_is_linux
+  when: is_linux

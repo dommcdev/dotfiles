@@ -1,7 +1,7 @@
 - name: Link Waybar config
   ansible.builtin.file:
-    src: "{{ dotfiles_root }}/waybar"
-    dest: "{{ dotfiles_home }}/.config/waybar"
+    src: "{{ root }}/waybar"
+    dest: "{{ home }}/.config/waybar"
     state: link
     force: true
 

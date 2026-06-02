@@ -49,7 +49,7 @@
 
 - name: Copy custom SDDM theme config
   ansible.builtin.copy:
-    src: "{{ dotfiles_root }}/sddm/theme.conf"
+    src: "{{ root }}/sddm/theme.conf"
     dest: /usr/share/sddm/themes/sddm-astronaut-theme/Themes/theme.conf
     mode: "0644"
   become: true
@@ -63,7 +63,7 @@
 
 - name: Copy SDDM wallpaper
   ansible.builtin.copy:
-    src: "{{ dotfiles_home }}/dev/wallpapers/catppuccin/deer0.png"
+    src: "{{ home }}/dev/wallpapers/catppuccin/deer0.png"
     dest: /usr/share/sddm/themes/sddm-astronaut-theme/Backgrounds/deer0.png
     mode: "0644"
     remote_src: true

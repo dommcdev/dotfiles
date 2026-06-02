@@ -1,7 +1,7 @@
 - name: Link SwayOSD config
   ansible.builtin.file:
-    src: "{{ dotfiles_root }}/swayosd"
-    dest: "{{ dotfiles_home }}/.config/swayosd"
+    src: "{{ root }}/swayosd"
+    dest: "{{ home }}/.config/swayosd"
     state: link
     force: true
 
@@ -13,13 +13,13 @@
 
 - name: Ensure user systemd directory exists
   ansible.builtin.file:
-    path: "{{ dotfiles_home }}/.config/systemd/user"
+    path: "{{ home }}/.config/systemd/user"
     state: directory
     mode: "0755"
 
 - name: Install SwayOSD user service
   ansible.builtin.copy:
-    dest: "{{ dotfiles_home }}/.config/systemd/user/swayosd-server.service"
+    dest: "{{ home }}/.config/systemd/user/swayosd-server.service"
     mode: "0644"
     content: |
       [Unit]

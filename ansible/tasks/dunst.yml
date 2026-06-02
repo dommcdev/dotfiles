@@ -1,7 +1,7 @@
 - name: Link Dunst config
   ansible.builtin.file:
-    src: "{{ dotfiles_root }}/dunst"
-    dest: "{{ dotfiles_home }}/.config/dunst"
+    src: "{{ root }}/dunst"
+    dest: "{{ home }}/.config/dunst"
     state: link
     force: true
 

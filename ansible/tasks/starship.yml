@@ -3,17 +3,17 @@
     name: starship
     state: present
   become: true
-  when: dotfiles_is_arch
+  when: is_arch
 
 - name: Install Starship with Homebrew
   ansible.builtin.command: brew install starship
   environment: "{{ brew_environment }}"
   changed_when: false
-  when: not dotfiles_is_arch
+  when: not is_arch
 
 - name: Link Starship config
   ansible.builtin.file:
-    src: "{{ dotfiles_root }}/starship/starship.toml"
-    dest: "{{ dotfiles_home }}/.config/starship.toml"
+    src: "{{ root }}/starship/starship.toml"
+    dest: "{{ home }}/.config/starship.toml"
     state: link
     force: true

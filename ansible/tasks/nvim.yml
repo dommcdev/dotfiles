@@ -1,28 +1,37 @@
 - name: Install Neovim packages on Arch
   ansible.builtin.package:
-    name: "{{ nvim_arch_packages }}"
+    name:
+      - neovim
+      - python
+      - python-pip
+      - unzip
+      - tree-sitter-cli
     state: present
   become: true
-  when: dotfiles_is_arch
+  when: is_arch
 
 - name: Install Neovim packages with Homebrew
   ansible.builtin.command: "brew install {{ item }}"
   environment: "{{ brew_environment }}"
   changed_when: false
-  loop: "{{ nvim_brew_packages }}"
-  when: not dotfiles_is_arch
+  loop:
+    - neovim
+    - python
+    - unzip
+    - tree-sitter-cli
+  when: not is_arch
 
 - name: Link Neovim config
   ansible.builtin.file:
-    src: "{{ dotfiles_root }}/nvim"
-    dest: "{{ dotfiles_home }}/.config/nvim"
+    src: "{{ root }}/nvim"
+    dest: "{{ home }}/.config/nvim"
     state: link
     force: true
 
 - name: Link editorconfig
   ansible.builtin.file:
-    src: "{{ dotfiles_root }}/nvim/editorconfig"
-    dest: "{{ dotfiles_home }}/.editorconfig"
+    src: "{{ root }}/nvim/editorconfig"
+    dest: "{{ home }}/.editorconfig"
     state: link
     force: true
 

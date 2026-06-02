@@ -3,29 +3,29 @@
     name: yazi
     state: present
   become: true
-  when: dotfiles_is_arch
+  when: is_arch
 
 - name: Install Yazi with Homebrew
   ansible.builtin.command: brew install yazi
   environment: "{{ brew_environment }}"
   changed_when: false
-  when: not dotfiles_is_arch
+  when: not is_arch
 
 - name: Link Yazi config
   ansible.builtin.file:
-    src: "{{ dotfiles_root }}/tui/yazi"
-    dest: "{{ dotfiles_home }}/.config/yazi"
+    src: "{{ root }}/tui/yazi"
+    dest: "{{ home }}/.config/yazi"
     state: link
     force: true
 
 - name: Install Yazi packages
   ansible.builtin.command: ya pkg install
   args:
-    chdir: "{{ dotfiles_home }}/.config/yazi"
+    chdir: "{{ home }}/.config/yazi"
   changed_when: false
 
 - name: Upgrade Yazi packages
   ansible.builtin.command: ya pkg upgrade
   args:
-    chdir: "{{ dotfiles_home }}/.config/yazi"
+    chdir: "{{ home }}/.config/yazi"
   changed_when: false
