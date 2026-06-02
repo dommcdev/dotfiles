@@ -1,0 +1,175 @@
+- name: Ensure look and feel config directories exist
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - "{{ dotfiles_home }}/.config/fontconfig"
+    - "{{ dotfiles_home }}/.config/qt6ct"
+  when: dotfiles_is_linux
+
+- name: Link fontconfig
+  ansible.builtin.file:
+    src: "{{ dotfiles_root }}/styling/fonts/fonts.conf"
+    dest: "{{ dotfiles_home }}/.config/fontconfig/fonts.conf"
+    state: link
+    force: true
+  when: dotfiles_is_linux
+
+- name: Install fonts on Arch
+  ansible.builtin.package:
+    name:
+      - noto-fonts
+      - noto-fonts-cjk
+      - noto-fonts-emoji
+      - noto-fonts-extra
+      - ttf-jetbrains-mono-nerd
+    state: present
+  become: true
+  when: dotfiles_is_arch
+
+- name: Install JetBrains Mono Nerd Font on macOS
+  ansible.builtin.command: brew install --cask font-jetbrains-mono-nerd-font
+  environment: "{{ brew_environment }}"
+  changed_when: false
+  when: dotfiles_is_macos
+
+- name: Link GTK configs
+  ansible.builtin.file:
+    src: "{{ dotfiles_root }}/styling/gtk/{{ item.src }}"
+    dest: "{{ dotfiles_home }}/.config/{{ item.dest }}"
+    state: link
+    force: true
+  loop:
+    - src: gtk-3.0
+      dest: gtk-3.0
+    - src: gtk-4.0
+      dest: gtk-4.0
+    - src: templates
+      dest: templates
+    - src: user-dirs.dirs
+      dest: user-dirs.dirs
+    - src: mimeapps.list
+      dest: mimeapps.list
+  when: dotfiles_is_linux
+
+- name: Install GTK theme on Arch
+  ansible.builtin.package:
+    name: adw-gtk-theme
+    state: present
+  become: true
+  when: dotfiles_is_arch
+
+- name: Configure Flatpak GTK filesystem overrides
+  ansible.builtin.command: "flatpak override --user --filesystem={{ item }}"
+  changed_when: false
+  loop:
+    - xdg-config/gtk-4.0
+    - xdg-config/gtk-3.0
+    - xdg-data/themes
+  when: dotfiles_is_linux
+
+- name: Set GTK theme
+  ansible.builtin.command: gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3
+  changed_when: false
+  when: dotfiles_is_linux
+
+- name: Set GTK color scheme
+  ansible.builtin.command: gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+  changed_when: false
+  when: dotfiles_is_linux
+
+- name: Set GTK accent color
+  ansible.builtin.command: gsettings set org.gnome.desktop.interface accent-color orange
+  changed_when: false
+  when: dotfiles_is_linux
+
+- name: Mask Flatpak adw-gtk themes
+  ansible.builtin.command: "flatpak mask {{ item }}"
+  become: true
+  changed_when: false
+  loop:
+    - org.gtk.Gtk3theme.adw-gtk3
+    - org.gtk.Gtk3theme.adw-gtk3-dark
+  when: dotfiles_is_linux
+
+- name: Link qt6ct config
+  ansible.builtin.file:
+    src: "{{ dotfiles_root }}/styling/qt/qt6ct.conf"
+    dest: "{{ dotfiles_home }}/.config/qt6ct/qt6ct.conf"
+    state: link
+    force: true
+
+- name: Install QT theming packages on Arch
+  ansible.builtin.package:
+    name:
+      - qt5-wayland
+      - qt6-wayland
+      - breeze
+      - breeze-icons
+    state: present
+  become: true
+  when: dotfiles_is_arch
+
+- name: Install qt6ct-kde on Arch
+  ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None qt6ct-kde
+  changed_when: false
+  when: dotfiles_is_arch
+
+- name: Install icon theme on Arch
+  ansible.builtin.package:
+    name: papirus-icon-theme
+    state: present
+  become: true
+  when: dotfiles_is_arch
+
+- name: Set icon theme
+  ansible.builtin.command: gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
+  changed_when: false
+  when: dotfiles_is_linux
+
+- name: Install cursor theme on Arch
+  ansible.builtin.package:
+    name: breeze
+    state: present
+  become: true
+  when: dotfiles_is_arch
+
+- name: Install cursor theme on Ubuntu
+  ansible.builtin.apt:
+    name: breeze-cursor-theme
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+  become: true
+  when: dotfiles_is_ubuntu
+
+- name: Install cursor theme on Fedora
+  ansible.builtin.dnf:
+    name: breeze-cursor-theme
+    state: present
+  become: true
+  when: dotfiles_is_fedora
+
+- name: Create default cursor directory
+  ansible.builtin.file:
+    path: "{{ dotfiles_home }}/.local/share/icons/default"
+    state: directory
+    mode: "0755"
+  when: dotfiles_is_linux
+
+- name: Configure xwayland cursor inheritance
+  ansible.builtin.copy:
+    dest: "{{ dotfiles_home }}/.local/share/icons/default/index.theme"
+    mode: "0644"
+    content: |
+      [Icon Theme]
+      Name=Default
+      Comment=Default Cursor Theme
+      Inherits=breeze_cursors
+  when: dotfiles_is_linux
+
+- name: Set desktop font
+  ansible.builtin.command: gsettings set org.gnome.desktop.interface font-name "Adwaita Sans 11"
+  changed_when: false
+  when: dotfiles_is_linux

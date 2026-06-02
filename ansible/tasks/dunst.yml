@@ -1,0 +1,14 @@
+- name: Link Dunst config
+  ansible.builtin.file:
+    src: "{{ dotfiles_root }}/dunst"
+    dest: "{{ dotfiles_home }}/.config/dunst"
+    state: link
+    force: true
+
+- name: Install Dunst
+  ansible.builtin.package:
+    name:
+      - dunst
+      - libnotify
+    state: present
+  become: true

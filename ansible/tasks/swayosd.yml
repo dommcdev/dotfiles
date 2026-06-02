@@ -1,0 +1,60 @@
+- name: Link SwayOSD config
+  ansible.builtin.file:
+    src: "{{ dotfiles_root }}/swayosd"
+    dest: "{{ dotfiles_home }}/.config/swayosd"
+    state: link
+    force: true
+
+- name: Install SwayOSD
+  ansible.builtin.package:
+    name: swayosd
+    state: present
+  become: true
+
+- name: Ensure user systemd directory exists
+  ansible.builtin.file:
+    path: "{{ dotfiles_home }}/.config/systemd/user"
+    state: directory
+    mode: "0755"
+
+- name: Install SwayOSD user service
+  ansible.builtin.copy:
+    dest: "{{ dotfiles_home }}/.config/systemd/user/swayosd-server.service"
+    mode: "0644"
+    content: |
+      [Unit]
+      Description=SwayOSD
+      After=graphical-session.target
+
+      [Service]
+      ExecStart=/usr/bin/swayosd-server
+      Restart=on-failure
+
+      [Install]
+      WantedBy=graphical-session.target
+
+- name: Reload user systemd manager
+  ansible.builtin.systemd_service:
+    daemon_reload: true
+    scope: user
+
+- name: Enable SwayOSD user service
+  ansible.builtin.systemd_service:
+    name: swayosd-server.service
+    enabled: true
+    scope: user
+
+- name: Enable SwayOSD libinput backend
+  ansible.builtin.systemd_service:
+    name: swayosd-libinput-backend.service
+    enabled: true
+  become: true
+
+- name: Restart SwayOSD user service when available
+  ansible.builtin.shell: systemctl --user restart swayosd-server 2>/dev/null || true
+  changed_when: false
+
+- name: Restart SwayOSD backend when available
+  ansible.builtin.shell: systemctl restart swayosd-libinput-backend 2>/dev/null || true
+  become: true
+  changed_when: false

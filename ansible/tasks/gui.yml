@@ -1,0 +1,224 @@
+- name: Create screenshot and video directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - "{{ dotfiles_home }}/Downloads/Screenshots"
+    - "{{ dotfiles_home }}/Downloads/Videos"
+
+- name: Install GUI packages on Arch
+  ansible.builtin.package:
+    name: "{{ gui_arch_packages }}"
+    state: present
+  become: true
+  when: dotfiles_is_arch
+
+- name: Install GUI Flatpaks
+  ansible.builtin.command: "flatpak install --assumeyes --noninteractive flathub {{ item }}"
+  changed_when: false
+  loop: "{{ gui_flatpaks }}"
+  when: dotfiles_is_linux
+
+- name: Ensure GUI config directories exist
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - "{{ dotfiles_home }}/.config/GIMP/3.2"
+    - "{{ dotfiles_home }}/.local/share/applications"
+    - "{{ dotfiles_home }}/.local/share/icons/hicolor/scalable/apps"
+
+- name: Install Chrome on Linux
+  ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome
+  changed_when: false
+  when: dotfiles_is_arch
+
+- name: Install Chrome and OnlyOffice on macOS
+  ansible.builtin.command: "brew install --cask {{ item }}"
+  environment: "{{ brew_environment }}"
+  changed_when: false
+  loop:
+    - google-chrome
+    - onlyoffice
+  when: dotfiles_is_macos
+
+- name: Link GIMP config files
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ dotfiles_home }}/.config/GIMP/3.2/{{ item | basename }}"
+    state: link
+    force: true
+  loop: "{{ lookup('ansible.builtin.fileglob', dotfiles_root + '/apps/gimp/*', wantlist=True) }}"
+
+- name: Link Chrome flags on Linux
+  ansible.builtin.file:
+    src: "{{ dotfiles_root }}/apps/chrome/chrome-flags.conf"
+    dest: "{{ dotfiles_home }}/.config/chrome-flags.conf"
+    state: link
+    force: true
+  when: dotfiles_is_linux
+
+- name: Ensure OnlyOffice config directory exists
+  ansible.builtin.file:
+    path: "{{ dotfiles_home }}/.config/onlyoffice"
+    state: directory
+    mode: "0755"
+
+- name: Link OnlyOffice theme
+  ansible.builtin.file:
+    src: "{{ dotfiles_root }}/apps/onlyoffice/theme.json"
+    dest: "{{ dotfiles_home }}/.config/onlyoffice/theme.json"
+    state: link
+    force: true
+
+- name: Link desktop files
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ dotfiles_home }}/.local/share/applications/{{ item | basename }}"
+    state: link
+    force: true
+  loop: "{{ lookup('ansible.builtin.fileglob', dotfiles_root + '/apps/desktop-files/misc-apps/*', wantlist=True) + lookup('ansible.builtin.fileglob', dotfiles_root + '/apps/desktop-files/hidden/*', wantlist=True) }}"
+  when: dotfiles_is_linux
+
+- name: Link desktop file icons
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ dotfiles_home }}/.local/share/icons/hicolor/scalable/apps/{{ item | basename }}"
+    state: link
+    force: true
+  loop: "{{ lookup('ansible.builtin.fileglob', dotfiles_root + '/apps/desktop-files/icons/*', wantlist=True) }}"
+  when: dotfiles_is_linux
+
+- name: Update local icon and desktop caches
+  ansible.builtin.shell: |
+    gtk-update-icon-cache -f -t "{{ dotfiles_home }}/.local/share/icons/hicolor"
+    update-desktop-database "{{ dotfiles_home }}/.local/share/applications"
+  changed_when: false
+  when: dotfiles_is_linux
+
+- name: Configure Nautilus captions
+  ansible.builtin.command: gsettings set org.gnome.nautilus.icon-view captions "['size', 'none', 'none']"
+  changed_when: false
+  when: dotfiles_is_linux
+
+- name: Configure GTK file chooser sorting
+  ansible.builtin.command: gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true
+  changed_when: false
+  when: dotfiles_is_linux
+
+- name: Install desktop development packages on Arch
+  ansible.builtin.package:
+    name:
+      - jdk-openjdk
+      - clang
+      - python
+      - python-pip
+      - deno
+      - uv
+    state: present
+  become: true
+  when: dotfiles_is_arch
+
+- name: Install desktop development packages with Homebrew
+  ansible.builtin.command: "brew install {{ item }}"
+  environment: "{{ brew_environment }}"
+  changed_when: false
+  loop:
+    - java
+    - llvm
+    - python
+    - typst
+    - deno
+    - uv
+  when: not dotfiles_is_arch
+
+- name: Install GitHub CLI for repo setup on Arch
+  ansible.builtin.package:
+    name: github-cli
+    state: present
+  become: true
+  when: dotfiles_is_arch
+
+- name: Install GitHub CLI for repo setup with Homebrew
+  ansible.builtin.command: brew install gh
+  environment: "{{ brew_environment }}"
+  changed_when: false
+  when: not dotfiles_is_arch
+
+- name: Ensure dev directories exist
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - "{{ dotfiles_home }}/dev/projects"
+    - "{{ dotfiles_home }}/dev/external"
+
+- name: Install gh markdown preview extension
+  ansible.builtin.command: gh extension install yusukebe/gh-markdown-preview
+  changed_when: false
+  failed_when: false
+
+- name: Use SSH remote for dotfiles repo
+  ansible.builtin.command: git remote set-url origin git@github.com:dommcdev/dotfiles.git
+  args:
+    chdir: "{{ dotfiles_home }}/dev/dotfiles"
+  changed_when: false
+  failed_when: false
+
+- name: Use SSH remote for wallpapers repo
+  ansible.builtin.command: git remote set-url origin git@github.com:dommcdev/wallpapers.git
+  args:
+    chdir: "{{ dotfiles_home }}/dev/wallpapers"
+  changed_when: false
+  failed_when: false
+
+- name: Install node on Arch
+  ansible.builtin.package:
+    name:
+      - nodejs
+      - npm
+    state: present
+  become: true
+  when: dotfiles_is_arch
+
+- name: Install node with Homebrew
+  ansible.builtin.command: brew install nodejs
+  environment: "{{ brew_environment }}"
+  changed_when: false
+  when: not dotfiles_is_arch
+
+- name: Configure npm global prefix
+  ansible.builtin.shell: |
+    mkdir -p "{{ dotfiles_home }}/.local/share/npm-global"
+    npm config set prefix '~/.local/share/npm-global'
+  changed_when: false
+
+- name: Install Rust for beancount tools on Arch
+  ansible.builtin.package:
+    name: rust
+    state: present
+  become: true
+  when: dotfiles_is_arch
+
+- name: Install beancount AUR tools on Arch
+  ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None beancount fava
+  changed_when: false
+  when: dotfiles_is_arch
+
+- name: Install beancount tools with Homebrew
+  ansible.builtin.command: "brew install {{ item }}"
+  environment: "{{ brew_environment }}"
+  changed_when: false
+  loop:
+    - beancount
+    - fava
+    - rust
+  when: not dotfiles_is_arch
+
+- name: Clone beans repo
+  ansible.builtin.command: gh repo clone dommcdev/beans "{{ dotfiles_home }}/dev/beans"
+  args:
+    creates: "{{ dotfiles_home }}/dev/beans"

@@ -1,0 +1,41 @@
+- name: Install tmux-git on Arch
+  ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None tmux-git
+  changed_when: false
+  when: dotfiles_is_arch
+
+- name: Install tmux with Homebrew
+  ansible.builtin.command: brew install tmux
+  environment: "{{ brew_environment }}"
+  changed_when: false
+  when: not dotfiles_is_arch
+
+- name: Ensure tmux config directory exists
+  ansible.builtin.file:
+    path: "{{ dotfiles_home }}/.config/tmux"
+    state: directory
+    mode: "0755"
+
+- name: Link tmux config
+  ansible.builtin.file:
+    src: "{{ dotfiles_root }}/tmux/tmux.conf"
+    dest: "{{ dotfiles_home }}/.config/tmux/tmux.conf"
+    state: link
+    force: true
+
+- name: Link tmux scripts
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ dotfiles_home }}/.local/bin/{{ item | basename }}"
+    state: link
+    force: true
+  loop: "{{ lookup('ansible.builtin.fileglob', dotfiles_root + '/tmux/scripts/*', wantlist=True) }}"
+
+- name: Clone tmux plugin manager
+  ansible.builtin.git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: "{{ dotfiles_home }}/.config/tmux/plugins/tpm"
+    update: false
+
+- name: Install tmux plugins
+  ansible.builtin.command: "{{ dotfiles_home }}/.config/tmux/plugins/tpm/bin/install_plugins"
+  changed_when: false

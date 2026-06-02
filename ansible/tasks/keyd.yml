@@ -1,0 +1,55 @@
+- name: Install keyd
+  ansible.builtin.package:
+    name: keyd
+    state: present
+  become: true
+  when: dotfiles_is_arch
+
+- name: Create keyd config directory
+  ansible.builtin.file:
+    path: /etc/keyd
+    state: directory
+    mode: "0755"
+  become: true
+
+- name: Copy keyd default config
+  ansible.builtin.copy:
+    src: "{{ dotfiles_root }}/keyd/default.conf"
+    dest: /etc/keyd/default.conf
+    mode: "0644"
+  become: true
+  register: keyd_config
+
+- name: Enable keyd
+  ansible.builtin.systemd_service:
+    name: keyd.service
+    enabled: true
+    state: started
+  become: true
+
+- name: Reload keyd after config changes
+  ansible.builtin.command: keyd reload
+  become: true
+  changed_when: false
+  when: keyd_config.changed
+
+- name: Create libinput config directory
+  ansible.builtin.file:
+    path: /etc/libinput
+    state: directory
+    mode: "0755"
+  become: true
+
+- name: Mark keyd virtual keyboard as internal
+  ansible.builtin.blockinfile:
+    path: /etc/libinput/local-overrides.quirks
+    create: true
+    mode: "0644"
+    marker: "# {mark} ANSIBLE DOTFILES KEYD QUIRK"
+    block: |
+      [Serial Keyboards]
+
+      MatchUdevType=keyboard
+      MatchName=*keyd*keyboard
+      AttrKeyboardIntegration=internal
+  become: true

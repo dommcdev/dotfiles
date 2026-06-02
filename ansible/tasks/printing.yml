@@ -1,0 +1,53 @@
+- name: Install printing packages
+  ansible.builtin.package:
+    name:
+      - cups
+      - cups-browsed
+      - cups-filters
+      - cups-pdf
+      - system-config-printer
+      - avahi
+      - cups-pk-helper
+      - nss-mdns
+    state: present
+  become: true
+  when: dotfiles_is_arch
+
+- name: Create resolved override directory
+  ansible.builtin.file:
+    path: /etc/systemd/resolved.conf.d
+    state: directory
+    mode: "0755"
+  become: true
+
+- name: Disable resolved multicast DNS
+  ansible.builtin.copy:
+    dest: /etc/systemd/resolved.conf.d/10-disable-multicast.conf
+    mode: "0644"
+    content: |
+      [Resolve]
+      MulticastDNS=no
+  become: true
+
+- name: Enable mDNS host resolution
+  ansible.builtin.lineinfile:
+    path: /etc/nsswitch.conf
+    regexp: "^hosts:.*$"
+    line: "hosts: mymachines mdns_minimal [NOTFOUND=return] resolve files myhostname dns"
+  become: true
+
+- name: Enable remote printer discovery
+  ansible.builtin.lineinfile:
+    path: /etc/cups/cups-browsed.conf
+    line: "CreateRemotePrinters Yes"
+  become: true
+
+- name: Enable printing services
+  ansible.builtin.systemd_service:
+    name: "{{ item }}"
+    enabled: true
+  become: true
+  loop:
+    - cups.service
+    - cups-browsed.service
+    - avahi-daemon.service

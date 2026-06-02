@@ -1,0 +1,96 @@
+- name: Ensure Hyprland config directory exists
+  ansible.builtin.file:
+    path: "{{ dotfiles_home }}/.config/hypr"
+    state: directory
+    mode: "0755"
+
+- name: Link Hyprland configs except runtime variants
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ dotfiles_home }}/.config/hypr/{{ item | basename }}"
+    state: link
+    force: true
+  loop: "{{ lookup('ansible.builtin.fileglob', dotfiles_root + '/hypr/*', wantlist=True) | reject('match', '.*/uwsm$') | reject('match', '.*/hypridle.*\\.conf$') | list }}"
+
+- name: Ensure UWSM config directory exists
+  ansible.builtin.file:
+    path: "{{ dotfiles_home }}/.config/uwsm"
+    state: directory
+    mode: "0755"
+
+- name: Link UWSM configs
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ dotfiles_home }}/.config/uwsm/{{ item | basename }}"
+    state: link
+    force: true
+  loop: "{{ lookup('ansible.builtin.fileglob', dotfiles_root + '/hypr/uwsm/*', wantlist=True) }}"
+
+- name: Link laptop hypridle config
+  ansible.builtin.file:
+    src: "{{ dotfiles_root }}/hypr/hypridle-laptop.conf"
+    dest: "{{ dotfiles_home }}/.config/hypr/hypridle.conf"
+    state: link
+    force: true
+  when: dotfiles_is_laptop
+
+- name: Link desktop hypridle config
+  ansible.builtin.file:
+    src: "{{ dotfiles_root }}/hypr/hypridle.conf"
+    dest: "{{ dotfiles_home }}/.config/hypr/hypridle.conf"
+    state: link
+    force: true
+  when: not dotfiles_is_laptop
+
+- name: Ensure user systemd directory exists
+  ansible.builtin.file:
+    path: "{{ dotfiles_home }}/.config/systemd/user"
+    state: directory
+    mode: "0755"
+
+- name: Link Hyprland user services
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ dotfiles_home }}/.config/systemd/user/{{ item | basename }}"
+    state: link
+    force: true
+  loop: "{{ lookup('ansible.builtin.fileglob', dotfiles_root + '/hypr/systemd/*', wantlist=True) }}"
+
+- name: Install Hyprland packages
+  ansible.builtin.package:
+    name:
+      - uwsm
+      - libnewt
+      - xdg-desktop-portal-hyprland
+      - xdg-desktop-portal-gtk
+      - hyprland
+      - hyprlock
+      - hypridle
+      - hyprpaper
+      - hyprpicker
+      - hyprsunset
+      - grim
+      - slurp
+      - hyprpolkitagent
+      - satty
+      - hyprland-qt-support
+    state: present
+  become: true
+
+- name: Enable Hyprland user services
+  ansible.builtin.systemd_service:
+    name: "{{ item }}"
+    enabled: true
+    scope: user
+  loop:
+    - hyprpolkitagent.service
+    - hyprpaper.service
+    - hypridle.service
+    - hyprsunset.service
+
+- name: Let Hyprland handle the power button
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/logind.conf
+    regexp: "^#?HandlePowerKey=.*$"
+    line: "HandlePowerKey=ignore"
+  become: true

@@ -1,0 +1,91 @@
+- name: Install network packages
+  ansible.builtin.shell: |
+    yes | pacman -S --needed nftables iptables
+    pacman -S --noconfirm --needed iwd inetutils impala
+  become: true
+  changed_when: false
+
+- name: Remove NetworkManager stack if present
+  ansible.builtin.shell: |
+    if command -v nmcli >/dev/null 2>&1; then
+      systemctl disable --now NetworkManager NetworkManager-wait-online.service NetworkManager-dispatcher.service || true
+      systemctl disable wpa_supplicant && systemctl mask wpa_supplicant 2>/dev/null || true
+      pacman -Rns --noconfirm nm-connection-editor network-manager-applet networkmanager || true
+      rm -rf /etc/NetworkManager
+    fi
+  become: true
+  changed_when: false
+
+- name: Create systemd-networkd directory
+  ansible.builtin.file:
+    path: /etc/systemd/network
+    state: directory
+    mode: "0755"
+  become: true
+
+- name: Copy systemd-networkd configs
+  ansible.builtin.copy:
+    src: "{{ dotfiles_root }}/network/{{ item }}"
+    dest: "/etc/systemd/network/{{ item }}"
+    mode: "0644"
+  become: true
+  loop:
+    - 20-wired.network
+    - 25-wireless.network
+
+- name: Enable systemd-networkd
+  ansible.builtin.systemd_service:
+    name: systemd-networkd.service
+    enabled: true
+    state: started
+  become: true
+
+- name: Disable networkd wait online
+  ansible.builtin.systemd_service:
+    name: systemd-networkd-wait-online.service
+    enabled: false
+    masked: true
+  become: true
+
+- name: Enable systemd-resolved
+  ansible.builtin.systemd_service:
+    name: systemd-resolved.service
+    enabled: true
+    state: started
+  become: true
+
+- name: Link systemd-resolved stub resolver
+  ansible.builtin.file:
+    src: /run/systemd/resolve/stub-resolv.conf
+    dest: /etc/resolv.conf
+    state: link
+    force: true
+  become: true
+
+- name: Create iwd directory
+  ansible.builtin.file:
+    path: /etc/iwd
+    state: directory
+    mode: "0755"
+  become: true
+
+- name: Copy iwd config
+  ansible.builtin.copy:
+    src: "{{ dotfiles_root }}/network/iwd.conf"
+    dest: /etc/iwd/main.conf
+    mode: "0644"
+  become: true
+
+- name: Enable iwd
+  ansible.builtin.systemd_service:
+    name: iwd.service
+    enabled: true
+    state: started
+  become: true
+
+- name: Restart network stack
+  ansible.builtin.shell: |
+    systemctl restart iwd systemd-networkd
+    /usr/lib/systemd/systemd-networkd-wait-online --quiet --timeout=30
+  become: true
+  changed_when: false

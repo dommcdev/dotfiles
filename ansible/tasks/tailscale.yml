@@ -1,0 +1,35 @@
+- name: Install Tailscale on Arch
+  ansible.builtin.package:
+    name: tailscale
+    state: present
+  become: true
+  when: dotfiles_is_arch
+
+- name: Install Tailscale on Ubuntu and Fedora
+  ansible.builtin.shell: |
+    curl -fsSL https://tailscale.com/install.sh -o /tmp/tailscale_install.sh
+    sh /tmp/tailscale_install.sh
+  args:
+    creates: /usr/bin/tailscale
+  become: true
+  when: dotfiles_is_ubuntu or dotfiles_is_fedora
+
+- name: Install Tailscale app on macOS
+  ansible.builtin.command: brew install --cask tailscale-app
+  environment: "{{ brew_environment }}"
+  changed_when: false
+  when: dotfiles_is_macos
+
+- name: Enable tailscaled
+  ansible.builtin.systemd_service:
+    name: tailscaled.service
+    enabled: true
+    state: started
+  become: true
+  when: dotfiles_is_linux
+
+- name: Configure Tailscale SSH operator
+  ansible.builtin.command: "tailscale set --ssh --operator={{ dotfiles_user }}"
+  become: true
+  changed_when: false
+  when: dotfiles_is_linux

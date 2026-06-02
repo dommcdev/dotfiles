@@ -1,0 +1,50 @@
+- name: Install Docker packages on Arch
+  ansible.builtin.package:
+    name:
+      - docker
+      - docker-compose
+      - lazydocker
+    state: present
+  become: true
+  when: dotfiles_is_arch
+
+- name: Install Docker on Ubuntu and Fedora
+  ansible.builtin.shell: |
+    curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
+    sh /tmp/get-docker.sh
+  args:
+    creates: /usr/bin/docker
+  become: true
+  when: dotfiles_is_ubuntu or dotfiles_is_fedora
+
+- name: Install lazydocker with Homebrew on Ubuntu and Fedora
+  ansible.builtin.command: brew install lazydocker
+  environment: "{{ brew_environment }}"
+  changed_when: false
+  when: dotfiles_is_ubuntu or dotfiles_is_fedora
+
+- name: Install Docker with Homebrew on macOS
+  ansible.builtin.command: "brew install {{ item }}"
+  environment: "{{ brew_environment }}"
+  changed_when: false
+  loop:
+    - docker
+    - docker-compose
+    - lazydocker
+  when: dotfiles_is_macos
+
+- name: Enable Docker on Linux
+  ansible.builtin.systemd_service:
+    name: docker.service
+    enabled: true
+    state: started
+  become: true
+  when: dotfiles_is_linux
+
+- name: Add user to Docker group
+  ansible.builtin.user:
+    name: "{{ dotfiles_user }}"
+    groups: docker
+    append: true
+  become: true
+  when: dotfiles_is_linux

@@ -1,0 +1,58 @@
+- name: Link Ghostty config
+  ansible.builtin.file:
+    src: "{{ dotfiles_root }}/ghostty"
+    dest: "{{ dotfiles_home }}/.config/ghostty"
+    state: link
+    force: true
+
+- name: Install Ghostty on Arch
+  ansible.builtin.package:
+    name:
+      - ghostty
+      - ttf-jetbrains-mono-nerd
+    state: present
+  become: true
+  when: dotfiles_is_arch
+
+- name: Enable Ghostty COPR on Fedora
+  ansible.builtin.command: dnf copr enable -y scottames/ghostty
+  become: true
+  changed_when: false
+  when: dotfiles_is_fedora
+
+- name: Install Ghostty on Fedora
+  ansible.builtin.dnf:
+    name: ghostty
+    state: present
+  become: true
+  when: dotfiles_is_fedora
+
+- name: Install Ghostty on Ubuntu
+  ansible.builtin.shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
+  args:
+    creates: /usr/bin/ghostty
+  become: true
+  when: dotfiles_is_ubuntu
+
+- name: Install Ghostty and font casks with Homebrew
+  ansible.builtin.command: "brew install --cask {{ item }}"
+  environment: "{{ brew_environment }}"
+  changed_when: false
+  loop: "{{ ['ghostty', 'font-jetbrains-mono-nerd-font'] if dotfiles_is_macos else ['font-jetbrains-mono-nerd-font'] }}"
+  when: dotfiles_is_macos or dotfiles_is_ubuntu or dotfiles_is_fedora
+
+- name: Enable Ghostty user service
+  ansible.builtin.systemd_service:
+    name: app-com.mitchellh.ghostty.service
+    enabled: true
+    scope: user
+  when: dotfiles_is_linux
+
+- name: Set Ghostty as default xdg terminal
+  ansible.builtin.copy:
+    dest: "{{ dotfiles_home }}/.config/xdg-terminals.list"
+    mode: "0644"
+    content: |
+      # Terminal emulator preference order for xdg-terminal-exec
+      com.mitchellh.ghostty.desktop
+  when: dotfiles_is_linux

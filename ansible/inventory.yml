@@ -1,0 +1,15 @@
+all:
+  hosts:
+    localhost:
+      ansible_connection: local
+  children:
+    servers:
+      hosts: {}
+    desktops:
+      hosts:
+        localhost:
+    custom:
+      hosts:
+        localhost:
+    laptops:
+      hosts: {}

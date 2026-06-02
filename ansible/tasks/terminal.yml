@@ -1,0 +1,92 @@
+- name: Install terminal packages on Arch
+  ansible.builtin.package:
+    name: "{{ terminal_arch_packages }}"
+    state: present
+  become: true
+  when: dotfiles_is_arch
+
+- name: Install terminal packages on Ubuntu
+  ansible.builtin.apt:
+    name: "{{ terminal_apt_packages }}"
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+  become: true
+  when: dotfiles_is_ubuntu
+
+- name: Install terminal packages on Fedora
+  ansible.builtin.dnf:
+    name: "{{ terminal_dnf_packages }}"
+    state: present
+  become: true
+  when: dotfiles_is_fedora
+
+- name: Install terminal Homebrew packages on Linux
+  ansible.builtin.command: "brew install {{ item }}"
+  environment: "{{ brew_environment }}"
+  changed_when: false
+  loop: "{{ terminal_brew_packages }}"
+  when: (dotfiles_is_ubuntu or dotfiles_is_fedora)
+
+- name: Install terminal Homebrew packages on macOS
+  ansible.builtin.command: "brew install {{ item }}"
+  environment: "{{ brew_environment }}"
+  changed_when: false
+  loop: "{{ terminal_macos_brew_packages }}"
+  when: dotfiles_is_macos
+
+- name: Link terminal config directories
+  ansible.builtin.file:
+    src: "{{ dotfiles_root }}/{{ item.src }}"
+    dest: "{{ dotfiles_home }}/{{ item.dest }}"
+    state: link
+    force: true
+  loop:
+    - src: tui/bat
+      dest: .config/bat
+    - src: tui/btop
+      dest: .config/btop
+
+- name: Create qalculate config directory
+  ansible.builtin.file:
+    path: "{{ dotfiles_home }}/.config/qalculate"
+    state: directory
+    mode: "0755"
+
+- name: Link qalculate config
+  ansible.builtin.file:
+    src: "{{ dotfiles_root }}/tui/qalc/qalc.cfg"
+    dest: "{{ dotfiles_home }}/.config/qalculate/qalc.cfg"
+    state: link
+    force: true
+
+- name: Create cava config directory
+  ansible.builtin.file:
+    path: "{{ dotfiles_home }}/.config/cava"
+    state: directory
+    mode: "0755"
+
+- name: Link cava config
+  ansible.builtin.file:
+    src: "{{ dotfiles_root }}/tui/cava/config"
+    dest: "{{ dotfiles_home }}/.config/cava/config"
+    state: link
+    force: true
+
+- name: Create fastfetch config directory
+  ansible.builtin.file:
+    path: "{{ dotfiles_home }}/.config/fastfetch"
+    state: directory
+    mode: "0755"
+
+- name: Link fastfetch configs
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ dotfiles_home }}/.config/fastfetch/{{ item | basename }}"
+    state: link
+    force: true
+  loop: "{{ lookup('ansible.builtin.fileglob', dotfiles_root + '/tui/fastfetch/*.jsonc', wantlist=True) }}"
+
+- name: Build bat cache
+  ansible.builtin.command: bat cache --build
+  changed_when: false

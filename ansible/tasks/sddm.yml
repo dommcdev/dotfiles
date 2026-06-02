@@ -1,0 +1,76 @@
+- name: Install SDDM and theme dependencies
+  ansible.builtin.package:
+    name:
+      - sddm
+      - qt6-svg
+      - qt6-declarative
+      - qt6-virtualkeyboard
+      - qt6-multimedia-ffmpeg
+    state: present
+  become: true
+
+- name: Clone SDDM astronaut theme
+  ansible.builtin.git:
+    repo: https://github.com/keyitdev/sddm-astronaut-theme.git
+    dest: /usr/share/sddm/themes/sddm-astronaut-theme
+    version: master
+    depth: 1
+  become: true
+
+- name: Copy SDDM theme fonts
+  ansible.builtin.shell: cp -n /usr/share/sddm/themes/sddm-astronaut-theme/Fonts/* /usr/share/fonts/ 2>/dev/null || true
+  become: true
+  changed_when: false
+
+- name: Create SDDM config directory
+  ansible.builtin.file:
+    path: /etc/sddm.conf.d
+    state: directory
+    mode: "0755"
+  become: true
+
+- name: Configure SDDM theme
+  ansible.builtin.copy:
+    dest: /etc/sddm.conf.d/theme.conf
+    mode: "0644"
+    content: |
+      [Theme]
+      Current=sddm-astronaut-theme
+  become: true
+
+- name: Configure SDDM virtual keyboard
+  ansible.builtin.copy:
+    dest: /etc/sddm.conf.d/virtualkbd.conf
+    mode: "0644"
+    content: |
+      [General]
+      InputMethod=qtvirtualkeyboard
+  become: true
+
+- name: Copy custom SDDM theme config
+  ansible.builtin.copy:
+    src: "{{ dotfiles_root }}/sddm/theme.conf"
+    dest: /usr/share/sddm/themes/sddm-astronaut-theme/Themes/theme.conf
+    mode: "0644"
+  become: true
+
+- name: Point SDDM theme metadata at custom config
+  ansible.builtin.lineinfile:
+    path: /usr/share/sddm/themes/sddm-astronaut-theme/metadata.desktop
+    regexp: "^ConfigFile=.*$"
+    line: "ConfigFile=Themes/theme.conf"
+  become: true
+
+- name: Copy SDDM wallpaper
+  ansible.builtin.copy:
+    src: "{{ dotfiles_home }}/dev/wallpapers/catppuccin/deer0.png"
+    dest: /usr/share/sddm/themes/sddm-astronaut-theme/Backgrounds/deer0.png
+    mode: "0644"
+    remote_src: true
+  become: true
+
+- name: Enable SDDM
+  ansible.builtin.systemd_service:
+    name: sddm.service
+    enabled: true
+  become: true

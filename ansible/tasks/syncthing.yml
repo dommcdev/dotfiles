@@ -1,0 +1,36 @@
+- name: Install Syncthing on Arch
+  ansible.builtin.package:
+    name: syncthing
+    state: present
+  become: true
+  when: dotfiles_is_arch
+
+- name: Install Syncthing on Ubuntu
+  ansible.builtin.apt:
+    name: syncthing
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+  become: true
+  when: dotfiles_is_ubuntu
+
+- name: Install Syncthing on Fedora
+  ansible.builtin.dnf:
+    name: syncthing
+    state: present
+  become: true
+  when: dotfiles_is_fedora
+
+- name: Install Syncthing with Homebrew
+  ansible.builtin.command: brew install syncthing
+  environment: "{{ brew_environment }}"
+  changed_when: false
+  when: dotfiles_is_macos
+
+- name: Enable Syncthing user service
+  ansible.builtin.systemd_service:
+    name: syncthing.service
+    enabled: true
+    state: started
+    scope: user
+  when: dotfiles_is_linux
