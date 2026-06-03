@@ -3,6 +3,7 @@ Nvim stuff (More lazy loading)
 Tweak auth stuff in fingerprints script
 Screen recording script w/waybar indicator
 Ambient light sensor?
+Possibly improve docker/iptables stuff (docker user chain?)
 
 # Low Priority
 Gpu passthrough (Windows, LookingGlass)
