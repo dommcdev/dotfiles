@@ -4,6 +4,7 @@ Tweak auth stuff in fingerprints script
 Screen recording script w/waybar indicator
 Ambient light sensor?
 Possibly improve docker/iptables stuff (docker user chain?)
+Syncthing needs to do systemctl enable --now syncthing@dominic.service (not a user service) for chocobo server
 
 # Low Priority
 Gpu passthrough (Windows, LookingGlass)
