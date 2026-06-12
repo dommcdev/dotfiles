@@ -55,7 +55,7 @@ fi
 if command -v brew &>/dev/null; then
   print_section "Updating Homebrew packages"
   brew update
-  brew upgrade
+  brew upgrade -y
   brew cleanup
 fi
 
