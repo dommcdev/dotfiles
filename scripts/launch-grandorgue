@@ -1,53 +1,17 @@
 #!/usr/bin/env bash
-#   ____                          _   ___
-#  / ___|_ __ __ _ _ __   __| |/ _ \ _ __ __ _ _    _   ___
-# | |  _| '__/ _` | '_ \ / _` | | | | '__/ _` | | | |/ _ \
-# | |_| | | | (_| | | | | (_| | |_| | | | (_| | |_| |  __/
-#  \____|_|  \__,_|_| |_|\__,_|\___/|_|  \__, |\__,_|\___|
-#                                         |___/
 
 # ---------------------------------------------------------------------------- #
-#   1. Parse Command Line Arguments
-# ---------------------------------------------------------------------------- #
-DO_INSTALL=false
-
-while getopts "ih" opt; do
-  case $opt in
-    i) DO_INSTALL=true ;;
-    \?) echo "Usage: cmd [-i]" >&2; exit 1 ;;
-  esac
-done
-
-# ---------------------------------------------------------------------------- #
-#   2. Handle Installation (-i)
-# ---------------------------------------------------------------------------- #
-if [ "$DO_INSTALL" = true ]; then
-    echo "--- Installing / Configuring GrandOrgue ---"
-
-    # Install the Flatpak
-    flatpak install --assumeyes --noninteractive flathub net.sourceforge.GrandOrgue
-
-    # Create the custom config directory (Prevents crash if it doesn't exist)
-    mkdir -p "$HOME/.config/GrandOrgue"
-
-    # Apply Overrides (Custom Home & Low Latency)
-    flatpak override --user --env=HOME="$HOME/.config/GrandOrgue" net.sourceforge.GrandOrgue
-    flatpak override --user --env=PIPEWIRE_LATENCY="128/48000" net.sourceforge.GrandOrgue
-
-    echo "--- Configuration Complete ---"
-fi
-
-# ---------------------------------------------------------------------------- #
-#   3. Launch Grandorgue
+#   Launch Grandorgue
 # ---------------------------------------------------------------------------- #
 if flatpak ps | grep -q "net.sourceforge.GrandOrgue"; then
     flatpak kill net.sourceforge.GrandOrgue
     while flatpak ps | grep -q "net.sourceforge.GrandOrgue"; do sleep 0.2; done
 fi
-flatpak run net.sourceforge.GrandOrgue &
+#flatpak run --env=PIPEWIRE_LATENCY="128/48000" net.sourceforge.GrandOrgue -c ~/.config/GrandOrgueConfig &
+PIPEWIRE_LATENCY="128/48000" GrandOrgue -c ~/.config/GrandOrgueConfig &
 
 # ---------------------------------------------------------------------------- #
-#   5. Route audio
+#   Route audio
 # ---------------------------------------------------------------------------- #
 DEFAULT_SINK=$(pactl get-default-sink)
 echo "Routing GrandOrgue to: $DEFAULT_SINK"
@@ -67,9 +31,3 @@ pw-link "GrandOrgueAudio:out_0" "${DEFAULT_SINK}:playback_1" 2>/dev/null
 # Connect Right Channel (out_1 -> playback_FR or playback_2)
 pw-link "GrandOrgueAudio:out_1" "${DEFAULT_SINK}:playback_FR" 2>/dev/null || \
 pw-link "GrandOrgueAudio:out_1" "${DEFAULT_SINK}:playback_2" 2>/dev/null
-
-
-#If not using flatpak, need to set pw-metadata quantum
-#pw-metadata -n settings 0 clock.force-quantum 128
-#and to reset
-#pw-metadata -n settings 0 clock.force-quantum 0
