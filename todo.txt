@@ -7,6 +7,7 @@ Possibly improve docker/iptables stuff (docker user chain?)
 Syncthing needs to do systemctl enable --now syncthing@dominic.service (not a user service) for chocobo server
 Add brew trust stuff
 Add ghostty-nautilus package
+Migrate hyprland conf to lua
 
 # Low Priority
 Gpu passthrough (Windows, LookingGlass)
