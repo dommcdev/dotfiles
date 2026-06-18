@@ -7,8 +7,8 @@ if flatpak ps | grep -q "net.sourceforge.GrandOrgue"; then
     flatpak kill net.sourceforge.GrandOrgue
     while flatpak ps | grep -q "net.sourceforge.GrandOrgue"; do sleep 0.2; done
 fi
-#flatpak run --env=PIPEWIRE_LATENCY="128/48000" net.sourceforge.GrandOrgue -c ~/.config/GrandOrgueConfig &
-PIPEWIRE_LATENCY="128/48000" GrandOrgue -c ~/.config/GrandOrgueConfig &
+flatpak run --env=PIPEWIRE_LATENCY="128/48000" net.sourceforge.GrandOrgue -c ~/.config/GrandOrgueConfig &
+#PIPEWIRE_LATENCY="128/48000" GrandOrgue -c ~/.config/GrandOrgueConfig &
 
 # ---------------------------------------------------------------------------- #
 #   Route audio
