@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+env_file="$HOME/dev/dotfiles/.env"
+
+usage() {
+  echo "Usage: wakeup <machine>"
+}
+
+# Help/arg check
+if [[ $# -ne 1 || $1 == "-h" || $1 == "--help" ]]; then
+  usage
+  exit 1
+fi
+
+# Env check
+if [[ ! -f $env_file ]]; then
+  echo "Error: missing $env_file" >&2
+  usage >&2
+  exit 1
+fi
+
+# Wakeonlan binary check
+if ! command -v wakeonlan >/dev/null 2>&1; then
+  echo "Error: wakeonlan is not installed or not on PATH" >&2
+  exit 1
+fi
+
+# Set machine/mac vars
+machine=$1
+mac=$(sed -n "s/^[[:space:]]*$machine=['\"]* \?\([^'\"]*\)['\"]*$/\1/p" "$env_file")
+
+if [[ -z $mac ]]; then
+  echo "Error: unknown machine '$machine' in $env_file" >&2
+  exit 1
+fi
+
+wakeonlan "$mac"
