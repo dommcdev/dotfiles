@@ -8,7 +8,8 @@ Syncthing needs to do systemctl enable --now syncthing@dominic.service (not a us
 Add brew trust stuff
 Add ghostty-nautilus package
 Migrate hyprland conf to lua
-Replace id3v2 with beets
+Replace id3v2 with beets/picard
+Setup ufw (and maybe Apparmor)
 
 # Low Priority
 Gpu passthrough (Windows, LookingGlass)
