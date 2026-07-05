@@ -2,7 +2,6 @@
   ansible.builtin.package:
     name:
       - openssh
-      - mosh
     state: present
   become: true
   when: is_arch
@@ -20,7 +19,6 @@
   ansible.builtin.dnf:
     name:
       - openssh-server
-      - mosh
     state: present
   become: true
   when: is_fedora

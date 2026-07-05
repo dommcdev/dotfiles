@@ -10,6 +10,7 @@ Add ghostty-nautilus package
 Migrate hyprland conf to lua
 Replace id3v2 with beets/picard
 Setup ufw (and maybe Apparmor)
+Fedora - default Y for dnf, disable SELinux
 
 # Low Priority
 Gpu passthrough (Windows, LookingGlass)

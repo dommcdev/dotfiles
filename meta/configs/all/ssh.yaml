@@ -1,38 +1,37 @@
-
 - link:
     ~/.ssh/config: ssh/config
 
 - shell:
-  - |
-    if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed openssh mosh
-      sudo systemctl enable sshd
-    elif [[ "$(./sys id)" == "ubuntu" ]]; then
-      sudo apt install -y openssh-server
-      sudo systemctl enable ssh
-    elif [[ "$(./sys id)" == "fedora" ]]; then
-      sudo dnf install -y openssh-server mosh
-      sudo systemctl enable sshd
-    elif [[ "$(./sys id)" == "mac" ]]; then
-      brew install openssh
-    fi
+    - |
+      if [[ "$(./sys id)" == "arch" ]]; then
+        sudo pacman -S --noconfirm --needed openssh
+        sudo systemctl enable sshd
+      elif [[ "$(./sys id)" == "ubuntu" ]]; then
+        sudo apt install -y openssh-server
+        sudo systemctl enable ssh
+      elif [[ "$(./sys id)" == "fedora" ]]; then
+        sudo dnf install -y openssh-server
+        sudo systemctl enable sshd
+      elif [[ "$(./sys id)" == "mac" ]]; then
+        brew install openssh
+      fi
 
-  # Solve common flakiness with ssh
-  - |
-    if [[ "$(./sys type)" == "Linux" ]]; then
-      # Only append if the string isn't already in the file
-      grep -qxF "net.ipv4.tcp_mtu_probing=1" /etc/sysctl.d/99-sysctl.conf || \
-      echo "net.ipv4.tcp_mtu_probing=1" | sudo tee -a /etc/sysctl.d/99-sysctl.conf
-    fi
+    # Solve common flakiness with ssh
+    - |
+      if [[ "$(./sys type)" == "Linux" ]]; then
+        # Only append if the string isn't already in the file
+        grep -qxF "net.ipv4.tcp_mtu_probing=1" /etc/sysctl.d/99-sysctl.conf || \
+        echo "net.ipv4.tcp_mtu_probing=1" | sudo tee -a /etc/sysctl.d/99-sysctl.conf
+      fi
 
-  # Increase security
-  - |
-    if [[ "$(./sys type)" == "Linux" ]]; then
-      #sudo sed -i 's/^#\?Port .*/Port 2264/' /etc/ssh/sshd_config
-      sudo sed -i 's/^#\?PasswordAuthentication .*/PasswordAuthentication no/' /etc/ssh/sshd_config
-      sudo sed -i 's/^#\?PermitRootLogin .*/PermitRootLogin no/' /etc/ssh/sshd_config
+    # Increase security
+    - |
+      if [[ "$(./sys type)" == "Linux" ]]; then
+        #sudo sed -i 's/^#\?Port .*/Port 2264/' /etc/ssh/sshd_config
+        sudo sed -i 's/^#\?PasswordAuthentication .*/PasswordAuthentication no/' /etc/ssh/sshd_config
+        sudo sed -i 's/^#\?PermitRootLogin .*/PermitRootLogin no/' /etc/ssh/sshd_config
 
-      sudo systemctl daemon-reload
-      sudo systemctl restart ssh.socket 2>/dev/null || sudo systemctl restart sshd.socket 2>/dev/null
-      sudo systemctl restart ssh 2>/dev/null || sudo systemctl restart sshd
-    fi
+        sudo systemctl daemon-reload
+        sudo systemctl restart ssh.socket 2>/dev/null || sudo systemctl restart sshd.socket 2>/dev/null
+        sudo systemctl restart ssh 2>/dev/null || sudo systemctl restart sshd
+      fi
