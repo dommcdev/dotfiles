@@ -9,12 +9,14 @@ Add brew trust stuff
 Add ghostty-nautilus package
 Migrate hyprland conf to lua
 Replace id3v2 with beets/picard
-Setup ufw (and maybe Apparmor)
+Setup ufw (and maybe Apparmor on server)
 Fedora - default Y for dnf, disable SELinux
+Networkmanager
+Thinner borders around floating windows
 
 # Low Priority
-Gpu passthrough (Windows, LookingGlass)
-Quickshell + notif center
+Gpu passthrough (Windows, LookingGlass, Quickpassthrough)
+Quickshell (incl notif center)
 Tui for archinstall options
 Finish cross-platform dotfiles support
 Theme hypr* stuff
