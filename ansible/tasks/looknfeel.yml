@@ -43,10 +43,10 @@
     state: link
     force: true
   loop:
-    - src: gtk-3.0
-      dest: gtk-3.0
-    - src: gtk-4.0
-      dest: gtk-4.0
+    - src: gtk-3.0/gtk.css
+      dest: gtk-3.0/gtk.css
+    - src: gtk-4.0/gtk.css
+      dest: gtk-4.0/gtk.css
     - src: templates
       dest: templates
     - src: user-dirs.dirs

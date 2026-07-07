@@ -1,21 +1,19 @@
-
 - link:
-    ~/.config/gtk-3.0: styling/gtk/gtk-3.0
-    ~/.config/gtk-4.0: styling/gtk/gtk-4.0
+    ~/.config/gtk-3.0/gtk.css: styling/gtk/gtk-3.0/gtk.css
+    ~/.config/gtk-4.0/gtk.css: styling/gtk/gtk-4.0/gtk.css
     ~/.config/templates: styling/gtk/templates
     ~/.config/user-dirs.dirs: styling/gtk/user-dirs.dirs
     ~/.config/mimeapps.list: styling/gtk/mimeapps.list
 
 - shell:
-  - mkdir -p ~/Downloads/Screenshots ~/Downloads/Videos
-  - sudo pacman -S --noconfirm --needed adw-gtk-theme
-  - flatpak override --user --filesystem=xdg-config/gtk-4.0
-  - flatpak override --user --filesystem=xdg-config/gtk-3.0
-  - flatpak override --user --filesystem=xdg-data/themes
-  - gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3"
-  - gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-  - gsettings set org.gnome.desktop.interface accent-color 'orange'
-  - sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3
-  - sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3-dark
-
+    - mkdir -p ~/Downloads/Screenshots ~/Downloads/Videos
+    - sudo pacman -S --noconfirm --needed adw-gtk-theme
+    - flatpak override --user --filesystem=xdg-config/gtk-4.0
+    - flatpak override --user --filesystem=xdg-config/gtk-3.0
+    - flatpak override --user --filesystem=xdg-data/themes
+    - gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3"
+    - gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+    - gsettings set org.gnome.desktop.interface accent-color 'orange'
+    - sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3
+    - sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3-dark
 #Note - on non-pacman systems you will need to set up a hook for copying the adw-gtk theme to ~/.local/share/themes
