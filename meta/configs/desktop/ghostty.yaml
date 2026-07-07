@@ -1,29 +1,28 @@
-
 - link:
-    ~/.config/ghostty: ghostty
+    ~/.config/ghostty/config: ghostty/config
 
 - shell:
-  - |
-    if [[ "$(./sys id)" == "arch" ]]; then
-      sudo pacman -S --noconfirm --needed ghostty ttf-jetbrains-mono-nerd
-    elif [[ "$(./sys id)" == "fedora" ]]; then
-      sudo dnf copr enable -y scottames/ghostty && sudo dnf install -y ghostty
-      brew install --cask font-jetbrains-mono-nerd-font
-    elif [[ "$(./sys id)" == "ubuntu" ]]; then
-      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
-      brew install --cask font-jetbrains-mono-nerd-font
-    elif [[ "$(./sys id)" == "mac" ]]; then
-      brew install --cask ghostty font-jetbrains-mono-nerd-font
-    fi
+    - |
+      if [[ "$(./sys id)" == "arch" ]]; then
+        sudo pacman -S --noconfirm --needed ghostty ttf-jetbrains-mono-nerd
+      elif [[ "$(./sys id)" == "fedora" ]]; then
+        sudo dnf copr enable -y scottames/ghostty && sudo dnf install -y ghostty
+        brew install --cask font-jetbrains-mono-nerd-font
+      elif [[ "$(./sys id)" == "ubuntu" ]]; then
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
+        brew install --cask font-jetbrains-mono-nerd-font
+      elif [[ "$(./sys id)" == "mac" ]]; then
+        brew install --cask ghostty font-jetbrains-mono-nerd-font
+      fi
 
-  # Autostart in background for faster launches
-  - if [[ "$(./sys type)" == "Linux" ]]; then systemctl enable --user app-com.mitchellh.ghostty.service; fi
+    # Autostart in background for faster launches
+    - if [[ "$(./sys type)" == "Linux" ]]; then systemctl enable --user app-com.mitchellh.ghostty.service; fi
 
-  # Set as default terminal
-  - |
-    if [[ "$(./sys type)" == "Linux" ]]; then
-      cat >~/.config/xdg-terminals.list <<EOF
-    # Terminal emulator preference order for xdg-terminal-exec
-    com.mitchellh.ghostty.desktop
-    EOF
-    fi
+    # Set as default terminal
+    - |
+      if [[ "$(./sys type)" == "Linux" ]]; then
+        cat >~/.config/xdg-terminals.list <<EOF
+      # Terminal emulator preference order for xdg-terminal-exec
+      com.mitchellh.ghostty.desktop
+      EOF
+      fi

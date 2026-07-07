@@ -1,7 +1,7 @@
 - name: Link Ghostty config
   ansible.builtin.file:
-    src: "{{ root }}/ghostty"
-    dest: "{{ home }}/.config/ghostty"
+    src: "{{ root }}/ghostty/config"
+    dest: "{{ home }}/.config/ghostty/config"
     state: link
     force: true
 

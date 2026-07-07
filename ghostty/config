@@ -1,4 +1,4 @@
-theme = dark:Catppuccin Mocha,light:Catppuccin Latte
+theme = noctalia
 confirm-close-surface=false
 font-family = "JetBrainsMono Nerd Font"
 background-opacity = 0.96
