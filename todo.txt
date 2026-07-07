@@ -15,13 +15,11 @@ Networkmanager
 Add upower
 
 Theming
-* Chrome, icons, nvim, obsidian, zed, opencode, cava, yazi
+* Chrome, icons, nvim, obsidian, zed, opencode
 
-Nvim contact support gh copilot thing
 Move wallpapers dir to be managed by syncthing rather than git
 Noctalia keyboard shortcuts (incl notifs)
 Hyprland persistent workspaces
-Battery on lockscreen?
 Screenshot edit bind? Sushi preview?
 
 # Low Priority
@@ -38,3 +36,4 @@ Noctalia
 * Battery on lock screen
 * Integrate locking with loginctl lock-session
 * ipc for toggling power menu
+* Allow putting more widgets in control center menu

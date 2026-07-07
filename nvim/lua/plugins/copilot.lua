@@ -1,69 +1,70 @@
-return {
-  "zbirenbaum/copilot.lua",
-  cmd = "Copilot",
-  event = "InsertEnter",
-  init = function()
-    vim.g.copilot_inline_suggestions_off = true
-  end,
-  keys = {
-    {
-      "<leader>ct",
-      function()
-        vim.g.copilot_inline_suggestions_off = not vim.g.copilot_inline_suggestions_off
-        local off = vim.g.copilot_inline_suggestions_off
-
-        for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-          if vim.api.nvim_buf_is_valid(buf) then
-            vim.b[buf].copilot_suggestion_hidden = off
-            vim.b[buf].copilot_suggestion_auto_trigger = not off
-          end
-        end
-
-        if off then
-          require("copilot.suggestion").dismiss()
-          print("Copilot inline: OFF")
-        else
-          print("Copilot inline: ON")
-        end
-      end,
-      desc = "[Copilot] [T]oggle inline",
-    },
-  },
-  config = function()
-    local copilot = require("copilot.suggestion")
-
-    require("copilot").setup({
-      suggestion = {
-        enabled = false,
-        auto_trigger = false,
-        keymap = {
-          accept = false,
-          next = "<M-]>",
-          prev = "<M-[>",
-          dismiss = "<C-]>",
-        },
-      },
-      -- Security: Don't attach to sensitive files
-      filetypes = {
-        markdown = false,
-        help = false,
-        gitcommit = false,
-        sh = function()
-          if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^%.env.*") then
-            return false
-          end
-          return true
-        end,
-      },
-    })
-
-    -- THE SUPERTAB LOGIC
-    vim.keymap.set("i", "<Tab>", function()
-      if copilot.is_visible() then
-        copilot.accept()
-      else
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
-      end
-    end, { desc = "Supertab" })
-  end,
-}
+return {}
+-- return {
+--   "zbirenbaum/copilot.lua",
+--   cmd = "Copilot",
+--   event = "InsertEnter",
+--   init = function()
+--     vim.g.copilot_inline_suggestions_off = true
+--   end,
+--   keys = {
+--     {
+--       "<leader>ct",
+--       function()
+--         vim.g.copilot_inline_suggestions_off = not vim.g.copilot_inline_suggestions_off
+--         local off = vim.g.copilot_inline_suggestions_off
+--
+--         for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+--           if vim.api.nvim_buf_is_valid(buf) then
+--             vim.b[buf].copilot_suggestion_hidden = off
+--             vim.b[buf].copilot_suggestion_auto_trigger = not off
+--           end
+--         end
+--
+--         if off then
+--           require("copilot.suggestion").dismiss()
+--           print("Copilot inline: OFF")
+--         else
+--           print("Copilot inline: ON")
+--         end
+--       end,
+--       desc = "[Copilot] [T]oggle inline",
+--     },
+--   },
+--   config = function()
+--     local copilot = require("copilot.suggestion")
+--
+--     require("copilot").setup({
+--       suggestion = {
+--         enabled = true,
+--         auto_trigger = false,
+--         keymap = {
+--           accept = false,
+--           next = "<M-]>",
+--           prev = "<M-[>",
+--           dismiss = "<C-]>",
+--         },
+--       },
+--       -- Security: Don't attach to sensitive files
+--       filetypes = {
+--         markdown = false,
+--         help = false,
+--         gitcommit = false,
+--         sh = function()
+--           if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^%.env.*") then
+--             return false
+--           end
+--           return true
+--         end,
+--       },
+--     })
+--
+--     -- THE SUPERTAB LOGIC
+--     vim.keymap.set("i", "<Tab>", function()
+--       if copilot.is_visible() then
+--         copilot.accept()
+--       else
+--         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+--       end
+--     end, { desc = "Supertab" })
+--   end,
+-- }
