@@ -14,6 +14,11 @@ Fedora - default Y for dnf, disable SELinux
 Networkmanager
 Thinner borders around floating windows
 
+Theming
+* Chrome, icons, nvim, obsidian, zed, opencode, cava, yazi
+Polkit app
+Lockscreen, idle
+
 # Low Priority
 Gpu passthrough (Windows, LookingGlass, Quickpassthrough)
 Quickshell (incl notif center)
