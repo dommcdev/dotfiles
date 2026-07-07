@@ -1,6 +1,7 @@
 - link:
     ~/.config/gtk-3.0/gtk.css: styling/gtk/gtk-3.0/gtk.css
     ~/.config/gtk-4.0/gtk.css: styling/gtk/gtk-4.0/gtk.css
+    ~/.config/gtk-4.0/settings.ini: styling/gtk/gtk-4.0/settings.ini
     ~/.config/templates: styling/gtk/templates
     ~/.config/user-dirs.dirs: styling/gtk/user-dirs.dirs
     ~/.config/mimeapps.list: styling/gtk/mimeapps.list
