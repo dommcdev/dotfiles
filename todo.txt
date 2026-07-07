@@ -23,6 +23,8 @@ Nvim contact support gh copilot thing
 Move wallpapers dir to be managed by syncthing rather than git
 Replace screenshot binds
 Noctalia keyboard shortcuts (incl notifs)
+Hyprland persistent workspaces
+Battery on lockscreen?
 
 # Low Priority
 Gpu passthrough (Windows, LookingGlass, Quickpassthrough)
@@ -31,3 +33,8 @@ Tui for archinstall options
 Finish cross-platform dotfiles support
 Theme hypr* stuff
 Devcontainers
+
+Noctalia
+* Differentiate between laptop/desktop in idle settings
+* Network module handling ethernet
+* Battery on lock screen
