@@ -12,19 +12,17 @@ Replace id3v2 with beets/picard
 Setup ufw (and maybe Apparmor on server)
 Fedora - default Y for dnf, disable SELinux
 Networkmanager
-Thinner borders around floating windows
+Add upower
 
 Theming
 * Chrome, icons, nvim, obsidian, zed, opencode, cava, yazi
-Polkit app
-Lockscreen, idle
 
 Nvim contact support gh copilot thing
 Move wallpapers dir to be managed by syncthing rather than git
-Replace screenshot binds
 Noctalia keyboard shortcuts (incl notifs)
 Hyprland persistent workspaces
 Battery on lockscreen?
+Screenshot edit bind? Sushi preview?
 
 # Low Priority
 Gpu passthrough (Windows, LookingGlass, Quickpassthrough)
