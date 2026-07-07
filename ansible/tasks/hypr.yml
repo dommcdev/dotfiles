@@ -10,7 +10,7 @@
     dest: "{{ home }}/.config/hypr/{{ item | basename }}"
     state: link
     force: true
-  loop: "{{ lookup('ansible.builtin.fileglob', root + '/hypr/*', wantlist=True) | reject('match', '.*/uwsm$') | reject('match', '.*/hypridle.*\\.conf$') | list }}"
+  loop: "{{ lookup('ansible.builtin.fileglob', root + '/hypr/*', wantlist=True) | reject('match', '.*/uwsm$') | list }}"
 
 - name: Ensure UWSM config directory exists
   ansible.builtin.file:
@@ -26,36 +26,6 @@
     force: true
   loop: "{{ lookup('ansible.builtin.fileglob', root + '/hypr/uwsm/*', wantlist=True) }}"
 
-- name: Link laptop hypridle config
-  ansible.builtin.file:
-    src: "{{ root }}/hypr/hypridle-laptop.conf"
-    dest: "{{ home }}/.config/hypr/hypridle.conf"
-    state: link
-    force: true
-  when: is_laptop
-
-- name: Link desktop hypridle config
-  ansible.builtin.file:
-    src: "{{ root }}/hypr/hypridle.conf"
-    dest: "{{ home }}/.config/hypr/hypridle.conf"
-    state: link
-    force: true
-  when: not is_laptop
-
-- name: Ensure user systemd directory exists
-  ansible.builtin.file:
-    path: "{{ home }}/.config/systemd/user"
-    state: directory
-    mode: "0755"
-
-- name: Link Hyprland user services
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ home }}/.config/systemd/user/{{ item | basename }}"
-    state: link
-    force: true
-  loop: "{{ lookup('ansible.builtin.fileglob', root + '/hypr/systemd/*', wantlist=True) }}"
-
 - name: Install Hyprland packages
   ansible.builtin.package:
     name:
@@ -64,29 +34,10 @@
       - xdg-desktop-portal-hyprland
       - xdg-desktop-portal-gtk
       - hyprland
-      - hyprlock
-      - hypridle
-      - hyprpaper
-      - hyprpicker
-      - hyprsunset
-      - grim
-      - slurp
-      - hyprpolkitagent
       - satty
       - hyprland-qt-support
     state: present
   become: true
-
-- name: Enable Hyprland user services
-  ansible.builtin.systemd_service:
-    name: "{{ item }}"
-    enabled: true
-    scope: user
-  loop:
-    - hyprpolkitagent.service
-    - hyprpaper.service
-    - hypridle.service
-    - hyprsunset.service
 
 - name: Let Hyprland handle the power button
   ansible.builtin.lineinfile:

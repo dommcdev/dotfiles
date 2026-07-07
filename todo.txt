@@ -7,17 +7,17 @@ Possibly improve docker/iptables stuff (docker user chain?)
 Syncthing needs to do systemctl enable --now syncthing@dominic.service (not a user service) for chocobo server
 Add brew trust stuff
 Add ghostty-nautilus package
-Migrate hyprland conf to lua
 Replace id3v2 with beets/picard
 Setup ufw (and maybe Apparmor on server)
 Fedora - default Y for dnf, disable SELinux
 Networkmanager
 Add upower
+noctalia systemd service
 
 Theming
 * Chrome, icons, nvim, obsidian, zed, opencode
 
-Hyprland persistent workspaces
+Hyprland persistent workspaces + other noctalia stuff
 Screenshot edit bind? Sushi preview?
 Create syncthing dir for wallpapers, games/saves, etc
 Fix symlinking of dirs vs files for tui apps
