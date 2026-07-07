@@ -19,6 +19,11 @@ Theming
 Polkit app
 Lockscreen, idle
 
+Nvim contact support gh copilot thing
+Move wallpapers dir to be managed by syncthing rather than git
+Replace screenshot binds
+Noctalia keyboard shortcuts (incl notifs)
+
 # Low Priority
 Gpu passthrough (Windows, LookingGlass, Quickpassthrough)
 Quickshell (incl notif center)
