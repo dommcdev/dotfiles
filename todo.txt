@@ -17,10 +17,10 @@ Add upower
 Theming
 * Chrome, icons, nvim, obsidian, zed, opencode
 
-Move wallpapers dir to be managed by syncthing rather than git
-Noctalia keyboard shortcuts (incl notifs)
 Hyprland persistent workspaces
 Screenshot edit bind? Sushi preview?
+Create syncthing dir for wallpapers, games/saves, etc
+Fix symlinking of dirs vs files for tui apps
 
 # Low Priority
 Gpu passthrough (Windows, LookingGlass, Quickpassthrough)
