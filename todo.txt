@@ -36,3 +36,5 @@ Noctalia
 * Differentiate between laptop/desktop in idle settings
 * Network module handling ethernet
 * Battery on lock screen
+* Integrate locking with loginctl lock-session
+* ipc for toggling power menu
