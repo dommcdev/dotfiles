@@ -10,12 +10,12 @@ ansible/site.yml
 
 ansible/tasks/docker.yml
 ansible/tasks/dunst.yml
-ansible/tasks/ghostty.yml
+ansible/tasks/ghostty.yml (double-check if config dir exists)
 ansible/tasks/git.yml
 ansible/tasks/gui.yml
 ansible/tasks/hypr.yml
 ansible/tasks/keyd.yml
-ansible/tasks/looknfeel.yml
+ansible/tasks/looknfeel.yml (double-check if config dir exists)
 ansible/tasks/mac.yml
 ansible/tasks/misc.yml
 ansible/tasks/network.yml

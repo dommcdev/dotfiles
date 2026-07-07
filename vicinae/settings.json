@@ -14,7 +14,7 @@
    "pop_to_root_on_close": true,
    "theme": {
       "dark": {
-         "name": "catppuccin-mocha",
+         "name": "noctalia",
          "icon_theme": "Papirus-Dark"
       }
    },
