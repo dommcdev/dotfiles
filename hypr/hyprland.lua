@@ -66,7 +66,7 @@ hl.config({
       enabled = false,
       range = 4,
       render_power = 3,
-      color = "rgba(1a1a1aee)",
+      color = 0xee1a1a1a,
     },
 
     blur = {
@@ -316,13 +316,38 @@ hl.window_rule({
   size = { "monitor_w*0.7", "monitor_h*0.75" },
 })
 
+-- Noctalia settings window
+hl.window_rule({
+  match = { class = "dev.noctalia.Noctalia" },
+  float = true,
+  size = { 1080, 920 },
+})
+
+-- Noctalia blur/animation stuff
+hl.layer_rule({
+  name = "noctalia",
+  match = {
+    namespace = "^noctalia-(bar-.+|notification|dock|panel|attached-panel|osd)$",
+  },
+  no_anim = true,
+  ignore_alpha = 0.5,
+  blur = true,
+  blur_popups = true,
+})
+
 -- Prevents screen sleep while any GrandOrgue window is open
 hl.window_rule({ match = { class = "GrandOrgue" }, idle_inhibit = "always" })
 hl.window_rule({ match = { class = "GrandOrgue" }, workspace = "9" })
 
--- Grandorgue layout
+-- For Grandorgue layout
 hl.workspace_rule({ workspace = "9", layout = "master", persistent = true })
 hl.workspace_rule({ workspace = "9", layout_opts = { orientation = "top" } })
+
+hl.workspace_rule({ workspace = "1", persistent = true })
+hl.workspace_rule({ workspace = "2", persistent = true })
+hl.workspace_rule({ workspace = "3", persistent = true })
+hl.workspace_rule({ workspace = "4", persistent = true })
+hl.workspace_rule({ workspace = "5", persistent = true })
 
 -- Move to a hidden workspace and prevent it from stealing focus
 hl.window_rule({
@@ -340,3 +365,6 @@ hl.window_rule({
 hl.layer_rule({ blur = true, ignore_alpha = 0, match = { namespace = "vicinae" } })
 hl.layer_rule({ no_anim = true, match = { namespace = "vicinae" } })
 hl.layer_rule({ match = { namespace = "vicinae" }, dim_around = true })
+
+-- For Noctalia Color templates
+require("noctalia").apply_theme()

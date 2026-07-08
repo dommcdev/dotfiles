@@ -10,6 +10,7 @@ local editor = 'ghostty -e "nvim"'
 local webapp = "google-chrome-stable --app"
 local screenshot = "noctalia msg screenshot-fullscreen"
 local screenshotArea = "noctalia msg screenshot-region"
+local controlcenter = "noctalia msg panel-toggle control-center"
 
 -- Floating TUI apps
 local bluetooth = "noctalia msg bluetooth-enable && ghostty --class=com.dominic.bluetui -e bluetui"
@@ -49,7 +50,7 @@ hl.bind(mainMod .. " + I", hl.dsp.exec_cmd(webapp .. '="https://gemini.google.co
 hl.bind(mainMod .. " + SHIFT + I", hl.dsp.exec_cmd(webapp .. '="https://chatgpt.com"'))
 hl.bind("SHIFT + ALT + XF86TouchpadOff", hl.dsp.exec_cmd(webapp .. '="https://gemini.google.com/app"')) -- Copilot Key
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(notes))
-hl.bind(mainMod .. " + O", hl.dsp.layout("togglesplit")) -- dwindle
+hl.bind(mainMod .. " + O", hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprpicker | wl-copy"))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(audiomixer))
 hl.bind(mainMod .. " + return", hl.dsp.exec_cmd(terminal))
@@ -64,6 +65,7 @@ hl.bind(mainMod .. " + Y", hl.dsp.exec_cmd(parabolic))
 hl.bind(mainMod .. " + SHIFT + Y", hl.dsp.exec_cmd(webapp .. '="https://youtube.com/playlist?list=WL"'))
 hl.bind(mainMod .. " + Z", hl.dsp.workspace.toggle_special("magic"))
 hl.bind(mainMod .. " + SHIFT + Z", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind(mainMod .. "+comma", hl.dsp.exec_cmd(controlcenter))
 
 -- Move focus with mainMod SHIFT + hjkl
 hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "l" }))
