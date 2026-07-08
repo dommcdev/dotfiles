@@ -12,13 +12,15 @@ Fedora - default Y for dnf, disable SELinux
 Networkmanager
 Add upower, gpu-screen-recorder
 noctalia systemd service
+Symlink all generated theme files
+Improve tmux theme
+Consolodate some of my ansible task files
 
 Theming
-* Chrome, icons, nvim, obsidian, zed, opencode
+* Chrome, icons, nvim, obsidian, zed, opencode, bat
 
 Screenshot edit keybind? Sushi preview?
 Create syncthing dir for wallpapers, games/saves, etc
-Fix symlinking of dirs vs files for tui apps
 Add more fonts / misc stuff from archinstall
 
 # Low Priority
@@ -33,3 +35,4 @@ Noctalia
 * Integrate locking with loginctl lock-session
 * ipc for toggling power menu
 * Allow putting more widgets in control center menu
+* Allow setting accent color for theme
