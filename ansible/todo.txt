@@ -2,10 +2,7 @@ Add stuff from bootstrapping scripts
 * Update homebrew after installation to make sure it stays updated
 
 TO REVIEW
-ansible/ansible.cfg
 ansible/group_vars/all.yml
-ansible/inventory.yml
-ansible/requirements.yml
 ansible/site.yml
 
 ansible/tasks/docker.yml
