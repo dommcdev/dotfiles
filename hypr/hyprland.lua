@@ -31,6 +31,9 @@ end)
 -- #####################
 -- ### LOOK AND FEEL ###
 -- #####################
+local noctalia = require("noctalia")
+noctalia.apply_theme()
+
 hl.config({
   general = {
     gaps_in = 4,
@@ -39,8 +42,7 @@ hl.config({
     border_size = 3,
 
     col = {
-      active_border = { colors = { "rgba(74c7ecee)", "rgba(a6e3a1ee)" }, angle = 45 },
-      inactive_border = "rgba(bac2deaa)",
+      --inactive_border = "rgba(bac2deaa)",
     },
 
     -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
@@ -49,7 +51,7 @@ hl.config({
   },
 })
 -- Fullscreen windows have red border
-hl.window_rule({ match = { fullscreen = true }, border_color = "rgba(f38ba8ff)" })
+hl.window_rule({ match = { fullscreen = true }, border_color = noctalia.colors.error })
 
 hl.config({
   decoration = {
@@ -365,6 +367,3 @@ hl.window_rule({
 hl.layer_rule({ blur = true, ignore_alpha = 0, match = { namespace = "vicinae" } })
 hl.layer_rule({ no_anim = true, match = { namespace = "vicinae" } })
 hl.layer_rule({ match = { namespace = "vicinae" }, dim_around = true })
-
--- For Noctalia Color templates
-require("noctalia").apply_theme()
