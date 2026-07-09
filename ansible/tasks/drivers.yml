@@ -1,0 +1,20 @@
+- name: Install Arch graphics, media, and firmware driver packages
+  ansible.builtin.package:
+    name:
+      - libva-mesa-driver
+      - libva-utils
+      - mesa
+      - vulkan-radeon
+      - intel-media-driver
+      - sof-firmware
+      - gst-plugins-good
+      - gst-plugins-bad
+      - gst-plugins-ugly
+      - gst-plugins-base
+      - gst-plugins-base-libs
+      - gst-libav
+      - vulkan-intel
+      - fwupd
+    state: present
+  become: true
+  when: is_arch and is_custom

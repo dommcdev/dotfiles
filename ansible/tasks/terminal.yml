@@ -41,11 +41,7 @@
       - figlet
       - man-db
       - man-pages
-      - bat
-      - btop
-      - fastfetch
       - bc
-      - libqalculate
     apt_pkgs:
       - 7zip
       - unar
@@ -73,7 +69,6 @@
       - duf
       - figlet
       - bc
-      - qalc
     dnf_pckgs:
       - 7zip
       - unar
@@ -100,7 +95,6 @@
       - duf
       - figlet
       - bc
-      - libqalculate
     brew_pkgs:
       - fzf
       - yt-dlp
@@ -111,9 +105,6 @@
       - dust
       - glow
       - difftastic
-      - bat
-      - btop
-      - fastfetch
       - caligula
     macos_brew_pkgs:
       - ouch
@@ -146,11 +137,7 @@
       - duf
       - figlet
       - difftastic
-      - bat
-      - btop
-      - fastfetch
       - bc
-      - libqalculate
       - caligula
   block:
     - name: Install terminal packages on Arch
@@ -191,59 +178,3 @@
         update_homebrew: false
       environment: "{{ brew_environment }}"
       when: is_macos
-
-- name: Link terminal config directories
-  ansible.builtin.file:
-    src: "{{ root }}/{{ item.src }}"
-    dest: "{{ home }}/{{ item.dest }}"
-    state: link
-    force: true
-  loop:
-    - src: tui/bat
-      dest: .config/bat
-    - src: tui/btop
-      dest: .config/btop
-
-- name: Create qalculate config directory
-  ansible.builtin.file:
-    path: "{{ home }}/.config/qalculate"
-    state: directory
-    mode: "0755"
-
-- name: Link qalculate config
-  ansible.builtin.file:
-    src: "{{ root }}/tui/qalc/qalc.cfg"
-    dest: "{{ home }}/.config/qalculate/qalc.cfg"
-    state: link
-    force: true
-
-- name: Create cava config directory
-  ansible.builtin.file:
-    path: "{{ home }}/.config/cava"
-    state: directory
-    mode: "0755"
-
-- name: Link cava config
-  ansible.builtin.file:
-    src: "{{ root }}/tui/cava/config"
-    dest: "{{ home }}/.config/cava/config"
-    state: link
-    force: true
-
-- name: Create fastfetch config directory
-  ansible.builtin.file:
-    path: "{{ home }}/.config/fastfetch"
-    state: directory
-    mode: "0755"
-
-- name: Link fastfetch configs
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ home }}/.config/fastfetch/{{ item | basename }}"
-    state: link
-    force: true
-  loop: "{{ lookup('ansible.builtin.fileglob', root + '/tui/fastfetch/*.jsonc', wantlist=True) }}"
-
-- name: Build bat cache
-  ansible.builtin.command: bat cache --build
-  changed_when: false

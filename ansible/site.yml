@@ -23,8 +23,15 @@
     - name: Misc bootstrap, distro, hardware, and small tools
       ansible.builtin.include_tasks: tasks/misc.yml
 
+    - name: Drivers
+      ansible.builtin.include_tasks: tasks/drivers.yml
+      when: is_custom and is_linux
+
     - name: Headless-safe terminal tools
       ansible.builtin.include_tasks: tasks/terminal.yml
+
+    - name: Small configured TUI tools
+      ansible.builtin.include_tasks: tasks/tui.yml
 
     - name: Yazi
       ansible.builtin.include_tasks: tasks/yazi.yml

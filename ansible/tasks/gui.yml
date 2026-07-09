@@ -17,7 +17,6 @@
       - bluetui
       - wiremix
       - gnuplot
-      - cava
       - nautilus
       - nautilus-python
       - gvfs-smb

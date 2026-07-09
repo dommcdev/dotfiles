@@ -1,14 +1,10 @@
 Add stuff from bootstrapping scripts
 * Update homebrew after installation to make sure it stays updated
 
-Double-check brew env stuff
-
 TO REVIEW
-ansible/group_vars/all.yml
 ansible/site.yml
 
 ansible/tasks/docker.yml
-ansible/tasks/dunst.yml
 ansible/tasks/ghostty.yml (double-check if config dir exists)
 ansible/tasks/git.yml
 ansible/tasks/gui.yml
@@ -25,13 +21,11 @@ ansible/tasks/scripts.yml
 ansible/tasks/sddm.yml
 ansible/tasks/ssh.yml
 ansible/tasks/starship.yml
-ansible/tasks/swayosd.yml
 ansible/tasks/syncthing.yml
 ansible/tasks/tailscale.yml
 ansible/tasks/terminal.yml
 ansible/tasks/tmux.yml
 ansible/tasks/vicinae.yml
 ansible/tasks/virtualization.yml
-ansible/tasks/waybar.yml
 ansible/tasks/yazi.yml
 ansible/tasks/zsh.yml

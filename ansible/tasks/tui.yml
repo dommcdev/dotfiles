@@ -1,0 +1,119 @@
+- name: Install configured TUI packages
+  vars:
+    arch_pkgs:
+      - bat
+      - btop
+      - fastfetch
+      - libqalculate
+      - cava
+    apt_pkgs:
+      - qalc
+      - cava
+    dnf_pkgs:
+      - libqalculate
+      - cava
+    brew_pkgs:
+      - bat
+      - btop
+      - fastfetch
+    macos_brew_pkgs:
+      - bat
+      - btop
+      - fastfetch
+      - libqalculate
+      - cava
+  block:
+    - name: Install configured TUI packages on Arch
+      ansible.builtin.package:
+        name: "{{ arch_pkgs }}"
+        state: present
+      become: true
+      when: is_arch
+
+    - name: Install configured TUI packages on Ubuntu
+      ansible.builtin.apt:
+        name: "{{ apt_pkgs }}"
+        state: present
+        update_cache: true
+        cache_valid_time: 3600
+      become: true
+      when: is_ubuntu
+
+    - name: Install configured TUI packages on Fedora
+      ansible.builtin.dnf:
+        name: "{{ dnf_pkgs }}"
+        state: present
+      become: true
+      when: is_fedora
+
+    - name: Install configured TUI Homebrew packages on Linux
+      community.general.homebrew:
+        name: "{{ brew_pkgs }}"
+        state: present
+        update_homebrew: false
+      environment: "{{ brew_environment }}"
+      when: is_ubuntu or is_fedora
+
+    - name: Install configured TUI Homebrew packages on macOS
+      community.general.homebrew:
+        name: "{{ macos_brew_pkgs }}"
+        state: present
+        update_homebrew: false
+      environment: "{{ brew_environment }}"
+      when: is_macos
+
+- name: Link TUI config directories
+  ansible.builtin.file:
+    src: "{{ root }}/{{ item.src }}"
+    dest: "{{ home }}/{{ item.dest }}"
+    state: link
+    force: true
+  loop:
+    - src: tui/bat
+      dest: .config/bat
+    - src: tui/btop
+      dest: .config/btop
+
+- name: Create qalculate config directory
+  ansible.builtin.file:
+    path: "{{ home }}/.config/qalculate"
+    state: directory
+    mode: "0755"
+
+- name: Link qalculate config
+  ansible.builtin.file:
+    src: "{{ root }}/tui/qalc/qalc.cfg"
+    dest: "{{ home }}/.config/qalculate/qalc.cfg"
+    state: link
+    force: true
+
+- name: Create cava config directory
+  ansible.builtin.file:
+    path: "{{ home }}/.config/cava"
+    state: directory
+    mode: "0755"
+
+- name: Link cava config
+  ansible.builtin.file:
+    src: "{{ root }}/tui/cava/config"
+    dest: "{{ home }}/.config/cava/config"
+    state: link
+    force: true
+
+- name: Create fastfetch config directory
+  ansible.builtin.file:
+    path: "{{ home }}/.config/fastfetch"
+    state: directory
+    mode: "0755"
+
+- name: Link fastfetch configs
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ home }}/.config/fastfetch/{{ item | basename }}"
+    state: link
+    force: true
+  loop: "{{ lookup('ansible.builtin.fileglob', root + '/tui/fastfetch/*.jsonc', wantlist=True) }}"
+
+- name: Build bat cache
+  ansible.builtin.command: bat cache --build
+  changed_when: false

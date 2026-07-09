@@ -188,22 +188,9 @@
   become: true
   when: is_arch and is_laptop
 
-- name: Install custom driver and desktop control packages on Arch
+- name: Install desktop control packages on Arch
   ansible.builtin.package:
     name:
-      - libva-mesa-driver
-      - libva-utils
-      - mesa
-      - vulkan-radeon
-      - intel-media-driver
-      - sof-firmware
-      - gst-plugins-good
-      - gst-plugins-bad
-      - gst-plugins-ugly
-      - gst-plugins-base
-      - gst-plugins-base-libs
-      - gst-libav
-      - vulkan-intel
       - xdg-utils
       - ddcutil
       - wl-clipboard
@@ -213,7 +200,6 @@
       - reflector
       - brightnessctl
       - acpi
-      - fwupd
     state: present
   become: true
   when: is_arch and is_custom
