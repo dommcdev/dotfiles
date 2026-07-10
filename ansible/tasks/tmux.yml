@@ -1,6 +1,8 @@
-- name: Install tmux-git on Arch
-  ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None tmux-git
-  changed_when: false
+- name: Install tmux
+  ansible.builtin.package:
+    name: tmux
+    state: present
+  become: true
   when: is_arch
 
 - name: Install tmux with Homebrew

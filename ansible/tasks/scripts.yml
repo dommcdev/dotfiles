@@ -1,28 +1,14 @@
-- name: Ensure local bin exists
-  ansible.builtin.file:
-    path: "{{ home }}/.local/bin"
-    state: directory
-    mode: "0755"
+- name: Find scripts to link
+  ansible.builtin.find:
+    paths: "{{ root }}/scripts"
+    file_type: file
+    recurse: true
+  register: scripts
 
-- name: Link top-level scripts
+- name: Link scripts to ~/.local/bin
   ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ home }}/.local/bin/{{ item | basename }}"
+    src: "{{ item.path }}"
+    dest: "{{ home }}/.local/bin/{{ item.path | basename }}"
     state: link
     force: true
-  loop: "{{ lookup('ansible.builtin.fileglob', root + '/scripts/*', wantlist=True) | reject('match', '.*/(utilities|archived)$') | list }}"
-
-- name: Link utility scripts
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ home }}/.local/bin/{{ item | basename }}"
-    state: link
-    force: true
-  loop: "{{ lookup('ansible.builtin.fileglob', root + '/scripts/utilities/*', wantlist=True) }}"
-
-- name: Link sys helper
-  ansible.builtin.file:
-    src: "{{ root }}/sys"
-    dest: "{{ home }}/.local/bin/sys"
-    state: link
-    force: true
+  loop: "{{ scripts.files }}"

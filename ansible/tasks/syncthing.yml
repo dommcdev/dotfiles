@@ -1,27 +1,11 @@
-- name: Install Syncthing on Arch
+- name: Install Syncthing (Linux)
   ansible.builtin.package:
     name: syncthing
     state: present
   become: true
-  when: is_arch
+  when: is_linux
 
-- name: Install Syncthing on Ubuntu
-  ansible.builtin.apt:
-    name: syncthing
-    state: present
-    update_cache: true
-    cache_valid_time: 3600
-  become: true
-  when: is_ubuntu
-
-- name: Install Syncthing on Fedora
-  ansible.builtin.dnf:
-    name: syncthing
-    state: present
-  become: true
-  when: is_fedora
-
-- name: Install Syncthing with Homebrew
+- name: Install Syncthing (Mac/Homebrew)
   community.general.homebrew:
     name: syncthing
     state: present
@@ -29,10 +13,19 @@
   environment: "{{ brew_environment }}"
   when: is_macos
 
-- name: Enable Syncthing user service
+- name: Enable Syncthing as a user service (Desktops)
   ansible.builtin.systemd_service:
     name: syncthing.service
     enabled: true
     state: started
     scope: user
-  when: is_linux
+  when: is_linux and not is_server
+
+# System service starts at boot rather than login via graphical session/ssh
+- name: Enable Syncthing as a system service (Servers)
+  ansible.builtin.systemd_service:
+    name: "syncthing@{{ user }}.service"
+    enabled: true
+    state: started
+  become: true
+  when: is_linux and is_server
