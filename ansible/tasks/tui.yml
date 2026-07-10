@@ -6,6 +6,7 @@
       - fastfetch
       - libqalculate
       - cava
+      - starship
     apt_pkgs:
       - qalc
       - cava
@@ -16,12 +17,14 @@
       - bat
       - btop
       - fastfetch
+      - starship
     macos_brew_pkgs:
       - bat
       - btop
       - fastfetch
       - libqalculate
       - cava
+      - starship
   block:
     - name: Install configured TUI packages on Arch
       ansible.builtin.package:
@@ -73,6 +76,13 @@
       dest: .config/bat
     - src: tui/btop
       dest: .config/btop
+
+- name: Link Starship config
+  ansible.builtin.file:
+    src: "{{ root }}/starship/starship.toml"
+    dest: "{{ home }}/.config/starship.toml"
+    state: link
+    force: true
 
 - name: Create qalculate config directory
   ansible.builtin.file:

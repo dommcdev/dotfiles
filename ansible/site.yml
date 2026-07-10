@@ -45,9 +45,6 @@
     - name: Zsh
       ansible.builtin.include_tasks: tasks/zsh.yml
 
-    - name: Starship
-      ansible.builtin.include_tasks: tasks/starship.yml
-
     - name: Neovim
       ansible.builtin.include_tasks: tasks/nvim.yml
 
