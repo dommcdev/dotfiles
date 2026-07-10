@@ -3,7 +3,6 @@ Nvim stuff (More lazy loading)
 Tweak auth stuff in fingerprints script
 Ambient light sensor automated install (systemd service + script copying + note on sensor driver symlinking)
 Possibly improve docker/iptables stuff (docker user chain?)
-Syncthing needs to do systemctl enable --now syncthing@dominic.service (not a user service) for chocobo server
 Add brew trust stuff
 Add ghostty-nautilus package
 Replace id3v2 with beets/picard
