@@ -342,7 +342,7 @@ hl.window_rule({ match = { class = "GrandOrgue" }, idle_inhibit = "always" })
 hl.window_rule({ match = { class = "GrandOrgue" }, workspace = "9" })
 
 -- For Grandorgue layout
-hl.workspace_rule({ workspace = "9", layout = "master", persistent = true })
+hl.workspace_rule({ workspace = "9", layout = "master" })
 hl.workspace_rule({ workspace = "9", layout_opts = { orientation = "top" } })
 
 hl.workspace_rule({ workspace = "1", persistent = true })
