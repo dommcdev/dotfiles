@@ -3,21 +3,6 @@
   gather_facts: true
 
   pre_tasks:
-    - name: Check for dotfiles sys helper
-      ansible.builtin.stat:
-        path: "{{ root }}/sys"
-      register: sys_helper
-
-    - name: Detect laptop state from dotfiles sys helper
-      ansible.builtin.command: "{{ root }}/sys power"
-      register: sys_power
-      changed_when: false
-      failed_when: false
-      when: sys_helper.stat.exists
-
-    - name: Record laptop state
-      ansible.builtin.set_fact:
-        is_laptop: "{{ 'laptops' in group_names or (sys_power.stdout | default('0')) == '1' }}"
 
   tasks:
     - name: Misc bootstrap, distro, hardware, and small tools
@@ -100,18 +85,6 @@
 
     - name: Hyprland
       ansible.builtin.include_tasks: tasks/hypr.yml
-      when: is_custom and is_arch
-
-    - name: Waybar
-      ansible.builtin.include_tasks: tasks/waybar.yml
-      when: is_custom and is_arch
-
-    - name: Dunst
-      ansible.builtin.include_tasks: tasks/dunst.yml
-      when: is_custom and is_arch
-
-    - name: SwayOSD
-      ansible.builtin.include_tasks: tasks/swayosd.yml
       when: is_custom and is_arch
 
     - name: Vicinae
