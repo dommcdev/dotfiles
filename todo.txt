@@ -26,7 +26,6 @@ Ansible
 * Add ymls: noctalia, zed, retroarch/yuzu (gaming.yml), etc.
 
 
-
 # Low Priority
 Gpu passthrough (Windows, LookingGlass, Quickpassthrough)
 Finish cross-platform dotfiles support
