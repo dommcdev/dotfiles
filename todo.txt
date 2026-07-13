@@ -3,28 +3,23 @@ Nvim stuff (More lazy loading)
 Tweak auth stuff in fingerprints script
 Ambient light sensor automated install (systemd service + script copying + note on sensor driver symlinking)
 Possibly improve docker/iptables stuff (docker user chain?)
-Add brew trust stuff
-Add ghostty-nautilus package
-Replace id3v2 with beets/picard
 Setup ufw (and maybe Apparmor on server)
 Fedora - default Y for dnf, disable SELinux
-Networkmanager
-Add upower, gpu-screen-recorder
+Replace iwd with Networkmanager (find replacement tui??)
 noctalia systemd service
-Symlink all generated theme files
 Improve tmux theme
-
-Theming
-* Chrome, icons, nvim, obsidian, zed, opencode, bat
-
-Screenshot edit keybind? Sushi preview?
 Create syncthing dir for wallpapers, games/saves, etc
 Add more fonts / misc stuff from archinstall
+Theming: Chrome, icons, nvim, obsidian, zed, opencode, bat
 
-# Low Priority
-Gpu passthrough (Windows, LookingGlass, Quickpassthrough)
-Finish cross-platform dotfiles support
-Devcontainers
+
+Ansible
+* Add brew trust stuff
+* Add ghostty-nautilus package
+* Replace id3v2 with beets/picard
+* Add upower, gpu-screen-recorder
+* Tweak tui config symlinking to include theme files
+* Add ymls: noctalia, zed, retroarch/yuzu (gaming.yml), etc.
 
 Noctalia
 * Differentiate between laptop/desktop in idle settings
@@ -34,3 +29,11 @@ Noctalia
 * ipc for toggling power menu
 * Allow putting more widgets in control center menu
 * Allow setting accent color for theme
+* Screenshot specific window
+* Screenshot piped into editor
+* Notification action launches sushi preview
+
+# Low Priority
+Gpu passthrough (Windows, LookingGlass, Quickpassthrough)
+Finish cross-platform dotfiles support
+Devcontainers
