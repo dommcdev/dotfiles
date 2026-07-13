@@ -1,0 +1,11 @@
+Network module handling ethernet (only an issue with iwd?? mention in docs)
+Battery on lock screen
+Allow setting accent color for theme
+Screenshot piped into editor
+Notification action launches sushi preview
+Group spacer with module
+
+Commented] Differentiate between battery/ac in idle settings
+Commented] Screenshot specific window
+Created] Default to XDG_PICTURES_DIR
+Coming soon] Drawer groups for the bar
