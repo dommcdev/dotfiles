@@ -14,7 +14,7 @@ Theming: Chrome, icons, nvim, obsidian, zed, opencode, bat
 Add cachyos repo
 Update screensaver hyprland stuff
 Fix flatpak gtk theming
-Vicinae logout (+ add which cmd works to tips)
+Better system fonts (inter, fira, google-sans, etc, + research fontconfig)
 
 
 Ansible

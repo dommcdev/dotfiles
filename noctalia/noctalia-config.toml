@@ -1,0 +1,318 @@
+[audio]
+enable_sounds = true
+
+[bar]
+order = [ "default" ]
+
+    [bar.default]
+    capsule_radius = 0
+    center = [ "date", "center_spacer", "clock", "center_spacer", "weather", "center_spacer", "privacy" ]
+    end = [
+        "battery",
+        "right_spacer",
+        "network",
+        "right_spacer",
+        "bluetooth",
+        "right_spacer",
+        "volume",
+        "right_spacer",
+        "brightness",
+        "right_spacer",
+        "notifications",
+        "right_spacer",
+        "control-center"
+    ]
+    font_family = "Adwaita Sans"
+    margin_edge = 0
+    margin_ends = 8
+    radius = 0
+    start = [ "workspaces", "left_spacer", "cpu", "ram", "left_spacer", "media" ]
+
+[battery.device."/org/freedesktop/UPower/devices/battery_hidpp_battery_0"]
+warning_threshold = 10
+
+[battery.device."/org/freedesktop/UPower/devices/headset_dev_95_05_BB_29_BF_05"]
+warning_threshold = 10
+
+[brightness]
+enable_ddcutil = true
+minimum_brightness = 0.04999999888241291
+
+[calendar]
+enabled = true
+
+    [calendar.account.personal_google]
+    color = "primary"
+    type = "google"
+
+[control_center]
+sidebar_section = "none"
+
+    [[control_center.shortcuts]]
+    type = "power_profile"
+
+    [[control_center.shortcuts]]
+    type = "caffeine"
+
+    [[control_center.shortcuts]]
+    type = "noctalia/screen_recorder:toggle"
+
+    [[control_center.shortcuts]]
+    type = "nightlight"
+
+    [[control_center.shortcuts]]
+    type = "notification"
+
+    [[control_center.shortcuts]]
+    type = "dark_mode"
+
+[desktop_widgets]
+schema_version = 2
+widget_order = [ "desktop-widget-0000000000000002" ]
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget.desktop-widget-0000000000000002]
+    box_height = 320.0
+    box_width = 576.0
+    cx = 608.0
+    cy = 1072.0
+    output = "DP-2"
+    rotation = 0.0
+    type = "audio_visualizer"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000002.settings]
+        background = false
+        background_opacity = 0.0
+        bands = 32
+        color_2 = "secondary"
+        show_when_idle = false
+
+[idle]
+behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = true
+    timeout = 600.0
+
+    [idle.behavior.lock-and-suspend]
+    action = "lock_and_suspend"
+    enabled = false
+    timeout = 900.0
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = true
+    timeout = 660.0
+
+[keybinds]
+down = [ "Down", "Ctrl+j" ]
+left = [ "Left", "Ctrl+h" ]
+right = [ "Right", "Ctrl+l" ]
+up = [ "Up", "Ctrl+k" ]
+
+[location]
+auto_locate = true
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-0000000000000001" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-2"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 1280.0
+    cy = 1085.0
+    output = "DP-2"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-2".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_password_hint = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+    box_height = 176.0
+    box_width = 368.0
+    cx = 1280.0
+    cy = 704.0
+    output = "DP-2"
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+        background = false
+        color = "primary"
+
+[nightlight]
+enabled = true
+temperature_night = 4700
+
+[notification]
+layer = "overlay"
+
+[osd.kinds]
+media = false
+
+[plugin_settings."noctalia/screen_recorder"]
+directory = "~/Downloads/Videos/Recordings"
+
+[plugin_settings."noctalia/wallhaven"]
+browser_placement = "floating"
+browser_position = "center"
+
+[plugins]
+enabled = [ "noctalia/bongocat", "noctalia/wallhaven", "noctalia/screen_recorder" ]
+
+[shell]
+avatar_path = "/home/dominic/Downloads/Shared/Images/Profile.png"
+button_borders = false
+clipboard_enabled = false
+corner_radius_scale = 0.0
+polkit_agent = true
+telemetry_enabled = true
+
+    [shell.launcher]
+    session_search = true
+
+    [shell.panel]
+    open_near_click_clipboard = true
+    open_near_click_control_center = true
+    session_placement = "floating"
+    session_position = "center"
+    transparency_mode = "soft"
+    wallpaper_placement = "floating"
+    wallpaper_position = "center"
+
+    [shell.screen_corners]
+    size = 42
+
+    [shell.screenshot]
+    directory = "/home/dominic/Downloads/Screenshots"
+
+[theme]
+builtin = "Catppuccin"
+community_palette = "Breeze"
+mode = "dark"
+source = "builtin"
+wallpaper_scheme = "m3-content"
+
+    [theme.templates]
+    builtin_ids = [ "btop", "cava", "gtk3", "gtk4", "ghostty", "hyprland", "kcolorscheme", "qt", "starship" ]
+    community_ids = [ "pywalfox", "zen-browser", "obsidian", "zed", "vicinae", "papirus-icons", "yazi", "hyprtoolkit" ]
+
+[wallpaper]
+directory = "/home/dominic/dev/wallpapers"
+
+    [wallpaper.default]
+    path = "/home/dominic/dev/wallpapers/wallhaven-zyp7jo.jpg"
+
+    [wallpaper.last]
+    path = "/home/dominic/dev/wallpapers/wallhaven-zyp7jo.jpg"
+
+    [wallpaper.monitors.DP-2]
+    path = "/home/dominic/dev/wallpapers/wallhaven-zyp7jo.jpg"
+
+[weather]
+refresh_minutes = 15
+unit = "imperial"
+
+[widget.battery]
+enabled = true
+
+[widget.bluetooth]
+color = "primary"
+
+[widget.brightness]
+enabled = true
+show_label = false
+
+[widget.center_spacer]
+enabled = true
+length = 11
+type = "spacer"
+
+[widget.clipboard]
+enabled = false
+
+[widget.clock]
+anchor = true
+format = "{:%-I:%M %p}"
+
+[widget.control-center]
+enabled = true
+glyph = "ghost-2-filled"
+
+[widget.cpu]
+show_label = false
+
+[widget.date]
+format = "{:%B %-d}"
+
+[widget.launcher]
+enabled = false
+
+[widget.left_spacer]
+enabled = true
+type = "spacer"
+
+[widget.media]
+enabled = true
+hide_when_no_media = true
+
+[widget.network]
+color = "secondary"
+show_label = false
+
+[widget.privacy]
+hide_inactive = true
+
+[widget.ram]
+show_label = false
+stat = "ram_pct"
+
+[widget.recorder]
+type = "noctalia/screen_recorder:recorder"
+
+[widget.recorder_2]
+type = "noctalia/screen_recorder:recorder"
+
+[widget.right_spacer]
+enabled = true
+length = 8
+type = "spacer"
+
+[widget.spacer_2]
+enabled = true
+type = "spacer"
+
+[widget.tray]
+drawer = true
+enabled = false
+
+[widget.volume]
+color = "tertiary"
+show_label = false
+
+[widget.wallpaper]
+enabled = false
+
+[widget.weather]
+show_condition = false
