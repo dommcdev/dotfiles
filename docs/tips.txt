@@ -20,6 +20,9 @@ For shutdown
     poweroff (symlink to above)
     shutdown now (classic)
 
+Logging out
+    On hyprland, uwsm stop should work. loginctl terminate-session [session id] works in vicinae, but not by itself in a terminal (screen freezes).
+
 Archiving/unarchiving
     ouch: everyday compression/decompression, nice tui
     7zip: high compression, good decompression

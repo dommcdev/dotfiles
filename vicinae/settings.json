@@ -47,6 +47,7 @@
          }
       },
       "browser-extension": {
+         "enabled": false,
          "entrypoints": {
             "browse-tabs": {
                "enabled": false
@@ -133,6 +134,7 @@
          "enabled": false
       },
       "files": {
+         "enabled": true,
          "entrypoints": {
             "rebuild-index": {
                "enabled": false
@@ -152,7 +154,7 @@
                "enabled": false
             },
             "logout": {
-               "enabled": false,
+               "enabled": true,
                "preferences": {
                   "confirm": true,
                   "customProgram": "uwsm stop"
@@ -186,7 +188,20 @@
          }
       },
       "raycast-compat": {
-         "enabled": true
+         "enabled": false
+      },
+      "shortcuts": {
+         "enabled": false
+      },
+      "snippets": {
+         "enabled": false
+      },
+      "system": {
+         "entrypoints": {
+            "browse-apps": {
+               "enabled": false
+            }
+         }
       },
       "theme": {
          "enabled": false

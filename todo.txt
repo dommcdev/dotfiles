@@ -11,6 +11,10 @@ Improve tmux theme
 Create syncthing dir for wallpapers, games/saves, etc
 Add more fonts / misc stuff from archinstall
 Theming: Chrome, icons, nvim, obsidian, zed, opencode, bat
+Add cachyos repo
+Update screensaver hyprland stuff
+Fix flatpak gtk theming
+Vicinae logout (+ add which cmd works to tips)
 
 
 Ansible
@@ -22,16 +26,17 @@ Ansible
 * Add ymls: noctalia, zed, retroarch/yuzu (gaming.yml), etc.
 
 Noctalia
-* Differentiate between laptop/desktop in idle settings
-* Network module handling ethernet
+* Network module handling ethernet (only an issue with iwd?? mention in docs)
 * Battery on lock screen
-* Integrate locking with loginctl lock-session
-* ipc for toggling power menu
 * Allow putting more widgets in control center menu
 * Allow setting accent color for theme
-* Screenshot specific window
 * Screenshot piped into editor
 * Notification action launches sushi preview
+* Group spacer with module
+
+* Differentiate between battery/ac in idle settings
+* Screenshot specific window
+* Default to XDG_PICTURES_DIR
 
 # Low Priority
 Gpu passthrough (Windows, LookingGlass, Quickpassthrough)
