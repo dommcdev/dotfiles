@@ -4,13 +4,44 @@ all:
       ansible_host: chocobo.tetra-salmon.ts.net
     kabigon:
       ansible_host: kabigon.tetra-salmon.ts.net
+      gpu_vendors:
+        - amd
+        - nvidia
     pikachu:
       ansible_host: pikachu.tetra-salmon.ts.net
+      gpu_vendors:
+        - intel
+
+  vars:
+    root: "{{ playbook_dir }}/.."
+    home: "{{ ansible_env.HOME }}"
+    user: "{{ ansible_user_id }}"
+
+    brew_environment:
+      PATH: "/opt/homebrew/bin:/home/linuxbrew/.linuxbrew/bin"
+
+    # Restate some Ansible gathered facts for greater ease of use
+    is_arch: "{{ (ansible_distribution | lower) in ['arch', 'archlinux', 'cachyos'] }}"
+    is_ubuntu: "{{ (ansible_distribution | lower) in ['ubuntu', 'debian', 'linuxmint'] }}"
+    is_fedora: "{{ (ansible_distribution | lower) == 'fedora' }}"
+    is_macos: "{{ ansible_system == 'Darwin' }}"
+    is_linux: "{{ ansible_system == 'Linux' }}"
+
+    # Inventory-defined facts
+    is_headless: false
+    is_managed_desktop: false
+    is_hardened: false
+    has_battery: false
+    has_fingerprint_reader: false
+    gpu_vendors: []
 
   children:
     servers:
       hosts:
         chocobo:
+      vars:
+        is_headless: true
+        is_hardened: true
 
     workstations:
       hosts: {}
@@ -19,7 +50,12 @@ all:
       hosts:
         kabigon:
         pikachu:
+      vars:
+        is_managed_desktop: true
 
     laptops:
       hosts:
         pikachu:
+      vars:
+        has_battery: true
+        has_fingerprint_reader: true
