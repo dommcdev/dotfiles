@@ -2,8 +2,8 @@
 
 apply:
 	git pull
-	ansible-playbook site.yml
+	ansible-playbook main.yml
 
 apply-local:
 	git pull
-	ansible-playbook site.yml --limit "$$(hostname -s)"
+	ansible-playbook main.yml --limit "$$(hostname -s)"

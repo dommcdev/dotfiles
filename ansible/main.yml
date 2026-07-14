@@ -1,0 +1,9 @@
+- name: Configure machines
+  hosts: all
+  gather_facts: true
+
+  pre_tasks: {}
+
+  tasks:
+    - name: Script links
+      ansible.builtin.include_tasks: tasks/apps/scripts.yml

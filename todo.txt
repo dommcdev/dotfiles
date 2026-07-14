@@ -24,8 +24,7 @@ Ansible
 * Replace id3v2 with beets/picard
 * Add upower, gpu-screen-recorder
 * Tweak tui config symlinking to include theme files
-* Add ymls: noctalia, zed, retroarch, switch-emulator
-* Fingerprint task
+* Add ymls: noctalia, zed, retroarch, switch-emulator, auth
 
 
 
