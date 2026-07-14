@@ -12,7 +12,7 @@ all:
       hosts:
         chocobo:
 
-    desktops:
+    workstations:
       hosts: {}
 
     custom:

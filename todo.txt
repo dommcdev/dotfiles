@@ -15,6 +15,7 @@ Add cachyos repo
 Update screensaver hyprland stuff
 Fix flatpak gtk theming
 Better system fonts (inter, fira, ibm-plex + research fontconfig)
+Add limine and snapper
 
 
 Ansible
@@ -24,6 +25,8 @@ Ansible
 * Add upower, gpu-screen-recorder
 * Tweak tui config symlinking to include theme files
 * Add ymls: noctalia, zed, retroarch/yuzu (gaming.yml), etc.
+* Fingerprint task
+
 
 
 # Low Priority

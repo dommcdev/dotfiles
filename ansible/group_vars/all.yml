@@ -10,6 +10,6 @@ is_ubuntu: "{{ (ansible_distribution | lower) in ['ubuntu', 'debian', 'linuxmint
 is_fedora: "{{ (ansible_distribution | lower) == 'fedora' }}"
 is_macos: "{{ ansible_system == 'Darwin' }}"
 is_linux: "{{ ansible_system == 'Linux' }}"
-is_desktop: "{{ 'desktops' in group_names }}"
+is_workstation: "{{ 'workstations' in group_names }}"
 is_custom: "{{ 'custom' in group_names }}"
 is_server: "{{ 'servers' in group_names }}"
