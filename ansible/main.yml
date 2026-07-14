@@ -15,3 +15,6 @@
       ansible.builtin.include_tasks: tasks/apps/scripts.yml
     - name: Syncthing
       ansible.builtin.include_tasks: tasks/apps/syncthing.yml
+    - name: Network
+      ansible.builtin.include_tasks: tasks/system/network.yml
+      when: is_managed_desktop

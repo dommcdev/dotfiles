@@ -13,6 +13,8 @@ all:
       ansible_host: pikachu.tetra-salmon.ts.net
       gpu_vendors:
         - intel
+    archlab:
+      ansible_host: 192.168.122.165
 
   vars:
     ansible_connection: "{{ 'local' if inventory_hostname == lookup('pipe', 'hostname -s') else 'ssh' }}"
@@ -53,6 +55,7 @@ all:
       hosts:
         kabigon:
         pikachu:
+        archlab:
       vars:
         is_managed_desktop: true
 

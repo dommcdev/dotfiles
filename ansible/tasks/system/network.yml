@@ -1,48 +1,53 @@
 - name: Install network packages
-  ansible.builtin.shell: |
-    yes | pacman -S --needed nftables iptables
-    pacman -S --noconfirm --needed iwd inetutils impala
+  ansible.builtin.package:
+    name: "{{ pkgs[ansible_facts['os_family']] }}"
+    state: present
   become: true
-  changed_when: false
+  when: ansible_facts['os_family'] in pkgs
+  vars:
+    pkgs:
+      Archlinux:
+        - networkmanager
+        - nm-connection-editor
+        - iwd
+        - inetutils
+        - nftables
+        - iptables
+      Debian:
+        - network-manager
+        - network-manager-gnome
+        - iwd
+        - inetutils-tools
+        - systemd-resolved
+        - nftables
+        - iptables
+      RedHat:
+        - NetworkManager
+        - NetworkManager-wifi
+        - nm-connection-editor
+        - iwd
+        - systemd-resolved
+        - nftables
+        - iptables-nft
 
-- name: Remove NetworkManager stack if present
-  ansible.builtin.shell: |
-    if command -v nmcli >/dev/null 2>&1; then
-      systemctl disable --now NetworkManager NetworkManager-wait-online.service NetworkManager-dispatcher.service || true
-      systemctl disable wpa_supplicant && systemctl mask wpa_supplicant 2>/dev/null || true
-      pacman -Rns --noconfirm nm-connection-editor network-manager-applet networkmanager || true
-      rm -rf /etc/NetworkManager
-    fi
-  become: true
-  changed_when: false
-
-- name: Create systemd-networkd directory
+- name: Create NetworkManager config directory
   ansible.builtin.file:
-    path: /etc/systemd/network
+    path: /etc/NetworkManager/conf.d
     state: directory
     mode: "0755"
   become: true
 
-- name: Copy systemd-networkd configs
+- name: Copy NetworkManager config
   ansible.builtin.copy:
-    src: "{{ root }}/network/{{ item }}"
-    dest: "/etc/systemd/network/{{ item }}"
+    src: "{{ root }}/network/networkmanager.conf"
+    dest: /etc/NetworkManager/conf.d/90-dotfiles.conf
     mode: "0644"
   become: true
-  loop:
-    - 20-wired.network
-    - 25-wireless.network
+  register: networkmanager_config
 
-- name: Enable systemd-networkd
+- name: Disable NetworkManager wait online to speed up boot
   ansible.builtin.systemd_service:
-    name: systemd-networkd.service
-    enabled: true
-    state: started
-  become: true
-
-- name: Disable networkd wait online
-  ansible.builtin.systemd_service:
-    name: systemd-networkd-wait-online.service
+    name: NetworkManager-wait-online.service
     enabled: false
     masked: true
   become: true
@@ -62,20 +67,6 @@
     force: true
   become: true
 
-- name: Create iwd directory
-  ansible.builtin.file:
-    path: /etc/iwd
-    state: directory
-    mode: "0755"
-  become: true
-
-- name: Copy iwd config
-  ansible.builtin.copy:
-    src: "{{ root }}/network/iwd.conf"
-    dest: /etc/iwd/main.conf
-    mode: "0644"
-  become: true
-
 - name: Enable iwd
   ansible.builtin.systemd_service:
     name: iwd.service
@@ -83,9 +74,9 @@
     state: started
   become: true
 
-- name: Restart network stack
-  ansible.builtin.shell: |
-    systemctl restart iwd systemd-networkd
-    /usr/lib/systemd/systemd-networkd-wait-online --quiet --timeout=30
+- name: Enable/restart NetworkManager
+  ansible.builtin.systemd_service:
+    name: NetworkManager.service
+    enabled: true
+    state: "{{ 'restarted' if networkmanager_config.changed else 'started' }}"
   become: true
-  changed_when: false
