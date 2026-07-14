@@ -2,6 +2,12 @@
   hosts: all
   gather_facts: true
 
+  vars_files:
+    - .secrets.yml
+
+  vars:
+    ansible_become_password: "{{ become_passwords[inventory_hostname] }}"
+
   pre_tasks: []
 
   tasks:
