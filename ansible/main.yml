@@ -2,7 +2,7 @@
   hosts: all
   gather_facts: true
 
-  pre_tasks: {}
+  pre_tasks: []
 
   tasks:
     - name: Script links
