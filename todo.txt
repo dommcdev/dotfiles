@@ -25,6 +25,7 @@ Ansible
 * Add upower, gpu-screen-recorder
 * Tweak tui config symlinking to include theme files
 * Add ymls: noctalia, zed, retroarch, switch-emulator, auth
+* Nuke sys from dotfiles root (it lives in scripts already)
 
 
 

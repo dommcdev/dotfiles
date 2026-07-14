@@ -7,3 +7,5 @@
   tasks:
     - name: Script links
       ansible.builtin.include_tasks: tasks/apps/scripts.yml
+    - name: Syncthing
+      ansible.builtin.include_tasks: tasks/apps/syncthing.yml

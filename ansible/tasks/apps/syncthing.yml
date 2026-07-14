@@ -13,19 +13,19 @@
   environment: "{{ brew_environment }}"
   when: is_macos
 
-- name: Enable Syncthing as a user service (Desktops)
+- name: Enable Syncthing as a user service
   ansible.builtin.systemd_service:
     name: syncthing.service
     enabled: true
     state: started
     scope: user
-  when: is_linux and not is_server
+  when: not is_headless
 
 # System service starts at boot rather than login via graphical session/ssh
-- name: Enable Syncthing as a system service (Servers)
+- name: Enable Syncthing as a system service
   ansible.builtin.systemd_service:
     name: "syncthing@{{ user }}.service"
     enabled: true
     state: started
   become: true
-  when: is_linux and is_server
+  when: is_headless

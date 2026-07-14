@@ -3,8 +3,6 @@ Add stuff from bootstrapping scripts
 
 
 TO REVIEW
-ansible/site.yml
-
 ansible/tasks/docker.yml
 ansible/tasks/ghostty.yml (double-check if config dir exists)
 ansible/tasks/gui.yml
