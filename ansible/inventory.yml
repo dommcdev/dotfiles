@@ -13,19 +13,20 @@ all:
         - intel
 
   vars:
+    ansible_connection: "{{ 'local' if inventory_hostname == lookup('pipe', 'hostname -s') else 'ssh' }}"
     root: "{{ playbook_dir }}/.."
-    home: "{{ ansible_env.HOME }}"
-    user: "{{ ansible_user_id }}"
+    home: "{{ ansible_facts['env']['HOME'] }}"
+    user: "{{ ansible_facts['user_id'] }}"
 
     brew_environment:
       PATH: "/opt/homebrew/bin:/home/linuxbrew/.linuxbrew/bin"
 
     # Restate some Ansible gathered facts for greater ease of use
-    is_arch: "{{ (ansible_distribution | lower) in ['arch', 'archlinux', 'cachyos'] }}"
-    is_ubuntu: "{{ (ansible_distribution | lower) in ['ubuntu', 'debian', 'linuxmint'] }}"
-    is_fedora: "{{ (ansible_distribution | lower) == 'fedora' }}"
-    is_macos: "{{ ansible_system == 'Darwin' }}"
-    is_linux: "{{ ansible_system == 'Linux' }}"
+    is_arch: "{{ (ansible_facts['distribution'] | lower) in ['arch', 'archlinux', 'cachyos'] }}"
+    is_ubuntu: "{{ (ansible_facts['distribution'] | lower) in ['ubuntu', 'debian', 'linuxmint'] }}"
+    is_fedora: "{{ (ansible_facts['distribution'] | lower) == 'fedora' }}"
+    is_macos: "{{ ansible_facts['system'] == 'Darwin' }}"
+    is_linux: "{{ ansible_facts['system'] == 'Linux' }}"
 
     # Inventory-defined facts
     is_headless: false

@@ -15,5 +15,5 @@
 - name: Install opencode with Bun
   ansible.builtin.command: bun add -g opencode-ai
   environment:
-    PATH: "{{ home }}/.local/share/bun/bin:/opt/homebrew/bin:/usr/local/bin:{{ ansible_env.PATH }}"
+    PATH: "{{ home }}/.local/share/bun/bin:/opt/homebrew/bin:/usr/local/bin:{{ ansible_facts['env']['PATH'] }}"
   changed_when: false

@@ -6,4 +6,4 @@ apply:
 
 apply-local:
 	git pull
-	ansible-playbook main.yml --limit "$$(hostname -s)" --connection local
+	ansible-playbook main.yml --limit "$$(hostname -s)"
