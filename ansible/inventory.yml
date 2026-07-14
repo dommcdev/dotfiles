@@ -2,6 +2,8 @@ all:
   hosts:
     chocobo:
       ansible_host: chocobo.tetra-salmon.ts.net
+      ansible_become_exe: /usr/bin/sudo.ws
+      #TODO remove the above stupid workaround once this merges: https://github.com/ansible/ansible/pull/86964
     kabigon:
       ansible_host: kabigon.tetra-salmon.ts.net
       gpu_vendors:
