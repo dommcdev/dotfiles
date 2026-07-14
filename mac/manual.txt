@@ -4,8 +4,8 @@ List of things to do after installing dotfiles. Blame macOS.
 2) Open Tailscale app, login, toggle "open on login," (run tailscale set command with -ssh etc?)
 3) Change display scaling to "more space"
 4) Grant Ghostty Full Disk Access
-5) Finder - remove items from sidebar, check "show item info", add home dir, setup nextcloud webDAV/bookmark
-6) Setup nextcloud desktop client
+5) Finder - remove items from sidebar, check "show item info", add home dir
+6) Setup syncthing
 7) Set wallpaper
 8) Manually launch Karabiner, follow prompts to give neccesary permissions
 9) Manually launch Raycast, type import and follow prompt to input rayconfig, change launch shortcut to cmd+'
@@ -13,3 +13,5 @@ List of things to do after installing dotfiles. Blame macOS.
 
 defaults write com.apple.universalaccess reduceMotion -bool true # reduce animations, must be run after ghostty has full disk access
 sudo systemsetup -setremotelogin on
+
+Also manually create a bunch of persistant spaces?
