@@ -10,7 +10,6 @@ noctalia systemd service
 Improve tmux theme
 Create syncthing dir for wallpapers, games/saves, etc
 Add more fonts / misc stuff from archinstall
-Theming: Chrome, icons, nvim, obsidian, zed, opencode, bat
 Add cachyos repo
 Update screensaver hyprland stuff
 Fix flatpak gtk theming
@@ -27,6 +26,10 @@ Ansible
 * Tweak tui config symlinking to include theme files
 * Add ymls: noctalia, zed, retroarch, switch-emulator, auth
 * Nuke sys from dotfiles root (it lives in scripts already)
+
+Themes
+Manual: nvim, vicinae, opencode, zed, obsidian, chrome
+Auto: gtk, qt, btop, bat, yazi, icons, cava, ghostty, starship, hyprland, hyprtoolkit
 
 
 
