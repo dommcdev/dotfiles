@@ -43,6 +43,8 @@
   pre_tasks: []
 
   tasks:
+    - name: Bootstrap
+      ansible.builtin.import_tasks: tasks/bootstrap.yml
     - name: Script links
       ansible.builtin.include_tasks: tasks/apps/scripts.yml
     - name: Syncthing

@@ -16,6 +16,7 @@ Update screensaver hyprland stuff
 Fix flatpak gtk theming
 Better system fonts (inter, fira, ibm-plex + research fontconfig)
 Add limine and snapper
+Switch to cachy? Will need to adjust powerprofilesdaemon pkg name
 
 
 Ansible

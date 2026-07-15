@@ -1,0 +1,151 @@
+- name: Refresh apt package cache
+  ansible.builtin.apt:
+    update_cache: true
+  become: true
+  when: is_ubuntu
+
+- name: Refresh pacman package databases
+  ansible.builtin.pacman:
+    update_cache: true
+  become: true
+  when: is_arch
+
+- name: Install bootstrap packages
+  ansible.builtin.package:
+    name: "{{ pkgs[ansible_facts['os_family']] }}"
+    state: present
+  become: true
+  when: ansible_facts['os_family'] in pkgs
+  vars:
+    pkgs:
+      Archlinux:
+        - base-devel
+        - git
+      Debian:
+        - build-essential
+        - curl
+        - file
+        - gcc
+        - git
+        - make
+        - procps
+      RedHat:
+        - curl
+        - file
+        - gcc
+        - gcc-c++
+        - git
+        - make
+        - procps-ng
+
+- name: Check for Homebrew
+  ansible.builtin.command: brew --version
+  register: bootstrap_brew
+  changed_when: false
+  failed_when: false
+  environment: "{{ brew_environment }}"
+  when: is_ubuntu or is_fedora or is_macos
+
+- name: Install Homebrew
+  ansible.builtin.shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  environment:
+    NONINTERACTIVE: "1"
+  when: (is_ubuntu or is_fedora or is_macos) and bootstrap_brew.rc != 0
+
+- name: Install bootstrap packages with Homebrew on macOS
+  community.general.homebrew:
+    name:
+      - gcc
+      - git
+      - make
+    state: present
+    update_homebrew: false
+  environment: "{{ brew_environment }}"
+  when: is_macos
+
+- name: Clone dotfiles
+  ansible.builtin.git:
+    repo: https://github.com/dommcdev/dotfiles.git
+    dest: "{{ root }}"
+    version: main
+    update: false
+
+- name: Configure Arch package management
+  become: true
+  when: is_arch
+  block:
+    - name: List configured pacman repositories
+      ansible.builtin.command: pacman-conf --repo-list
+      register: pacman_repositories
+      changed_when: false
+
+    - name: Add CachyOS repositories
+      when: "'cachyos' not in pacman_repositories.stdout"
+      block:
+        - name: Download CachyOS repository installer
+          ansible.builtin.get_url:
+            url: https://mirror.cachyos.org/cachyos-repo.tar.xz
+            dest: /tmp/cachyos-repo.tar.xz
+            mode: "0644"
+
+        - name: Extract CachyOS repository installer
+          ansible.builtin.unarchive:
+            src: /tmp/cachyos-repo.tar.xz
+            dest: /tmp
+            remote_src: true
+
+        - name: Run CachyOS repository installer
+          ansible.builtin.shell: yes | ./cachyos-repo.sh --install
+          args:
+            chdir: /tmp/cachyos-repo
+
+    - name: Configure additional pacman repositories
+      community.general.ini_file:
+        path: /etc/pacman.conf
+        section: "{{ item.section }}"
+        option: "{{ item.option }}"
+        value: "{{ item.value }}"
+        no_extra_spaces: true
+      loop:
+        - section: multilib
+          option: Include
+          value: /etc/pacman.d/mirrorlist
+        - section: omarchy
+          option: SigLevel
+          value: Optional TrustAll
+        - section: omarchy
+          option: Server
+          value: https://pkgs.omarchy.org/stable/$arch
+
+    - name: Refresh configured Arch package databases
+      ansible.builtin.pacman:
+        update_cache: true
+
+    - name: Install Arch repository packages
+      ansible.builtin.package:
+        name:
+          - bun
+          - yay
+        state: present
+
+    - name: Configure pacman options
+      ansible.builtin.lineinfile:
+        path: /etc/pacman.conf
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        insertafter: '^\[options\]'
+      loop:
+        - regexp: "^#?Color$"
+          line: Color
+        - regexp: "^ILoveCandy$"
+          line: ILoveCandy
+        - regexp: "^#?VerbosePkgLists$"
+          line: VerbosePkgLists
+
+- name: Install Bun with Homebrew
+  community.general.homebrew:
+    name: oven-sh/bun/bun
+    state: present
+    update_homebrew: false
+  environment: "{{ brew_environment }}"
+  when: is_ubuntu or is_fedora or is_macos

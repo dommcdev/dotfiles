@@ -16,31 +16,10 @@
       [install.cache]
       dir = "{{ home }}/.cache/bun"
 
-- name: Install Bun on Arch
-  ansible.builtin.package:
-    name: bun
-    state: present
-  become: true
-  when: is_arch
-
-- name: Install Bun with Homebrew
-  community.general.homebrew:
-    name: oven-sh/bun/bun
-    state: present
-    update_homebrew: false
-  environment: "{{ brew_environment }}"
-  when: not is_arch
-
-- name: Install Arch pacman configuration
+- name: Install Arch pacman hooks and upgrade packages
   become: true
   when: is_arch
   block:
-    - name: Copy pacman.conf
-      ansible.builtin.copy:
-        src: "{{ root }}/arch/pacman/pacman.conf"
-        dest: /etc/pacman.conf
-        mode: "0644"
-
     - name: Create pacman hooks directory
       ansible.builtin.file:
         path: /etc/pacman.d/hooks

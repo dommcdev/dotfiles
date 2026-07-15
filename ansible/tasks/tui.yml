@@ -127,4 +127,4 @@
 - name: Build bat cache
   ansible.builtin.command: bat cache --build
   changed_when: false
-# Note, in the end make sure this includes impala, bluetui, wiremix, and cava. All but cava should be behind is_managed_desktop flag and cava should be behind not is_headless flag
+# Note, in the end make sure this includes impala (wlctl), bluetui, wiremix, and cava. All but cava should be behind is_managed_desktop flag and cava should be behind not is_headless flag
