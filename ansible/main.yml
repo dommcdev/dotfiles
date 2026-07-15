@@ -1,3 +1,35 @@
+- name: Bootstrap machines with ansible deps
+  hosts: all
+  gather_facts: false
+
+  vars_files:
+    - .secrets.yml
+
+  vars:
+    ansible_become_password: "{{ become_passwords[inventory_hostname] }}"
+
+  tasks:
+    - name: Install Python when missing
+      ansible.builtin.raw: |
+        if command -v python3 >/dev/null 2>&1; then
+          exit 0
+        elif command -v pacman >/dev/null 2>&1; then
+          pacman -Syu --needed --noconfirm python
+        elif command -v apt-get >/dev/null 2>&1; then
+          apt-get update
+          apt-get install -y python3
+        elif command -v dnf >/dev/null 2>&1; then
+          dnf install -y python3
+        else
+          echo "Unsupported package manager" >&2
+          exit 1
+        fi
+
+        echo "PYTHON_BOOTSTRAPPED"
+      become: true
+      register: python_bootstrap
+      changed_when: "'PYTHON_BOOTSTRAPPED' in python_bootstrap.stdout"
+
 - name: Configure machines
   hosts: all
   gather_facts: true

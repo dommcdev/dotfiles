@@ -15,6 +15,7 @@ all:
         - intel
     archlab:
       ansible_host: 192.168.122.165
+      ansible_user: arch
 
   vars:
     ansible_connection: "{{ 'local' if inventory_hostname == lookup('pipe', 'hostname -s') else 'ssh' }}"
