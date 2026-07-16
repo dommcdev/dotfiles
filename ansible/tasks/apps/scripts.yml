@@ -1,14 +1,16 @@
-- name: Find scripts to link
-  ansible.builtin.find:
-    paths: "{{ root }}/scripts"
-    file_type: file
-    recurse: true
-  register: scripts
-
 - name: Link scripts to ~/.local/bin
-  ansible.builtin.file:
-    src: "{{ item.path }}"
-    dest: "{{ home }}/.local/bin/{{ item.path | basename }}"
-    state: link
-    force: true
-  loop: "{{ scripts.files }}"
+  block:
+    - name: Scan dotfiles dir(s) for scripts to link
+      ansible.builtin.find:
+        paths: "{{ root }}/scripts"
+        file_type: file
+        recurse: true
+      register: scripts
+
+    - name: Perform the symlinking
+      ansible.builtin.file:
+        src: "{{ item.path }}"
+        dest: "{{ home }}/.local/bin/{{ item.path | basename }}"
+        state: link
+        force: true
+      loop: "{{ scripts.files }}"

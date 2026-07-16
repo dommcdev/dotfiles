@@ -30,27 +30,29 @@
         - nftables
         - iptables-nft
 
-- name: Create NetworkManager config directory
-  ansible.builtin.file:
-    path: /etc/NetworkManager/conf.d
-    state: directory
-    mode: "0755"
-  become: true
+- name: Configure NetworkManager
+  block:
+    - name: Create config directory
+      ansible.builtin.file:
+        path: /etc/NetworkManager/conf.d
+        state: directory
+        mode: "0755"
+      become: true
 
-- name: Copy NetworkManager config
-  ansible.builtin.copy:
-    src: "{{ root }}/network/networkmanager.conf"
-    dest: /etc/NetworkManager/conf.d/90-dotfiles.conf
-    mode: "0644"
-  become: true
-  register: networkmanager_config
+    - name: Copy config
+      ansible.builtin.copy:
+        src: "{{ root }}/network/networkmanager.conf"
+        dest: /etc/NetworkManager/conf.d/90-dotfiles.conf
+        mode: "0644"
+      become: true
+      register: networkmanager_config
 
-- name: Disable NetworkManager wait online to speed up boot
-  ansible.builtin.systemd_service:
-    name: NetworkManager-wait-online.service
-    enabled: false
-    masked: true
-  become: true
+    - name: Disable NetworkManager-wait-online to speed up boot
+      ansible.builtin.systemd_service:
+        name: NetworkManager-wait-online.service
+        enabled: false
+        masked: true
+      become: true
 
 - name: Enable systemd-resolved
   ansible.builtin.systemd_service:

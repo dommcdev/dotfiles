@@ -10,58 +10,78 @@
   become: true
   when: is_arch
 
-- name: Install bootstrap packages
-  ansible.builtin.package:
-    name: "{{ pkgs[ansible_facts['os_family']] }}"
-    state: present
-  become: true
-  when: ansible_facts['os_family'] in pkgs
-  vars:
-    pkgs:
-      Archlinux:
-        - base-devel
-        - git
-      Debian:
-        - build-essential
-        - curl
-        - file
-        - gcc
-        - git
-        - make
-        - procps
-      RedHat:
-        - curl
-        - file
-        - gcc
-        - gcc-c++
-        - git
-        - make
-        - procps-ng
+- name: Install Homebrew
+  block:
+    - name: Check if homebrew is installed.
+      ansible.builtin.command: brew --version
+      register: bootstrap_brew
+      changed_when: false
+      failed_when: false
+      environment: "{{ brew_environment }}"
 
-- name: Check for Homebrew
-  ansible.builtin.command: brew --version
-  register: bootstrap_brew
-  changed_when: false
-  failed_when: false
-  environment: "{{ brew_environment }}"
+    - name: Run installer
+      ansible.builtin.shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      environment:
+        NONINTERACTIVE: "1"
+      when: bootstrap_brew.rc != 0
   when: is_ubuntu or is_fedora or is_macos
 
-- name: Install Homebrew
-  ansible.builtin.shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  environment:
-    NONINTERACTIVE: "1"
-  when: (is_ubuntu or is_fedora or is_macos) and bootstrap_brew.rc != 0
+- name: Install essential packages
+  block:
+    - name: Install packages on Linux
+      ansible.builtin.package:
+        name: "{{ pkgs[ansible_facts['os_family']] }}"
+        state: present
+      become: true
+      vars:
+        pkgs:
+          Archlinux:
+            - base-devel
+            - git
+          Debian:
+            - build-essential
+            - curl
+            - file
+            - gcc
+            - git
+            - make
+            - procps
+          RedHat:
+            - curl
+            - file
+            - gcc
+            - gcc-c++
+            - git
+            - make
+            - procps-ng
+      when: ansible_facts['os_family'] in pkgs
 
-- name: Install bootstrap packages with Homebrew on macOS
-  community.general.homebrew:
-    name:
-      - gcc
-      - git
-      - make
-    state: present
-    update_homebrew: false
-  environment: "{{ brew_environment }}"
-  when: is_macos
+    - name: Install package on macOS via homebrew
+      community.general.homebrew:
+        name:
+          - gcc
+          - git
+          - make
+        state: present
+        update_homebrew: false
+      environment: "{{ brew_environment }}"
+      when: is_macos
+
+- name: Install Bun
+  block:
+    - name: Install Bun on Arch
+      ansible.builtin.package:
+        name: bun
+        state: present
+      when: is_arch
+
+    - name: Install Bun via Homebrew
+      community.general.homebrew:
+        name: oven-sh/bun/bun
+        state: present
+        update_homebrew: false
+      environment: "{{ brew_environment }}"
+      when: is_ubuntu or is_fedora or is_macos
 
 - name: Clone dotfiles
   ansible.builtin.git:
@@ -121,11 +141,9 @@
       ansible.builtin.pacman:
         update_cache: true
 
-    - name: Install Arch repository packages
+    - name: Install Yay
       ansible.builtin.package:
-        name:
-          - bun
-          - yay
+        name: yay
         state: present
 
     - name: Configure pacman options
@@ -141,11 +159,3 @@
           line: ILoveCandy
         - regexp: "^#?VerbosePkgLists$"
           line: VerbosePkgLists
-
-- name: Install Bun with Homebrew
-  community.general.homebrew:
-    name: oven-sh/bun/bun
-    state: present
-    update_homebrew: false
-  environment: "{{ brew_environment }}"
-  when: is_ubuntu or is_fedora or is_macos

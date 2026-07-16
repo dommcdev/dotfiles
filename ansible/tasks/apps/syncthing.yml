@@ -1,37 +1,40 @@
-- name: Install Syncthing (Linux)
-  ansible.builtin.package:
-    name: syncthing
-    state: present
-  become: true
-  when: is_linux
+- name: Install Syncthing package
+  block:
+    - name: Install on Linux
+      ansible.builtin.package:
+        name: syncthing
+        state: present
+      become: true
+      when: is_linux
 
-- name: Install Syncthing (Mac/Homebrew)
-  community.general.homebrew:
-    name: syncthing
-    state: present
-    update_homebrew: false
-  environment: "{{ brew_environment }}"
-  when: is_macos
+    - name: Install on macOS via homebrew
+      community.general.homebrew:
+        name: syncthing
+        state: present
+        update_homebrew: false
+      environment: "{{ brew_environment }}"
+      when: is_macos
 
-- name: Enable Syncthing as a user service
-  ansible.builtin.systemd_service:
-    name: syncthing.service
-    enabled: true
-    state: started
-    scope: user
-  when: not is_headless
+- name: Enable Syncthing
+  block:
+    - name: Enable as a user service #Starts on graphical/ssh login
+      ansible.builtin.systemd_service:
+        name: syncthing.service
+        enabled: true
+        state: started
+        scope: user
+      when: not is_headless
 
-# System service starts at boot rather than login via graphical session/ssh
-- name: Enable Syncthing as a system service
-  ansible.builtin.systemd_service:
-    name: "syncthing@{{ user }}.service"
-    enabled: true
-    state: started
-  become: true
-  when: is_headless
+    - name: Enable as a system service #Starts at boot rather than graphical/ssh login
+      ansible.builtin.systemd_service:
+        name: "syncthing@{{ user }}.service"
+        enabled: true
+        state: started
+      become: true
+      when: is_headless
 #
 #
-# Instructions
+# Instructions for device setup
 # I use the hub-and-spoke approach. All devices sync to chocobo (and not to each other).
 # First, set up chocobo. You'll need to change the gui listen address to <machine.ip>:8384 to allow other devices to access. Set a gui password since this will be avaible to the local network. In settings/connections turn off everything but local discovery (don't think we need any of them). Grab the id string.
 # Then, set up your other devices. No need to modify gui settings or add a gui password here though. Change connection settings like above. Then click add remote device, and put in the id string from above. Crucially, under the advanced settings change the address to tcp://chocobo:22000 rather than dynamic.
