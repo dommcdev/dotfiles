@@ -1,29 +1,22 @@
 # Dotfiles
 
-My personal dotfiles with support for Arch, Ubuntu, Fedora, and macOS.
-Themed with **Catppuccin Mocha**.
+My personal dotfiles as well as a comprehensive Ansible playbook for configuring my machines.
 
 ## Features
 
-- **WM**: Hyprland (+ all the other hyprapps)
-- **Shell**: Zsh + Starship + Zoxide
-- **Editor**: Neovim + tmux + opencode
-- **TUIs**: Impala, bluetui, wiremix, btop, yazi, fastfetch, qalculate, caligula, etc.
-- **Symlink Manager**: Dotbot.
+- **DE**: Hyprland + Noctalia
+- **Terminal**: Ghostty
+- **Shell**: Zsh + Starship + Zoxide + Fastfetch
+- **Editor**: Neovim + Zed + Opencode
+- **Notable Programs**: Yazi, Keyd, Tailscale, Vicinae, Btop, Virt-manager, Feishin, Obsidian, etc
 
-## Quick Install
-
-```bash
-# Full interactive install
-./install
-```
-
-## Usage
+## Setup
 
 ```bash
-# Install specific module
-./setup all/git
+# Push updates to all machines
+make install
 
-# System detection
-./sys id
+# Apply updates locally
+make install-local
 ```
+
