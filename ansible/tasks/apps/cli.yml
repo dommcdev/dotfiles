@@ -154,14 +154,14 @@
         update_cache: true
         cache_valid_time: 3600
       become: true
-      when: is_ubuntu
+      when: is_debian
 
     - name: Install terminal packages on Fedora
       ansible.builtin.dnf:
         name: "{{ dnf_pckgs }}"
         state: present
       become: true
-      when: is_fedora
+      when: is_redhat
 
     - name: Install terminal Homebrew packages on Linux
       community.general.homebrew:
@@ -169,7 +169,7 @@
         state: present
         update_homebrew: false
       environment: "{{ brew_environment }}"
-      when: (is_ubuntu or is_fedora)
+      when: (is_debian or is_redhat)
 
     - name: Install terminal Homebrew packages on macOS
       community.general.homebrew:

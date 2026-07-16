@@ -27,9 +27,9 @@ all:
       PATH: "/opt/homebrew/bin:/home/linuxbrew/.linuxbrew/bin"
 
     # Restate some Ansible gathered facts for greater ease of use
-    is_arch: "{{ (ansible_facts['distribution'] | lower) in ['arch', 'archlinux', 'cachyos'] }}"
-    is_ubuntu: "{{ (ansible_facts['distribution'] | lower) in ['ubuntu', 'debian', 'linuxmint'] }}"
-    is_fedora: "{{ (ansible_facts['distribution'] | lower) == 'fedora' }}"
+    is_arch: "{{ ansible_facts['os_family'] == 'Archlinux' }}"
+    is_debian: "{{ ansible_facts['os_family'] == 'Debian' }}"
+    is_redhat: "{{ ansible_facts['os_family'] == 'RedHat' }}"
     is_macos: "{{ ansible_facts['system'] == 'Darwin' }}"
     is_linux: "{{ ansible_facts['system'] == 'Linux' }}"
 

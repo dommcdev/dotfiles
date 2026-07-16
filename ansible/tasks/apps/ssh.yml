@@ -13,7 +13,7 @@
     update_cache: true
     cache_valid_time: 3600
   become: true
-  when: is_ubuntu
+  when: is_debian
 
 - name: Install SSH packages on Fedora
   ansible.builtin.dnf:
@@ -21,7 +21,7 @@
       - openssh-server
     state: present
   become: true
-  when: is_fedora
+  when: is_redhat
 
 - name: Install OpenSSH with Homebrew
   community.general.homebrew:
@@ -49,14 +49,14 @@
     name: sshd.service
     enabled: true
   become: true
-  when: is_arch or is_fedora
+  when: is_arch or is_redhat
 
 - name: Enable SSH daemon on Ubuntu
   ansible.builtin.systemd_service:
     name: ssh.service
     enabled: true
   become: true
-  when: is_ubuntu
+  when: is_debian
 
 - name: Enable TCP MTU probing
   ansible.builtin.lineinfile:

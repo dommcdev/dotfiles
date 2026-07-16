@@ -12,14 +12,14 @@
     update_cache: true
     cache_valid_time: 3600
   become: true
-  when: is_ubuntu
+  when: is_debian
 
 - name: Install zsh on Fedora
   ansible.builtin.dnf:
     name: zsh
     state: present
   become: true
-  when: is_fedora
+  when: is_redhat
 
 - name: Ensure zsh config directory exists
   ansible.builtin.file:

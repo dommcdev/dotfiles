@@ -15,7 +15,7 @@
   args:
     creates: /usr/bin/docker
   become: true
-  when: is_ubuntu or is_fedora
+  when: is_debian or is_redhat
 
 - name: Install lazydocker with Homebrew on Ubuntu and Fedora
   community.general.homebrew:
@@ -23,7 +23,7 @@
     state: present
     update_homebrew: false
   environment: "{{ brew_environment }}"
-  when: is_ubuntu or is_fedora
+  when: is_debian or is_redhat
 
 - name: Install Docker with Homebrew on macOS
   community.general.homebrew:

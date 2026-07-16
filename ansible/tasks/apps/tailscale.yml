@@ -12,7 +12,7 @@
   args:
     creates: /usr/bin/tailscale
   become: true
-  when: is_ubuntu or is_fedora
+  when: is_debian or is_redhat
 
 - name: Install Tailscale app on macOS
   community.general.homebrew_cask:

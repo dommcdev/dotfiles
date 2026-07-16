@@ -2,7 +2,7 @@
   ansible.builtin.apt:
     update_cache: true
   become: true
-  when: is_ubuntu
+  when: is_debian
 
 - name: Refresh pacman package databases
   ansible.builtin.pacman:
@@ -52,7 +52,7 @@
       environment:
         NONINTERACTIVE: "1"
       when: prerequisites_brew.rc != 0
-  when: is_ubuntu or is_fedora or is_macos
+  when: is_debian or is_redhat or is_macos
 
 - name: Install essential packages on macOS via Homebrew
   community.general.homebrew:
@@ -80,18 +80,10 @@
         state: present
         update_homebrew: false
       environment: "{{ brew_environment }}"
-      when: is_ubuntu or is_fedora or is_macos
-
-- name: Clone dotfiles
-  ansible.builtin.git:
-    repo: https://github.com/dommcdev/dotfiles.git
-    dest: "{{ root }}"
-    version: main
-    update: false
+      when: is_debian or is_redhat or is_macos
 
 - name: Configure Arch package management
   become: true
-  when: is_arch
   block:
     - name: List configured pacman repositories
       ansible.builtin.command: pacman-conf --repo-list
@@ -158,3 +150,11 @@
           line: ILoveCandy
         - regexp: "^#?VerbosePkgLists$"
           line: VerbosePkgLists
+  when: is_arch
+
+- name: Clone dotfiles
+  ansible.builtin.git:
+    repo: https://github.com/dommcdev/dotfiles.git
+    dest: "{{ root }}"
+    version: main
+    update: true

@@ -48,7 +48,7 @@
     mode: "0644"
   become: true
   loop: "{{ lookup('ansible.builtin.fileglob', '/etc/update-motd.d/*', wantlist=True) }}"
-  when: is_ubuntu
+  when: is_debian
 
 - name: Configure Fedora DNF defaults
   ansible.builtin.blockinfile:
@@ -58,7 +58,7 @@
       max_parallel_downloads=10
       fastestmirror=True
   become: true
-  when: is_fedora
+  when: is_redhat
 
 - name: Install Linux desktop utility packages on Arch
   ansible.builtin.package:
@@ -94,7 +94,7 @@
     update_cache: true
     cache_valid_time: 3600
   become: true
-  when: is_ubuntu and is_desktop
+  when: is_debian and is_desktop
 
 - name: Install Linux desktop utility packages on Fedora
   ansible.builtin.dnf:
@@ -111,7 +111,7 @@
       - dmidecode
     state: present
   become: true
-  when: is_fedora and is_desktop
+  when: is_redhat and is_desktop
 
 - name: Add Flathub remote
   ansible.builtin.command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -197,7 +197,7 @@
       - fwupd
     state: present
   become: true
-  when: is_fedora and is_custom
+  when: is_redhat and is_custom
 
 - name: Install fun terminal packages on Arch
   ansible.builtin.package:
