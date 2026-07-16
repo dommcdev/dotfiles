@@ -19,8 +19,8 @@ all:
 
   vars:
     ansible_connection: "{{ 'local' if inventory_hostname == lookup('pipe', 'hostname -s') else 'ssh' }}"
-    root: "{{ playbook_dir }}/.."
     home: "{{ ansible_facts['env']['HOME'] }}"
+    root: "{{ home }}/dev/dotfiles"
     user: "{{ ansible_facts['user_id'] }}"
 
     brew_environment:

@@ -10,11 +10,39 @@
   become: true
   when: is_arch
 
+- name: Install essential packages on Linux
+  ansible.builtin.package:
+    name: "{{ pkgs[ansible_facts['os_family']] }}"
+    state: present
+  become: true
+  vars:
+    pkgs:
+      Archlinux:
+        - base-devel
+        - git
+      Debian:
+        - build-essential
+        - curl
+        - file
+        - gcc
+        - git
+        - make
+        - procps
+      RedHat:
+        - curl
+        - file
+        - gcc
+        - gcc-c++
+        - git
+        - make
+        - procps-ng
+  when: ansible_facts['os_family'] in pkgs
+
 - name: Install Homebrew
   block:
     - name: Check if homebrew is installed.
       ansible.builtin.command: brew --version
-      register: bootstrap_brew
+      register: prerequisites_brew
       changed_when: false
       failed_when: false
       environment: "{{ brew_environment }}"
@@ -23,49 +51,19 @@
       ansible.builtin.shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       environment:
         NONINTERACTIVE: "1"
-      when: bootstrap_brew.rc != 0
+      when: prerequisites_brew.rc != 0
   when: is_ubuntu or is_fedora or is_macos
 
-- name: Install essential packages
-  block:
-    - name: Install packages on Linux
-      ansible.builtin.package:
-        name: "{{ pkgs[ansible_facts['os_family']] }}"
-        state: present
-      become: true
-      vars:
-        pkgs:
-          Archlinux:
-            - base-devel
-            - git
-          Debian:
-            - build-essential
-            - curl
-            - file
-            - gcc
-            - git
-            - make
-            - procps
-          RedHat:
-            - curl
-            - file
-            - gcc
-            - gcc-c++
-            - git
-            - make
-            - procps-ng
-      when: ansible_facts['os_family'] in pkgs
-
-    - name: Install package on macOS via homebrew
-      community.general.homebrew:
-        name:
-          - gcc
-          - git
-          - make
-        state: present
-        update_homebrew: false
-      environment: "{{ brew_environment }}"
-      when: is_macos
+- name: Install essential packages on macOS via Homebrew
+  community.general.homebrew:
+    name:
+      - gcc
+      - git
+      - make
+    state: present
+    update_homebrew: false
+  environment: "{{ brew_environment }}"
+  when: is_macos
 
 - name: Install Bun
   block:
@@ -73,6 +71,7 @@
       ansible.builtin.package:
         name: bun
         state: present
+      become: true
       when: is_arch
 
     - name: Install Bun via Homebrew
