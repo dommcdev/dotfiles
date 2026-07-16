@@ -30,7 +30,7 @@ autoload -Uz compinit
 compinit
 
 # Conditional ubuntu config
-if [[ "$($HOME/dev/dotfiles/sys id)" == "ubuntu" ]]; then
+if [[ "$($HOME/dev/dotfiles/scripts/sys id)" == "ubuntu" ]]; then
     alias fd='fdfind'
 fi
 

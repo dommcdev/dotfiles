@@ -75,3 +75,6 @@
     enabled: true
     state: "{{ 'restarted' if networkmanager_config.changed else 'started' }}"
   become: true
+#
+# Debugging: nmcli, (networkctl status), ip link, ip route, ip addr
+# TODO might need to disable/mask wpa_supplicant depending on distro. Also, wait after restarting networkmanager?
