@@ -8,32 +8,36 @@
       - system-config-printer
       - avahi
       - cups-pk-helper
-      - nss-mdns
     state: present
   become: true
   when: is_arch
 
-- name: Create resolved override directory
-  ansible.builtin.file:
-    path: /etc/systemd/resolved.conf.d
-    state: directory
-    mode: "0755"
-  become: true
+- name: Configure systemd-resolved for printer discovery
+  block:
+    - name: Create resolved override directory
+      ansible.builtin.file:
+        path: /etc/systemd/resolved.conf.d
+        state: directory
+        mode: "0755"
+      become: true
 
-- name: Disable resolved multicast DNS
-  ansible.builtin.copy:
-    dest: /etc/systemd/resolved.conf.d/10-disable-multicast.conf
-    mode: "0644"
-    content: |
-      [Resolve]
-      MulticastDNS=no
-  become: true
+    # Avahi handles mDNS advertising and discovery; systemd-resolved only queries .local domains.
+    - name: Set systemd-resolved mDNS to resolve-only
+      ansible.builtin.copy:
+        dest: /etc/systemd/resolved.conf.d/10-mdns-resolve.conf
+        mode: "0644"
+        content: |
+          [Resolve]
+          MulticastDNS=resolve
+          LLMNR=no
+      become: true
+      register: resolved_config
 
-- name: Enable mDNS host resolution
-  ansible.builtin.lineinfile:
-    path: /etc/nsswitch.conf
-    regexp: "^hosts:.*$"
-    line: "hosts: mymachines mdns_minimal [NOTFOUND=return] resolve files myhostname dns"
+- name: Enable/restart systemd-resolved
+  ansible.builtin.systemd_service:
+    name: systemd-resolved.service
+    enabled: true
+    state: "{{ 'restarted' if resolved_config.changed else 'started' }}"
   become: true
 
 - name: Enable remote printer discovery
@@ -41,11 +45,13 @@
     path: /etc/cups/cups-browsed.conf
     line: "CreateRemotePrinters Yes"
   become: true
+  register: cups_browsed_config
 
-- name: Enable printing services
+- name: Enable/restart printing services
   ansible.builtin.systemd_service:
     name: "{{ item }}"
     enabled: true
+    state: "{{ 'restarted' if item == 'cups-browsed.service' and cups_browsed_config.changed else 'started' }}"
   become: true
   loop:
     - cups.service
