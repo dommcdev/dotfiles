@@ -5,12 +5,12 @@
   when: is_debian
 
 - name: Refresh pacman package databases
-  ansible.builtin.pacman:
+  community.general.pacman:
     update_cache: true
   become: true
   when: is_arch
 
-- name: Install essential packages on Linux
+- name: Install basic dependencies on Linux
   ansible.builtin.package:
     name: "{{ pkgs[ansible_facts['os_family']] }}"
     state: present
@@ -39,6 +39,7 @@
   when: ansible_facts['os_family'] in pkgs
 
 - name: Install Homebrew
+  when: is_debian or is_redhat or is_macos
   block:
     - name: Check if homebrew is installed.
       ansible.builtin.command: brew --version
@@ -51,10 +52,10 @@
       ansible.builtin.shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       environment:
         NONINTERACTIVE: "1"
+      changed_when: true
       when: prerequisites_brew.rc != 0
-  when: is_debian or is_redhat or is_macos
 
-- name: Install essential packages on macOS via Homebrew
+- name: Install basic dependencies on macOS via Homebrew
   community.general.homebrew:
     name:
       - gcc
@@ -84,6 +85,7 @@
 
 - name: Configure Arch package management
   become: true
+  when: is_arch
   block:
     - name: List configured pacman repositories
       ansible.builtin.command: pacman-conf --repo-list
@@ -105,14 +107,19 @@
             dest: /tmp
             remote_src: true
 
-        - name: Run CachyOS repository installer
-          ansible.builtin.shell: yes | ./cachyos-repo.sh --install
-          args:
-            chdir: /tmp/cachyos-repo
+    - name: Run CachyOS repository installer
+      ansible.builtin.shell: |
+        set -o pipefail
+        yes | ./cachyos-repo.sh --install
+      args:
+        chdir: /tmp/cachyos-repo
+        executable: /bin/bash
+      changed_when: true
 
     - name: Configure additional pacman repositories
       community.general.ini_file:
         path: /etc/pacman.conf
+        mode: "0644"
         section: "{{ item.section }}"
         option: "{{ item.option }}"
         value: "{{ item.value }}"
@@ -129,7 +136,7 @@
           value: https://pkgs.omarchy.org/stable/$arch
 
     - name: Refresh configured Arch package databases
-      ansible.builtin.pacman:
+      community.general.pacman:
         update_cache: true
 
     - name: Install Yay
@@ -150,7 +157,6 @@
           line: ILoveCandy
         - regexp: "^#?VerbosePkgLists$"
           line: VerbosePkgLists
-  when: is_arch
 
 - name: Clone dotfiles
   ansible.builtin.git:

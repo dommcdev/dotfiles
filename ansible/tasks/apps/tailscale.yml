@@ -6,13 +6,19 @@
   when: is_arch
 
 - name: Install Tailscale on Ubuntu and Fedora
-  ansible.builtin.shell: |
-    curl -fsSL https://tailscale.com/install.sh -o /tmp/tailscale_install.sh
-    sh /tmp/tailscale_install.sh
-  args:
-    creates: /usr/bin/tailscale
   become: true
   when: is_debian or is_redhat
+  block:
+    - name: Download installer
+      ansible.builtin.get_url:
+        url: https://tailscale.com/install.sh
+        dest: /tmp/tailscale_install.sh
+        mode: "0755"
+
+    - name: Run installer
+      ansible.builtin.command: /tmp/tailscale_install.sh
+      args:
+        creates: /usr/bin/tailscale
 
 - name: Install Tailscale app on macOS
   community.general.homebrew_cask:
@@ -38,6 +44,7 @@
       - "--auth-key={{ tailscale_auth_key }}"
   become: true
   no_log: true
+  changed_when: false
   when:
     - is_linux
     - tailscale_auth_key is defined
@@ -55,9 +62,13 @@
   when: is_linux
 #
 #
-# Subnet router note: Using --accept-routes DOES NOT WORK when on the same network as the subnet router WHEN that subnet router is off. Turn on/off with tailscale set --accept-routes=[true|false]
+# Subnet router note: Using --accept-routes DOES NOT WORK when on the same network as
+# the subnet router WHEN that subnet router is off. Turn it on or off with
+# tailscale set --accept-routes=[true|false]
 #
 # To turn exit node on, do
 #   tailscale set --exit-node=[name]
 # To turn off, do
 #   tailscale set --exit-node=
+#
+# tailscale wait (tailscale-online.target) might prove useful if we ever run into timing issues

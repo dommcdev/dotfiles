@@ -15,18 +15,20 @@
       environment: "{{ brew_environment }}"
       when: is_macos
 
-- name: Ensure SSH config directory exists
-  ansible.builtin.file:
-    path: "{{ home }}/.ssh"
-    state: directory
-    mode: "0700"
-
 - name: Link SSH config
-  ansible.builtin.file:
-    src: "{{ root }}/ssh/config"
-    dest: "{{ home }}/.ssh/config"
-    state: link
-    force: true
+  block:
+    - name: Ensure SSH config directory exists
+      ansible.builtin.file:
+        path: "{{ home }}/.ssh"
+        state: directory
+        mode: "0700"
+
+    - name: Link config
+      ansible.builtin.file:
+        src: "{{ root }}/ssh/config"
+        dest: "{{ home }}/.ssh/config"
+        state: link
+        force: true
 
 - name: Configure SSH daemon
   block:

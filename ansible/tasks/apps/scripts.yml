@@ -1,5 +1,11 @@
 - name: Link scripts to ~/.local/bin
   block:
+    - name: Create ~/.local/bin
+      ansible.builtin.file:
+        path: "{{ home }}/.local/bin"
+        state: directory
+        mode: "0755"
+
     - name: Scan dotfiles dir(s) for scripts to link
       ansible.builtin.find:
         paths: "{{ root }}/scripts"
