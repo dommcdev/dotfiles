@@ -2,11 +2,11 @@
 
 install:
 	git pull
-	ansible-playbook ansible/main.yml
+	cd ansible && ansible-playbook main.yml
 
 install-local:
 	git pull
-	ansible-playbook ansible/main.yml --limit "$$(hostname -s)"
+	cd ansible && ansible-playbook main.yml --limit "$$(hostname -s)"
 
 install-fresh:
 	@read -rp "Inventory host name: " host; \
@@ -17,7 +17,7 @@ install-fresh:
 	printf '\n'; \
 	if [ -z "$$tailscale_auth_key" ]; then printf 'Tailscale auth key is required\n' >&2; exit 1; fi; \
 	git pull && \
-	ansible-playbook ansible/main.yml \
+	cd ansible && ansible-playbook main.yml \
 		--limit "$$host" \
 		--user "$$ssh_user" \
 		--ask-pass \
