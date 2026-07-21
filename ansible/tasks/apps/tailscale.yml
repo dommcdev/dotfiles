@@ -43,7 +43,6 @@
       - up
       - "--auth-key={{ tailscale_auth_key }}"
   become: true
-  no_log: true
   changed_when: false
   when:
     - is_linux
