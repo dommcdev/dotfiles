@@ -42,6 +42,7 @@
       - tailscale
       - up
       - "--auth-key={{ tailscale_auth_key }}"
+      - --reset
   become: true
   changed_when: false
   when:
