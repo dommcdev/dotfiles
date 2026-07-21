@@ -8,6 +8,12 @@ install-local:
 	git pull
 	cd ansible && ansible-playbook main.yml --limit "$$(hostname -s)"
 
+install-machine:
+	@read -rp "Inventory host name: " host; \
+	if [ -z "$$host" ]; then printf 'Inventory host is required\n' >&2; exit 1; fi; \
+	git pull
+	cd ansible && ansible-playbook main.yml --limit "$$host" \
+
 install-fresh:
 	@read -rp "Inventory host name: " host; \
 	if [ -z "$$host" ]; then printf 'Inventory host is required\n' >&2; exit 1; fi; \
