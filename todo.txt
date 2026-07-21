@@ -18,6 +18,7 @@ Add limine and snapper
 Switch to cachy? Will need to adjust powerprofilesdaemon pkg name
 Switch to bitwarden
 Add ansible package somewhere (and install requirements.txt)
+Fix dotfiles clone using https, thus setting origin wrong?
 
 
 Ansible
