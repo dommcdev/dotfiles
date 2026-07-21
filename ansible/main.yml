@@ -55,5 +55,8 @@
     - name: Network
       ansible.builtin.include_tasks: tasks/system/network.yml
       when: is_managed_desktop
+    - name: Printing
+      ansible.builtin.include_tasks: tasks/system/printing.yml
+      when: is_managed_desktop
     - name: SSH
       ansible.builtin.import_tasks: tasks/apps/ssh.yml

@@ -78,11 +78,32 @@
         masked: true
       become: true
 
-- name: Enable systemd-resolved
+- name: Configure systemd-resolved
+  block:
+    - name: Create resolved override directory
+      ansible.builtin.file:
+        path: /etc/systemd/resolved.conf.d
+        state: directory
+        mode: "0755"
+      become: true
+
+    # Dedicated responders such as Avahi handle mDNS advertising and discovery.
+    - name: Set systemd-resolved mDNS to resolve-only
+      ansible.builtin.copy:
+        dest: /etc/systemd/resolved.conf.d/10-mdns-resolve.conf
+        mode: "0644"
+        content: |
+          [Resolve]
+          MulticastDNS=resolve
+          LLMNR=no
+      become: true
+      register: resolved_config
+
+- name: Enable/restart systemd-resolved
   ansible.builtin.systemd_service:
     name: systemd-resolved.service
     enabled: true
-    state: started
+    state: "{{ 'restarted' if resolved_config.changed else 'started' }}"
   become: true
 
 - name: Link systemd-resolved stub resolver

@@ -1,44 +1,35 @@
 - name: Install printing packages
   ansible.builtin.package:
-    name:
-      - cups
-      - cups-browsed
-      - cups-filters
-      - cups-pdf
-      - system-config-printer
-      - avahi
-      - cups-pk-helper
+    name: "{{ pkgs[ansible_facts['os_family']] }}"
     state: present
   become: true
-  when: is_arch
-
-- name: Configure systemd-resolved for printer discovery
-  block:
-    - name: Create resolved override directory
-      ansible.builtin.file:
-        path: /etc/systemd/resolved.conf.d
-        state: directory
-        mode: "0755"
-      become: true
-
-    # Avahi handles mDNS advertising and discovery; systemd-resolved only queries .local domains.
-    - name: Set systemd-resolved mDNS to resolve-only
-      ansible.builtin.copy:
-        dest: /etc/systemd/resolved.conf.d/10-mdns-resolve.conf
-        mode: "0644"
-        content: |
-          [Resolve]
-          MulticastDNS=resolve
-          LLMNR=no
-      become: true
-      register: resolved_config
-
-- name: Enable/restart systemd-resolved
-  ansible.builtin.systemd_service:
-    name: systemd-resolved.service
-    enabled: true
-    state: "{{ 'restarted' if resolved_config.changed else 'started' }}"
-  become: true
+  when: ansible_facts['os_family'] in pkgs
+  vars:
+    pkgs:
+      Archlinux:
+        - cups
+        - cups-browsed
+        - cups-filters
+        - cups-pdf
+        - system-config-printer
+        - avahi
+        - cups-pk-helper
+      Debian:
+        - cups
+        - cups-browsed
+        - cups-filters
+        - printer-driver-cups-pdf
+        - system-config-printer
+        - avahi-daemon
+        - cups-pk-helper
+      RedHat:
+        - cups
+        - cups-browsed
+        - cups-filters
+        - cups-pdf
+        - system-config-printer
+        - avahi
+        - cups-pk-helper
 
 - name: Enable remote printer discovery
   ansible.builtin.lineinfile:
