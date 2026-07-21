@@ -1,9 +1,9 @@
-- name: Bootstrap machines with ansible deps
+- name: Install Ansible deps
   hosts: all
   gather_facts: false
 
   vars_files:
-    - .secrets.yml
+    - secrets.yml
 
   vars:
     ansible_become_password: "{{ become_passwords[inventory_hostname] }}"
@@ -35,7 +35,7 @@
   gather_facts: true
 
   vars_files:
-    - .secrets.yml
+    - secrets.yml
 
   vars:
     ansible_become_password: "{{ become_passwords[inventory_hostname] }}"

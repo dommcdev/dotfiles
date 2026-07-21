@@ -63,3 +63,6 @@ fwupdmgr refresh
 fwupdmgr get-updates
 fwupdmgr update
 fwupdmgr get-history
+
+AI Docs
+    Tell it to adhere to ASD-STE100 Simplified Technical English

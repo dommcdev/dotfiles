@@ -30,8 +30,34 @@
   become: true
   when: is_linux
 
-- name: Configure Tailscale SSH operator
-  ansible.builtin.command: "tailscale set --ssh --operator={{ user }}"
+- name: Start and authenticate Tailscale
+  ansible.builtin.command:
+    argv:
+      - tailscale
+      - up
+      - "--auth-key={{ tailscale_auth_key }}"
+  become: true
+  no_log: true
+  when:
+    - is_linux
+    - tailscale_auth_key is defined
+    - tailscale_auth_key | length > 0
+
+- name: Configure Tailscale options
+  ansible.builtin.command:
+    argv:
+      - tailscale
+      - set
+      - --ssh
+      - "--operator={{ user }}"
   become: true
   changed_when: false
   when: is_linux
+#
+#
+# Subnet router note: Using --accept-routes DOES NOT WORK when on the same network as the subnet router WHEN that subnet router is off. Turn on/off with tailscale set --accept-routes=[true|false]
+#
+# To turn exit node on, do
+#   tailscale set --exit-node=[name]
+# To turn off, do
+#   tailscale set --exit-node=
