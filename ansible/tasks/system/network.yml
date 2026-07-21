@@ -44,6 +44,7 @@
         src: "{{ root }}/network/networkmanager.conf"
         dest: /etc/NetworkManager/conf.d/90-dotfiles.conf
         mode: "0644"
+        remote_src: true
       become: true
       register: networkmanager_config
 

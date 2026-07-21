@@ -199,7 +199,7 @@
 - name: Use SSH remote for dotfiles repo
   ansible.builtin.command: git remote set-url origin git@github.com:dommcdev/dotfiles.git
   args:
-    chdir: "{{ home }}/dev/dotfiles"
+    chdir: "{{ root }}"
   changed_when: false
   failed_when: false
 

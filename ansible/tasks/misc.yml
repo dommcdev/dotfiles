@@ -31,6 +31,7 @@
         src: "{{ root }}/arch/pacman/hooks/adw-gtk3-flatpak-sync.hook"
         dest: /etc/pacman.d/hooks/adw-gtk3-flatpak-sync.hook
         mode: "0644"
+        remote_src: true
 
     - name: Refresh Arch package databases and upgrade
       ansible.builtin.pacman:
@@ -297,6 +298,7 @@
     src: "{{ root }}/timeshift/timeshift.json"
     dest: /etc/timeshift/timeshift.json
     mode: "0644"
+    remote_src: true
   become: true
   when: is_arch and is_custom
 

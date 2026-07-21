@@ -52,6 +52,7 @@
     src: "{{ root }}/sddm/theme.conf"
     dest: /usr/share/sddm/themes/sddm-astronaut-theme/Themes/theme.conf
     mode: "0644"
+    remote_src: true
   become: true
 
 - name: Point SDDM theme metadata at custom config

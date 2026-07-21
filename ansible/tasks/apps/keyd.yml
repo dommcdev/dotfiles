@@ -17,6 +17,7 @@
     src: "{{ root }}/keyd/default.conf"
     dest: /etc/keyd/default.conf
     mode: "0644"
+    remote_src: true
   become: true
   register: keyd_config
 
