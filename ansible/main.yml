@@ -45,6 +45,9 @@
   tasks:
     - name: Prerequisites
       ansible.builtin.import_tasks: tasks/prereqs.yml
+    - name: Tailscale
+      ansible.builtin.import_tasks: tasks/apps/tailscale.yml
+
     - name: Script links
       ansible.builtin.include_tasks: tasks/apps/scripts.yml
     - name: Syncthing
@@ -52,3 +55,5 @@
     - name: Network
       ansible.builtin.include_tasks: tasks/system/network.yml
       when: is_managed_desktop
+    - name: SSH
+      ansible.builtin.import_tasks: tasks/apps/ssh.yml
