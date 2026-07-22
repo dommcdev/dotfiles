@@ -17,4 +17,4 @@
       - fwupd
     state: present
   become: true
-  when: is_arch and is_custom
+  when: is_arch and is_managed_desktop

@@ -1,36 +1,35 @@
-- name: Install virtualization packages
-  ansible.builtin.package:
-    name:
-      - qemu-full
-      - virt-manager
-      - virt-viewer
-      - dnsmasq
-    state: present
+- name: Configure virtualization
   become: true
   when: is_arch
+  block:
+    - name: Install virtualization packages
+      ansible.builtin.package:
+        name:
+          - qemu-full
+          - virt-manager
+          - virt-viewer
+          - dnsmasq
+        state: present
 
-- name: Enable libvirtd
-  ansible.builtin.systemd_service:
-    name: libvirtd.service
-    enabled: true
-  become: true
+    - name: Enable libvirtd
+      ansible.builtin.systemd_service:
+        name: libvirtd.service
+        enabled: true
+        state: started
 
-- name: Add user to libvirt group
-  ansible.builtin.user:
-    name: "{{ user }}"
-    groups: libvirt
-    append: true
-  become: true
+    - name: Add user to libvirt group
+      ansible.builtin.user:
+        name: "{{ user }}"
+        groups: libvirt
+        append: true
 
-- name: Autostart libvirt default network
-  ansible.builtin.command: virsh net-autostart default
-  become: true
-  changed_when: false
-  failed_when: false
+    - name: Autostart libvirt default network
+      ansible.builtin.command: virsh net-autostart default
+      changed_when: false
+      failed_when: false
 
-- name: Allow libvirt forwarding before Docker rules
-  ansible.builtin.shell: |
-    iptables -C FORWARD -i virbr0 -j ACCEPT 2>/dev/null || iptables -I FORWARD 1 -i virbr0 -j ACCEPT
-    iptables -C FORWARD -o virbr0 -j ACCEPT 2>/dev/null || iptables -I FORWARD 1 -o virbr0 -j ACCEPT
-  become: true
-  changed_when: false
+    - name: Allow libvirt forwarding before Docker rules
+      ansible.builtin.shell: |
+        iptables -C FORWARD -i virbr0 -j ACCEPT 2>/dev/null || iptables -I FORWARD 1 -i virbr0 -j ACCEPT
+        iptables -C FORWARD -o virbr0 -j ACCEPT 2>/dev/null || iptables -I FORWARD 1 -o virbr0 -j ACCEPT
+      changed_when: false

@@ -1,16 +1,18 @@
-- name: Ensure opencode config directory exists
-  ansible.builtin.file:
-    path: "{{ home }}/.config/opencode"
-    state: directory
-    mode: "0755"
+- name: Configure opencode
+  block:
+    - name: Create config directory
+      ansible.builtin.file:
+        path: "{{ home }}/.config/opencode"
+        state: directory
+        mode: "0755"
 
-- name: Link opencode config files
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ home }}/.config/opencode/{{ item | basename }}"
-    state: link
-    force: true
-  loop: "{{ lookup('ansible.builtin.fileglob', root + '/opencode/*', wantlist=True) }}"
+    - name: Link config files
+      ansible.builtin.file:
+        src: "{{ item }}"
+        dest: "{{ home }}/.config/opencode/{{ item | basename }}"
+        state: link
+        force: true
+      loop: "{{ lookup('ansible.builtin.fileglob', root + '/opencode/*', wantlist=True) }}"
 
 - name: Install opencode with Bun
   ansible.builtin.command: bun add -g opencode-ai

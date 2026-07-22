@@ -24,6 +24,16 @@
       - gvfs-mtp
       - sushi
       - udiskie
+      - jdk-openjdk
+      - clang
+      - python
+      - python-pip
+      - deno
+      - uv
+      - github-cli
+      - nodejs
+      - npm
+      - rust
     gui_flatpaks:
       - org.nickvision.tubeconverter
       - com.github.PintaProject.Pinta
@@ -37,9 +47,12 @@
       when: is_arch
 
     - name: Install GUI Flatpaks
-      ansible.builtin.command: "flatpak install --assumeyes --noninteractive flathub {{ item }}"
-      changed_when: false
-      loop: "{{ gui_flatpaks }}"
+      community.general.flatpak:
+        name: "{{ gui_flatpaks }}"
+        remote: flathub
+        method: system
+        state: present
+      become: true
       when: is_linux
 
 - name: Create screenshot and video directories
@@ -92,66 +105,55 @@
     force: true
   when: is_linux
 
-- name: Ensure OnlyOffice config directory exists
-  ansible.builtin.file:
-    path: "{{ home }}/.config/onlyoffice"
-    state: directory
-    mode: "0755"
+- name: Configure OnlyOffice
+  block:
+    - name: Create config directory
+      ansible.builtin.file:
+        path: "{{ home }}/.config/onlyoffice"
+        state: directory
+        mode: "0755"
 
-- name: Link OnlyOffice theme
-  ansible.builtin.file:
-    src: "{{ root }}/apps/onlyoffice/theme.json"
-    dest: "{{ home }}/.config/onlyoffice/theme.json"
-    state: link
-    force: true
+    - name: Link theme
+      ansible.builtin.file:
+        src: "{{ root }}/apps/onlyoffice/theme.json"
+        dest: "{{ home }}/.config/onlyoffice/theme.json"
+        state: link
+        force: true
 
-- name: Link desktop files
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ home }}/.local/share/applications/{{ item | basename }}"
-    state: link
-    force: true
-  loop: "{{ lookup('ansible.builtin.fileglob', root + '/apps/desktop-files/misc-apps/*', wantlist=True) + lookup('ansible.builtin.fileglob', root + '/apps/desktop-files/hidden/*', wantlist=True) }}"
+- name: Configure Linux desktop integration
   when: is_linux
+  block:
+    - name: Link desktop files
+      ansible.builtin.file:
+        src: "{{ item }}"
+        dest: "{{ home }}/.local/share/applications/{{ item | basename }}"
+        state: link
+        force: true
+      loop: >-
+        {{ lookup('ansible.builtin.fileglob', root + '/apps/desktop-files/misc-apps/*', wantlist=True)
+        + lookup('ansible.builtin.fileglob', root + '/apps/desktop-files/hidden/*', wantlist=True) }}
 
-- name: Link desktop file icons
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ home }}/.local/share/icons/hicolor/scalable/apps/{{ item | basename }}"
-    state: link
-    force: true
-  loop: "{{ lookup('ansible.builtin.fileglob', root + '/apps/desktop-files/icons/*', wantlist=True) }}"
-  when: is_linux
+    - name: Link desktop file icons
+      ansible.builtin.file:
+        src: "{{ item }}"
+        dest: "{{ home }}/.local/share/icons/hicolor/scalable/apps/{{ item | basename }}"
+        state: link
+        force: true
+      loop: "{{ lookup('ansible.builtin.fileglob', root + '/apps/desktop-files/icons/*', wantlist=True) }}"
 
-- name: Update local icon and desktop caches
-  ansible.builtin.shell: |
-    gtk-update-icon-cache -f -t "{{ home }}/.local/share/icons/hicolor"
-    update-desktop-database "{{ home }}/.local/share/applications"
-  changed_when: false
-  when: is_linux
+    - name: Update local icon and desktop caches
+      ansible.builtin.shell: |
+        gtk-update-icon-cache -f -t "{{ home }}/.local/share/icons/hicolor"
+        update-desktop-database "{{ home }}/.local/share/applications"
+      changed_when: false
 
-- name: Configure Nautilus captions
-  ansible.builtin.command: gsettings set org.gnome.nautilus.icon-view captions "['size', 'none', 'none']"
-  changed_when: false
-  when: is_linux
+    - name: Configure Nautilus captions
+      ansible.builtin.command: gsettings set org.gnome.nautilus.icon-view captions "['size', 'none', 'none']"
+      changed_when: false
 
-- name: Configure GTK file chooser sorting
-  ansible.builtin.command: gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true
-  changed_when: false
-  when: is_linux
-
-- name: Install desktop development packages on Arch
-  ansible.builtin.package:
-    name:
-      - jdk-openjdk
-      - clang
-      - python
-      - python-pip
-      - deno
-      - uv
-    state: present
-  become: true
-  when: is_arch
+    - name: Configure GTK file chooser sorting
+      ansible.builtin.command: gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true
+      changed_when: false
 
 - name: Install desktop development packages with Homebrew
   community.general.homebrew:
@@ -165,14 +167,7 @@
     state: present
     update_homebrew: false
   environment: "{{ brew_environment }}"
-  when: not is_arch
-
-- name: Install GitHub CLI for repo setup on Arch
-  ansible.builtin.package:
-    name: github-cli
-    state: present
-  become: true
-  when: is_arch
+  when: is_debian or is_redhat or is_macos
 
 - name: Install GitHub CLI for repo setup with Homebrew
   community.general.homebrew:
@@ -180,7 +175,7 @@
     state: present
     update_homebrew: false
   environment: "{{ brew_environment }}"
-  when: not is_arch
+  when: is_debian or is_redhat or is_macos
 
 - name: Ensure dev directories exist
   ansible.builtin.file:
@@ -197,66 +192,58 @@
   failed_when: false
 
 - name: Use SSH remote for dotfiles repo
-  ansible.builtin.command: git remote set-url origin git@github.com:dommcdev/dotfiles.git
-  args:
-    chdir: "{{ root }}"
-  changed_when: false
-  failed_when: false
+  community.general.git_config:
+    name: remote.origin.url
+    value: git@github.com:dommcdev/dotfiles.git
+    scope: local
+    repo: "{{ root }}"
 
 - name: Use SSH remote for wallpapers repo
-  ansible.builtin.command: git remote set-url origin git@github.com:dommcdev/wallpapers.git
-  args:
-    chdir: "{{ home }}/dev/wallpapers"
-  changed_when: false
-  failed_when: false
-
-- name: Install node on Arch
-  ansible.builtin.package:
-    name:
-      - nodejs
-      - npm
-    state: present
-  become: true
-  when: is_arch
+  community.general.git_config:
+    name: remote.origin.url
+    value: git@github.com:dommcdev/wallpapers.git
+    scope: local
+    repo: "{{ home }}/dev/wallpapers"
 
 - name: Install node with Homebrew
   community.general.homebrew:
-    name: nodejs
+    name: node
     state: present
     update_homebrew: false
   environment: "{{ brew_environment }}"
-  when: not is_arch
+  when: is_debian or is_redhat or is_macos
 
-- name: Configure npm global prefix
-  ansible.builtin.shell: |
-    mkdir -p "{{ home }}/.local/share/npm-global"
-    npm config set prefix '~/.local/share/npm-global'
-  changed_when: false
+- name: Configure npm global packages
+  block:
+    - name: Create global package directory
+      ansible.builtin.file:
+        path: "{{ home }}/.local/share/npm-global"
+        state: directory
+        mode: "0755"
 
-- name: Install Rust for beancount tools on Arch
-  ansible.builtin.package:
-    name: rust
-    state: present
-  become: true
-  when: is_arch
+    - name: Configure global package prefix
+      ansible.builtin.command: npm config set prefix ~/.local/share/npm-global
+      changed_when: false
 
-- name: Install beancount AUR tools on Arch
-  ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None beancount fava
-  changed_when: false
-  when: is_arch
+- name: Configure beancount tools
+  block:
+    - name: Install beancount AUR tools on Arch
+      ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None beancount fava
+      changed_when: false
+      when: is_arch
 
-- name: Install beancount tools with Homebrew
-  community.general.homebrew:
-    name:
-      - beancount
-      - fava
-      - rust
-    state: present
-    update_homebrew: false
-  environment: "{{ brew_environment }}"
-  when: not is_arch
+    - name: Install beancount tools with Homebrew
+      community.general.homebrew:
+        name:
+          - beancount
+          - fava
+          - rust
+        state: present
+        update_homebrew: false
+      environment: "{{ brew_environment }}"
+      when: is_debian or is_redhat or is_macos
 
-- name: Clone beans repo
-  ansible.builtin.command: gh repo clone dommcdev/beans "{{ home }}/dev/beans"
-  args:
-    creates: "{{ home }}/dev/beans"
+    - name: Clone beans repo
+      ansible.builtin.command: gh repo clone dommcdev/beans "{{ home }}/dev/beans"
+      args:
+        creates: "{{ home }}/dev/beans"

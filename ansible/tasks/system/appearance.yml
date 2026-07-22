@@ -1,179 +1,137 @@
-- name: Ensure look and feel config directories exist
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: directory
-    mode: "0755"
-  loop:
-    - "{{ home }}/.config/fontconfig"
-    - "{{ home }}/.config/qt6ct"
+- name: Install appearance packages
+  block:
+    - name: Install native appearance packages
+      ansible.builtin.package:
+        name: "{{ pkgs[ansible_facts['os_family']] }}"
+        state: present
+      become: true
+      when: ansible_facts['os_family'] in pkgs
+      vars:
+        pkgs:
+          Archlinux:
+            - noto-fonts
+            - noto-fonts-cjk
+            - noto-fonts-emoji
+            - noto-fonts-extra
+            - ttf-jetbrains-mono-nerd
+            - adw-gtk-theme
+            - qt5-wayland
+            - qt6-wayland
+            - breeze
+            - breeze-icons
+            - papirus-icon-theme
+          Debian:
+            - breeze-cursor-theme
+          RedHat:
+            - breeze-cursor-theme
+
+    - name: Install JetBrains Mono Nerd Font on macOS
+      community.general.homebrew_cask:
+        name: font-jetbrains-mono-nerd-font
+        state: present
+        update_homebrew: false
+      environment: "{{ brew_environment }}"
+      when: is_macos
+
+    - name: Install qt6ct-kde on Arch
+      ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None qt6ct-kde
+      changed_when: false
+      when: is_arch
+
+- name: Link Linux appearance config
   when: is_linux
+  block:
+    - name: Create config directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      loop:
+        - "{{ home }}/.config/fontconfig"
+        - "{{ home }}/.config/qt6ct"
+        - "{{ home }}/.config/gtk-3.0"
+        - "{{ home }}/.config/gtk-4.0"
 
-- name: Link fontconfig
-  ansible.builtin.file:
-    src: "{{ root }}/styling/fonts/fonts.conf"
-    dest: "{{ home }}/.config/fontconfig/fonts.conf"
-    state: link
-    force: true
-  when: is_linux
+    - name: Link fontconfig
+      ansible.builtin.file:
+        src: "{{ root }}/styling/fonts/fonts.conf"
+        dest: "{{ home }}/.config/fontconfig/fonts.conf"
+        state: link
+        force: true
 
-- name: Install fonts on Arch
-  ansible.builtin.package:
-    name:
-      - noto-fonts
-      - noto-fonts-cjk
-      - noto-fonts-emoji
-      - noto-fonts-extra
-      - ttf-jetbrains-mono-nerd
-    state: present
-  become: true
-  when: is_arch
+    - name: Link GTK configs
+      ansible.builtin.file:
+        src: "{{ root }}/styling/gtk/{{ item.src }}"
+        dest: "{{ home }}/.config/{{ item.dest }}"
+        state: link
+        force: true
+      loop:
+        - src: gtk-3.0/gtk.css
+          dest: gtk-3.0/gtk.css
+        - src: gtk-4.0/gtk.css
+          dest: gtk-4.0/gtk.css
+        - src: gtk-4.0/settings.ini
+          dest: gtk-4.0/settings.ini
+        - src: templates
+          dest: templates
+        - src: user-dirs.dirs
+          dest: user-dirs.dirs
+        - src: mimeapps.list
+          dest: mimeapps.list
 
-- name: Install JetBrains Mono Nerd Font on macOS
-  community.general.homebrew_cask:
-    name: font-jetbrains-mono-nerd-font
-    state: present
-    update_homebrew: false
-  environment: "{{ brew_environment }}"
-  when: is_macos
+    - name: Link qt6ct config
+      ansible.builtin.file:
+        src: "{{ root }}/styling/qt/qt6ct.conf"
+        dest: "{{ home }}/.config/qt6ct/qt6ct.conf"
+        state: link
+        force: true
 
-- name: Link GTK configs
-  ansible.builtin.file:
-    src: "{{ root }}/styling/gtk/{{ item.src }}"
-    dest: "{{ home }}/.config/{{ item.dest }}"
-    state: link
-    force: true
-  loop:
-    - src: gtk-3.0/gtk.css
-      dest: gtk-3.0/gtk.css
-    - src: gtk-4.0/gtk.css
-      dest: gtk-4.0/gtk.css
-    - src: gtk-4.0/settings.ini
-      dest: gtk-4.0/settings.ini
-    - src: templates
-      dest: templates
-    - src: user-dirs.dirs
-      dest: user-dirs.dirs
-    - src: mimeapps.list
-      dest: mimeapps.list
-  when: is_linux
+- name: Configure Linux desktop appearance
+  when: is_linux and is_managed_desktop
+  block:
+    - name: Configure Flatpak GTK filesystem overrides
+      ansible.builtin.command: "flatpak override --user --filesystem={{ item }}"
+      changed_when: false
+      loop:
+        - xdg-config/gtk-4.0
+        - xdg-config/gtk-3.0
+        - xdg-data/themes
 
-- name: Install GTK theme on Arch
-  ansible.builtin.package:
-    name: adw-gtk-theme
-    state: present
-  become: true
-  when: is_arch
+    - name: Configure desktop appearance
+      ansible.builtin.command: "gsettings set org.gnome.desktop.interface {{ item.key }} {{ item.value }}"
+      changed_when: false
+      loop:
+        - key: gtk-theme
+          value: adw-gtk3
+        - key: color-scheme
+          value: prefer-dark
+        - key: accent-color
+          value: orange
+        - key: icon-theme
+          value: Papirus-Dark
+        - key: font-name
+          value: "'Adwaita Sans 11'"
 
-- name: Configure Flatpak GTK filesystem overrides
-  ansible.builtin.command: "flatpak override --user --filesystem={{ item }}"
-  changed_when: false
-  loop:
-    - xdg-config/gtk-4.0
-    - xdg-config/gtk-3.0
-    - xdg-data/themes
-  when: is_linux
+    - name: Mask Flatpak adw-gtk themes
+      ansible.builtin.command: "flatpak mask {{ item }}"
+      become: true
+      changed_when: false
+      loop:
+        - org.gtk.Gtk3theme.adw-gtk3
+        - org.gtk.Gtk3theme.adw-gtk3-dark
 
-- name: Set GTK theme
-  ansible.builtin.command: gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3
-  changed_when: false
-  when: is_linux
+    - name: Create default cursor directory
+      ansible.builtin.file:
+        path: "{{ home }}/.local/share/icons/default"
+        state: directory
+        mode: "0755"
 
-- name: Set GTK color scheme
-  ansible.builtin.command: gsettings set org.gnome.desktop.interface color-scheme prefer-dark
-  changed_when: false
-  when: is_linux
-
-- name: Set GTK accent color
-  ansible.builtin.command: gsettings set org.gnome.desktop.interface accent-color orange
-  changed_when: false
-  when: is_linux
-
-- name: Mask Flatpak adw-gtk themes
-  ansible.builtin.command: "flatpak mask {{ item }}"
-  become: true
-  changed_when: false
-  loop:
-    - org.gtk.Gtk3theme.adw-gtk3
-    - org.gtk.Gtk3theme.adw-gtk3-dark
-  when: is_linux
-
-- name: Link qt6ct config
-  ansible.builtin.file:
-    src: "{{ root }}/styling/qt/qt6ct.conf"
-    dest: "{{ home }}/.config/qt6ct/qt6ct.conf"
-    state: link
-    force: true
-
-- name: Install QT theming packages on Arch
-  ansible.builtin.package:
-    name:
-      - qt5-wayland
-      - qt6-wayland
-      - breeze
-      - breeze-icons
-    state: present
-  become: true
-  when: is_arch
-
-- name: Install qt6ct-kde on Arch
-  ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None qt6ct-kde
-  changed_when: false
-  when: is_arch
-
-- name: Install icon theme on Arch
-  ansible.builtin.package:
-    name: papirus-icon-theme
-    state: present
-  become: true
-  when: is_arch
-
-- name: Set icon theme
-  ansible.builtin.command: gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
-  changed_when: false
-  when: is_linux
-
-- name: Install cursor theme on Arch
-  ansible.builtin.package:
-    name: breeze
-    state: present
-  become: true
-  when: is_arch
-
-- name: Install cursor theme on Ubuntu
-  ansible.builtin.apt:
-    name: breeze-cursor-theme
-    state: present
-    update_cache: true
-    cache_valid_time: 3600
-  become: true
-  when: is_debian
-
-- name: Install cursor theme on Fedora
-  ansible.builtin.dnf:
-    name: breeze-cursor-theme
-    state: present
-  become: true
-  when: is_redhat
-
-- name: Create default cursor directory
-  ansible.builtin.file:
-    path: "{{ home }}/.local/share/icons/default"
-    state: directory
-    mode: "0755"
-  when: is_linux
-
-- name: Configure xwayland cursor inheritance
-  ansible.builtin.copy:
-    dest: "{{ home }}/.local/share/icons/default/index.theme"
-    mode: "0644"
-    content: |
-      [Icon Theme]
-      Name=Default
-      Comment=Default Cursor Theme
-      Inherits=breeze_cursors
-  when: is_linux
-
-- name: Set desktop font
-  ansible.builtin.command: gsettings set org.gnome.desktop.interface font-name "Adwaita Sans 11"
-  changed_when: false
-  when: is_linux
+    - name: Configure xwayland cursor inheritance
+      ansible.builtin.copy:
+        dest: "{{ home }}/.local/share/icons/default/index.theme"
+        mode: "0644"
+        content: |
+          [Icon Theme]
+          Name=Default
+          Comment=Default Cursor Theme
+          Inherits=breeze_cursors

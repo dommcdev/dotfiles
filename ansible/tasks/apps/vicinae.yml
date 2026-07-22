@@ -1,36 +1,39 @@
-- name: Ensure Vicinae config directory exists
-  ansible.builtin.file:
-    path: "{{ home }}/.config/vicinae"
-    state: directory
-    mode: "0755"
+- name: Configure Vicinae
+  when: is_arch and is_managed_desktop
+  block:
+    - name: Create config directory
+      ansible.builtin.file:
+        path: "{{ home }}/.config/vicinae"
+        state: directory
+        mode: "0755"
 
-- name: Link Vicinae settings
-  ansible.builtin.file:
-    src: "{{ root }}/vicinae/settings.json"
-    dest: "{{ home }}/.config/vicinae/settings.json"
-    state: link
-    force: true
+    - name: Link settings
+      ansible.builtin.file:
+        src: "{{ root }}/vicinae/settings.json"
+        dest: "{{ home }}/.config/vicinae/settings.json"
+        state: link
+        force: true
 
-- name: Link Vicinae power helper
-  ansible.builtin.file:
-    src: "{{ root }}/vicinae/vicinae-power.sh"
-    dest: "{{ home }}/.local/bin/vicinae-power.sh"
-    state: link
-    force: true
+    - name: Link power helper
+      ansible.builtin.file:
+        src: "{{ root }}/vicinae/vicinae-power.sh"
+        dest: "{{ home }}/.local/bin/vicinae-power.sh"
+        state: link
+        force: true
 
-- name: Install Vicinae
-  ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None vicinae-bin
-  changed_when: false
+    - name: Install Vicinae
+      ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None vicinae-bin
+      changed_when: false
 
-- name: Enable Vicinae user service
-  ansible.builtin.systemd_service:
-    name: vicinae.service
-    enabled: true
-    scope: user
+    - name: Enable Vicinae user service
+      ansible.builtin.systemd_service:
+        name: vicinae.service
+        enabled: true
+        scope: user
 
-- name: Restart Vicinae if available
-  ansible.builtin.systemd_service:
-    name: vicinae.service
-    state: restarted
-    scope: user
-  failed_when: false
+    - name: Restart Vicinae if available
+      ansible.builtin.systemd_service:
+        name: vicinae.service
+        state: restarted
+        scope: user
+      failed_when: false

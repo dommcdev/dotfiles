@@ -1,45 +1,50 @@
 - name: Install tmux
-  ansible.builtin.package:
-    name: tmux
-    state: present
-  become: true
-  when: is_arch
+  block:
+    - name: Install tmux on Linux
+      ansible.builtin.package:
+        name: tmux
+        state: present
+      become: true
+      when: is_linux
 
-- name: Install tmux with Homebrew
-  community.general.homebrew:
-    name: tmux
-    state: present
-    update_homebrew: false
-  environment: "{{ brew_environment }}"
-  when: not is_arch
+    - name: Install tmux with Homebrew on macOS
+      community.general.homebrew:
+        name: tmux
+        state: present
+        update_homebrew: false
+      environment: "{{ brew_environment }}"
+      when: is_macos
 
-- name: Ensure tmux config directory exists
-  ansible.builtin.file:
-    path: "{{ home }}/.config/tmux"
-    state: directory
-    mode: "0755"
+- name: Configure tmux
+  block:
+    - name: Create config directory
+      ansible.builtin.file:
+        path: "{{ home }}/.config/tmux"
+        state: directory
+        mode: "0755"
 
-- name: Link tmux config
-  ansible.builtin.file:
-    src: "{{ root }}/tmux/tmux.conf"
-    dest: "{{ home }}/.config/tmux/tmux.conf"
-    state: link
-    force: true
+    - name: Link config
+      ansible.builtin.file:
+        src: "{{ root }}/tmux/tmux.conf"
+        dest: "{{ home }}/.config/tmux/tmux.conf"
+        state: link
+        force: true
 
-- name: Link tmux scripts
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ home }}/.local/bin/{{ item | basename }}"
-    state: link
-    force: true
-  loop: "{{ lookup('ansible.builtin.fileglob', root + '/tmux/scripts/*', wantlist=True) }}"
+    - name: Link scripts
+      ansible.builtin.file:
+        src: "{{ item }}"
+        dest: "{{ home }}/.local/bin/{{ item | basename }}"
+        state: link
+        force: true
+      loop: "{{ lookup('ansible.builtin.fileglob', root + '/tmux/scripts/*', wantlist=True) }}"
 
-- name: Clone tmux plugin manager
-  ansible.builtin.git:
-    repo: https://github.com/tmux-plugins/tpm
-    dest: "{{ home }}/.config/tmux/plugins/tpm"
-    update: false
+    - name: Clone plugin manager
+      ansible.builtin.git:
+        repo: https://github.com/tmux-plugins/tpm
+        dest: "{{ home }}/.config/tmux/plugins/tpm"
+        version: master
+        update: false
 
-- name: Install tmux plugins
-  ansible.builtin.command: "{{ home }}/.config/tmux/plugins/tpm/bin/install_plugins"
-  changed_when: false
+    - name: Install plugins
+      ansible.builtin.command: "{{ home }}/.config/tmux/plugins/tpm/bin/install_plugins"
+      changed_when: false

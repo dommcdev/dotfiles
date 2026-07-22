@@ -1,53 +1,60 @@
-- name: Install Docker packages on Arch
-  ansible.builtin.package:
-    name:
-      - docker
-      - docker-compose
-      - lazydocker
-    state: present
-  become: true
-  when: is_arch
+- name: Install Docker
+  block:
+    - name: Install Docker packages on Arch
+      ansible.builtin.package:
+        name:
+          - docker
+          - docker-compose
+          - lazydocker
+        state: present
+      become: true
+      when: is_arch
 
-- name: Install Docker on Ubuntu and Fedora
-  ansible.builtin.shell: |
-    curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
-    sh /tmp/get-docker.sh
-  args:
-    creates: /usr/bin/docker
-  become: true
-  when: is_debian or is_redhat
+    - name: Install Docker on Ubuntu and Fedora
+      become: true
+      when: is_debian or is_redhat
+      block:
+        - name: Download Docker installer
+          ansible.builtin.get_url:
+            url: https://get.docker.com
+            dest: /tmp/get-docker.sh
+            mode: "0755"
 
-- name: Install lazydocker with Homebrew on Ubuntu and Fedora
-  community.general.homebrew:
-    name: lazydocker
-    state: present
-    update_homebrew: false
-  environment: "{{ brew_environment }}"
-  when: is_debian or is_redhat
+        - name: Run Docker installer
+          ansible.builtin.command: /tmp/get-docker.sh
+          args:
+            creates: /usr/bin/docker
+    - name: Install lazydocker with Homebrew on Ubuntu and Fedora
+      community.general.homebrew:
+        name: lazydocker
+        state: present
+        update_homebrew: false
+      environment: "{{ brew_environment }}"
+      when: is_debian or is_redhat
 
-- name: Install Docker with Homebrew on macOS
-  community.general.homebrew:
-    name:
-      - docker
-      - docker-compose
-      - lazydocker
-    state: present
-    update_homebrew: false
-  environment: "{{ brew_environment }}"
-  when: is_macos
+    - name: Install Docker with Homebrew on macOS
+      community.general.homebrew:
+        name:
+          - docker
+          - docker-compose
+          - lazydocker
+        state: present
+        update_homebrew: false
+      environment: "{{ brew_environment }}"
+      when: is_macos
 
-- name: Enable Docker on Linux
-  ansible.builtin.systemd_service:
-    name: docker.service
-    enabled: true
-    state: started
-  become: true
-  when: is_linux
-
-- name: Add user to Docker group
-  ansible.builtin.user:
-    name: "{{ user }}"
-    groups: docker
-    append: true
+- name: Configure Docker on Linux
   become: true
   when: is_linux
+  block:
+    - name: Enable Docker
+      ansible.builtin.systemd_service:
+        name: docker.service
+        enabled: true
+        state: started
+
+    - name: Add user to Docker group
+      ansible.builtin.user:
+        name: "{{ user }}"
+        groups: docker
+        append: true

@@ -1,17 +1,19 @@
-- name: Install Yazi on Arch
-  ansible.builtin.package:
-    name: yazi
-    state: present
-  become: true
-  when: is_arch
+- name: Install Yazi
+  block:
+    - name: Install Yazi on Arch
+      ansible.builtin.package:
+        name: yazi
+        state: present
+      become: true
+      when: is_arch
 
-- name: Install Yazi with Homebrew
-  community.general.homebrew:
-    name: yazi
-    state: present
-    update_homebrew: false
-  environment: "{{ brew_environment }}"
-  when: not is_arch
+    - name: Install Yazi with Homebrew
+      community.general.homebrew:
+        name: yazi
+        state: present
+        update_homebrew: false
+      environment: "{{ brew_environment }}"
+      when: is_debian or is_redhat or is_macos
 
 - name: Link Yazi config
   ansible.builtin.file:
@@ -20,14 +22,16 @@
     state: link
     force: true
 
-- name: Install Yazi packages
-  ansible.builtin.command: ya pkg install
-  args:
-    chdir: "{{ home }}/.config/yazi"
-  changed_when: false
+- name: Configure Yazi packages
+  block:
+    - name: Install Yazi packages
+      ansible.builtin.command: ya pkg install
+      args:
+        chdir: "{{ home }}/.config/yazi"
+      changed_when: false
 
-- name: Upgrade Yazi packages
-  ansible.builtin.command: ya pkg upgrade
-  args:
-    chdir: "{{ home }}/.config/yazi"
-  changed_when: false
+    - name: Upgrade Yazi packages
+      ansible.builtin.command: ya pkg upgrade
+      args:
+        chdir: "{{ home }}/.config/yazi"
+      changed_when: false

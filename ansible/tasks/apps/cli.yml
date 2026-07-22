@@ -1,100 +1,98 @@
 - name: Install terminal packages
   vars:
-    arch_pkgs:
-      - ouch
-      - 7zip
-      - unarchiver
-      - unrar
-      - github-cli
-      - wget
-      - curl
-      - ffmpeg
-      - fd
-      - ripgrep
-      - poppler
-      - zoxide
-      - imagemagick
-      - chafa
-      - resvg
-      - ncdu
-      - fzf
-      - trash-cli
-      - tldr
-      - whois
-      - eza
-      - jq
-      - less
-      - yt-dlp
-      - gum
-      - git-delta
-      - difftastic
-      - nmap
-      - bind
-      - id3v2
-      - lazygit
-      - acpi
-      - caligula
-      - dust
-      - glow
-      - playerctl
-      - duf
-      - figlet
-      - man-db
-      - man-pages
-      - bc
-    apt_pkgs:
-      - 7zip
-      - unar
-      - unrar
-      - gh
-      - trash-cli
-      - wget
-      - ffmpeg
-      - fd-find
-      - ripgrep
-      - poppler-utils
-      - zoxide
-      - imagemagick
-      - ghostscript
-      - chafa
-      - ncdu
-      - eza
-      - jq
-      - less
-      - git-delta
-      - nmap
-      - bind9-dnsutils
-      - id3v2
-      - playerctl
-      - duf
-      - figlet
-      - bc
-    dnf_pckgs:
-      - 7zip
-      - unar
-      - unrar
-      - gh
-      - trash-cli
-      - wget
-      - ffmpeg
-      - fd-find
-      - ripgrep
-      - poppler-utils
-      - zoxide
-      - ImageMagick
-      - ghostscript
-      - chafa
-      - ncdu
-      - jq
-      - less
-      - git-delta
-      - nmap
-      - bind-utils
-      - id3v2
-      - playerctl
-      - duf
-      - figlet
-      - bc
+    pkgs:
+      Archlinux:
+        - ouch
+        - 7zip
+        - unarchiver
+        - unrar
+        - wget
+        - curl
+        - ffmpeg
+        - fd
+        - ripgrep
+        - poppler
+        - zoxide
+        - imagemagick
+        - chafa
+        - resvg
+        - ncdu
+        - fzf
+        - trash-cli
+        - tldr
+        - whois
+        - eza
+        - jq
+        - less
+        - yt-dlp
+        - gum
+        - git-delta
+        - difftastic
+        - nmap
+        - bind
+        - id3v2
+        - lazygit
+        - acpi
+        - caligula
+        - dust
+        - glow
+        - playerctl
+        - duf
+        - figlet
+        - man-db
+        - man-pages
+        - bc
+      Debian:
+        - 7zip
+        - unar
+        - unrar
+        - trash-cli
+        - wget
+        - ffmpeg
+        - fd-find
+        - ripgrep
+        - poppler-utils
+        - zoxide
+        - imagemagick
+        - ghostscript
+        - chafa
+        - ncdu
+        - eza
+        - jq
+        - less
+        - git-delta
+        - nmap
+        - bind9-dnsutils
+        - id3v2
+        - playerctl
+        - duf
+        - figlet
+        - bc
+      RedHat:
+        - 7zip
+        - unar
+        - unrar
+        - trash-cli
+        - wget
+        - ffmpeg
+        - fd-find
+        - ripgrep
+        - poppler-utils
+        - zoxide
+        - ImageMagick
+        - ghostscript
+        - chafa
+        - ncdu
+        - jq
+        - less
+        - git-delta
+        - nmap
+        - bind-utils
+        - id3v2
+        - playerctl
+        - duf
+        - figlet
+        - bc
     brew_pkgs:
       - fzf
       - yt-dlp
@@ -140,28 +138,12 @@
       - bc
       - caligula
   block:
-    - name: Install terminal packages on Arch
+    - name: Install native terminal packages
       ansible.builtin.package:
-        name: "{{ arch_pkgs }}"
+        name: "{{ pkgs[ansible_facts['os_family']] }}"
         state: present
       become: true
-      when: is_arch
-
-    - name: Install terminal packages on Ubuntu
-      ansible.builtin.apt:
-        name: "{{ apt_pkgs }}"
-        state: present
-        update_cache: true
-        cache_valid_time: 3600
-      become: true
-      when: is_debian
-
-    - name: Install terminal packages on Fedora
-      ansible.builtin.dnf:
-        name: "{{ dnf_pckgs }}"
-        state: present
-      become: true
-      when: is_redhat
+      when: ansible_facts['os_family'] in pkgs
 
     - name: Install terminal Homebrew packages on Linux
       community.general.homebrew:

@@ -1,46 +1,59 @@
-- name: Install Neovim packages on Arch
-  ansible.builtin.package:
-    name:
-      - neovim
-      - python
-      - python-pip
-      - unzip
-      - tree-sitter-cli
-    state: present
-  become: true
-  when: is_arch
+- name: Install Neovim
+  block:
+    - name: Install Neovim packages on Arch
+      ansible.builtin.package:
+        name:
+          - neovim
+          - python
+          - python-pip
+          - unzip
+          - tree-sitter-cli
+        state: present
+      become: true
+      when: is_arch
 
-- name: Install Neovim packages with Homebrew
-  community.general.homebrew:
-    name:
-      - neovim
-      - python
-      - unzip
-      - tree-sitter-cli
-    state: present
-    update_homebrew: false
-  environment: "{{ brew_environment }}"
-  when: not is_arch
+    - name: Install Neovim packages with Homebrew
+      community.general.homebrew:
+        name:
+          - neovim
+          - python
+          - unzip
+          - tree-sitter-cli
+        state: present
+        update_homebrew: false
+      environment: "{{ brew_environment }}"
+      when: is_debian or is_redhat or is_macos
 
-- name: Link Neovim config
-  ansible.builtin.file:
-    src: "{{ root }}/nvim"
-    dest: "{{ home }}/.config/nvim"
-    state: link
-    force: true
+- name: Configure Neovim
+  block:
+    - name: Link Neovim config
+      ansible.builtin.file:
+        src: "{{ root }}/nvim"
+        dest: "{{ home }}/.config/nvim"
+        state: link
+        force: true
 
-- name: Link editorconfig
-  ansible.builtin.file:
-    src: "{{ root }}/nvim/editorconfig"
-    dest: "{{ home }}/.editorconfig"
-    state: link
-    force: true
+    - name: Link editorconfig
+      ansible.builtin.file:
+        src: "{{ root }}/nvim/editorconfig"
+        dest: "{{ home }}/.editorconfig"
+        state: link
+        force: true
 
-- name: Restore Neovim plugins
-  ansible.builtin.command: nvim --headless "+Lazy! restore" +qa
-  changed_when: false
+    - name: Restore Neovim plugins
+      ansible.builtin.command: nvim --headless "+Lazy! restore" +qa
+      changed_when: false
 
-- name: Install Neovim treesitter parsers
-  ansible.builtin.command: >-
-    nvim --headless -c "lua require('nvim-treesitter').install({'lua','vim','vimdoc','python','java','c','cpp','html','css','javascript','typescript','tsx','sql','go','json','yaml','toml','bash','markdown','markdown_inline','beancount','typst'}):wait(60000)" -c "qa"
-  changed_when: false
+    - name: Install Neovim treesitter parsers
+      ansible.builtin.command:
+        argv:
+          - nvim
+          - --headless
+          - -c
+          - >-
+            lua require('nvim-treesitter').install({'lua','vim','vimdoc','python','java','c','cpp','html','css',
+            'javascript','typescript','tsx','sql','go','json','yaml','toml','bash','markdown','markdown_inline',
+            'beancount','typst'}):wait(60000)
+          - -c
+          - qa
+      changed_when: false
