@@ -1,10 +1,10 @@
 [credential]
     helper = store --file=$HOME/.config/git/credentials
 
-# For github with https - could be useful
-#[credential "https://github.com"]
-#  helper =
-#  helper = !gh auth git-credential
+# For github when using https
+[credential "https://github.com"]
+  helper =
+  helper = !gh auth git-credential
 
 
 [user]
