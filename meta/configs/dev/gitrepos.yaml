@@ -12,7 +12,7 @@
       if ! gh auth status >/dev/null 2>&1; then
           echo "Setting up GitHub auth..."
           mkdir -p ~/.ssh && chmod 700 ~/.ssh
-          gh auth login --web -p ssh
+          gh auth login --web
           ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
       else
           echo "GitHub already authenticated. Skipping."
@@ -25,8 +25,3 @@
 
     # Repo folders
     - mkdir -p ~/dev/projects ~/dev/external
-
-    # Edit previously cloned repos to have ssh rather than https remotes
-    - |
-      if [ -d "$HOME/dev/dotfiles" ]; then cd "$HOME/dev/dotfiles" && git remote set-url origin git@github.com:dommcdev/dotfiles.git; fi
-      if [ -d "$HOME/dev/wallpapers" ]; then cd "$HOME/dev/wallpapers" && git remote set-url origin git@github.com:dommcdev/wallpapers.git; fi

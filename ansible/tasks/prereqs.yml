@@ -158,7 +158,7 @@
 
 - name: Clone dotfiles
   ansible.builtin.git:
-    repo: git@github.com:dommcdev/dotfiles.git
+    repo: https://github.com/dommcdev/dotfiles.git
     dest: "{{ root }}"
     version: main
     update: true
