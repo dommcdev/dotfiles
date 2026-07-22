@@ -11,8 +11,6 @@ ansible/tasks/nvim.yml
 ansible/tasks/opencode.yml
 ansible/tasks/printing.yml
 ansible/tasks/sddm.yml
-ansible/tasks/ssh.yml
-ansible/tasks/tailscale.yml
 ansible/tasks/terminal.yml
 ansible/tasks/tmux.yml
 ansible/tasks/vicinae.yml

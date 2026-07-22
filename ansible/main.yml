@@ -60,3 +60,7 @@
       when: is_managed_desktop
     - name: SSH
       ansible.builtin.import_tasks: tasks/apps/ssh.yml
+    - name: Git
+      ansible.builtin.import_tasks: tasks/apps/git.yml
+    - name: Zsh
+      ansible.builtin.import_tasks: tasks/apps/zsh.yml

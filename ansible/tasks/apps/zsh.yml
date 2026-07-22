@@ -1,69 +1,43 @@
-- name: Install zsh on Arch
+- name: Install zsh
   ansible.builtin.package:
     name: zsh
     state: present
   become: true
-  when: is_arch
-
-- name: Install zsh on Ubuntu
-  ansible.builtin.apt:
-    name: zsh
-    state: present
-    update_cache: true
-    cache_valid_time: 3600
-  become: true
-  when: is_debian
-
-- name: Install zsh on Fedora
-  ansible.builtin.dnf:
-    name: zsh
-    state: present
-  become: true
-  when: is_redhat
-
-- name: Ensure zsh config directory exists
-  ansible.builtin.file:
-    path: "{{ home }}/.config/zsh"
-    state: directory
-    mode: "0755"
-
-- name: Link zshrc
-  ansible.builtin.file:
-    src: "{{ root }}/zsh/zshrc"
-    dest: "{{ home }}/.config/zsh/.zshrc"
-    state: link
-    force: true
-
-- name: Link macOS zprofile
-  ansible.builtin.file:
-    src: "{{ root }}/zsh/zprofile-mac"
-    dest: "{{ home }}/.config/zsh/.zprofile"
-    state: link
-    force: true
-  when: is_macos
-
-- name: Link zshenv
-  ansible.builtin.file:
-    src: "{{ root }}/zsh/zshenv"
-    dest: "{{ home }}/.zshenv"
-    state: link
-    force: true
-
-- name: Read current login shell
-  ansible.builtin.command: "getent passwd {{ user }}"
-  register: zsh_passwd_entry
-  changed_when: false
   when: is_linux
 
-- name: Locate zsh
-  ansible.builtin.shell: command -v zsh
-  register: zsh_path
-  changed_when: false
-  when: is_linux
+- name: Link zsh config
+  block:
+    - name: Ensure config directory exists
+      ansible.builtin.file:
+        path: "{{ home }}/.config/zsh"
+        state: directory
+        mode: "0755"
 
-- name: Change login shell to zsh
-  ansible.builtin.command: "chsh -s {{ zsh_path.stdout }} {{ user }}"
+    - name: Link zshrc
+      ansible.builtin.file:
+        src: "{{ root }}/zsh/zshrc"
+        dest: "{{ home }}/.config/zsh/.zshrc"
+        state: link
+        force: true
+
+    - name: Link macOS zprofile
+      ansible.builtin.file:
+        src: "{{ root }}/zsh/zprofile-mac"
+        dest: "{{ home }}/.config/zsh/.zprofile"
+        state: link
+        force: true
+      when: is_macos
+
+    - name: Link zshenv
+      ansible.builtin.file:
+        src: "{{ root }}/zsh/zshenv"
+        dest: "{{ home }}/.zshenv"
+        state: link
+        force: true
+
+- name: Set zsh as login shell
+  ansible.builtin.user:
+    name: "{{ user }}"
+    shell: /usr/bin/zsh
   become: true
-  when:
-    - is_linux
-    - zsh_passwd_entry.stdout.split(':')[-1] != zsh_path.stdout
+  when: is_linux
