@@ -66,3 +66,19 @@ fwupdmgr get-history
 
 AI Docs
     Tell it to adhere to ASD-STE100 Simplified Technical English
+
+Getting docker and libvirt to play nicely.
+On a normal Linux machine ip forwarding is disabled by default.
+
+However, both docker and libvirt enable ip forwarding, with some firewall rules.
+* Docker with the iptables backend sets a global FORWARD DROP policy, except for Docker and explicit user (DOCKER-USER) exceptions.
+* Libvirt genrally only restricts virbr0 traffic, leaving the global FORWARD policy to ACCEPT.
+* Docker with the nftables backend mimics libvirt more, i.e. doesn't set a global FORWARD DROP policy.
+
+So to prevent Docker from stepping on Libvirt's toes, you can either
+a) Add some DOCKER-USER chain rules. It it somewhat complex to get these to persist though
+b) Switch Docker to the experimental nftables backend
+c) Add `"ip-forward-no-drop": true` to `/etc/docker/daemon.json`
+
+sudo iptables -w 10 -I DOCKER-USER 1 -i 'virbr+' -m conntrack --ctstate NEW,ESTABLISHED,RELATED -j ACCEPT
+sudo iptables -w 10 -I DOCKER-USER 1 -o 'virbr+' -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT

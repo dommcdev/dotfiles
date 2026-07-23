@@ -33,3 +33,6 @@
         iptables -C FORWARD -i virbr0 -j ACCEPT 2>/dev/null || iptables -I FORWARD 1 -i virbr0 -j ACCEPT
         iptables -C FORWARD -o virbr0 -j ACCEPT 2>/dev/null || iptables -I FORWARD 1 -o virbr0 -j ACCEPT
       changed_when: false
+#
+#
+# sudo virsh net-list --all

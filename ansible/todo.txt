@@ -1,6 +1,5 @@
 TO REVIEW
 ansible/tasks/apps/cli.yml
-ansible/tasks/apps/docker.yml
 ansible/tasks/apps/ghostty.yml
 ansible/tasks/apps/gui.yml
 ansible/tasks/apps/hypr.yml
