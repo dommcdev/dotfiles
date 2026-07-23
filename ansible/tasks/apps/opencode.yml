@@ -8,14 +8,16 @@
 
     - name: Link config files
       ansible.builtin.file:
-        src: "{{ item }}"
-        dest: "{{ home }}/.config/opencode/{{ item | basename }}"
+        src: "{{ root }}/opencode/{{ item }}"
+        dest: "{{ home }}/.config/opencode/{{ item }}"
         state: link
         force: true
-      loop: "{{ lookup('ansible.builtin.fileglob', root + '/opencode/*', wantlist=True) }}"
+      loop:
+        - opencode.json
+        - tui.json
 
 - name: Install opencode with Bun
   ansible.builtin.command: bun add -g opencode-ai
   environment:
-    PATH: "{{ home }}/.local/share/bun/bin:/opt/homebrew/bin:/usr/local/bin:{{ ansible_facts['env']['PATH'] }}"
+    PATH: "{{ brew_environment['PATH'] }}:/usr/local/bin:{{ ansible_facts['env']['PATH'] }}"
   changed_when: false

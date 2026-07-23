@@ -8,7 +8,6 @@ ansible/tasks/apps/keyd.yml
 ansible/tasks/apps/libvirt.yml
 ansible/tasks/apps/noctalia.yml
 ansible/tasks/apps/nvim.yml
-ansible/tasks/apps/opencode.yml
 ansible/tasks/apps/retroarch.yml
 ansible/tasks/apps/sddm.yml
 ansible/tasks/apps/switch-emulator.yml

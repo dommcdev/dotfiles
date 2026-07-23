@@ -83,6 +83,26 @@
       environment: "{{ brew_environment }}"
       when: is_debian or is_redhat or is_macos
 
+- name: Configure Bun
+  block:
+    - name: Create config directory
+      ansible.builtin.file:
+        path: "{{ home }}/.config"
+        state: directory
+        mode: "0755"
+
+    - name: Configure global install paths
+      ansible.builtin.copy:
+        dest: "{{ home }}/.config/.bunfig.toml"
+        mode: "0644"
+        content: |
+          [install]
+          globalDir = "{{ home }}/.local/share/bun/install/global"
+          globalBinDir = "{{ home }}/.local/share/bun/bin"
+
+          [install.cache]
+          dir = "{{ home }}/.cache/bun"
+
 - name: Configure Arch package management
   become: true
   when: is_arch

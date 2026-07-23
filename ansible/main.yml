@@ -64,3 +64,5 @@
       ansible.builtin.import_tasks: tasks/apps/git.yml
     - name: Zsh
       ansible.builtin.import_tasks: tasks/apps/zsh.yml
+    - name: Opencode
+      ansible.builtin.import_tasks: tasks/apps/opencode.yml
