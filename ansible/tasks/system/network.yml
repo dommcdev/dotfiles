@@ -80,7 +80,7 @@
         masked: true
       become: true
 
-- name: Configure systemd-resolved
+- name: Configure systemd-resolved (set mDNS to resolve-only + Cloudflare for DNS)
   block:
     - name: Create resolved override directory
       ansible.builtin.file:
@@ -89,13 +89,18 @@
         mode: "0755"
       become: true
 
-    # Dedicated responders such as Avahi handle mDNS advertising and discovery.
-    - name: Set systemd-resolved mDNS to resolve-only
+    - name: Copy config
       ansible.builtin.copy:
-        dest: /etc/systemd/resolved.conf.d/10-mdns-resolve.conf
+        dest: /etc/systemd/resolved.conf.d/10-global.conf
         mode: "0644"
         content: |
           [Resolve]
+          # Primary & Secondary DNS (Cloudflare)
+          DNS=1.1.1.1#cloudflare-dns.com 1.0.0.1#cloudflare-dns.com 2606:4700:4700::1111#cloudflare-dns.com 2606:4700:4700::1001#cloudflare-dns.com
+
+          # Set resolvd mDNS to resolve-only
+          # Dedicated responders such as Avahi handle mDNS advertising and discovery.
+          DNSOverTLS=opportunistic
           MulticastDNS=resolve
           LLMNR=no
       become: true
