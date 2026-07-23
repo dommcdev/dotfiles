@@ -12,7 +12,6 @@
         - cups-filters
         - cups-pdf
         - system-config-printer
-        - avahi
         - cups-pk-helper
       Debian:
         - cups
@@ -20,7 +19,6 @@
         - cups-filters
         - printer-driver-cups-pdf
         - system-config-printer
-        - avahi-daemon
         - cups-pk-helper
       RedHat:
         - cups
@@ -28,7 +26,6 @@
         - cups-filters
         - cups-pdf
         - system-config-printer
-        - avahi
         - cups-pk-helper
 
 - name: Enable remote printer discovery
@@ -47,4 +44,3 @@
   loop:
     - cups.service
     - cups-browsed.service
-    - avahi-daemon.service

@@ -14,6 +14,7 @@
         - inetutils
         - nftables
         - iptables
+        - avahi
       Debian:
         - network-manager
         - network-manager-gnome
@@ -22,6 +23,7 @@
         - systemd-resolved
         - nftables
         - iptables
+        - avahi-daemon
       RedHat:
         - NetworkManager
         - NetworkManager-wifi
@@ -31,6 +33,7 @@
         - systemd-resolved
         - nftables
         - iptables-nft
+        - avahi
 
 - name: Configure NetworkManager
   block:
@@ -47,32 +50,16 @@
         mode: "0644"
         content: |
           [main]
-          # Let systemd-resolved manage DNS
           dns=systemd-resolved
-          # Optional: rc-manager controls how NM handles /etc/resolv.conf
-          rc-manager=symlink
 
           [keyfile]
           unmanaged-devices=interface-name:tailscale0
 
           [device]
-          # Use iwd for Wi-Fi
           wifi.backend=iwd
 
           [connectivity]
-          uri=http://www.archlinux.org/check_network_status.txt
-          interval=300
-
-          [logging]
-          backend=journal
-          audit=true
-
-          [connection]
-          # Tell systemd-resolved to resolve-only to prevent unintentionally activing its mDNS responder
-          connection.mdns=1
-
-          [global-dns-domain-*]
-          servers=dns+tls://1.1.1.1#cloudflare-dns.com,dns+tls://1.0.0.1#cloudflare-dns.com,dns+tls://[2606:4700:4700::1111]#cloudflare-dns.com,dns+tls://[2606:4700:4700::1001]#cloudflare-dns.com
+          uri=http://connectivity-check.ubuntu.com/
       become: true
       register: networkmanager_config
 
@@ -102,8 +89,8 @@
           DNS=1.1.1.1#cloudflare-dns.com 1.0.0.1#cloudflare-dns.com 2606:4700:4700::1111#cloudflare-dns.com 2606:4700:4700::1001#cloudflare-dns.com
           DNSOverTLS=opportunistic
 
-          # Set resolvd mDNS to resolve-only
-          # Dedicated responders such as Avahi handle mDNS advertising and discovery.
+          ## Allow systemd-resolved to resolve mDNS names, but do not advertise/register
+          # this machine over mDNS. Avahi is the sole mDNS advertiser/responder.
           MulticastDNS=resolve
           LLMNR=no
       become: true
@@ -114,6 +101,13 @@
     name: systemd-resolved.service
     enabled: true
     state: "{{ 'restarted' if resolved_config.changed else 'started' }}"
+  become: true
+
+- name: Enable Avahi
+  ansible.builtin.systemd_service:
+    name: avahi-daemon.service
+    enabled: true
+    state: started
   become: true
 
 - name: Link systemd-resolved stub resolver
