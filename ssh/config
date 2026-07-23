@@ -1,6 +1,10 @@
-Host chocobo kabigon pikachu applepie archlinux
+Host chocobo kabigon pikachu applepie
     HostName %h.tetra-salmon.ts.net
     User dominic
+
+Host archlinux
+    HostName archlinux
+    User arch
 
 Host srv2
     HostName srv2
