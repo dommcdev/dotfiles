@@ -31,3 +31,7 @@ install-fresh:
 
 finalize:
 	./scripts/finalize-setup
+
+# Vars
+#  --user and --ask-pass provides ssh user/password, needed if you don't have key-based ssh set up
+#  --ask-become-pass provices sudo password, needed if you don't have it in secrets.yml

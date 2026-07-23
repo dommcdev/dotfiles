@@ -14,7 +14,7 @@ all:
       gpu_vendors:
         - intel
     archlab:
-      ansible_host: archlinux.tetra-salmon.ts.net
+      ansible_host: archlinux
 
   vars:
     ansible_connection: "{{ 'local' if inventory_hostname == lookup('pipe', 'hostname -s') else 'ssh' }}"
