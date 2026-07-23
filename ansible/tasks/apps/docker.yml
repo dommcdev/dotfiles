@@ -47,11 +47,28 @@
   become: true
   when: is_linux
   block:
-    - name: Enable Docker service on headless machines
+    - name: Configure Docker daemon
+      ansible.builtin.copy:
+        dest: /etc/docker/daemon.json
+        content: |
+          {
+            "ip-forward-no-drop": true,
+            "log-driver": "json-file",
+            "log-opts": {
+              "max-size": "10m",
+              "max-file": "5"
+            }
+          }
+        owner: root
+        group: root
+        mode: "0644"
+      register: docker_config
+
+    - name: Enable/restart Docker service on headless machines
       ansible.builtin.systemd_service:
         name: docker.service
         enabled: true
-        state: started
+        state: "{{ 'restarted' if docker_config.changed else 'started' }}"
       when: is_headless
 
     - name: Enable Docker socket on desktop machines

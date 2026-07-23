@@ -1,25 +1,3 @@
-- name: Install Arch pacman hooks and upgrade packages
-  become: true
-  when: is_arch
-  block:
-    - name: Create pacman hooks directory
-      ansible.builtin.file:
-        path: /etc/pacman.d/hooks
-        state: directory
-        mode: "0755"
-
-    - name: Copy adw-gtk3 Flatpak sync hook
-      ansible.builtin.copy:
-        src: "{{ root }}/arch/pacman/hooks/adw-gtk3-flatpak-sync.hook"
-        dest: /etc/pacman.d/hooks/adw-gtk3-flatpak-sync.hook
-        mode: "0644"
-        remote_src: true
-
-    - name: Refresh Arch package databases and upgrade
-      community.general.pacman:
-        update_cache: true
-        upgrade: true
-
 - name: Install Arch AUR helper extras
   ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None downgrade
   changed_when: false

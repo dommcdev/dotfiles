@@ -95,7 +95,6 @@
       loop:
         - xdg-config/gtk-4.0
         - xdg-config/gtk-3.0
-        - xdg-data/themes
 
     - name: Configure desktop appearance
       ansible.builtin.command: "gsettings set org.gnome.desktop.interface {{ item.key }} {{ item.value }}"
@@ -105,20 +104,10 @@
           value: adw-gtk3
         - key: color-scheme
           value: prefer-dark
-        - key: accent-color
-          value: orange
         - key: icon-theme
           value: Papirus-Dark
         - key: font-name
           value: "'Adwaita Sans 11'"
-
-    - name: Mask Flatpak adw-gtk themes
-      ansible.builtin.command: "flatpak mask {{ item }}"
-      become: true
-      changed_when: false
-      loop:
-        - org.gtk.Gtk3theme.adw-gtk3
-        - org.gtk.Gtk3theme.adw-gtk3-dark
 
     - name: Create default cursor directory
       ansible.builtin.file:

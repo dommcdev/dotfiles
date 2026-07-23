@@ -2,23 +2,15 @@
 Nvim stuff (More lazy loading)
 Tweak auth stuff in fingerprints script
 Ambient light sensor automated install (systemd service + script copying + note on sensor driver symlinking)
-Possibly improve docker/iptables stuff (docker user chain?)
 Setup ufw (and maybe Apparmor on server)
-Fedora - default Y for dnf, disable SELinux
-Replace iwd with Networkmanager (find replacement tui??)
-noctalia systemd service
 Improve tmux theme
 Create syncthing dir for wallpapers, games/saves, etc
-Add more fonts / misc stuff from archinstall
-Add cachyos repo
-Update screensaver hyprland stuff
-Fix flatpak gtk theming
-Better system fonts (inter, fira, ibm-plex + research fontconfig)
+Grab misc stuff from archinstall
+Better system fonts (inter, fira, ibm-plex + research fontconfig + fallback noto fonts)
 Add limine and snapper
 Switch to cachy? Will need to adjust powerprofilesdaemon pkg name
 Switch to bitwarden
 Add ansible package somewhere (and install requirements.txt)
-Fix dotfiles clone using https, thus setting origin wrong?
 
 
 Ansible
@@ -27,7 +19,6 @@ Ansible
 * Replace id3v2 with beets/picard
 * Add upower, gpu-screen-recorder
 * Tweak tui config symlinking to include theme files
-* Add ymls: noctalia, zed, retroarch, switch-emulator, auth
 
 Themes
 Manual: nvim, vicinae, opencode, zed, obsidian, chrome
