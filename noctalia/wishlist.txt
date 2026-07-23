@@ -1,6 +1,7 @@
 Network module handling ethernet (only an issue with iwd?? mention in docs)
 Group spacer with module
 Show feels like in weather module
+Add settings icon to network module
 
 
 [Commented] Differentiate between battery/ac in idle settings #3336

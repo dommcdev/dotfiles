@@ -68,11 +68,11 @@
           audit=true
 
           [connection]
-          # Tell systemd-resolved to resolve only to prevent unintentionally activing its mDNS responder
+          # Tell systemd-resolved to resolve-only to prevent unintentionally activing its mDNS responder
           connection.mdns=1
-          # Ignore DNS servers pushed by local router DHCP
-          ipv4.ignore-auto-dns=true
-          ipv6.ignore-auto-dns=true
+
+          [global-dns-domain-*]
+          servers=dns+tls://1.1.1.1#cloudflare-dns.com,dns+tls://1.0.0.1#cloudflare-dns.com,dns+tls://[2606:4700:4700::1111]#cloudflare-dns.com,dns+tls://[2606:4700:4700::1001]#cloudflare-dns.com
       become: true
       register: networkmanager_config
 
@@ -100,10 +100,10 @@
           [Resolve]
           # Primary & Secondary DNS (Cloudflare)
           DNS=1.1.1.1#cloudflare-dns.com 1.0.0.1#cloudflare-dns.com 2606:4700:4700::1111#cloudflare-dns.com 2606:4700:4700::1001#cloudflare-dns.com
+          DNSOverTLS=opportunistic
 
           # Set resolvd mDNS to resolve-only
           # Dedicated responders such as Avahi handle mDNS advertising and discovery.
-          DNSOverTLS=opportunistic
           MulticastDNS=resolve
           LLMNR=no
       become: true
