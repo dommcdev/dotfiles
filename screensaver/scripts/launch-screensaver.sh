@@ -3,14 +3,14 @@
 # Launch the screensaver in Ghostty on all monitors.
 # Usage: launch-screensaver [-l] [-m]
 
-cmd="screensaver.sh"
+cmd=(screensaver.sh)
 font_size_override=""
 monitor_mouse=false
 
 while getopts "lm" opt; do
   case $opt in
     l)
-      cmd="lavat -g -c fab387 -s 5 -b 13"
+      cmd=(lavat -g -c fab387 -s 5 -b 13)
       font_size_override="12"
       ;;
     m)
@@ -35,8 +35,8 @@ pgrep -f com.dominic.screensaver && exit 0
 walker -q 2>/dev/null || true
 
 # Hide cursor and ensure it's restored on exit
-hyprctl keyword cursor:invisible true &>/dev/null
-trap 'hyprctl keyword cursor:invisible false &>/dev/null' EXIT INT TERM
+hyprctl eval 'hl.config({ cursor = { invisible = true } })' &>/dev/null
+trap 'hyprctl eval "hl.config({ cursor = { invisible = false } })" &>/dev/null' EXIT INT TERM
 
 focused=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true).name')
 
@@ -49,12 +49,16 @@ for m in $(hyprctl monitors -j | jq -r '.[] | .name'); do
     font_size=$(echo "18 * $height / $scale / 1440" | bc)
   fi
 
-  hyprctl dispatch focusmonitor "$m"
-  hyprctl dispatch exec -- \
+  monitor=$(jq -Rn --arg value "$m" '$value')
+  hyprctl dispatch "hl.dsp.focus({ monitor = $monitor })"
+
+  printf -v launch_cmd '%q ' \
     ghostty --class=com.dominic.screensaver \
     --config-file="$HOME/dev/dotfiles/screensaver/ghostty-conf" \
     --font-size="$font_size" \
-    -e "$cmd"
+    -e "${cmd[@]}"
+  launch_cmd=$(jq -Rn --arg value "$launch_cmd" '$value')
+  hyprctl dispatch "hl.dsp.exec_cmd($launch_cmd)"
 done
 
 # Wait for screensaver to initialize and mouse to settle
@@ -83,4 +87,5 @@ else
   done
 fi
 
-hyprctl dispatch focusmonitor "$focused"
+focused=$(jq -Rn --arg value "$focused" '$value')
+hyprctl dispatch "hl.dsp.focus({ monitor = $focused })"
