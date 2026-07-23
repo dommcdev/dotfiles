@@ -47,6 +47,14 @@
   become: true
   when: is_linux
   block:
+    - name: Create Docker configuration directory
+      ansible.builtin.file:
+        path: /etc/docker
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
     - name: Configure Docker daemon
       ansible.builtin.copy:
         dest: /etc/docker/daemon.json
