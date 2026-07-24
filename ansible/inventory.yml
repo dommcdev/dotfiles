@@ -22,9 +22,6 @@ all:
     root: "{{ home }}/dev/dotfiles"
     user: "{{ ansible_facts['user_id'] }}"
 
-    brew_environment:
-      PATH: "/opt/homebrew/bin:/home/linuxbrew/.linuxbrew/bin"
-
     # Restate some Ansible gathered facts for greater ease of use
     is_arch: "{{ ansible_facts['os_family'] == 'Archlinux' }}"
     is_debian: "{{ ansible_facts['os_family'] == 'Debian' }}"

@@ -21,7 +21,6 @@
           - tree-sitter-cli
         state: present
         update_homebrew: false
-      environment: "{{ brew_environment }}"
       when: is_debian or is_redhat or is_macos
 
 - name: Configure Neovim

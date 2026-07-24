@@ -39,7 +39,6 @@
         name: "{{ brew_pkgs }}"
         state: present
         update_homebrew: false
-      environment: "{{ brew_environment }}"
       when: is_debian or is_redhat
 
     - name: Install configured TUI Homebrew packages on macOS
@@ -47,7 +46,6 @@
         name: "{{ macos_brew_pkgs }}"
         state: present
         update_homebrew: false
-      environment: "{{ brew_environment }}"
       when: is_macos
 
 - name: Link TUI config directories

@@ -39,7 +39,6 @@
           - rectangle
         state: present
         update_homebrew: false
-      environment: "{{ brew_environment }}"
 
     - name: Apply macOS defaults
       ansible.builtin.shell: |

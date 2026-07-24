@@ -12,7 +12,6 @@
         name: syncthing
         state: present
         update_homebrew: false
-      environment: "{{ brew_environment }}"
       when: is_macos
 
 - name: Enable Syncthing

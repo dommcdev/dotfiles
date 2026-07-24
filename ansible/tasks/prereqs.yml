@@ -46,7 +46,8 @@
       register: prerequisites_brew
       changed_when: false
       failed_when: false
-      environment: "{{ brew_environment }}"
+      environment:
+        PATH: "/opt/homebrew/bin:/home/linuxbrew/.linuxbrew/bin:{{ ansible_facts['env']['PATH'] }}"
 
     - name: Run installer
       ansible.builtin.shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -63,7 +64,6 @@
       - make
     state: present
     update_homebrew: false
-  environment: "{{ brew_environment }}"
   when: is_macos
 
 - name: Install Bun
@@ -80,7 +80,6 @@
         name: oven-sh/bun/bun
         state: present
         update_homebrew: false
-      environment: "{{ brew_environment }}"
       when: is_debian or is_redhat or is_macos
 
 - name: Configure Bun

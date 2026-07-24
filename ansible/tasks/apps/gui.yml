@@ -86,7 +86,6 @@
       - onlyoffice
     state: present
     update_homebrew: false
-  environment: "{{ brew_environment }}"
   when: is_macos
 
 - name: Link GIMP config files
@@ -166,7 +165,6 @@
       - uv
     state: present
     update_homebrew: false
-  environment: "{{ brew_environment }}"
   when: is_debian or is_redhat or is_macos
 
 - name: Install GitHub CLI for repo setup with Homebrew
@@ -174,7 +172,6 @@
     name: gh
     state: present
     update_homebrew: false
-  environment: "{{ brew_environment }}"
   when: is_debian or is_redhat or is_macos
 
 - name: Ensure dev directories exist
@@ -210,7 +207,6 @@
     name: node
     state: present
     update_homebrew: false
-  environment: "{{ brew_environment }}"
   when: is_debian or is_redhat or is_macos
 
 - name: Configure npm global packages
@@ -240,7 +236,6 @@
           - rust
         state: present
         update_homebrew: false
-      environment: "{{ brew_environment }}"
       when: is_debian or is_redhat or is_macos
 
     - name: Clone beans repo

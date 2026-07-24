@@ -30,7 +30,6 @@
             name: lazydocker
             state: present
             update_homebrew: false
-          environment: "{{ brew_environment }}"
 
     - name: Install Docker with Homebrew on macOS
       community.general.homebrew:
@@ -40,7 +39,6 @@
           - lazydocker
         state: present
         update_homebrew: false
-      environment: "{{ brew_environment }}"
       when: is_macos
 
 - name: Configure Docker on Linux

@@ -37,7 +37,6 @@
           - font-jetbrains-mono-nerd-font
         state: present
         update_homebrew: false
-      environment: "{{ brew_environment }}"
       when: is_macos
 
 - name: Configure Ghostty
