@@ -11,7 +11,6 @@
       when: is_arch
 
     - name: Install Docker packages on Ubuntu and Fedora
-      become: true
       when: is_debian or is_redhat
       block:
         - name: Download Docker installer
@@ -24,6 +23,7 @@
           ansible.builtin.command: /tmp/get-docker.sh
           args:
             creates: /usr/bin/docker
+          become: true
 
         - name: Install lazydocker
           community.general.homebrew:

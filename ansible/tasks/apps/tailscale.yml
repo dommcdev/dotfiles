@@ -6,7 +6,6 @@
   when: is_arch
 
 - name: Install Tailscale on Ubuntu and Fedora
-  become: true
   when: is_debian or is_redhat
   block:
     - name: Download installer
@@ -19,6 +18,7 @@
       ansible.builtin.command: /tmp/tailscale_install.sh
       args:
         creates: /usr/bin/tailscale
+      become: true
 
 - name: Install Tailscale app on macOS
   community.general.homebrew_cask:
