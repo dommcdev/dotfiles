@@ -1,14 +1,15 @@
 - name: Install Ghostty
+  vars:
+    pkgs:
+      Archlinux:
+        - ghostty
+        - ghostty-nautilus
+        - ttf-jetbrains-mono-nerd
+      Debian:
+        - ghostty
+      RedHat:
+        - ghostty
   block:
-    - name: Install Ghostty on Arch
-      ansible.builtin.package:
-        name:
-          - ghostty
-          - ttf-jetbrains-mono-nerd
-        state: present
-      become: true
-      when: is_arch
-
     - name: Enable Ghostty COPR on Fedora
       community.general.copr:
         name: scottames/ghostty
@@ -16,19 +17,12 @@
       become: true
       when: is_redhat
 
-    - name: Install Ghostty on Fedora
+    - name: Install Ghostty on Linux
       ansible.builtin.package:
-        name: ghostty
+        name: "{{ pkgs[ansible_facts['os_family']] }}"
         state: present
       become: true
-      when: is_redhat
-
-    - name: Install Ghostty on Ubuntu
-      ansible.builtin.shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
-      args:
-        creates: /usr/bin/ghostty
-      become: true
-      when: is_debian
+      when: ansible_facts['os_family'] in pkgs
 
     - name: Install Ghostty and font on macOS
       community.general.homebrew_cask:
@@ -54,7 +48,7 @@
         state: link
         force: true
 
-- name: Configure Ghostty on Linux
+- name: Linux-specific Ghostty config
   when: is_linux
   block:
     - name: Enable Ghostty user service

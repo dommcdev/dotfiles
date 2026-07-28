@@ -52,7 +52,6 @@
         - difftastic
         - nmap
         - bind
-        - id3v2
         - lazygit
         - acpi
         - caligula
@@ -86,7 +85,6 @@
         - git-delta
         - nmap
         - bind9-dnsutils
-        - id3v2
         - playerctl
         - duf
         - figlet
@@ -112,7 +110,6 @@
         - git-delta
         - nmap
         - bind-utils
-        - id3v2
         - playerctl
         - duf
         - figlet
@@ -154,7 +151,6 @@
       - git-delta
       - nmap
       - bind
-      - id3v2
       - dust
       - glow
       - duf

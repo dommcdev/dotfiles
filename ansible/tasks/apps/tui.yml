@@ -24,6 +24,7 @@
     pkgs:
       Archlinux:
         - bat
+        - beets
         - btop
         - fastfetch
         - libqalculate
@@ -34,11 +35,13 @@
         - libqalculate
     brew_pkgs:
       - bat
+      - beets
       - btop
       - fastfetch
       - starship
     macos_brew_pkgs:
       - bat
+      - beets
       - btop
       - fastfetch
       - libqalculate
@@ -90,6 +93,7 @@
         state: directory
         mode: "0755"
       loop:
+        - "{{ home }}/.config/beets"
         - "{{ home }}/.config/qalculate"
         - "{{ home }}/.config/cava"
         - "{{ home }}/.config/fastfetch"
@@ -98,6 +102,13 @@
       ansible.builtin.file:
         src: "{{ root }}/tui/bat"
         dest: "{{ home }}/.config/bat"
+        state: link
+        force: true
+
+    - name: Link beets config (FILE)
+      ansible.builtin.file:
+        src: "{{ root }}/tui/beets/config.yaml"
+        dest: "{{ home }}/.config/beets/config.yaml"
         state: link
         force: true
 

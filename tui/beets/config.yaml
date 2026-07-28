@@ -1,0 +1,48 @@
+directory: ~/Music
+library: ~/.config/beets/musiclibrary.db
+
+import:
+  move: yes
+  write: yes
+  autotag: yes
+
+paths:
+  default: %the{%asciify{$albumartist}}/%asciify{$album}%aunique{}/$track - %asciify{$title}
+  singleton: Non-Album/%the{%asciify{$artist}}/%asciify{$title}
+  comp: Compilations/%asciify{$album}%aunique{}/$track - %asciify{$title}
+
+plugins: scrub info musicbrainz the fetchart embedart zero
+
+zero:
+  fields: comments
+  update_database: true
+
+scrub:
+  auto: yes
+
+art_filename: cover
+
+fetchart:
+  auto: yes
+  sources:
+    - coverart: release
+    - itunes
+    - coverart: releasegroup
+    - filesystem
+    - amazon
+    - albumart
+  enforce_ratio: yes
+  maxwidth: 1200
+  high_resolution: yes
+  cover_format: JPEG
+
+embedart:
+  auto: yes
+  ifempty: no
+  maxwidth: 1200
+  quality: 90
+  remove_art_file: yes
+
+musicbrainz:
+  genres: yes
+  genres_tag: genre
