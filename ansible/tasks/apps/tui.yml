@@ -8,16 +8,21 @@
         - fastfetch
         - libqalculate
         - starship
+        - tmux
+        - yazi
       Debian:
         - qalc
+        - tmux
       RedHat:
         - libqalculate
+        - tmux
     brew_pkgs:
       - bat
       - beets
       - btop
       - fastfetch
       - starship
+      - yazi
     macos_brew_pkgs:
       - bat
       - beets
@@ -25,6 +30,8 @@
       - fastfetch
       - libqalculate
       - starship
+      - tmux
+      - yazi
   block:
     - name: Install native TUI packages
       ansible.builtin.package:
@@ -97,6 +104,7 @@
         - "{{ home }}/.config/qalculate"
         - "{{ home }}/.config/cava"
         - "{{ home }}/.config/fastfetch"
+        - "{{ home }}/.config/tmux"
 
     - name: Link bat config (DIR)
       ansible.builtin.file:
@@ -149,6 +157,32 @@
         dest: "{{ home }}/.config/starship.toml"
         state: link
         force: true
+
+    - name: Link tmux config (FILE)
+      ansible.builtin.file:
+        src: "{{ root }}/tmux/tmux.conf"
+        dest: "{{ home }}/.config/tmux/tmux.conf"
+        state: link
+        force: true
+
+    - name: Link Yazi config (DIR)
+      ansible.builtin.file:
+        src: "{{ root }}/tui/yazi"
+        dest: "{{ home }}/.config/yazi"
+        state: link
+        force: true
+
+    - name: Install Yazi packages
+      ansible.builtin.command: ya pkg install
+      args:
+        chdir: "{{ home }}/.config/yazi"
+      changed_when: false
+
+    - name: Upgrade Yazi packages
+      ansible.builtin.command: ya pkg upgrade
+      args:
+        chdir: "{{ home }}/.config/yazi"
+      changed_when: false
 
 - name: Build bat cache
   ansible.builtin.command: bat cache --build

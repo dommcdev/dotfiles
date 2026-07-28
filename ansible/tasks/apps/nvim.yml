@@ -4,9 +4,6 @@
       ansible.builtin.package:
         name:
           - neovim
-          - python
-          - python-pip
-          - unzip
           - tree-sitter-cli
         state: present
       become: true
@@ -16,8 +13,6 @@
       community.general.homebrew:
         name:
           - neovim
-          - python
-          - unzip
           - tree-sitter-cli
         state: present
         update_homebrew: false

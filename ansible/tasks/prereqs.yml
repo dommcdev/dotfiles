@@ -20,6 +20,8 @@
       Archlinux:
         - base-devel
         - git
+        - python
+        - python-pip
       Debian:
         - build-essential
         - curl
@@ -62,9 +64,17 @@
       - gcc
       - git
       - make
+      - python
     state: present
     update_homebrew: false
   when: is_macos
+
+- name: Install basic depencencies with Linuxbrew
+  community.general.homebrew:
+    name: python
+    state: present
+    update_homebrew: false
+  when: is_debian or is_redhat
 
 - name: Install Bun
   block:
