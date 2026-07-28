@@ -55,9 +55,10 @@
       become: true
       when: ansible_facts['os_family'] in pkgs
 
-    - name: Install wlctl on Arch
-      ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None wlctl-bin
-      changed_when: false
+    - name: Install wlctl from AUR
+      kewlfft.aur.aur:
+        name: wlctl-bin
+        state: present
       when: is_arch
 
     - name: Install on macOS

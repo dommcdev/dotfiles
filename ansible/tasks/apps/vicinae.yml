@@ -22,8 +22,9 @@
         force: true
 
     - name: Install Vicinae
-      ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None vicinae-bin
-      changed_when: false
+      kewlfft.aur.aur:
+        name: vicinae-bin
+        state: present
 
     - name: Enable Vicinae user service
       ansible.builtin.systemd_service:

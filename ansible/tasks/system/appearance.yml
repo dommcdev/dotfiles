@@ -33,8 +33,9 @@
       when: is_macos
 
     - name: Install qt6ct-kde on Arch
-      ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None qt6ct-kde
-      changed_when: false
+      kewlfft.aur.aur:
+        name: qt6ct-kde
+        state: present
       when: is_arch
 
 - name: Link Linux appearance config

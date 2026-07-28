@@ -1,6 +1,7 @@
 - name: Install Arch AUR helper extras
-  ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None downgrade
-  changed_when: false
+  kewlfft.aur.aur:
+    name: downgrade
+    state: present
   when: is_arch
 
 - name: Disable Ubuntu MOTD scripts
@@ -170,8 +171,9 @@
   when: is_arch and is_managed_desktop
 
 - name: Install cmatrix AUR package
-  ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None cmatrix-git
-  changed_when: false
+  kewlfft.aur.aur:
+    name: cmatrix-git
+    state: present
   when: is_arch and is_managed_desktop
 
 - name: Install lavat # noqa command-instead-of-module
@@ -226,8 +228,9 @@
   when: is_managed_desktop
 
 - name: Install screensaver text effects package
-  ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None aur/python-terminaltexteffects
-  changed_when: false
+  kewlfft.aur.aur:
+    name: python-terminaltexteffects
+    state: present
   when: is_arch and is_managed_desktop
 
 - name: Configure Timeshift

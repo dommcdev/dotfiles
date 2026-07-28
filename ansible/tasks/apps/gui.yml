@@ -75,8 +75,9 @@
     - "{{ home }}/.local/share/icons/hicolor/scalable/apps"
 
 - name: Install Chrome on Linux
-  ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None google-chrome
-  changed_when: false
+  kewlfft.aur.aur:
+    name: google-chrome
+    state: present
   when: is_arch
 
 - name: Install Chrome and OnlyOffice on macOS
@@ -224,8 +225,11 @@
 - name: Configure beancount tools
   block:
     - name: Install beancount AUR tools on Arch
-      ansible.builtin.command: yay -S --noconfirm --needed --answerdiff None --answerclean None beancount fava
-      changed_when: false
+      kewlfft.aur.aur:
+        name:
+          - beancount
+          - fava
+        state: present
       when: is_arch
 
     - name: Install beancount tools with Homebrew
