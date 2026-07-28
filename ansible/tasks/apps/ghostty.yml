@@ -4,7 +4,6 @@
       Archlinux:
         - ghostty
         - ghostty-nautilus
-        - ttf-jetbrains-mono-nerd
       Debian:
         - ghostty
       RedHat:
@@ -24,11 +23,9 @@
       become: true
       when: ansible_facts['os_family'] in pkgs
 
-    - name: Install Ghostty and font on macOS
+    - name: Install Ghostty on macOS
       community.general.homebrew_cask:
-        name:
-          - ghostty
-          - font-jetbrains-mono-nerd-font
+        name: ghostty
         state: present
         update_homebrew: false
       when: is_macos

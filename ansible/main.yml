@@ -79,3 +79,7 @@
       ansible.builtin.import_tasks: tasks/apps/libvirt.yml
     - name: TUI Applications
       ansible.builtin.import_tasks: tasks/apps/tui.yml
+    - name: Fonts
+      ansible.builtin.import_tasks: tasks/apps/fonts.yml
+    - name: Ghostty
+      ansible.builtin.import_tasks: tasks/apps/ghostty.yml

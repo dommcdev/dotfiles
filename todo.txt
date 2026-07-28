@@ -6,7 +6,7 @@ Setup ufw (and maybe Apparmor on server)
 Improve tmux theme
 Create syncthing dir for wallpapers, games/saves, etc
 Grab misc stuff from archinstall
-Better system fonts (inter, fira, ibm-plex + research fontconfig + fallback noto fonts)
+Better system fonts (inter, fira, ibm-plex + research fontconfig + fallback noto fonts + gsettings etc)
 Add limine and snapper
 Switch to cachy? Will need to adjust powerprofilesdaemon pkg name
 Switch to bitwarden
@@ -17,7 +17,6 @@ Increase server login timeout for navidrome/feishin
 
 Ansible
 * Add brew trust stuff
-* Add ghostty-nautilus package
 * Add upower, gpu-screen-recorder
 * Switch to cachy downgrade package, check if other aur pkgs are in cachy repos
 

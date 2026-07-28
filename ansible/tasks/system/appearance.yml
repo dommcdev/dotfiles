@@ -9,11 +9,6 @@
       vars:
         pkgs:
           Archlinux:
-            - noto-fonts
-            - noto-fonts-cjk
-            - noto-fonts-emoji
-            - noto-fonts-extra
-            - ttf-jetbrains-mono-nerd
             - adw-gtk-theme
             - qt5-wayland
             - qt6-wayland
@@ -24,13 +19,6 @@
             - breeze-cursor-theme
           RedHat:
             - breeze-cursor-theme
-
-    - name: Install JetBrains Mono Nerd Font on macOS
-      community.general.homebrew_cask:
-        name: font-jetbrains-mono-nerd-font
-        state: present
-        update_homebrew: false
-      when: is_macos
 
     - name: Install qt6ct-kde on Arch
       kewlfft.aur.aur:
@@ -47,17 +35,9 @@
         state: directory
         mode: "0755"
       loop:
-        - "{{ home }}/.config/fontconfig"
         - "{{ home }}/.config/qt6ct"
         - "{{ home }}/.config/gtk-3.0"
         - "{{ home }}/.config/gtk-4.0"
-
-    - name: Link fontconfig
-      ansible.builtin.file:
-        src: "{{ root }}/styling/fonts/fonts.conf"
-        dest: "{{ home }}/.config/fontconfig/fonts.conf"
-        state: link
-        force: true
 
     - name: Link GTK configs
       ansible.builtin.file:
@@ -106,8 +86,6 @@
           value: prefer-dark
         - key: icon-theme
           value: Papirus-Dark
-        - key: font-name
-          value: "'Adwaita Sans 11'"
 
     - name: Create default cursor directory
       ansible.builtin.file:
