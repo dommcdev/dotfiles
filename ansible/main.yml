@@ -68,3 +68,5 @@
       ansible.builtin.import_tasks: tasks/apps/opencode.yml
     - name: Docker
       ansible.builtin.import_tasks: tasks/apps/docker.yml
+    - name: Libvirt
+      ansible.builtin.import_tasks: tasks/apps/libvirt.yml

@@ -1,16 +1,39 @@
+- name: Install virtualization packages
+  ansible.builtin.package:
+    name: "{{ pkgs[ansible_facts['os_family']] }}"
+    state: present
+  become: true
+  when: ansible_facts['os_family'] in pkgs
+  vars:
+    pkgs:
+      Archlinux:
+        - dnsmasq
+        - libvirt
+        - qemu-full
+        - virt-manager
+        - virt-viewer
+      Debian:
+        - dnsmasq-base
+        - libvirt-clients
+        - libvirt-daemon-config-network
+        - libvirt-daemon-system
+        - qemu-system-x86
+        - virt-manager
+        - virt-viewer
+      RedHat:
+        - dnsmasq
+        - libvirt-client
+        - libvirt-daemon-config-network
+        - libvirt-daemon-kvm
+        - qemu-kvm
+        - virt-install
+        - virt-manager
+        - virt-viewer
+
 - name: Configure virtualization
   become: true
-  when: is_arch
+  when: is_linux
   block:
-    - name: Install virtualization packages
-      ansible.builtin.package:
-        name:
-          - qemu-full
-          - virt-manager
-          - virt-viewer
-          - dnsmasq
-        state: present
-
     - name: Enable libvirtd
       ansible.builtin.systemd_service:
         name: libvirtd.service
@@ -27,12 +50,5 @@
       ansible.builtin.command: virsh net-autostart default
       changed_when: false
       failed_when: false
-
-    - name: Allow libvirt forwarding before Docker rules
-      ansible.builtin.shell: |
-        iptables -C FORWARD -i virbr0 -j ACCEPT 2>/dev/null || iptables -I FORWARD 1 -i virbr0 -j ACCEPT
-        iptables -C FORWARD -o virbr0 -j ACCEPT 2>/dev/null || iptables -I FORWARD 1 -o virbr0 -j ACCEPT
-      changed_when: false
-#
 #
 # sudo virsh net-list --all

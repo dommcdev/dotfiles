@@ -1,7 +1,9 @@
 Network module handling ethernet (only an issue with iwd?? mention in docs)
 Group spacer with module
 Show feels like in weather module
-Add settings icon to network module
+Add settings icon to network module, link to nm-connection-editor
+Hide lockscreen password hint box
+Buttons with borders have weird animation layout shifts
 
 
 [Commented] Differentiate between battery/ac in idle settings #3336
