@@ -44,22 +44,38 @@
       - libqalculate
       - starship
 
-- name: Install Cava if on a Desktop
+# NOTE: Ubuntu/Fedora are missing wlctl, bluetui, and wiremix. Might be able to grab from crates.io or smth
+- name: Install additional desktop-only TUI packages
   when: is_managed_desktop
   block:
     - name: Install on Linux
       ansible.builtin.package:
-        name: cava
+        name: "{{ pkgs[ansible_facts['os_family']] }}"
         state: present
       become: true
-      when: is_linux
+      when: ansible_facts['os_family'] in pkgs
 
-    - name: Install with Homebrew
+    - name: Install on macOS
       community.general.homebrew:
-        name: cava
+        name: "{{ macos_brew_pkgs }}"
         state: present
         update_homebrew: false
       when: is_macos
+  vars:
+    pkgs:
+      Archlinux:
+        - cava
+        - wlctl
+        - bluetui
+        - wiremix
+      Debian:
+        - blueman
+        - pavucontrol
+      RedHat:
+        - blueman
+        - pavucontrol
+    macos_brew_pkgs:
+      - cava
 
 - name: Configure TUI applications
   block:
@@ -121,5 +137,3 @@
 - name: Build bat cache
   ansible.builtin.command: bat cache --build
   changed_when: false
-# Note, in the end make sure this includes impala (wlctl), bluetui, wiremix, and cava.
-# All but cava should use is_managed_desktop; cava should use not is_headless.
