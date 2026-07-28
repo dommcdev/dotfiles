@@ -1,25 +1,4 @@
 - name: Install terminal packages
-  block:
-    - name: Install native terminal packages
-      ansible.builtin.package:
-        name: "{{ pkgs[ansible_facts['os_family']] }}"
-        state: present
-      become: true
-      when: ansible_facts['os_family'] in pkgs
-
-    - name: Install terminal Homebrew packages on Linux
-      community.general.homebrew:
-        name: "{{ brew_pkgs }}"
-        state: present
-        update_homebrew: false
-      when: is_debian or is_redhat
-
-    - name: Install terminal Homebrew packages on macOS
-      community.general.homebrew:
-        name: "{{ macos_brew_pkgs }}"
-        state: present
-        update_homebrew: false
-      when: is_macos
   vars:
     pkgs:
       Archlinux:
@@ -158,3 +137,24 @@
       - difftastic
       - bc
       - caligula
+  block:
+    - name: Install native terminal packages
+      ansible.builtin.package:
+        name: "{{ pkgs[ansible_facts['os_family']] }}"
+        state: present
+      become: true
+      when: ansible_facts['os_family'] in pkgs
+
+    - name: Install terminal Homebrew packages on Linux
+      community.general.homebrew:
+        name: "{{ brew_pkgs }}"
+        state: present
+        update_homebrew: false
+      when: is_debian or is_redhat
+
+    - name: Install terminal Homebrew packages on macOS
+      community.general.homebrew:
+        name: "{{ macos_brew_pkgs }}"
+        state: present
+        update_homebrew: false
+      when: is_macos
