@@ -32,6 +32,7 @@ On hyprland, `uwsm stop` should work. `loginctl terminate-session [session id]` 
 - `7zip`: high compression, good decompression
 - `unar`: great decompression, fixes gibberish text
 - `unrar`: best rar decompression (official spec)
+- `unzip`: not special other than being a common dep (e.g. for nvim plugins)
 
 ## Flatpak overrides
 - `flatpak override --user --show`

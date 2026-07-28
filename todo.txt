@@ -21,12 +21,14 @@ Ansible
 * Replace id3v2 with beets/picard
 * Add upower, gpu-screen-recorder
 * Tweak tui config symlinking to include theme files
+* Switch to cachy downgrade package, check if other aur pkgs are in cachy repos
 
 Themes
 Manual: nvim, vicinae, opencode, zed, obsidian, chrome
 Auto: gtk, qt, btop, bat, yazi, icons, cava (needs color/banding tweaks), ghostty, starship, hyprland, hyprtoolkit
 
 
+Package requests: wlctl, downgrade
 
 # Low Priority
 Gpu passthrough (Windows, LookingGlass, Quickpassthrough)

@@ -43,10 +43,17 @@
   pre_tasks: []
 
   tasks:
+    # Clone dotfiles, grab essential deps, package managers, etc
     - name: Prerequisites
       ansible.builtin.import_tasks: tasks/prereqs.yml
+
+      # Setup ssh access before nuking password auth later on
     - name: Tailscale
       ansible.builtin.import_tasks: tasks/apps/tailscale.yml
+
+      # Install useful packages early on (e.g. unzip)
+    - name: CLI Utilties
+      ansible.builtin.import_tasks: tasks/apps/cli.yml
 
     - name: Script links
       ansible.builtin.include_tasks: tasks/apps/scripts.yml

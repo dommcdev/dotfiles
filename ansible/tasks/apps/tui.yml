@@ -1,4 +1,25 @@
-- name: Install configured TUI packages
+- name: Install TUI packages
+  block:
+    - name: Install native TUI packages
+      ansible.builtin.package:
+        name: "{{ pkgs[ansible_facts['os_family']] }}"
+        state: present
+      become: true
+      when: ansible_facts['os_family'] in pkgs
+
+    - name: Install TUI Homebrew packages on Linux
+      community.general.homebrew:
+        name: "{{ brew_pkgs }}"
+        state: present
+        update_homebrew: false
+      when: is_debian or is_redhat
+
+    - name: Install TUI Homebrew packages on macOS
+      community.general.homebrew:
+        name: "{{ macos_brew_pkgs }}"
+        state: present
+        update_homebrew: false
+      when: is_macos
   vars:
     pkgs:
       Archlinux:
@@ -6,14 +27,11 @@
         - btop
         - fastfetch
         - libqalculate
-        - cava
         - starship
       Debian:
         - qalc
-        - cava
       RedHat:
         - libqalculate
-        - cava
     brew_pkgs:
       - bat
       - btop
@@ -24,52 +42,28 @@
       - btop
       - fastfetch
       - libqalculate
-      - cava
       - starship
+
+- name: Install Cava if on a Desktop
+  when: is_managed_desktop
   block:
-    - name: Install native TUI packages
+    - name: Install on Linux
       ansible.builtin.package:
-        name: "{{ pkgs[ansible_facts['os_family']] }}"
+        name: cava
         state: present
       become: true
-      when: ansible_facts['os_family'] in pkgs
+      when: is_linux
 
-    - name: Install configured TUI Homebrew packages on Linux
+    - name: Install with Homebrew
       community.general.homebrew:
-        name: "{{ brew_pkgs }}"
-        state: present
-        update_homebrew: false
-      when: is_debian or is_redhat
-
-    - name: Install configured TUI Homebrew packages on macOS
-      community.general.homebrew:
-        name: "{{ macos_brew_pkgs }}"
+        name: cava
         state: present
         update_homebrew: false
       when: is_macos
 
-- name: Link TUI config directories
-  ansible.builtin.file:
-    src: "{{ root }}/{{ item.src }}"
-    dest: "{{ home }}/{{ item.dest }}"
-    state: link
-    force: true
-  loop:
-    - src: tui/bat
-      dest: .config/bat
-    - src: tui/btop
-      dest: .config/btop
-
-- name: Link Starship config
-  ansible.builtin.file:
-    src: "{{ root }}/starship/starship.toml"
-    dest: "{{ home }}/.config/starship.toml"
-    state: link
-    force: true
-
 - name: Configure TUI applications
   block:
-    - name: Create application config directories
+    - name: Ensure config dirs exist
       ansible.builtin.file:
         path: "{{ item }}"
         state: directory
@@ -79,27 +73,50 @@
         - "{{ home }}/.config/cava"
         - "{{ home }}/.config/fastfetch"
 
-    - name: Link qalculate config
+    - name: Link bat config (DIR)
       ansible.builtin.file:
-        src: "{{ root }}/tui/qalc/qalc.cfg"
-        dest: "{{ home }}/.config/qalculate/qalc.cfg"
+        src: "{{ root }}/tui/bat"
+        dest: "{{ home }}/.config/bat"
         state: link
         force: true
 
-    - name: Link cava config
+    - name: Link btop config (DIR)
+      ansible.builtin.file:
+        src: "{{ root }}/tui/btop"
+        dest: "{{ home }}/.config/btop"
+        state: link
+        force: true
+
+    - name: Link cava config (FILE)
       ansible.builtin.file:
         src: "{{ root }}/tui/cava/config"
         dest: "{{ home }}/.config/cava/config"
         state: link
         force: true
 
-    - name: Link fastfetch configs
+    - name: Link fastfetch config (FILES)
       ansible.builtin.file:
-        src: "{{ item }}"
-        dest: "{{ home }}/.config/fastfetch/{{ item | basename }}"
+        src: "{{ root }}/tui/fastfetch/{{ item }}"
+        dest: "{{ home }}/.config/fastfetch/{{ item }}"
         state: link
         force: true
-      loop: "{{ query('ansible.builtin.fileglob', root + '/tui/fastfetch/*.jsonc') }}"
+      loop:
+        - config.jsonc
+        - full.jsonc
+
+    - name: Link qalculate config (FILE)
+      ansible.builtin.file:
+        src: "{{ root }}/tui/qalc/qalc.cfg"
+        dest: "{{ home }}/.config/qalculate/qalc.cfg"
+        state: link
+        force: true
+
+    - name: Link Starship config (FILE)
+      ansible.builtin.file:
+        src: "{{ root }}/tui/starship/starship.toml"
+        dest: "{{ home }}/.config/starship.toml"
+        state: link
+        force: true
 
 - name: Build bat cache
   ansible.builtin.command: bat cache --build
