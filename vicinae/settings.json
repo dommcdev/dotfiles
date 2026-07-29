@@ -12,11 +12,21 @@
    "$schema": "https://vicinae.com/schemas/config.json",
    "close_on_focus_loss": false,
    "pop_to_root_on_close": true,
+   "global_shortcuts": {
+      "toggle": ""
+   },
    "font": {
-      "rendering": "qt",
-      "normal": {}
+      "rendering": "native",
+      "normal": {
+         "family": "Inter",
+         "size": 10.5
+      }
    },
    "theme": {
+      "light": {
+         "name": "catppuccin-latte",
+         "icon_theme": "Papirus"
+      },
       "dark": {
          "name": "catppuccin-mocha",
          "icon_theme": "Papirus-Dark"
@@ -134,7 +144,14 @@
          "enabled": false
       },
       "files": {
-         "enabled": true,
+         "enabled": false,
+         "preferences": {
+            "autoIndexing": false,
+            "excludedIndexingPaths": [],
+            "indexingPaths": [
+               "/home/dominic"
+            ]
+         },
          "entrypoints": {
             "rebuild-index": {
                "enabled": false
@@ -173,7 +190,6 @@
                }
             },
             "sleep": {
-               "alias": "suspend",
                "enabled": true,
                "preferences": {
                   "confirm": false
@@ -183,7 +199,7 @@
                "enabled": false
             },
             "suspend": {
-               "enabled": false
+               "enabled": true
             }
          }
       },

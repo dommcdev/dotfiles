@@ -41,7 +41,7 @@
 
     - name: Link GTK configs
       ansible.builtin.file:
-        src: "{{ root }}/styling/gtk/{{ item.src }}"
+        src: "{{ root }}/appearance/gtk/{{ item.src }}"
         dest: "{{ home }}/.config/{{ item.dest }}"
         state: link
         force: true
@@ -61,7 +61,7 @@
 
     - name: Link qt6ct config
       ansible.builtin.file:
-        src: "{{ root }}/styling/qt/qt6ct.conf"
+        src: "{{ root }}/appearance/qt/qt6ct.conf"
         dest: "{{ home }}/.config/qt6ct/qt6ct.conf"
         state: link
         force: true

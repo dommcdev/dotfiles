@@ -4,6 +4,7 @@ Show feels like in weather module
 Add settings icon to network module, link to nm-connection-editor
 Hide lockscreen password hint box
 Buttons with borders have weird animation layout shifts
+Ability to remember last user in greeter
 
 
 [Commented] Differentiate between battery/ac in idle settings #3336
