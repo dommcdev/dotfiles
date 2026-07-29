@@ -1,20 +1,9 @@
 TO REVIEW
-ansible/tasks/apps/cli.yml
-ansible/tasks/apps/ghostty.yml
 ansible/tasks/apps/gui.yml
 ansible/tasks/apps/hypr.yml
 ansible/tasks/apps/keyd.yml
-ansible/tasks/apps/libvirt.yml
 ansible/tasks/apps/noctalia.yml
-ansible/tasks/apps/nvim.yml
-ansible/tasks/apps/retroarch.yml
-ansible/tasks/apps/sddm.yml
-ansible/tasks/apps/switch-emulator.yml
-ansible/tasks/apps/tmux.yml
-ansible/tasks/apps/tui.yml
 ansible/tasks/apps/vicinae.yml
-ansible/tasks/apps/yazi.yml
-ansible/tasks/apps/zed.yml
 ansible/tasks/mac.yml
 ansible/tasks/misc.yml
 ansible/tasks/system/appearance.yml
@@ -22,3 +11,6 @@ ansible/tasks/system/auth.yml
 ansible/tasks/system/drivers.yml
 ansible/tasks/system/firewall.yml
 ansible/tasks/system/hardware.yml
+
+ansible/tasks/apps/switch-emulator.yml
+ansible/tasks/apps/retroarch.yml
