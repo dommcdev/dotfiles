@@ -105,6 +105,7 @@
         - "{{ home }}/.config/cava"
         - "{{ home }}/.config/fastfetch"
         - "{{ home }}/.config/tmux"
+        - "{{ home }}/.config/yazi"
 
     - name: Link bat config (DIR)
       ansible.builtin.file:
@@ -160,17 +161,24 @@
 
     - name: Link tmux config (FILE)
       ansible.builtin.file:
-        src: "{{ root }}/tmux/tmux.conf"
+        src: "{{ root }}/tui/tmux/tmux.conf"
         dest: "{{ home }}/.config/tmux/tmux.conf"
         state: link
         force: true
 
-    - name: Link Yazi config (DIR)
+    - name: Link Yazi config (FILES)
       ansible.builtin.file:
-        src: "{{ root }}/tui/yazi"
-        dest: "{{ home }}/.config/yazi"
+        src: "{{ root }}/tui/yazi/{{ item }}"
+        dest: "{{ home }}/.config/yazi/{{ item }}"
         state: link
         force: true
+      loop:
+        - init.lua
+        - keymap.toml
+        - package.toml
+        - theme.toml
+        - vfs.toml
+        - yazi.toml
 
     - name: Install Yazi packages
       ansible.builtin.command: ya pkg install

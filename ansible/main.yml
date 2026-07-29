@@ -55,6 +55,8 @@
     - name: CLI Utilties
       ansible.builtin.import_tasks: tasks/apps/cli.yml
 
+    - name: TUI Applications
+      ansible.builtin.import_tasks: tasks/apps/tui.yml
     - name: Script links
       ansible.builtin.include_tasks: tasks/apps/scripts.yml
     - name: Syncthing
@@ -77,8 +79,6 @@
       ansible.builtin.import_tasks: tasks/apps/docker.yml
     - name: Libvirt
       ansible.builtin.import_tasks: tasks/apps/libvirt.yml
-    - name: TUI Applications
-      ansible.builtin.import_tasks: tasks/apps/tui.yml
     - name: Fonts
       ansible.builtin.import_tasks: tasks/apps/fonts.yml
     - name: Ghostty
