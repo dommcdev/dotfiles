@@ -10,25 +10,51 @@
     "context": "Workspace",
     "bindings": {
       // "shift shift": "file_finder::Toggle"
-    },
+    }
   },
   {
     "context": "Editor && vim_mode == insert",
     "bindings": {
       // "j k": "vim::NormalBefore"
-    },
+    }
   },
   {
     "context": "VimControl && !menu",
     "bindings": {
-      "g o": "vim::StartOfDocument",
-    },
+      "g o": "vim::StartOfDocument"
+    }
   },
   {
     "context": "VimControl && !VimWaiting && !menu",
     "bindings": {
       "shift-h": "pane::ActivatePreviousItem",
-      "shift-l": "pane::ActivateNextItem",
-    },
+      "shift-l": "pane::ActivateNextItem"
+    }
   },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-w j": "workspace::ActivatePaneDown",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w n": "workspace::NewTerminal",
+      "ctrl-w c": "pane::CloseActiveItem",
+      "ctrl-w l": "pane::ActivateNextItem",
+      "ctrl-w h": "pane::ActivatePreviousItem"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "space s f": "file_finder::Toggle",
+      "space s g": "pane::DeploySearch",
+      "space ,": "tab_switcher::Toggle"
+    }
+  },
+  {
+    "context": "Picker",
+    "bindings": {
+      "ctrl-j": "menu::SelectNext",
+      "ctrl-k": "menu::SelectPrevious"
+    }
+  }
 ]

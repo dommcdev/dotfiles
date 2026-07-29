@@ -86,6 +86,7 @@
         - ghostscript
         - chafa
         - ncdu
+        - eza
         - jq
         - less
         - git-delta

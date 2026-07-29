@@ -7,6 +7,9 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "preview_tabs": {
+    "enable_preview_from_file_finder": true
+  },
   "base_keymap": "VSCode",
   "vim": {
     "use_smartcase_find": true,

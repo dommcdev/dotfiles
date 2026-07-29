@@ -46,9 +46,10 @@
         groups: libvirt
         append: true
 
-    - name: Autostart libvirt default network
-      ansible.builtin.command: virsh net-autostart default
-      changed_when: false
-      failed_when: false
+- name: Ensure default network autostarts on physical machines
+  community.libvirt.virt_net:
+    name: default
+    autostart: true
+  when: ansible_facts['virtualization_role'] == 'host'
 #
 # sudo virsh net-list --all
