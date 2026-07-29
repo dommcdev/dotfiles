@@ -28,7 +28,7 @@
         dest: "{{ home }}/.local/share/fonts"
         remote_src: true
         creates: "{{ home }}/.local/share/fonts/JetBrainsMonoNerdFont-Regular.ttf"
-      notify: Refresh font cache
+      register: jetbrains_mono_nerd_font
       when: is_debian or is_redhat
 
     - name: Install JetBrains Mono Nerd Font on macOS
@@ -53,18 +53,19 @@
         dest: "{{ home }}/.config/fontconfig/fonts.conf"
         state: link
         force: true
-      notify: Refresh font cache
+      register: fontconfig
 
 - name: Configure desktop font
   ansible.builtin.command: "gsettings set org.gnome.desktop.interface font-name 'Adwaita Sans 11'"
   changed_when: false
   when: is_linux and is_managed_desktop
 
-handlers:
-  - name: Refresh font cache
-    ansible.builtin.command: fc-cache -f
-    changed_when: false
-
+- name: Refresh font cache
+  ansible.builtin.command: fc-cache -f
+  changed_when: true
+  when:
+    - is_linux
+    - (jetbrains_mono_nerd_font is not skipped and jetbrains_mono_nerd_font is changed) or fontconfig is changed
 #
 # Nota bene
 # fc-match [serif|sans-serif|monospace etc]
