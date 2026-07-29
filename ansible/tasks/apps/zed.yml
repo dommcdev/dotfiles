@@ -1,0 +1,46 @@
+- name: Install Zed
+  block:
+    - name: Install Zed on Arch
+      ansible.builtin.package:
+        name: zed
+        state: present
+      become: true
+      when: is_arch
+
+    - name: Download Zed installer on Debian and Red Hat
+      ansible.builtin.get_url:
+        url: https://zed.dev/install.sh
+        dest: /tmp/zed-install.sh
+        mode: "0755"
+      when: is_debian or is_redhat
+
+    - name: Install Zed on Debian and Red Hat
+      ansible.builtin.command:
+        cmd: /tmp/zed-install.sh
+        creates: "{{ home }}/.local/bin/zed"
+      when: is_debian or is_redhat
+
+    - name: Install Zed on macOS
+      community.general.homebrew_cask:
+        name: zed
+        state: present
+        update_homebrew: false
+      when: is_macos
+
+- name: Configure Zed
+  block:
+    - name: Create config directory
+      ansible.builtin.file:
+        path: "{{ home }}/.config/zed"
+        state: directory
+        mode: "0755"
+
+    - name: Link config files
+      ansible.builtin.file:
+        src: "{{ root }}/zed/{{ item }}"
+        dest: "{{ home }}/.config/zed/{{ item }}"
+        state: link
+        force: true
+      loop:
+        - settings.json
+        - keymap.json

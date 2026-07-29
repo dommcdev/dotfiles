@@ -83,3 +83,5 @@
       ansible.builtin.import_tasks: tasks/apps/fonts.yml
     - name: Ghostty
       ansible.builtin.import_tasks: tasks/apps/ghostty.yml
+    - name: Zed
+      ansible.builtin.import_tasks: tasks/apps/zed.yml
