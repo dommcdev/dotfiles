@@ -6,16 +6,68 @@
 // To see the default key bindings run `zed: open default keymap`
 // from the command palette.
 [
+  // Pane tab controls. Matching Editor and Terminal explicitly makes these
+  // bindings take precedence at the lowest active context node.
   {
-    "context": "Workspace",
+    "context": "(Pane || Editor || Terminal) && !menu",
     "bindings": {
-      // "shift shift": "file_finder::Toggle"
+      // Select a tab in the currently focused pane.
+      "ctrl-space 1": ["pane::ActivateItem", 0],
+      "ctrl-space 2": ["pane::ActivateItem", 1],
+      "ctrl-space 3": ["pane::ActivateItem", 2],
+      "ctrl-space 4": ["pane::ActivateItem", 3],
+      "ctrl-space 5": ["pane::ActivateItem", 4],
+      "ctrl-space 6": ["pane::ActivateItem", 5],
+      "ctrl-space 7": ["pane::ActivateItem", 6],
+      "ctrl-space 8": ["pane::ActivateItem", 7],
+      "ctrl-space 9": ["pane::ActivateItem", 8],
+      "ctrl-space 0": "pane::ActivateLastItem",
+
+      // The terminal overrides tab creation below.
+      "ctrl-space c": "workspace::NewFile",
+      "ctrl-space x": ["pane::CloseActiveItem", { "close_pinned": false }],
+      "ctrl-w c": "workspace::NewFile",
+      "ctrl-w x": ["pane::CloseActiveItem", { "close_pinned": false }],
+
+      // Move between panes.
+      "ctrl-space h": "workspace::ActivatePaneLeft",
+      "ctrl-space j": "workspace::ActivatePaneDown",
+      "ctrl-space k": "workspace::ActivatePaneUp",
+      "ctrl-space l": "workspace::ActivatePaneRight",
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-w j": "workspace::ActivatePaneDown",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w l": "workspace::ActivatePaneRight"
     }
   },
+
+  // Creates another terminal tab in the focused center pane.
   {
-    "context": "Editor && vim_mode == insert",
+    "context": "Terminal && !menu",
     "bindings": {
-      // "j k": "vim::NormalBefore"
+      "ctrl-space c": "workspace::NewCenterTerminal",
+      "ctrl-w c": "workspace::NewCenterTerminal"
+    }
+  },
+
+  // Command palette instead of file finder. Matching lower contexts also
+  // overrides editor and terminal defaults without repeating the binding.
+  {
+    "context": "(Workspace || Pane || Editor || Terminal) && !menu",
+    "bindings": {
+      "ctrl-p": "command_palette::Toggle"
+    }
+  },
+
+  // Vim normal-mode leader binding: copy the entire current buffer
+  // to the system clipboard, then clear the temporary selection.
+  {
+    "context": "vim_mode == normal && !menu",
+    "bindings": {
+      "space shift-y": [
+        "action::Sequence",
+        ["editor::SelectAll", "editor::Copy", "editor::Cancel"]
+      ]
     }
   },
   {
@@ -29,17 +81,6 @@
     "bindings": {
       "shift-h": "pane::ActivatePreviousItem",
       "shift-l": "pane::ActivateNextItem"
-    }
-  },
-  {
-    "context": "Terminal",
-    "bindings": {
-      "ctrl-w j": "workspace::ActivatePaneDown",
-      "ctrl-w k": "workspace::ActivatePaneUp",
-      "ctrl-w n": "workspace::NewTerminal",
-      "ctrl-w c": "pane::CloseActiveItem",
-      "ctrl-w l": "pane::ActivateNextItem",
-      "ctrl-w h": "pane::ActivatePreviousItem"
     }
   },
   {
