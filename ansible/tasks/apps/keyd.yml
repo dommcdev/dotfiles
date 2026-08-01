@@ -1,12 +1,23 @@
-- name: Configure keyd
-  become: true
-  when: is_arch
+- name: Install keyd package
   block:
+    - name: Enable keyd COPR on Fedora
+      community.general.copr:
+        name: alternateved/keyd
+        state: enabled
+      become: true
+      when: is_redhat
+
     - name: Install keyd
       ansible.builtin.package:
         name: keyd
         state: present
+      become: true
+      when: is_arch or is_debian or is_redhat
 
+- name: Configure keyd on Linux
+  become: true
+  when: is_arch or is_debian or is_redhat
+  block:
     - name: Create keyd config directory
       ansible.builtin.file:
         path: /etc/keyd
@@ -24,6 +35,7 @@
     - name: Enable keyd
       ansible.builtin.systemd_service:
         name: keyd.service
+        daemon_reload: true
         enabled: true
         state: "{{ 'restarted' if keyd_config.changed else 'started' }}"
 
@@ -45,3 +57,8 @@
           MatchUdevType=keyboard
           MatchName=*keyd*keyboard
           AttrKeyboardIntegration=internal
+
+# Useful commands
+# libinput quirks validate --data-dir /etc/libinput
+# libinput list-devices
+# libinput debug-events

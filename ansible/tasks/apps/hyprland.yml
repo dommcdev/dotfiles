@@ -1,0 +1,72 @@
+- name: Install Hyprland packages
+  when: is_managed_desktop and (is_arch or is_redhat)
+  vars:
+    pkgs:
+      Archlinux:
+        - uwsm
+        - libnewt
+        - xdg-desktop-portal-hyprland
+        - xdg-desktop-portal-gtk
+        - hyprland
+        - hyprland-qt-support
+        - hyprpicker
+      RedHat:
+        - uwsm
+        - newt
+        - xdg-desktop-portal-hyprland
+        - xdg-desktop-portal-gtk
+        - hyprland
+        - hyprland-qt-support
+        - hyprpicker
+  block:
+    - name: Enable Hyprland COPR on Fedora
+      community.general.copr:
+        name: lionheartp/Hyprland
+        state: enabled
+      become: true
+      when: is_redhat
+
+    - name: Install Hyprland packages
+      ansible.builtin.package:
+        name: "{{ pkgs[ansible_facts['os_family']] }}"
+        state: present
+      become: true
+
+- name: Configure Hyprland
+  when: is_managed_desktop and (is_arch or is_redhat)
+  block:
+    - name: Create Hyprland and UWSM config directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      loop:
+        - "{{ home }}/.config/hypr"
+        - "{{ home }}/.config/uwsm"
+
+    - name: Link Hyprland configs
+      ansible.builtin.file:
+        src: "{{ root }}/hypr/{{ item }}"
+        dest: "{{ home }}/.config/hypr/{{ item }}"
+        state: link
+        force: true
+      loop:
+        - hyprland.lua
+        - keybindings.lua
+
+    - name: Link UWSM configs
+      ansible.builtin.file:
+        src: "{{ root }}/hypr/uwsm/{{ item }}"
+        dest: "{{ home }}/.config/uwsm/{{ item }}"
+        state: link
+        force: true
+      loop:
+        - env
+        - env-hyprland
+
+    - name: Let Hyprland handle the power button
+      ansible.builtin.lineinfile:
+        path: /etc/systemd/logind.conf
+        regexp: "^#?HandlePowerKey=.*$"
+        line: "HandlePowerKey=ignore"
+      become: true

@@ -246,3 +246,4 @@
       ansible.builtin.command: gh repo clone dommcdev/beans "{{ home }}/dev/beans"
       args:
         creates: "{{ home }}/dev/beans"
+# TODO add satty here? Or ditch

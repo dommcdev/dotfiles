@@ -14,6 +14,7 @@ Noctalia greeter yml + fix login keychain password
 Increase server login timeout for navidrome/feishin
 
 
+Add picard/kid3 to gui.yml
 Ansible
 * Add brew trust stuff
 * Add upower, gpu-screen-recorder
@@ -31,3 +32,6 @@ Gpu passthrough (Windows, LookingGlass, Quickpassthrough)
 Finish cross-platform dotfiles support
 Devcontainers
 Self-host excalidraw
+
+# Ansible TODO
+* Hyprland on Fedora, Ubuntu

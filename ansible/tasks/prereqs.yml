@@ -32,6 +32,7 @@
         - procps
       RedHat:
         - curl
+        - dnf-plugins-core
         - file
         - gcc
         - gcc-c++

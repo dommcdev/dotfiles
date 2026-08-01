@@ -1,10 +1,12 @@
 theme = noctalia
 confirm-close-surface=false
 font-family = "JetBrainsMono Nerd Font"
-background-opacity = 0.96
+background-opacity = 0.93
 window-padding-x=6
 window-padding-y=4
 shell-integration-features = ssh-env, cursor
+
+
 
 #This is supposed to fix weird stuff when ssh-ing into machines, but doesn't really work
 #ssh-env is more reliable (or the equivilant of ssh-ing from a tmux session)
