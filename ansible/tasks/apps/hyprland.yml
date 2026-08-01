@@ -1,5 +1,4 @@
 - name: Install Hyprland packages
-  when: is_managed_desktop and (is_arch or is_redhat)
   vars:
     pkgs:
       Archlinux:
@@ -33,7 +32,6 @@
       become: true
 
 - name: Configure Hyprland
-  when: is_managed_desktop and (is_arch or is_redhat)
   block:
     - name: Create Hyprland and UWSM config directories
       ansible.builtin.file:
@@ -70,3 +68,4 @@
         regexp: "^#?HandlePowerKey=.*$"
         line: "HandlePowerKey=ignore"
       become: true
+# TODO Ubuntu support

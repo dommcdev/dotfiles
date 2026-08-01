@@ -32,6 +32,3 @@ Gpu passthrough (Windows, LookingGlass, Quickpassthrough)
 Finish cross-platform dotfiles support
 Devcontainers
 Self-host excalidraw
-
-# Ansible TODO
-* Hyprland on Fedora, Ubuntu

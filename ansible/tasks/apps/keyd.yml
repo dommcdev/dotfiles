@@ -12,11 +12,9 @@
         name: keyd
         state: present
       become: true
-      when: is_arch or is_debian or is_redhat
 
 - name: Configure keyd on Linux
   become: true
-  when: is_arch or is_debian or is_redhat
   block:
     - name: Create keyd config directory
       ansible.builtin.file:
