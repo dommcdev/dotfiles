@@ -22,7 +22,7 @@ Ansible
 
 Themes
 Manual: nvim, vicinae, opencode, zed, obsidian, chrome, yazi
-Auto: gtk, qt, btop, bat, icons, cava (needs color/banding tweaks), ghostty, starship, hyprland, hyprtoolkit
+Auto: gtk, qt, btop, bat, icons, cava (needs color/banding tweaks), ghostty, starship, hyprland, hyprtoolkit (square borders?)
 
 
 Package requests: wlctl, downgrade

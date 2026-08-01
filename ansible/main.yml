@@ -90,6 +90,9 @@
       ansible.builtin.import_tasks: tasks/apps/fonts.yml
     - name: Ghostty
       ansible.builtin.import_tasks: tasks/apps/ghostty.yml
+    - name: Vicinae
+      ansible.builtin.include_tasks: tasks/apps/vicinae.yml
+      when: is_managed_desktop and (not is_debian)
     - name: Zed
       ansible.builtin.import_tasks: tasks/apps/zed.yml
     - name: Nvim

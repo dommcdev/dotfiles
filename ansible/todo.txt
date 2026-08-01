@@ -1,9 +1,6 @@
 TO REVIEW
 ansible/tasks/apps/gui.yml
-ansible/tasks/apps/hypr.yml
-ansible/tasks/apps/keyd.yml
 ansible/tasks/apps/noctalia.yml
-ansible/tasks/apps/vicinae.yml
 ansible/tasks/mac.yml
 ansible/tasks/misc.yml
 ansible/tasks/system/appearance.yml

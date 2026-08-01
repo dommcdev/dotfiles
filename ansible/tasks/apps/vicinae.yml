@@ -1,5 +1,35 @@
+- name: Install Vicinae
+  block:
+    - name: Install Vicinae on Arch
+      kewlfft.aur.aur:
+        name: vicinae-bin
+        state: present
+      when: is_arch
+
+    - name: Install Vicinae on Fedora
+      block:
+        - name: Enable COPR
+          community.general.copr:
+            name: quadratech188/vicinae
+            state: enabled
+          become: true
+          when: is_redhat
+
+        - name: Install package
+          ansible.builtin.dnf:
+            name: vicinae
+            state: present
+          become: true
+          when: is_redhat
+
+    - name: Install Vicinae on macOS
+      community.general.homebrew_cask:
+        name: vicinae
+        state: present
+        update_homebrew: false
+      when: is_macos
+
 - name: Configure Vicinae
-  when: is_arch and is_managed_desktop
   block:
     - name: Create config directory
       ansible.builtin.file:
@@ -13,28 +43,12 @@
         dest: "{{ home }}/.config/vicinae/settings.json"
         state: link
         force: true
+      register: vicinae_settings
 
-    - name: Link power helper
-      ansible.builtin.file:
-        src: "{{ root }}/vicinae/vicinae-power.sh"
-        dest: "{{ home }}/.local/bin/vicinae-power.sh"
-        state: link
-        force: true
-
-    - name: Install Vicinae
-      kewlfft.aur.aur:
-        name: vicinae-bin
-        state: present
-
-    - name: Enable Vicinae user service
-      ansible.builtin.systemd_service:
-        name: vicinae.service
-        enabled: true
-        scope: user
-
-    - name: Restart Vicinae if available
-      ansible.builtin.systemd_service:
-        name: vicinae.service
-        state: restarted
-        scope: user
-      failed_when: false
+- name: Enable/restart Vicinae
+  ansible.builtin.systemd_service:
+    name: vicinae.service
+    enabled: true
+    state: "{{ 'restarted' if vicinae_settings.changed else 'started' }}"
+    scope: user
+  when: is_linux
