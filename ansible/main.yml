@@ -63,10 +63,10 @@
       ansible.builtin.include_tasks: tasks/apps/syncthing.yml
     - name: Network
       ansible.builtin.include_tasks: tasks/system/network.yml
-      when: is_managed_desktop
+      when: is_managed_desktop and is_linux
     - name: Printing
       ansible.builtin.include_tasks: tasks/system/printing.yml
-      when: is_managed_desktop
+      when: is_managed_desktop and is_linux
     - name: Hyprland
       ansible.builtin.include_tasks: tasks/apps/hyprland.yml
       when: is_managed_desktop and (is_arch or is_redhat)
@@ -85,6 +85,7 @@
       ansible.builtin.import_tasks: tasks/apps/docker.yml
     - name: Libvirt
       ansible.builtin.import_tasks: tasks/apps/libvirt.yml
+      when: is_linux
     - name: Fonts
       ansible.builtin.import_tasks: tasks/apps/fonts.yml
     - name: Ghostty

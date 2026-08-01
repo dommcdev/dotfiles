@@ -22,20 +22,66 @@
         state: directory
         mode: "0755"
 
-    - name: Copy keyd default config
+    - name: Copy keyd config
       ansible.builtin.copy:
-        src: "{{ root }}/keyd/default.conf"
         dest: /etc/keyd/default.conf
         mode: "0644"
-        remote_src: true
+        content: |
+          # Apply to every keyboard
+          [ids]
+          *
+
+          [main]
+          # Caps is ctrl when held, esc when tapped
+          capslock = overload(control, esc)
+
+          # Map physical alt to software meta
+          leftalt = leftmeta
+          rightalt = rightmeta
+
+          # Map physical meta to software alt
+          leftmeta = leftalt
+          rightmeta = rightalt
+
+          # Boths shifts together toggle capslock
+          leftshift+rightshift = capslock
+
+          # Emulate arrow keys with alt + h/j/k/l
+          [alt]
+          h = left
+          j = down
+          k = up
+          l = right
+
+          [alt+shift]
+          h = M-S-h
+          j = M-S-j
+          k = M-S-k
+          l = M-S-l
+
+          [alt+control]
+          h = M-C-h
+          j = M-C-j
+          k = M-C-k
+          l = M-C-l
+
+          [alt+meta]
+          h = M-A-h
+          j = M-A-j
+          k = M-A-k
+          l = M-A-l
       register: keyd_config
 
-    - name: Enable keyd
+    - name: Enable and start keyd
       ansible.builtin.systemd_service:
         name: keyd.service
-        daemon_reload: true
         enabled: true
-        state: "{{ 'restarted' if keyd_config.changed else 'started' }}"
+        state: started
+
+    - name: Reload keyd configuration # noqa no-handler
+      ansible.builtin.command: keyd reload
+      changed_when: true
+      when: keyd_config.changed
 
     - name: Create libinput config directory
       ansible.builtin.file:

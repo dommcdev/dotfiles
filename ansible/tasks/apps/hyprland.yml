@@ -44,7 +44,7 @@
 
     - name: Link Hyprland configs
       ansible.builtin.file:
-        src: "{{ root }}/hypr/{{ item }}"
+        src: "{{ root }}/hyprland/{{ item }}"
         dest: "{{ home }}/.config/hypr/{{ item }}"
         state: link
         force: true
@@ -54,7 +54,7 @@
 
     - name: Link UWSM configs
       ansible.builtin.file:
-        src: "{{ root }}/hypr/uwsm/{{ item }}"
+        src: "{{ root }}/hyprland/uwsm/{{ item }}"
         dest: "{{ home }}/.config/uwsm/{{ item }}"
         state: link
         force: true

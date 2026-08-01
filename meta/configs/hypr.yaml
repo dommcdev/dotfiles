@@ -1,10 +1,10 @@
 - link:
     ~/.config/hypr:
-      path: hypr/*
+      path: hyprland/*
       glob: true
-      exclude: [hypr/uwsm]
+      exclude: [hyprland/uwsm]
     ~/.config/uwsm:
-      path: hypr/uwsm/*
+      path: hyprland/uwsm/*
       glob: true
 
 - shell:

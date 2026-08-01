@@ -32,7 +32,6 @@
 
 - name: Configure virtualization
   become: true
-  when: is_linux
   block:
     - name: Enable libvirtd
       ansible.builtin.systemd_service:
