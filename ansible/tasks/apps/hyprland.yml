@@ -9,6 +9,8 @@
         - hyprland
         - hyprland-qt-support
         - hyprpicker
+        - qt5-wayland
+        - qt6-wayland
       RedHat:
         - uwsm
         - newt
@@ -17,6 +19,8 @@
         - hyprland
         - hyprland-qt-support
         - hyprpicker
+        - qt5-qtwayland
+        - qt6-qtwayland
   block:
     - name: Enable Hyprland COPR on Fedora
       community.general.copr:

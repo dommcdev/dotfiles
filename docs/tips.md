@@ -141,3 +141,11 @@ For getting the correct colors, simply put in an override to allow `~/.config/gt
 `~/.config/hypr/application-style.conf` provides styling for hypr* qt6 apps. See https://wiki.hypr.land/Hypr-Ecosystem/hyprland-qt-support/
 
 More useful is `~/.config/hypr/hyprtoolkit.conf`, which themings hyprland dialogs, etc.
+
+### Cursor theming
+
+Place Hyprcursor themes in `~/.local/share/icons/`. Hyprland detects them automatically. If more than one theme is installed, set `HYPRCURSOR_THEME` and `HYPRCURSOR_SIZE` in `~/.config/uwsm/env-hyprland`.
+
+Alternatively, add `exec-once = hyprctl setcursor <name> <size>` to the Hyprland config. This also works with XCursor themes.
+
+For XWayland applications, set the cursor theme with `Inherits=<name>` in `~/.local/share/icons/default/index.theme`.

@@ -20,12 +20,10 @@ Ansible
 * Add upower, gpu-screen-recorder
 * Switch to cachy downgrade package, check if other aur pkgs are in cachy repos
 
-Themes
-Manual: nvim, vicinae, opencode, zed, obsidian, chrome, yazi, cava
-Auto: gtk, qt, btop, bat, icons, ghostty, starship, hyprland, hyprtoolkit (square borders?)
+Theming
+Manual: nvim, vicinae, opencode, zed, obsidian, chrome, yazi, cava, btop, bat, icons, ghostty, starship, hyprland, hyprtoolkit (square borders?)
+Auto: gtk, qt
 
-
-Package requests: wlctl, downgrade
 
 # Low Priority
 Gpu passthrough (Windows, LookingGlass, Quickpassthrough)

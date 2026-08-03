@@ -1,6 +1,6 @@
-- name: Install appearance packages
+- name: Configure GTK, Qt, and icon appearance
   block:
-    - name: Install native appearance packages
+    - name: Install packages
       ansible.builtin.package:
         name: "{{ pkgs[ansible_facts['os_family']] }}"
         state: present
@@ -10,25 +10,27 @@
         pkgs:
           Archlinux:
             - adw-gtk-theme
-            - qt5-wayland
-            - qt6-wayland
             - breeze
             - breeze-icons
             - papirus-icon-theme
           Debian:
-            - breeze-cursor-theme
+            - breeze
+            - breeze-icon-theme
+            - papirus-icon-theme
+            - qt6ct
           RedHat:
-            - breeze-cursor-theme
+            - adw-gtk3-theme
+            - plasma-breeze
+            - breeze-icon-theme
+            - papirus-icon-theme
+            - qt6ct
 
-    - name: Install qt6ct-kde on Arch
+    - name: Install Qt configuration tool on Arch
       kewlfft.aur.aur:
         name: qt6ct-kde
         state: present
       when: is_arch
 
-- name: Link Linux appearance config
-  when: is_linux
-  block:
     - name: Create config directories
       ansible.builtin.file:
         path: "{{ item }}"
@@ -63,9 +65,6 @@
         - src: qt/qt6ct.conf
           dest: qt6ct/qt6ct.conf
 
-- name: Configure Linux desktop appearance
-  when: is_linux and is_managed_desktop
-  block:
     - name: Configure Flatpak GTK filesystem overrides
       ansible.builtin.command: "flatpak override --user --filesystem={{ item }}"
       changed_when: false
@@ -84,9 +83,9 @@
         - key: icon-theme
           value: Papirus-Dark
 
-# Note: If changing cursor don't forget about `uwsm/env` file and curor block in noctalia greeter conf
-- name: Configure desktop cursor settings
-  when: is_linux and is_managed_desktop
+# Note: If changing the cursor, also update `uwsm/env` and the cursor block in the Noctalia greeter config.
+# Breeze cursors are installed as part of each distro's general breeze megapackage installed above
+- name: Configure mouse cursor
   block:
     - name: Create default cursor directory
       ansible.builtin.file:
@@ -94,7 +93,7 @@
         state: directory
         mode: "0755"
 
-    - name: Configure xwayland cursor inheritance
+    - name: Configure cursor for Xwayland apps
       ansible.builtin.copy:
         dest: "{{ home }}/.local/share/icons/default/index.theme"
         mode: "0644"
@@ -103,5 +102,3 @@
           Name=Default
           Comment=Default Cursor Theme
           Inherits=breeze_cursors
-
-# TODO more Debian/Fedora support

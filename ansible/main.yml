@@ -67,6 +67,9 @@
     - name: Printing
       ansible.builtin.include_tasks: tasks/system/printing.yml
       when: is_managed_desktop and is_linux
+    - name: Appearance
+      ansible.builtin.include_tasks: tasks/system/appearance.yml
+      when: is_linux and is_managed_desktop
     - name: Hyprland
       ansible.builtin.include_tasks: tasks/apps/hyprland.yml
       when: is_managed_desktop and (is_arch or is_redhat)
