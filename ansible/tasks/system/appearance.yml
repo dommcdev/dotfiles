@@ -39,18 +39,18 @@
         - "{{ home }}/.config/gtk-3.0"
         - "{{ home }}/.config/gtk-4.0"
 
-    - name: Link GTK configs
+    - name: Link config files
       ansible.builtin.file:
-        src: "{{ root }}/appearance/gtk/{{ item.src }}"
+        src: "{{ root }}/appearance/{{ item.src }}"
         dest: "{{ home }}/.config/{{ item.dest }}"
         state: link
         force: true
       loop:
-        - src: gtk-3.0/gtk.css
+        - src: gtk/gtk.css
           dest: gtk-3.0/gtk.css
-        - src: gtk-4.0/gtk.css
+        - src: gtk/gtk.css
           dest: gtk-4.0/gtk.css
-        - src: gtk-4.0/settings.ini
+        - src: gtk/settings.ini
           dest: gtk-4.0/settings.ini
         - src: templates
           dest: templates
@@ -58,13 +58,10 @@
           dest: user-dirs.dirs
         - src: mimeapps.list
           dest: mimeapps.list
-
-    - name: Link qt6ct config
-      ansible.builtin.file:
-        src: "{{ root }}/appearance/qt/qt6ct.conf"
-        dest: "{{ home }}/.config/qt6ct/qt6ct.conf"
-        state: link
-        force: true
+        - src: gtk/bookmarks
+          dest: gtk-3.0/bookmarks
+        - src: qt/qt6ct.conf
+          dest: qt6ct/qt6ct.conf
 
 - name: Configure Linux desktop appearance
   when: is_linux and is_managed_desktop
@@ -87,6 +84,10 @@
         - key: icon-theme
           value: Papirus-Dark
 
+# Note: If changing cursor don't forget about `uwsm/env` file and curor block in noctalia greeter conf
+- name: Configure desktop cursor settings
+  when: is_linux and is_managed_desktop
+  block:
     - name: Create default cursor directory
       ansible.builtin.file:
         path: "{{ home }}/.local/share/icons/default"
@@ -102,3 +103,5 @@
           Name=Default
           Comment=Default Cursor Theme
           Inherits=breeze_cursors
+
+# TODO more Debian/Fedora support
