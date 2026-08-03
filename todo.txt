@@ -3,7 +3,6 @@ Nvim stuff (More lazy loading)
 Tweak auth stuff in fingerprints script
 Ambient light sensor automated install (systemd service + script copying + note on sensor driver symlinking)
 Setup ufw (and maybe Apparmor on server)
-Make tmux theme (replace plugin)
 Create syncthing dir for wallpapers, games/saves, etc
 Grab misc stuff from archinstall
 Better system fonts (inter, fira, ibm-plex + research fontconfig + fallback noto fonts + gsettings etc)
@@ -27,6 +26,5 @@ Auto: gtk, qt
 
 # Low Priority
 Gpu passthrough (Windows, LookingGlass, Quickpassthrough)
-Finish cross-platform dotfiles support
 Devcontainers
 Self-host excalidraw
