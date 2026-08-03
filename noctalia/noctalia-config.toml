@@ -6,8 +6,9 @@ order = [ "default" ]
 
     [bar.default]
     capsule_radius = 0
-    center = [ "date", "center_spacer", "clock", "center_spacer", "weather", "center_spacer", "privacy" ]
+    center = [ "date", "center_spacer", "clock", "center_spacer", "weather", "center_spacer", "privacy", "notes", "widget" ]
     end = [
+        "tray",
         "battery",
         "right_spacer",
         "network",
@@ -22,7 +23,7 @@ order = [ "default" ]
         "right_spacer",
         "control-center"
     ]
-    font_family = "Adwaita Sans"
+    font_family = "Inter"
     margin_edge = 0
     margin_ends = 8
     radius = 0
@@ -47,6 +48,7 @@ enabled = true
 
 [control_center]
 sidebar_section = "none"
+width = 750
 
     [[control_center.shortcuts]]
     type = "power_profile"
@@ -76,19 +78,25 @@ widget_order = [ "desktop-widget-0000000000000002" ]
     visible = true
 
     [desktop_widgets.widget.desktop-widget-0000000000000002]
-    box_height = 320.0
-    box_width = 576.0
+    box_height = 384.0
+    box_width = 704.0
     cx = 608.0
-    cy = 1072.0
+    cy = 1088.0
     output = "DP-2"
-    rotation = 0.0
+    rotation = -0.0
     type = "audio_visualizer"
 
         [desktop_widgets.widget.desktop-widget-0000000000000002.settings]
         background = false
-        background_opacity = 0.0
+        background_color = "surface"
+        background_opacity = 0.80000000000000004
+        background_padding = 10
+        background_radius = 12
         bands = 32
+        centered = true
+        color_1 = "primary"
         color_2 = "secondary"
+        mirrored = true
         show_when_idle = false
 
 [idle]
@@ -132,7 +140,7 @@ widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-000000000000000
     box_height = 70.0
     box_width = 400.0
     cx = 1280.0
-    cy = 1085.0
+    cy = 1104.0
     output = "DP-2"
     rotation = 0.0
     type = "login_box"
@@ -141,12 +149,17 @@ widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-000000000000000
         background_color = "surface_variant"
         background_opacity = 0.88
         background_radius = 12.0
+        center_password_text = false
         input_opacity = 1.0
         input_radius = 6.0
+        layout = "compact"
         show_caps_lock = true
         show_keyboard_layout = true
         show_login_button = true
-        show_password_hint = false
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = false
+        show_weather = true
 
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
     box_height = 176.0
@@ -159,6 +172,8 @@ widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-000000000000000
 
         [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
         background = false
+        center_text = true
+        clock_style = "digital"
         color = "primary"
 
 [nightlight]
@@ -171,6 +186,12 @@ layer = "overlay"
 [osd.kinds]
 media = false
 
+[plugin_settings."noctalia/notes"]
+notes_dir = "~/Downloads/Notes"
+panel_open_near_click = false
+panel_placement = "attached"
+panel_position = "top_right"
+
 [plugin_settings."noctalia/screen_recorder"]
 directory = "~/Downloads/Videos/Recordings"
 
@@ -179,13 +200,14 @@ browser_placement = "floating"
 browser_position = "center"
 
 [plugins]
-enabled = [ "noctalia/bongocat", "noctalia/wallhaven", "noctalia/screen_recorder" ]
+enabled = [ "noctalia/bongocat", "noctalia/wallhaven", "noctalia/screen_recorder", "noctalia/notes", "oldirtty/color_picker" ]
 
 [shell]
 avatar_path = "/home/dominic/Downloads/Shared/Images/Profile.png"
 button_borders = false
 clipboard_enabled = false
 corner_radius_scale = 0.0
+password_style = "random"
 polkit_agent = true
 telemetry_enabled = true
 
@@ -195,6 +217,7 @@ telemetry_enabled = true
     [shell.panel]
     open_near_click_clipboard = true
     open_near_click_control_center = true
+    open_near_click_session = true
     session_placement = "floating"
     session_position = "center"
     transparency_mode = "soft"
@@ -206,29 +229,32 @@ telemetry_enabled = true
 
     [shell.screenshot]
     directory = "/home/dominic/Downloads/Screenshots"
+    filename_pattern = "Screenshot %Y-%m-%d at %H.%M.%S"
+    show_cursor = true
 
 [theme]
 builtin = "Catppuccin"
-community_palette = "Breeze"
+community_palette = "Vesper"
+custom_palette = "Catppuccin-Mocha-Blue"
 mode = "dark"
 source = "builtin"
 wallpaper_scheme = "m3-content"
 
     [theme.templates]
-    builtin_ids = [ "btop", "cava", "gtk3", "gtk4", "ghostty", "hyprland", "kcolorscheme", "qt", "starship" ]
-    community_ids = [ "pywalfox", "zen-browser", "obsidian", "zed", "vicinae", "papirus-icons", "yazi", "hyprtoolkit" ]
+    builtin_ids = [ "btop", "gtk3", "gtk4", "ghostty", "hyprland", "kcolorscheme", "starship" ]
+    community_ids = [ "hyprtoolkit", "papirus-icons", "bat" ]
 
 [wallpaper]
 directory = "/home/dominic/dev/wallpapers"
 
     [wallpaper.default]
-    path = "/home/dominic/dev/wallpapers/wallhaven-zyp7jo.jpg"
+    path = "/home/dominic/dev/wallpapers/catppuccin/waves.png"
 
     [wallpaper.last]
-    path = "/home/dominic/dev/wallpapers/wallhaven-zyp7jo.jpg"
+    path = "/home/dominic/dev/wallpapers/catppuccin/waves.png"
 
     [wallpaper.monitors.DP-2]
-    path = "/home/dominic/dev/wallpapers/wallhaven-zyp7jo.jpg"
+    path = "/home/dominic/dev/wallpapers/catppuccin/waves.png"
 
 [weather]
 refresh_minutes = 15
@@ -281,6 +307,10 @@ hide_when_no_media = true
 color = "secondary"
 show_label = false
 
+[widget.notes]
+enabled = false
+type = "noctalia/notes:notes"
+
 [widget.privacy]
 hide_inactive = true
 
@@ -295,7 +325,6 @@ type = "noctalia/screen_recorder:recorder"
 type = "noctalia/screen_recorder:recorder"
 
 [widget.right_spacer]
-enabled = true
 length = 8
 type = "spacer"
 
@@ -305,7 +334,7 @@ type = "spacer"
 
 [widget.tray]
 drawer = true
-enabled = false
+pinned = [ "systray_141024" ]
 
 [widget.volume]
 color = "tertiary"
@@ -316,3 +345,7 @@ enabled = false
 
 [widget.weather]
 show_condition = false
+
+[widget.widget]
+enabled = false
+type = "oldirtty/color_picker:widget"
