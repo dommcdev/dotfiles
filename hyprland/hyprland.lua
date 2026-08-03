@@ -221,9 +221,9 @@ hl.window_rule({
   size = { "monitor_w*0.7", "monitor_h*0.6" },
 })
 
--- Float impala, bluetui, wiremix, btop, sushi, settings, and calculator
+-- Float wlctl, bluetui, wiremix, btop, sushi, settings, and calculator
 hl.window_rule({
-  match = { class = "com.dominic.impala" },
+  match = { class = "com.dominic.wlctl" },
   float = true,
   center = true,
   size = { "monitor_w*0.55", "monitor_h*0.55" },

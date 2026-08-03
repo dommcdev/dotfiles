@@ -17,7 +17,7 @@ local bluetooth = "noctalia msg bluetooth-enable && ghostty --class=com.dominic.
 local audiomixer = "ghostty --class=com.dominic.wiremix -e wiremix"
 local calculator = "ghostty --class=com.dominic.calc -e qalc"
 local sysmonitor = "ghostty --class=com.dominic.btop -e btop"
-local wifi = "noctalia msg wifi-enable && ghostty --class=com.dominic.impala -e impala"
+local wifi = "noctalia msg wifi-enable && ghostty --class=com.dominic.wlctl -e wlctl"
 local power = "ghostty --class=com.dominic.powerbutton -e ~/.local/bin/power-button.sh"
 local parabolic = "flatpak run org.nickvision.tubeconverter"
 
