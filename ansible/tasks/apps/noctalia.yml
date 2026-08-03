@@ -1,2 +1,83 @@
+- name: Install Noctalia packages
+  vars:
+    pkgs:
+      Archlinux:
+        - noctalia
+        - noctalia-greeter
+        - greetd
+        - accountsservice
+  ansible.builtin.package:
+    name: "{{ pkgs[ansible_facts['os_family']] }}"
+    state: present
+  become: true
+  when: ansible_facts['os_family'] in pkgs
+
+- name: Configure greetd
+  ansible.builtin.copy:
+    dest: /etc/greetd/config.toml
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      [default_session]
+      command = "/usr/bin/noctalia-greeter-session"
+      user = "greeter"
+  become: true
+  when: is_arch
+  register: greetd_config
+
+- name: Configure noctalia-greeter
+  ansible.builtin.copy:
+    dest: /var/lib/noctalia-greeter/greeter.toml
+    owner: greeter
+    group: greeter
+    mode: "0644"
+    content: |
+      [user]
+      default = "{{ user }}"
+
+      [appearance]
+      hide_logo = true
+      password_style = "random"
+
+      [idle]
+      timeout = 600
+
+      [cursor]
+      theme = "breeze_cursors"
+      size = 24
+
+      [auth]
+      # For fprintd
+      allow_empty_password = true
+  become: true
+  when: is_arch
+  register: noctalia_greeter_config
+
+- name: Enable/restart greetd
+  ansible.builtin.systemd_service:
+    name: greetd.service
+    enabled: true
+    state: "{{ 'restarted' if greetd_config.changed or noctalia_greeter_config.changed else 'started' }}"
+  become: true
+  when: is_arch
+
+- name: Configure Noctalia
+  block:
+    - name: Create config directory
+      ansible.builtin.file:
+        path: "{{ home }}/.config/noctalia"
+        state: directory
+        mode: "0755"
+
+    - name: Link config
+      ansible.builtin.file:
+        src: "{{ root }}/noctalia/noctalia-config.toml"
+        dest: "{{ home }}/.config/noctalia/noctalia-config.toml"
+        state: link
+        force: true
 # To restart noctalia...
 # pkill noctalia && hyprctl dispatch "hl.dsp.exec_cmd('noctalia')"
+
+# TODO Add Debian and Fedora support
+# TODO Set fractional scaling per-device?
