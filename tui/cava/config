@@ -191,7 +191,7 @@
 # 'frequency' displays the lower cut off frequency of the bar above.
 # Only supported on ncurses and noncurses output.
 ; xaxis = none
- 
+
 # enable synchronized sync. 1 = on, 0 = off
 # removes flickering in alacritty terminal emulator.
 # defaults to off since the behaviour in other terminal emulators is unknown
@@ -215,7 +215,6 @@
 ; waveform = 0
 
 [color]
-theme = "noctalia"
 
 # Colors can be one of seven predefined: black, blue, cyan, green, magenta, red, white, yellow.
 # Or defined by hex code '#xxxxxx' (hex code must be within ''). User defined colors requires

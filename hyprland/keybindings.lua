@@ -28,6 +28,8 @@ local mainMod = "SUPER"
 
 -- See https://wiki.hypr.land/Configuring/Binds/
 hl.bind(mainMod .. " + space", hl.dsp.exec_cmd(menu))
+hl.bind("ALT + space", hl.dsp.exec_cmd("pkill -USR2 -x handy"))
+hl.bind("ALT + space", hl.dsp.exec_cmd("pkill -USR2 -x handy"), { release = true })
 hl.bind("CTRL + apostrophe", hl.dsp.exec_cmd(menu))
 hl.bind("Print", hl.dsp.exec_cmd(screenshot))
 hl.bind("SHIFT + Print", hl.dsp.exec_cmd(screenshotArea))

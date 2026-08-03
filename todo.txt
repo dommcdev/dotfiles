@@ -21,8 +21,8 @@ Ansible
 * Switch to cachy downgrade package, check if other aur pkgs are in cachy repos
 
 Themes
-Manual: nvim, vicinae, opencode, zed, obsidian, chrome, yazi
-Auto: gtk, qt, btop, bat, icons, cava (needs color/banding tweaks), ghostty, starship, hyprland, hyprtoolkit (square borders?)
+Manual: nvim, vicinae, opencode, zed, obsidian, chrome, yazi, cava
+Auto: gtk, qt, btop, bat, icons, ghostty, starship, hyprland, hyprtoolkit (square borders?)
 
 
 Package requests: wlctl, downgrade
