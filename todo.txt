@@ -10,6 +10,7 @@ Add limine and snapper
 Increase server login timeout for navidrome/feishin
 Power-profiles-daemon stuff, also install upower
 Add brew trust stuff
+Setup fuse mnt/bookmark for chocobo files
 
 
 # Low Priority
