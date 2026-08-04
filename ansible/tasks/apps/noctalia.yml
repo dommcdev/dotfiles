@@ -29,7 +29,6 @@
           command = "/usr/bin/noctalia-greeter-session"
           user = "greeter"
       become: true
-      when: is_arch
       register: greetd_config
 
     - name: Configure PAM
@@ -47,7 +46,6 @@
           session    include      system-local-login
           session    optional     pam_gnome_keyring.so auto_start
       become: true
-      when: is_arch
       register: greetd_pam_config
 
 - name: Configure noctalia-greeter
@@ -75,7 +73,6 @@
       # For fprintd
       allow_empty_password = true
   become: true
-  when: is_arch
   register: noctalia_greeter_config
 
   # DO NOT restart greetd.service, or else your session will go down with it.
@@ -85,7 +82,6 @@
     enabled: true
     state: started
   become: true
-  when: is_arch
 
 - name: Configure Noctalia
   block:

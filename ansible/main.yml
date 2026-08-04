@@ -102,3 +102,4 @@
       ansible.builtin.import_tasks: tasks/apps/nvim.yml
     - name: Noctalia
       ansible.builtin.import_tasks: tasks/apps/noctalia.yml
+      when: is_managed_desktop and is_arch
