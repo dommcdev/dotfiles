@@ -9,6 +9,7 @@
 - Laptop mirroring wonky: `hyprctl reload`
 - `hunk` diff for diff tui
 - `systemd-analyze critical-chain` and `systemd-analyze blame`
+- `scp` for quick simple file transfers
 
 ## For rebooting:
 

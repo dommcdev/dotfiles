@@ -105,6 +105,7 @@ alias rcp='rsync -ahP --backup --suffix=_old' #preserves permissions etc, human-
 alias rbig='rsync -ahPz --stats --inplace' #preserves permissions etc, human-readable, progress/partial, compress in transit, copy in place
 alias rmirror='rsync -ahP --delete' #preserves permissions etc, human-readable, progress/partial, delete duplicates (!!). Add -n for dry run
 #alias -g C='| wl-copy' #somehwat risky
+alias rnoctalia="pkill noctalia & hyprctl dispatch \"hl.dsp.exec_cmd('noctalia')\""
 
 
 

@@ -100,3 +100,5 @@
       ansible.builtin.import_tasks: tasks/apps/zed.yml
     - name: Nvim
       ansible.builtin.import_tasks: tasks/apps/nvim.yml
+    - name: Noctalia
+      ansible.builtin.import_tasks: tasks/apps/noctalia.yml

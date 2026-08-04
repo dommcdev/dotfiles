@@ -31,6 +31,23 @@
         state: present
       when: is_arch
 
+    - name: Download Papirus Folders installer
+      ansible.builtin.get_url:
+        url: https://git.io/papirus-folders-install
+        dest: /tmp/papirus-folders-install.sh
+        mode: "0755"
+
+    - name: Install Papirus Folders
+      ansible.builtin.command: /tmp/papirus-folders-install.sh
+      args:
+        creates: /usr/bin/papirus-folders
+      become: true
+
+    - name: Configure Papirus folder color
+      ansible.builtin.command: papirus-folders -C orange --theme Papirus-Dark
+      become: true
+      changed_when: false
+
     - name: Create config directories
       ansible.builtin.file:
         path: "{{ item }}"
@@ -102,3 +119,5 @@
           Name=Default
           Comment=Default Cursor Theme
           Inherits=breeze_cursors
+
+# TODO adw-gtk on Debian, qt6ct-kde on Debian/Fedora

@@ -1,7 +1,5 @@
-TO REVIEW
 ansible/tasks/apps/gui.yml
 ansible/tasks/misc.yml
-ansible/tasks/system/appearance.yml
 
 ansible/tasks/system/auth.yml
 ansible/tasks/system/drivers.yml

@@ -1,9 +1,3 @@
-- name: Install Arch AUR helper extras
-  kewlfft.aur.aur:
-    name: downgrade
-    state: present
-  when: is_arch
-
 - name: Disable Ubuntu MOTD scripts
   ansible.builtin.file:
     path: "{{ item }}"
@@ -44,6 +38,7 @@
             - wev
             - libinput-tools
             - dmidecode
+            - downgrade
           Debian:
             - flatpak
             - smartmontools

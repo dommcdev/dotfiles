@@ -163,3 +163,31 @@
         state: present
         update_homebrew: false
       when: is_macos
+
+- name: Install Ansible tooling
+  block:
+    - name: Install Ansible tooling on Arch
+      ansible.builtin.package:
+        name:
+          - ansible
+          - ansible-lint
+          - yamllint
+        state: present
+      become: true
+      when: is_arch
+
+    - name: Install Ansible tooling with Homebrew
+      community.general.homebrew:
+        name:
+          - ansible
+          - ansible-lint
+          - yamllint
+        state: present
+        update_homebrew: false
+      when: is_debian or is_redhat or is_macos
+
+    - name: Install Ansible Galaxy requirements
+      ansible.builtin.command:
+        cmd: ansible-galaxy collection install --requirements-file "{{ root }}/ansible/requirements.yml"
+      register: ansible_galaxy_requirements
+      changed_when: "'installed successfully' in ansible_galaxy_requirements.stdout"

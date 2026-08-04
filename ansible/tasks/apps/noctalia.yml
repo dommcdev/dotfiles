@@ -6,6 +6,7 @@
         - noctalia-greeter
         - greetd
         - accountsservice
+        - gpu-screen-recorder
   ansible.builtin.package:
     name: "{{ pkgs[ansible_facts['os_family']] }}"
     state: present
@@ -13,18 +14,38 @@
   when: ansible_facts['os_family'] in pkgs
 
 - name: Configure greetd
-  ansible.builtin.copy:
-    dest: /etc/greetd/config.toml
-    owner: root
-    group: root
-    mode: "0644"
-    content: |
-      [default_session]
-      command = "/usr/bin/noctalia-greeter-session"
-      user = "greeter"
-  become: true
-  when: is_arch
-  register: greetd_config
+  block:
+    - name: Copy config
+      ansible.builtin.copy:
+        dest: /etc/greetd/config.toml
+        owner: root
+        group: root
+        mode: "0644"
+        content: |
+          [default_session]
+          command = "/usr/bin/noctalia-greeter-session"
+          user = "greeter"
+      become: true
+      when: is_arch
+      register: greetd_config
+
+    - name: Configure PAM
+      ansible.builtin.copy:
+        dest: /etc/pam.d/greetd
+        owner: root
+        group: root
+        mode: "0644"
+        content: |
+          auth       required     pam_securetty.so
+          auth       requisite    pam_nologin.so
+          auth       include      system-local-login
+          auth       optional     pam_gnome_keyring.so
+          account    include      system-local-login
+          session    include      system-local-login
+          session    optional     pam_gnome_keyring.so auto_start
+      become: true
+      when: is_arch
+      register: greetd_pam_config
 
 - name: Configure noctalia-greeter
   ansible.builtin.copy:
@@ -58,7 +79,7 @@
   ansible.builtin.systemd_service:
     name: greetd.service
     enabled: true
-    state: "{{ 'restarted' if greetd_config.changed or noctalia_greeter_config.changed else 'started' }}"
+    state: "{{ 'restarted' if greetd_config.changed or greetd_pam_config.changed or noctalia_greeter_config.changed else 'started' }}"
   become: true
   when: is_arch
 

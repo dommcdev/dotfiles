@@ -9,6 +9,7 @@
       - libreoffice-fresh
       - blender
       - kdenlive
+      - kid3
       - gnome-disk-utility
       - gimp
       - resources
