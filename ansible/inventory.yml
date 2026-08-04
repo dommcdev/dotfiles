@@ -6,13 +6,8 @@ all:
       #TODO remove the above stupid workaround once this merges: https://github.com/ansible/ansible/pull/86964
     kabigon:
       ansible_host: kabigon
-      gpu_vendors:
-        - amd
-        - nvidia
     pikachu:
       ansible_host: pikachu
-      gpu_vendors:
-        - intel
     archlab:
       ansible_host: archlinux
 
@@ -24,8 +19,8 @@ all:
 
     # Restate some Ansible gathered facts for greater ease of use
     is_arch: "{{ ansible_facts['os_family'] == 'Archlinux' }}"
-    is_debian: "{{ ansible_facts['os_family'] == 'Debian' }}"
-    is_redhat: "{{ ansible_facts['os_family'] == 'RedHat' }}"
+    is_ubuntu: "{{ ansible_facts['os_family'] == 'Debian' }}"
+    is_fedora: "{{ ansible_facts['os_family'] == 'RedHat' }}"
     is_macos: "{{ ansible_facts['system'] == 'Darwin' }}"
     is_linux: "{{ ansible_facts['system'] == 'Linux' }}"
 
@@ -35,7 +30,6 @@ all:
     is_hardened: false
     has_battery: false
     has_fingerprint_reader: false
-    gpu_vendors: []
 
   children:
     servers:

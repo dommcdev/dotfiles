@@ -20,7 +20,7 @@
         path: "{{ home }}/.local/share/fonts"
         state: directory
         mode: "0755"
-      when: is_debian or is_redhat
+      when: is_ubuntu or is_fedora
 
     - name: Install JetBrains Mono Nerd Font on Debian and Red Hat
       ansible.builtin.unarchive:
@@ -29,7 +29,7 @@
         remote_src: true
         creates: "{{ home }}/.local/share/fonts/JetBrainsMonoNerdFont-Regular.ttf"
       register: jetbrains_mono_nerd_font
-      when: is_debian or is_redhat
+      when: is_ubuntu or is_fedora
 
     - name: Install JetBrains Mono Nerd Font on macOS
       community.general.homebrew_cask:

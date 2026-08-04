@@ -6,7 +6,7 @@
   when: is_arch
 
 - name: Install Tailscale on Ubuntu and Fedora
-  when: is_debian or is_redhat
+  when: is_ubuntu or is_fedora
   block:
     - name: Download installer
       ansible.builtin.get_url:

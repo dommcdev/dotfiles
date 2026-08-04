@@ -51,7 +51,7 @@
 
 - name: Enable/restart SSH
   ansible.builtin.systemd_service:
-    name: "{{ 'ssh' if is_debian else 'sshd' }}.service"
+    name: "{{ 'ssh' if is_ubuntu else 'sshd' }}.service"
     enabled: true
     state: "{{ 'restarted' if ssh_pass_auth.changed or ssh_root_login.changed else 'started' }}"
   become: true

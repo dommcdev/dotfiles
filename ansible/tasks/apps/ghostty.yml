@@ -14,7 +14,7 @@
         name: scottames/ghostty
         state: enabled
       become: true
-      when: is_redhat
+      when: is_fedora
 
     - name: Install Ghostty on Linux
       ansible.builtin.package:

@@ -4,7 +4,7 @@
     mode: "0644"
   become: true
   loop: "{{ lookup('ansible.builtin.fileglob', '/etc/update-motd.d/*', wantlist=True) }}"
-  when: is_debian
+  when: is_ubuntu
 
 - name: Configure Fedora DNF defaults
   ansible.builtin.blockinfile:
@@ -14,7 +14,7 @@
       max_parallel_downloads=10
       fastestmirror=True
   become: true
-  when: is_redhat
+  when: is_fedora
 
 - name: Configure Linux desktop utilities
   when: is_linux and is_managed_desktop

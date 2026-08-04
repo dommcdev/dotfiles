@@ -45,7 +45,7 @@
         name: "{{ brew_pkgs }}"
         state: present
         update_homebrew: false
-      when: is_debian or is_redhat
+      when: is_ubuntu or is_fedora
 
     - name: Install TUI Homebrew packages on macOS
       community.general.homebrew:

@@ -13,14 +13,14 @@
             name: quadratech188/vicinae
             state: enabled
           become: true
-          when: is_redhat
+          when: is_fedora
 
         - name: Install package
           ansible.builtin.dnf:
             name: vicinae
             state: present
           become: true
-          when: is_redhat
+          when: is_fedora
 
     - name: Install Vicinae on macOS
       community.general.homebrew_cask:

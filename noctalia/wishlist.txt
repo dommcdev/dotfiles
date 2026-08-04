@@ -1,17 +1,21 @@
-Network module handling ethernet (only an issue with iwd?? mention in docs)
 Group spacer with module
 Show feels like in weather module
 Add settings icon to network module, link to nm-connection-editor
-Hide lockscreen password hint box
 Buttons with borders have weird animation layout shifts
-Ability to remember last user in greeter
 No border radius of 0 in greeter
+Tooltips
 
 
 [Commented] Differentiate between battery/ac in idle settings #3336
 [Commented] Allow screenshoting specific window #3380
 [Commented] Add ipc bind for screenshotting with pipe included #3273
 [Commented] Add action to screenshot notif with customizable open with (previewer and editor) #3303
-[Commented] Battery widget on lock screen #3436
 [Created] Default to XDG_PICTURES_DIR #3415
 [Coming soon] Drawer groups for the bar
+
+Nits
+Docs - network module only works with ethernet if using networkmanager
+Default to last last logged in user in greeter
+
+Done?
+[Commented] Battery widget on lock screen #3436

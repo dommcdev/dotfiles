@@ -2,7 +2,7 @@
   ansible.builtin.apt:
     update_cache: true
   become: true
-  when: is_debian
+  when: is_ubuntu
 
 - name: Refresh pacman package databases
   community.general.pacman:
@@ -41,8 +41,41 @@
         - procps-ng
   when: ansible_facts['os_family'] in pkgs
 
+- name: Configure Ubuntu package repositories
+  when: is_ubuntu
+  block:
+    - name: Install Ubuntu repository management tools
+      ansible.builtin.package:
+        name: software-properties-common
+        state: present
+      become: true
+
+    - name: Enable Ubuntu Multiverse repository
+      ansible.builtin.command: add-apt-repository --yes multiverse
+      become: true
+      changed_when: false
+
+- name: Configure Fedora package repositories
+  become: true
+  when: is_fedora
+  block:
+    - name: Enable RPM Fusion repositories
+      ansible.builtin.dnf:
+        name:
+          - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_facts['distribution_major_version'] }}.noarch.rpm"
+          - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_facts['distribution_major_version'] }}.noarch.rpm"
+        state: present
+        disable_gpg_check: true
+
+    - name: Enable RPM Fusion tainted repositories
+      ansible.builtin.package:
+        name:
+          - rpmfusion-free-release-tainted
+          - rpmfusion-nonfree-release-tainted
+        state: present
+
 - name: Install Homebrew
-  when: is_debian or is_redhat or is_macos
+  when: is_ubuntu or is_fedora or is_macos
   block:
     - name: Check if homebrew is installed.
       ansible.builtin.command: brew --version
@@ -75,7 +108,7 @@
     name: python
     state: present
     update_homebrew: false
-  when: is_debian or is_redhat
+  when: is_ubuntu or is_fedora
 
 - name: Install Bun
   block:
@@ -91,7 +124,7 @@
         name: oven-sh/bun/bun
         state: present
         update_homebrew: false
-      when: is_debian or is_redhat or is_macos
+      when: is_ubuntu or is_fedora or is_macos
 
 - name: Configure Bun
   block:

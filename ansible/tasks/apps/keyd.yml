@@ -5,7 +5,7 @@
         name: alternateved/keyd
         state: enabled
       become: true
-      when: is_redhat
+      when: is_fedora
 
     - name: Install keyd
       ansible.builtin.package:

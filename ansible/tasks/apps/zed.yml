@@ -12,13 +12,13 @@
         url: https://zed.dev/install.sh
         dest: /tmp/zed-install.sh
         mode: "0755"
-      when: is_debian or is_redhat
+      when: is_ubuntu or is_fedora
 
     - name: Install Zed on Debian and Red Hat
       ansible.builtin.command:
         cmd: /tmp/zed-install.sh
         creates: "{{ home }}/.local/bin/zed"
-      when: is_debian or is_redhat
+      when: is_ubuntu or is_fedora
 
     - name: Install Zed on macOS
       community.general.homebrew_cask:

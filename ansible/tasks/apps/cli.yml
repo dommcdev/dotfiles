@@ -155,7 +155,7 @@
         name: "{{ brew_pkgs }}"
         state: present
         update_homebrew: false
-      when: is_debian or is_redhat
+      when: is_ubuntu or is_fedora
 
     - name: Install terminal Homebrew packages on macOS
       community.general.homebrew:
@@ -184,7 +184,7 @@
           - yamllint
         state: present
         update_homebrew: false
-      when: is_debian or is_redhat or is_macos
+      when: is_ubuntu or is_fedora or is_macos
 
     - name: Install Ansible Galaxy requirements
       ansible.builtin.command:

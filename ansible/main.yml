@@ -47,6 +47,10 @@
     - name: Prerequisites
       ansible.builtin.import_tasks: tasks/prereqs.yml
 
+    - name: Drivers and media codecs
+      ansible.builtin.include_tasks: tasks/system/drivers.yml
+      when: is_managed_desktop and is_linux
+
       # Setup ssh access before nuking password auth later on
     - name: Tailscale
       ansible.builtin.import_tasks: tasks/apps/tailscale.yml
@@ -72,7 +76,7 @@
       when: is_linux and is_managed_desktop
     - name: Hyprland
       ansible.builtin.include_tasks: tasks/apps/hyprland.yml
-      when: is_managed_desktop and (is_arch or is_redhat)
+      when: is_managed_desktop and (is_arch or is_fedora)
     - name: Keyd
       ansible.builtin.include_tasks: tasks/apps/keyd.yml
       when: is_linux
@@ -95,7 +99,7 @@
       ansible.builtin.import_tasks: tasks/apps/ghostty.yml
     - name: Vicinae
       ansible.builtin.include_tasks: tasks/apps/vicinae.yml
-      when: is_managed_desktop and (not is_debian)
+      when: is_managed_desktop and (not is_ubuntu)
     - name: Zed
       ansible.builtin.import_tasks: tasks/apps/zed.yml
     - name: Nvim

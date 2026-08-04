@@ -11,7 +11,7 @@
       when: is_arch
 
     - name: Install Docker packages on Ubuntu and Fedora
-      when: is_debian or is_redhat
+      when: is_ubuntu or is_fedora
       block:
         - name: Download Docker installer
           ansible.builtin.get_url:

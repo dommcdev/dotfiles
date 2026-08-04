@@ -27,7 +27,7 @@
         name: lionheartp/Hyprland
         state: enabled
       become: true
-      when: is_redhat
+      when: is_fedora
 
     - name: Install Hyprland packages
       ansible.builtin.package:
