@@ -22,6 +22,9 @@
         group: root
         mode: "0644"
         content: |
+          [terminal]
+          vt=1
+
           [default_session]
           command = "/usr/bin/noctalia-greeter-session"
           user = "greeter"
@@ -75,11 +78,12 @@
   when: is_arch
   register: noctalia_greeter_config
 
-- name: Enable/restart greetd
+  # DO NOT restart greetd.service, or else your session will go down with it.
+- name: Enable greetd
   ansible.builtin.systemd_service:
     name: greetd.service
     enabled: true
-    state: "{{ 'restarted' if greetd_config.changed or greetd_pam_config.changed or noctalia_greeter_config.changed else 'started' }}"
+    state: started
   become: true
   when: is_arch
 
