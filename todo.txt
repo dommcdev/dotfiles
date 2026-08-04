@@ -17,3 +17,5 @@ Gpu passthrough (Windows, LookingGlass, Quickpassthrough)
 Devcontainers
 Self-host excalidraw
 Theming system
+
+New ymls: Switch emulator, retroarch, firewall (ufw)

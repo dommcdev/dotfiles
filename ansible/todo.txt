@@ -1,13 +1,9 @@
 ansible/tasks/apps/gui.yml
 ansible/tasks/misc.yml
+ansible/tasks/system/hardware.yml
 
 ansible/tasks/system/auth.yml
 ansible/tasks/system/drivers.yml
-ansible/tasks/system/firewall.yml
-ansible/tasks/system/hardware.yml
-
 
 ansible/tasks/mac.yml
 
-ansible/tasks/apps/switch-emulator.yml
-ansible/tasks/apps/retroarch.yml

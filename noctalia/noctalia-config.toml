@@ -241,8 +241,8 @@ source = "builtin"
 wallpaper_scheme = "m3-content"
 
     [theme.templates]
-    builtin_ids = [ "btop", "gtk3", "gtk4", "ghostty", "hyprland", "kcolorscheme", "starship" ]
-    community_ids = [ "hyprtoolkit", "papirus-icons", "bat" ]
+    builtin_ids = [ "gtk3", "gtk4", "kcolorscheme" ]
+    community_ids = []
 
 [wallpaper]
 directory = "/home/dominic/dev/wallpapers"
