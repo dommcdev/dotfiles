@@ -1,40 +1,77 @@
 - name: Install GUI packages
   vars:
-    arch_pkgs:
-      - audacity
-      - decibels
-      - papers
-      - loupe
-      - showtime
-      - libreoffice-fresh
-      - blender
-      - kdenlive
-      - kid3
-      - gnome-disk-utility
-      - gimp
-      - resources
-      - evince
-      - celluloid
-      - bluetui
-      - wiremix
-      - gnuplot
-      - nautilus
-      - nautilus-python
-      - gvfs-smb
-      - gvfs-dnssd
-      - gvfs-mtp
-      - sushi
+    pkgs:
+      Archlinux:
+        - audacity
+        - decibels
+        - papers
+        - loupe
+        - showtime
+        - libreoffice-fresh
+        - blender
+        - kdenlive
+        - kid3
+        - gnome-disk-utility
+        - gimp
+        - resources
+        - evince
+        - celluloid
+        - bluetui
+        - wiremix
+        - gnuplot
+        - nautilus
+        - nautilus-python
+        - gvfs-smb
+        - gvfs-dnssd
+        - gvfs-mtp
+        - sushi
+      Debian:
+        - audacity
+        - loupe
+        - libreoffice
+        - blender
+        - kdenlive
+        - kid3
+        - gnome-disk-utility
+        - gimp
+        - evince
+        - celluloid
+        - gnuplot
+        - nautilus
+        - python3-nautilus
+        - gvfs-backends
+        - gnome-sushi
+      RedHat:
+        - audacity
+        - decibels
+        - papers
+        - loupe
+        - showtime
+        - libreoffice
+        - blender
+        - kdenlive
+        - kid3
+        - gnome-disk-utility
+        - gimp
+        - evince
+        - celluloid
+        - gnuplot
+        - nautilus
+        - nautilus-python
+        - gvfs-smb
+        - gvfs-mtp
+        - sushi
     gui_flatpaks:
       - org.nickvision.tubeconverter
       - com.github.PintaProject.Pinta
       - org.onlyoffice.desktopeditors
   block:
-    - name: Install GUI packages on Arch
+    - name: Install native GUI packages
       ansible.builtin.package:
-        name: "{{ arch_pkgs }}"
+        name: "{{ pkgs[ansible_facts['os_family']] }}"
         state: present
       become: true
-      when: is_arch
+      when: ansible_facts['os_family'] in pkgs
 
     - name: Install GUI Flatpaks
       community.general.flatpak:
@@ -45,30 +82,64 @@
       become: true
       when: is_linux
 
-- name: Create screenshot and video directories
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: directory
-    mode: "0755"
-  loop:
-    - "{{ home }}/Downloads/Screenshots"
-    - "{{ home }}/Downloads/Videos"
-
-- name: Ensure GUI config directories exist
+- name: Ensure config directories exist
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     mode: "0755"
   loop:
     - "{{ home }}/.config/GIMP/3.2"
-    - "{{ home }}/.local/share/applications"
-    - "{{ home }}/.local/share/icons/hicolor/scalable/apps"
+  when: is_linux
 
-- name: Install Chrome on Linux
+- name: Install Chrome on Arch
   kewlfft.aur.aur:
     name: google-chrome
     state: present
   when: is_arch
+
+- name: Configure Google Chrome repository on Ubuntu
+  become: true
+  when: is_ubuntu
+  block:
+    - name: Ensure apt keyring directory exists
+      ansible.builtin.file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: "0755"
+
+    - name: Install Google Linux signing key
+      ansible.builtin.get_url:
+        url: https://dl.google.com/linux/linux_signing_key.pub
+        dest: /etc/apt/keyrings/google-chrome.asc
+        mode: "0644"
+
+    - name: Add Google Chrome apt repository
+      ansible.builtin.apt_repository:
+        repo: >-
+          deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.asc]
+          https://dl.google.com/linux/chrome/deb/ stable main
+        filename: google-chrome
+        state: present
+        update_cache: true
+
+- name: Configure Google Chrome repository on Fedora
+  ansible.builtin.yum_repository:
+    name: google-chrome
+    description: Google Chrome
+    baseurl: https://dl.google.com/linux/chrome/rpm/stable/x86_64
+    enabled: true
+    gpgcheck: true
+    gpgkey: https://dl.google.com/linux/linux_signing_key.pub
+    state: present
+  become: true
+  when: is_fedora
+
+- name: Install Chrome on Ubuntu and Fedora
+  ansible.builtin.package:
+    name: google-chrome-stable
+    state: present
+  become: true
+  when: is_ubuntu or is_fedora
 
 - name: Install Chrome and OnlyOffice on macOS
   community.general.homebrew_cask:
@@ -86,6 +157,7 @@
     state: link
     force: true
   loop: "{{ lookup('ansible.builtin.fileglob', root + '/apps/gimp/*', wantlist=True) }}"
+  when: is_linux
 
 - name: Link Chrome flags on Linux
   ansible.builtin.file:
@@ -98,30 +170,6 @@
 - name: Configure Linux desktop integration
   when: is_linux
   block:
-    - name: Link desktop files
-      ansible.builtin.file:
-        src: "{{ item }}"
-        dest: "{{ home }}/.local/share/applications/{{ item | basename }}"
-        state: link
-        force: true
-      loop: >-
-        {{ lookup('ansible.builtin.fileglob', root + '/apps/desktop-files/misc-apps/*', wantlist=True)
-        + lookup('ansible.builtin.fileglob', root + '/apps/desktop-files/hidden/*', wantlist=True) }}
-
-    - name: Link desktop file icons
-      ansible.builtin.file:
-        src: "{{ item }}"
-        dest: "{{ home }}/.local/share/icons/hicolor/scalable/apps/{{ item | basename }}"
-        state: link
-        force: true
-      loop: "{{ lookup('ansible.builtin.fileglob', root + '/apps/desktop-files/icons/*', wantlist=True) }}"
-
-    - name: Update local icon and desktop caches
-      ansible.builtin.shell: |
-        gtk-update-icon-cache -f -t "{{ home }}/.local/share/icons/hicolor"
-        update-desktop-database "{{ home }}/.local/share/applications"
-      changed_when: false
-
     - name: Configure Nautilus captions
       ansible.builtin.command: gsettings set org.gnome.nautilus.icon-view captions "['size', 'none', 'none']"
       changed_when: false
@@ -129,4 +177,49 @@
     - name: Configure GTK file chooser sorting
       ansible.builtin.command: gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true
       changed_when: false
+
+- name: Hide junk applications from launchers
+  vars:
+    hidden_apps:
+      - avahi-discover
+      - bssh
+      - btop
+      - bvnc
+      - cmake-gui
+      - fcitx5-configtool
+      - fcitx5-wayland-launcher
+      - java-java-openjdk
+      - jconsole-java-openjdk
+      - jshell-java-openjdk
+      - lstopo
+      - org.fcitx.fcitx5-config-qt
+      - org.fcitx.fcitx5-migrator
+      - org.fcitx.fcitx5-qt5-gui-wrapper
+      - org.fcitx.fcitx5-qt6-gui-wrapper
+      - org.fcitx.Fcitx5
+      - qv4l2
+      - qvidcap
+      - remote-viewer
+      - uuctl
+      - xdvi
+      - xgps
+      - xgpsspeed
+      - yazi
+  block:
+    - name: Ensure local applications directory exists
+      ansible.builtin.file:
+        path: "{{ home }}/.local/share/applications"
+        state: directory
+        mode: "0755"
+
+    - name: Create hidden application entries
+      ansible.builtin.copy:
+        dest: "{{ home }}/.local/share/applications/{{ item }}.desktop"
+        mode: "0644"
+        content: |
+          [Desktop Entry]
+          Type=Application
+          Name={{ item }}
+          NoDisplay=true
+      loop: "{{ hidden_apps }}"
 # TODO add satty here? Or ditch

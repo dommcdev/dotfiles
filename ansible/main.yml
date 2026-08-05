@@ -60,6 +60,9 @@
       when: is_managed_desktop and is_linux
     - name: TUI Applications
       ansible.builtin.import_tasks: tasks/apps/tui.yml
+    - name: GrandOrgue
+      ansible.builtin.include_tasks: tasks/apps/grandorgue.yml
+      when: setup_grandorgue
     - name: Script links
       ansible.builtin.include_tasks: tasks/apps/scripts.yml
     - name: Syncthing

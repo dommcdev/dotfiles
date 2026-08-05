@@ -19,4 +19,4 @@
 - name: Install opencode with Bun
   ansible.builtin.command: bun add -g opencode-ai
   changed_when: false
-#TODO Opencode desktop?
+# TODO Opencode desktop?

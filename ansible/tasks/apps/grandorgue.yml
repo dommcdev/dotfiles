@@ -1,0 +1,12 @@
+- name: Install GrandOrgue
+  community.general.flatpak:
+    name: net.sourceforge.GrandOrgue
+    remote: flathub
+    method: system
+    state: present
+  become: true
+  when: is_linux
+# Note - I couldn't get realtime to work with flatpak.
+# sudo pacman -S --noconfirm --needed realtime-privileges
+# sudo usermod -aG realtime $USER
+# TODO add carla stuff?

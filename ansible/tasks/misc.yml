@@ -181,38 +181,6 @@
   become: true
   when: is_linux and is_managed_desktop
 
-- name: Clone wallpapers
-  ansible.builtin.git:
-    repo: https://github.com/dommcdev/wallpapers.git
-    dest: "{{ home }}/dev/wallpapers"
-    version: main
-    update: false
-  when: is_managed_desktop
-
-- name: Configure GrandOrgue
-  when: is_linux and is_managed_desktop
-  block:
-    - name: Install GrandOrgue Flatpak
-      community.general.flatpak:
-        name: net.sourceforge.GrandOrgue
-        remote: flathub
-        method: system
-        state: present
-      become: true
-
-    - name: Create config directory
-      ansible.builtin.file:
-        path: "{{ home }}/.config/GrandOrgue"
-        state: directory
-        mode: "0755"
-
-    - name: Configure Flatpak overrides
-      ansible.builtin.command: "flatpak override --user {{ item }} net.sourceforge.GrandOrgue"
-      changed_when: false
-      loop:
-        - "--env=HOME={{ home }}/.config/GrandOrgue"
-        - "--env=PIPEWIRE_LATENCY=128/48000"
-
 - name: Link screensaver scripts
   ansible.builtin.file:
     src: "{{ item }}"
@@ -227,3 +195,12 @@
     name: python-terminaltexteffects
     state: present
   when: is_arch and is_managed_desktop
+
+- name: Create screenshot and video directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - "{{ home }}/Downloads/Screenshots"
+    - "{{ home }}/Downloads/Videos"

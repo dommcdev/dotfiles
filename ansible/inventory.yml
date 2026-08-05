@@ -3,13 +3,25 @@ all:
     chocobo:
       ansible_host: chocobo
       ansible_become_exe: /usr/bin/sudo.ws
+      is_headless: true
+      is_hardened: true
       #TODO remove the above stupid workaround once this merges: https://github.com/ansible/ansible/pull/86964
     kabigon:
       ansible_host: kabigon
+      is_managed_desktop: true
+      is_dev_env: true
+      setup_grandorgue: true
     pikachu:
       ansible_host: pikachu
+      is_managed_desktop: true
+      is_dev_env: true
+      has_battery: true
+      has_fingerprint_reader: true
+      setup_grandorgue: true
     archlab:
       ansible_host: archlinux
+      is_managed_desktop: true
+      is_dev_env: true
 
   vars:
     ansible_connection: "{{ 'local' if inventory_hostname == lookup('pipe', 'hostname -s') else 'ssh' }}"
@@ -32,30 +44,4 @@ all:
     has_battery: false
     has_fingerprint_reader: false
     manage_gpu: true
-
-  children:
-    servers:
-      hosts:
-        chocobo:
-      vars:
-        is_headless: true
-        is_hardened: true
-
-    workstations:
-      hosts: {}
-
-    custom:
-      hosts:
-        kabigon:
-        pikachu:
-        archlab:
-      vars:
-        is_managed_desktop: true
-        is_dev_env: true
-
-    laptops:
-      hosts:
-        pikachu:
-      vars:
-        has_battery: true
-        has_fingerprint_reader: true
+    setup_grandorgue: false

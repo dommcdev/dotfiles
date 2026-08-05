@@ -9,8 +9,8 @@
       - uv
       - github-cli
       - nodejs
-      - npm
       - rust
+      - typst
     state: present
   become: true
   when: is_arch
@@ -23,12 +23,14 @@
       - python
       - typst
       - deno
+      - node
       - uv
+      - rust
     state: present
     update_homebrew: false
   when: is_ubuntu or is_fedora or is_macos
 
-- name: Install GitHub CLI for repo setup with Homebrew
+- name: Install GitHub CLI with Homebrew
   community.general.homebrew:
     name: gh
     state: present
@@ -49,21 +51,7 @@
   changed_when: false
   failed_when: false
 
-- name: Use SSH remote for dotfiles repo
-  community.general.git_config:
-    name: remote.origin.url
-    value: git@github.com:dommcdev/dotfiles.git
-    scope: local
-    repo: "{{ root }}"
-
-- name: Use SSH remote for wallpapers repo
-  community.general.git_config:
-    name: remote.origin.url
-    value: git@github.com:dommcdev/wallpapers.git
-    scope: local
-    repo: "{{ home }}/dev/wallpapers"
-
-- name: Configure beancount tools
+- name: Install Beancount and Fava
   block:
     - name: Install beancount AUR tools on Arch
       kewlfft.aur.aur:
@@ -78,12 +66,6 @@
         name:
           - beancount
           - fava
-          - rust
         state: present
         update_homebrew: false
       when: is_ubuntu or is_fedora or is_macos
-
-    - name: Clone beans repo
-      ansible.builtin.command: gh repo clone dommcdev/beans "{{ home }}/dev/beans"
-      args:
-        creates: "{{ home }}/dev/beans"
