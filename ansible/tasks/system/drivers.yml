@@ -75,23 +75,21 @@
   vars:
     pkgs:
       Archlinux:
-        - lib32-mesa
-        - lib32-vulkan-radeon
         - linux-firmware-amdgpu
         - mesa
         - vulkan-radeon
       RedHat:
         - amd-gpu-firmware
         - mesa-dri-drivers
-        - mesa-dri-drivers.i686
         - mesa-vulkan-drivers
-        - mesa-vulkan-drivers.i686
       Debian:
         - libgl1-mesa-dri
         - mesa-va-drivers
         - mesa-vdpau-drivers
         - mesa-vulkan-drivers
-  when: "'amd' in gpu_vendors"
+  when:
+    - manage_gpu
+    - "'amd' in gpu_vendors"
   block:
     - name: Install AMD drivers and firmware
       ansible.builtin.package:
@@ -104,7 +102,6 @@
       ansible.builtin.dnf:
         name:
           - mesa-va-drivers-freeworld
-          - mesa-va-drivers-freeworld.i686
         state: present
         allowerasing: true
       become: true
@@ -115,8 +112,6 @@
     pkgs:
       Archlinux:
         - intel-media-driver
-        - lib32-mesa
-        - lib32-vulkan-intel
         - linux-firmware-intel
         - mesa
         - vulkan-intel
@@ -124,9 +119,7 @@
         - intel-gpu-firmware
         - intel-media-driver
         - mesa-dri-drivers
-        - mesa-dri-drivers.i686
         - mesa-vulkan-drivers
-        - mesa-vulkan-drivers.i686
       Debian:
         - intel-media-va-driver-non-free
         - libgl1-mesa-dri
@@ -136,45 +129,37 @@
     state: present
   become: true
   when:
+    - manage_gpu
     - "'intel' in gpu_vendors"
     - ansible_facts['os_family'] in pkgs
 
 - name: Install NVIDIA graphics support
-  when: "'nvidia' in gpu_vendors"
+  when:
+    - manage_gpu
+    - "'nvidia' in gpu_vendors"
   block:
-    - name: Find installed Arch kernel module directories
-      ansible.builtin.find:
-        paths: /usr/lib/modules
-        patterns: pkgbase
-        recurse: true
-        file_type: file
-      register: arch_kernel_pkgbases
-      when: is_arch
-
-    - name: Find packages owning the installed Arch kernels
-      ansible.builtin.command: "pacman --query --owns --quiet {{ item.path }}"
-      loop: "{{ arch_kernel_pkgbases.files | default([]) }}"
-      loop_control:
-        label: "{{ item.path }}"
-      register: arch_kernel_owners
+    - name: Find headers for installed Arch kernels
+      ansible.builtin.shell:
+        cmd: |
+          for pkgbase in /usr/lib/modules/*/pkgbase; do
+            [ -r "$pkgbase" ] && printf '%s-headers\n' "$(cat "$pkgbase")"
+          done
+        executable: /bin/sh
+      register: arch_kernel_headers
       changed_when: false
-      failed_when: false
       when: is_arch
 
     - name: Install headers for all installed Arch kernels
       ansible.builtin.package:
-        name: "{{ item.stdout }}-headers"
+        name: "{{ arch_kernel_headers.stdout_lines | default([]) | unique }}"
         state: present
       become: true
-      loop: "{{ arch_kernel_owners.results | default([]) | selectattr('rc', 'equalto', 0) }}"
-      loop_control:
-        label: "{{ item.stdout }}-headers"
       when: is_arch
 
     - name: Install NVIDIA open DKMS drivers on Arch
       ansible.builtin.package:
         name:
-          - lib32-nvidia-utils
+          - libva-nvidia-driver
           - linux-firmware-nvidia
           - nvidia-open-dkms
           - nvidia-settings
@@ -201,19 +186,21 @@
       ansible.builtin.package:
         name:
           - "{{ ubuntu_nvidia_open_driver.stdout }}"
+          - nvidia-vaapi-driver
           - nvidia-settings
         state: present
       become: true
       when: is_ubuntu
 
-    - name: Install NVIDIA open kernel drivers and firmware on Fedora
+    - name: Install NVIDIA drivers on Fedora
       ansible.builtin.package:
         name:
-          - akmod-nvidia-open
-          - nvidia-gpu-firmware
+          - akmod-nvidia
+          - libva-nvidia-driver
           - nvidia-settings
           - xorg-x11-drv-nvidia-cuda
-          - xorg-x11-drv-nvidia-libs.i686
         state: present
       become: true
       when: is_fedora
+# NOTE: Older Intel GPUs may require libva-intel-driver instead of intel-media-driver.
+# NOTE: NVIDIA open kernel modules only support Turing and newer GPUs.

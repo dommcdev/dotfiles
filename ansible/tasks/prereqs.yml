@@ -67,13 +67,6 @@
         state: present
         disable_gpg_check: true
 
-    - name: Enable RPM Fusion tainted repositories
-      ansible.builtin.package:
-        name:
-          - rpmfusion-free-release-tainted
-          - rpmfusion-nonfree-release-tainted
-        state: present
-
 - name: Install Homebrew
   when: is_ubuntu or is_fedora or is_macos
   block:

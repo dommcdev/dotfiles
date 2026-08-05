@@ -77,7 +77,6 @@
         - unrar
         - trash-cli
         - wget
-        - ffmpeg
         - fd-find
         - ripgrep
         - poppler-utils
@@ -149,6 +148,14 @@
         state: present
       become: true
       when: ansible_facts['os_family'] in pkgs
+
+    - name: Install unrestricted FFmpeg on Fedora
+      ansible.builtin.dnf:
+        name: ffmpeg
+        state: present
+        allowerasing: true
+      become: true
+      when: is_fedora
 
     - name: Install terminal Homebrew packages on Linux
       community.general.homebrew:

@@ -30,6 +30,7 @@ all:
     is_hardened: false
     has_battery: false
     has_fingerprint_reader: false
+    manage_gpu: true
 
   children:
     servers:

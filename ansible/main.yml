@@ -47,10 +47,6 @@
     - name: Prerequisites
       ansible.builtin.import_tasks: tasks/prereqs.yml
 
-    - name: Drivers and media codecs
-      ansible.builtin.include_tasks: tasks/system/drivers.yml
-      when: is_managed_desktop and is_linux
-
       # Setup ssh access before nuking password auth later on
     - name: Tailscale
       ansible.builtin.import_tasks: tasks/apps/tailscale.yml
@@ -59,6 +55,9 @@
     - name: CLI Utilties
       ansible.builtin.import_tasks: tasks/apps/cli.yml
 
+    - name: Drivers and media codecs
+      ansible.builtin.include_tasks: tasks/system/drivers.yml
+      when: is_managed_desktop and is_linux
     - name: TUI Applications
       ansible.builtin.import_tasks: tasks/apps/tui.yml
     - name: Script links
@@ -99,7 +98,7 @@
       ansible.builtin.import_tasks: tasks/apps/ghostty.yml
     - name: Vicinae
       ansible.builtin.include_tasks: tasks/apps/vicinae.yml
-      when: is_managed_desktop and (not is_ubuntu)
+      when: is_managed_desktop and is_linux and (not is_ubuntu)
     - name: Zed
       ansible.builtin.import_tasks: tasks/apps/zed.yml
     - name: Nvim
