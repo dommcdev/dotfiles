@@ -1,2 +1,0 @@
-- shell:
-    - if [ ! -d "$HOME/dev/wallpapers" ]; then git clone https://github.com/dommcdev/wallpapers.git $HOME/dev/wallpapers; fi

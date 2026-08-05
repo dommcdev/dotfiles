@@ -134,19 +134,22 @@ For libadwaita, use custom gtk.css in ~/.config/gtk-4.0/
 ### Flatpaks
 The adw-gtk3 theme should be installed automatically unless explicitly masked.
 
-If your desired theme is not avaible as a flatpak you can instead place it in `~/.local/share/themes` and then put in a global flatpak overrides to allow sandbox access. If you want to install a theme from a package manager you will need to set up a hook to copy the theme from `/usr/share/themes` on update.
+If your desired theme is not avaible as a flatpak yff can instead place it in `~/.local/share/themes` and then put in a global flatpak override to allow sandbox access. If you want to install a theme from a package manager you will need to set up a hook to copy the theme from `/usr/share/themes` on update.
 
 For getting the correct colors, simply put in an override to allow `~/.config/gtk-3.0/` and `~/.config/gtk-4.0/` into the sandbox. IMPORTANT: The folder itself can be a symlink, but the individual files cannot be!
 
-### Hyprland theming
+## Hyprland theming
 `~/.config/hypr/application-style.conf` provides styling for hypr* qt6 apps. See https://wiki.hypr.land/Hypr-Ecosystem/hyprland-qt-support/
 
 More useful is `~/.config/hypr/hyprtoolkit.conf`, which themings hyprland dialogs, etc.
 
-### Cursor theming
+## Cursor theming
 
 Place Hyprcursor themes in `~/.local/share/icons/`. Hyprland detects them automatically. If more than one theme is installed, set `HYPRCURSOR_THEME` and `HYPRCURSOR_SIZE` in `~/.config/uwsm/env-hyprland`.
 
 Alternatively, add `exec-once = hyprctl setcursor <name> <size>` to the Hyprland config. This also works with XCursor themes.
 
 For XWayland applications, set the cursor theme with `Inherits=<name>` in `~/.local/share/icons/default/index.theme`.
+
+## Icons
+Gsettings (icon-theme) works for most things (e.g. nautilus), but gtk-4.0/settings.ini (and qt6ct) may be needed as well. Vicinae and most launchers also allow setting a different icon set if desired.

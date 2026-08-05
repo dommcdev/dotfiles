@@ -27,6 +27,7 @@ all:
     # Inventory-defined facts
     is_headless: false
     is_managed_desktop: false
+    is_dev_env: false
     is_hardened: false
     has_battery: false
     has_fingerprint_reader: false
@@ -50,6 +51,7 @@ all:
         archlab:
       vars:
         is_managed_desktop: true
+        is_dev_env: true
 
     laptops:
       hosts:

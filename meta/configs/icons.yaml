@@ -1,5 +1,0 @@
-- shell:
-    - sudo pacman -S --noconfirm --needed papirus-icon-theme
-    - gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
-#Applying icon theme
-#Gsettings (icon-theme) works for most things (e.g. nautilus), but gtk-4.0/settings.ini may be needed as well

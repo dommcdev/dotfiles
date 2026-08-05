@@ -83,6 +83,9 @@
       ansible.builtin.import_tasks: tasks/apps/ssh.yml
     - name: Git
       ansible.builtin.import_tasks: tasks/apps/git.yml
+    - name: Development environment
+      ansible.builtin.include_tasks: tasks/apps/dev.yml
+      when: is_dev_env
     - name: Zsh
       ansible.builtin.import_tasks: tasks/apps/zsh.yml
     - name: Opencode

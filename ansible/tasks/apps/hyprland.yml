@@ -11,6 +11,7 @@
         - hyprpicker
         - qt5-wayland
         - qt6-wayland
+        - udiskie
       RedHat:
         - uwsm
         - newt
@@ -21,6 +22,7 @@
         - hyprpicker
         - qt5-qtwayland
         - qt6-qtwayland
+        - udiskie
   block:
     - name: Enable Hyprland COPR on Fedora
       community.general.copr:

@@ -227,35 +227,3 @@
     name: python-terminaltexteffects
     state: present
   when: is_arch and is_managed_desktop
-
-- name: Configure Timeshift
-  become: true
-  when: is_arch and is_managed_desktop
-  block:
-    - name: Install packages
-      ansible.builtin.package:
-        name:
-          - timeshift
-          - btrfs-progs
-          - xorg-xhost
-          - cronie
-        state: present
-
-    - name: Create config directory
-      ansible.builtin.file:
-        path: /etc/timeshift
-        state: directory
-        mode: "0755"
-
-    - name: Copy config
-      ansible.builtin.copy:
-        src: "{{ root }}/timeshift/timeshift.json"
-        dest: /etc/timeshift/timeshift.json
-        mode: "0644"
-        remote_src: true
-
-    - name: Enable cronie
-      ansible.builtin.systemd_service:
-        name: cronie.service
-        enabled: true
-        state: started
