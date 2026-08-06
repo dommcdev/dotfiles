@@ -20,12 +20,6 @@
         dest: /etc/apt/keyrings/google-chrome.asc
         mode: "0644"
 
-    - name: Remove legacy Google Chrome apt repository
-      ansible.builtin.file:
-        path: /etc/apt/sources.list.d/google-chrome.list
-        state: absent
-      register: legacy_chrome_repository
-
     - name: Add Google Chrome apt repository
       ansible.builtin.deb822_repository:
         name: google-chrome
@@ -42,7 +36,7 @@
     - name: Update apt cache for Google Chrome repository
       ansible.builtin.apt:
         update_cache: true
-      when: legacy_chrome_repository.changed or chrome_repository.changed
+      when: chrome_repository.changed
 
 - name: Configure Google Chrome repository on Fedora
   ansible.builtin.yum_repository:

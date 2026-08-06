@@ -22,4 +22,4 @@ Nvidia hyprland support
 Git timeline viewer
 
 New ymls: Switch emulator, retroarch, firewall (ufw)
-Ansible: Auth, hardware
+Ansible: Auth, hardware, pkg vars at end, comment overhaul
