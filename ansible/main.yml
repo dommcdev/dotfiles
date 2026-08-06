@@ -1,14 +1,17 @@
-- name: Install Ansible deps
+- name: Configure machines
   hosts: all
   gather_facts: false
 
   vars_files:
     - secrets.yml
 
-  vars:
-    ansible_become_password: "{{ become_passwords[inventory_hostname] }}"
-
   tasks:
+    - name: Use stored become password when available
+      ansible.builtin.set_fact:
+        ansible_become_password: "{{ become_passwords[inventory_hostname] }}"
+      when: inventory_hostname in become_passwords
+      no_log: true
+
     - name: Install Python when missing
       ansible.builtin.raw: |
         if command -v python3 >/dev/null 2>&1; then
@@ -30,19 +33,10 @@
       register: python_bootstrap
       changed_when: "'PYTHON_BOOTSTRAPPED' in python_bootstrap.stdout"
 
-- name: Configure machines
-  hosts: all
-  gather_facts: true
+      # Now that python is guaranteed Ansible can operate fully, including gathering facts
+    - name: Gather facts
+      ansible.builtin.setup:
 
-  vars_files:
-    - secrets.yml
-
-  vars:
-    ansible_become_password: "{{ become_passwords[inventory_hostname] }}"
-
-  pre_tasks: []
-
-  tasks:
     # Clone dotfiles, grab essential deps, package managers, etc
     - name: Prerequisites
       ansible.builtin.import_tasks: tasks/prereqs.yml

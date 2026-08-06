@@ -2,10 +2,6 @@ Host chocobo kabigon pikachu applepie
     HostName %h.tetra-salmon.ts.net
     User dominic
 
-Host archlinux
-    HostName archlinux.tetra-salmon.ts.net
-    User arch
-
 Host srv2
     HostName srv2
     User matthew
