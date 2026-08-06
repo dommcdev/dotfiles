@@ -1,4 +1,0 @@
-
-- shell:
-  - brew install --cask raycast
-  - 'echo "Your password is: password123"'

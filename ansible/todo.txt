@@ -1,6 +1,0 @@
-ansible/tasks/misc.yml
-ansible/tasks/system/hardware.yml
-
-ansible/tasks/system/auth.yml
-
-ansible/tasks/mac.yml

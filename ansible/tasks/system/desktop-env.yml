@@ -7,6 +7,7 @@
   vars:
     pkgs:
       Archlinux:
+        - accountsservice
         - xdg-utils
         - ddcutil
         - wl-clipboard

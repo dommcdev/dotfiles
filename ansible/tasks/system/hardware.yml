@@ -1,5 +1,5 @@
 # Will contain firmware stuff, bluetooth, audio, and power management
-#- fwupd
+#- fwupd, dmidecode
 - name: Configure power profiles daemon on laptops
   become: true
   when: is_arch and has_battery

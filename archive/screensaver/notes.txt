@@ -1,0 +1,3 @@
+Will needs to install python-terminal-texteffects (aur) for this to work. Also need figlet font to generate the ascii (.tte) files.
+
+.tte is an extension I made up fyi.

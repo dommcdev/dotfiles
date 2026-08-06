@@ -94,7 +94,7 @@
     - name: Git
       ansible.builtin.import_tasks: tasks/apps/git.yml
     - name: Development environment
-      ansible.builtin.include_tasks: tasks/apps/dev.yml
+      ansible.builtin.include_tasks: tasks//dev.yml
       when: is_dev_env
     - name: Zsh
       ansible.builtin.import_tasks: tasks/apps/zsh.yml
@@ -119,3 +119,5 @@
     - name: Noctalia
       ansible.builtin.import_tasks: tasks/apps/noctalia.yml
       when: is_managed_desktop and is_arch
+    - name: Misc
+      ansible.builtin.import_tasks: tasks/mics.yml

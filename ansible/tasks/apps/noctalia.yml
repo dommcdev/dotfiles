@@ -5,7 +5,6 @@
         - noctalia
         - noctalia-greeter
         - greetd
-        - accountsservice
         - gpu-screen-recorder
   ansible.builtin.package:
     name: "{{ pkgs[ansible_facts['os_family']] }}"

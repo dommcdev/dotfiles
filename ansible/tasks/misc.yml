@@ -17,15 +17,6 @@
   become: true
   when: is_fedora
 
-- name: Increase sudo password tries
-  ansible.builtin.copy:
-    dest: /etc/sudoers.d/passwd-tries
-    content: "Defaults passwd_tries=10\n"
-    mode: "0440"
-    validate: "visudo -cf %s"
-  become: true
-  when: is_linux and is_managed_desktop
-
 - name: Create some dirs
   ansible.builtin.file:
     path: "{{ item }}"
@@ -37,59 +28,14 @@
     - "{{ home }}/programs"
     - "{{ home }}/backups"
 
-# BELOW IS UNREVIEWED
 - name: Install miscellaneous system packages
   ansible.builtin.package:
     name: "{{ pkgs[ansible_facts['os_family']] }}"
     state: present
   become: true
-  when: is_linux and is_managed_desktop and ansible_facts['os_family'] in pkgs
+  when: is_managed_desktop and ansible_facts['os_family'] in pkgs
   vars:
     pkgs:
       Archlinux:
-        - dmidecode
         - downgrade
         - reflector
-      Debian:
-        - dmidecode
-      RedHat:
-        - dmidecode
-
-- name: Configure Arch faillock
-  become: true
-  when: is_arch and is_managed_desktop
-  block:
-    - name: Configure auth precheck
-      ansible.builtin.lineinfile:
-        path: /etc/pam.d/system-auth
-        regexp: "^(auth\\s+required\\s+pam_faillock\\.so)\\s+preauth.*$"
-        line: "auth       required                    pam_faillock.so      preauth silent deny=10 unlock_time=120"
-        backrefs: false
-
-    - name: Configure auth failure
-      ansible.builtin.lineinfile:
-        path: /etc/pam.d/system-auth
-        regexp: "^(auth\\s+\\[default=die\\]\\s+pam_faillock\\.so)\\s+authfail.*$"
-        line: "auth       [default=die]               pam_faillock.so      authfail deny=10 unlock_time=120"
-        backrefs: false
-
-    - name: Configure deny limit
-      ansible.builtin.lineinfile:
-        path: /etc/security/faillock.conf
-        regexp: "^#?\\s*deny\\s*=.*$"
-        line: "deny = 10"
-
-- name: Link screensaver scripts
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ home }}/.local/bin/{{ item | basename }}"
-    state: link
-    force: true
-  loop: "{{ lookup('ansible.builtin.fileglob', root + '/screensaver/scripts/*', wantlist=True) }}"
-  when: is_managed_desktop
-
-- name: Install screensaver text effects package
-  kewlfft.aur.aur:
-    name: python-terminaltexteffects
-    state: present
-  when: is_arch and is_managed_desktop
