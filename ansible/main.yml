@@ -57,7 +57,7 @@
 
     - name: Drivers and media codecs
       ansible.builtin.include_tasks: tasks/system/drivers.yml
-      when: is_managed_desktop and is_linux
+      when: is_managed_desktop
     - name: GUI Applications
       ansible.builtin.import_tasks: tasks/apps/gui.yml
     - name: Browser
@@ -73,16 +73,16 @@
       ansible.builtin.include_tasks: tasks/apps/syncthing.yml
     - name: Network
       ansible.builtin.include_tasks: tasks/system/network.yml
-      when: is_managed_desktop and is_linux
+      when: is_managed_desktop
     - name: Printing
       ansible.builtin.include_tasks: tasks/system/printing.yml
-      when: is_managed_desktop and is_linux
+      when: is_managed_desktop
     - name: Desktop environment packages
       ansible.builtin.include_tasks: tasks/system/desktop-env.yml
-      when: is_managed_desktop and is_linux
+      when: is_managed_desktop
     - name: Appearance
       ansible.builtin.include_tasks: tasks/system/appearance.yml
-      when: is_linux and is_managed_desktop
+      when: is_managed_desktop
     - name: Hyprland
       ansible.builtin.include_tasks: tasks/apps/hyprland.yml
       when: is_managed_desktop and (is_arch or is_fedora)
@@ -111,7 +111,7 @@
       ansible.builtin.import_tasks: tasks/apps/ghostty.yml
     - name: Vicinae
       ansible.builtin.include_tasks: tasks/apps/vicinae.yml
-      when: is_managed_desktop and is_linux and (not is_ubuntu)
+      when: is_managed_desktop and (not is_ubuntu)
     - name: Zed
       ansible.builtin.import_tasks: tasks/apps/zed.yml
     - name: Nvim

@@ -1,10 +1,12 @@
-- name: Disable Ubuntu MOTD scripts
+- name: Disable Ubuntu login messages
   ansible.builtin.file:
-    path: "{{ item }}"
+    path: "{{ home }}/.hushlogin"
+    state: touch
     mode: "0644"
-  become: true
-  loop: "{{ lookup('ansible.builtin.fileglob', '/etc/update-motd.d/*', wantlist=True) }}"
+    access_time: preserve
+    modification_time: preserve
   when: is_ubuntu
+  # Note: can also do chmod -x /etc/update-motd.d/*
 
 - name: Configure Fedora DNF defaults
   ansible.builtin.blockinfile:

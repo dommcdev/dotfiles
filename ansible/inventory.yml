@@ -18,10 +18,17 @@ all:
       has_battery: true
       has_fingerprint_reader: true
       setup_grandorgue: true
-    archlab:
-      ansible_host: archlinux
+    arch:
+      ansible_host: 192.168.122.165
       is_managed_desktop: true
       is_dev_env: true
+      setup_grandorgue: true
+    ubuntu-tester:
+      ansible_become_exe: /usr/bin/sudo.ws
+      ansible_host: 192.168.122.176
+      is_managed_desktop: true
+      is_dev_env: true
+      setup_grandorgue: true
 
   vars:
     ansible_connection: "{{ 'local' if inventory_hostname == lookup('pipe', 'hostname -s') else 'ssh' }}"
