@@ -77,6 +77,9 @@
     - name: Printing
       ansible.builtin.include_tasks: tasks/system/printing.yml
       when: is_managed_desktop and is_linux
+    - name: Desktop environment packages
+      ansible.builtin.include_tasks: tasks/system/desktop-env.yml
+      when: is_managed_desktop and is_linux
     - name: Appearance
       ansible.builtin.include_tasks: tasks/system/appearance.yml
       when: is_linux and is_managed_desktop
