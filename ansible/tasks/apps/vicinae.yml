@@ -1,6 +1,8 @@
 - name: Install Vicinae
   block:
     - name: Install Vicinae on Arch
+      become: true
+      become_user: aur_builder
       kewlfft.aur.aur:
         name: vicinae-bin
         state: present

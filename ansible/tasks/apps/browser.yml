@@ -1,4 +1,6 @@
 - name: Install Chrome on Arch
+  become: true
+  become_user: aur_builder
   kewlfft.aur.aur:
     name: google-chrome
     state: present

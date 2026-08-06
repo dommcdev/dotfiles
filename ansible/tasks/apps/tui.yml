@@ -79,6 +79,8 @@
       when: ansible_facts['os_family'] in pkgs
 
     - name: Install wlctl from AUR
+      become: true
+      become_user: aur_builder
       kewlfft.aur.aur:
         name: wlctl-bin
         state: present

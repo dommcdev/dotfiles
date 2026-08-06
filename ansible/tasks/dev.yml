@@ -48,6 +48,8 @@
 - name: Install Beancount and Fava
   block:
     - name: Install beancount AUR tools on Arch
+      become: true
+      become_user: aur_builder
       kewlfft.aur.aur:
         name:
           - beancount

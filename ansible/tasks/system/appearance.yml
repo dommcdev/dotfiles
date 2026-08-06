@@ -26,6 +26,8 @@
             - qt6ct
 
     - name: Install Qt configuration tool on Arch
+      become: true
+      become_user: aur_builder
       kewlfft.aur.aur:
         name: qt6ct-kde
         state: present
