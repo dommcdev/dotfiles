@@ -90,6 +90,7 @@
       loop:
         - xdg-config/gtk-4.0
         - xdg-config/gtk-3.0
+        - "{{ root }}/appearance/gtk:ro"
 
     - name: Configure desktop appearance
       ansible.builtin.command: "gsettings set org.gnome.desktop.interface {{ item.key }} {{ item.value }}"

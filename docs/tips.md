@@ -136,7 +136,7 @@ The adw-gtk3 theme should be installed automatically unless explicitly masked.
 
 If your desired theme is not avaible as a flatpak yff can instead place it in `~/.local/share/themes` and then put in a global flatpak override to allow sandbox access. If you want to install a theme from a package manager you will need to set up a hook to copy the theme from `/usr/share/themes` on update.
 
-For getting the correct colors, simply put in an override to allow `~/.config/gtk-3.0/` and `~/.config/gtk-4.0/` into the sandbox. IMPORTANT: The folder itself can be a symlink, but the individual files cannot be!
+For getting the correct colors, simply put in an override to allow `~/.config/gtk-3.0/` and `~/.config/gtk-4.0/` into the sandbox. IMPORTANT: The folder itself can be a symlink, but the individual files cannot be (unless you adjust the flatpak overrides to include the location of said files)!
 
 ## Hyprland theming
 `~/.config/hypr/application-style.conf` provides styling for hypr* qt6 apps. See https://wiki.hypr.land/Hypr-Ecosystem/hyprland-qt-support/
