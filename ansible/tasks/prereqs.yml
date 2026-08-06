@@ -165,10 +165,9 @@
             remote_src: true
 
         - name: Run CachyOS repository installer
-          ansible.builtin.command: ./cachyos-repo.sh --install
+          ansible.builtin.shell: yes | ./cachyos-repo.sh --install # noqa risky-shell-pipe
           args:
             chdir: /tmp/cachyos-repo
-            stdin: "y\n"
           changed_when: true
 
     - name: Configure additional pacman repositories
