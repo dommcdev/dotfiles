@@ -1,4 +1,3 @@
-ansible/tasks/apps/gui.yml
 ansible/tasks/misc.yml
 ansible/tasks/system/hardware.yml
 

@@ -55,6 +55,7 @@
       when: is_macos
 
 # NOTE: Ubuntu/Fedora are missing wlctl, bluetui, and wiremix. Might be able to grab from crates.io or smth
+# MacOS is missing cava since it requires complicated setup
 - name: Install additional desktop-only TUI packages
   when: is_managed_desktop
   vars:
@@ -69,8 +70,6 @@
       RedHat:
         - blueman
         - pavucontrol
-    macos_brew_pkgs:
-      - cava
   block:
     - name: Install on Linux
       ansible.builtin.package:
@@ -84,13 +83,6 @@
         name: wlctl-bin
         state: present
       when: is_arch
-
-    - name: Install on macOS
-      community.general.homebrew:
-        name: "{{ macos_brew_pkgs }}"
-        state: present
-        update_homebrew: false
-      when: is_macos
 
 - name: Configure TUI applications
   block:

@@ -1,0 +1,64 @@
+- name: Install Chrome on Arch
+  kewlfft.aur.aur:
+    name: google-chrome
+    state: present
+  when: is_arch
+
+- name: Configure Google Chrome repository on Ubuntu
+  become: true
+  when: is_ubuntu
+  block:
+    - name: Ensure apt keyring directory exists
+      ansible.builtin.file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: "0755"
+
+    - name: Install Google Linux signing key
+      ansible.builtin.get_url:
+        url: https://dl.google.com/linux/linux_signing_key.pub
+        dest: /etc/apt/keyrings/google-chrome.asc
+        mode: "0644"
+
+    - name: Add Google Chrome apt repository
+      ansible.builtin.apt_repository:
+        repo: >-
+          deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.asc]
+          https://dl.google.com/linux/chrome/deb/ stable main
+        filename: google-chrome
+        state: present
+        update_cache: true
+
+- name: Configure Google Chrome repository on Fedora
+  ansible.builtin.yum_repository:
+    name: google-chrome
+    description: Google Chrome
+    baseurl: https://dl.google.com/linux/chrome/rpm/stable/x86_64
+    enabled: true
+    gpgcheck: true
+    gpgkey: https://dl.google.com/linux/linux_signing_key.pub
+    state: present
+  become: true
+  when: is_fedora
+
+- name: Install Chrome on Ubuntu and Fedora
+  ansible.builtin.package:
+    name: google-chrome-stable
+    state: present
+  become: true
+  when: is_ubuntu or is_fedora
+
+- name: Install Chrome on macOS
+  community.general.homebrew_cask:
+    name: google-chrome
+    state: present
+    update_homebrew: false
+  when: is_macos
+
+- name: Link Chrome flags on Linux
+  ansible.builtin.file:
+    src: "{{ root }}/apps/chrome-flags.conf"
+    dest: "{{ home }}/.config/chrome-flags.conf"
+    state: link
+    force: true
+  when: is_linux

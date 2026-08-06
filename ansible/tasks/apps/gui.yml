@@ -8,39 +8,23 @@
         - loupe
         - showtime
         - libreoffice-fresh
-        - blender
         - kdenlive
         - kid3
         - gnome-disk-utility
-        - gimp
         - resources
         - evince
-        - celluloid
         - bluetui
         - wiremix
-        - gnuplot
-        - nautilus
-        - nautilus-python
-        - gvfs-smb
-        - gvfs-dnssd
-        - gvfs-mtp
-        - sushi
+        - satty
       Debian:
         - audacity
         - loupe
         - libreoffice
-        - blender
         - kdenlive
         - kid3
         - gnome-disk-utility
-        - gimp
         - evince
-        - celluloid
-        - gnuplot
-        - nautilus
-        - python3-nautilus
-        - gvfs-backends
-        - gnome-sushi
+        - satty
       RedHat:
         - audacity
         - decibels
@@ -48,19 +32,11 @@
         - loupe
         - showtime
         - libreoffice
-        - blender
         - kdenlive
         - kid3
         - gnome-disk-utility
-        - gimp
         - evince
-        - celluloid
-        - gnuplot
-        - nautilus
-        - nautilus-python
-        - gvfs-smb
-        - gvfs-mtp
-        - sushi
+        - satty
     gui_flatpaks:
       - org.nickvision.tubeconverter
       - com.github.PintaProject.Pinta
@@ -82,94 +58,42 @@
       become: true
       when: is_linux
 
-- name: Ensure config directories exist
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: directory
-    mode: "0755"
-  loop:
-    - "{{ home }}/.config/GIMP/3.2"
-  when: is_linux
-
-- name: Install Chrome on Arch
-  kewlfft.aur.aur:
-    name: google-chrome
-    state: present
-  when: is_arch
-
-- name: Configure Google Chrome repository on Ubuntu
-  become: true
-  when: is_ubuntu
-  block:
-    - name: Ensure apt keyring directory exists
-      ansible.builtin.file:
-        path: /etc/apt/keyrings
-        state: directory
-        mode: "0755"
-
-    - name: Install Google Linux signing key
-      ansible.builtin.get_url:
-        url: https://dl.google.com/linux/linux_signing_key.pub
-        dest: /etc/apt/keyrings/google-chrome.asc
-        mode: "0644"
-
-    - name: Add Google Chrome apt repository
-      ansible.builtin.apt_repository:
-        repo: >-
-          deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.asc]
-          https://dl.google.com/linux/chrome/deb/ stable main
-        filename: google-chrome
-        state: present
-        update_cache: true
-
-- name: Configure Google Chrome repository on Fedora
-  ansible.builtin.yum_repository:
-    name: google-chrome
-    description: Google Chrome
-    baseurl: https://dl.google.com/linux/chrome/rpm/stable/x86_64
-    enabled: true
-    gpgcheck: true
-    gpgkey: https://dl.google.com/linux/linux_signing_key.pub
-    state: present
-  become: true
-  when: is_fedora
-
-- name: Install Chrome on Ubuntu and Fedora
-  ansible.builtin.package:
-    name: google-chrome-stable
-    state: present
-  become: true
-  when: is_ubuntu or is_fedora
-
-- name: Install Chrome and OnlyOffice on macOS
+- name: Install OnlyOffice on macOS
   community.general.homebrew_cask:
-    name:
-      - google-chrome
-      - onlyoffice
+    name: onlyoffice
     state: present
     update_homebrew: false
   when: is_macos
 
-- name: Link GIMP config files
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ home }}/.config/GIMP/3.2/{{ item | basename }}"
-    state: link
-    force: true
-  loop: "{{ lookup('ansible.builtin.fileglob', root + '/apps/gimp/*', wantlist=True) }}"
-  when: is_linux
-
-- name: Link Chrome flags on Linux
-  ansible.builtin.file:
-    src: "{{ root }}/apps/chrome/chrome-flags.conf"
-    dest: "{{ home }}/.config/chrome-flags.conf"
-    state: link
-    force: true
-  when: is_linux
-
-- name: Configure Linux desktop integration
+- name: Install and configure Nautilus
+  vars:
+    pkgs:
+      Archlinux:
+        - nautilus
+        - nautilus-python
+        - gvfs-smb
+        - gvfs-dnssd
+        - gvfs-mtp
+        - sushi
+      Debian:
+        - nautilus
+        - python3-nautilus
+        - gvfs-backends
+        - gnome-sushi
+      RedHat:
+        - nautilus
+        - nautilus-python
+        - gvfs-smb
+        - gvfs-mtp
+        - sushi
   when: is_linux
   block:
+    - name: Install Nautilus
+      ansible.builtin.package:
+        name: "{{ pkgs[ansible_facts['os_family']] }}"
+        state: present
+      become: true
+
     - name: Configure Nautilus captions
       ansible.builtin.command: gsettings set org.gnome.nautilus.icon-view captions "['size', 'none', 'none']"
       changed_when: false
@@ -177,6 +101,7 @@
     - name: Configure GTK file chooser sorting
       ansible.builtin.command: gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first true
       changed_when: false
+      when: is_linux
 
 - name: Hide junk applications from launchers
   vars:
@@ -222,4 +147,3 @@
           Name={{ item }}
           NoDisplay=true
       loop: "{{ hidden_apps }}"
-# TODO add satty here? Or ditch
