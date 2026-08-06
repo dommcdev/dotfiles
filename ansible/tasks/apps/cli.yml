@@ -198,3 +198,30 @@
         cmd: ansible-galaxy collection install --requirements-file "{{ root }}/ansible/requirements.yml"
       register: ansible_galaxy_requirements
       changed_when: "'installed successfully' in ansible_galaxy_requirements.stdout"
+
+- name: Install fun terminal programs
+  when: is_arch and is_managed_desktop
+  block:
+    - name: Install native packages
+      ansible.builtin.package:
+        name:
+          - perl-curses
+          - perl-term-animation
+          - cowsay
+          - ponysay
+          - countryfetch
+          - lolcat
+          - fortune-mod
+          - sl
+          - espeak-ng
+          - toilet
+          - nyancat
+        state: present
+      become: true
+
+    - name: Install AUR packages
+      kewlfft.aur.aur:
+        name:
+          - cmatrix-git
+          - lavat-git
+        state: present

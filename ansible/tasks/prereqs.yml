@@ -1,3 +1,4 @@
+# Note, the order-of-operations is very intentional for the tasks in this file.
 - name: Refresh apt package cache
   ansible.builtin.apt:
     update_cache: true
@@ -229,6 +230,23 @@
           line: ILoveCandy
         - regexp: "^#?VerbosePkgLists$"
           line: VerbosePkgLists
+
+- name: Install Flatpak
+  when: is_linux
+  block:
+    - name: Install Flatpak package
+      ansible.builtin.package:
+        name: flatpak
+        state: present
+      become: true
+
+    - name: Add flatpak Flathub remote
+      community.general.flatpak_remote:
+        name: flathub
+        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+        method: system
+        state: present
+      become: true
 
 - name: Clone dotfiles
   ansible.builtin.git:

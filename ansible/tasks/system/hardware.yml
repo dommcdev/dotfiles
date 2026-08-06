@@ -1,2 +1,16 @@
 # Will contain firmware stuff, bluetooth, audio, and power management
 #- fwupd
+- name: Configure power profiles daemon on laptops
+  become: true
+  when: is_arch and has_battery
+  block:
+    - name: Install package
+      ansible.builtin.package:
+        name: power-profiles-daemon
+        state: present
+
+    - name: Enable service
+      ansible.builtin.systemd_service:
+        name: power-profiles-daemon.service
+        enabled: true
+        state: started
