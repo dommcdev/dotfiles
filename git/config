@@ -9,7 +9,7 @@
 
 [user]
 	email = dominicmcdev@gmail.com
-	name = Dominic
+	name = Dominic McDevitt
 [core]
   	excludesfile = $HOME/.config/git/ignore
     pager = delta
