@@ -144,31 +144,28 @@
   become: true
   when: is_arch
   block:
-    - name: List configured pacman repositories
-      ansible.builtin.command: pacman-conf --repo-list
-      register: pacman_repositories
-      changed_when: false
-
-    - name: Add CachyOS repositories
-      when: "'cachyos' not in pacman_repositories.stdout"
+    - name: Add CachyOS repo
+      when: ansible_facts['distribution'] | lower != 'cachyos'
       block:
-        - name: Download CachyOS repository installer
+        - name: Download CachyOS mirrorlist
           ansible.builtin.get_url:
-            url: https://mirror.cachyos.org/cachyos-repo.tar.xz
-            dest: /tmp/cachyos-repo.tar.xz
+            url: https://raw.githubusercontent.com/CachyOS/CachyOS-PKGBUILDS/master/cachyos-mirrorlist/cachyos-mirrorlist
+            dest: /etc/pacman.d/cachyos-mirrorlist
             mode: "0644"
 
-        - name: Extract CachyOS repository installer
-          ansible.builtin.unarchive:
-            src: /tmp/cachyos-repo.tar.xz
-            dest: /tmp
-            remote_src: true
-
-        - name: Run CachyOS repository installer
-          ansible.builtin.shell: yes | ./cachyos-repo.sh --install # noqa risky-shell-pipe
-          args:
-            chdir: /tmp/cachyos-repo
-          changed_when: true
+        - name: Configure CachyOS repository
+          community.general.ini_file:
+            path: /etc/pacman.conf
+            mode: "0644"
+            section: cachyos
+            option: "{{ item.option }}"
+            value: "{{ item.value }}"
+            no_extra_spaces: true
+          loop:
+            - option: SigLevel
+              value: Optional TrustAll
+            - option: Include
+              value: /etc/pacman.d/cachyos-mirrorlist
 
     - name: Configure additional pacman repositories
       community.general.ini_file:
