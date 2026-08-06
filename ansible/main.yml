@@ -120,4 +120,4 @@
       ansible.builtin.import_tasks: tasks/apps/noctalia.yml
       when: is_managed_desktop and is_arch
     - name: Misc
-      ansible.builtin.import_tasks: tasks/mics.yml
+      ansible.builtin.import_tasks: tasks/misc.yml
