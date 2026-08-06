@@ -13,9 +13,11 @@
     block: |
       max_parallel_downloads=10
       fastestmirror=True
+      defaultyes=True
   become: true
   when: is_fedora
 
+# BELOW IS UNREVIEWED
 - name: Configure Linux desktop utilities
   when: is_linux and is_managed_desktop
   block:

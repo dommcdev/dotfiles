@@ -25,14 +25,8 @@
       - deno
       - node
       - uv
+      - gh
       - rust
-    state: present
-    update_homebrew: false
-  when: is_ubuntu or is_fedora or is_macos
-
-- name: Install GitHub CLI with Homebrew
-  community.general.homebrew:
-    name: gh
     state: present
     update_homebrew: false
   when: is_ubuntu or is_fedora or is_macos

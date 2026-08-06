@@ -58,6 +58,10 @@
     - name: Drivers and media codecs
       ansible.builtin.include_tasks: tasks/system/drivers.yml
       when: is_managed_desktop and is_linux
+    - name: GUI Applications
+      ansible.builtin.import_tasks: tasks/apps/gui.yml
+    - name: Browser
+      ansible.builtin.import_tasks: tasks/apps/browser.yml
     - name: TUI Applications
       ansible.builtin.import_tasks: tasks/apps/tui.yml
     - name: GrandOrgue

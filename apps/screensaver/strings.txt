@@ -85,3 +85,19 @@ Neofetch My Sanity
 Blue Screen of Death
 Omarchy
 Read the Friendly Manual
+
+
+Yet another Yohgurt
+Yaml Ain't Markdown
+Yet Another Markup Language
+Weed Eater
+Cosplaying as Sysadmin
+Rolling Keys
+Binary Blobs
+Touch Grass
+Can't Repro
+LGTM
+IndexOutOfBoundsException
+Segmentation fault (core dumped)
+IndentationError: unexpected indent
+TypeError: Cannot read properties of undefined

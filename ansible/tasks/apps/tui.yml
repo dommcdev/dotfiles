@@ -57,7 +57,7 @@
 # NOTE: Ubuntu/Fedora are missing wlctl, bluetui, and wiremix. Might be able to grab from crates.io or smth
 # MacOS is missing cava since it requires complicated setup
 - name: Install additional desktop-only TUI packages
-  when: is_managed_desktop
+  when: not is_headless
   vars:
     pkgs:
       Archlinux:
