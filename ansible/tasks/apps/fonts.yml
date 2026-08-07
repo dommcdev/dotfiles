@@ -49,7 +49,7 @@
 
     - name: Link fontconfig
       ansible.builtin.file:
-        src: "{{ root }}/styling/fonts/fonts.conf"
+        src: "{{ root }}/appearance/fonts/fonts.conf"
         dest: "{{ home }}/.config/fontconfig/fonts.conf"
         state: link
         force: true
