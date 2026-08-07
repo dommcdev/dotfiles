@@ -33,7 +33,7 @@
       register: python_bootstrap
       changed_when: "'PYTHON_BOOTSTRAPPED' in python_bootstrap.stdout"
 
-      # Now that python is guaranteed Ansible can operate fully, including gathering facts
+      # Now that python is guaranteed, Ansible can operate fully, including gathering facts
     - name: Gather facts
       ansible.builtin.setup:
 

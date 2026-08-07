@@ -56,6 +56,9 @@
           - fava
         state: present
       when: is_arch
+      environment:
+        LC_ALL: en_US.UTF-8
+        LANGUAGE: en_US.UTF-8
 
     - name: Install beancount tools with Homebrew
       community.general.homebrew:
