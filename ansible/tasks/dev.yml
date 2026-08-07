@@ -45,20 +45,16 @@
   changed_when: false
   failed_when: false
 
+#https://github.com/kewlfft/ansible-aur/pull/79
 - name: Install Beancount and Fava
   block:
     - name: Install beancount AUR tools on Arch
       become: true
       become_user: aur_builder
-      kewlfft.aur.aur:
-        name:
-          - beancount
-          - fava
-        state: present
+      ansible.builtin.command: yay -S --noconfirm --needed --cleanafter beancount fava
+      register: beancount_aur_install
+      changed_when: "'nothing to do' not in beancount_aur_install.stdout | lower"
       when: is_arch
-      environment:
-        LC_ALL: en_US.UTF-8
-        LANGUAGE: en_US.UTF-8
 
     - name: Install beancount tools with Homebrew
       community.general.homebrew:
