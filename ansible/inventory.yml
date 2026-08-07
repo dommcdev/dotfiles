@@ -19,7 +19,7 @@ all:
       has_fingerprint_reader: true
       setup_grandorgue: true
     arch:
-      ansible_host: 192.168.122.165
+      ansible_host: archlinux
       is_managed_desktop: true
       is_dev_env: true
       setup_grandorgue: true
