@@ -79,12 +79,23 @@
       environment:
         PATH: "/opt/homebrew/bin:/home/linuxbrew/.linuxbrew/bin:{{ ansible_facts['env']['PATH'] }}"
 
+    - name: Prepare Linuxbrew installation prefix
+      ansible.builtin.file:
+        path: /home/linuxbrew/.linuxbrew
+        state: directory
+        owner: "{{ user }}"
+        group: "{{ ansible_facts['user_gid'] }}"
+        mode: "0755"
+      become: true
+      when:
+        - is_linux
+        - prerequisites_brew.rc != 0
+
     - name: Run installer
       ansible.builtin.shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       environment:
         NONINTERACTIVE: "1"
       changed_when: true
-      become: true
       when: prerequisites_brew.rc != 0
 
 - name: Install basic dependencies on macOS via Homebrew
