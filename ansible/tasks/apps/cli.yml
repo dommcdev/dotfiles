@@ -178,6 +178,12 @@
 
 - name: Install Ansible tooling
   block:
+    - name: Create Ansible state directory
+      ansible.builtin.file:
+        path: "{{ home }}/.local/state/ansible"
+        state: directory
+        mode: "0700"
+
     - name: Install Ansible tooling on Arch
       ansible.builtin.package:
         name:

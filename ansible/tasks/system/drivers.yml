@@ -18,6 +18,7 @@
         (['amd'] if '0x1002' in gpu_pci_vendor_ids.stdout_lines else [])
         + (['intel'] if '0x8086' in gpu_pci_vendor_ids.stdout_lines else [])
         + (['nvidia'] if '0x10de' in gpu_pci_vendor_ids.stdout_lines else [])
+        + (['virtio'] if '0x1af4' in gpu_pci_vendor_ids.stdout_lines else [])
       }}
 
 - name: Install graphics drivers, firmware and multi-media codecs
@@ -130,6 +131,24 @@
   when:
     - manage_gpu
     - "'intel' in gpu_vendors"
+    - ansible_facts['os_family'] in pkgs
+
+- name: Install VirtIO graphics support
+  vars:
+    pkgs:
+      Archlinux:
+        - vulkan-virtio
+      Debian:
+        - mesa-vulkan-drivers
+      RedHat:
+        - mesa-vulkan-drivers
+  ansible.builtin.package:
+    name: "{{ pkgs[ansible_facts['os_family']] }}"
+    state: present
+  become: true
+  when:
+    - manage_gpu
+    - "'virtio' in gpu_vendors"
     - ansible_facts['os_family'] in pkgs
 
 - name: Install NVIDIA graphics support
