@@ -180,12 +180,6 @@
         chdir: "{{ home }}/.config/yazi"
       changed_when: false
 
-    - name: Upgrade Yazi packages
-      ansible.builtin.command: ya pkg upgrade
-      args:
-        chdir: "{{ home }}/.config/yazi"
-      changed_when: false
-
 - name: Build bat cache
   ansible.builtin.command: bat cache --build
   changed_when: false

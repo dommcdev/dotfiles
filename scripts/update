@@ -79,3 +79,7 @@ if command -v bun &>/dev/null; then
 fi
 
 print_section "All updates complete!"
+
+#Also, maybe occasionally do
+#cd ~/.config/yazi && ya pkg upgrade
+#Update nvim packages
