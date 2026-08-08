@@ -20,7 +20,7 @@
         - ncdu
         - fzf
         - trash-cli
-        - tldr
+        - tealdeer
         - whois
         - eza
         - jq
@@ -99,7 +99,7 @@
     brew_pkgs:
       - fzf
       - yt-dlp
-      - tlrc
+      - tealdeer
       - resvg
       - gum
       - ouch
@@ -124,7 +124,7 @@
       - resvg
       - ncdu
       - fzf
-      - tlrc
+      - tealdeer
       - eza
       - jq
       - less
@@ -170,6 +170,11 @@
         state: present
         update_homebrew: false
       when: is_macos
+
+    - name: Update tldr cache
+      ansible.builtin.command:
+        cmd: tldr --update
+      changed_when: false
 
 - name: Install Ansible tooling
   block:

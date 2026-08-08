@@ -104,7 +104,7 @@
     update_homebrew: false
   when: is_ubuntu or is_fedora
 
-- name: Install Bun
+- name: Install and configure Bun
   block:
     - name: Install Bun on Arch
       ansible.builtin.package:
@@ -120,8 +120,6 @@
         update_homebrew: false
       when: is_ubuntu or is_fedora or is_macos
 
-- name: Configure Bun
-  block:
     - name: Create config directory
       ansible.builtin.file:
         path: "{{ home }}/.config"

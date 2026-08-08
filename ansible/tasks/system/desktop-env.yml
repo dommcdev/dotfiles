@@ -1,4 +1,4 @@
-- name: Install desktop integration packages
+- name: Install misc desktop integration packages
   ansible.builtin.package:
     name: "{{ pkgs[ansible_facts['os_family']] }}"
     state: present
@@ -19,6 +19,24 @@
         - udiskie
         - wev
         - libinput-tools
+        - fwupd
+        - fuse2
+      Debian:
+        - accountsservice
+        - xdg-utils
+        - ddcutil
+        - wl-clipboard
+        - gnome-keyring
+        - libsecret-1-0
+        - libsecret-tools
+        - wtype
+        - brightnessctl
+        - acpi
+        - udiskie
+        - wev
+        - libinput-tools
+        - fwupd
+        - libfuse2
       RedHat:
         - xdg-utils
         - ddcutil
@@ -31,6 +49,8 @@
         - udiskie
         - wev
         - libinput-utils
+        - fwupd
+        - fuse-libs
 
 - name: Configure desktop storage support
   block:
@@ -63,3 +83,99 @@
             - exfatprogs
             - btrfs-progs
             - xfsprogs
+
+- name: Configure desktop audio
+  block:
+    - name: Install PipeWire audio packages
+      ansible.builtin.package:
+        name: "{{ pkgs[ansible_facts['os_family']] }}"
+        state: present
+      become: true
+      when: ansible_facts['os_family'] in pkgs
+      vars:
+        pkgs:
+          Archlinux:
+            - gst-plugin-pipewire
+            - libpulse
+            - pipewire
+            - pipewire-alsa
+            - pipewire-jack
+            - pipewire-pulse
+            - wireplumber
+          Debian:
+            - gstreamer1.0-pipewire
+            - libpulse0
+            - pipewire
+            - pipewire-alsa
+            - pipewire-audio
+            - pipewire-jack
+            - pipewire-pulse
+            - wireplumber
+          RedHat:
+            - gstreamer1-plugin-pipewire
+            - pipewire
+            - pipewire-alsa
+            - pipewire-jack-audio-connection-kit
+            - pipewire-pulseaudio
+            - pulseaudio-libs
+            - wireplumber
+
+- name: Configure Bluetooth
+  block:
+    - name: Install Bluetooth packages
+      ansible.builtin.package:
+        name: "{{ pkgs[ansible_facts['os_family']] }}"
+        state: present
+      become: true
+      when: ansible_facts['os_family'] in pkgs
+      vars:
+        pkgs:
+          Archlinux:
+            - bluez
+            - bluez-utils
+          Debian:
+            - bluez
+          RedHat:
+            - bluez
+
+    - name: Enable Bluetooth
+      ansible.builtin.systemd_service:
+        name: bluetooth.service
+        enabled: true
+        state: started
+      become: true
+
+- name: Configure power profiles
+  when: has_battery
+  become: true
+  block:
+    - name: Install CachyOS Tuned power profiles
+      community.general.pacman:
+        name:
+          - tuned-cachy
+          - tuned-cachy-ppd
+        state: present
+      when: is_arch
+
+    - name: Enable CachyOS Tuned power profiles
+      ansible.builtin.systemd_service:
+        name: "{{ item }}"
+        enabled: true
+        state: started
+      loop:
+        - tuned.service
+        - tuned-ppd.service
+      when: is_arch
+
+    - name: Install power profiles daemon
+      ansible.builtin.package:
+        name: power-profiles-daemon
+        state: present
+      when: not is_arch
+
+    - name: Enable power profiles daemon
+      ansible.builtin.systemd_service:
+        name: power-profiles-daemon.service
+        enabled: true
+        state: started
+      when: not is_arch

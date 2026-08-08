@@ -2,11 +2,15 @@
   vars:
     pkgs:
       Archlinux:
+        - gnu-free-fonts
         - noto-fonts
         - noto-fonts-cjk
         - noto-fonts-emoji
         - noto-fonts-extra
+        - terminus-font
+        - ttf-dejavu
         - ttf-jetbrains-mono-nerd
+        - ttf-liberation
   block:
     - name: Install native font packages
       ansible.builtin.package:
@@ -70,3 +74,4 @@
 # Nota bene
 # fc-match [serif|sans-serif|monospace etc]
 # fc-cache -rv
+# TODO general fonts on Ubuntu/Fedora as well

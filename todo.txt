@@ -5,12 +5,13 @@ Ambient light sensor automated install (systemd service + script copying + note 
 Setup ufw (and maybe Apparmor on server)
 Create syncthing dir for wallpapers, games/saves, etc
 Grab misc stuff from archinstall
-Better system fonts (ttf-ms-fonts inter, fira, ibm-plex + research fontconfig + fallback noto fonts + gsettings etc)
+Better system fonts (ttf-ms-fonts, inter, fira, ibm-plex + research fontconfig, + gsettings etc)
 Add limine and snapper
 Increase server login timeout for navidrome/feishin
 Power-profiles-daemon stuff, also install upower
 Add brew trust stuff
 Setup fuse mnt/bookmark for chocobo files
+chwd on cachyos for automatic drivers?
 
 
 # Low Priority
@@ -22,4 +23,4 @@ Nvidia hyprland support
 Git timeline viewer
 
 New ymls: Switch emulator, retroarch, firewall (ufw)
-Ansible: Auth, hardware, pkg vars at end, comment overhaul
+Ansible: Auth, pkg vars at end, comment overhaul
