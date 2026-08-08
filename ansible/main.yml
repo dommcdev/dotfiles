@@ -6,10 +6,30 @@
     - secrets.yml
 
   tasks:
-    - name: Use stored become password when available
+    - name: Use stored machine password when available
       ansible.builtin.set_fact:
-        ansible_become_password: "{{ become_passwords[inventory_hostname] }}"
-      when: inventory_hostname in become_passwords
+        ansible_password: "{{ machine_passwords[inventory_hostname] }}"
+        ansible_become_password: "{{ machine_passwords[inventory_hostname] }}"
+      when: inventory_hostname in (machine_passwords | default({}))
+      no_log: true
+
+    - name: Prompt for machine password when not stored
+      ansible.builtin.pause:
+        prompt: SSH/sudo password
+        echo: false
+      register: machine_password_prompt
+      when:
+        - prompt_for_machine_password | default(false) | bool
+        - inventory_hostname not in (machine_passwords | default({}))
+      no_log: true
+
+    - name: Use prompted machine password
+      ansible.builtin.set_fact:
+        ansible_password: "{{ machine_password_prompt.user_input }}"
+        ansible_become_password: "{{ machine_password_prompt.user_input }}"
+      when:
+        - prompt_for_machine_password | default(false) | bool
+        - inventory_hostname not in (machine_passwords | default({}))
       no_log: true
 
     - name: Install Python when missing

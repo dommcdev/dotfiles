@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+pull=true
+target=""
+
+usage() {
+  cat <<'EOF'
+Usage: ./install [--no-pull] [local|final|MACHINE]
+
+  ./install              Configure all inventory hosts
+  ./install local        Configure this machine only
+  ./install MACHINE      Bootstrap one inventory host
+  ./install final        Run the interactive final setup
+
+Options:
+  --no-pull              Use the current worktree without running git pull
+  -h, --help             Show this help
+EOF
+}
+
+while (($#)); do
+  case "$1" in
+    --no-pull)
+      pull=false
+      ;;
+    -h | --help)
+      usage
+      exit 0
+      ;;
+    -*)
+      printf 'Unknown option: %s\n\n' "$1" >&2
+      usage >&2
+      exit 2
+      ;;
+    *)
+      if [[ -n "$target" ]]; then
+        printf 'Only one target may be specified\n\n' >&2
+        usage >&2
+        exit 2
+      fi
+      target=$1
+      ;;
+  esac
+  shift
+done
+
+if [[ "$target" == final ]]; then
+  exec "$root/scripts/finalize-setup"
+fi
+
+if [[ "$pull" == true ]]; then
+  git -C "$root" pull
+fi
+
+cd "$root/ansible"
+
+case "$target" in
+  "")
+    exec ansible-playbook main.yml
+    ;;
+  local)
+    exec ansible-playbook main.yml --limit "$(hostname -s)"
+    ;;
+  *)
+    exec ansible-playbook main.yml \
+      --limit "$target" \
+      --extra-vars prompt_for_machine_password=true
+    ;;
+esac
+
+# Note: As of right now this only prompts for missing ssh/sudo password on single-machine runs.
+# If you do a simple `./install` and a machine is missing its entry in secrets.yml Ansible will hard-fail.

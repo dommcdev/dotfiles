@@ -73,7 +73,7 @@
   block:
     - name: Check if homebrew is installed.
       ansible.builtin.command: brew --version
-      register: prerequisites_brew
+      register: brew_stat
       changed_when: false
       failed_when: false
       environment:
@@ -89,14 +89,14 @@
       become: true
       when:
         - is_linux
-        - prerequisites_brew.rc != 0
+        - brew_stat.rc != 0
 
     - name: Run installer
       ansible.builtin.shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       environment:
         NONINTERACTIVE: "1"
       changed_when: true
-      when: prerequisites_brew.rc != 0
+      when: brew_stat.rc != 0
 
 - name: Install basic dependencies on macOS via Homebrew
   community.general.homebrew:
