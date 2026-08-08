@@ -84,6 +84,7 @@
       environment:
         NONINTERACTIVE: "1"
       changed_when: true
+      become: true
       when: prerequisites_brew.rc != 0
 
 - name: Install basic dependencies on macOS via Homebrew
