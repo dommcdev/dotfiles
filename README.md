@@ -18,4 +18,5 @@ My personal dotfiles as well as a comprehensive Ansible playbook for configuring
 4. Once done, replace the raw IP in `inventory.yml` with the new Tailscale MagicDNS name. Add the MagicDNS name and user to the SSH config as well. You can remove ansible_user from the machine at this point.
 5. Run `./install final` on the fresh machine.
 
-Use `./install --no-pull MACHINE` to retry against the current worktree without pulling first.
+Use `./install --no-pull MACHINE` to retry without updating either dotfiles checkout.
+word

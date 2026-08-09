@@ -32,7 +32,7 @@ all:
       is_dev_env: true
       setup_grandorgue: true
     fedora:
-      ansible_host: 192.168.122.176
+      ansible_host: 192.168.122.155
       ansible_user: dominic
       is_managed_desktop: true
       is_dev_env: true

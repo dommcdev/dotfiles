@@ -16,7 +16,7 @@ Usage: ./install [--no-pull] [local|final|MACHINE]
   ./install final        Run the interactive final setup
 
 Options:
-  --no-pull              Use the current worktree without running git pull
+  --no-pull              Skip all dotfiles repository updates
   -h, --help             Show this help
 EOF
 }
@@ -56,17 +56,25 @@ if [[ "$pull" == true ]]; then
 fi
 
 cd "$root/ansible"
+ansible_args=()
+
+if [[ "$pull" == false ]]; then
+  ansible_args+=(--extra-vars update_dotfiles=false)
+fi
 
 case "$target" in
   "")
-    exec ansible-playbook main.yml
+    exec ansible-playbook main.yml "${ansible_args[@]}"
     ;;
   local)
-    exec ansible-playbook main.yml --limit "$(hostname -s)"
+    exec ansible-playbook main.yml \
+      --limit "$(hostname -s)" \
+      "${ansible_args[@]}"
     ;;
   *)
     exec ansible-playbook main.yml \
       --limit "$target" \
+      "${ansible_args[@]}" \
       --extra-vars prompt_for_machine_password=true
     ;;
 esac

@@ -259,4 +259,4 @@
     repo: https://github.com/dommcdev/dotfiles.git
     dest: "{{ root }}"
     version: main
-    update: true
+    update: "{{ update_dotfiles | default(true) }}"
