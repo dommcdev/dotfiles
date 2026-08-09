@@ -19,19 +19,6 @@
       - 882DCFE48E2051D48E2562ABF3B607488DB35A47
   changed_when: false
 
-- name: Install CachyOS bootstrap packages
-  community.general.pacman:
-    name: "{{ cachyos_bootstrap_package_urls }}"
-    state: present
-  vars:
-    cachyos_mirror_url: https://mirror.cachyos.org/repo/x86_64/cachyos
-    cachyos_bootstrap_package_urls:
-      - "{{ cachyos_mirror_url }}/cachyos-keyring-20240331-1-any.pkg.tar.zst"
-      - "{{ cachyos_mirror_url }}/cachyos-mirrorlist-27-1-any.pkg.tar.zst"
-      - "{{ cachyos_mirror_url }}/cachyos-v3-mirrorlist-27-1-any.pkg.tar.zst"
-      - "{{ cachyos_mirror_url }}/cachyos-v4-mirrorlist-27-1-any.pkg.tar.zst"
-      - "{{ cachyos_mirror_url }}/pacman-7.1.0.r9.g54d9411-4-x86_64.pkg.tar.zst"
-
 - name: Check for x86-64-v3 support
   ansible.builtin.command:
     argv:
@@ -83,6 +70,10 @@
       {{ '/etc/pacman.d/cachyos-v4-mirrorlist'
          if cachyos_znver4.rc == 0 or cachyos_x86_64_v4.rc == 0
          else '/etc/pacman.d/cachyos-v3-mirrorlist' }}
+    cachyos_optimized_mirrorlist_package: >-
+      {{ 'cachyos-v4-mirrorlist'
+         if cachyos_znver4.rc == 0 or cachyos_x86_64_v4.rc == 0
+         else 'cachyos-v3-mirrorlist' }}
 
 - name: Back up pacman configuration
   ansible.builtin.copy:
@@ -91,6 +82,27 @@
     remote_src: true
     force: false
     mode: preserve
+
+- name: Configure the direct CachyOS bootstrap repository
+  ansible.builtin.blockinfile:
+    path: /etc/pacman.conf
+    insertbefore: '^\[core\]$'
+    marker: "# {mark} ANSIBLE MANAGED CACHYOS REPOSITORIES"
+    block: |
+      [cachyos]
+      Server = https://mirror.cachyos.org/repo/$arch/cachyos
+
+- name: Refresh package databases with the CachyOS bootstrap repository
+  community.general.pacman:
+    update_cache: true
+
+- name: Install CachyOS repository metadata
+  community.general.pacman:
+    name:
+      - cachyos-keyring
+      - cachyos-mirrorlist
+      - "{{ cachyos_optimized_mirrorlist_package }}"
+    state: latest
 
 - name: Use automatic package architecture detection
   ansible.builtin.lineinfile:
