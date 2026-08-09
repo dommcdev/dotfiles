@@ -23,18 +23,11 @@ login_opencode() {
     fi
 }
 
-start_tailscale() {
-    read -rp "Would you like to start tailscale? [Y/n] "
-    if [[ "${REPLY,,}" =~ ^y$|^$ ]]; then
-        sudo tailscale up
-        pause_and_continue
-    fi
-}
-
-setup_gitrepos() {
+auth_github() {
     read -rp "Would you like to authenticate git and clone repos? [Y/n] "
     if [[ "${REPLY,,}" =~ ^y$|^$ ]]; then
-        bash ~/dev/dotfiles/setup dev/gitrepos
+        gh auth login --web -p https
+        #TODO clone repos from txt file list
         pause_and_continue
     fi
 }
@@ -47,21 +40,14 @@ enroll_fingerprints() {
     fi
 }
 
-timeshift_setup() {
-    read -rp "Would you like to set up Timeshift (choose disk for snapshots)? [Y/n] "
-    if [[ "${REPLY,,}" =~ ^y$|^$ ]]; then
-        timeshift-gtk &
-        pause_and_continue
-    fi
-}
 
 sign_in_google
 login_opencode
 start_tailscale
-setup_gitrepos
+auth_github
 enroll_fingerprints
-timeshift_setup
 # Set up chrome stuff - don't show cards/shortcuts, set wallpaper
 # Copy dotfiles env file
 # Setup google calender in noctalia
 # Syncthing
+# If on a new monitor, noctalia widgets/stuff will need to be redone

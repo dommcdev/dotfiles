@@ -24,6 +24,12 @@ all:
       is_managed_desktop: true
       is_dev_env: true
       setup_grandorgue: true
+    cachyos:
+      ansible_host: 192.168.122.232
+      ansible_user: cachyos
+      is_managed_desktop: true
+      is_dev_env: true
+      setup_grandorgue: true
     ubuntu:
       ansible_become_exe: /usr/bin/sudo.ws
       ansible_host: 192.168.122.176

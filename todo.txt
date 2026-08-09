@@ -1,16 +1,17 @@
 # To-do
 Nvim stuff (More lazy loading)
 Tweak auth stuff in fingerprints script
-Ambient light sensor automated install (systemd service + script copying + note on sensor driver symlinking)
+Ambient light sensor
 Setup ufw (and maybe Apparmor on server)
 Create syncthing dir for wallpapers, games/saves, etc
-Grab misc stuff from archinstall
 Better system fonts (ttf-ms-fonts, inter, fira, ibm-plex + research fontconfig, + gsettings etc)
-Add limine and snapper
 Increase server login timeout for navidrome/feishin
-Power-profiles-daemon stuff, also install upower
 Setup fuse mnt/bookmark for chocobo files
-chwd on cachyos for automatic drivers?
+
+Cachyos
+* Limine
+* Snapper
+* Use chwd instead of my manual driver stack
 
 
 # Low Priority
@@ -23,3 +24,7 @@ Git timeline viewer
 
 New ymls: Switch emulator, retroarch, firewall (ufw)
 Ansible: Auth, pkg vars at end, comment overhaul
+
+Create file with git repos to clone
+Load noctalia before hyprland?
+Merge dotfiles.env with secrets.yml somehow

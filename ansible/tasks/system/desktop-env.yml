@@ -154,6 +154,7 @@
         name:
           - tuned-cachy
           - tuned-cachy-ppd
+          - upower
         state: present
       when: is_arch
 
@@ -167,9 +168,11 @@
         - tuned-ppd.service
       when: is_arch
 
-    - name: Install power profiles daemon
+    - name: Install generic power profiles daemon
       ansible.builtin.package:
-        name: power-profiles-daemon
+        name:
+          - power-profiles-daemon
+          - upower
         state: present
       when: not is_arch
 
