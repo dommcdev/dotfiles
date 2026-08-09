@@ -1,0 +1,117 @@
+# Should roughly mirror https://github.com/CachyOS/cachyos-repo-add-script
+# Minus the system update part, as this can cause issues with an initial ansible run.
+
+- name: Import the CachyOS repository signing key
+  ansible.builtin.command:
+    argv:
+      - pacman-key
+      - --recv-keys
+      - 882DCFE48E2051D48E2562ABF3B607488DB35A47
+      - --keyserver
+      - keyserver.ubuntu.com
+  changed_when: false
+
+- name: Locally sign the CachyOS repository signing key
+  ansible.builtin.command:
+    argv:
+      - pacman-key
+      - --lsign-key
+      - 882DCFE48E2051D48E2562ABF3B607488DB35A47
+  changed_when: false
+
+- name: Install CachyOS bootstrap packages
+  community.general.pacman:
+    name: "{{ cachyos_bootstrap_package_urls }}"
+    state: present
+  vars:
+    cachyos_mirror_url: https://mirror.cachyos.org/repo/x86_64/cachyos
+    cachyos_bootstrap_package_urls:
+      - "{{ cachyos_mirror_url }}/cachyos-keyring-20240331-1-any.pkg.tar.zst"
+      - "{{ cachyos_mirror_url }}/cachyos-mirrorlist-27-1-any.pkg.tar.zst"
+      - "{{ cachyos_mirror_url }}/cachyos-v3-mirrorlist-27-1-any.pkg.tar.zst"
+      - "{{ cachyos_mirror_url }}/cachyos-v4-mirrorlist-27-1-any.pkg.tar.zst"
+      - "{{ cachyos_mirror_url }}/pacman-7.1.0.r9.g54d9411-4-x86_64.pkg.tar.zst"
+
+- name: Check for x86-64-v3 support
+  ansible.builtin.command:
+    argv:
+      - /bin/bash
+      - -o
+      - pipefail
+      - -c
+      - /lib/ld-linux-x86-64.so.2 --help | grep -F 'x86-64-v3 (supported, searched)'
+  register: cachyos_x86_64_v3
+  changed_when: false
+  failed_when: false
+
+- name: Check for x86-64-v4 support
+  ansible.builtin.command:
+    argv:
+      - /bin/bash
+      - -o
+      - pipefail
+      - -c
+      - /lib/ld-linux-x86-64.so.2 --help | grep -F 'x86-64-v4 (supported, searched)'
+  register: cachyos_x86_64_v4
+  changed_when: false
+  failed_when: false
+
+- name: Check for Zen 4 or Zen 5
+  ansible.builtin.command:
+    argv:
+      - /bin/bash
+      - -o
+      - pipefail
+      - -c
+      - gcc -march=native -Q --help=target 2>&1 | grep -E 'march.*(znver4|znver5)'
+  register: cachyos_znver4
+  changed_when: false
+  failed_when: false
+
+- name: Require x86-64-v3 support
+  ansible.builtin.assert:
+    that: cachyos_x86_64_v3.rc == 0
+    fail_msg: CachyOS optimized repositories require an x86-64-v3 capable CPU
+
+- name: Select the optimized CachyOS repositories
+  ansible.builtin.set_fact:
+    cachyos_repo_variant: >-
+      {{ 'znver4' if cachyos_znver4.rc == 0 else
+         'v4' if cachyos_x86_64_v4.rc == 0 else
+         'v3' }}
+    cachyos_optimized_mirrorlist: >-
+      {{ '/etc/pacman.d/cachyos-v4-mirrorlist'
+         if cachyos_znver4.rc == 0 or cachyos_x86_64_v4.rc == 0
+         else '/etc/pacman.d/cachyos-v3-mirrorlist' }}
+
+- name: Back up pacman configuration
+  ansible.builtin.copy:
+    src: /etc/pacman.conf
+    dest: /etc/pacman.conf.bak
+    remote_src: true
+    force: false
+    mode: preserve
+
+- name: Use automatic package architecture detection
+  ansible.builtin.lineinfile:
+    path: /etc/pacman.conf
+    regexp: '^Architecture\s*='
+    line: Architecture = auto
+
+- name: Configure optimized CachyOS repositories
+  ansible.builtin.blockinfile:
+    path: /etc/pacman.conf
+    insertbefore: '^\[core\]$'
+    marker: "# {mark} ANSIBLE MANAGED CACHYOS REPOSITORIES"
+    block: |
+      [cachyos-{{ cachyos_repo_variant }}]
+      Include = {{ cachyos_optimized_mirrorlist }}
+
+      [cachyos-core-{{ cachyos_repo_variant }}]
+      Include = {{ cachyos_optimized_mirrorlist }}
+
+      [cachyos-extra-{{ cachyos_repo_variant }}]
+      Include = {{ cachyos_optimized_mirrorlist }}
+
+      [cachyos]
+      Include = /etc/pacman.d/cachyos-mirrorlist

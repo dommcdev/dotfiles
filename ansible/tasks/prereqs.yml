@@ -1,4 +1,13 @@
 # Note, the order-of-operations is very intentional for the tasks in this file.
+- name: Add CachyOS repositories
+  ansible.builtin.include_tasks:
+    file: misc/cachyos-repo.yml
+    apply:
+      become: true
+  when:
+    - is_arch
+    - ansible_facts['distribution'] | lower != 'cachyos'
+
 - name: Refresh apt package cache
   ansible.builtin.apt:
     update_cache: true
@@ -161,29 +170,6 @@
   become: true
   when: is_arch
   block:
-    - name: Add CachyOS repo
-      when: ansible_facts['distribution'] | lower != 'cachyos'
-      block:
-        - name: Download CachyOS mirrorlist
-          ansible.builtin.get_url:
-            url: https://raw.githubusercontent.com/CachyOS/CachyOS-PKGBUILDS/master/cachyos-mirrorlist/cachyos-mirrorlist
-            dest: /etc/pacman.d/cachyos-mirrorlist
-            mode: "0644"
-
-        - name: Configure CachyOS repository
-          community.general.ini_file:
-            path: /etc/pacman.conf
-            mode: "0644"
-            section: cachyos
-            option: "{{ item.option }}"
-            value: "{{ item.value }}"
-            no_extra_spaces: true
-          loop:
-            - option: SigLevel
-              value: Optional TrustAll
-            - option: Include
-              value: /etc/pacman.d/cachyos-mirrorlist
-
     - name: Configure additional pacman repositories
       community.general.ini_file:
         path: /etc/pacman.conf
