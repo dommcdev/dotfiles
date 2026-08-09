@@ -8,7 +8,7 @@ target=""
 
 usage() {
   cat <<'EOF'
-Usage: ./install [--no-pull] [local|final|MACHINE]
+Usage: ./install [-n|--no-pull] [local|final|MACHINE]
 
   ./install              Configure all inventory hosts
   ./install local        Configure this machine only
@@ -16,14 +16,14 @@ Usage: ./install [--no-pull] [local|final|MACHINE]
   ./install final        Run the interactive final setup
 
 Options:
-  --no-pull              Skip all dotfiles repository updates
+  -n, --no-pull          Skip all dotfiles repository updates
   -h, --help             Show this help
 EOF
 }
 
 while (($#)); do
   case "$1" in
-    --no-pull)
+    -n | --no-pull)
       pull=false
       ;;
     -h | --help)
