@@ -157,6 +157,13 @@
       become: true
       when: is_fedora
 
+    - name: Tap and trust the Caligula Homebrew repository
+      community.general.homebrew_tap:
+        name: philocalyst/tap
+        state: present
+        trust: true
+      when: is_ubuntu or is_fedora or is_macos
+
     - name: Install terminal Homebrew packages on Linux
       community.general.homebrew:
         name: "{{ brew_pkgs }}"
@@ -206,6 +213,7 @@
 
     - name: Install Ansible Galaxy requirements
       ansible.builtin.command:
+        # Add --force to refresh collections installed from Git branches.
         cmd: ansible-galaxy collection install --requirements-file "{{ root }}/ansible/requirements.yml"
       register: ansible_galaxy_requirements
       changed_when: "'installed successfully' in ansible_galaxy_requirements.stdout"

@@ -125,6 +125,13 @@
       become: true
       when: is_arch
 
+    - name: Tap and trust the Bun Homebrew repository
+      community.general.homebrew_tap:
+        name: oven-sh/bun
+        state: present
+        trust: true
+      when: is_ubuntu or is_fedora or is_macos
+
     - name: Install Bun via Homebrew
       community.general.homebrew:
         name: oven-sh/bun/bun
