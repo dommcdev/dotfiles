@@ -37,7 +37,7 @@
         if command -v python3 >/dev/null 2>&1; then
           exit 0
         elif command -v pacman >/dev/null 2>&1; then
-          pacman -Syu --needed --noconfirm python
+          pacman -S --needed --noconfirm python
         elif command -v apt-get >/dev/null 2>&1; then
           apt-get update
           apt-get install -y python3

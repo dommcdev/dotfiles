@@ -104,11 +104,14 @@
       - "{{ cachyos_optimized_mirrorlist_package }}"
     state: latest
 
-- name: Use automatic package architecture detection
+- name: Configure supported package architectures
   ansible.builtin.lineinfile:
     path: /etc/pacman.conf
     regexp: '^Architecture\s*='
-    line: Architecture = auto
+    line: >-
+      Architecture = {{ 'x86_64 x86_64_v3 x86_64_v4'
+                        if cachyos_repo_variant in ['v4', 'znver4']
+                        else 'x86_64 x86_64_v3' }}
 
 - name: Configure optimized CachyOS repositories
   ansible.builtin.blockinfile:
