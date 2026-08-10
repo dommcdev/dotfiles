@@ -32,3 +32,5 @@ manage qt6ct config better.
 Don't restart networkmanager?
 Allow `local` install option to prompt for password?
 grandorgue keybind doesn't work.
+First run doesn't work since I need to accept key authenticity.
+Bun install dir, cargo install dir

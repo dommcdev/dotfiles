@@ -8,37 +8,37 @@
     },
   },
   "display": {
-    "separator": "  ",
+    "separator": " | ",
   },
   "modules": [
     "break",
     "title",
     {
       "type": "os",
-      "key": "os    ",
+      "key": "system ",
       "format": "{2}",
     },
     {
       "type": "wm",
-      "key": "wm    ",
+      "key": "desktop",
       "format": "{1} {5}",
     },
     {
       "type": "kernel",
-      "key": "kernel",
+      "key": "kernel ",
     },
     {
       "type": "cpu",
-      "key": "cpu   ",
+      "key": "cpu    ",
     },
     {
       "type": "memory",
-      "key": "ram   ",
+      "key": "ram    ",
       "format": "{1} / {2} ({3})",
     },
     {
       "type": "disk",
-      "key": "disk  ",
+      "key": "disk   ",
       "folders": "/",
       "format": "{1} / {2} ({3})",
     },
