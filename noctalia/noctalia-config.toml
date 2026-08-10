@@ -129,14 +129,7 @@ auto_locate = true
 [lockscreen_widgets]
 enabled = true
 schema_version = 2
-widget_order = [
-    "lockscreen-login-box@eDP-1",
-    "lockscreen-login-box@DP-2",
-    "lockscreen-widget-0000000000000001",
-    "lockscreen-widget-0000000000000002",
-    "lockscreen-widget-0000000000000003",
-    "lockscreen-widget-0000000000000004"
-]
+widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-0000000000000001", "lockscreen-widget-0000000000000002" ]
 
     [lockscreen_widgets.grid]
     cell_size = 16
@@ -329,7 +322,7 @@ directory = "/home/dominic/dev/wallpapers"
     path = "/home/dominic/dev/wallpapers/catppuccin/waves.png"
 
     [wallpaper.monitors.DP-2]
-    path = "/home/dominic/dev/wallpapers/wallhaven-yqj21x.jpg"
+    path = "/home/dominic/dev/wallpapers/catppuccin/waves.png"
 
     [wallpaper.monitors.eDP-1]
     path = "/home/dominic/dev/wallpapers/catppuccin/waves.png"
