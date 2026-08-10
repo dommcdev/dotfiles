@@ -81,8 +81,22 @@
           dest: mimeapps.list
         - src: gtk/bookmarks
           dest: gtk-3.0/bookmarks
-        - src: qt/qt6ct.conf
-          dest: qt6ct/qt6ct.conf
+
+    - name: Configure Qt appearance
+      community.general.ini_file:
+        path: "{{ home }}/.config/qt6ct/qt6ct.conf"
+        section: Appearance
+        option: "{{ item.option }}"
+        value: "{{ item.value }}"
+        no_extra_spaces: true
+        mode: "0644"
+      loop:
+        - option: style
+          value: Breeze
+        - option: icon_theme
+          value: Papirus
+        - option: color_scheme_path
+          value: "/home/{{ user }}/.local/share/color-schemes/noctalia.colors"
 
     - name: Configure Flatpak GTK filesystem overrides
       ansible.builtin.command: "flatpak override --user --filesystem={{ item }}"
