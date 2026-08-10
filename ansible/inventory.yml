@@ -46,6 +46,7 @@ all:
 
   vars:
     ansible_connection: "{{ 'local' if inventory_hostname == lookup('pipe', 'hostname -s') else 'ssh' }}"
+    ansible_ssh_common_args: -o StrictHostKeyChecking=accept-new
     home: "{{ ansible_facts['env']['HOME'] }}"
     root: "{{ home }}/dev/dotfiles"
     user: "{{ ansible_facts['user_id'] }}"

@@ -70,6 +70,7 @@ case "$target" in
     exec ansible-playbook main.yml \
       --limit "$(hostname -s)" \
       "${ansible_args[@]}"
+      --extra-vars prompt_for_machine_password=true
     ;;
   *)
     exec ansible-playbook main.yml \
@@ -79,5 +80,5 @@ case "$target" in
     ;;
 esac
 
-# Note: As of right now this only prompts for missing ssh/sudo password on single-machine runs.
+# Note: As of right now this only prompts for missing ssh/sudo password on single-machine/local runs.
 # If you do a simple `./install` and a machine is missing its entry in secrets.yml Ansible will hard-fail.

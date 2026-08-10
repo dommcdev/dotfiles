@@ -74,66 +74,66 @@
     - name: CLI Utilties
       ansible.builtin.import_tasks: tasks/apps/cli.yml
 
-    - name: Noctalia
-      ansible.builtin.import_tasks: tasks/apps/noctalia.yml
-      when: is_managed_desktop and is_arch
-    - name: Drivers and media codecs
-      ansible.builtin.include_tasks: tasks/system/drivers.yml
-      when: is_managed_desktop
-    - name: GUI Applications
-      ansible.builtin.import_tasks: tasks/apps/gui.yml
-    - name: Browser
-      ansible.builtin.import_tasks: tasks/apps/browser.yml
-    - name: TUI Applications
-      ansible.builtin.import_tasks: tasks/apps/tui.yml
-    - name: GrandOrgue
-      ansible.builtin.include_tasks: tasks/apps/grandorgue.yml
-      when: setup_grandorgue
-    - name: Script links
-      ansible.builtin.include_tasks: tasks/apps/scripts.yml
-    - name: Syncthing
-      ansible.builtin.include_tasks: tasks/apps/syncthing.yml
-    - name: Network
-      ansible.builtin.include_tasks: tasks/system/network.yml
-      when: is_managed_desktop
-    - name: Printing
-      ansible.builtin.include_tasks: tasks/system/printing.yml
-      when: is_managed_desktop
-    - name: Appearance
-      ansible.builtin.include_tasks: tasks/system/appearance.yml
-      when: is_managed_desktop
-    - name: Hyprland
-      ansible.builtin.include_tasks: tasks/apps/hyprland.yml
-      when: is_managed_desktop and (is_arch or is_fedora)
-    - name: Keyd
-      ansible.builtin.include_tasks: tasks/apps/keyd.yml
-      when: is_linux
-    - name: SSH
-      ansible.builtin.import_tasks: tasks/apps/ssh.yml
     - name: Git
       ansible.builtin.import_tasks: tasks/apps/git.yml
+    - name: Zsh
+      ansible.builtin.import_tasks: tasks/apps/zsh.yml
+    - name: Nvim
+      ansible.builtin.import_tasks: tasks/apps/nvim.yml
+    - name: Script links
+      ansible.builtin.include_tasks: tasks/apps/scripts.yml
+    - name: TUI Applications
+      ansible.builtin.import_tasks: tasks/apps/tui.yml
     - name: Development environment
       ansible.builtin.include_tasks: tasks//dev.yml
       when: is_dev_env
-    - name: Zsh
-      ansible.builtin.import_tasks: tasks/apps/zsh.yml
     - name: Opencode
       ansible.builtin.import_tasks: tasks/apps/opencode.yml
+    - name: Misc
+      ansible.builtin.import_tasks: tasks/misc.yml
+    - name: Syncthing
+      ansible.builtin.include_tasks: tasks/apps/syncthing.yml
     - name: Docker
       ansible.builtin.import_tasks: tasks/apps/docker.yml
     - name: Libvirt
       ansible.builtin.import_tasks: tasks/apps/libvirt.yml
       when: is_linux
+    - name: Network
+      ansible.builtin.include_tasks: tasks/system/network.yml
+      when: is_managed_desktop
+    - name: Keyd
+      ansible.builtin.include_tasks: tasks/apps/keyd.yml
+      when: is_linux
+    - name: Drivers and media codecs
+      ansible.builtin.include_tasks: tasks/system/drivers.yml
+      when: is_managed_desktop
+    - name: Hyprland
+      ansible.builtin.include_tasks: tasks/apps/hyprland.yml
+      when: is_managed_desktop and (is_arch or is_fedora)
     - name: Fonts
       ansible.builtin.import_tasks: tasks/apps/fonts.yml
+    - name: Appearance
+      ansible.builtin.include_tasks: tasks/system/appearance.yml
+      when: is_managed_desktop
     - name: Ghostty
       ansible.builtin.import_tasks: tasks/apps/ghostty.yml
+    - name: Browser
+      ansible.builtin.import_tasks: tasks/apps/browser.yml
+    - name: GUI Applications
+      ansible.builtin.import_tasks: tasks/apps/gui.yml
+    - name: Noctalia
+      ansible.builtin.import_tasks: tasks/apps/noctalia.yml
+      when: is_managed_desktop and is_arch
     - name: Vicinae
       ansible.builtin.include_tasks: tasks/apps/vicinae.yml
       when: is_managed_desktop and (not is_ubuntu)
-    - name: Nvim
-      ansible.builtin.import_tasks: tasks/apps/nvim.yml
-    - name: Misc
-      ansible.builtin.import_tasks: tasks/misc.yml
     - name: Zed
       ansible.builtin.import_tasks: tasks/apps/zed.yml
+    - name: Printing
+      ansible.builtin.include_tasks: tasks/system/printing.yml
+      when: is_managed_desktop
+    - name: GrandOrgue
+      ansible.builtin.include_tasks: tasks/apps/grandorgue.yml
+      when: setup_grandorgue
+    - name: SSH #Put this near the end since it changes ssh stuff which affects Ansible
+      ansible.builtin.import_tasks: tasks/apps/ssh.yml
