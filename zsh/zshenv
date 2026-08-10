@@ -13,17 +13,20 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_STATE_HOME="$HOME/.local/state"
 
-export PATH="$PATH:$GOPATH/bin"
-export PATH="$HOME/.local/share/npm-global/bin:$PATH"
-export PATH="$HOME/.local/share/bun/bin:$PATH"
+# Default path -> misc path stuff -> Homebrew -> .local/bin
+path=(
+    "${path[@]}"
+    "$HOME/.local/share/bun/bin"
+    "$GOPATH/bin"
+)
 # Homebrew for non-interactive shells
 if [[ -d /home/linuxbrew/.linuxbrew ]]; then
     export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
     export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
     export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX/Homebrew"
-    export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}"
+    path=("$HOMEBREW_PREFIX/bin" "$HOMEBREW_PREFIX/sbin" "${path[@]}")
 fi
-export PATH="$HOME/.local/bin:$PATH"
+path=("$HOME/.local/bin" "${path[@]}")
 
 
 [[ -f "$HOME/.config/zsh/.zshenv.local" ]] && source "$HOME/.config/zsh/.zshenv.local"
