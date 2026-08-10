@@ -43,7 +43,6 @@ enroll_fingerprints() {
 
 sign_in_google
 login_opencode
-start_tailscale
 auth_github
 enroll_fingerprints
 # Set up chrome stuff - don't show cards/shortcuts, set wallpaper
