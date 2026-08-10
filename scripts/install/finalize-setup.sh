@@ -26,7 +26,7 @@ auth_github() {
     read -rp "Would you like to authenticate git and clone repos? [Y/n] "
     if [[ "${REPLY,,}" =~ ^y$|^$ ]]; then
         gh auth login --web -p https
-        #TODO clone repos from txt file list
+        bash ~/dev/dotfiles/scripts/install/clone-gitrepos.sh
         pause_and_continue
     fi
 }

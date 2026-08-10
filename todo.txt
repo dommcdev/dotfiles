@@ -24,6 +24,6 @@ Nvidia hyprland support
 New ymls: Switch emulator, retroarch, firewall (ufw)
 Ansible: Auth, pkg vars at end, comment overhaul
 
-Create file with git repos to clone
 Merge dotfiles.env with secrets.yml somehow
 manage qt6ct config better.
+wakeonlan package

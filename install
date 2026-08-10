@@ -48,7 +48,7 @@ while (($#)); do
 done
 
 if [[ "$target" == final ]]; then
-  exec "$root/scripts/finalize-setup"
+  exec "$root/scripts/install/finalize-setup.sh"
 fi
 
 if [[ "$pull" == true ]]; then
