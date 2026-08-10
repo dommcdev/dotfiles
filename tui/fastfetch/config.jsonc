@@ -8,42 +8,46 @@
     },
   },
   "display": {
-    "separator": " | ",
+    "separator": " ",
   },
   "modules": [
     "break",
-    "title",
+    {
+      "type": "title",
+      "format": "{#yellow}{user-name}{#magenta}@{#cyan}{host-name}{#} ~{#}",
+    },
     {
       "type": "os",
-      "key": "system ",
+      "key": "{#cyan}  {#blue}System       {#bright_black}┆{#}",
       "format": "{2}",
     },
     {
       "type": "wm",
-      "key": "desktop",
-      "format": "{1} {5}",
+      "key": "{#cyan}  {#blue}Desktop      {#bright_black}┆{#}",
+      "format": "{1} ({3})",
     },
     {
       "type": "kernel",
-      "key": "kernel ",
+      "key": "{#cyan}  {#blue}Kernel       {#bright_black}┆{#}",
     },
     {
       "type": "cpu",
-      "key": "cpu    ",
+      "key": "{#cyan}  {#blue}CPU          {#bright_black}┆{#}",
     },
     {
       "type": "memory",
-      "key": "ram    ",
+      "key": "{#cyan}  {#blue}Memory       {#bright_black}┆{#}",
       "format": "{1} / {2} ({3})",
     },
     {
       "type": "disk",
-      "key": "disk   ",
+      "key": "{#cyan}󱥎  {#blue}Storage (/)  {#bright_black}┆{#}",
       "folders": "/",
       "format": "{1} / {2} ({3})",
     },
     {
       "type": "colors",
+      "key": "{#cyan}  {#blue}Colors       {#bright_black}┆{#}",
       "symbol": "circle",
     },
     "break",

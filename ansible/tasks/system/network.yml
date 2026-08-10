@@ -8,7 +8,7 @@
     pkgs:
       Archlinux:
         - networkmanager
-        - network-manager-applet
+        #        - network-manager-applet
         - nm-connection-editor
         - iwd
         - inetutils
@@ -27,7 +27,7 @@
       RedHat:
         - NetworkManager
         - NetworkManager-wifi
-        - network-manager-applet
+        #        - network-manager-applet
         - nm-connection-editor
         - iwd
         - systemd-resolved
