@@ -18,31 +18,31 @@ all:
       has_battery: true
       has_fingerprint_reader: true
       setup_grandorgue: true
-    arch:
-      ansible_host: 192.168.122.165
-      ansible_user: arch
-      is_managed_desktop: true
-      is_dev_env: true
-      setup_grandorgue: true
-    cachyos:
-      ansible_host: 192.168.122.232
-      ansible_user: cachyos
-      is_managed_desktop: true
-      is_dev_env: true
-      setup_grandorgue: true
-    ubuntu:
-      ansible_become_exe: /usr/bin/sudo.ws
-      ansible_host: 192.168.122.176
-      ansible_user: dominic
-      is_managed_desktop: true
-      is_dev_env: true
-      setup_grandorgue: true
-    fedora:
-      ansible_host: 192.168.122.155
-      ansible_user: dominic
-      is_managed_desktop: true
-      is_dev_env: true
-      setup_grandorgue: true
+    # arch:
+    #   ansible_host: 192.168.122.165
+    #   ansible_user: arch
+    #   is_managed_desktop: true
+    #   is_dev_env: true
+    #   setup_grandorgue: true
+    # cachyos:
+    #   ansible_host: 192.168.122.232
+    #   ansible_user: cachyos
+    #   is_managed_desktop: true
+    #   is_dev_env: true
+    #   setup_grandorgue: true
+    # ubuntu:
+    #   ansible_become_exe: /usr/bin/sudo.ws
+    #   ansible_host: 192.168.122.176
+    #   ansible_user: dominic
+    #   is_managed_desktop: true
+    #   is_dev_env: true
+    #   setup_grandorgue: true
+    # fedora:
+    #   ansible_host: 192.168.122.155
+    #   ansible_user: dominic
+    #   is_managed_desktop: true
+    #   is_dev_env: true
+    #   setup_grandorgue: true
 
   vars:
     ansible_connection: "{{ 'local' if inventory_hostname == lookup('pipe', 'hostname -s') else 'ssh' }}"
