@@ -50,6 +50,9 @@ enabled = true
 sidebar_section = "none"
 width = 750
 
+    [control_center.calendar]
+    show_events_card = false
+
     [[control_center.shortcuts]]
     type = "caffeine"
 
@@ -324,7 +327,7 @@ source = "builtin"
 wallpaper_scheme = "m3-content"
 
     [theme.templates]
-    builtin_ids = [ "gtk3", "gtk4", "hyprland", "kcolorscheme" ]
+    builtin_ids = [ "gtk3", "gtk4", "kcolorscheme" ]
     community_ids = []
 
 [wallpaper]

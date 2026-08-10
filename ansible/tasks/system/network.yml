@@ -130,8 +130,8 @@
   ansible.builtin.systemd_service:
     name: NetworkManager.service
     enabled: true
-    state: "{{ 'restarted' if networkmanager_config.changed else 'started' }}"
+    state: "{{ 'started' }}"
   become: true
 #
 # Debugging: nmcli, (networkctl status), ip link, ip route, ip addr
-# TODO might need to disable/mask wpa_supplicant depending on distro. Also, wait after restarting networkmanager?
+# Note, this doesn't restart networkmanager to prevent interrupting ansible.

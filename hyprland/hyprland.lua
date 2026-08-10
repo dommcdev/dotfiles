@@ -31,8 +31,8 @@ end)
 -- #####################
 -- ### LOOK AND FEEL ###
 -- #####################
-local noctalia = require("noctalia")
-noctalia.apply_theme()
+local colors = require("colors")
+colors.apply_theme()
 
 hl.config({
   general = {
@@ -51,7 +51,7 @@ hl.config({
   },
 })
 -- Fullscreen windows have red border
-hl.window_rule({ match = { fullscreen = true }, border_color = noctalia.colors.error })
+hl.window_rule({ match = { fullscreen = true }, border_color = colors.colors.error })
 
 hl.config({
   decoration = {
