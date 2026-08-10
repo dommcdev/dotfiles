@@ -50,6 +50,15 @@ install_packages() {
 #        print_success "Packages already installed."
       fi
       ;;
+    cachyos)
+      # Check if installed to be fast/idempotent
+      if ! pacman -Qi fprintd &>/dev/null || ! pacman -Qi usbutils &>/dev/null; then
+        print_info "Installing packages (Arch)..."
+        sudo pacman -S --noconfirm --needed fprintd usbutils
+#      else
+#        print_success "Packages already installed."
+      fi
+      ;;
     ubuntu)
       if ! dpkg -s fprintd libpam-fprintd usbutils &>/dev/null; then
         print_info "Installing packages (Ubuntu)..."

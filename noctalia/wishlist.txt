@@ -4,6 +4,10 @@ Add settings icon to network module, link to nm-connection-editor
 Buttons with borders have weird animation layout shifts
 No border radius of 0 in greeter
 Tooltips
+Why can't gui settings manupulate config file directly?
+Why does noctalia need to reload for config file manual changes to take effect.
+toggling widget editors is annoying
+why doesn't export config remember last dir saved
 
 
 [Commented] Differentiate between battery/ac in idle settings #3336
