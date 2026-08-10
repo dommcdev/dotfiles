@@ -1,4 +1,17 @@
 # Note, the order-of-operations is very intentional for the tasks in this file.
+- name: Read operating system release information
+  ansible.builtin.slurp:
+    src: /etc/os-release
+  register: os_release
+  when: is_arch
+
+- name: Detect CachyOS
+  ansible.builtin.set_fact:
+    is_cachyos: >-
+      {{ is_arch and
+         'ID=cachyos' in
+         (os_release.content | default('') | b64decode).splitlines() }}
+
 - name: Add CachyOS repositories
   ansible.builtin.include_tasks:
     file: misc/cachyos-repo.yml
@@ -6,7 +19,7 @@
       become: true
   when:
     - is_arch
-    - ansible_facts['distribution'] | lower != 'cachyos'
+    - not is_cachyos
 
 - name: Refresh apt package cache
   ansible.builtin.apt:
