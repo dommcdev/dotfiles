@@ -7,7 +7,7 @@ local thinkpad = "desc:Samsung Display Corp. ATNA53JB01-0"
 local dell27 = "desc:Dell Inc. DELL G2724D CDDZ5Y3"
 
 hl.monitor({ output = dell27, mode = "2560x1440@165", position = "auto", scale = 1 })
-hl.monitor({ output = thinkpad, mode = "2880x1800@120", position = "auto", scale = 1.6 })
+hl.monitor({ output = thinkpad, mode = "2880x1800@120", position = "auto", scale = 1.5 })
 
 hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1, mirror = "eDP-1" })
 
