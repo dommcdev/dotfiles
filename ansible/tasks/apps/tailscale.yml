@@ -40,14 +40,15 @@
     argv:
       - tailscale
       - up
-      - "--auth-key={{ tailscale_auth_key }}"
+      - "--auth-key={{ prepared_tailscale_auth_key }}"
       - --reset
   become: true
   changed_when: false
+  no_log: true
   when:
     - is_linux
-    - tailscale_auth_key is defined
-    - tailscale_auth_key | length > 0
+    - prepared_tailscale_auth_key is defined
+    - prepared_tailscale_auth_key | length > 0
 
 - name: Configure Tailscale options
   ansible.builtin.command:

@@ -1,4 +1,4 @@
-- name: Configure machines
+- name: Prepare machines
   hosts: all
   gather_facts: false
 
@@ -32,6 +32,12 @@
         - inventory_hostname not in (machine_passwords | default({}))
       no_log: true
 
+    - name: Preserve Tailscale auth key for configuration
+      ansible.builtin.set_fact:
+        prepared_tailscale_auth_key: "{{ tailscale_auth_key }}"
+      when: tailscale_auth_key is defined
+      no_log: true
+
     - name: Install Python when missing
       ansible.builtin.raw: |
         if command -v python3 >/dev/null 2>&1; then
@@ -57,6 +63,19 @@
     - name: Gather facts
       ansible.builtin.setup:
 
+- name: Configure machines
+  hosts: all
+  gather_facts: false
+
+  # This block only works if facts have been gathered in a previous play
+  environment:
+    XDG_CONFIG_HOME: "{{ home }}/.config"
+    XDG_DATA_HOME: "{{ home }}/.local/share"
+    XDG_CACHE_HOME: "{{ home }}/.cache"
+    XDG_STATE_HOME: "{{ home }}/.local/state"
+    CARGO_HOME: "{{home }}/.local/share/cargo"
+
+  tasks:
     # Clone dotfiles, grab essential deps, package managers, etc
     - name: Prerequisites
       ansible.builtin.import_tasks: tasks/prereqs.yml
