@@ -175,7 +175,7 @@
         - yazi.toml
 
     - name: Install Yazi packages
-      ansible.builtin.command: ya pkg install
+      ansible.builtin.command: ya pkg install --discard
       args:
         chdir: "{{ home }}/.config/yazi"
       changed_when: false

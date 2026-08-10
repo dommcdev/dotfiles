@@ -55,6 +55,7 @@
       loop:
         - hyprland.lua
         - keybindings.lua
+        - colors.lua
 
     - name: Link UWSM configs
       ansible.builtin.file:
