@@ -29,3 +29,5 @@ Create file with git repos to clone
 Load noctalia before hyprland?
 Merge dotfiles.env with secrets.yml somehow
 manage qt6ct config better.
+Don't restart networkmanager?
+Allow `local` install option to prompt for password?

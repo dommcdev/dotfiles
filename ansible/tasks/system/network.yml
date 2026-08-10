@@ -96,6 +96,14 @@
       become: true
       register: resolved_config
 
+- name: Link systemd-resolved stub resolver
+  ansible.builtin.file:
+    src: /run/systemd/resolve/stub-resolv.conf
+    dest: /etc/resolv.conf
+    state: link
+    force: true
+  become: true
+
 - name: Enable/restart systemd-resolved
   ansible.builtin.systemd_service:
     name: systemd-resolved.service
@@ -108,14 +116,6 @@
     name: avahi-daemon.service
     enabled: true
     state: started
-  become: true
-
-- name: Link systemd-resolved stub resolver
-  ansible.builtin.file:
-    src: /run/systemd/resolve/stub-resolv.conf
-    dest: /etc/resolv.conf
-    state: link
-    force: true
   become: true
 
 - name: Enable TCP MTU probing
