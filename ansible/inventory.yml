@@ -5,14 +5,13 @@ all:
       ansible_become_exe: /usr/bin/sudo.ws
       is_headless: true
       is_hardened: true
-      #TODO remove the above stupid workaround once this merges: https://github.com/ansible/ansible/pull/86964
     kabigon:
       ansible_host: kabigon
       is_managed_desktop: true
       is_dev_env: true
       setup_grandorgue: true
     pikachu:
-      ansible_host: 192.168.1.151
+      ansible_host: pikachu
       is_managed_desktop: true
       is_dev_env: true
       has_battery: true
@@ -67,3 +66,5 @@ all:
     has_fingerprint_reader: false
     manage_gpu: true
     setup_grandorgue: false
+
+#TODO remove the stupid sudo.ws workaround once this merges: https://github.com/ansible/ansible/pull/86964
