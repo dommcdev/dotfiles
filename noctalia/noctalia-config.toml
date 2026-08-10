@@ -51,9 +51,6 @@ sidebar_section = "none"
 width = 750
 
     [[control_center.shortcuts]]
-    type = "power_profile"
-
-    [[control_center.shortcuts]]
     type = "caffeine"
 
     [[control_center.shortcuts]]
@@ -70,7 +67,7 @@ width = 750
 
 [desktop_widgets]
 schema_version = 2
-widget_order = [ "desktop-widget-0000000000000002" ]
+widget_order = [ "desktop-widget-0000000000000002", "desktop-widget-0000000000000003" ]
 
     [desktop_widgets.grid]
     cell_size = 16
@@ -97,6 +94,21 @@ widget_order = [ "desktop-widget-0000000000000002" ]
         color_1 = "primary"
         color_2 = "secondary"
         mirrored = true
+        show_when_idle = false
+
+    [desktop_widgets.widget.desktop-widget-0000000000000003]
+    box_height = 128.0
+    box_width = 448.0
+    cx = 480.0
+    cy = 920.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "audio_visualizer"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000003.settings]
+        background = false
+        bands = 32
+        centered = true
         show_when_idle = false
 
 [idle]
@@ -164,8 +176,8 @@ widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-000000000000000
     [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
     box_height = 70.0
     box_width = 400.0
-    cx = 900.0
-    cy = 943.5
+    cx = 960.0
+    cy = 1013.0
     output = "eDP-1"
     rotation = 0.0
     type = "login_box"
@@ -217,10 +229,10 @@ widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-000000000000000
         layout = "horizontal"
 
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000003]
-    box_height = 0.0
-    box_width = 0.0
-    cx = 900.0
-    cy = 562.5
+    box_height = 176.0
+    box_width = 240.0
+    cx = 960.0
+    cy = 592.0
     output = "eDP-1"
     rotation = 0.0
     type = "clock"
@@ -230,13 +242,16 @@ widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-000000000000000
         background_opacity = 0.0
 
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000004]
-    box_height = 112.0
+    box_height = 32.0
     box_width = 64.0
-    cx = 1252.0
-    cy = 908.5
+    cx = 1872.0
+    cy = 24.0
     output = "eDP-1"
     rotation = 0.0
     type = "yocraft/battery-widget:widget"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000004.settings]
+        background = false
 
 [nightlight]
 enabled = true
