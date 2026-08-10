@@ -9,6 +9,7 @@ Increase server login timeout for navidrome/feishin
 Setup fuse mnt/bookmark for chocobo files
 Merge dotfiles.env with secrets.yml somehow
 Tailscale key bug
+Toggle qt6ct once?
 
 Cachyos
 * Limine
