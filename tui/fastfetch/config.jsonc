@@ -18,7 +18,7 @@
     },
     {
       "type": "os",
-      "key": "{#cyan}  {#blue}System       {#bright_black}┆{#}",
+      "key": "{#cyan}󰟀  {#blue}System       {#bright_black}┆{#}",
       "format": "{2}",
     },
     {
