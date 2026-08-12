@@ -107,6 +107,7 @@
       - glow
       - difftastic
       - caligula
+      - hunk
     macos_brew_pkgs:
       - ouch
       - unzip
@@ -141,6 +142,7 @@
       - bc
       - id3v2
       - caligula
+      - hunk
   block:
     - name: Install native terminal packages
       ansible.builtin.package:
@@ -177,6 +179,11 @@
         state: present
         update_homebrew: false
       when: is_macos
+
+    - name: Install Hunk with Bun on Arch
+      ansible.builtin.command: bun add -g hunkdiff
+      changed_when: false
+      when: is_arch
 
     - name: Update tldr cache
       ansible.builtin.command:
