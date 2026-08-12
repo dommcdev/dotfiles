@@ -1,16 +1,54 @@
+# Linux font setup:
+# - Inter is the desktop and sans-serif UI font.
+# - Liberation Serif is the serif default.
+# - JetBrains Mono Nerd Font is the monospace default; Fira Code Nerd Font is
+#   also installed as a backup.
+# - Noto provides broad Unicode, CJK, and color emoji coverage.
+# - DejaVu, GNU FreeFont, IBM Plex, Liberation, Terminus, and Fira Sans provide
+#   additional families and fallbacks.
+# - Microsoft core fonts are installed on Arch and Ubuntu, but not Fedora.
+# macOS only receives JetBrains Mono Nerd Font from this task.
 - name: Install fonts
   vars:
     pkgs:
       Archlinux:
         - gnu-free-fonts
+        - inter-font
         - noto-fonts
         - noto-fonts-cjk
         - noto-fonts-emoji
         - noto-fonts-extra
         - terminus-font
         - ttf-dejavu
+        - ttf-fira-sans
+        - ttf-firacode-nerd
+        - ttf-ibm-plex
         - ttf-jetbrains-mono-nerd
         - ttf-liberation
+      Debian:
+        - fonts-dejavu
+        - fonts-freefont-ttf
+        - fonts-ibm-plex
+        - fonts-inter
+        - fonts-liberation
+        - fonts-noto
+        - fonts-noto-cjk
+        - fonts-noto-color-emoji
+        - fonts-noto-extra
+        - fonts-terminus
+      RedHat:
+        - dejavu-fonts-all
+        - gnu-free-mono-fonts
+        - gnu-free-sans-fonts
+        - gnu-free-serif-fonts
+        - google-noto-color-emoji-fonts
+        - google-noto-fonts-all
+        - google-noto-sans-cjk-fonts
+        - google-noto-serif-cjk-fonts
+        - ibm-plex-fonts-all
+        - liberation-fonts-all
+        - rsms-inter-fonts
+        - terminus-fonts
   block:
     - name: Install native font packages
       ansible.builtin.package:
@@ -19,6 +57,30 @@
       become: true
       when: ansible_facts['os_family'] in pkgs
 
+    - name: Install Microsoft core fonts on Arch
+      become: true
+      become_user: aur_builder
+      kewlfft.aur.aur:
+        name: ttf-ms-fonts
+        state: present
+      when: is_arch
+
+    - name: Accept the Microsoft core fonts license on Ubuntu
+      ansible.builtin.debconf:
+        name: ttf-mscorefonts-installer
+        question: msttcorefonts/accepted-mscorefonts-eula
+        value: "true"
+        vtype: boolean
+      become: true
+      when: is_ubuntu
+
+    - name: Install Microsoft core fonts on Ubuntu
+      ansible.builtin.package:
+        name: ttf-mscorefonts-installer
+        state: present
+      become: true
+      when: is_ubuntu
+
     - name: Create local font directory
       ansible.builtin.file:
         path: "{{ home }}/.local/share/fonts"
@@ -26,13 +88,45 @@
         mode: "0755"
       when: is_ubuntu or is_fedora
 
-    - name: Install JetBrains Mono Nerd Font on Debian and Red Hat
+    - name: Install Fira Sans on Debian and Red Hat
+      ansible.builtin.get_url:
+        url: "https://raw.githubusercontent.com/google/fonts/main/ofl/firasans/{{ item }}.ttf"
+        dest: "{{ home }}/.local/share/fonts/{{ item }}.ttf"
+        mode: "0644"
+      loop:
+        - FiraSans-Black
+        - FiraSans-BlackItalic
+        - FiraSans-Bold
+        - FiraSans-BoldItalic
+        - FiraSans-ExtraBold
+        - FiraSans-ExtraBoldItalic
+        - FiraSans-ExtraLight
+        - FiraSans-ExtraLightItalic
+        - FiraSans-Italic
+        - FiraSans-Light
+        - FiraSans-LightItalic
+        - FiraSans-Medium
+        - FiraSans-MediumItalic
+        - FiraSans-Regular
+        - FiraSans-SemiBold
+        - FiraSans-SemiBoldItalic
+        - FiraSans-Thin
+        - FiraSans-ThinItalic
+      register: fira_sans
+      when: is_ubuntu or is_fedora
+
+    - name: Install Nerd Fonts on Debian and Red Hat
       ansible.builtin.unarchive:
-        src: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz
+        src: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/{{ item.archive }}.tar.xz"
         dest: "{{ home }}/.local/share/fonts"
         remote_src: true
-        creates: "{{ home }}/.local/share/fonts/JetBrainsMonoNerdFont-Regular.ttf"
-      register: jetbrains_mono_nerd_font
+        creates: "{{ home }}/.local/share/fonts/{{ item.file }}"
+      loop:
+        - archive: FiraCode
+          file: FiraCodeNerdFont-Regular.ttf
+        - archive: JetBrainsMono
+          file: JetBrainsMonoNerdFont-Regular.ttf
+      register: nerd_fonts
       when: is_ubuntu or is_fedora
 
     - name: Install JetBrains Mono Nerd Font on macOS
@@ -60,7 +154,7 @@
       register: fontconfig
 
 - name: Configure desktop font
-  ansible.builtin.command: "gsettings set org.gnome.desktop.interface font-name 'Adwaita Sans 11'"
+  ansible.builtin.command: "gsettings set org.gnome.desktop.interface font-name 'Inter 11'"
   changed_when: false
   when: is_linux and is_managed_desktop
 
@@ -69,9 +163,8 @@
   changed_when: true
   when:
     - is_linux
-    - (jetbrains_mono_nerd_font is not skipped and jetbrains_mono_nerd_font is changed) or fontconfig is changed
+    - (nerd_fonts is defined and nerd_fonts is changed) or (fira_sans is defined and fira_sans is changed) or fontconfig is changed
 #
 # Nota bene
 # fc-match [serif|sans-serif|monospace etc]
 # fc-cache -rv
-# TODO general fonts on Ubuntu/Fedora as well

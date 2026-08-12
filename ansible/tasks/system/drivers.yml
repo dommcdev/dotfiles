@@ -268,3 +268,4 @@
       when: is_fedora
 # NOTE: Older Intel GPUs may require libva-intel-driver instead of intel-media-driver.
 # NOTE: NVIDIA open kernel modules only support Turing and newer GPUs.
+# Use chwd on arch/cachy?

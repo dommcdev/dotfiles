@@ -1,10 +1,9 @@
 # To-do
-Nvim stuff (More lazy loading)
-Tweak auth stuff in fingerprints script
+Nvim stuff (More lazy loading, finish new lsp)
 Ambient light sensor
-Setup ufw (and maybe Apparmor on server)
+Setup ufw (apps/firewall.yml)
+
 Create syncthing dir for wallpapers, games/saves, etc
-Better system fonts (ttf-ms-fonts, inter, fira, ibm-plex + research fontconfig, + gsettings etc)
 Increase server login timeout for navidrome/feishin
 Setup fuse mnt/bookmark for chocobo files
 Merge dotfiles.env with secrets.yml somehow
@@ -13,11 +12,8 @@ Toggle qt6ct once?
 Simple remote viewer
 Add cockpit to server installs
 Add terminal-browser
-
-Cachyos
-* Limine
-* Snapper
-* Use chwd instead of my manual driver stack
+Mask some .desktop files
+Tweak limine, snapper?
 
 
 # Low Priority
@@ -27,7 +23,6 @@ Self-host excalidraw
 Theming system
 Nvidia hyprland support
 
-New ymls: Switch emulator, retroarch, firewall (ufw), wakeonlan
-Ansible: Auth, pkg vars at end, comment overhaul
-
+New ymls: Switch emulator, retroarch, wakeonlan
+Ansible: Auth (replace fingerprints script + tweak PAM auth stuff), pkg vars at end, comment overhaul
 
