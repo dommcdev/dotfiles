@@ -74,7 +74,8 @@ fi
 
 # export noctalia config to dotfiles
 if command -v noctalia &>/dev/null; then
-  noctalia config export > /tmp/noctalia-config.toml && mv /tmp/noctalia-config.toml ~/dev/dotfiles/noctalia/noctalia-config.toml && echo "Noctalia config updated"
+  print_section "Exporting noctalia config"
+  noctalia config export > /tmp/noctalia-config.toml && mv /tmp/noctalia-config.toml ~/dev/dotfiles/noctalia/noctalia-config.toml
 fi
 
 print_section "All updates complete!"

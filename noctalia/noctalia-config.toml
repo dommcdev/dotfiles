@@ -6,7 +6,7 @@ order = [ "default" ]
 
     [bar.default]
     capsule_radius = 0
-    center = [ "date", "center_spacer", "clock", "center_spacer", "weather", "center_spacer", "privacy", "widget" ]
+    center = [ "date", "center_spacer", "clock", "center_spacer", "weather", "center_spacer", "privacy" ]
     end = [
         "tray",
         "battery",
@@ -51,7 +51,7 @@ sidebar_section = "none"
 width = 750
 
     [control_center.calendar]
-    show_events_card = false
+    show_events_card = true
 
     [[control_center.shortcuts]]
     type = "caffeine"
@@ -70,7 +70,7 @@ width = 750
 
 [desktop_widgets]
 schema_version = 2
-widget_order = [ "desktop-widget-0000000000000002", "desktop-widget-0000000000000003" ]
+widget_order = [ "desktop-widget-0000000000000002", "desktop-widget-0000000000000003", "desktop-widget-0000000000000004" ]
 
     [desktop_widgets.grid]
     cell_size = 16
@@ -114,6 +114,15 @@ widget_order = [ "desktop-widget-0000000000000002", "desktop-widget-000000000000
         centered = true
         show_when_idle = false
 
+    [desktop_widgets.widget.desktop-widget-0000000000000004]
+    box_height = 128.0
+    box_width = 112.0
+    cx = 1088.0
+    cy = 296.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "yocraft/battery-widget:widget"
+
 [idle]
 behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
 
@@ -144,7 +153,14 @@ auto_locate = true
 [lockscreen_widgets]
 enabled = true
 schema_version = 2
-widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-0000000000000001", "lockscreen-widget-0000000000000002" ]
+widget_order = [
+    "lockscreen-login-box@eDP-1",
+    "lockscreen-login-box@DP-2",
+    "lockscreen-widget-0000000000000001",
+    "lockscreen-widget-0000000000000002",
+    "lockscreen-widget-0000000000000003",
+    "lockscreen-widget-0000000000000004"
+]
 
     [lockscreen_widgets.grid]
     cell_size = 16
@@ -255,6 +271,8 @@ widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-000000000000000
 
         [lockscreen_widgets.widget.lockscreen-widget-0000000000000004.settings]
         background = false
+        battery = "bat0"
+        refresh_interval = 60
 
 [nightlight]
 enabled = true
@@ -280,13 +298,7 @@ browser_placement = "floating"
 browser_position = "center"
 
 [plugins]
-enabled = [
-    "noctalia/bongocat",
-    "noctalia/wallhaven",
-    "noctalia/screen_recorder",
-    "oldirtty/color_picker",
-    "yocraft/battery-widget"
-]
+enabled = [ "noctalia/bongocat", "noctalia/wallhaven", "noctalia/screen_recorder", "yocraft/battery-widget" ]
 
 [shell]
 avatar_path = "/home/dominic/Downloads/Shared/Images/Profile.png"
