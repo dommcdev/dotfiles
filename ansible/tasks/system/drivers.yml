@@ -48,6 +48,13 @@
         cpu_vendor: "{{ detected_cpu_vendor.stdout }}"
 
 - name: Install CPU microcode
+  ansible.builtin.package:
+    name: "{{ pkgs[ansible_facts['os_family']][cpu_vendor] }}"
+    state: present
+  become: true
+  when:
+    - ansible_facts['os_family'] in pkgs
+    - cpu_vendor in pkgs[ansible_facts['os_family']]
   vars:
     pkgs:
       Archlinux:
@@ -59,15 +66,13 @@
       Debian:
         amd: amd64-microcode
         intel: intel-microcode
-  ansible.builtin.package:
-    name: "{{ pkgs[ansible_facts['os_family']][cpu_vendor] }}"
-    state: present
-  become: true
-  when:
-    - ansible_facts['os_family'] in pkgs
-    - cpu_vendor in pkgs[ansible_facts['os_family']]
 
 - name: Install graphics drivers, firmware and multi-media codecs
+  ansible.builtin.package:
+    name: "{{ pkgs[ansible_facts['os_family']] }}"
+    state: present
+  become: true
+  when: ansible_facts['os_family'] in pkgs
   vars:
     pkgs:
       Archlinux:
@@ -111,13 +116,11 @@
         - mesa-utils
         - vainfo
         - vulkan-tools
-  ansible.builtin.package:
-    name: "{{ pkgs[ansible_facts['os_family']] }}"
-    state: present
-  become: true
-  when: ansible_facts['os_family'] in pkgs
 
 - name: Install AMD graphics support
+  when:
+    - manage_gpu
+    - "'amd' in gpu_vendors"
   vars:
     pkgs:
       Archlinux:
@@ -133,9 +136,7 @@
         - mesa-va-drivers
         - mesa-vdpau-drivers
         - mesa-vulkan-drivers
-  when:
-    - manage_gpu
-    - "'amd' in gpu_vendors"
+
   block:
     - name: Install AMD drivers and firmware
       ansible.builtin.package:
@@ -154,6 +155,14 @@
       when: is_fedora
 
 - name: Install Intel graphics support
+  ansible.builtin.package:
+    name: "{{ pkgs[ansible_facts['os_family']] }}"
+    state: present
+  become: true
+  when:
+    - manage_gpu
+    - "'intel' in gpu_vendors"
+    - ansible_facts['os_family'] in pkgs
   vars:
     pkgs:
       Archlinux:
@@ -170,24 +179,8 @@
         - intel-media-va-driver-non-free
         - libgl1-mesa-dri
         - mesa-vulkan-drivers
-  ansible.builtin.package:
-    name: "{{ pkgs[ansible_facts['os_family']] }}"
-    state: present
-  become: true
-  when:
-    - manage_gpu
-    - "'intel' in gpu_vendors"
-    - ansible_facts['os_family'] in pkgs
 
 - name: Install VirtIO graphics support
-  vars:
-    pkgs:
-      Archlinux:
-        - vulkan-virtio
-      Debian:
-        - mesa-vulkan-drivers
-      RedHat:
-        - mesa-vulkan-drivers
   ansible.builtin.package:
     name: "{{ pkgs[ansible_facts['os_family']] }}"
     state: present
@@ -196,6 +189,14 @@
     - manage_gpu
     - "'virtio' in gpu_vendors"
     - ansible_facts['os_family'] in pkgs
+  vars:
+    pkgs:
+      Archlinux:
+        - vulkan-virtio
+      Debian:
+        - mesa-vulkan-drivers
+      RedHat:
+        - mesa-vulkan-drivers
 
 - name: Install NVIDIA graphics support
   when:

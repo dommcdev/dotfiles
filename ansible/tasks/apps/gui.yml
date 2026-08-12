@@ -66,6 +66,7 @@
   when: is_macos
 
 - name: Install and configure Nautilus
+  when: is_linux
   vars:
     pkgs:
       Archlinux:
@@ -86,7 +87,6 @@
         - gvfs-smb
         - gvfs-mtp
         - sushi
-  when: is_linux
   block:
     - name: Install Nautilus
       ansible.builtin.package:

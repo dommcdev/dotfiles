@@ -95,6 +95,8 @@
           value: Breeze
         - option: icon_theme
           value: Papirus
+        - option: custom_palette
+          value: "true"
         - option: color_scheme_path
           value: "/home/{{ user }}/.local/share/color-schemes/noctalia.colors"
 

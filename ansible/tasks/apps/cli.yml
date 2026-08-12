@@ -253,3 +253,4 @@
           - cmatrix-git
           - lavat-git
         state: present
+# TODO Add terminal-browser?
