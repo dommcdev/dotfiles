@@ -185,11 +185,6 @@
       changed_when: false
       when: is_arch
 
-    - name: Update tldr cache
-      ansible.builtin.command:
-        cmd: tldr --update
-      changed_when: false
-
 - name: Install Ansible tooling
   block:
     - name: Create Ansible state directory

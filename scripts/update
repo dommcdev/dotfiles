@@ -83,3 +83,4 @@ print_section "All updates complete!"
 #Also, maybe occasionally do
 #cd ~/.config/yazi && ya pkg upgrade
 #Update nvim packages
+# tldr --update
