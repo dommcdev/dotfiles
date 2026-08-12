@@ -81,4 +81,4 @@ case "$target" in
 esac
 
 # Note: As of right now this only prompts for missing ssh/sudo password on single-machine/local runs.
-# If you do a simple `./install` and a machine is missing its entry in secrets.yml Ansible will hard-fail.
+# If you do a simple `./install` and a machine is missing its password in .env Ansible will hard-fail.

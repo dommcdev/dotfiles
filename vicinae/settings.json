@@ -16,7 +16,7 @@
       "toggle": ""
    },
    "font": {
-      "rendering": "native",
+      "rendering": "qt",
       "normal": {
          "family": "Inter",
          "size": 10.5

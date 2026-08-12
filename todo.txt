@@ -6,7 +6,6 @@ Setup ufw (apps/firewall.yml)
 Create syncthing dir for wallpapers, games/saves, etc
 Increase server login timeout for navidrome/feishin
 Setup fuse mnt/bookmark for chocobo files
-Merge dotfiles.env with secrets.yml somehow
 Tailscale key bug
 Toggle qt6ct once?
 Simple remote viewer
@@ -25,4 +24,3 @@ Nvidia hyprland support
 
 New ymls: Switch emulator, retroarch, wakeonlan
 Ansible: Auth (replace fingerprints script + tweak PAM auth stuff), comment overhaul
-

@@ -2,4 +2,5 @@
 *.DS_Store
 productivity.html
 .env*
+!.env.example
 /ansible/secrets.yml
