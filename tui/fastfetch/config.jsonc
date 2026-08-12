@@ -45,10 +45,9 @@
       "folders": "/",
       "format": "{1} / {2} ({3})",
     },
-    "break",
     {
       "type": "custom",
-      "key": " ",
+      "key": "{#cyan}  {#blue}Theme        {#bright_black}┆{#}",
       "format": "{#yellow}󰮯 {#green}󰊠 {#cyan}󰊠 {#red}󰊠 {#blue}󰊠 {#magenta}󰊠 {#white}󰊠 {#bright_black}󰊠{#}",
     },
     "break",
