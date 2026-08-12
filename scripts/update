@@ -72,6 +72,11 @@ if command -v bun &>/dev/null; then
   bun update -g
 fi
 
+# export noctalia config to dotfiles
+if command -v noctalia &>/dev/null; then
+  noctalia config export > /tmp/noctalia-config.toml && mv /tmp/noctalia-config.toml ~/dev/dotfiles/noctalia/noctalia-config.toml && echo "Noctalia config updated"
+fi
+
 print_section "All updates complete!"
 
 #Also, maybe occasionally do

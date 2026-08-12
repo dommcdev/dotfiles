@@ -11,6 +11,7 @@ local webapp = "google-chrome-stable --app"
 local screenshot = "noctalia msg screenshot-fullscreen"
 local screenshotArea = "noctalia msg screenshot-region"
 local controlcenter = "noctalia msg panel-toggle control-center"
+local noctalia_settings = "noctalia msg settings-toggle"
 
 -- Floating TUI apps
 local bluetooth = "noctalia msg bluetooth-enable && ghostty --class=com.dominic.bluetui -e bluetui"
@@ -66,7 +67,7 @@ hl.bind(mainMod .. " + Y", hl.dsp.exec_cmd(parabolic))
 hl.bind(mainMod .. " + SHIFT + Y", hl.dsp.exec_cmd(webapp .. '="https://youtube.com/playlist?list=WL"'))
 hl.bind(mainMod .. " + Z", hl.dsp.workspace.toggle_special("magic"))
 hl.bind(mainMod .. " + SHIFT + Z", hl.dsp.window.move({ workspace = "special:magic" }))
-hl.bind(mainMod .. "+comma", hl.dsp.exec_cmd(controlcenter))
+hl.bind(mainMod .. "+comma", hl.dsp.exec_cmd(noctalia_settings))
 
 -- Move focus with mainMod SHIFT + hjkl
 hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "l" }))
