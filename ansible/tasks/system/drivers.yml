@@ -1,25 +1,71 @@
-- name: Detect graphics hardware vendors
-  ansible.builtin.shell:
-    cmd: |
-      for device in /sys/bus/pci/devices/*; do
-        [ -r "$device/class" ] || continue
-        case "$(cat "$device/class")" in
-          0x03*) cat "$device/vendor" ;;
-        esac
-      done
-    executable: /bin/sh
-  register: gpu_pci_vendor_ids
-  changed_when: false
+- name: Detect/set graphics hardware vendors
+  block:
+    - name: Determine vendor(s)
+      ansible.builtin.shell:
+        cmd: |
+          for device in /sys/bus/pci/devices/*; do
+            [ -r "$device/class" ] || continue
+            case "$(cat "$device/class")" in
+              0x03*) cat "$device/vendor" ;;
+            esac
+          done
+        executable: /bin/sh
+      register: gpu_pci_vendor_ids
+      changed_when: false
 
-- name: Set graphics hardware vendors
-  ansible.builtin.set_fact:
-    gpu_vendors: >-
-      {{
-        (['amd'] if '0x1002' in gpu_pci_vendor_ids.stdout_lines else [])
-        + (['intel'] if '0x8086' in gpu_pci_vendor_ids.stdout_lines else [])
-        + (['nvidia'] if '0x10de' in gpu_pci_vendor_ids.stdout_lines else [])
-        + (['virtio'] if '0x1af4' in gpu_pci_vendor_ids.stdout_lines else [])
-      }}
+    - name: Set vendor(s)
+      ansible.builtin.set_fact:
+        gpu_vendors: >-
+          {{
+            (['amd'] if '0x1002' in gpu_pci_vendor_ids.stdout_lines else [])
+            + (['intel'] if '0x8086' in gpu_pci_vendor_ids.stdout_lines else [])
+            + (['nvidia'] if '0x10de' in gpu_pci_vendor_ids.stdout_lines else [])
+            + (['virtio'] if '0x1af4' in gpu_pci_vendor_ids.stdout_lines else [])
+          }}
+
+- name: Detect/set CPU vendor
+  block:
+    - name: Detect vendor
+      ansible.builtin.shell:
+        cmd: |
+          while IFS=: read -r key value; do
+            case "$key" in
+              vendor_id*)
+                case "$value" in
+                  *AuthenticAMD*) printf '%s\n' amd ;;
+                  *GenuineIntel*) printf '%s\n' intel ;;
+                esac
+                break
+                ;;
+            esac
+          done < /proc/cpuinfo
+        executable: /bin/sh
+      register: detected_cpu_vendor
+      changed_when: false
+
+    - name: Set CPU vendor
+      ansible.builtin.set_fact:
+        cpu_vendor: "{{ detected_cpu_vendor.stdout }}"
+
+- name: Install CPU microcode
+  vars:
+    pkgs:
+      Archlinux:
+        amd: amd-ucode
+        intel: intel-ucode
+      RedHat:
+        amd: microcode_ctl
+        intel: microcode_ctl
+      Debian:
+        amd: amd64-microcode
+        intel: intel-microcode
+  ansible.builtin.package:
+    name: "{{ pkgs[ansible_facts['os_family']][cpu_vendor] }}"
+    state: present
+  become: true
+  when:
+    - ansible_facts['os_family'] in pkgs
+    - cpu_vendor in pkgs[ansible_facts['os_family']]
 
 - name: Install graphics drivers, firmware and multi-media codecs
   vars:
