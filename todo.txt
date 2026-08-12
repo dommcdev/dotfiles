@@ -11,6 +11,8 @@ Merge dotfiles.env with secrets.yml somehow
 Tailscale key bug
 Toggle qt6ct once?
 Simple remote viewer
+Add cockpit to server installs
+Add terminal-browser
 
 Cachyos
 * Limine
