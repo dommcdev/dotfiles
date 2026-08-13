@@ -6,7 +6,7 @@ order = [ "default" ]
 
     [bar.default]
     capsule_radius = 0
-    center = [ "date", "center_spacer", "clock", "center_spacer", "weather", "center_spacer", "privacy" ]
+    center = [ "date", "center_spacer", "clock", "center_spacer", "weather", "center_spacer", "privacy", "status" ]
     end = [
         "tray",
         "battery",
@@ -23,7 +23,6 @@ order = [ "default" ]
         "right_spacer",
         "control-center"
     ]
-    font_family = "Inter"
     margin_edge = 0
     margin_ends = 8
     radius = 0
@@ -70,7 +69,7 @@ width = 750
 
 [desktop_widgets]
 schema_version = 2
-widget_order = [ "desktop-widget-0000000000000002", "desktop-widget-0000000000000003", "desktop-widget-0000000000000004" ]
+widget_order = [ "desktop-widget-0000000000000002", "desktop-widget-0000000000000003" ]
 
     [desktop_widgets.grid]
     cell_size = 16
@@ -264,14 +263,14 @@ widget_order = [
     box_height = 32.0
     box_width = 64.0
     cx = 1872.0
-    cy = 24.0
+    cy = 16.0
     output = "eDP-1"
     rotation = 0.0
     type = "yocraft/battery-widget:widget"
 
         [lockscreen_widgets.widget.lockscreen-widget-0000000000000004.settings]
         background = false
-        battery = "bat0"
+        battery = "auto"
         refresh_interval = 60
 
 [nightlight]
@@ -283,6 +282,11 @@ layer = "overlay"
 
 [osd.kinds]
 media = false
+
+[plugin_settings."davemhammer/tailscale"]
+manager_placement = "attached"
+notify_on_peer_change = false
+refresh_interval = 60
 
 [plugin_settings."noctalia/notes"]
 notes_dir = "~/Downloads/Notes"
@@ -298,13 +302,20 @@ browser_placement = "floating"
 browser_position = "center"
 
 [plugins]
-enabled = [ "noctalia/bongocat", "noctalia/wallhaven", "noctalia/screen_recorder", "yocraft/battery-widget" ]
+enabled = [
+    "noctalia/bongocat",
+    "noctalia/wallhaven",
+    "noctalia/screen_recorder",
+    "yocraft/battery-widget",
+    "davemhammer/tailscale"
+]
 
 [shell]
 avatar_path = "/home/dominic/Downloads/Shared/Images/Profile.png"
 button_borders = false
 clipboard_enabled = false
 corner_radius_scale = 0.0
+external_ip_enabled = true
 password_style = "random"
 polkit_agent = true
 telemetry_enabled = true
@@ -432,6 +443,10 @@ type = "spacer"
 [widget.spacer_2]
 enabled = true
 type = "spacer"
+
+[widget.status]
+enabled = false
+type = "davemhammer/tailscale:status"
 
 [widget.tray]
 drawer = true

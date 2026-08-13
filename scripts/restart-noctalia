@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if pkill -x noctalia 2>/dev/null; then
+    while pgrep -x noctalia >/dev/null; do
+        sleep 0.1
+    done
+fi
+
+exec hyprctl dispatch "hl.dsp.exec_cmd('noctalia')"

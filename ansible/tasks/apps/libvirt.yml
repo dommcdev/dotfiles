@@ -9,7 +9,7 @@
       Archlinux:
         - dnsmasq
         - libvirt
-        - qemu-full
+        - qemu-desktop
         - virt-manager
         - virt-viewer
       Debian:
