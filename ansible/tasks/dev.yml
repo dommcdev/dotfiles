@@ -40,6 +40,11 @@
   loop:
     - "{{ home }}/dev/projects"
     - "{{ home }}/dev/external"
+    - "{{ home }}/.local/share/npm-global"
+
+- name: Configure npm global package directory
+  ansible.builtin.command: npm config set prefix "{{ home }}/.local/share/npm-global"
+  changed_when: false
 
 - name: Install gh markdown preview extension
   ansible.builtin.command: gh extension install yusukebe/gh-markdown-preview

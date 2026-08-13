@@ -17,7 +17,6 @@
 * Timezone detection is flaky/incorrect sometimes?
 * Greeter doesn't respect border radius = 0 setting
 * Buttons with borders have weird animation layout shifts
-* [Created] Battery widget doesn't work (#345 + og #3436 issue)
 
 ## Larger QoL improvements
 * Tooltips. Many of the widgets could really use these.

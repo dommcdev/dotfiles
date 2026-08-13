@@ -7,13 +7,11 @@ Create syncthing dir for wallpapers, games/saves, etc
 Increase server login timeout for navidrome/feishin
 Setup fuse mnt/bookmark for chocobo files
 Tailscale key bug
-Toggle qt6ct once?
 Simple remote viewer
-Add cockpit to server installs
-Add terminal-browser
 Mask some .desktop files
-Tweak limine, snapper?
 
+New ymls: Switch emulator, retroarch, wakeonlan
+Ansible: Auth (replace fingerprints script + tweak PAM auth stuff), comment overhaul
 
 # Low Priority
 Gpu passthrough (Windows, LookingGlass, Quickpassthrough)
@@ -21,6 +19,4 @@ Devcontainers
 Self-host excalidraw
 Theming system
 Nvidia hyprland support
-
-New ymls: Switch emulator, retroarch, wakeonlan
-Ansible: Auth (replace fingerprints script + tweak PAM auth stuff), comment overhaul
+Tweak limine, snapper?

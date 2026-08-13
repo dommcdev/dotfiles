@@ -1,11 +1,11 @@
-- name: Disable Ubuntu login messages
+- name: Disable login messages (includes Ubuntu motd and cockpit message)
   ansible.builtin.file:
     path: "{{ home }}/.hushlogin"
     state: touch
     mode: "0644"
     access_time: preserve
     modification_time: preserve
-  when: is_ubuntu
+  when: is_headless
   # Note: can also do chmod -x /etc/update-motd.d/*
 
 - name: Configure Fedora DNF defaults
@@ -41,3 +41,18 @@
       Archlinux:
         - downgrade
         - reflector
+
+- name: Configure Cockpit
+  when: is_headless
+  become: true
+  block:
+    - name: Install Cockpit
+      ansible.builtin.package:
+        name: cockpit
+        state: present
+
+    - name: Enable Cockpit socket
+      ansible.builtin.systemd_service:
+        name: cockpit.socket
+        enabled: true
+        state: started
