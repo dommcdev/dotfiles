@@ -38,19 +38,28 @@
         state: present
       when: is_macos
 #
-#
-# Instructions for device setup
+# Manual setup instructions
 # I use the hub-and-spoke approach. All devices sync to chocobo (and not to each other).
-# First, set up chocobo. Change the GUI listen address to <machine.ip>:8384 to allow
-# other devices to access it. Set a GUI password since this will be available to the
-# local network. In settings/connections, turn off everything but local discovery
-# (don't think we need any of them). Grab the ID string.
-# Then, set up your other devices. No need to modify GUI settings or add a GUI
-# password here. Change connection settings as above, click add remote device, and
-# enter the ID string. Under advanced settings, change the address to
-# tcp://chocobo:22000 rather than dynamic.
-# Over on chocobo hit accept. No need to change the address here though (it can stay dynamic).
 #
-# I think you can initiate a folder from either device. Create a folder on one device
-# with the correct path for that machine, then share it with chocobo or, when on
-# chocobo, with everyone. Accept it on the other devices and change the path if needed.
+# Chocobo (Hub)
+# Open the settings panel and...
+#   Turn off all 4 discovery options (local, global, nat, relay).
+#   Change the GUI listen address to <machine.ip>:8384 and set a GUI password
+#   Select "Use https for GUI"
+# Finally click "Show ID" and copy the ID string.
+#
+# Machines (Spokes)
+# Open the settings panel and...
+#   Turn off all 4 discovery options (local, global, nat, relay)
+# Then click "Add remote device" and...
+#   Enter chocobo's ID string
+#   Select "Auto Accept" (UNLESS on a phone)
+#   Change "Addresses" from dynamic to tcp://chocobo:22000
+# Then open chocobo's interface and...
+#   Click accept (keep addresses as dynamic)
+#   Select the folders you wish to share
+#
+# Adding folders
+# Open chocobo's interface, and...
+#   Click "Add folder" and pick the local path
+#   Share with every device; They will auto-accept.
