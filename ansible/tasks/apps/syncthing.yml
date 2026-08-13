@@ -14,22 +14,6 @@
         update_homebrew: false
       when: is_macos
 
-- name: Define Syncthing topology
-  ansible.builtin.set_fact:
-    syncthing_hub: chocobo
-    syncthing_folders:
-      - id: bjvqm-regpz
-        label: Library
-        hub_path: "{{ home }}/files/2-Library"
-      - id: jkr9l-9nkhp
-        label: Downloads
-        hub_path: "{{ home }}/files/1-Downloads"
-
-- name: Require the hub in the play
-  ansible.builtin.assert:
-    that: syncthing_hub in ansible_play_hosts
-    fail_msg: Run Syncthing setup for chocobo and its spokes together.
-
 - name: Enable Syncthing
   block:
     - name: Enable Linux user service
@@ -53,188 +37,20 @@
         name: syncthing
         state: present
       when: is_macos
-
-- name: Read Syncthing device ID
-  ansible.builtin.command: syncthing device-id
-  register: syncthing_device_id_result
-  changed_when: false
-
-- name: Record Syncthing topology for this host
-  ansible.builtin.set_fact:
-    syncthing_device_id: "{{ syncthing_device_id_result.stdout | trim }}"
-    syncthing_peers: >-
-      {{ (ansible_play_hosts | difference([syncthing_hub]))
-         if inventory_hostname == syncthing_hub else [syncthing_hub] }}
-
-- name: Configure Syncthing
-  block:
-    - name: Wait for the Syncthing API
-      ansible.builtin.command: syncthing cli config dump-json
-      register: syncthing_config_result
-      changed_when: false
-      retries: 12
-      delay: 1
-      until: syncthing_config_result.rc == 0
-
-    - name: Add peer devices
-      ansible.builtin.command:
-        argv:
-          - syncthing
-          - cli
-          - config
-          - devices
-          - add
-          - "--device-id={{ hostvars[item].syncthing_device_id }}"
-          - "--name={{ item }}"
-          - "--addresses=tcp://{{ hostvars[item].ansible_host }}:22000"
-      loop: "{{ syncthing_peers }}"
-      when: >-
-        hostvars[item].syncthing_device_id not in
-        (syncthing_config_result.stdout | from_json).devices
-        | map(attribute='deviceID') | list
-      changed_when: true
-
-    - name: Refresh Syncthing configuration
-      ansible.builtin.command: syncthing cli config dump-json
-      register: syncthing_config_result
-      changed_when: false
-
-    - name: Configure peer addresses
-      ansible.builtin.command: >-
-        syncthing cli config devices {{ hostvars[item].syncthing_device_id }}
-        addresses 0 set tcp://{{ hostvars[item].ansible_host }}:22000
-      vars:
-        current_device: >-
-          {{ (syncthing_config_result.stdout | from_json).devices
-             | selectattr('deviceID', 'equalto', hostvars[item].syncthing_device_id)
-             | first }}
-      loop: "{{ syncthing_peers }}"
-      when: current_device.addresses != ['tcp://' ~ hostvars[item].ansible_host ~ ':22000']
-      changed_when: true
-
-    - name: Disable non-LAN connectivity
-      ansible.builtin.command: >-
-        syncthing cli config options {{ item.property }} set
-        {{ item.value | string | lower }}
-      loop:
-        - property: global-ann-enabled
-          current: "{{ (syncthing_config_result.stdout | from_json).options.globalAnnounceEnabled }}"
-          value: false
-        - property: relays-enabled
-          current: "{{ (syncthing_config_result.stdout | from_json).options.relaysEnabled }}"
-          value: false
-        - property: natenabled
-          current: "{{ (syncthing_config_result.stdout | from_json).options.natEnabled }}"
-          value: false
-        - property: local-ann-enabled
-          current: "{{ (syncthing_config_result.stdout | from_json).options.localAnnounceEnabled }}"
-          value: false
-      loop_control:
-        label: "{{ item.property }}"
-      when: item.current | bool != item.value
-      changed_when: true
-
-    - name: Keep the GUI local
-      ansible.builtin.command: >-
-        syncthing cli config gui raw-address set 127.0.0.1:8384
-      when: (syncthing_config_result.stdout | from_json).gui.address != '127.0.0.1:8384'
-      register: syncthing_gui_address
-      changed_when: true
-
-- name: Configure Syncthing hub
-  when: inventory_hostname == syncthing_hub
-  block:
-    - name: Create folder directories
-      ansible.builtin.file:
-        path: "{{ item.hub_path }}"
-        state: directory
-        mode: "0755"
-      loop: "{{ syncthing_folders }}"
-      loop_control:
-        label: "{{ item.label }}"
-
-    - name: Add folders
-      ansible.builtin.command:
-        argv:
-          - syncthing
-          - cli
-          - config
-          - folders
-          - add
-          - "--id={{ item.id }}"
-          - "--label={{ item.label }}"
-          - "--path={{ item.hub_path }}"
-          - --type=sendreceive
-      loop: "{{ syncthing_folders }}"
-      loop_control:
-        label: "{{ item.label }}"
-      when: >-
-        item.id not in (syncthing_config_result.stdout | from_json).folders
-        | map(attribute='id') | list
-      changed_when: true
-
-    - name: Refresh Syncthing configuration
-      ansible.builtin.command: syncthing cli config dump-json
-      register: syncthing_config_result
-      changed_when: false
-
-    - name: Configure folder paths
-      ansible.builtin.command: >-
-        syncthing cli config folders {{ item.id }} path set {{ item.hub_path }}
-      vars:
-        current_folder: >-
-          {{ (syncthing_config_result.stdout | from_json).folders
-             | selectattr('id', 'equalto', item.id) | first }}
-      loop: "{{ syncthing_folders }}"
-      loop_control:
-        label: "{{ item.label }}"
-      when: current_folder.path != item.hub_path
-      changed_when: true
-
-    - name: Share folders with spokes
-      ansible.builtin.command:
-        argv:
-          - syncthing
-          - cli
-          - config
-          - folders
-          - "{{ item.0.id }}"
-          - devices
-          - add
-          - "--device-id={{ hostvars[item.1].syncthing_device_id }}"
-      vars:
-        current_folder: >-
-          {{ (syncthing_config_result.stdout | from_json).folders
-             | selectattr('id', 'equalto', item.0.id) | first }}
-      loop: "{{ syncthing_folders | product(syncthing_peers) }}"
-      loop_control:
-        label: "{{ item.0.label }} -> {{ item.1 }}"
-      when: >-
-        hostvars[item.1].syncthing_device_id not in current_folder.devices
-        | map(attribute='deviceID') | list
-      changed_when: true
-
-- name: Configure Syncthing spokes
-  when: inventory_hostname != syncthing_hub
-  block:
-    - name: Auto-accept folders shared by the hub
-      ansible.builtin.command: >-
-        syncthing cli config devices {{ hostvars[syncthing_hub].syncthing_device_id }}
-        auto-accept-folders set true
-      vars:
-        hub_device: >-
-          {{ (syncthing_config_result.stdout | from_json).devices
-             | selectattr('deviceID', 'equalto', hostvars[syncthing_hub].syncthing_device_id)
-             | first }}
-      when: not hub_device.autoAcceptFolders
-      changed_when: true
-
-    - name: Put auto-accepted folders in the home directory
-      ansible.builtin.command: syncthing cli config defaults folder path set ~
-      when: (syncthing_config_result.stdout | from_json).defaults.folder.path != '~'
-      changed_when: true
-
-- name: Restart Syncthing after changing the GUI address # noqa no-handler
-  ansible.builtin.command: syncthing cli operations restart
-  when: syncthing_gui_address.changed | default(false)
-  changed_when: true
+#
+#
+# Instructions for device setup
+# I use the hub-and-spoke approach. All devices sync to chocobo (and not to each other).
+# First, set up chocobo. Change the GUI listen address to <machine.ip>:8384 to allow
+# other devices to access it. Set a GUI password since this will be available to the
+# local network. In settings/connections, turn off everything but local discovery
+# (don't think we need any of them). Grab the ID string.
+# Then, set up your other devices. No need to modify GUI settings or add a GUI
+# password here. Change connection settings as above, click add remote device, and
+# enter the ID string. Under advanced settings, change the address to
+# tcp://chocobo:22000 rather than dynamic.
+# Over on chocobo hit accept. No need to change the address here though (it can stay dynamic).
+#
+# I think you can initiate a folder from either device. Create a folder on one device
+# with the correct path for that machine, then share it with chocobo or, when on
+# chocobo, with everyone. Accept it on the other devices and change the path if needed.
