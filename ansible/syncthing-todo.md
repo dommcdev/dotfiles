@@ -1,16 +1,22 @@
 # Syncthing Automation
 
-## Goal
+Ansible now performs the complete initial setup without the Syncthing GUI:
 
-Keep `chocobo` as the stable hub and treat every other machine as a disposable spoke.
-Ansible should discover device IDs at runtime, connect both sides, and configure the
-`Library` and `Downloads` folders without using Syncthing GUIs or storing IDs in inventory.
+- `chocobo` is the hub and every other host in the play is a spoke.
+- Device IDs are discovered during the play and are not stored in inventory.
+- `Library` and `Downloads` are created and shared by `chocobo`.
+- Spokes automatically accept folders from `chocobo` under their home directory.
+- Every peer uses its inventory hostname directly on port 22000.
+- Discovery, relays, and NAT traversal are disabled.
+- The GUI remains localhost-only, so it needs neither LAN exposure nor a password.
 
-Expose only `chocobo`'s GUI to the LAN over HTTPS. Its password may be configured manually.
+Run the play for `chocobo` and the desired spokes together. Replacing a machine adds
+its new identity automatically. Old identities are deliberately not removed: automatic
+identity deletion adds substantial complexity and is rarely needed.
 
-## Status
+Syncthing cannot trust arbitrary unknown devices. Device IDs are its authentication
+mechanism, but Ansible discovers and exchanges them so there is no manual approval.
 
-- An oversized draft exists in `tasks/apps/syncthing.yml`.
-- It passes Ansible syntax and lint checks.
-- It has not been run, so it has not changed any Syncthing configuration.
-- It still needs to be reviewed and replaced with a much smaller, maintainable approach.
+Syncthing is retained instead of using Unison or lsyncd. Unison needs a scheduled or
+long-running process for each spoke and matching versions on both ends. Lsyncd is only
+a one-way mirror and is unsafe when files can be changed on both machines.

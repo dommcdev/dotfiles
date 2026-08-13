@@ -42,7 +42,7 @@
 
     - name: Preserve Tailscale auth key for configuration
       ansible.builtin.set_fact:
-        prepared_tailscale_auth_key: "{{ tailscale_auth_key }}"
+        ts_auth_key: "{{ tailscale_auth_key }}"
       when: tailscale_auth_key | length > 0
       no_log: true
 

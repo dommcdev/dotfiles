@@ -1,4 +1,4 @@
-- name: Install Syncthing package
+- name: Install Syncthing
   block:
     - name: Install on Linux
       ansible.builtin.package:
@@ -7,7 +7,7 @@
       become: true
       when: is_linux
 
-    - name: Install on macOS via homebrew
+    - name: Install on macOS
       community.general.homebrew:
         name: syncthing
         state: present
@@ -17,19 +17,22 @@
 - name: Define Syncthing topology
   ansible.builtin.set_fact:
     syncthing_hub: chocobo
-    syncthing_managed_folders:
+    syncthing_folders:
       - id: bjvqm-regpz
         label: Library
         hub_path: "{{ home }}/files/2-Library"
-        spoke_path: "{{ home }}/Library"
       - id: jkr9l-9nkhp
         label: Downloads
         hub_path: "{{ home }}/files/1-Downloads"
-        spoke_path: "{{ home }}/Downloads"
+
+- name: Require the hub in the play
+  ansible.builtin.assert:
+    that: syncthing_hub in ansible_play_hosts
+    fail_msg: Run Syncthing setup for chocobo and its spokes together.
 
 - name: Enable Syncthing
   block:
-    - name: Enable as a user service # Starts on graphical/ssh login
+    - name: Enable Linux user service
       ansible.builtin.systemd_service:
         name: syncthing.service
         enabled: true
@@ -37,7 +40,7 @@
         scope: user
       when: is_linux and not is_headless
 
-    - name: Enable as a system service # Starts at boot rather than graphical/ssh login
+    - name: Enable Linux system service
       ansible.builtin.systemd_service:
         name: "syncthing@{{ user }}.service"
         enabled: true
@@ -45,296 +48,193 @@
       become: true
       when: is_linux and is_headless
 
-    - name: Enable as a Homebrew service
+    - name: Enable Homebrew service
       community.general.homebrew_services:
         name: syncthing
         state: present
       when: is_macos
 
-- name: Read device ID with current Syncthing CLI
+- name: Read Syncthing device ID
   ansible.builtin.command: syncthing device-id
-  register: syncthing_current_device_id
+  register: syncthing_device_id_result
   changed_when: false
-  failed_when: false
 
-- name: Read device ID with legacy Syncthing CLI
-  ansible.builtin.command:
-    argv:
-      - syncthing
-      - -device-id
-  register: syncthing_legacy_device_id
-  changed_when: false
-  when: syncthing_current_device_id.rc != 0
-
-- name: Record device ID
+- name: Record Syncthing topology for this host
   ansible.builtin.set_fact:
-    syncthing_device_id: >-
-      {{ (syncthing_current_device_id.stdout
-          if syncthing_current_device_id.rc == 0
-          else syncthing_legacy_device_id.stdout) | trim }}
-
-- name: Verify that the hub is part of the play
-  ansible.builtin.assert:
-    that:
-      - syncthing_hub in ansible_play_hosts
-    fail_msg: >-
-      Syncthing topology setup must include {{ syncthing_hub }}. Rerun without a
-      limit, or include both {{ syncthing_hub }} and the desired spokes in --limit.
-
-- name: Select peers managed in this run
-  ansible.builtin.set_fact:
-    syncthing_peer_hosts: >-
+    syncthing_device_id: "{{ syncthing_device_id_result.stdout | trim }}"
+    syncthing_peers: >-
       {{ (ansible_play_hosts | difference([syncthing_hub]))
-          if inventory_hostname == syncthing_hub else [syncthing_hub] }}
+         if inventory_hostname == syncthing_hub else [syncthing_hub] }}
 
-- name: Wait for the Syncthing API
-  ansible.builtin.command: syncthing cli config dump-json
-  register: syncthing_config_result
-  changed_when: false
-  retries: 12
-  delay: 1
-  until: syncthing_config_result.rc == 0
+- name: Configure Syncthing
+  block:
+    - name: Wait for the Syncthing API
+      ansible.builtin.command: syncthing cli config dump-json
+      register: syncthing_config_result
+      changed_when: false
+      retries: 12
+      delay: 1
+      until: syncthing_config_result.rc == 0
 
-- name: Read Syncthing configuration
-  ansible.builtin.set_fact:
-    syncthing_config: "{{ syncthing_config_result.stdout | from_json }}"
-    syncthing_desired_devices: []
-    syncthing_stale_device_ids: []
-    syncthing_device_changes: []
+    - name: Add peer devices
+      ansible.builtin.command:
+        argv:
+          - syncthing
+          - cli
+          - config
+          - devices
+          - add
+          - "--device-id={{ hostvars[item].syncthing_device_id }}"
+          - "--name={{ item }}"
+          - "--addresses=tcp://{{ hostvars[item].ansible_host }}:22000"
+      loop: "{{ syncthing_peers }}"
+      when: >-
+        hostvars[item].syncthing_device_id not in
+        (syncthing_config_result.stdout | from_json).devices
+        | map(attribute='deviceID') | list
+      changed_when: true
 
-- name: Build desired peer devices
-  ansible.builtin.set_fact:
-    syncthing_desired_devices: >-
-      {{ syncthing_desired_devices + [{
-          'deviceID': hostvars[item].syncthing_device_id,
-          'name': item,
-          'addresses': (['dynamic'] if inventory_hostname == syncthing_hub
-                        else ['tcp://' ~ syncthing_hub ~ ':22000']),
-          'introducer': false,
-          'autoAcceptFolders': false
-        }] }}
-  loop: "{{ syncthing_peer_hosts }}"
+    - name: Refresh Syncthing configuration
+      ansible.builtin.command: syncthing cli config dump-json
+      register: syncthing_config_result
+      changed_when: false
 
-- name: Find obsolete identities for managed peers
-  ansible.builtin.set_fact:
-    syncthing_stale_device_ids: >-
-      {{ (syncthing_stale_device_ids | default([])) +
-         (syncthing_config.devices
-          | selectattr('name', 'equalto', item.name)
-          | rejectattr('deviceID', 'equalto', item.deviceID)
-          | map(attribute='deviceID') | list) }}
-  loop: "{{ syncthing_desired_devices }}"
+    - name: Configure peer addresses
+      ansible.builtin.command: >-
+        syncthing cli config devices {{ hostvars[item].syncthing_device_id }}
+        addresses 0 set tcp://{{ hostvars[item].ansible_host }}:22000
+      vars:
+        current_device: >-
+          {{ (syncthing_config_result.stdout | from_json).devices
+             | selectattr('deviceID', 'equalto', hostvars[item].syncthing_device_id)
+             | first }}
+      loop: "{{ syncthing_peers }}"
+      when: current_device.addresses != ['tcp://' ~ hostvars[item].ansible_host ~ ':22000']
+      changed_when: true
 
-- name: Remove obsolete identities from folders
-  ansible.builtin.command:
-    argv:
-      - syncthing
-      - cli
-      - config
-      - folders
-      - "{{ item.0.id }}"
-      - devices
-      - "{{ item.1.deviceID }}"
-      - delete
-  loop: "{{ syncthing_config.folders | subelements('devices') }}"
-  loop_control:
-    label: "{{ item.0.label }} -> {{ item.1.deviceID }}"
-  when: item.1.deviceID in (syncthing_stale_device_ids | unique | list)
-  changed_when: true
+    - name: Disable non-LAN connectivity
+      ansible.builtin.command: >-
+        syncthing cli config options {{ item.property }} set
+        {{ item.value | string | lower }}
+      loop:
+        - property: global-ann-enabled
+          current: "{{ (syncthing_config_result.stdout | from_json).options.globalAnnounceEnabled }}"
+          value: false
+        - property: relays-enabled
+          current: "{{ (syncthing_config_result.stdout | from_json).options.relaysEnabled }}"
+          value: false
+        - property: natenabled
+          current: "{{ (syncthing_config_result.stdout | from_json).options.natEnabled }}"
+          value: false
+        - property: local-ann-enabled
+          current: "{{ (syncthing_config_result.stdout | from_json).options.localAnnounceEnabled }}"
+          value: false
+      loop_control:
+        label: "{{ item.property }}"
+      when: item.current | bool != item.value
+      changed_when: true
 
-- name: Remove obsolete peer identities
-  ansible.builtin.command:
-    argv:
-      - syncthing
-      - cli
-      - config
-      - devices
-      - "{{ item }}"
-      - delete
-  loop: "{{ syncthing_stale_device_ids | unique | list }}"
-  changed_when: true
+    - name: Keep the GUI local
+      ansible.builtin.command: >-
+        syncthing cli config gui raw-address set 127.0.0.1:8384
+      when: (syncthing_config_result.stdout | from_json).gui.address != '127.0.0.1:8384'
+      register: syncthing_gui_address
+      changed_when: true
 
-- name: Build peer device changes
-  ansible.builtin.set_fact:
-    syncthing_device_changes: >-
-      {{ (syncthing_device_changes | default([])) + [{
-          'name': item.name,
-          'current': current_device,
-          'desired': current_device | combine(item, recursive=true)
-        }] }}
-  vars:
-    current_device: >-
-      {{ (syncthing_config.devices
-          | selectattr('deviceID', 'equalto', item.deviceID) | first)
-         | default(syncthing_config.defaults.device, true) }}
-  loop: "{{ syncthing_desired_devices }}"
-
-- name: Configure peer devices
-  ansible.builtin.command:
-    argv:
-      - syncthing
-      - cli
-      - config
-      - devices
-      - add-json
-      - "{{ item.desired | to_json }}"
-  loop: "{{ syncthing_device_changes }}"
-  loop_control:
-    label: "{{ item.name }}"
-  when: item.current != item.desired
-  changed_when: true
-
-- name: Refresh Syncthing configuration
-  ansible.builtin.command: syncthing cli config dump-json
-  register: syncthing_config_result
-  changed_when: false
-
-- name: Record refreshed Syncthing configuration
-  ansible.builtin.set_fact:
-    syncthing_config: "{{ syncthing_config_result.stdout | from_json }}"
-    syncthing_required_folder_devices: []
-    syncthing_folder_changes: []
-
-- name: Build required folder devices
-  ansible.builtin.set_fact:
-    syncthing_required_folder_devices: >-
-      {{ syncthing_required_folder_devices + [{
-          'deviceID': hostvars[item].syncthing_device_id,
-          'introducedBy': '',
-          'encryptionPassword': ''
-        }] }}
-  loop: "{{ [inventory_hostname] + syncthing_peer_hosts }}"
-
-- name: Build folder changes
-  ansible.builtin.set_fact:
-    syncthing_folder_changes: >-
-      {{ syncthing_folder_changes + [{
-          'label': item.label,
-          'exists': matching_folders | length > 0,
-          'current': current_folder,
-          'desired': current_folder | combine({
-            'id': item.id,
-            'label': item.label,
-            'path': folder_path,
-            'type': 'sendreceive',
-            'devices': folder_devices
-          }, recursive=true)
-        }] }}
-  vars:
-    matching_folders: >-
-      {{ syncthing_config.folders
-         | selectattr('id', 'equalto', item.id) | list }}
-    current_folder: >-
-      {{ (matching_folders | first)
-         | default(syncthing_config.defaults.folder, true) }}
-    folder_path: >-
-      {{ item.hub_path if inventory_hostname == syncthing_hub
-         else item.spoke_path }}
-    folder_devices: >-
-      {{ (((current_folder.devices
-            | rejectattr('deviceID', 'in', syncthing_stale_device_ids | unique | list)
-            | list) + syncthing_required_folder_devices)
-          | unique(attribute='deviceID') | list)
-         if inventory_hostname == syncthing_hub
-         else syncthing_required_folder_devices }}
-  loop: "{{ syncthing_managed_folders }}"
-
-- name: Create managed folder directories
-  ansible.builtin.file:
-    path: >-
-      {{ item.hub_path if inventory_hostname == syncthing_hub
-         else item.spoke_path }}
-    state: directory
-    mode: "0755"
-  loop: "{{ syncthing_managed_folders }}"
-  loop_control:
-    label: "{{ item.label }}"
-
-- name: Configure managed folders
-  ansible.builtin.command:
-    argv:
-      - syncthing
-      - cli
-      - config
-      - folders
-      - add-json
-      - "{{ item.desired | to_json }}"
-  loop: "{{ syncthing_folder_changes }}"
-  loop_control:
-    label: "{{ item.label }}"
-  when: not item.exists or item.current != item.desired
-  changed_when: true
-
-- name: Disable external Syncthing connectivity
-  ansible.builtin.command:
-    argv:
-      - syncthing
-      - cli
-      - config
-      - options
-      - "{{ item.property }}"
-      - set
-      - "{{ item.value | string | lower }}"
-  loop:
-    - property: global-ann-enabled
-      current: "{{ syncthing_config.options.globalAnnounceEnabled }}"
-      value: false
-    - property: relays-enabled
-      current: "{{ syncthing_config.options.relaysEnabled }}"
-      value: false
-    - property: natenabled
-      current: "{{ syncthing_config.options.natEnabled }}"
-      value: false
-    - property: local-ann-enabled
-      current: "{{ syncthing_config.options.localAnnounceEnabled }}"
-      value: true
-  loop_control:
-    label: "{{ item.property }}"
-  when: item.current | bool != item.value
-  changed_when: true
-
-- name: Configure hub GUI
+- name: Configure Syncthing hub
   when: inventory_hostname == syncthing_hub
   block:
-    - name: Require a GUI password before exposing it
-      ansible.builtin.assert:
-        that:
-          - syncthing_config.gui.password | length > 0
-        fail_msg: >-
-          Set a Syncthing GUI password on {{ syncthing_hub }} through its local GUI,
-          then rerun Ansible. The play will not expose an unauthenticated GUI.
+    - name: Create folder directories
+      ansible.builtin.file:
+        path: "{{ item.hub_path }}"
+        state: directory
+        mode: "0755"
+      loop: "{{ syncthing_folders }}"
+      loop_control:
+        label: "{{ item.label }}"
 
-    - name: Enable HTTPS for the hub GUI
+    - name: Add folders
       ansible.builtin.command:
         argv:
           - syncthing
           - cli
           - config
-          - gui
-          - raw-use-tls
-          - set
-          - "true"
-      register: syncthing_gui_tls
-      when: not syncthing_config.gui.useTLS
-      changed_when: true
-
-    - name: Expose the hub GUI to the LAN
-      ansible.builtin.command:
-        argv:
-          - syncthing
-          - cli
-          - config
-          - gui
-          - raw-address
-          - set
-          - 0.0.0.0:8384
-      register: syncthing_gui_address
-      when: syncthing_config.gui.address != '0.0.0.0:8384'
-      changed_when: true
-
-    - name: Restart Syncthing after GUI changes
-      ansible.builtin.command: syncthing cli operations restart
+          - folders
+          - add
+          - "--id={{ item.id }}"
+          - "--label={{ item.label }}"
+          - "--path={{ item.hub_path }}"
+          - --type=sendreceive
+      loop: "{{ syncthing_folders }}"
+      loop_control:
+        label: "{{ item.label }}"
       when: >-
-        (syncthing_gui_tls.changed | default(false)) or
-        (syncthing_gui_address.changed | default(false))
+        item.id not in (syncthing_config_result.stdout | from_json).folders
+        | map(attribute='id') | list
       changed_when: true
+
+    - name: Refresh Syncthing configuration
+      ansible.builtin.command: syncthing cli config dump-json
+      register: syncthing_config_result
+      changed_when: false
+
+    - name: Configure folder paths
+      ansible.builtin.command: >-
+        syncthing cli config folders {{ item.id }} path set {{ item.hub_path }}
+      vars:
+        current_folder: >-
+          {{ (syncthing_config_result.stdout | from_json).folders
+             | selectattr('id', 'equalto', item.id) | first }}
+      loop: "{{ syncthing_folders }}"
+      loop_control:
+        label: "{{ item.label }}"
+      when: current_folder.path != item.hub_path
+      changed_when: true
+
+    - name: Share folders with spokes
+      ansible.builtin.command:
+        argv:
+          - syncthing
+          - cli
+          - config
+          - folders
+          - "{{ item.0.id }}"
+          - devices
+          - add
+          - "--device-id={{ hostvars[item.1].syncthing_device_id }}"
+      vars:
+        current_folder: >-
+          {{ (syncthing_config_result.stdout | from_json).folders
+             | selectattr('id', 'equalto', item.0.id) | first }}
+      loop: "{{ syncthing_folders | product(syncthing_peers) }}"
+      loop_control:
+        label: "{{ item.0.label }} -> {{ item.1 }}"
+      when: >-
+        hostvars[item.1].syncthing_device_id not in current_folder.devices
+        | map(attribute='deviceID') | list
+      changed_when: true
+
+- name: Configure Syncthing spokes
+  when: inventory_hostname != syncthing_hub
+  block:
+    - name: Auto-accept folders shared by the hub
+      ansible.builtin.command: >-
+        syncthing cli config devices {{ hostvars[syncthing_hub].syncthing_device_id }}
+        auto-accept-folders set true
+      vars:
+        hub_device: >-
+          {{ (syncthing_config_result.stdout | from_json).devices
+             | selectattr('deviceID', 'equalto', hostvars[syncthing_hub].syncthing_device_id)
+             | first }}
+      when: not hub_device.autoAcceptFolders
+      changed_when: true
+
+    - name: Put auto-accepted folders in the home directory
+      ansible.builtin.command: syncthing cli config defaults folder path set ~
+      when: (syncthing_config_result.stdout | from_json).defaults.folder.path != '~'
+      changed_when: true
+
+- name: Restart Syncthing after changing the GUI address # noqa no-handler
+  ansible.builtin.command: syncthing cli operations restart
+  when: syncthing_gui_address.changed | default(false)
+  changed_when: true

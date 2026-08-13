@@ -35,20 +35,59 @@
   become: true
   when: is_linux
 
-- name: Start and authenticate Tailscale
-  ansible.builtin.command:
-    argv:
-      - tailscale
-      - up
-      - "--auth-key={{ prepared_tailscale_auth_key }}"
-      - --reset
-  become: true
-  changed_when: false
-  no_log: true
-  when:
-    - is_linux
-    - prepared_tailscale_auth_key is defined
-    - prepared_tailscale_auth_key | length > 0
+- name: Authenticate Tailscale
+  when: is_linux
+  block:
+    - name: Check authentication state
+      ansible.builtin.command:
+        argv:
+          - tailscale
+          - status
+          - --json
+      become: true
+      register: tailscale_status
+      changed_when: false
+
+    - name: Record authentication state
+      ansible.builtin.set_fact:
+        tailscale_backend_state: >-
+          {{ (tailscale_status.stdout | from_json).BackendState | default('Unknown') }}
+
+    - name: Require an auth key when Tailscale needs login
+      ansible.builtin.fail:
+        msg: >-
+          {{ inventory_hostname }} needs Tailscale authentication. Add a single-use
+          tailscale_auth_key to .env and rerun the playbook.
+      when:
+        - tailscale_backend_state == 'NeedsLogin'
+        - ts_auth_key is not defined or ts_auth_key | length == 0
+
+    - name: Start and authenticate Tailscale
+      ansible.builtin.command:
+        argv:
+          - tailscale
+          - up
+          - "--auth-key={{ ts_auth_key }}"
+          - --reset
+      become: true
+      changed_when: false
+      no_log: true
+      when:
+        - tailscale_backend_state == 'NeedsLogin'
+        - ts_auth_key is defined
+        - ts_auth_key | length > 0
+
+    - name: Remove used single-use Tailscale auth key
+      ansible.builtin.lineinfile:
+        path: "{{ playbook_dir }}/../.env"
+        regexp: '^\s*tailscale_auth_key\s*='
+        state: absent
+      delegate_to: localhost
+      become: false
+      when:
+        - tailscale_backend_state == 'NeedsLogin'
+        - ts_auth_key is defined
+        - ts_auth_key | length > 0
 
 - name: Configure Tailscale options
   ansible.builtin.command:
