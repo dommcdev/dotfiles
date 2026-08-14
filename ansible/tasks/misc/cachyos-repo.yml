@@ -83,6 +83,10 @@
     force: false
     mode: preserve
 
+- name: Gather installed package facts
+  ansible.builtin.package_facts:
+    manager: pacman
+
 - name: Configure the direct CachyOS bootstrap repository
   ansible.builtin.blockinfile:
     path: /etc/pacman.conf
@@ -91,10 +95,18 @@
     block: |
       [cachyos]
       Server = https://mirror.cachyos.org/repo/$arch/cachyos
+  when: >-
+    'cachyos-keyring' not in ansible_facts.packages or
+    'cachyos-mirrorlist' not in ansible_facts.packages or
+    cachyos_optimized_mirrorlist_package not in ansible_facts.packages
 
 - name: Refresh package databases with the CachyOS bootstrap repository
   community.general.pacman:
     update_cache: true
+  when: >-
+    'cachyos-keyring' not in ansible_facts.packages or
+    'cachyos-mirrorlist' not in ansible_facts.packages or
+    cachyos_optimized_mirrorlist_package not in ansible_facts.packages
 
 - name: Install CachyOS repository metadata
   community.general.pacman:

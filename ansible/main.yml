@@ -112,7 +112,7 @@
     - name: TUI Applications
       ansible.builtin.import_tasks: tasks/apps/tui.yml
     - name: Development environment
-      ansible.builtin.include_tasks: tasks//dev.yml
+      ansible.builtin.include_tasks: tasks/dev.yml
       when: is_dev_env
     - name: Opencode
       ansible.builtin.import_tasks: tasks/apps/opencode.yml
@@ -130,7 +130,7 @@
       when: is_managed_desktop
     - name: Keyd
       ansible.builtin.include_tasks: tasks/apps/keyd.yml
-      when: is_linux
+      when: is_linux and (not is_headless)
     - name: Drivers and media codecs
       ansible.builtin.include_tasks: tasks/system/drivers.yml
       when: is_managed_desktop
@@ -146,8 +146,10 @@
       ansible.builtin.import_tasks: tasks/apps/ghostty.yml
     - name: Browser
       ansible.builtin.import_tasks: tasks/apps/browser.yml
+      when: not is_headless
     - name: GUI Applications
       ansible.builtin.import_tasks: tasks/apps/gui.yml
+      when: not is_headless
     - name: Noctalia
       ansible.builtin.import_tasks: tasks/apps/noctalia.yml
       when: is_managed_desktop and is_arch
@@ -156,6 +158,7 @@
       when: is_managed_desktop and (not is_ubuntu)
     - name: Zed
       ansible.builtin.import_tasks: tasks/apps/zed.yml
+      when: is_dev_env
     - name: Printing
       ansible.builtin.include_tasks: tasks/system/printing.yml
       when: is_managed_desktop

@@ -72,16 +72,11 @@
           l = M-A-l
       register: keyd_config
 
-    - name: Enable and start keyd
+    - name: Enable/restart keyd
       ansible.builtin.systemd_service:
         name: keyd.service
         enabled: true
-        state: started
-
-    - name: Reload keyd configuration # noqa no-handler
-      ansible.builtin.command: keyd reload
-      changed_when: true
-      when: keyd_config.changed
+        state: "{{ 'restarted' if keyd_config.changed else 'started' }}"
 
     - name: Create libinput config directory
       ansible.builtin.file:
@@ -106,3 +101,4 @@
 # libinput quirks validate --data-dir /etc/libinput
 # libinput list-devices
 # libinput debug-events
+# Note: On Ubuntu the binary is keyd.rvaiya
