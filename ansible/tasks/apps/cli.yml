@@ -249,3 +249,18 @@
           - lavat-git
         state: present
 # TODO Add terminal-browser?
+
+# Note: Borg v2 will bring breaking changes, might need to pin pkgs or smth then
+- name: Install Borg
+  vars:
+    borg_packages:
+      Archlinux: borg
+      Debian: borgbackup
+      RedHat: borgbackup
+  block:
+    - name: Install Borg with the native package manager
+      ansible.builtin.package:
+        name: "{{ borg_packages[ansible_facts['os_family']] }}"
+        state: present
+      become: true
+      when: ansible_facts['os_family'] in borg_packages

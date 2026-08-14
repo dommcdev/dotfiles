@@ -1,9 +1,8 @@
 # To-do
 Nvim stuff (More lazy loading, finish new lsp)
 Setup ufw (apps/firewall.yml)
-Setup fuse mnt/bookmark for chocobo files
+Setup fuse mnt and bookmark for chocobo files
 Simple remote viewer
-Apps: borg kde-connect
 
 New ymls: Switch emulator, retroarch, wakeonlan
 Ansible: Auth (replace fingerprints script + tweak PAM auth stuff), comment overhaul
