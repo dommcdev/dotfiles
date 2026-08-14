@@ -2,7 +2,6 @@
 Nvim stuff (More lazy loading, finish new lsp)
 Setup fuse mnt and bookmark for chocobo files
 Simple remote viewer
-Ansible comment overhaul
 
 
 # Low Priority

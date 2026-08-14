@@ -97,7 +97,6 @@
         state: link
         force: true
 # To restart noctalia...
-# pkill noctalia && hyprctl dispatch "hl.dsp.exec_cmd('noctalia')"
 
 # TODO Add Debian and Fedora support
 # TODO Set fractional scaling per-device?

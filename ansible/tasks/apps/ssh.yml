@@ -1,3 +1,9 @@
+- name: Verify Tailscale before configuring SSH
+  ansible.builtin.command: tailscale wait --timeout=30s
+  become: true
+  changed_when: false
+  when: is_linux
+
 - name: Install SSH package
   block:
     - name: Install on Linux

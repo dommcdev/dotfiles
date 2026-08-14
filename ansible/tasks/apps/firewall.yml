@@ -1,3 +1,8 @@
+- name: Verify Tailscale before configuring the firewall
+  ansible.builtin.command: tailscale wait --timeout=30s
+  become: true
+  changed_when: false
+
 - name: Install UFW
   ansible.builtin.package:
     name: ufw

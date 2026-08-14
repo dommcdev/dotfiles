@@ -43,9 +43,22 @@
           fi
           exit 1
 
-    - name: Add fingerprint authentication before the system auth stack
+    - name: Configure polkit fingerprint authentication
+      ansible.builtin.copy:
+        dest: /etc/pam.d/polkit-1
+        owner: root
+        group: root
+        mode: "0644"
+        content: |
+          auth      sufficient pam_fprintd.so
+          auth      required pam_unix.so
+          account   required pam_unix.so
+          password  required pam_unix.so
+          session   required pam_unix.so
+
+    - name: Add fingerprint authentication before the sudo system auth stack
       community.general.pamd:
-        name: "{{ item }}"
+        name: sudo
         type: auth
         control: include
         module_path: system-auth
@@ -53,9 +66,6 @@
         new_control: sufficient
         new_module_path: pam_fprintd.so
         state: before
-      loop:
-        - sudo
-        - polkit-1
 
     - name: Bypass sudo fingerprint authentication for Ansible
       community.general.pamd:
