@@ -5,7 +5,6 @@
     mode: "0440"
     validate: "visudo -cf %s"
   become: true
-  when: is_linux and is_managed_desktop
 
 - name: Install fingerprint authentication packages
   ansible.builtin.package:

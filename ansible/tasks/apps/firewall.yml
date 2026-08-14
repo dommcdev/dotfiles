@@ -1,0 +1,45 @@
+- name: Install UFW
+  ansible.builtin.package:
+    name: ufw
+    state: present
+  become: true
+
+- name: Disable and mask firewalld on Fedora
+  ansible.builtin.systemd_service:
+    name: firewalld.service
+    enabled: false
+    masked: true
+    state: stopped
+  become: true
+  when: is_fedora
+
+- name: Deny incoming traffic by default
+  community.general.ufw:
+    default: deny
+    direction: incoming
+  become: true
+
+- name: Allow outgoing traffic by default
+  community.general.ufw:
+    default: allow
+    direction: outgoing
+  become: true
+
+- name: Allow incoming traffic over Tailscale
+  community.general.ufw:
+    rule: allow
+    direction: in
+    interface: tailscale0
+  become: true
+
+- name: Allow Tailscale direct connections
+  community.general.ufw:
+    rule: allow
+    port: "41641"
+    proto: udp
+  become: true
+
+- name: Enable UFW
+  community.general.ufw:
+    state: enabled
+  become: true

@@ -167,5 +167,11 @@
     - name: GrandOrgue
       ansible.builtin.include_tasks: tasks/apps/grandorgue.yml
       when: setup_grandorgue
+    - name: Auth
+      ansible.builtin.import_tasks: tasks/system/auth.yml
+      when: is_managed_desktop
+    - name: Firewall
+      ansible.builtin.import_tasks: tasks/apps/firewall.yml
+      when: is_linux and is_hardened
     - name: SSH #Put this near the end since it changes ssh stuff which affects Ansible
       ansible.builtin.import_tasks: tasks/apps/ssh.yml
