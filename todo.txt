@@ -3,7 +3,7 @@ Nvim stuff (More lazy loading, finish new lsp)
 Setup ufw (apps/firewall.yml)
 Setup fuse mnt and bookmark for chocobo files
 Simple remote viewer
-Ansible: Auth (replace fingerprints script + tweak PAM auth stuff), comment overhaul
+Ansible comment overhaul
 
 
 # Low Priority

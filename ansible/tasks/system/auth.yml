@@ -1,37 +1,3 @@
-# TODO put fingerprint and pam stuff in here
-- name: Configure Arch faillock
-  become: true
-  when: is_arch and is_managed_desktop
-  block:
-    - name: Configure auth precheck
-      ansible.builtin.lineinfile:
-        path: /etc/pam.d/system-auth
-        regexp: "^(auth\\s+required\\s+pam_faillock\\.so)\\s+preauth.*$"
-        line: "auth       required                    pam_faillock.so      preauth silent deny=10 unlock_time=120"
-        backrefs: false
-
-    - name: Configure auth failure
-      ansible.builtin.lineinfile:
-        path: /etc/pam.d/system-auth
-        regexp: "^(auth\\s+\\[default=die\\]\\s+pam_faillock\\.so)\\s+authfail.*$"
-        line: "auth       [default=die]               pam_faillock.so      authfail deny=10 unlock_time=120"
-        backrefs: false
-
-    - name: Configure deny limit
-      ansible.builtin.lineinfile:
-        path: /etc/security/faillock.conf
-        regexp: "^#?\\s*deny\\s*=.*$"
-        line: "deny = 10"
-
-- name: Link screensaver scripts
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ home }}/.local/bin/{{ item | basename }}"
-    state: link
-    force: true
-  loop: "{{ lookup('ansible.builtin.fileglob', root + '/screensaver/scripts/*', wantlist=True) }}"
-  when: is_managed_desktop
-
 - name: Increase sudo password tries
   ansible.builtin.copy:
     dest: /etc/sudoers.d/passwd-tries
@@ -40,3 +6,69 @@
     validate: "visudo -cf %s"
   become: true
   when: is_linux and is_managed_desktop
+
+- name: Install fingerprint authentication packages
+  ansible.builtin.package:
+    name: "{{ pkgs[ansible_facts['os_family']] }}"
+    state: present
+  become: true
+  when:
+    - has_fingerprint_reader
+    - ansible_facts['os_family'] in pkgs
+  vars:
+    pkgs:
+      Archlinux:
+        - fprintd
+      Debian:
+        - fprintd
+        - libpam-fprintd
+      RedHat:
+        - fprintd
+        - fprintd-pam
+
+- name: Configure pam auth for fingerprint reader
+  when: is_arch and has_fingerprint_reader
+  become: true
+  block:
+    - name: Deploy Ansible process detection script for PAM
+      ansible.builtin.copy:
+        dest: /usr/local/bin/pam-is-ansible
+        owner: root
+        group: root
+        mode: "0755"
+        content: |
+          #!/usr/bin/env bash
+          # Check if Ansible/Python is running in the parent process tree
+          if grep -qE "(ansible|python)" /proc/$PPID/cmdline 2>/dev/null; then
+            exit 0
+          fi
+          exit 1
+
+    - name: Add fingerprint authentication before the system auth stack
+      community.general.pamd:
+        name: "{{ item }}"
+        type: auth
+        control: include
+        module_path: system-auth
+        new_type: auth
+        new_control: sufficient
+        new_module_path: pam_fprintd.so
+        state: before
+      loop:
+        - sudo
+        - polkit-1
+
+    - name: Bypass sudo fingerprint authentication for Ansible
+      community.general.pamd:
+        name: sudo
+        type: auth
+        control: sufficient
+        module_path: pam_fprintd.so
+        new_type: auth
+        new_control: "[success=1 default=ignore]"
+        new_module_path: pam_exec.so
+        module_arguments:
+          - quiet
+          - /usr/local/bin/pam-is-ansible
+        state: before
+# TODO Ubuntu/Fedora fingerprint PAM support. Should be similar
