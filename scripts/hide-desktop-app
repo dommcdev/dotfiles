@@ -1,42 +1,52 @@
 #!/usr/bin/env bash
 
-# Define the absolute path to your dotfiles repo
-HIDDEN_DIR="$HOME/dev/dotfiles/apps/desktop-files/hidden"
-DOTFILES_ROOT="$HOME/dev/dotfiles"
+set -euo pipefail
 
-# 1. Ask for the application name
-read -p "Enter the Name of the app to hide (e.g., Remote Viewer): " search_name
+script_path=$(readlink -f -- "${BASH_SOURCE[0]}")
+repo_root=$(git -C "$(dirname -- "$script_path")" rev-parse --show-toplevel)
+gui_tasks="$repo_root/ansible/tasks/apps/gui.yml"
 
+command -v fzf >/dev/null || { echo "fzf is required" >&2; exit 1; }
+
+read -r -p "Application name: " search_name
 if [[ -z "$search_name" ]]; then
-    echo "No name entered. Exiting."
-    exit 1
+  echo "No name entered" >&2
+  exit 1
 fi
 
-# 2. Find the .desktop file in /usr/share/applications
-# We look for the exact Name field (case-insensitive)
-system_path=$(grep -ril "^Name=$search_name$" /usr/share/applications | head -n 1)
+shopt -s nullglob
+desktop_files=(
+  /usr/local/share/applications/*.desktop
+  /usr/share/applications/*.desktop
+  /var/lib/flatpak/exports/share/applications/*.desktop
+  "$HOME"/.local/share/flatpak/exports/share/applications/*.desktop
+)
 
-if [[ -z "$system_path" ]]; then
-    echo "Could not find an exact system match for Name=$search_name"
-    echo "Showing partial matches in /usr/share/applications/:"
-    grep -ri "^Name=.*$search_name" /usr/share/applications | head -n 5
-    exit 1
+selection=$(
+  for desktop_file in "${desktop_files[@]}"; do
+    name=$(grep -m1 '^Name=' -- "$desktop_file" || true)
+    [[ -n "$name" ]] && printf '%s\t%s\n' \
+      "${name#Name=}" "${desktop_file##*/}"
+  done | fzf \
+    --query="$search_name" \
+    --select-1 \
+    --exit-0 \
+    --delimiter=$'\t' \
+    --with-nth=1,2
+) || exit 1
+
+if [[ -z "$selection" ]]; then
+  echo "No application selected" >&2
+  exit 1
 fi
 
-# 3. Get the filename (e.g., remote-viewer.desktop)
-target_filename=$(basename "$system_path")
-echo "Found system match: $target_filename"
+desktop_id=${selection##*$'\t'}
+desktop_id=${desktop_id%.desktop}
+entry="      - $desktop_id"
 
-# 5. Create the override file in the specific dotfiles folder
-cat << ENTR > "$HIDDEN_DIR/$target_filename"
-[Desktop Entry]
-Type=Application
-Name=$search_name
-NoDisplay=true
-ENTR
-
-echo "Successfully created override in $HIDDEN_DIR/$target_filename"
-
-# 6. Run your dotfiles installer
-echo "Applying dotfiles..."
-cd "$DOTFILES_ROOT" && ./setup linux-desktop/apps
+if grep -Fqx -- "$entry" "$gui_tasks"; then
+  echo "$desktop_id is already listed in $gui_tasks"
+else
+  sed -i "/^    hidden_apps:$/a\\$entry" "$gui_tasks"
+  echo "Added $desktop_id to $gui_tasks"
+fi

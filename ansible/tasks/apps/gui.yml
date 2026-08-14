@@ -114,6 +114,7 @@
 - name: Hide junk applications from launchers
   vars:
     hidden_apps:
+      - limine-snapper-restore
       - avahi-discover
       - bssh
       - btop

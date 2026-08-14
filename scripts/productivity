@@ -1,0 +1,928 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+TARGET_FILE="todo.txt"
+OUTPUT_HTML="/tmp/productivity.html"
+
+for command in git base64; do
+    if ! command -v "$command" >/dev/null 2>&1; then
+        printf 'Error: Required command not found: %s\n' "$command" >&2
+        exit 1
+    fi
+done
+
+printf 'Analyzing repository history...\n'
+
+TEMP_DIR="$(mktemp -d)"
+trap 'rm -rf "$TEMP_DIR"' EXIT
+COMMITS_DATA="$TEMP_DIR/commits"
+TODO_DATA="$TEMP_DIR/todo"
+META_DATA="$TEMP_DIR/meta"
+
+# Each commit starts with record separator 0x1e. Header fields use 0x1f;
+# numstat rows that follow contain additions, deletions, and path.
+git log --all --date=short \
+    --format='%x1e%H%x1f%ad%x1f%at%x1f%aN%x1f%aE%x1f%s' \
+    --numstat > "$COMMITS_DATA"
+
+if [ -f "$TARGET_FILE" ]; then
+    git log --follow --format='%H%x1f%ad' --date=short -- "$TARGET_FILE" |
+    while IFS=$'\x1f' read -r hash date; do
+        if content="$(git show "$hash:$TARGET_FILE" 2>/dev/null)"; then
+            count="$(printf '%s\n' "$content" | awk 'NF { count++ } END { print count + 0 }')"
+            printf '%s\x1f%s\x1e' "$date" "$count"
+        fi
+    done > "$TODO_DATA"
+else
+    : > "$TODO_DATA"
+fi
+
+REPO_NAME="$(basename "$REPO_ROOT")"
+BRANCH="$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD)"
+printf '%s\x1f%s\x1f%s' "$REPO_NAME" "$BRANCH" "$(date +%s)" > "$META_DATA"
+
+encode_file() {
+    base64 < "$1" | tr -d '\n'
+}
+
+{
+cat <<'HTML_START'
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Repository Productivity</title>
+<style>
+:root {
+    --black: #050505;
+    --panel: #0b0b0b;
+    --panel-2: #111111;
+    --line: #292929;
+    --line-hot: #74330d;
+    --orange: #ff6b00;
+    --orange-2: #ff9d45;
+    --orange-dim: #8a3b08;
+    --cream: #f4eee8;
+    --muted: #918b86;
+    --good: #ffb26f;
+    --danger: #b94b26;
+}
+
+* {
+    box-sizing: border-box;
+    border-radius: 0 !important;
+}
+
+html {
+    background: var(--black);
+}
+
+body {
+    min-width: 320px;
+    margin: 0;
+    background: var(--black);
+    color: var(--cream);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: linear-gradient(rgba(255, 107, 0, .025) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 107, 0, .025) 1px, transparent 1px);
+    background-size: 32px 32px;
+}
+
+.shell {
+    width: min(1500px, 100%);
+    margin: 0 auto;
+    padding: 28px;
+}
+
+.masthead {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: end;
+    padding: 22px 0 20px;
+    border-top: 2px solid var(--orange);
+    border-bottom: 1px solid var(--line);
+}
+
+.eyebrow,
+.section-label,
+.metric-label,
+.mini-label,
+th {
+    color: var(--orange);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+h1 {
+    max-width: 900px;
+    margin: 5px 0 0;
+    font-family: "Arial Narrow", "Roboto Condensed", sans-serif;
+    font-size: clamp(40px, 6vw, 78px);
+    font-weight: 700;
+    letter-spacing: -.025em;
+    line-height: .94;
+    text-transform: uppercase;
+}
+
+.repo-name {
+    color: var(--orange);
+}
+
+.meta {
+    text-align: right;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.meta strong {
+    color: var(--cream);
+}
+
+.metrics {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    border-left: 1px solid var(--line);
+}
+
+.metric {
+    min-height: 126px;
+    padding: 19px;
+    background: rgba(11, 11, 11, .92);
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.metric-value {
+    margin-top: 13px;
+    overflow: hidden;
+    color: var(--cream);
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-size: clamp(31px, 3.6vw, 54px);
+    letter-spacing: -.02em;
+    line-height: 1;
+    text-overflow: ellipsis;
+}
+
+.metric-note {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.section-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: baseline;
+    margin-top: 38px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid var(--line-hot);
+}
+
+.section-head h2 {
+    margin: 0;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-size: 26px;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+}
+
+.section-head span {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    border-left: 1px solid var(--line);
+}
+
+.panel {
+    grid-column: span 6;
+    min-width: 0;
+    padding: 20px;
+    background: rgba(11, 11, 11, .94);
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.panel.wide { grid-column: span 12; }
+.panel.third { grid-column: span 4; }
+.panel.eight { grid-column: span 8; }
+
+.panel-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: flex-start;
+    min-height: 45px;
+    margin-bottom: 12px;
+}
+
+.panel h3 {
+    margin: 0;
+    font-size: 14px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.panel-subtitle {
+    color: var(--muted);
+    font-size: 10px;
+    text-align: right;
+}
+
+.chart {
+    width: 100%;
+    min-height: 260px;
+}
+
+.chart svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.axis-text {
+    fill: var(--muted);
+    font-family: inherit;
+    font-size: 10px;
+}
+
+.grid-line { stroke: var(--line); stroke-width: 1; }
+.axis-line { stroke: #4a4a4a; stroke-width: 1; }
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.legend i {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    margin-right: 5px;
+    vertical-align: -1px;
+    background: var(--orange);
+}
+
+.bars {
+    display: grid;
+    gap: 12px;
+}
+
+.bar-row {
+    display: grid;
+    grid-template-columns: minmax(90px, 1.4fr) 4fr auto;
+    gap: 12px;
+    align-items: center;
+}
+
+.bar-name {
+    overflow: hidden;
+    color: #d8d2cc;
+    font-size: 11px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.bar-track {
+    height: 12px;
+    background: #1b1b1b;
+    border-left: 1px solid #4a4a4a;
+}
+
+.bar-fill {
+    height: 100%;
+    min-width: 2px;
+    background: var(--orange);
+}
+
+.bar-value {
+    min-width: 54px;
+    color: var(--muted);
+    font-size: 10px;
+    text-align: right;
+}
+
+.heatmap-wrap {
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.heatmap {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(7, 11px);
+    grid-auto-columns: 11px;
+    gap: 3px;
+    width: max-content;
+    min-width: 100%;
+}
+
+.heat-cell {
+    width: 11px;
+    height: 11px;
+    background: #1c1c1c;
+    outline: 1px solid #222;
+}
+
+.heat-1 { background: #4a2008; }
+.heat-2 { background: #7b3307; }
+.heat-3 { background: #b64903; }
+.heat-4 { background: var(--orange); }
+
+.heat-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 11px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.heat-legend {
+    display: inline-flex;
+    gap: 3px;
+    align-items: center;
+}
+
+.heat-legend i {
+    width: 11px;
+    height: 11px;
+    background: #1c1c1c;
+}
+
+.heat-legend i:nth-child(2) { background: #4a2008; }
+.heat-legend i:nth-child(3) { background: #7b3307; }
+.heat-legend i:nth-child(4) { background: #b64903; }
+.heat-legend i:nth-child(5) { background: var(--orange); }
+
+.records {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+}
+
+.record {
+    padding: 15px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.record-value {
+    margin-top: 5px;
+    color: var(--cream);
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.record-note {
+    overflow: hidden;
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table-wrap { overflow-x: auto; }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+}
+
+th,
+td {
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    white-space: nowrap;
+}
+
+th { background: var(--panel-2); }
+td.subject {
+    width: 100%;
+    max-width: 440px;
+    overflow: hidden;
+    color: #d8d2cc;
+    text-overflow: ellipsis;
+}
+
+.hash { color: var(--orange); }
+.plus { color: var(--orange-2); }
+.minus { color: #b96549; }
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 0 8px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+@media (max-width: 1050px) {
+    .metrics { grid-template-columns: repeat(3, 1fr); }
+    .panel.third { grid-column: span 6; }
+    .panel.eight { grid-column: span 12; }
+}
+
+@media (max-width: 700px) {
+    .shell { padding: 14px; }
+    .masthead { grid-template-columns: 1fr; }
+    .meta { text-align: left; }
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .metric { min-height: 105px; padding: 14px; }
+    .panel, .panel.third { grid-column: span 12; padding: 15px; }
+    .section-head span { display: none; }
+    .bar-row { grid-template-columns: 90px 1fr auto; gap: 8px; }
+    .records { grid-template-columns: 1fr; }
+    footer { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<main class="shell">
+    <header class="masthead">
+        <div>
+            <div class="eyebrow">Repository intelligence / complete history</div>
+            <h1><span class="repo-name" id="repoName">Repository</span><br>Productivity</h1>
+        </div>
+        <div class="meta">
+            <div>BRANCH <strong id="branch">...</strong></div>
+            <div>WINDOW <strong id="historyWindow">...</strong></div>
+            <div>GENERATED <strong id="generatedAt">...</strong></div>
+        </div>
+    </header>
+
+    <section class="metrics" id="metrics"></section>
+
+    <div class="section-head">
+        <h2>Contribution Pulse</h2>
+        <span>Commit density and sustained activity</span>
+    </div>
+    <section class="grid">
+        <article class="panel wide">
+            <div class="panel-head">
+                <h3>Contribution Density</h3>
+                <div class="panel-subtitle">Trailing 52 weeks / all branches</div>
+            </div>
+            <div class="heatmap-wrap"><div class="heatmap" id="heatmap"></div></div>
+            <div class="heat-labels">
+                <span id="heatRange"></span>
+                <span class="heat-legend">LESS <i></i><i></i><i></i><i></i><i></i> MORE</span>
+            </div>
+        </article>
+        <article class="panel eight">
+            <div class="panel-head">
+                <h3>Monthly Velocity</h3>
+                <div class="panel-subtitle">Commits per month</div>
+            </div>
+            <div class="chart" id="commitChart"></div>
+        </article>
+        <article class="panel third">
+            <div class="panel-head">
+                <h3>Records</h3>
+                <div class="panel-subtitle">All-time</div>
+            </div>
+            <div class="records" id="records"></div>
+        </article>
+    </section>
+
+    <div class="section-head">
+        <h2>Code Movement</h2>
+        <span>What changed, when, and where</span>
+    </div>
+    <section class="grid">
+        <article class="panel wide">
+            <div class="panel-head">
+                <h3>Monthly Churn</h3>
+                <div class="legend"><span><i></i>ADDITIONS</span><span><i style="background:#8a3b08"></i>DELETIONS</span></div>
+            </div>
+            <div class="chart" id="churnChart"></div>
+        </article>
+        <article class="panel">
+            <div class="panel-head">
+                <h3>File Hotspots</h3>
+                <div class="panel-subtitle">Most lines changed</div>
+            </div>
+            <div class="bars" id="files"></div>
+        </article>
+        <article class="panel">
+            <div class="panel-head">
+                <h3>Change By Extension</h3>
+                <div class="panel-subtitle">Historical churn</div>
+            </div>
+            <div class="bars" id="extensions"></div>
+        </article>
+    </section>
+
+    <div class="section-head">
+        <h2>Working Rhythm</h2>
+        <span>Timing, cadence, and ownership</span>
+    </div>
+    <section class="grid">
+        <article class="panel third">
+            <div class="panel-head">
+                <h3>Day Of Week</h3>
+                <div class="panel-subtitle">Commit share</div>
+            </div>
+            <div class="chart" id="weekdayChart"></div>
+        </article>
+        <article class="panel third">
+            <div class="panel-head">
+                <h3>Time Of Day</h3>
+                <div class="panel-subtitle">Author local time</div>
+            </div>
+            <div class="chart" id="hourChart"></div>
+        </article>
+        <article class="panel third">
+            <div class="panel-head">
+                <h3>Contributors</h3>
+                <div class="panel-subtitle">Commits / churn</div>
+            </div>
+            <div class="bars" id="contributors"></div>
+        </article>
+        <article class="panel wide">
+            <div class="panel-head">
+                <h3>Todo Trajectory</h3>
+                <div class="panel-subtitle">Non-empty lines in todo.txt</div>
+            </div>
+            <div class="chart" id="todoChart"></div>
+        </article>
+    </section>
+
+    <div class="section-head">
+        <h2>Latest Work</h2>
+        <span>Most recent commits across all branches</span>
+    </div>
+    <section class="grid">
+        <article class="panel wide table-wrap">
+            <table>
+                <thead><tr><th>Commit</th><th>Date</th><th>Author</th><th>Message</th><th>Files</th><th>Change</th></tr></thead>
+                <tbody id="recent"></tbody>
+            </table>
+        </article>
+    </section>
+
+    <footer>
+        <span>DEPENDENCY-FREE / GENERATED FROM LOCAL GIT HISTORY</span>
+        <span id="footerSummary"></span>
+    </footer>
+</main>
+HTML_START
+
+printf '<script id="commits-data" type="application/octet-stream">%s</script>\n' "$(encode_file "$COMMITS_DATA")"
+printf '<script id="todo-data" type="application/octet-stream">%s</script>\n' "$(encode_file "$TODO_DATA")"
+printf '<script id="meta-data" type="application/octet-stream">%s</script>\n' "$(encode_file "$META_DATA")"
+
+cat <<'HTML_END'
+<script>
+(() => {
+    'use strict';
+
+    const $ = id => document.getElementById(id);
+    const decode = id => new TextDecoder().decode(Uint8Array.from(atob($(id).textContent.trim()), c => c.charCodeAt(0)));
+    const esc = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
+    const number = value => new Intl.NumberFormat('en', { notation: value >= 100000 ? 'compact' : 'standard', maximumFractionDigits: 1 }).format(value);
+    const fullNumber = value => new Intl.NumberFormat('en').format(value);
+    const pct = value => `${Math.round(value * 100)}%`;
+    const dateKey = date => date.toISOString().slice(0, 10);
+    const monthKey = date => dateKey(date).slice(0, 7);
+    const dayMs = 86400000;
+
+    const [repoName, branch, generatedEpoch] = decode('meta-data').split('\x1f');
+    const commits = decode('commits-data').split('\x1e').filter(Boolean).map(record => {
+        const lines = record.replace(/^\n/, '').split('\n');
+        const [hash, date, epoch, author, email, subject] = lines.shift().split('\x1f');
+        const files = [];
+        let additions = 0;
+        let deletions = 0;
+        let binaryFiles = 0;
+        for (const line of lines) {
+            if (!line) continue;
+            const firstTab = line.indexOf('\t');
+            const secondTab = line.indexOf('\t', firstTab + 1);
+            if (firstTab < 0 || secondTab < 0) continue;
+            const addedRaw = line.slice(0, firstTab);
+            const deletedRaw = line.slice(firstTab + 1, secondTab);
+            const path = line.slice(secondTab + 1);
+            const binary = addedRaw === '-' || deletedRaw === '-';
+            const added = binary ? 0 : Number(addedRaw);
+            const deleted = binary ? 0 : Number(deletedRaw);
+            if (binary) binaryFiles++;
+            additions += added;
+            deletions += deleted;
+            files.push({ path, added, deleted, binary });
+        }
+        const timestamp = Number(epoch) * 1000;
+        return { hash, date, timestamp, author, email, subject: subject || '(no subject)', files, additions, deletions, binaryFiles };
+    }).sort((a, b) => a.timestamp - b.timestamp);
+
+    const todo = decode('todo-data').split('\x1e').filter(Boolean).map(record => {
+        const [date, count] = record.split('\x1f');
+        return { date, count: Number(count) };
+    }).reverse();
+
+    if (!commits.length) {
+        document.body.innerHTML = '<main class="shell"><h1>No commits found</h1></main>';
+        return;
+    }
+
+    const byDay = new Map();
+    const byMonth = new Map();
+    const byAuthor = new Map();
+    const byFile = new Map();
+    const byExtension = new Map();
+    const weekdays = Array(7).fill(0);
+    const hours = Array(24).fill(0);
+    let additions = 0;
+    let deletions = 0;
+    let filesChanged = 0;
+    let binaryChanges = 0;
+
+    const extensionFor = path => {
+        const clean = path.replace(/^"|"$/g, '');
+        const name = clean.split('/').pop();
+        if (!name || !name.includes('.') || name.startsWith('.') && name.indexOf('.', 1) < 0) return '[no extension]';
+        return `.${name.split('.').pop().toLowerCase()}`;
+    };
+
+    for (const commit of commits) {
+        const day = byDay.get(commit.date) || { commits: 0, additions: 0, deletions: 0 };
+        day.commits++;
+        day.additions += commit.additions;
+        day.deletions += commit.deletions;
+        byDay.set(commit.date, day);
+
+        const month = commit.date.slice(0, 7);
+        const monthStats = byMonth.get(month) || { commits: 0, additions: 0, deletions: 0 };
+        monthStats.commits++;
+        monthStats.additions += commit.additions;
+        monthStats.deletions += commit.deletions;
+        byMonth.set(month, monthStats);
+
+        const authorKey = commit.email.toLowerCase() || commit.author;
+        const author = byAuthor.get(authorKey) || { name: commit.author, commits: 0, additions: 0, deletions: 0 };
+        author.commits++;
+        author.additions += commit.additions;
+        author.deletions += commit.deletions;
+        byAuthor.set(authorKey, author);
+
+        const localDate = new Date(commit.timestamp);
+        weekdays[localDate.getDay()]++;
+        hours[localDate.getHours()]++;
+        additions += commit.additions;
+        deletions += commit.deletions;
+        filesChanged += commit.files.length;
+        binaryChanges += commit.binaryFiles;
+
+        for (const file of commit.files) {
+            const fileStats = byFile.get(file.path) || { changes: 0, commits: 0 };
+            fileStats.changes += file.added + file.deleted;
+            fileStats.commits++;
+            byFile.set(file.path, fileStats);
+            const extension = extensionFor(file.path);
+            const extensionStats = byExtension.get(extension) || { changes: 0, files: new Set() };
+            extensionStats.changes += file.added + file.deleted;
+            extensionStats.files.add(file.path);
+            byExtension.set(extension, extensionStats);
+        }
+    }
+
+    const activeDates = [...byDay.keys()].sort();
+    const firstDate = activeDates[0];
+    const lastDate = activeDates.at(-1);
+    const spanDays = Math.floor((new Date(`${lastDate}T12:00:00`) - new Date(`${firstDate}T12:00:00`)) / dayMs) + 1;
+    const trackedFiles = new Set([...byFile.keys()]).size;
+    const currentTodo = todo.length ? todo.at(-1).count : 0;
+
+    let longestStreak = 1;
+    let runningStreak = 1;
+    let longestStart = firstDate;
+    let longestEnd = firstDate;
+    let runningStart = firstDate;
+    for (let i = 1; i < activeDates.length; i++) {
+        const gap = Math.round((new Date(`${activeDates[i]}T12:00:00`) - new Date(`${activeDates[i - 1]}T12:00:00`)) / dayMs);
+        if (gap === 1) {
+            runningStreak++;
+        } else {
+            runningStreak = 1;
+            runningStart = activeDates[i];
+        }
+        if (runningStreak > longestStreak) {
+            longestStreak = runningStreak;
+            longestStart = runningStart;
+            longestEnd = activeDates[i];
+        }
+    }
+
+    let currentStreak = 1;
+    for (let i = activeDates.length - 1; i > 0; i--) {
+        const gap = Math.round((new Date(`${activeDates[i]}T12:00:00`) - new Date(`${activeDates[i - 1]}T12:00:00`)) / dayMs);
+        if (gap !== 1) break;
+        currentStreak++;
+    }
+
+    const busiestDay = [...byDay].sort((a, b) => b[1].commits - a[1].commits)[0];
+    const biggestCommit = [...commits].sort((a, b) => (b.additions + b.deletions) - (a.additions + a.deletions))[0];
+    const topMonth = [...byMonth].sort((a, b) => b[1].commits - a[1].commits)[0];
+    const topWeekday = weekdays.indexOf(Math.max(...weekdays));
+    const topHour = hours.indexOf(Math.max(...hours));
+    const weekdayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+    $('repoName').textContent = repoName;
+    $('branch').textContent = branch;
+    $('historyWindow').textContent = `${firstDate} -> ${lastDate}`;
+    $('generatedAt').textContent = new Date(Number(generatedEpoch) * 1000).toLocaleString();
+    document.title = `${repoName} / Productivity`;
+
+    const metrics = [
+        ['Total commits', fullNumber(commits.length), `${number(commits.length / Math.max(spanDays / 365.25, 1))} per year`],
+        ['Lines added', `+${number(additions)}`, `${pct(additions / Math.max(additions + deletions, 1))} of churn`],
+        ['Lines removed', `-${number(deletions)}`, `net ${additions - deletions >= 0 ? '+' : ''}${number(additions - deletions)}`],
+        ['Active days', fullNumber(activeDates.length), `${pct(activeDates.length / spanDays)} of ${fullNumber(spanDays)} days`],
+        ['Contributors', fullNumber(byAuthor.size), `${fullNumber(trackedFiles)} historical files`],
+        ['Open todos', fullNumber(currentTodo), `${fullNumber(todo.length)} snapshots`],
+        ['Longest streak', `${longestStreak}d`, `${longestStart} -> ${longestEnd}`],
+        ['Current streak', `${currentStreak}d`, `ending ${lastDate}`],
+        ['Avg active day', number(commits.length / activeDates.length), 'commits per active day'],
+        ['Avg commit size', number((additions + deletions) / commits.length), 'lines changed'],
+        ['Files / commit', number(filesChanged / commits.length), `${fullNumber(binaryChanges)} binary changes`],
+        ['Repository age', `${number(spanDays / 365.25)}y`, `${firstDate} first commit`]
+    ];
+    $('metrics').innerHTML = metrics.map(([label, value, note]) => `<article class="metric"><div class="metric-label">${esc(label)}</div><div class="metric-value">${esc(value)}</div><div class="metric-note">${esc(note)}</div></article>`).join('');
+
+    const recordItems = [
+        ['Busiest day', `${busiestDay[1].commits} commits`, busiestDay[0]],
+        ['Best month', `${topMonth[1].commits} commits`, topMonth[0]],
+        ['Largest commit', number(biggestCommit.additions + biggestCommit.deletions), biggestCommit.subject],
+        ['Peak rhythm', `${weekdayNames[topWeekday]} ${String(topHour).padStart(2, '0')}:00`, 'most frequent day / hour'],
+        ['Code survival', pct(Math.max(additions - deletions, 0) / Math.max(additions, 1)), 'net additions / additions'],
+        ['Change volume', number(additions + deletions), 'total line churn']
+    ];
+    $('records').innerHTML = recordItems.map(([label, value, note]) => `<div class="record"><div class="mini-label">${esc(label)}</div><div class="record-value">${esc(value)}</div><div class="record-note" title="${esc(note)}">${esc(note)}</div></div>`).join('');
+
+    function svgBars(target, labels, values, options = {}) {
+        const width = 760;
+        const height = options.height || 270;
+        const margin = { top: 12, right: 12, bottom: 35, left: 52 };
+        const plotWidth = width - margin.left - margin.right;
+        const plotHeight = height - margin.top - margin.bottom;
+        const max = Math.max(...values, 1);
+        const step = plotWidth / values.length;
+        const barWidth = Math.max(2, step * .68);
+        let svg = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(options.label || 'Bar chart')}">`;
+        for (let i = 0; i <= 4; i++) {
+            const y = margin.top + plotHeight * i / 4;
+            const value = max * (1 - i / 4);
+            svg += `<line class="grid-line" x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}"/><text class="axis-text" x="${margin.left - 8}" y="${y + 3}" text-anchor="end">${number(value)}</text>`;
+        }
+        values.forEach((value, i) => {
+            const barHeight = value / max * plotHeight;
+            const x = margin.left + i * step + (step - barWidth) / 2;
+            const y = margin.top + plotHeight - barHeight;
+            svg += `<rect x="${x}" y="${y}" width="${barWidth}" height="${barHeight}" fill="${options.color || '#ff6b00'}"><title>${esc(labels[i])}: ${fullNumber(value)}</title></rect>`;
+            const labelEvery = options.labelEvery || Math.max(1, Math.ceil(values.length / 10));
+            if (i % labelEvery === 0 || i === values.length - 1) svg += `<text class="axis-text" x="${x + barWidth / 2}" y="${height - 12}" text-anchor="middle">${esc(options.formatLabel ? options.formatLabel(labels[i]) : labels[i])}</text>`;
+        });
+        svg += '</svg>';
+        $(target).innerHTML = svg;
+    }
+
+    function svgLines(target, labels, series, options = {}) {
+        const width = 1100;
+        const height = options.height || 300;
+        const margin = { top: 12, right: 15, bottom: 36, left: 58 };
+        const plotWidth = width - margin.left - margin.right;
+        const plotHeight = height - margin.top - margin.bottom;
+        const allValues = series.flatMap(item => item.values);
+        const max = Math.max(...allValues, 1);
+        const xFor = i => margin.left + (labels.length === 1 ? plotWidth / 2 : i / (labels.length - 1) * plotWidth);
+        const yFor = value => margin.top + plotHeight - value / max * plotHeight;
+        let svg = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(options.label || 'Line chart')}">`;
+        for (let i = 0; i <= 4; i++) {
+            const y = margin.top + plotHeight * i / 4;
+            svg += `<line class="grid-line" x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}"/><text class="axis-text" x="${margin.left - 8}" y="${y + 3}" text-anchor="end">${number(max * (1 - i / 4))}</text>`;
+        }
+        series.forEach(item => {
+            const points = item.values.map((value, i) => `${xFor(i)},${yFor(value)}`).join(' ');
+            svg += `<polyline points="${points}" fill="none" stroke="${item.color}" stroke-width="${item.width || 2}" vector-effect="non-scaling-stroke"/>`;
+            item.values.forEach((value, i) => {
+                if (labels.length < 40 || i % Math.ceil(labels.length / 40) === 0) svg += `<circle cx="${xFor(i)}" cy="${yFor(value)}" r="2" fill="${item.color}"><title>${esc(labels[i])}: ${fullNumber(value)} ${esc(item.name)}</title></circle>`;
+            });
+        });
+        const labelEvery = Math.max(1, Math.ceil(labels.length / 8));
+        labels.forEach((label, i) => {
+            if (i % labelEvery === 0 || i === labels.length - 1) svg += `<text class="axis-text" x="${xFor(i)}" y="${height - 11}" text-anchor="middle">${esc(options.formatLabel ? options.formatLabel(label) : label)}</text>`;
+        });
+        svg += '</svg>';
+        $(target).innerHTML = svg;
+    }
+
+    const months = [...byMonth.keys()].sort();
+    svgBars('commitChart', months, months.map(month => byMonth.get(month).commits), {
+        label: 'Commits per month',
+        formatLabel: month => month.slice(2)
+    });
+    svgLines('churnChart', months, [
+        { name: 'added', values: months.map(month => byMonth.get(month).additions), color: '#ff6b00', width: 2.5 },
+        { name: 'removed', values: months.map(month => byMonth.get(month).deletions), color: '#8a3b08', width: 2 }
+    ], { label: 'Lines added and removed per month', formatLabel: month => month.slice(2) });
+
+    const todoLabels = todo.map(item => item.date);
+    if (todo.length) {
+        svgLines('todoChart', todoLabels, [{ name: 'todos', values: todo.map(item => item.count), color: '#ff6b00', width: 3 }], {
+            label: 'Todo list line count over time',
+            formatLabel: date => date.slice(2)
+        });
+    } else {
+        $('todoChart').textContent = 'No todo history found.';
+    }
+
+    svgBars('weekdayChart', weekdayNames, weekdays, { label: 'Commits by weekday', height: 290, labelEvery: 1 });
+    svgBars('hourChart', hours.map((_, hour) => String(hour).padStart(2, '0')), hours, {
+        label: 'Commits by hour',
+        height: 290,
+        labelEvery: 3
+    });
+
+    function renderRanked(target, rows, valueFor, noteFor) {
+        const max = Math.max(...rows.map(valueFor), 1);
+        $(target).innerHTML = rows.map(row => {
+            const value = valueFor(row);
+            return `<div class="bar-row"><div class="bar-name" title="${esc(row.name)}">${esc(row.name)}</div><div class="bar-track"><div class="bar-fill" style="width:${value / max * 100}%"></div></div><div class="bar-value">${esc(noteFor(row))}</div></div>`;
+        }).join('');
+    }
+
+    const fileRows = [...byFile].map(([name, stats]) => ({ name, ...stats })).sort((a, b) => b.changes - a.changes).slice(0, 12);
+    renderRanked('files', fileRows, row => row.changes, row => `${number(row.changes)} / ${row.commits}c`);
+
+    const extensionRows = [...byExtension].map(([name, stats]) => ({ name, changes: stats.changes, files: stats.files.size })).sort((a, b) => b.changes - a.changes).slice(0, 12);
+    renderRanked('extensions', extensionRows, row => row.changes, row => `${number(row.changes)} / ${row.files}f`);
+
+    const contributorRows = [...byAuthor.values()].sort((a, b) => b.commits - a.commits).slice(0, 10).map(author => ({ ...author, name: author.name || 'Unknown' }));
+    renderRanked('contributors', contributorRows, row => row.commits, row => `${row.commits} / ${number(row.additions + row.deletions)}`);
+
+    const heatEnd = new Date(`${lastDate}T12:00:00`);
+    heatEnd.setDate(heatEnd.getDate() + (6 - heatEnd.getDay()));
+    const heatStart = new Date(heatEnd);
+    heatStart.setDate(heatStart.getDate() - 363);
+    const heatValues = [];
+    for (let cursor = new Date(heatStart); cursor <= heatEnd; cursor.setDate(cursor.getDate() + 1)) {
+        heatValues.push({ date: dateKey(cursor), value: byDay.get(dateKey(cursor))?.commits || 0 });
+    }
+    const positiveHeat = heatValues.map(item => item.value).filter(Boolean).sort((a, b) => a - b);
+    const threshold = quantile => positiveHeat[Math.floor((positiveHeat.length - 1) * quantile)] || 1;
+    const q1 = threshold(.25);
+    const q2 = threshold(.5);
+    const q3 = threshold(.75);
+    $('heatmap').innerHTML = heatValues.map(item => {
+        const level = item.value === 0 ? 0 : item.value <= q1 ? 1 : item.value <= q2 ? 2 : item.value <= q3 ? 3 : 4;
+        return `<i class="heat-cell heat-${level}"><title>${item.date}: ${item.value} commit${item.value === 1 ? '' : 's'}</title></i>`;
+    }).join('');
+    $('heatRange').textContent = `${dateKey(heatStart)} -> ${dateKey(heatEnd)}`;
+
+    $('recent').innerHTML = [...commits].reverse().slice(0, 15).map(commit => `<tr><td class="hash">${esc(commit.hash.slice(0, 8))}</td><td>${esc(commit.date)}</td><td>${esc(commit.author)}</td><td class="subject" title="${esc(commit.subject)}">${esc(commit.subject)}</td><td>${commit.files.length}</td><td><span class="plus">+${fullNumber(commit.additions)}</span> <span class="minus">-${fullNumber(commit.deletions)}</span></td></tr>`).join('');
+    $('footerSummary').textContent = `${fullNumber(commits.length)} COMMITS / ${fullNumber(additions + deletions)} LINES CHANGED / ${fullNumber(activeDates.length)} ACTIVE DAYS`;
+})();
+</script>
+</body>
+</html>
+HTML_END
+} > "$OUTPUT_HTML"
+
+printf 'Dashboard generated at %s\n' "$OUTPUT_HTML"
+
+if command -v open >/dev/null 2>&1; then
+    open "$OUTPUT_HTML"
+elif command -v xdg-open >/dev/null 2>&1 && [ -n "${DISPLAY:-}${WAYLAND_DISPLAY:-}" ]; then
+    xdg-open "$OUTPUT_HTML" >/dev/null 2>&1 &
+else
+    printf 'Open %s in your browser.\n' "$OUTPUT_HTML"
+fi
