@@ -139,11 +139,13 @@
       when: is_managed_desktop and (is_arch or is_fedora)
     - name: Fonts
       ansible.builtin.import_tasks: tasks/apps/fonts.yml
+      when: not is_headless
     - name: Appearance
       ansible.builtin.include_tasks: tasks/system/appearance.yml
       when: is_managed_desktop
     - name: Ghostty
       ansible.builtin.import_tasks: tasks/apps/ghostty.yml
+      when: not is_headless
     - name: Browser
       ansible.builtin.import_tasks: tasks/apps/browser.yml
       when: not is_headless
@@ -158,7 +160,7 @@
       when: is_managed_desktop and (not is_ubuntu)
     - name: Zed
       ansible.builtin.import_tasks: tasks/apps/zed.yml
-      when: is_dev_env
+      when: is_dev_env and (not is_headless)
     - name: Printing
       ansible.builtin.include_tasks: tasks/system/printing.yml
       when: is_managed_desktop
