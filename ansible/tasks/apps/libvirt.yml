@@ -9,6 +9,7 @@
       Archlinux:
         - dnsmasq
         - libvirt
+        - python-lxml
         - qemu-desktop
         - virt-manager
         - virt-viewer
@@ -17,6 +18,7 @@
         - libvirt-clients
         - libvirt-daemon-config-network
         - libvirt-daemon-system
+        - python3-lxml
         - qemu-system-x86
         - virt-manager
         - virt-viewer
@@ -25,6 +27,7 @@
         - libvirt-client
         - libvirt-daemon-config-network
         - libvirt-daemon-kvm
+        - python3-lxml
         - qemu-kvm
         - virt-install
         - virt-manager
@@ -52,3 +55,4 @@
   when: ansible_facts['virtualization_role'] == 'host'
 #
 # sudo virsh net-list --all
+# Note: pythyon3-lxml is for the ansible community.libvirt module
