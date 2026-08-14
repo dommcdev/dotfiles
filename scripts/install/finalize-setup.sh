@@ -34,7 +34,7 @@ auth_github() {
 enroll_fingerprints() {
     read -rp "Would you like to enroll fingerprints? [Y/n] "
     if [[ "${REPLY,,}" =~ ^y$|^$ ]]; then
-        bash ~/.local/bin/enroll-fingerprints
+        bash ~/.local/bin/enroll-fingerprints.sh
         pause_and_continue
     fi
 }
