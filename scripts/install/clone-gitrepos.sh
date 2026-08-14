@@ -7,9 +7,9 @@ default_location="$HOME/dev/projects"
 # Format: "repo|location". Leave location empty to use the default above.
 repos=(
   "portfolio|"
-  "courses|$HOME/dev/"
-  "homelab|$HOME/dev/"
-  "beans|$HOME/dev/"
+  "courses|$HOME/dev"
+  "homelab|$HOME/dev"
+  "beans|$HOME/dev"
   "chopchop|"
 )
 

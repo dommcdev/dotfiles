@@ -3,11 +3,10 @@ Nvim stuff (More lazy loading, finish new lsp)
 Ambient light sensor
 Setup ufw (apps/firewall.yml)
 
-Increase server login timeout for navidrome/feishin, look into playlists
 Setup fuse mnt/bookmark for chocobo files
 Simple remote viewer
 Mask some .desktop files
-Apps: Feishin, cursor, borg
+Apps: Cursor, borg kde-connect
 
 New ymls: Switch emulator, retroarch, wakeonlan
 Ansible: Auth (replace fingerprints script + tweak PAM auth stuff), comment overhaul
@@ -19,3 +18,4 @@ Self-host excalidraw
 Theming system
 Nvidia hyprland support
 Tweak limine, snapper?
+Look into playlists
