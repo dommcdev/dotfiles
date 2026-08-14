@@ -42,8 +42,8 @@ return {
       color_overrides = {},
       custom_highlights = {},
       default_integrations = true,
-      auto_integrations = true, --automatically detect installed plugins and enabled their respective integrations
-      integrations = { --the part technically optional due to line above
+      auto_integrations = false,
+      integrations = { --the part technically optional if above is true
         blink_cmp = true,
         gitsigns = true,
         harpoon = true,

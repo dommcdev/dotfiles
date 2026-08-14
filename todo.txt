@@ -1,5 +1,4 @@
 # To-do
-Nvim stuff (More lazy loading)
 Setup fuse mnt and bookmark for chocobo files
 Simple remote viewer
 

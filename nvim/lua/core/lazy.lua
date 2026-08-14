@@ -22,4 +22,15 @@ require("lazy").setup({
     },
     install = { colorscheme = { "catppuccin" } }, -- colorscheme for installing plugins.
     checker = { enabled = false }, --auto-check for updates
+    performance = {
+        rtp = {
+            disabled_plugins = {
+                "gzip",
+                "tarPlugin",
+                "tohtml",
+                "tutor",
+                "zipPlugin",
+            },
+        },
+    },
 })

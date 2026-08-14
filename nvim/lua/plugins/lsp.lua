@@ -214,10 +214,9 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-    lazy = false,
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "folke/snacks.nvim",
-      "saghen/blink.cmp",
       "mason-org/mason.nvim",
       "mason-org/mason-lspconfig.nvim",
     },
@@ -227,9 +226,6 @@ return {
 
       vim.filetype.add(policy.filetype_detection)
 
-      vim.lsp.config("*", {
-        capabilities = require("blink.cmp").get_lsp_capabilities(),
-      })
       for server, config in pairs(policy.lsp_overrides) do
         vim.lsp.config(server, config)
       end
@@ -584,9 +580,8 @@ return {
 
   {
     "saghen/blink.cmp",
-    event = "VimEnter",
+    event = { "InsertEnter", "CmdlineEnter" },
     version = "1.*",
-    dependencies = { "folke/lazydev.nvim" },
     opts = {
       keymap = {
         preset = "default",
@@ -598,7 +593,10 @@ return {
         documentation = { auto_show = true, auto_show_delay_ms = 200 },
       },
       sources = {
-        default = { "lsp", "path", "snippets", "lazydev" },
+        default = { "lsp", "path", "snippets" },
+        per_filetype = {
+          lua = { inherit_defaults = true, "lazydev" },
+        },
         providers = {
           lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
         },
@@ -633,7 +631,8 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
-    lazy = false,
+    event = { "BufReadPre", "BufNewFile" },
+    cmd = { "TSInstall", "TSLog", "TSUninstall", "TSUpdate" },
     build = ":TSUpdate",
     config = function()
       -- Enable treesitter highlighting for all filetypes with a parser
