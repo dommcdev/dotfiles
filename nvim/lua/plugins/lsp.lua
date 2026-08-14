@@ -3,6 +3,7 @@
 -- This is the only section that should need routine changes. LSP names come
 -- from nvim-lspconfig. Formatter names come from conform.nvim. A formatter's
 -- Mason package and executable default to its Conform name unless specified.
+-- Astro lsp fix: npm install --prefix "$HOME/.local/share/nvim/mason/packages/astro-language-server" --save-exact typescript@6.0.3
 
 local policy = {
   prompt_timeout_ms = 5000,
