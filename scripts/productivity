@@ -4,7 +4,6 @@ set -euo pipefail
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 cd "$REPO_ROOT"
 
-TARGET_FILE="todo.txt"
 OUTPUT_HTML="/tmp/productivity.html"
 
 for command in git base64; do
@@ -13,6 +12,17 @@ for command in git base64; do
         exit 1
     fi
 done
+
+TARGET_FILE=""
+for candidate in todo.txt todo.md; do
+    if [ -f "$candidate" ]; then
+        TARGET_FILE="$candidate"
+        break
+    fi
+done
+if [ -z "$TARGET_FILE" ]; then
+    TARGET_FILE="$(git ls-files | awk -F/ '!found && ($NF == "todo.txt" || $NF == "todo.md") { print; found = 1 }')"
+fi
 
 printf 'Analyzing repository history...\n'
 
@@ -42,7 +52,7 @@ fi
 
 REPO_NAME="$(basename "$REPO_ROOT")"
 BRANCH="$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD)"
-printf '%s\x1f%s\x1f%s' "$REPO_NAME" "$BRANCH" "$(date +%s)" > "$META_DATA"
+printf '%s\x1f%s\x1f%s\x1f%s' "$REPO_NAME" "$BRANCH" "$(date +%s)" "$TARGET_FILE" > "$META_DATA"
 
 encode_file() {
     base64 < "$1" | tr -d '\n'
@@ -571,7 +581,7 @@ footer {
         <article class="panel wide">
             <div class="panel-head">
                 <h3>Todo Trajectory</h3>
-                <div class="panel-subtitle">Non-empty lines in todo.txt</div>
+                <div class="panel-subtitle" id="todoSubtitle"></div>
             </div>
             <div class="chart" id="todoChart"></div>
         </article>
@@ -616,7 +626,7 @@ cat <<'HTML_END'
     const monthKey = date => dateKey(date).slice(0, 7);
     const dayMs = 86400000;
 
-    const [repoName, branch, generatedEpoch] = decode('meta-data').split('\x1f');
+    const [repoName, branch, generatedEpoch, todoPath] = decode('meta-data').split('\x1f');
     const commits = decode('commits-data').split('\x1e').filter(Boolean).map(record => {
         const lines = record.replace(/^\n/, '').split('\n');
         const [hash, date, epoch, author, email, subject] = lines.shift().split('\x1f');
@@ -760,6 +770,7 @@ cat <<'HTML_END'
     $('branch').textContent = branch;
     $('historyWindow').textContent = `${firstDate} -> ${lastDate}`;
     $('generatedAt').textContent = new Date(Number(generatedEpoch) * 1000).toLocaleString();
+    $('todoSubtitle').textContent = todoPath ? `Non-empty lines in ${todoPath}` : 'No todo.txt or todo.md found';
     document.title = `${repoName} / Productivity`;
 
     const metrics = [

@@ -8,12 +8,6 @@ gui_tasks="$repo_root/ansible/tasks/apps/gui.yml"
 
 command -v fzf >/dev/null || { echo "fzf is required" >&2; exit 1; }
 
-read -r -p "Application name: " search_name
-if [[ -z "$search_name" ]]; then
-  echo "No name entered" >&2
-  exit 1
-fi
-
 shopt -s nullglob
 desktop_files=(
   /usr/local/share/applications/*.desktop
@@ -22,31 +16,33 @@ desktop_files=(
   "$HOME"/.local/share/flatpak/exports/share/applications/*.desktop
 )
 
-selection=$(
-  for desktop_file in "${desktop_files[@]}"; do
-    name=$(grep -m1 '^Name=' -- "$desktop_file" || true)
-    [[ -n "$name" ]] && printf '%s\t%s\n' \
-      "${name#Name=}" "${desktop_file##*/}"
-  done | fzf \
-    --query="$search_name" \
-    --select-1 \
-    --exit-0 \
-    --delimiter=$'\t' \
-    --with-nth=1,2
-) || exit 1
+while read -r -p "Application name (blank to quit): " search_name && [[ -n "$search_name" ]]; do
+  selection=$(
+    for desktop_file in "${desktop_files[@]}"; do
+      name=$(grep -m1 '^Name=' -- "$desktop_file" || true)
+      [[ -n "$name" ]] && printf '%s\t%s\n' \
+        "${name#Name=}" "${desktop_file##*/}"
+    done | fzf \
+      --query="$search_name" \
+      --select-1 \
+      --exit-0 \
+      --delimiter=$'\t' \
+      --with-nth=1,2
+  ) || break
 
-if [[ -z "$selection" ]]; then
-  echo "No application selected" >&2
-  exit 1
-fi
+  if [[ -z "$selection" ]]; then
+    echo "No application selected" >&2
+    break
+  fi
 
-desktop_id=${selection##*$'\t'}
-desktop_id=${desktop_id%.desktop}
-entry="      - $desktop_id"
+  desktop_id=${selection##*$'\t'}
+  desktop_id=${desktop_id%.desktop}
+  entry="      - $desktop_id"
 
-if grep -Fqx -- "$entry" "$gui_tasks"; then
-  echo "$desktop_id is already listed in $gui_tasks"
-else
-  sed -i "/^    hidden_apps:$/a\\$entry" "$gui_tasks"
-  echo "Added $desktop_id to $gui_tasks"
-fi
+  if grep -Fqx -- "$entry" "$gui_tasks"; then
+    echo "$desktop_id is already listed in $gui_tasks"
+  else
+    sed -i "/^    hidden_apps:$/a\\$entry" "$gui_tasks"
+    echo "Added $desktop_id to $gui_tasks"
+  fi
+done

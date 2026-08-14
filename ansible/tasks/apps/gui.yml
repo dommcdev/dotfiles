@@ -114,6 +114,13 @@
 - name: Hide junk applications from launchers
   vars:
     hidden_apps:
+      - designer
+      - qdbusviewer
+      - assistant
+      - linguist
+      - org.cachyos.KernelManager
+      - org.cachyos.scx-manager
+      - tuned-gui
       - limine-snapper-restore
       - avahi-discover
       - bssh
