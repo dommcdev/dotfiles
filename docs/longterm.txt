@@ -1,1 +1,6 @@
-Theme-switching via mycolors.css and/or matugen
+Gpu passthrough (Windows, LookingGlass, Quickpassthrough)
+Self-host excalidraw
+Nvidia hyprland support
+Tweak limine, snapper?
+Ambient light sensor
+Switch emulator yml

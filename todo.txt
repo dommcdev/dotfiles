@@ -1,13 +1,3 @@
 # To-do
-Setup fuse mnt and bookmark for chocobo files
-Simple remote viewer
-
-
-# Low Priority
-Gpu passthrough (Windows, LookingGlass, Quickpassthrough)
-Self-host excalidraw
 Theming system
-Nvidia hyprland support
-Tweak limine, snapper?
-Ambient light sensor
-New ymls: Switch emulator, retroarch, wakeonlan
+New ymls: Retroarch, wakeonlan
