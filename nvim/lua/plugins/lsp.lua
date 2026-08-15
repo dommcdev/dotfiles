@@ -631,7 +631,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
-    event = { "BufReadPre", "BufNewFile" },
+    lazy = false, --Load immediately to prevent lag when opening files with heavy treesitter stuff
     cmd = { "TSInstall", "TSLog", "TSUninstall", "TSUpdate" },
     build = ":TSUpdate",
     config = function()
