@@ -11,6 +11,7 @@
 * [Commented] Allow screenshoting specific window #3380
 * [Commented] Add action to screenshot notif with customizable open with (previewer and editor) #3303
 * [Coming soon] Drawer groups for the bar
+* Toggles should be square in square-borders mode
 
 ## Bugs
 * Occasionally the weather visual effects don't work
