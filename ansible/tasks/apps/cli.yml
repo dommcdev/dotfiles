@@ -248,7 +248,6 @@
           - cmatrix-git
           - lavat-git
         state: present
-# TODO Add terminal-browser?
 
 # Note: Borg v2 will bring breaking changes, might need to pin pkgs or smth then
 - name: Install Borg

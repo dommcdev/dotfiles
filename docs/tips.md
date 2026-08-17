@@ -10,6 +10,7 @@
 - `hunk` diff for diff tui
 - `systemd-analyze critical-chain` and `systemd-analyze blame`
 - `scp` for quick simple file transfers
+- `wtype` and `ydotool` are wayland replacements for `xdotool`
 
 ## For rebooting:
 
