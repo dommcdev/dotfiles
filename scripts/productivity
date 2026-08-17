@@ -581,9 +581,16 @@ footer {
         <article class="panel wide">
             <div class="panel-head">
                 <h3>Todo Trajectory</h3>
-                <div class="panel-subtitle" id="todoSubtitle"></div>
+                <div class="panel-subtitle"><span id="todoSubtitle"></span> / snapshots evenly spaced</div>
             </div>
             <div class="chart" id="todoChart"></div>
+        </article>
+        <article class="panel wide">
+            <div class="panel-head">
+                <h3>Todo Trajectory / Calendar Time</h3>
+                <div class="panel-subtitle">Even time axis / horizontal runs mean no change</div>
+            </div>
+            <div class="chart" id="todoTimeChart"></div>
         </article>
     </section>
 
@@ -856,6 +863,43 @@ cat <<'HTML_END'
         $(target).innerHTML = svg;
     }
 
+    function svgTimeSteps(target, points, endDate) {
+        const width = 1100;
+        const height = 300;
+        const margin = { top: 12, right: 15, bottom: 36, left: 58 };
+        const plotWidth = width - margin.left - margin.right;
+        const plotHeight = height - margin.top - margin.bottom;
+        const timestamps = points.map(point => new Date(`${point.date}T12:00:00`).getTime());
+        const start = timestamps[0];
+        const end = Math.max(new Date(`${endDate}T12:00:00`).getTime(), timestamps.at(-1));
+        const duration = Math.max(end - start, 1);
+        const max = Math.max(...points.map(point => point.count), 1);
+        const xFor = timestamp => margin.left + (timestamp - start) / duration * plotWidth;
+        const yFor = value => margin.top + plotHeight - value / max * plotHeight;
+        let path = `M ${xFor(timestamps[0])} ${yFor(points[0].count)}`;
+        for (let i = 1; i < points.length; i++) {
+            path += ` H ${xFor(timestamps[i])} V ${yFor(points[i].count)}`;
+        }
+        path += ` H ${xFor(end)}`;
+
+        let svg = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Todo list line count over calendar time">`;
+        for (let i = 0; i <= 4; i++) {
+            const y = margin.top + plotHeight * i / 4;
+            svg += `<line class="grid-line" x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}"/><text class="axis-text" x="${margin.left - 8}" y="${y + 3}" text-anchor="end">${number(max * (1 - i / 4))}</text>`;
+        }
+        for (let i = 0; i <= 5; i++) {
+            const timestamp = start + duration * i / 5;
+            const x = xFor(timestamp);
+            svg += `<line class="grid-line" x1="${x}" y1="${margin.top}" x2="${x}" y2="${margin.top + plotHeight}"/><text class="axis-text" x="${x}" y="${height - 11}" text-anchor="middle">${dateKey(new Date(timestamp)).slice(2)}</text>`;
+        }
+        svg += `<path d="${path}" fill="none" stroke="#ff6b00" stroke-width="3" vector-effect="non-scaling-stroke"/>`;
+        points.forEach((point, i) => {
+            svg += `<circle cx="${xFor(timestamps[i])}" cy="${yFor(point.count)}" r="2.5" fill="#ff6b00"><title>${esc(point.date)}: ${fullNumber(point.count)} todos</title></circle>`;
+        });
+        svg += '</svg>';
+        $(target).innerHTML = svg;
+    }
+
     const months = [...byMonth.keys()].sort();
     svgBars('commitChart', months, months.map(month => byMonth.get(month).commits), {
         label: 'Commits per month',
@@ -872,8 +916,10 @@ cat <<'HTML_END'
             label: 'Todo list line count over time',
             formatLabel: date => date.slice(2)
         });
+        svgTimeSteps('todoTimeChart', todo, dateKey(new Date(Number(generatedEpoch) * 1000)));
     } else {
         $('todoChart').textContent = 'No todo history found.';
+        $('todoTimeChart').textContent = 'No todo history found.';
     }
 
     svgBars('weekdayChart', weekdayNames, weekdays, { label: 'Commits by weekday', height: 290, labelEvery: 1 });
