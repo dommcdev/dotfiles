@@ -6,7 +6,7 @@ order = [ "default" ]
 
     [bar.default]
     capsule_radius = 0
-    center = [ "date", "center_spacer", "clock", "center_spacer", "weather", "center_spacer", "privacy", "status" ]
+    center = [ "date", "center_spacer", "clock", "center_spacer", "weather", "center_spacer", "privacy", "widget" ]
     end = [
         "tray",
         "battery",
@@ -152,14 +152,7 @@ auto_locate = true
 [lockscreen_widgets]
 enabled = true
 schema_version = 2
-widget_order = [
-    "lockscreen-login-box@eDP-1",
-    "lockscreen-login-box@DP-2",
-    "lockscreen-widget-0000000000000001",
-    "lockscreen-widget-0000000000000002",
-    "lockscreen-widget-0000000000000003",
-    "lockscreen-widget-0000000000000004"
-]
+widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-0000000000000001", "lockscreen-widget-0000000000000002" ]
 
     [lockscreen_widgets.grid]
     cell_size = 16
@@ -281,6 +274,7 @@ temperature_night = 4700
 layer = "overlay"
 
 [osd.kinds]
+lock_keys = false
 media = false
 
 [plugin_settings."davemhammer/tailscale"]
@@ -306,8 +300,8 @@ enabled = [
     "noctalia/bongocat",
     "noctalia/wallhaven",
     "noctalia/screen_recorder",
-    "yocraft/battery-widget",
-    "davemhammer/tailscale"
+    "oldirtty/color_picker",
+    "yocraft/battery-widget"
 ]
 
 [shell]
