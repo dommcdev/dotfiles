@@ -7,6 +7,10 @@ export ANDROID_HOME="$HOME/programs/Android/Sdk"
 export GOPATH="$HOME/.local/share/go"
 export CARGO_HOME="$HOME/.local/share/cargo"
 
+#Bunfig does not currently work fully, so set this as a temp workaround.
+#See https://github.com/oven-sh/bun/issues/4553
+export BUN_INSTALL="$HOME/.local/share/bun"
+
 # Set these for ssh
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"

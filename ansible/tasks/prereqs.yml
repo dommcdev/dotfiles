@@ -177,7 +177,7 @@
           globalBinDir = "{{ home }}/.local/share/bun/bin"
 
           [install.cache]
-          dir = "{{ home }}/.cache/bun"
+          dir = "{{ home }}/.local/share/bun/install/cache"
 
 - name: Configure Arch package management
   become: true
