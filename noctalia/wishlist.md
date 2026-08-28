@@ -2,7 +2,6 @@
 * Hide unamed devices in bluetooth panel (Blueman does this by default)
 * Mention in the docs that ethernet status will only be displayed in the network module if using NetworkManager (as opposed to just iwd).
 * Default to last logged-in user in the greeter. I believe this is how SDDM does it?
-* [Created] Default to XDG_PICTURES_DIR #3415
 * Add a feels-like field to weather widget
 * Add a settings icon to the network widget that opens nm-connection-editor (?)
 * Ability to group a spacer with a bar widget (so that if for some reason the widget doesn't display the spacer doesn't either, e.g. a battery widget).
@@ -12,6 +11,7 @@
 * [Commented] Add action to screenshot notif with customizable open with (previewer and editor) #3303
 * [Coming soon] Drawer groups for the bar
 * Toggles should be square in square-borders mode
+* Battery threshhold box is confusing
 
 ## Bugs
 * Occasionally the weather visual effects don't work
