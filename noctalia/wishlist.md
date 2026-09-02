@@ -12,6 +12,7 @@
 * [Coming soon] Drawer groups for the bar
 * Toggles should be square in square-borders mode
 * Battery threshhold box is confusing
+* Set fixed-width spacing for sys monitor bar widgets (no layout shifting)
 
 ## Bugs
 * Occasionally the weather visual effects don't work
