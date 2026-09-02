@@ -159,6 +159,7 @@
       become: true
       when: is_fedora
 
+    # Note, this appears to be archived now: https://github.com/philocalyst/homebrew-tap
     - name: Tap and trust the Caligula Homebrew repository
       community.general.homebrew_tap:
         name: philocalyst/tap
