@@ -42,7 +42,7 @@ run = [ 'shell -- for path in %s; do echo "file://$path"; done | wl-copy -t text
 
 [[mgr.prepend_keymap]]
 on   = [ "g", "s" ]
-run  = "cd sftp://chocobo"
+run  = "cd sftp://chocobo/files"
 desc = "Go to chocobo server"
 
 [[mgr.prepend_keymap]]
