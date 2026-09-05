@@ -60,10 +60,10 @@ for file in "${files[@]}"; do
     if [ -n "$SUB_DIR" ]; then
         DEST="$TARGET_DIR/$SUB_DIR"
         mkdir -p "$DEST"
-        mv "$file" "$DEST/"
+        mv -i "$file" "$DEST/"
         echo "Sorted ($METHOD): $filename -> $SUB_DIR/"
     else
-        mv "$file" "$MISC_DIR/"
+        mv -i "$file" "$MISC_DIR/"
         echo "No date found via filename or EXIF. Moved to misc: $filename"
     fi
 done

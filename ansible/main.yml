@@ -170,6 +170,9 @@
     - name: Auth
       ansible.builtin.import_tasks: tasks/system/auth.yml
       when: is_managed_desktop
+    - name: macOS
+      ansible.builtin.include_tasks: tasks/mac.yml
+      when: is_macos
 
       # Put these at the end since they nuke SSH
     - name: Firewall

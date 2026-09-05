@@ -1,4 +1,6 @@
 -- Code Runner - run files in a floating terminal
+-- TODO: Escape shell paths and gsub '%' replacements, set the working directory,
+-- and stop on save failures to avoid running stale files.
 -- Available placeholders:
 --   ${file}     - full file path
 --   ${dir}      - directory of the file
