@@ -6,7 +6,7 @@ order = [ "default" ]
 
     [bar.default]
     capsule_radius = 0
-    center = [ "date", "center_spacer", "clock", "center_spacer", "weather", "center_spacer", "privacy", "widget" ]
+    center = [ "date", "center_spacer", "clock", "center_spacer", "weather", "center_spacer", "privacy", "status" ]
     end = [
         "tray",
         "battery",
@@ -26,7 +26,7 @@ order = [ "default" ]
     margin_edge = 0
     margin_ends = 8
     radius = 0
-    start = [ "workspaces", "left_spacer", "cpu", "ram", "left_spacer", "media" ]
+    start = [ "workspaces", "left_spacer", "ram", "cpu", "left_spacer", "media" ]
 
 [battery.device."/org/freedesktop/UPower/devices/battery_hidpp_battery_0"]
 warning_threshold = 10
@@ -82,6 +82,8 @@ widget_order = [ "desktop-widget-0000000000000002", "desktop-widget-000000000000
     cx = 608.0
     cy = 1088.0
     output = "DP-2"
+    placement_height = 0.0
+    placement_width = 0.0
     rotation = -0.0
     type = "audio_visualizer"
 
@@ -104,6 +106,8 @@ widget_order = [ "desktop-widget-0000000000000002", "desktop-widget-000000000000
     cx = 480.0
     cy = 920.0
     output = "eDP-1"
+    placement_height = 1200.0
+    placement_width = 1920.0
     rotation = 0.0
     type = "audio_visualizer"
 
@@ -152,7 +156,14 @@ auto_locate = true
 [lockscreen_widgets]
 enabled = true
 schema_version = 2
-widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-0000000000000001", "lockscreen-widget-0000000000000002" ]
+widget_order = [
+    "lockscreen-login-box@eDP-1",
+    "lockscreen-login-box@DP-2",
+    "lockscreen-widget-0000000000000001",
+    "lockscreen-widget-0000000000000002",
+    "lockscreen-widget-0000000000000003",
+    "lockscreen-widget-0000000000000004"
+]
 
     [lockscreen_widgets.grid]
     cell_size = 16
@@ -165,6 +176,8 @@ widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-000000000000000
     cx = 1280.0
     cy = 1104.0
     output = "DP-2"
+    placement_height = 0.0
+    placement_width = 0.0
     rotation = 0.0
     type = "login_box"
 
@@ -185,11 +198,13 @@ widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-000000000000000
         show_weather = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
-    box_height = 70.0
-    box_width = 400.0
+    box_height = 196.0
+    box_width = 720.0
     cx = 960.0
-    cy = 1013.0
+    cy = 1014.0
     output = "eDP-1"
+    placement_height = 1200.0
+    placement_width = 1920.0
     rotation = 0.0
     type = "login_box"
 
@@ -200,11 +215,11 @@ widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-000000000000000
         center_password_text = false
         input_opacity = 1.0
         input_radius = 6.0
-        layout = "compact"
+        layout = "regular"
         show_caps_lock = true
         show_keyboard_layout = true
         show_login_button = true
-        show_media = true
+        show_media = false
         show_session_buttons = true
         show_unlock_hint = true
         show_weather = true
@@ -215,6 +230,8 @@ widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-000000000000000
     cx = 1280.0
     cy = 704.0
     output = "DP-2"
+    placement_height = 0.0
+    placement_width = 0.0
     rotation = 0.0
     type = "clock"
 
@@ -230,6 +247,8 @@ widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-000000000000000
     cx = 1280.0
     cy = 1248.0
     output = "DP-2"
+    placement_height = 0.0
+    placement_width = 0.0
     rotation = 0.0
     type = "yocraft/battery-widget:widget"
 
@@ -240,11 +259,13 @@ widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-000000000000000
         layout = "horizontal"
 
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000003]
-    box_height = 176.0
-    box_width = 240.0
+    box_height = 224.0
+    box_width = 336.0
     cx = 960.0
-    cy = 592.0
+    cy = 600.0
     output = "eDP-1"
+    placement_height = 1200.0
+    placement_width = 1920.0
     rotation = 0.0
     type = "clock"
 
@@ -258,6 +279,8 @@ widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-000000000000000
     cx = 1872.0
     cy = 16.0
     output = "eDP-1"
+    placement_height = 1200.0
+    placement_width = 1920.0
     rotation = 0.0
     type = "yocraft/battery-widget:widget"
 
@@ -300,8 +323,8 @@ enabled = [
     "noctalia/bongocat",
     "noctalia/wallhaven",
     "noctalia/screen_recorder",
-    "oldirtty/color_picker",
-    "yocraft/battery-widget"
+    "yocraft/battery-widget",
+    "davemhammer/tailscale"
 ]
 
 [shell]
@@ -348,19 +371,19 @@ wallpaper_scheme = "m3-content"
     community_ids = []
 
 [wallpaper]
-directory = "/home/dominic/dev/wallpapers"
+directory = "/home/dominic/Vault/Wallpapers"
 
     [wallpaper.default]
-    path = "/home/dominic/dev/wallpapers/catppuccin/waves.png"
+    path = "/home/dominic/Vault/Wallpapers/waves.png"
 
     [wallpaper.last]
-    path = "/home/dominic/dev/wallpapers/catppuccin/waves.png"
+    path = "/home/dominic/Vault/Wallpapers/waves.png"
 
     [wallpaper.monitors.DP-2]
     path = "/home/dominic/dev/wallpapers/catppuccin/waves.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/dominic/dev/wallpapers/catppuccin/waves.png"
+    path = "/home/dominic/Vault/Wallpapers/waves.png"
 
 [weather]
 refresh_minutes = 15
