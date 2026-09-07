@@ -2,7 +2,6 @@
 * Hide unamed devices in bluetooth panel (Blueman does this by default)
 * Mention in the docs that ethernet status will only be displayed in the network module if using NetworkManager (as opposed to just iwd).
 * Default to last logged-in user in the greeter. I believe this is how SDDM does it?
-* Add a feels-like field to weather widget
 * Add a settings icon to the network widget that opens nm-connection-editor (?)
 * Ability to group a spacer with a bar widget (so that if for some reason the widget doesn't display the spacer doesn't either, e.g. a battery widget).
 * [Commented] Add ipc bind for screenshotting with pipe included #3273
