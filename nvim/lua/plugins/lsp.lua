@@ -622,9 +622,14 @@ return {
 
   {
     "rachartier/tiny-inline-diagnostic.nvim",
-    event = "LspAttach",
+    event = { "LspAttach", "DiagnosticChanged" },
     config = function()
-      require("tiny-inline-diagnostic").setup()
+      require("tiny-inline-diagnostic").setup({
+        options = {
+          -- Also display diagnostics from non-LSP sources such as s16.nvim.
+          overwrite_events = { "LspAttach", "DiagnosticChanged" },
+        },
+      })
     end,
   },
 
