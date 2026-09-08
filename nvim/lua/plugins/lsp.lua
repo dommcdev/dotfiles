@@ -596,8 +596,10 @@ return {
         default = { "lsp", "path", "snippets" },
         per_filetype = {
           lua = { inherit_defaults = true, "lazydev" },
+          s16 = { "s16", "path" }, --S16 CAN REMOVE
         },
         providers = {
+          s16 = { name = "S16", module = "s16.blink" }, --S16 CAN REMOVE
           lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
         },
       },
