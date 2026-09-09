@@ -68,6 +68,9 @@
          }
       },
       "calculator": {
+         "preferences": {
+            "backend": "numen"
+         },
          "entrypoints": {
             "refresh-rates": {
                "enabled": false
