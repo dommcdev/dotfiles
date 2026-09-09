@@ -5,10 +5,12 @@ return {
   config = function()
     require("lualine").setup({
       options = {
-        theme = theme,
+        theme = "auto",
         globalstatus = true,
-        component_separators = { left = "|", right = "|" },
-        section_separators = { left = "", right = "" },
+        --component_separators = { left = "|", right = "|" },
+        --section_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
+        component_separators = { left = "", right = "" },
       },
       sections = {
         lualine_a = {
@@ -21,7 +23,8 @@ return {
         },
         lualine_b = { "branch", "diff", "diagnostics" },
         lualine_c = { "filename" },
-        lualine_x = { "encoding", "fileformat", "filetype" },
+        --lualine_x = { "encoding", "fileformat", "filetype" },
+        lualine_x = { "filetype" },
         lualine_y = { "progress" },
         lualine_z = { "location" },
       },

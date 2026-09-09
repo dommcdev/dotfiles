@@ -5,7 +5,7 @@ enable_sounds = true
 order = [ "default" ]
 
     [bar.default]
-    capsule_radius = 0
+    capsule_radius = "auto"
     center = [ "date", "center_spacer", "clock", "center_spacer", "weather", "center_spacer", "privacy", "status" ]
     end = [
         "tray",
@@ -25,7 +25,7 @@ order = [ "default" ]
     ]
     margin_edge = 0
     margin_ends = 8
-    radius = 0
+    radius = 20
     start = [ "workspaces", "left_spacer", "ram", "cpu", "left_spacer", "media" ]
 
 [battery.device."/org/freedesktop/UPower/devices/battery_hidpp_battery_0"]
@@ -198,8 +198,8 @@ widget_order = [
         show_weather = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
-    box_height = 196.0
-    box_width = 720.0
+    box_height = 70.0
+    box_width = 400.0
     cx = 960.0
     cy = 1014.0
     output = "eDP-1"
@@ -215,13 +215,13 @@ widget_order = [
         center_password_text = false
         input_opacity = 1.0
         input_radius = 6.0
-        layout = "regular"
+        layout = "compact"
         show_caps_lock = true
         show_keyboard_layout = true
         show_login_button = true
         show_media = false
-        show_session_buttons = true
-        show_unlock_hint = true
+        show_session_buttons = false
+        show_unlock_hint = false
         show_weather = true
 
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
@@ -330,8 +330,9 @@ enabled = [
 [shell]
 avatar_path = "/home/dominic/Downloads/Shared/Images/Profile.png"
 button_borders = false
+card_borders = false
 clipboard_enabled = false
-corner_radius_scale = 0.0
+corner_radius_scale = 1.0000000149011612
 external_ip_enabled = true
 password_style = "random"
 polkit_agent = true
@@ -374,16 +375,16 @@ wallpaper_scheme = "m3-content"
 directory = "/home/dominic/Vault/Wallpapers"
 
     [wallpaper.default]
-    path = "/home/dominic/Vault/Wallpapers/waves.png"
+    path = "/home/dominic/Vault/Wallpapers/seal-japanese-dual.png"
 
     [wallpaper.last]
-    path = "/home/dominic/Vault/Wallpapers/waves.png"
+    path = "/home/dominic/Vault/Wallpapers/seal-japanese-dual.png"
 
     [wallpaper.monitors.DP-2]
     path = "/home/dominic/dev/wallpapers/catppuccin/waves.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/dominic/Vault/Wallpapers/waves.png"
+    path = "/home/dominic/Vault/Wallpapers/seal-japanese-dual.png"
 
 [weather]
 refresh_minutes = 15
