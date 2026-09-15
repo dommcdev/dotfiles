@@ -152,7 +152,7 @@
       "files": {
          "enabled": false,
          "preferences": {
-            "autoIndexing": false,
+            "autoIndexing": true,
             "excludedIndexingPaths": [],
             "indexingPaths": [
                "/home/dominic"
@@ -161,6 +161,9 @@
          "entrypoints": {
             "rebuild-index": {
                "enabled": false
+            },
+            "search": {
+               "enabled": true
             }
          }
       },
