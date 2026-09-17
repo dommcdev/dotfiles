@@ -71,3 +71,4 @@ text/csv=org.onlyoffice.desktopeditors.desktop
 application/vnd.ms-powerpoint=org.onlyoffice.desktopeditors.desktop
 application/vnd.openxmlformats-officedocument.presentationml.presentation=org.onlyoffice.desktopeditors.desktop
 application/vnd.oasis.opendocument.presentation=org.onlyoffice.desktopeditors.desktop
+x-scheme-handler/codex=chatgpt.desktop
