@@ -50,7 +50,7 @@ hl.bind(mainMod .. " + G", hl.dsp.window.float({ action = "toggle" }))
 hl.bind("ALT + G", hl.dsp.exec_cmd("~/.local/bin/launch-grandorgue.sh"))
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd(webapp .. '="https://gemini.google.com/app"'))
 hl.bind(mainMod .. " + SHIFT + I", hl.dsp.exec_cmd(webapp .. '="https://chatgpt.com"'))
-hl.bind("SHIFT + ALT + XF86TouchpadOff", hl.dsp.exec_cmd(webapp .. '="https://gemini.google.com/app"')) -- Copilot Key
+hl.bind("SHIFT + ALT + F23", hl.dsp.exec_cmd(webapp .. '="https://gemini.google.com/app"')) -- Copilot Key
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(notes))
 hl.bind(mainMod .. " + O", hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprpicker | wl-copy"))
