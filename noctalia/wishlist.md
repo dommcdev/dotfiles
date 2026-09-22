@@ -12,6 +12,7 @@
 * Toggles should be square in square-borders mode
 * Battery threshhold box is confusing
 * Set fixed-width spacing for sys monitor bar widgets (no layout shifting)
+* Sound output changes shouldn't be in 3-dot menu, unintuitive
 
 ## Bugs
 * Occasionally the weather visual effects don't work

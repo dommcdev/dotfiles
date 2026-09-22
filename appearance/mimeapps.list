@@ -72,3 +72,6 @@ application/vnd.ms-powerpoint=org.onlyoffice.desktopeditors.desktop
 application/vnd.openxmlformats-officedocument.presentationml.presentation=org.onlyoffice.desktopeditors.desktop
 application/vnd.oasis.opendocument.presentation=org.onlyoffice.desktopeditors.desktop
 x-scheme-handler/codex=chatgpt.desktop
+x-scheme-handler/opencode=ai.opencode.desktop.desktop
+
+[Added Associations]
