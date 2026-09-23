@@ -5,3 +5,4 @@ Add herdr, terminal-browser
 Hyprland scrolling
 Auto-update
 Add step to clean up dead symlinks in scripts
+Add rsync to install pkgs
