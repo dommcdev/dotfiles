@@ -1,0 +1,57 @@
+Eden / PS4 Controller Motion Controls on Arch
+
+Problem:
+Eden could use the DualShock 4 buttons/sticks, but motion setup would hang at “shake controller.”
+
+Diagnosis:
+Running:
+
+    testcontroller
+
+showed:
+
+    HIDAPI_SetupDeviceDriver() couldn't open /dev/hidraw8: Permission denied
+
+SDL was falling back to /dev/input/eventXX for normal controls, but could not access the hidraw device needed for gyro/accelerometer data.
+
+The controller was a DualShock 4 Slim:
+
+    VID: 054c
+    PID: 09cc
+
+and SDL reported:
+
+    bluetooth 1
+
+So the USB-style udev rule alone was not enough for the Bluetooth hidraw device.
+
+Fix:
+Create:
+
+    /etc/udev/rules.d/70-dualshock4.rules
+
+with:
+
+    KERNEL=="hidraw*", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="09cc", MODE="0660", TAG+="uaccess"
+    KERNEL=="hidraw*", KERNELS=="*054C:09CC*", MODE="0660", TAG+="uaccess"
+
+Then reload udev:
+
+    sudo udevadm control --reload-rules
+
+Disconnect/reconnect the controller.
+
+Verify with:
+
+    testcontroller
+
+The important part is that this should no longer appear:
+
+    Failed to open /dev/hidrawX: Permission denied
+
+After that, Eden can detect the DS4 gyro when configuring Motion.
+
+Optional:
+Instead of maintaining custom rules manually, install the AUR package:
+
+    yay -S game-devices-udev
