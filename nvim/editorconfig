@@ -12,7 +12,7 @@ insert_final_newline = true
 [*.{lua,beancount,yaml,json}]
 indent_size = 2
 
-[*.{c,cpp,java}]
+[*.{c,cpp}]
 indent_size = 4
 
 [*.tte]
