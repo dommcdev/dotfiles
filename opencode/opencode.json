@@ -1,4 +1,12 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "formatter": true
+  "formatter": true,
+  "mcp": {
+    "servers": {
+      "excalidraw": {
+        "type": "remote",
+        "url": "https://mcp.excalidraw.com/mcp"
+      }
+    }
+  }
 }

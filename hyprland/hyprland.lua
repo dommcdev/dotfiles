@@ -168,6 +168,7 @@ hl.config({
       scroll_factor = 0.4,
       clickfinger_behavior = true,
       tap_to_click = true,
+      disable_while_typing = false,
     },
   },
 })
@@ -181,6 +182,7 @@ hl.config({
   },
 })
 hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
+--hl.gesture({ fingers = 3, direction = "horizontal", action = "scroll-move" })
 
 -- ##############################
 -- ### WINDOWS AND WORKSPACES ###
