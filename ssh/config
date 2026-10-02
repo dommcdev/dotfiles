@@ -13,7 +13,7 @@ Host srv2
 #Host server
 #   HostName server
 #   User squid
-#   IdentityFile ~/.ssh/id_super_secure
+#   IdentityFile ~/.ssh/some_id
 #   Port 2264
 
 Host *
