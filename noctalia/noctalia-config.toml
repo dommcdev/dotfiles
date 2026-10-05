@@ -153,6 +153,9 @@ up = [ "Up", "Ctrl+k" ]
 [location]
 auto_locate = true
 
+[lockscreen]
+transition = []
+
 [lockscreen_widgets]
 enabled = true
 schema_version = 2
