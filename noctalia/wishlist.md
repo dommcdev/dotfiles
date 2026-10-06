@@ -10,7 +10,6 @@
 * [Commented] Add action to screenshot notif with customizable open with (previewer and editor) #3303
 * [Coming soon] Drawer groups for the bar
 * Toggles should be square in square-borders mode
-* Battery threshhold box is confusing
 * Set fixed-width spacing for sys monitor bar widgets (no layout shifting)
 * Sound output changes shouldn't be in 3-dot menu, unintuitive
 * dismissing notif should clear badge
