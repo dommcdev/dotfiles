@@ -152,6 +152,9 @@
     - name: GUI Applications
       ansible.builtin.import_tasks: tasks/apps/gui.yml
       when: not is_headless
+    - name: RetroArch
+      ansible.builtin.include_tasks: tasks/apps/retroarch.yml
+      when: is_managed_desktop
     - name: Noctalia
       ansible.builtin.import_tasks: tasks/apps/noctalia.yml
       when: is_managed_desktop and is_arch

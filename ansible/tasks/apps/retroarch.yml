@@ -1,0 +1,80 @@
+- name: Install RetroArch and menu assets
+  vars:
+    pkgs:
+      Archlinux:
+        - retroarch
+        - retroarch-assets-ozone # One clean, controller-friendly menu
+      Debian:
+        - retroarch
+        - retroarch-assets # Ubuntu bundles the menu assets together
+      RedHat:
+        - retroarch
+        - retroarch-assets
+  ansible.builtin.package:
+    name: "{{ pkgs[ansible_facts['os_family']] }}"
+    state: present
+  become: true
+  when: ansible_facts['os_family'] in pkgs
+
+- name: Install RetroArch on macOS
+  community.general.homebrew_cask:
+    name: retroarch
+    state: present
+    update_homebrew: false
+  when: is_macos
+
+# Online Updater > Update Core Info Files, then Core Downloader:
+# - Snes9x: SNES / Super Famicom
+# - Nestopia UE: NES / Famicom
+# - mGBA: Game Boy / Game Boy Color / Game Boy Advance
+# - Genesis Plus GX: Master System / Game Gear / Mega Drive / Sega CD
+# - Mupen64Plus-Next: Nintendo 64
+# - Dolphin: GameCube / Wii
+# Dolphin also needs Online Updater > Core System Files Downloader > Dolphin.zip.
+
+- name: Configure RetroArch on Linux
+  when: is_arch or is_ubuntu or is_fedora
+  block:
+    - name: Create RetroArch directories
+      ansible.builtin.file:
+        path: "{{ home }}/.config/retroarch/{{ item }}"
+        state: directory
+        mode: "0755"
+      loop:
+        - ""
+        - cores
+        - info
+        - system
+
+    - name: Initialize RetroArch config from distribution defaults
+      ansible.builtin.copy:
+        src: /etc/retroarch.cfg
+        dest: "{{ home }}/.config/retroarch/retroarch.cfg"
+        remote_src: true
+        force: false
+        mode: "0644"
+
+    - name: Set RetroArch defaults
+      ansible.builtin.lineinfile:
+        path: "{{ home }}/.config/retroarch/retroarch.cfg"
+        regexp: '^#?\s*{{ item.option }}\s*='
+        line: '{{ item.option }} = "{{ item.value }}"'
+      loop:
+        - option: libretro_directory
+          value: "{{ home }}/.config/retroarch/cores"
+        - option: libretro_info_path
+          value: "{{ home }}/.config/retroarch/info"
+        - option: system_directory
+          value: "{{ home }}/.config/retroarch/system"
+        - option: menu_show_online_updater
+          value: "true"
+        - option: menu_show_core_updater
+          value: "true" # Arch disables this in its distribution defaults
+        - option: menu_driver
+          value: ozone
+        - option: video_smooth
+          value: "false" # Crisp pixels without a shader collection
+        - option: menu_pause_libretro
+          value: "true"
+        - option: autosave_interval
+          value: "10" # Periodically flush in-game saves to disk
