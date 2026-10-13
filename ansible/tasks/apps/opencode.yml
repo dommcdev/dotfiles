@@ -14,9 +14,9 @@
         force: true
       loop:
         - opencode.json
-        - tui.json
+        - cli.json
 
 - name: Install opencode with Bun
-  ansible.builtin.command: bun add -g opencode-ai
+  ansible.builtin.command: bun add -g --trust @opencode/cli
   changed_when: false
 # TODO Opencode desktop?
