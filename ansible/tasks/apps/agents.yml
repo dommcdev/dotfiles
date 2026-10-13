@@ -1,0 +1,19 @@
+- name: Install agent skills with Bun
+  ansible.builtin.command:
+    argv:
+      - bunx
+      - skills
+      - add
+      - "{{ item.source }}"
+      - --skill
+      - "{{ item.skill }}"
+      - --global
+      - --yes
+    creates: "{{ home }}/.agents/skills/{{ item.skill }}/SKILL.md"
+  loop:
+    - source: vercel-labs/agent-browser
+      skill: agent-browser
+    - source: anthropics/skills
+      skill: frontend-design
+  loop_control:
+    label: "{{ item.skill }}"
