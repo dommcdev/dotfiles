@@ -133,9 +133,10 @@ y() {
 	rm -f -- "$tmp"
 }
 
-# Download as high-quality MP3
+# Download as high-quality Opus file
 vaud() {
-    yt-dlp -x --audio-format mp3 --audio-quality 0 "$1"
+    yt-dlp -f "bestaudio[acodec=opus]/bestaudio" -x --audio-format opus --audio-quality 0 "$1"
+    #yt-dlp -x --audio-format opus --audio-quality 0 "$1" #force opus, potentially double-transcoding
 }
 
 # Download video up to 1080p MP4
