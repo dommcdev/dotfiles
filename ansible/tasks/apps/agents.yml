@@ -15,5 +15,9 @@
       skill: agent-browser
     - source: anthropics/skills
       skill: frontend-design
+    - source: vercel-labs/agent-skills
+      skill: vercel-composition-patterns
+    - source: vercel-labs/agent-skills
+      skill: vercel-react-best-practices
   loop_control:
     label: "{{ item.skill }}"
