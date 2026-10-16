@@ -22,6 +22,7 @@ M.commands = {
   rb = "ruby ${file}",
   java = "java ${file}",
   zig = "zig run ${file}",
+  typ = "typst compile ${file}",
 }
 
 function M.run()
