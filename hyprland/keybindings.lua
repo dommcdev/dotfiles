@@ -10,6 +10,7 @@ local editor = 'ghostty -e "nvim"'
 local webapp = "google-chrome-stable --app"
 local screenshot = "noctalia msg screenshot-fullscreen"
 local screenshotArea = "noctalia msg screenshot-region"
+local screenshotAnnotate = "noctalia msg screenshot-annotate"
 local controlcenter = "noctalia msg panel-toggle control-center"
 local noctalia_settings = "noctalia msg settings-toggle"
 
@@ -58,6 +59,7 @@ hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(audiomixer))
 hl.bind(mainMod .. " + return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(screenshot))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(screenshotArea))
+hl.bind(mainMod .. " + ALT + S", hl.dsp.exec_cmd(screenshotAnnotate))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(calculator))
 hl.bind(mainMod .. " + U", hl.dsp.exec_cmd(sysmonitor))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(wifi))

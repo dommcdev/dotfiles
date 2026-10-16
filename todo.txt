@@ -4,6 +4,4 @@ New ymls: Retroarch, wakeonlan
 Add herdr, terminal-browser, agent-browser
 Hyprland scrolling
 Auto-update
-Add step to clean up dead symlinks in scripts
-Add rsync to install pkgs, usbutils, evtest
 Switch from rust to rustup??

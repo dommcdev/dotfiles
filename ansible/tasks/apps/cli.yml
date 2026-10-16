@@ -9,6 +9,7 @@
         - unrar
         - wget
         - curl
+        - rsync
         - ffmpeg
         - fd
         - ripgrep
@@ -50,6 +51,7 @@
         - unrar
         - trash-cli
         - wget
+        - rsync
         - ffmpeg
         - fd-find
         - ripgrep
@@ -77,6 +79,7 @@
         - unrar
         - trash-cli
         - wget
+        - rsync
         - fd-find
         - ripgrep
         - poppler-utils
@@ -115,6 +118,7 @@
       - unar
       - ffmpeg
       - wget
+      - rsync
       - fd
       - ripgrep
       - poppler

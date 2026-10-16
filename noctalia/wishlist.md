@@ -1,16 +1,13 @@
 ## Small QoL stuff/nits
 * Hide unamed devices in bluetooth panel (Blueman does this by default)
-* Mention in the docs that ethernet status will only be displayed in the network module if using NetworkManager (as opposed to just iwd).
 * Default to last logged-in user in the greeter. I believe this is how SDDM does it?
 * Add a settings icon to the network widget that opens nm-connection-editor (?)
 * Ability to group a spacer with a bar widget (so that if for some reason the widget doesn't display the spacer doesn't either, e.g. a battery widget).
-* [Commented] Add ipc bind for screenshotting with pipe included #3273
 * [Commented] Differentiate between battery/ac in idle settings. Especially important for stuff like suspend. #3336
 * [Commented] Allow screenshoting specific window #3380
 * [Commented] Add action to screenshot notif with customizable open with (previewer and editor) #3303
 * [Coming soon] Drawer groups for the bar
 * Toggles should be square in square-borders mode
-* Set fixed-width spacing for sys monitor bar widgets (no layout shifting)
 * Sound output changes shouldn't be in 3-dot menu, unintuitive
 * dismissing notif should clear badge
 

@@ -19,6 +19,8 @@
         - udiskie
         - wev
         - libinput-tools
+        - usbutils
+        - evtest
         - fwupd
         - fuse2
       Debian:
@@ -35,6 +37,8 @@
         - udiskie
         - wev
         - libinput-tools
+        - usbutils
+        - evtest
         - fwupd
         - libfuse2
       RedHat:
@@ -49,6 +53,8 @@
         - udiskie
         - wev
         - libinput-utils
+        - usbutils
+        - evtest
         - fwupd
         - fuse-libs
 
