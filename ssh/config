@@ -9,6 +9,11 @@ Host srv2
     HostName srv2
     User matthew
 
+Host third
+    HostName 192.168.1.53
+    User cantus76
+    Port 2276
+
 # Example
 #Host server
 #   HostName server
