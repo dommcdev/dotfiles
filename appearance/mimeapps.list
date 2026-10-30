@@ -76,4 +76,3 @@ x-scheme-handler/opencode=ai.opencode.desktop.desktop
 x-scheme-handler/t3code=com.t3tools.T3Code.desktop
 
 [Added Associations]
-x-scheme-handler/t3code=com.t3tools.T3Code.desktop;
