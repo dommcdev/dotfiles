@@ -1,0 +1,16 @@
+- name: Configure T3 Code
+  block:
+    - name: Create config directory
+      ansible.builtin.file:
+        path: "{{ home }}/.t3/userdata"
+        state: directory
+        mode: "0755"
+
+    - name: Link config files
+      ansible.builtin.file:
+        src: "{{ root }}/t3code/{{ item }}"
+        dest: "{{ home }}/.t3/userdata/{{ item }}"
+        state: link
+        force: true
+      loop:
+        - settings.json

@@ -116,6 +116,8 @@
       when: is_dev_env
     - name: Opencode
       ansible.builtin.import_tasks: tasks/apps/opencode.yml
+    - name: T3 Code
+      ansible.builtin.import_tasks: tasks/apps/t3code.yml
     - name: Agent skills
       ansible.builtin.import_tasks: tasks/apps/agents.yml
     - name: Misc

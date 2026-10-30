@@ -1,0 +1,34 @@
+{
+  "projectSettingsFolded": true,
+  "idleCompaction": "onReturn",
+  "removeAgentCreditsOnMerge": true,
+  "pullRequestMergeMethod": "rebase",
+  "providerInstances": {
+    "codex": {
+      "driver": "codex",
+      "enabled": true,
+      "config": {
+        "setupMode": "managed"
+      }
+    },
+    "cursor": {
+      "driver": "cursor",
+      "displayName": "Cursor",
+      "enabled": true
+    },
+    "opencode": {
+      "driver": "opencode",
+      "displayName": "OpenCode",
+      "enabled": true
+    },
+    "antigravity": {
+      "driver": "antigravity",
+      "displayName": "Antigravity",
+      "enabled": true
+    },
+    "claudeAgent": {
+      "driver": "claudeAgent",
+      "enabled": false
+    }
+  }
+}
