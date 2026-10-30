@@ -14,3 +14,5 @@
         force: true
       loop:
         - settings.json
+        - keybindings.json
+        - client-settings.json
