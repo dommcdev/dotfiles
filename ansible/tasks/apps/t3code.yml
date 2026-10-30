@@ -1,5 +1,12 @@
-- name: Configure T3 Code
+- name: Install and configure T3 Code
+  when: is_arch
   block:
+    - name: Install T3 Code
+      community.general.pacman:
+        name: t3code-bin
+        state: present
+      become: true
+
     - name: Create config directory
       ansible.builtin.file:
         path: "{{ home }}/.t3/userdata"
