@@ -1,0 +1,21 @@
+- name: Install and configure Hex
+  when: is_arch
+  block:
+    - name: Install Hex
+      community.general.pacman:
+        name: hex-bin
+        state: present
+      become: true
+
+    - name: Create data directory
+      ansible.builtin.file:
+        path: "{{ home }}/.local/share/hex"
+        state: directory
+        mode: "0755"
+
+    - name: Link settings
+      ansible.builtin.file:
+        src: "{{ root }}/apps/hex/settings.json"
+        dest: "{{ home }}/.local/share/hex/settings.json"
+        state: link
+        force: true

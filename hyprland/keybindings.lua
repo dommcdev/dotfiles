@@ -29,10 +29,7 @@ local parabolic = "flatpak run org.nickvision.tubeconverter"
 local mainMod = "SUPER"
 
 -- See https://wiki.hypr.land/Configuring/Binds/
-hl.bind(mainMod .. " + space", hl.dsp.exec_cmd(menu))
---hl.bind("ALT + space", hl.dsp.exec_cmd("pkill -USR2 -x handy"))
---hl.bind("ALT + space", hl.dsp.exec_cmd("pkill -USR2 -x handy"), { release = true })
-hl.bind("F4", hl.dsp.global("hex:dictation"))
+hl.bind(mainMod .. " + space", hl.dsp.global("hex:dictation")) -- Release Space before Super (Hyprland 0.56).
 hl.bind("CTRL + apostrophe", hl.dsp.exec_cmd(menu))
 hl.bind("Print", hl.dsp.exec_cmd(screenshot))
 hl.bind("SHIFT + Print", hl.dsp.exec_cmd(screenshotArea))
@@ -52,7 +49,7 @@ hl.bind(mainMod .. " + G", hl.dsp.window.float({ action = "toggle" }))
 hl.bind("ALT + G", hl.dsp.exec_cmd("~/.local/bin/launch-grandorgue.sh"))
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd(webapp .. '="https://gemini.google.com/app"'))
 hl.bind(mainMod .. " + SHIFT + I", hl.dsp.exec_cmd(webapp .. '="https://chatgpt.com"'))
-hl.bind("SHIFT + ALT + F23", hl.dsp.exec_cmd(webapp .. '="https://gemini.google.com/app"')) -- Copilot Key
+hl.bind("SHIFT + ALT + F23", hl.dsp.global("hex:dictation")) -- Copilot: hold or double-tap.
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(notes))
 hl.bind(mainMod .. " + O", hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprpicker | wl-copy"))
