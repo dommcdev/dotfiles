@@ -1,3 +1,8 @@
+# Use a non-Bluetooth OS microphone input; earbuds can still handle playback.
+# With Bluetooth mic input, Hex's Microphone mode setting behaves as follows:
+# - Release when idle: switches to low-quality hands-free mode, delaying recording
+#   and potentially interrupting playback.
+# - Keep ready: keeps hands-free mode active or can stall high-fidelity playback.
 - name: Install and configure Hex
   when: is_arch
   block:
