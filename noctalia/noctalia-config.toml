@@ -6,7 +6,7 @@ order = [ "default" ]
 
     [bar.default]
     capsule_radius = "auto"
-    center = [ "date", "center_spacer", "clock", "center_spacer", "weather", "center_spacer", "privacy", "status" ]
+    center = [ "date", "center_spacer", "clock", "center_spacer", "weather", "center_spacer", "privacy", "widget" ]
     end = [
         "tray",
         "battery",
@@ -82,8 +82,8 @@ widget_order = [ "desktop-widget-0000000000000002", "desktop-widget-000000000000
     cx = 608.0
     cy = 1088.0
     output = "DP-2"
-    placement_height = 0.0
-    placement_width = 0.0
+    placement_height = 1440.0
+    placement_width = 2560.0
     rotation = -0.0
     type = "audio_visualizer"
 
@@ -106,8 +106,8 @@ widget_order = [ "desktop-widget-0000000000000002", "desktop-widget-000000000000
     cx = 480.0
     cy = 920.0
     output = "eDP-1"
-    placement_height = 1200.0
-    placement_width = 1920.0
+    placement_height = 0.0
+    placement_width = 0.0
     rotation = 0.0
     type = "audio_visualizer"
 
@@ -160,14 +160,7 @@ transition_duration = 200
 [lockscreen_widgets]
 enabled = true
 schema_version = 2
-widget_order = [
-    "lockscreen-login-box@eDP-1",
-    "lockscreen-login-box@DP-2",
-    "lockscreen-widget-0000000000000001",
-    "lockscreen-widget-0000000000000002",
-    "lockscreen-widget-0000000000000003",
-    "lockscreen-widget-0000000000000004"
-]
+widget_order = [ "lockscreen-login-box@DP-2", "lockscreen-widget-0000000000000001", "lockscreen-widget-0000000000000002" ]
 
     [lockscreen_widgets.grid]
     cell_size = 16
@@ -180,13 +173,13 @@ widget_order = [
     cx = 1280.0
     cy = 1104.0
     output = "DP-2"
-    placement_height = 0.0
-    placement_width = 0.0
+    placement_height = 1440.0
+    placement_width = 2560.0
     rotation = 0.0
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@DP-2".settings]
-        background_color = "surface_variant"
+        background_color = "surface_container"
         background_opacity = 0.88
         background_radius = 12.0
         center_password_text = false
@@ -213,7 +206,7 @@ widget_order = [
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
-        background_color = "surface_variant"
+        background_color = "surface_container"
         background_opacity = 0.88
         background_radius = 12.0
         center_password_text = false
@@ -234,8 +227,8 @@ widget_order = [
     cx = 1280.0
     cy = 704.0
     output = "DP-2"
-    placement_height = 0.0
-    placement_width = 0.0
+    placement_height = 1440.0
+    placement_width = 2560.0
     rotation = 0.0
     type = "clock"
 
@@ -251,8 +244,8 @@ widget_order = [
     cx = 1280.0
     cy = 1248.0
     output = "DP-2"
-    placement_height = 0.0
-    placement_width = 0.0
+    placement_height = 1440.0
+    placement_width = 2560.0
     rotation = 0.0
     type = "yocraft/battery-widget:widget"
 
@@ -325,13 +318,7 @@ browser_placement = "floating"
 browser_position = "center"
 
 [plugins]
-enabled = [
-    "noctalia/bongocat",
-    "noctalia/wallhaven",
-    "noctalia/screen_recorder",
-    "yocraft/battery-widget",
-    "davemhammer/tailscale"
-]
+enabled = [ "noctalia/bongocat", "noctalia/wallhaven", "noctalia/screen_recorder", "oldirtty/color_picker" ]
 
 [shell]
 avatar_path = "/home/dominic/Downloads/Shared/Images/Profile.png"
