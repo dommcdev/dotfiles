@@ -74,5 +74,9 @@ application/vnd.oasis.opendocument.presentation=org.onlyoffice.desktopeditors.de
 x-scheme-handler/codex=chatgpt.desktop
 x-scheme-handler/opencode=ai.opencode.desktop.desktop
 x-scheme-handler/t3code=com.t3tools.T3Code.desktop
+audio/x-opus+ogg=org.gnome.Decibels.desktop
+application/json=nvim.desktop
 
 [Added Associations]
+audio/x-opus+ogg=org.gnome.Decibels.desktop;
+application/json=nvim.desktop;

@@ -10,6 +10,7 @@ repos=(
   "courses|$HOME/dev"
   "homelab|$HOME/dev"
   "beans|$HOME/dev"
+  "agents|$HOME/dev"
   "chopchop|"
 )
 
@@ -24,4 +25,10 @@ for entry in "${repos[@]}"; do
   fi
 
   git clone "https://github.com/dommcdev/${repo}.git" "$location/$repo"
+done
+
+mkdir -p "$HOME/.agents/skills"
+for skill in "$HOME/dev/agents/skills"/*; do
+  [[ -d "$skill" ]] || continue
+  ln -sfn "$skill" "$HOME/.agents/skills/$(basename "$skill")"
 done
