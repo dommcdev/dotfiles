@@ -5,3 +5,4 @@ Add herdr, terminal-browser, agent-browser
 Hyprland scrolling
 Auto-update
 Switch from rust to rustup??
+Taildrive?
