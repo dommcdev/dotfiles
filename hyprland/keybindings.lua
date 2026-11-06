@@ -29,7 +29,7 @@ local parabolic = "flatpak run org.nickvision.tubeconverter"
 local mainMod = "SUPER"
 
 -- See https://wiki.hypr.land/Configuring/Binds/
-hl.bind(mainMod .. " + space", hl.dsp.global("hex:dictation")) -- Release Space before Super (Hyprland 0.56).
+--hl.bind(mainMod .. " + space", hl.dsp.global("hex:dictation")) -- Release Space before Super (Hyprland 0.56).
 hl.bind("CTRL + apostrophe", hl.dsp.exec_cmd(menu))
 hl.bind("Print", hl.dsp.exec_cmd(screenshot))
 hl.bind("SHIFT + Print", hl.dsp.exec_cmd(screenshotArea))
