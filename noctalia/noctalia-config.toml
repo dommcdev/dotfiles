@@ -197,6 +197,7 @@ widget_order = [
         show_keyboard_layout = true
         show_login_button = true
         show_media = true
+        show_password_reveal = true
         show_session_buttons = true
         show_unlock_hint = false
         show_weather = true
@@ -214,18 +215,19 @@ widget_order = [
 
         [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
         background_color = "surface_container"
-        background_opacity = 0.88
+        background_opacity = 0.0
         background_radius = 12.0
-        center_password_text = false
-        input_opacity = 1.0
+        center_password_text = true
+        input_opacity = 0.25
         input_radius = 6.0
         layout = "compact"
         show_caps_lock = true
         show_keyboard_layout = true
-        show_login_button = true
+        show_login_button = false
         show_media = false
+        show_password_reveal = false
         show_session_buttons = false
-        show_unlock_hint = true
+        show_unlock_hint = false
         show_weather = true
 
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
@@ -371,7 +373,7 @@ builtin = "Catppuccin"
 community_palette = "Vesper"
 custom_palette = "catppuccin-peach"
 mode = "dark"
-source = "builtin"
+source = "wallpaper"
 wallpaper_scheme = "m3-content"
 
     [theme.templates]
@@ -382,16 +384,16 @@ wallpaper_scheme = "m3-content"
 directory = "/home/dominic/Vault/Wallpapers"
 
     [wallpaper.default]
-    path = "/home/dominic/Vault/Wallpapers/seal-japanese-dual.png"
+    path = "/home/dominic/Vault/Wallpapers/wallhaven-rrvlym.jpg"
 
     [wallpaper.last]
-    path = "/home/dominic/Vault/Wallpapers/seal-japanese-dual.png"
+    path = "/home/dominic/Vault/Wallpapers/wallhaven-rrvlym.jpg"
 
     [wallpaper.monitors.DP-2]
     path = "/home/dominic/Vault/Wallpapers/seal-japanese-dual.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/dominic/Vault/Wallpapers/seal-japanese-dual.png"
+    path = "/home/dominic/Vault/Wallpapers/wallhaven-rrvlym.jpg"
 
 [weather]
 refresh_minutes = 15

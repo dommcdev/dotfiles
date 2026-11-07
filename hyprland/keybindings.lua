@@ -40,7 +40,9 @@ hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("noctalia msg notification-clear-acti
 hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd("noctalia msg notification-invoke-latest"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(browser .. " --incognito"))
-hl.bind(mainMod .. " + D", hl.dsp.window.fullscreen({ mode = "maximized" }))
+hl.bind(mainMod .. " + C", hl.dsp.layout("center")) --#scrolling
+--hl.bind(mainMod .. " + D", hl.dsp.window.fullscreen({ mode = "maximized" })) --#dwindle
+hl.bind(mainMod .. " + D", hl.dsp.layout("colresize +conf")) --#scrolling
 hl.bind(mainMod .. " + SHIFT + D", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(bluetooth))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.exec_cmd("ghostty -e yazi"))
@@ -75,15 +77,15 @@ hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "r" }))
 hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "u" }))
 hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "d" }))
 
--- Move  Windows
+-- Move  Windows --#dwindle
 --hl.bind(mainMod .. " + CTRL + h", hl.dsp.window.move({ direction = "l" }))
 -- hl.bind(mainMod .. " + CTRL + l", hl.dsp.window.move({ direction = "r" }))
 -- hl.bind(mainMod .. " + CTRL + k", hl.dsp.window.move({ direction = "u" }))
 -- hl.bind(mainMod .. " + CTRL + j", hl.dsp.window.move({ direction = "d" }))
+
+-- Move Windows --#scrolling
 hl.bind(mainMod .. " + CTRL + h", hl.dsp.layout("swapcol l"))
 hl.bind(mainMod .. " + CTRL + l", hl.dsp.layout("swapcol r"))
-hl.bind(mainMod .. " + C", hl.dsp.layout("colresize +conf"))
-hl.bind(mainMod .. " + SHIFT + C", hl.dsp.layout("center"))
 
 -- Resize windows
 hl.bind(mainMod .. " + right", hl.dsp.window.resize({ x = 40, y = 0, relative = true }), { repeating = true })
@@ -139,5 +141,5 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("noctalia msg media toggle"), { locked
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("noctalia msg media toggle"), { locked = true })
 
 --Misc fn keys
-hl.bind("XF86Calculator", hl.dsp.exec_cmd(calculator), { repeating = true, locked = true })
-hl.bind("XF86Search", hl.dsp.exec_cmd(menu), { repeating = true, locked = true })
+--hl.bind("XF86Calculator", hl.dsp.exec_cmd(calculator), { repeating = true, locked = true })
+--hl.bind("XF86Search", hl.dsp.exec_cmd(menu), { repeating = true, locked = true })

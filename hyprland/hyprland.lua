@@ -35,6 +35,9 @@ local colors = require("colors")
 colors.apply_theme()
 
 hl.config({
+  render = {
+    cm_auto_hdr = 0,
+  },
   general = {
     gaps_in = 4,
     gaps_out = 8,
@@ -47,7 +50,7 @@ hl.config({
 
     -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
     resize_on_border = false,
-    no_focus_fallback = true,
+    no_focus_fallback = true, --Don't cycle between windows on e.g. focus left bind
     --layout = "dwindle",
     layout = "scrolling",
   },
@@ -377,4 +380,4 @@ hl.window_rule({
 -- Vicinae stuff
 hl.layer_rule({ blur = true, ignore_alpha = 0, match = { namespace = "vicinae" } })
 hl.layer_rule({ no_anim = true, match = { namespace = "vicinae" } })
-hl.layer_rule({ match = { namespace = "vicinae" }, dim_around = true })
+--hl.layer_rule({ match = { namespace = "vicinae" }, dim_around = true })
