@@ -47,8 +47,14 @@ hl.config({
 
     -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
     resize_on_border = false,
-    layout = "dwindle",
-    --layout = "scrolling",
+    no_focus_fallback = true,
+    --layout = "dwindle",
+    layout = "scrolling",
+  },
+  scrolling = {
+    wrap_swapcol = false,
+    wrap_focus = false,
+    explicit_column_widths = "0.5, 1.0",
   },
 })
 -- Fullscreen windows have red border
@@ -108,6 +114,7 @@ hl.curve("flat", { type = "bezier", points = { { 0.25, 0.25 }, { 0.75, 0.75 } } 
 hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" })
 hl.animation({ leaf = "border", enabled = true, speed = 5.39, bezier = "easeOutQuint" })
 hl.animation({ leaf = "windows", enabled = true, speed = 4.79, bezier = "easeOutQuint" })
+hl.animation({ leaf = "windowsMove", enabled = true, speed = 1.5, bezier = "easeOutQuint" })
 hl.animation({ leaf = "windowsIn", enabled = true, speed = 4.1, bezier = "easeOutQuint", style = "popin 87%" })
 hl.animation({ leaf = "windowsOut", enabled = true, speed = 1.49, bezier = "linear", style = "popin 87%" })
 hl.animation({ leaf = "fadeIn", enabled = true, speed = 1.73, bezier = "almostLinear" })
@@ -182,7 +189,8 @@ hl.config({
   },
 })
 hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
---hl.gesture({ fingers = 3, direction = "horizontal", action = "scroll-move" })
+--hl.gesture({ fingers = 3, direction = "horizontal", action = "scroll_move" })
+hl.gesture({ fingers = 2, direction = "pinch", action = "cursor_zoom", zoom_level = 1, mode = "live" })
 
 -- ##############################
 -- ### WINDOWS AND WORKSPACES ###

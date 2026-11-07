@@ -67,7 +67,7 @@ hl.bind(mainMod .. " + Y", hl.dsp.exec_cmd(parabolic))
 hl.bind(mainMod .. " + SHIFT + Y", hl.dsp.exec_cmd(webapp .. '="https://youtube.com/playlist?list=WL"'))
 hl.bind(mainMod .. " + Z", hl.dsp.workspace.toggle_special("magic"))
 hl.bind(mainMod .. " + SHIFT + Z", hl.dsp.window.move({ workspace = "special:magic" }))
-hl.bind(mainMod .. "+comma", hl.dsp.exec_cmd(noctalia_settings))
+hl.bind(mainMod .. "+ SHIFT + comma", hl.dsp.exec_cmd(noctalia_settings))
 
 -- Move focus with mainMod SHIFT + hjkl
 hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "l" }))
@@ -76,19 +76,20 @@ hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "u" }))
 hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "d" }))
 
 -- Move  Windows
-hl.bind(mainMod .. " + CTRL + h", hl.dsp.window.move({ direction = "l" }))
-hl.bind(mainMod .. " + CTRL + l", hl.dsp.window.move({ direction = "r" }))
-hl.bind(mainMod .. " + CTRL + k", hl.dsp.window.move({ direction = "u" }))
-hl.bind(mainMod .. " + CTRL + j", hl.dsp.window.move({ direction = "d" }))
+--hl.bind(mainMod .. " + CTRL + h", hl.dsp.window.move({ direction = "l" }))
+-- hl.bind(mainMod .. " + CTRL + l", hl.dsp.window.move({ direction = "r" }))
+-- hl.bind(mainMod .. " + CTRL + k", hl.dsp.window.move({ direction = "u" }))
+-- hl.bind(mainMod .. " + CTRL + j", hl.dsp.window.move({ direction = "d" }))
+hl.bind(mainMod .. " + CTRL + h", hl.dsp.layout("swapcol l"))
+hl.bind(mainMod .. " + CTRL + l", hl.dsp.layout("swapcol r"))
+hl.bind(mainMod .. " + C", hl.dsp.layout("colresize +conf"))
+hl.bind(mainMod .. " + SHIFT + C", hl.dsp.layout("center"))
 
 -- Resize windows
 hl.bind(mainMod .. " + right", hl.dsp.window.resize({ x = 40, y = 0, relative = true }), { repeating = true })
 hl.bind(mainMod .. " + left", hl.dsp.window.resize({ x = -40, y = 0, relative = true }), { repeating = true })
 hl.bind(mainMod .. " + up", hl.dsp.window.resize({ x = 0, y = -40, relative = true }), { repeating = true })
 hl.bind(mainMod .. " + down", hl.dsp.window.resize({ x = 0, y = 40, relative = true }), { repeating = true })
-
---hl.bind(mainMod .. " + period", hl.dsp.layout("move +col"))
---hl.bind(mainMod .. " + comma", hl.dsp.layout("swapcol l"))
 
 -- Switch workspaces with mainMod + [0-9]
 hl.bind(mainMod .. " + 1", hl.dsp.focus({ workspace = 1 }))

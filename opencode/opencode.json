@@ -6,6 +6,16 @@
       "excalidraw": {
         "type": "remote",
         "url": "https://mcp.excalidraw.com/mcp"
+      },
+      "browse": {
+        "type": "local",
+        "command": [
+          "/home/dominic/.local/bin/browse",
+          "mcp"
+        ],
+        "environment": {
+          "OPENCODE_BROWSER_RUNTIME": "auto-update"
+        }
       }
     }
   }
