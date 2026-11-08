@@ -29,7 +29,9 @@ local parabolic = "flatpak run org.nickvision.tubeconverter"
 local mainMod = "SUPER"
 
 -- See https://wiki.hypr.land/Configuring/Binds/
---hl.bind(mainMod .. " + space", hl.dsp.global("hex:dictation")) -- Release Space before Super (Hyprland 0.56).
+-- Hex's portal action names include its in-app shortcuts; Super is named LOGO.
+hl.bind(mainMod .. " + space", hl.dsp.global("anomaly.hex:dictation-LOGO-space"))
+hl.bind(mainMod .. " + SHIFT + space", hl.dsp.global("anomaly.hex:capture-SHIFT-LOGO-space"))
 hl.bind("CTRL + apostrophe", hl.dsp.exec_cmd(menu))
 hl.bind("Print", hl.dsp.exec_cmd(screenshot))
 hl.bind("SHIFT + Print", hl.dsp.exec_cmd(screenshotArea))
@@ -51,7 +53,8 @@ hl.bind(mainMod .. " + G", hl.dsp.window.float({ action = "toggle" }))
 hl.bind("ALT + G", hl.dsp.exec_cmd("~/.local/bin/launch-grandorgue.sh"))
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd(webapp .. '="https://gemini.google.com/app"'))
 hl.bind(mainMod .. " + SHIFT + I", hl.dsp.exec_cmd(webapp .. '="https://chatgpt.com"'))
-hl.bind("SHIFT + ALT + F23", hl.dsp.global("hex:dictation")) -- Copilot: hold or double-tap.
+hl.bind("SHIFT + ALT + XF86TouchpadOff", hl.dsp.global("anomaly.hex:dictation-LOGO-space")) -- Copilot key
+--hl.bind("SHIFT + ALT + F23", hl.dsp.global("anomaly.hex:dictation-LOGO-space")) -- Alternative Copilot key name.
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(notes))
 hl.bind(mainMod .. " + O", hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprpicker | wl-copy"))

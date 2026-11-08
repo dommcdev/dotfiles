@@ -10,6 +10,7 @@
 * Toggles should be square in square-borders mode
 * Sound output changes shouldn't be in 3-dot menu, unintuitive
 * dismissing notif should clear badge
+* Only show the notification bar icon's red unread dot for notifications received while I'm not viewing the desktop (e.g. while the screen is locked). Notifications received while I'm active with the screen unlocked shouldn't count as unread.
 
 ## Bugs
 * Occasionally the weather visual effects don't work

@@ -47,12 +47,7 @@
     "language": "en"
   },
   "transcription_device": "auto",
-  "transcription_recents": [
-    {
-      "model": "parakeet_unified_en",
-      "language": "en"
-    }
-  ],
+  "transcription_recents": [],
   "keyboard_model_switching": {
     "enabled": false,
     "mappings": {}
@@ -95,8 +90,16 @@
     "hotkey": {
       "keys": [
         {
+          "modifier": "shift",
+          "side": "any"
+        },
+        {
+          "modifier": "command",
+          "side": "any"
+        },
+        {
           "code": 0,
-          "label": "F9"
+          "label": "Space"
         }
       ]
     },
@@ -141,21 +144,21 @@
     "restore_shortcut_default": false,
     "keep_on_clipboard": false,
     "copy_only": false,
-    "spoken_formatting": false,
-    "filler_words": false,
+    "spoken_formatting": true,
+    "filler_words": true,
     "subtitle_export": false,
     "second_dictation_shortcut": false,
     "smart_spacing": false,
-    "spoken_symbols": false,
+    "spoken_symbols": true,
     "picker_sort_filter": false,
     "sided_modifier_chords": false,
     "tap_or_hold": false,
     "benchmark_details": false,
     "parakeet_ultra": false,
     "standalone_special_keys": false,
-    "history_stats": false,
+    "history_stats": true,
     "recent_dictations": false,
-    "skip_pauses": false,
+    "skip_pauses": true,
     "stop_when_call_ends": false,
     "output_fixes": false
   },
@@ -164,7 +167,7 @@
   "gnome_keyboard_shortcuts": false,
   "share_dictation_shortcut": false,
   "ui_language": null,
-  "indicator_position": "bottom",
+  "indicator_position": "top",
   "updates": {
     "channel": null
   },
@@ -173,8 +176,8 @@
     "streaming-english-model",
     "annotate-on-by-default",
     "anomaly-hex-identity",
+    "meeting-retention-default",
     "scrawl-capture-settings",
-    "scrawl-routing-settings",
-    "meeting-retention-default"
+    "scrawl-routing-settings"
   ]
 }
