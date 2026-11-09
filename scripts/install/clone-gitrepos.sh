@@ -27,6 +27,12 @@ for entry in "${repos[@]}"; do
   git clone "https://github.com/dommcdev/${repo}.git" "$location/$repo"
 done
 
+mkdir -p "$HOME/.config/opencode" "$HOME/.codex" "$HOME/.claude" "$HOME/.gemini"
+ln -sfn "$HOME/dev/agents/global-agents.md" "$HOME/.config/opencode/AGENTS.md"
+ln -sfn "$HOME/dev/agents/global-agents.md" "$HOME/.codex/AGENTS.md"
+ln -sfn "$HOME/dev/agents/global-agents.md" "$HOME/.claude/CLAUDE.md"
+ln -sfn "$HOME/dev/agents/global-agents.md" "$HOME/.gemini/GEMINI.md"
+
 mkdir -p "$HOME/.agents/skills"
 for skill in "$HOME/dev/agents/skills"/*; do
   [[ -d "$skill" ]] || continue
