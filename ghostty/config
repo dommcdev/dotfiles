@@ -5,6 +5,7 @@ background-opacity = 0.93
 window-padding-x=6
 window-padding-y=4
 shell-integration-features = ssh-env, cursor
+window-decoration = none
 
 
 
