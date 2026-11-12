@@ -55,6 +55,7 @@ hl.config({
     layout = "scrolling",
   },
   scrolling = {
+    -- follow_min_visible = 1.0,
     wrap_swapcol = false,
     wrap_focus = false,
     explicit_column_widths = "0.5, 1.0",
