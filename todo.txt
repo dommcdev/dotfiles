@@ -6,3 +6,4 @@ Hyprland scrolling
 Auto-update
 Switch from rust to rustup??
 Taildrive?
+Check opencode claude agent issue (https://github.com/anomalyco/opencode/issues/61072)
