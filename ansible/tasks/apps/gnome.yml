@@ -1,0 +1,63 @@
+- name: Install GNOME packages
+  vars:
+    pkgs:
+      Archlinux:
+        - gdm
+        - gnome-shell
+        - gnome-session
+        - gnome-control-center
+        - xdg-desktop-portal-gnome
+        - xdg-desktop-portal-gtk
+      RedHat:
+        - gdm
+        - gnome-shell
+        - gnome-session
+        - gnome-control-center
+        - xdg-desktop-portal-gnome
+        - xdg-desktop-portal-gtk
+  ansible.builtin.package:
+    name: "{{ pkgs[ansible_facts['os_family']] }}"
+    state: present
+  become: true
+  when: ansible_facts['os_family'] in pkgs
+
+  # DO NOT restart gdm.service, or else your session will go down with it.
+- name: Enable GDM
+  ansible.builtin.systemd_service:
+    name: gdm.service
+    enabled: true
+    force: true # Replace any existing display-manager.service alias (e.g. greetd)
+  become: true
+
+- name: Install Scrollwork
+  block:
+    - name: Clone extension
+      ansible.builtin.git:
+        repo: https://github.com/dommcdev/scrollwork.git
+        dest: "{{ home }}/.local/share/gnome-shell/extensions/scrollwork@local"
+        version: main
+        depth: 1
+
+    - name: Compile extension schemas
+      ansible.builtin.command: glib-compile-schemas {{ home }}/.local/share/gnome-shell/extensions/scrollwork@local/schemas
+      changed_when: false
+
+- name: Configure GNOME
+  block:
+    - name: Clear default shortcuts
+      ansible.builtin.shell: |
+        for schema in org.gnome.desktop.wm.keybindings org.gnome.mutter.keybindings \
+          org.gnome.mutter.wayland.keybindings org.gnome.shell.keybindings \
+          org.gnome.settings-daemon.plugins.media-keys; do
+          for key in $(gsettings list-keys "$schema"); do
+            if [ "$key" != custom-keybindings ] && [ "$(gsettings range "$schema" "$key")" = "type as" ]; then
+              gsettings set "$schema" "$key" "[]"
+            fi
+          done
+        done
+      changed_when: false
+
+    - name: Load settings
+      ansible.builtin.shell: dconf load / < {{ root }}/gnome/settings.ini
+      changed_when: false
+# Find the dconf key behind a GNOME Settings toggle with `dconf watch /`

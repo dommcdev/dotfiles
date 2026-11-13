@@ -138,8 +138,11 @@
     - name: Drivers and media codecs
       ansible.builtin.include_tasks: tasks/system/drivers.yml
       when: is_managed_desktop
-    - name: Hyprland
-      ansible.builtin.include_tasks: tasks/apps/hyprland.yml
+    # - name: Hyprland
+    #   ansible.builtin.include_tasks: tasks/apps/hyprland.yml
+    #   when: is_managed_desktop and (is_arch or is_fedora)
+    - name: GNOME
+      ansible.builtin.include_tasks: tasks/apps/gnome.yml
       when: is_managed_desktop and (is_arch or is_fedora)
     - name: Fonts
       ansible.builtin.import_tasks: tasks/apps/fonts.yml
@@ -162,9 +165,9 @@
     - name: RetroArch
       ansible.builtin.include_tasks: tasks/apps/retroarch.yml
       when: is_managed_desktop
-    - name: Noctalia
-      ansible.builtin.import_tasks: tasks/apps/noctalia.yml
-      when: is_managed_desktop and is_arch
+    # - name: Noctalia
+    #   ansible.builtin.import_tasks: tasks/apps/noctalia.yml
+    #   when: is_managed_desktop and is_arch
     - name: Vicinae
       ansible.builtin.include_tasks: tasks/apps/vicinae.yml
       when: is_managed_desktop and (not is_ubuntu)

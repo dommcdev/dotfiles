@@ -4,7 +4,7 @@ My personal dotfiles as well as a comprehensive Ansible playbook for configuring
 
 ## Features
 
-- **DE**: Hyprland + Noctalia
+- **DE**: Hyprland + Noctalia, or GNOME + Scrollwork (toggle in `ansible/main.yml`)
 - **Terminal**: Ghostty
 - **Shell**: Zsh, Starship, Zoxide, Fastfetch
 - **Editor**: Neovim, Zed, Opencode
