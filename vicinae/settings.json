@@ -33,12 +33,12 @@
       }
    },
    "launcher_window": {
-      "rounding": 0,
+      "rounding": 20,
       "opacity": 0.9,
       "client_side_decorations": {
          "enabled": true,
          "rounding": 10,
-         "border_width": 1
+         "border_width": 3
       }
    },
    "favorites": [
