@@ -12,6 +12,8 @@ repos=(
   "beans|$HOME/dev"
   "agents|$HOME/dev"
   "chopchop|"
+  "chant|$HOME/dev"
+  "hymns|$HOME/dev"
 )
 
 for entry in "${repos[@]}"; do
